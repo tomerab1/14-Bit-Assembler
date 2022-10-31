@@ -34,7 +34,7 @@ void do_pre_assembler(const char* path);
 ReadState get_current_reading_state(LineIterator* it);
 
 /* Creates a new macro list */
-MacroList get_new_macro_list();
+MacroList* get_new_macro_list();
 
 /* Checks if macro list is empty */
 bool is_macro_list_empty(MacroList* list);
@@ -52,6 +52,6 @@ void insert_data_to_macro_list_node(MacroListNode* node, const char* line);
 void free_macro_expension(char*** macro_expension, int size);
 
 /* Frees a macro list */
-void free_macro_list(MacroList* list);
+void free_macro_list(MacroList** list);
 
 #endif

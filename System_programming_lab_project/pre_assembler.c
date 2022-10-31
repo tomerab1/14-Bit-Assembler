@@ -5,7 +5,7 @@ void do_pre_assembler(const char* path)
 {
 	LineIterator it;
 	ReadState current_state = READ_UNKNOWN;
-	MacroList list = get_new_macro_list();
+	MacroList* list = get_new_macro_list();
 	MacroListNode* node;
 	bool did_started_reading = FALSE;
 	char* line;
@@ -17,7 +17,7 @@ void do_pre_assembler(const char* path)
 			current_state = get_current_reading_state(&it);
 			if (current_state != READ_COMMENT) {
 				if (current_state == READ_START_MACRO && !did_started_reading) {
-					insert_node_to_macro_list(&list, get_macro_name(&it));
+					insert_node_to_macro_list(list, get_macro_name(&it));
 					did_started_reading = TRUE;
 				}
 
@@ -26,7 +26,7 @@ void do_pre_assembler(const char* path)
 				}
 
 				else if (did_started_reading && current_state == READ_UNKNOWN) {
-					insert_data_to_macro_list_node(list.tail, line);
+					insert_data_to_macro_list_node(list->tail, line);
 				}
 			}
 
@@ -37,7 +37,7 @@ void do_pre_assembler(const char* path)
 	}
 
 	fclose(f_in);
-	free_macro_list(&list);
+	free_macro_list(list);
 }
 
 ReadState get_current_reading_state(LineIterator* it)
@@ -69,10 +69,10 @@ ReadState get_current_reading_state(LineIterator* it)
 	}
 }
 
-MacroList get_new_macro_list()
+MacroList* get_new_macro_list()
 {
-	MacroList new_list;
-	new_list.head = new_list.tail = NULL;
+	MacroList* new_list = (MacroList*) xmalloc(sizeof(MacroList));
+	new_list->head = new_list->tail = NULL;
 	return new_list;
 }
 
@@ -134,9 +134,9 @@ void free_macro_expension(char*** macro_expension, int size)
 	free(ptr);
 }
 
-void free_macro_list(MacroList* list)
+void free_macro_list(MacroList** list)
 {
-	MacroListNode* next, *current = list->head;
+	MacroListNode* next, *current = (*list)->head;
 
 	while (current) {
 		next = current->next;
@@ -145,4 +145,5 @@ void free_macro_list(MacroList* list)
 		free(current);
 		current = next;
 	}
+	free(*list);
 }
