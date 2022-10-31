@@ -14,8 +14,8 @@ void do_pre_assembler(const char* path)
 	while ((line = get_line(f_in)) != NULL) {
 		line_iterator_put_line(&it, line);
 		while (!line_iterator_is_end(&it)) {
+			current_state = get_current_reading_state(&it, line_iterator_peek(&it));
 			if (current_state != READ_COMMENT) {
-				current_state = get_current_reading_state(&it, line_iterator_peek(&it));
 				if (current_state == READ_START_MACRO && !did_started_reading) {
 					insert_node_to_macro_list(&list, get_macro_name(&it));
 					did_started_reading = TRUE;
