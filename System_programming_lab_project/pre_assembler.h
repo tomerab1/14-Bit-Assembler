@@ -29,8 +29,13 @@ typedef struct
 	MacroListNode* tail;
 } MacroList;
 
-void do_pre_assembler(const char* path);
+/* Starts the pre-assembler phase. */
+void start_pre_assembler(const char* path);
 
+/* Reads a file, creates the macro list and returns it. */
+MacroList* create_macro_list_from_file(FILE* in);
+
+/* Returns the current reading state. */
 ReadState get_current_reading_state(LineIterator* it);
 
 /* Creates a new macro list */

@@ -1,17 +1,15 @@
 #include "pre_assembler.h"
 #include <string.h>
 
-void do_pre_assembler(const char* path)
+MacroList* create_macro_list_from_file(FILE* in)
 {
 	LineIterator it;
 	ReadState current_state = READ_UNKNOWN;
 	MacroList* list = get_new_macro_list();
-	MacroListNode* node;
 	bool did_started_reading = FALSE;
 	char* line;
-	FILE* f_in = open_file(path, "r");
 
-	while ((line = get_line(f_in)) != NULL) {
+	while ((line = get_line(in)) != NULL) {
 		line_iterator_put_line(&it, line);
 		while (!line_iterator_is_end(&it)) {
 			current_state = get_current_reading_state(&it);
@@ -25,7 +23,7 @@ void do_pre_assembler(const char* path)
 					did_started_reading = FALSE;
 				}
 
-				else if (did_started_reading && current_state == READ_UNKNOWN) {
+				if (did_started_reading && current_state == READ_UNKNOWN) {
 					insert_data_to_macro_list_node(list->tail, line);
 				}
 			}
@@ -36,8 +34,19 @@ void do_pre_assembler(const char* path)
 		free(line);
 	}
 
-	fclose(f_in);
-	free_macro_list(list);
+	return list;
+}
+
+void start_pre_assembler(const char* path)
+{
+	FILE* in = open_file(path, "r");
+	MacroList* list = create_macro_list_from_file(in);
+
+	/* Moves the file pointer back to the starting of the file. */
+	rewind(in);
+
+	/* TODO: Write the program, after running the pre-assembler, to a new file. */
+
 }
 
 ReadState get_current_reading_state(LineIterator* it)
