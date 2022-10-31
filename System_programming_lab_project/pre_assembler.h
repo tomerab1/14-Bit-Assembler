@@ -38,6 +38,9 @@ MacroList* create_macro_list_from_file(FILE* in);
 /* Returns the current reading state. */
 ReadState get_current_reading_state(LineIterator* it);
 
+/* Returns the macro label name. */
+char* get_macro_name(LineIterator* it);
+
 /* Creates a new macro list */
 MacroList* get_new_macro_list();
 
@@ -55,6 +58,11 @@ void insert_data_to_macro_list_node(MacroListNode* node, const char* line);
 
 /* Frees the 'macro_expension' member */
 void free_macro_expension(char*** macro_expension, int size);
+
+#ifdef DEBUG
+void print_macro_list(MacroList* list);
+#endif // DEBUG
+
 
 /* Frees a macro list */
 void free_macro_list(MacroList** list);

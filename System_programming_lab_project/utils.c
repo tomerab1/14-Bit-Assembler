@@ -37,6 +37,5 @@ FILE* open_file(const char* path, const char* mode)
 char* get_line(FILE* in)
 {
     char* read_buffer = (char*)xcalloc(SOURCE_LINE_MAX_LENGTH + 1, sizeof(char));
-    fgets(read_buffer, SOURCE_LINE_MAX_LENGTH, in);
-    return read_buffer;
+    return fgets(read_buffer, SOURCE_LINE_MAX_LENGTH, in);
 }

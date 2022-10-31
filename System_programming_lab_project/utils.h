@@ -1,8 +1,12 @@
 #ifndef UTILS_H
 #define UTILS_H
 
+#define _CRT_SECURE_NO_WARNINGS
+
 #include <stdio.h>
 #include <stdlib.h>
+
+#define DEBUG
 
 /* TODO: Remove later, just defined for visual studio. */
 #ifndef __cplusplus

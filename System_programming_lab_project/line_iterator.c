@@ -1,11 +1,5 @@
 #include "line_iterator.h"
 
-LineIterator get_new_line_iterator()
-{
-    LineIterator new_it;
-    return new_it;
-}
-
 void line_iterator_put_line(LineIterator* it, const char* line)
 {
     it->current = it->start = line;
@@ -24,5 +18,5 @@ char line_iterator_peek(LineIterator* it)
 
 bool line_iterator_is_end(LineIterator* it)
 {
-    return *(it->current);
+    return *(it->current) == '\0';
 }
