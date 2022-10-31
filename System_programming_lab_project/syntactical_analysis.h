@@ -1,0 +1,4 @@
+#ifndef SYNTACTICAL_ANALYSIS_H
+#define SYNTACTICAL_ANALYSIS_H
+
+#endif
