@@ -24,5 +24,5 @@ char line_iterator_peek(LineIterator* it)
 
 bool line_iterator_is_end(LineIterator* it)
 {
-    return *(it->current);
+    return *(it->current) != '\0';
 }
