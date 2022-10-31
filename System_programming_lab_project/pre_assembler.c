@@ -14,7 +14,7 @@ void do_pre_assembler(const char* path)
 	while ((line = get_line(f_in)) != NULL) {
 		line_iterator_put_line(&it, line);
 		while (!line_iterator_is_end(&it)) {
-			current_state = get_current_reading_state(&it, line_iterator_peek(&it));
+			current_state = get_current_reading_state(&it);
 			if (current_state != READ_COMMENT) {
 				if (current_state == READ_START_MACRO && !did_started_reading) {
 					insert_node_to_macro_list(&list, get_macro_name(&it));
@@ -40,10 +40,11 @@ void do_pre_assembler(const char* path)
 	free_macro_list(&list);
 }
 
-ReadState get_current_reading_state(LineIterator* it, char ch)
+ReadState get_current_reading_state(LineIterator* it)
 {
 	int i;
 	ReadState state = READ_UNKNOWN;
+	char ch = line_iterator_peek(it);
 
 	if (ch == START_COMMENT_CHAR) {
 		return READ_COMMENT;

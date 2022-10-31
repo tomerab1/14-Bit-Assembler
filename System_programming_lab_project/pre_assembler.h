@@ -31,7 +31,7 @@ typedef struct
 
 void do_pre_assembler(const char* path);
 
-ReadState get_current_reading_state(LineIterator* it, char ch);
+ReadState get_current_reading_state(LineIterator* it);
 
 /* Creates a new macro list */
 MacroList get_new_macro_list();
