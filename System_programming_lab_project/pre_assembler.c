@@ -17,7 +17,10 @@ MacroList* create_macro_list_from_file(FILE* in)
 		while (isblank(line_iterator_peek(&it)))
 			line_iterator_advance(&it);
 
+		/* Get the current state. */
 		current_state = get_current_reading_state(&it);
+
+		/* Skip comments, and if not a comment, copy macro (if the state is correct). */
 		if (current_state != READ_COMMENT) {
 			if (current_state == READ_START_MACRO && !did_started_reading) {
 				insert_node_to_macro_list(list, create_new_macro_list_node(get_macro_name(&it)));
@@ -42,7 +45,7 @@ void start_pre_assembler(const char* path)
 	FILE* in = open_file(path, "r");
 	MacroList* list = create_macro_list_from_file(in);
 
-	print_macro_list(list);
+	dump_macro_list(list);
 
 	/* Moves the file pointer back to the starting of the file. */
 	rewind(in);
@@ -169,7 +172,7 @@ void free_macro_expension(char*** macro_expension, int size)
 	free(ptr);
 }
 
-void print_macro_list(MacroList* list)
+void dump_macro_list(MacroList* list)
 {
 	MacroListNode* head = list->head;
 	int i;

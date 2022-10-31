@@ -60,7 +60,7 @@ void insert_data_to_macro_list_node(MacroListNode* node, const char* line);
 void free_macro_expension(char*** macro_expension, int size);
 
 #ifdef DEBUG
-void print_macro_list(MacroList* list);
+void dump_macro_list(MacroList* list);
 #endif // DEBUG
 
 
