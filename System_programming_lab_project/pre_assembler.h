@@ -81,7 +81,6 @@ void free_macro_expension(char*** macro_expension, int size);
 void dump_macro_list(MacroList* list);
 #endif 
 
-
 /* Frees a macro list */
 void free_macro_list(MacroList** list);
 

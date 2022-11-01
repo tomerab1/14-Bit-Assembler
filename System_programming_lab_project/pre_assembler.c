@@ -81,7 +81,9 @@ bool start_pre_assembler(const char* path)
 		return FALSE;
 	}
 
+#ifdef DEBUG
 	dump_macro_list(list);
+#endif
 
 	/* Moves the file pointer back to the starting of the file. */
 	rewind(in);
