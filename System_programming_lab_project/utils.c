@@ -72,5 +72,18 @@ FILE* open_file(const char* path, const char* mode)
 char* get_line(FILE* in)
 {
     char* read_buffer = (char*)xcalloc(SOURCE_LINE_MAX_LENGTH + 1, sizeof(char));
-    return fgets(read_buffer, SOURCE_LINE_MAX_LENGTH, in);
+    size_t read = 0;
+    char ch;
+
+    while ((ch = (char)fgetc(in)) != EOF && ch != '\n' && read < SOURCE_LINE_MAX_LENGTH) {
+        read_buffer[read++] = ch;
+    }
+
+    /* If nothing was read from the file */
+    if (read == 0) {
+        free(read_buffer);
+        return NULL;
+    }
+
+    return read_buffer;
 }
