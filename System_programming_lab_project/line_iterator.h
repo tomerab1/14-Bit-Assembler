@@ -18,6 +18,9 @@ void line_iterator_advance(LineIterator* it);
 /* Advances the line iterator by -1. */
 void line_iterator_backwards(LineIterator* it);
 
+/* Consumes blanks, i.e white spaces and tabs. */
+void line_iterator_consume_blanks(LineIterator* it);
+
 /* Returns the current char 'current' points to. */
 char line_iterator_peek(LineIterator* it);
 

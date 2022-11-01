@@ -15,8 +15,7 @@ bool fill_macro_list_from_file(FILE* in, MacroList* in_list)
 		line_iterator_put_line(&it, line);
 
 		/* If blanks are encountered, consume them. */
-		while (isblank(line_iterator_peek(&it)))
-			line_iterator_advance(&it);
+		line_iterator_consume_blanks(&it);
 
 		/* Get the current state. */
 		current_state = get_current_reading_state(&it);
@@ -157,8 +156,8 @@ char* get_macro_name(LineIterator* it)
 	int phy_sz = INIT_PHY_SZ, log_sz = INIT_LOG_SZ;
 	char* name = (char*)calloc(INIT_PHY_SZ, sizeof(char));
 
-	while (isblank(line_iterator_peek(it)))
-		line_iterator_advance(it);
+	/* If blanks are encountered, consume them. */
+	line_iterator_consume_blanks(it);
 
 	while (line_iterator_peek(it) != '\n' && !isblank(line_iterator_peek(it))) {
 		if (log_sz + 1 >= phy_sz) {
@@ -277,8 +276,7 @@ void create_pre_assembler_file(FILE* in, FILE* out, MacroList* list)
 		line_iterator_put_line(&it, line);
 
 		/* If blanks are encountered, consume them. */
-		while (isblank(line_iterator_peek(&it)))
-			line_iterator_advance(&it);
+		line_iterator_consume_blanks(&it);
 
 		/* Get the current state. */
 		current_state = get_current_reading_state(&it);

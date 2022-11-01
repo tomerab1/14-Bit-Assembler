@@ -1,4 +1,5 @@
 #include "line_iterator.h"
+#include <ctype.h>
 
 void line_iterator_put_line(LineIterator* it, const char* line)
 {
@@ -15,6 +16,12 @@ void line_iterator_backwards(LineIterator* it)
 {
     if (it->current - 1 >= it->start)
         it->current--;
+}
+
+void line_iterator_consume_blanks(LineIterator* it)
+{
+    while (isblank(line_iterator_peek(it)))
+        line_iterator_advance(it);
 }
 
 char line_iterator_peek(LineIterator* it)
