@@ -20,9 +20,27 @@ typedef unsigned short bool;
 #define GROW_ARRAY(type, pointer, new_count, size) (type)xrealloc((pointer), (new_count) * (size))
 #define FREE_ARRAY(pointer) free((pointer))
 
+/*
+	This enumeration is used to represent each opcode with a specific numeric constant.
+*/
+typedef enum
+{
+	OP_MOV = 0, OP_CMP, OP_ADD, OP_SUB,
+	OP_NOT, OP_CLR, OP_LEA, OP_INC,
+	OP_DEC, OP_JMP, OP_BNE, OP_RED,
+	OP_PRN, OP_JSR, OP_RTS, OP_STOP, OP_TOTAL, OP_UNKNOWN
+} Opcodes;
+
+/* This function takes a string and returns the matching Opcode. */
+Opcodes get_opcode(const char* str);
+
+/* Wrapper function of malloc, calloc and realloc, they check whether an allocation was successful or not. */
 void* xrealloc(void* ptr, size_t alloc_sz);
 void* xcalloc(size_t count, size_t alloc_sz);
 void* xmalloc(size_t alloc_sz);
+
+/* Creates a new file name, that end with 'postfix'. */
+const char* get_outfile_name(const char* path, const char* postfix);
 
 /* Opens a file for the specified I/O mode. */
 FILE* open_file(const char* path, const char* mode);

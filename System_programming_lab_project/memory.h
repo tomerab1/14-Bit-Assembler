@@ -2,17 +2,6 @@
 #define MEMORY_H
 
 /*
-	This enumeration is used to represent each opcode with a specific numeric constant.
-*/
-typedef enum
-{
-	OP_MOV = 0, OP_CMP, OP_ADD, OP_SUB,
-	OP_NOT, OP_CLR, OP_LEA, OP_INC,
-	OP_DEC, OP_JMP, OP_BNE, OP_RED,
-	OP_PRN, OP_JSR, OP_RTS, OP_STOP, OP_TOTAL
-} Opcodes;
-
-/*
 	This enumeration is used to represent each encoding type with a specific numeric constant. 
 */
 typedef enum 

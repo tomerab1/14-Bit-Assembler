@@ -16,7 +16,7 @@ typedef struct __list_node
 	int log_sz;
 	int phy_sz;
 	char* macro_name;
-	char** macro_expension; // A dynamic array of strings.
+	char** macro_expension; /* A dynamic array of strings. */
 	struct __list_node* next;
 } MacroListNode;
 
@@ -30,13 +30,19 @@ typedef struct
 } MacroList;
 
 /* Starts the pre-assembler phase. */
-void start_pre_assembler(const char* path);
+bool start_pre_assembler(const char* path);
 
-/* Reads a file, creates the macro list and returns it. */
-MacroList* create_macro_list_from_file(FILE* in);
+/* Reads a file, fills 'in_list' with the macros data, if all is valid, it returns TRUE, otherwise FALSE. */
+bool fill_macro_list_from_file(FILE* in, MacroList* in_list);
 
 /* Returns the current reading state. */
 ReadState get_current_reading_state(LineIterator* it);
+
+/* Searches the list for an enrty. */
+bool search_macro_list(const MacroList* list, const char* entry);
+
+/* Checks if the name is not a keyword, and it's not a label. */
+bool is_a_macro_name(const char* name);
 
 /* Returns the macro label name. */
 char* get_macro_name(LineIterator* it);
@@ -50,18 +56,24 @@ bool is_macro_list_empty(MacroList* list);
 /* Create a new macro list node */
 MacroListNode* create_new_macro_list_node(const char* name);
 
+/* Expands a macro to file 'out'. */
+void expand_macro_to_file(FILE* out, MacroList* list, const char* name);
+
 /* Inserts a new node to the macro list */
 void insert_node_to_macro_list(MacroList* list, MacroListNode* node);
 
 /* Inserts a line into '__list_node.macro_expension' member. */
 void insert_data_to_macro_list_node(MacroListNode* node, const char* line);
 
+/* Creates an expanded source file inside 'out' */
+void create_pre_assembler_file(FILE* in, FILE* out, MacroList* list);
+
 /* Frees the 'macro_expension' member */
 void free_macro_expension(char*** macro_expension, int size);
 
 #ifdef DEBUG
 void dump_macro_list(MacroList* list);
-#endif // DEBUG
+#endif 
 
 
 /* Frees a macro list */

@@ -11,6 +11,12 @@ void line_iterator_advance(LineIterator* it)
         ++(it->current);
 }
 
+void line_iterator_backwards(LineIterator* it)
+{
+    if (it->current - 1 >= it->start)
+        it->current--;
+}
+
 char line_iterator_peek(LineIterator* it)
 {
     return *(it->current);

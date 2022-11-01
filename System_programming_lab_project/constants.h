@@ -6,9 +6,16 @@
 #define INIT_LOG_SZ 0
 
 #define START_COMMENT_CHAR ';'
+#define POSTFIX_DOT_CHAR '.'
 #define START_MACRO_DEF_LEN 3
 #define START_MACRO_DEFENITION "mcr"
 #define END_MACRO_DEF_LEN 5
 #define END_MACRO_DEFENITION "endmcr"
+
+#define MODE_READ "r"
+#define MODE_READ_WRITE "r+"
+#define MODE_WRITE "w"
+#define MODE_WRITE_READ "w+"
+#define MODE_APP_READ "a+"
 
 #endif

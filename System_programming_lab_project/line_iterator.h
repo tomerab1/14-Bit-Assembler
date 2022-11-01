@@ -15,6 +15,9 @@ void line_iterator_put_line(LineIterator* it, const char* line);
 /* Advances the line iterator by 1. */
 void line_iterator_advance(LineIterator* it);
 
+/* Advances the line iterator by -1. */
+void line_iterator_backwards(LineIterator* it);
+
 /* Returns the current char 'current' points to. */
 char line_iterator_peek(LineIterator* it);
 
