@@ -1,5 +1,6 @@
 prn #-5
 bne LOOP(r4,r3)
+m1
 mcr m1
 sub r1, r4
 bne END

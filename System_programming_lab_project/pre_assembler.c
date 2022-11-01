@@ -35,9 +35,7 @@ bool fill_macro_list_from_file(FILE* in, MacroList* in_list)
                     printf("Error on line: %d - '%s' is a reserved keyword ! It cannot be used as a macro's name...\n", current_line, name);
                     did_error_occurred = TRUE;
                 }
-                if (!did_error_occurred) {
-                    insert_node_to_macro_list(in_list, create_new_macro_list_node(name));
-                }
+                insert_node_to_macro_list(in_list, create_new_macro_list_node(name));
                 did_started_reading = TRUE;
             }
             else if (current_state == READ_START_MACRO && did_started_reading) {
@@ -47,7 +45,7 @@ bool fill_macro_list_from_file(FILE* in, MacroList* in_list)
             else if (current_state == READ_END_MACRO) {
                 did_started_reading = FALSE;
             }
-            else if (did_started_reading && !did_error_occurred) {
+            else if (did_started_reading) {
                 /* A macro declaration inside of the macro, we need to insert all of it's source line to those of the current macro. */
                 if (search_macro_list(in_list, name)) {
                     insert_macro_data_to_list_node(in_list->tail, get_macro_list_node(in_list, name));
