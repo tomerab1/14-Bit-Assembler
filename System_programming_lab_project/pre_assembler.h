@@ -65,6 +65,12 @@ void insert_node_to_macro_list(MacroList* list, MacroListNode* node);
 /* Inserts a line into '__list_node.macro_expension' member. */
 void insert_data_to_macro_list_node(MacroListNode* node, const char* line);
 
+/* Insert all of the data inside the macro specified in 'line' to the current node */
+void insert_macro_data_to_list_node(MacroListNode* tail, MacroListNode* node);
+
+/* Returns the node in which its name matches to entry*/
+MacroListNode* get_macro_list_node(MacroList* list, const char* entry);
+
 /* Creates an expanded source file inside 'out' */
 void create_pre_assembler_file(FILE* in, FILE* out, MacroList* list);
 

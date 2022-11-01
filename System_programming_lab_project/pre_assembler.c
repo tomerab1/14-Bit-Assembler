@@ -48,7 +48,13 @@ bool fill_macro_list_from_file(FILE* in, MacroList* in_list)
 				did_started_reading = FALSE;
 			}
 			else if (did_started_reading && !did_error_occurred) {
-				insert_data_to_macro_list_node(in_list->tail, line);
+				/* A macro declaration inside of the macro, we need to insert all of it's source line to those of the current macro. */
+				if (search_macro_list(in_list, name)) {
+					insert_macro_data_to_list_node(in_list->tail, get_macro_list_node(in_list, name));
+				}
+				else {
+					insert_data_to_macro_list_node(in_list->tail, line);
+				}
 			}
 		}
 		if (name) free(name);
@@ -234,6 +240,26 @@ void insert_data_to_macro_list_node(MacroListNode* node, const char* line)
 	node->macro_expension[node->log_sz] = (char*)xcalloc(text_length + 1, sizeof(char));
 	sprintf(node->macro_expension[node->log_sz], "%s", line);
 	node->log_sz++;
+}
+
+void insert_macro_data_to_list_node(MacroListNode* tail, MacroListNode* node)
+{
+	int i;
+	for (i = 0; i < node->log_sz; i++) {
+		insert_data_to_macro_list_node(tail, node->macro_expension[i]);
+	}
+}
+
+MacroListNode* get_macro_list_node(MacroList* list, const char* entry)
+{
+	MacroListNode* head = list->head;
+
+	while (head) {
+		if (strcmp(head->macro_name, entry) == 0) return head;
+		head = head->next;
+	}
+
+	return NULL;
 }
 
 void create_pre_assembler_file(FILE* in, FILE* out, MacroList* list)

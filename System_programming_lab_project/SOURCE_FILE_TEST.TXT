@@ -6,6 +6,7 @@ bne END
 endmcr
 m1
 mcr	m2
+m1
 sub	r1, r5
 bne LOOP(r4, r3)
 dec	r1
