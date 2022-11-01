@@ -5,12 +5,13 @@
 bool fill_macro_list_from_file(FILE* in, MacroList* in_list)
 {
 	int current_line = 1;
-	char* line, * name = NULL;
+	char* line, *name;
 	LineIterator it;
 	ReadState current_state = READ_UNKNOWN;
 	bool did_started_reading = FALSE, did_error_occurred = FALSE;
 
 	while ((line = get_line(in)) != NULL) {
+		name = NULL;
 		line_iterator_put_line(&it, line);
 
 		/* If blanks are encountered, consume them. */
@@ -57,8 +58,8 @@ bool fill_macro_list_from_file(FILE* in, MacroList* in_list)
 				}
 			}
 		}
-		if (name) free(name);
 		current_line++;
+		free(name);
 		free(line);
 	}
 
@@ -264,12 +265,13 @@ MacroListNode* get_macro_list_node(MacroList* list, const char* entry)
 
 void create_pre_assembler_file(FILE* in, FILE* out, MacroList* list)
 {
-	char* line, *name = NULL;
+	char* line, *name;
 	LineIterator it;
 	ReadState current_state = READ_UNKNOWN;
 	bool did_started_reading = FALSE;
 
 	while ((line = get_line(in)) != NULL) {
+		name = NULL;
 		line_iterator_put_line(&it, line);
 
 		/* If blanks are encountered, consume them. */
@@ -298,7 +300,7 @@ void create_pre_assembler_file(FILE* in, FILE* out, MacroList* list)
 				}
 			}
 		}
-		if (name) free(name);
+		free(name);
 		free(line);
 	}
 }
