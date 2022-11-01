@@ -289,17 +289,21 @@ void create_pre_assembler_file(FILE* in, FILE* out, MacroList* list)
         if (current_state != READ_COMMENT) {
             name = get_macro_name(&it);
 
-            /* Check if a macros name was encountered */
-            if (search_macro_list(list, name)) {
+            if (search_macro_list(list, name)) {  /* Check if a macros name was encountered */
                 expand_macro_to_file(out, list, name);
-                did_started_reading = TRUE;
+                if (current_state != READ_START_MACRO) {
+                    did_started_reading = FALSE;
+                }
+                else {
+                    did_started_reading = TRUE;
+                }
             }
             else if (current_state == READ_END_MACRO) {
                 did_started_reading = FALSE;
             }
             else {
                 /* So the macro wont be copied twice. */
-                if (!did_started_reading) {
+                if (!did_started_reading && current_state != READ_START_MACRO) {
                     fputs(line, out);
                     fputc('\n', out);
                 }
