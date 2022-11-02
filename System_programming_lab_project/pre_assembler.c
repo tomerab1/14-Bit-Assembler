@@ -2,14 +2,14 @@
 #include <string.h>
 #include <ctype.h>
 
-bool fill_macro_list_from_file(FILE* in, MacroList* in_list)
+void fill_macro_list_from_file(FILE* in, MacroList* in_list)
 {
     int current_line = 1;
     char* line, *name;
     LineIterator it;
     MacroListNode* node;
     ReadState current_state = READ_UNKNOWN;
-    bool did_started_reading = FALSE, did_error_occurred = FALSE;
+    bool did_started_reading = FALSE;
 
     while ((line = get_line(in)) != NULL) {
         name = NULL;
@@ -25,23 +25,9 @@ bool fill_macro_list_from_file(FILE* in, MacroList* in_list)
         if (current_state != READ_COMMENT) {
             name = get_macro_name(&it);
 
-            /* Check if a macro was decalred before it was defined. */
-            if (current_state == READ_UNKNOWN && is_a_macro_name(name) && !get_macro_list_node(in_list, name)) {
-                printf("Error on line: %d - Macro defined before declared !\n", current_line);
-                did_error_occurred = TRUE;
-            }
             if (current_state == READ_START_MACRO && !did_started_reading) {
-                /* Verify that a macros name is not a reserved keyword. */
-                if (get_opcode(name) != OP_UNKNOWN) {
-                    printf("Error on line: %d - '%s' is a reserved keyword ! It cannot be used as a macro's name...\n", current_line, name);
-                    did_error_occurred = TRUE;
-                }
                 insert_node_to_macro_list(in_list, create_new_macro_list_node(name));
                 did_started_reading = TRUE;
-            }
-            else if (current_state == READ_START_MACRO && did_started_reading) {
-                printf("Error on line: %d - Nested macro defenition detected !\n", current_line);
-                did_error_occurred = TRUE;
             }
             else if (current_state == READ_END_MACRO) {
                 did_started_reading = FALSE;
@@ -61,24 +47,15 @@ bool fill_macro_list_from_file(FILE* in, MacroList* in_list)
         free(name);
         free(line);
     }
-
-    return did_error_occurred;
 }
 
-bool start_pre_assembler(const char* path)
+void start_pre_assembler(const char* path)
 {
     FILE* in = open_file(path, MODE_READ), *out = NULL;
     MacroList* list = get_new_macro_list();
-    bool did_error_occurred = fill_macro_list_from_file(in, list);
     char* out_name = NULL;
 
-    /* If an error occurred, we dont create an expanded file, we terminate the assembling process. */
-    if (did_error_occurred) {
-        /* Cleaning up. */
-        free_macro_list(&list);
-        fclose(in);
-        return FALSE;
-    }
+    fill_macro_list_from_file(in, list);
 
 #ifdef DEBUG
     dump_macro_list(list);
@@ -97,8 +74,6 @@ bool start_pre_assembler(const char* path)
     free(out_name);
     fclose(out);
     fclose(in);
-
-    return TRUE;
 }
 
 ReadState get_current_reading_state(LineIterator* it)
@@ -135,11 +110,6 @@ ReadState get_current_reading_state(LineIterator* it)
     }
 
     return READ_UNKNOWN;
-}
-
-bool is_a_macro_name(const char* name)
-{
-    return get_opcode(name) == OP_UNKNOWN && !(strchr(name, ':'));
 }
 
 char* get_macro_name(LineIterator* it)

@@ -30,16 +30,13 @@ typedef struct
 } MacroList;
 
 /* Starts the pre-assembler phase. */
-bool start_pre_assembler(const char* path);
+void start_pre_assembler(const char* path);
 
 /* Reads a file, fills 'in_list' with the macros data, if all is valid, it returns TRUE, otherwise FALSE. */
-bool fill_macro_list_from_file(FILE* in, MacroList* in_list);
+void fill_macro_list_from_file(FILE* in, MacroList* in_list);
 
 /* Returns the current reading state. */
 ReadState get_current_reading_state(LineIterator* it);
-
-/* Checks if the name is not a keyword, and it's not a label. */
-bool is_a_macro_name(const char* name);
 
 /* Returns the macro label name. */
 char* get_macro_name(LineIterator* it);
