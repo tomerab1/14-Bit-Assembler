@@ -6,6 +6,9 @@
 #define INIT_LOG_SZ 0
 
 #define START_COMMENT_CHAR ';'
+#define START_MACRO_DEF_CHAR 'm'
+#define END_MACRO_DEF_CHAR 'e'
+
 #define POSTFIX_DOT_CHAR '.'
 #define START_MACRO_DEF_LEN 3
 #define START_MACRO_DEFENITION "mcr"

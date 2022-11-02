@@ -4,7 +4,6 @@
 
 void fill_macro_list_from_file(FILE* in, MacroList* in_list)
 {
-    int current_line = 1;
     char* line, *name;
     LineIterator it;
     MacroListNode* node;
@@ -43,7 +42,7 @@ void fill_macro_list_from_file(FILE* in, MacroList* in_list)
                 }
             }
         }
-        current_line++;
+
         free(name);
         free(line);
     }
@@ -81,35 +80,30 @@ ReadState get_current_reading_state(LineIterator* it)
     int i;
     char ch = line_iterator_peek(it);
 
-    if (ch == START_COMMENT_CHAR) {
-        return READ_COMMENT;
-    }
+    line_iterator_advance(it);
 
-    if (ch == START_MACRO_DEFENITION[0]) { /* Matches first char, 'm' */
-        line_iterator_advance(it);
+    switch (ch) {
+    case START_COMMENT_CHAR: 
+        return READ_COMMENT;
+    case START_MACRO_DEF_CHAR:
         for (i = 1; i < START_MACRO_DEF_LEN && !line_iterator_is_end(it); i++, line_iterator_advance(it)) {
             if (line_iterator_peek(it) != START_MACRO_DEFENITION[i]) {
                 line_iterator_backwards(it);
                 return READ_UNKNOWN;
             }
         }
-
         return READ_START_MACRO;
-    }
-
-    if (ch == END_MACRO_DEFENITION[0]) { /* Matches first char, 'e' */
-        line_iterator_advance(it);
+    case END_MACRO_DEF_CHAR: 
         for (i = 1; i < END_MACRO_DEF_LEN && !line_iterator_is_end(it); i++, line_iterator_advance(it)) {
             if (line_iterator_peek(it) != END_MACRO_DEFENITION[i]) {
                 line_iterator_backwards(it);
                 return READ_UNKNOWN;
             }
         }
-
         return READ_END_MACRO;
+    default:
+        return READ_UNKNOWN;
     }
-
-    return READ_UNKNOWN;
 }
 
 char* get_macro_name(LineIterator* it)
@@ -265,7 +259,7 @@ void create_pre_assembler_file(FILE* in, FILE* out, MacroList* list)
                     If we reached the end of a macro definitons, and we are not currently reading a macro.
                     So the macro wont be copied twice. 
                 */
-                if (current_state != READ_END_MACRO && !did_started_reading) {
+                if (!did_started_reading) {
                     fputs(line, out);
                     fputc('\n', out);
                 }
