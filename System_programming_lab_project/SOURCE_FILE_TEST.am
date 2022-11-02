@@ -9,11 +9,6 @@ bne END
 sub	r1, r5
 bne LOOP(r4, r3)
 dec	r1
-sub r1, r4
-bne END
-sub	r1, r5
-bne LOOP(r4, r3)
-dec	r1
 L1: inc K
 bne LOOP(K,STR)
 END: stop

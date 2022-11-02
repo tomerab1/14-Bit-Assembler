@@ -277,26 +277,31 @@ void create_pre_assembler_file(FILE* in, FILE* out, MacroList* list)
         if (current_state != READ_COMMENT) {
             name = get_macro_name(&it);
 
-            if (get_macro_list_node(list, name)) {  /* Check if a macros name was encountered */
+            /* Check wheter we encountered a valid macro name, and we did not started reading a macro. */
+            if (get_macro_list_node(list, name) && !did_started_reading) {
+                /* Expand the macro.*/
                 expand_macro_to_file(out, list, name);
-                if (current_state != READ_START_MACRO) {
-                    did_started_reading = FALSE;
-                }
-                else {
+                /* If the state is READ_START_MACRO, change the flag to reflect that we are inside a macro definition. */
+                if (current_state == READ_START_MACRO) {
                     did_started_reading = TRUE;
                 }
             }
+            /* We reached an 'endmcr' thus the macro defintion has ended. Change the flag to reflect that. */
             else if (current_state == READ_END_MACRO) {
                 did_started_reading = FALSE;
             }
             else {
-                /* So the macro wont be copied twice. */
-                if (!did_started_reading && current_state != READ_START_MACRO) {
+                /* 
+                    If we reached the end of a macro definitons, and we are not currently reading a macro.
+                    So the macro wont be copied twice. 
+                */
+                if (current_state != READ_END_MACRO && !did_started_reading) {
                     fputs(line, out);
                     fputc('\n', out);
                 }
             }
         }
+
         free(name);
         free(line);
     }
