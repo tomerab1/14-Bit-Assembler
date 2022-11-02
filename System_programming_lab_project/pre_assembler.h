@@ -38,9 +38,6 @@ bool fill_macro_list_from_file(FILE* in, MacroList* in_list);
 /* Returns the current reading state. */
 ReadState get_current_reading_state(LineIterator* it);
 
-/* Searches the list for an enrty. */
-bool search_macro_list(const MacroList* list, const char* entry);
-
 /* Checks if the name is not a keyword, and it's not a label. */
 bool is_a_macro_name(const char* name);
 
