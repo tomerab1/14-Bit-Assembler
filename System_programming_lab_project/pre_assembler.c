@@ -70,7 +70,7 @@ bool start_pre_assembler(const char* path)
     FILE* in = open_file(path, MODE_READ), *out = NULL;
     MacroList* list = get_new_macro_list();
     bool did_error_occurred = fill_macro_list_from_file(in, list);
-    const char* out_name = NULL;
+    char* out_name = NULL;
 
     /* If an error occurred, we dont create an expanded file, we terminate the assembling process. */
     if (did_error_occurred) {
@@ -94,7 +94,7 @@ bool start_pre_assembler(const char* path)
 
     /* Cleaning up. */
     free_macro_list(&list);
-    free((void*)out_name);
+    free(out_name);
     fclose(out);
     fclose(in);
 
