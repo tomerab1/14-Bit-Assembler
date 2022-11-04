@@ -48,4 +48,7 @@ FILE* open_file(const char* path, const char* mode);
 /* Reads a new line from 'in'. */
 char* get_line(FILE* in);
 
+/* This function takes a negative value, and returns it's 2's complement form. */
+unsigned int get_2s_complement(int n);
+
 #endif

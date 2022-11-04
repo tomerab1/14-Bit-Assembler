@@ -2,9 +2,15 @@
 #define CONSTANTS_H
 
 #define SOURCE_LINE_MAX_LENGTH 80
+#define LABEL_MAX_LENGTH 30
+
+#define RAM_MEMORY_SZ 256
+#define RAM_INIT_VAL 0
+#define REG_INIT_VAL 0
 #define INIT_PHY_SZ 4
 #define INIT_LOG_SZ 0
 
+#define END_LABEL_CHAR ':'
 #define START_COMMENT_CHAR ';'
 #define START_MACRO_DEF_CHAR 'm'
 #define END_MACRO_DEF_CHAR 'e'

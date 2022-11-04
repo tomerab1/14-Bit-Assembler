@@ -87,3 +87,8 @@ char* get_line(FILE* in)
 
     return read_buffer;
 }
+
+unsigned int get_2s_complement(int n)
+{
+    return (unsigned int)n;
+}
