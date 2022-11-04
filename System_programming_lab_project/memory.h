@@ -35,12 +35,13 @@ typedef struct
 } MemoryWord;
 
 /*
-	This struct is used to represent the 'random access memory' (RAM).
+	This struct is used to represent 'instruction/data image' and the 'instruction/data counter'.
 */
 typedef struct
 {
+	long counter;
 	MemoryWord memory[RAM_MEMORY_SZ];
-} RAM;
+} imageMemory;
 
 /* 
 	This struct is used to represent a 14bit register
@@ -51,30 +52,30 @@ typedef struct
 } Register;
 
 /*
-	This struct is used to represent a CPU and it's internal registers.
+	This struct is used to represent all the memory buffers, the 'cpu' registers and the instruction/data image.
 */
 typedef struct
 {
-	unsigned int DC;
 	Register registers[REG_TOTAL];
-	RAM ram;
-} CPU;
+	imageMemory instruction_image;
+	imageMemory data_image;
+} memoryBuffer;
 
 /*
-	This is a function for creating a new CPU object.
+	This is a function for creating a new memory buffer object.
 */
-CPU get_new_cpu();
+memoryBuffer get_new_memory_buffer();
 
 
 /*
-	This is an internal function that creates a new RAM object. 
+	This is an internal function that creates a new image memory object. 
 */
-static RAM get_new_ram();
+static imageMemory get_new_image_memory();
 
 /*
-	This is an internal function used to zero all the ram memory. 
+	This is an internal function used to zero all the image memory. 
 */
-static void init_ram(RAM* ram);
+static void init_image_memory(imageMemory* mem);
 
 
 #endif

@@ -1,25 +1,26 @@
 #include "memory.h"
 #include <string.h>
 
-CPU get_new_cpu()
+memoryBuffer get_new_memory_buffer()
 {
-    CPU cpu;
+    memoryBuffer mem_buff;
 
-    cpu.ram = get_new_ram();
-    cpu.DC = 0;
-    memset(cpu.registers, REG_INIT_VAL, sizeof(Register) * REG_TOTAL);
+    mem_buff.instruction_image = get_new_image_memory();
+    mem_buff.data_image = get_new_image_memory();
+    memset(mem_buff.registers, REG_INIT_VAL, sizeof(Register) * REG_TOTAL);
 
-    return cpu;
+    return mem_buff;
 }
 
-RAM get_new_ram()
+imageMemory get_new_image_memory()
 {
-    RAM ram;
-    init_ram(&ram);
+    imageMemory ram;
+    init_image_memory(&ram);
     return ram;
 }
 
-void init_ram(RAM* ram)
+void init_image_memory(imageMemory* mem)
 {
-    memset(ram->memory, RAM_INIT_VAL, sizeof(MemoryWord) * RAM_MEMORY_SZ);
+    mem->counter = 0;
+    memset(mem->memory, RAM_INIT_VAL, sizeof(MemoryWord) * RAM_MEMORY_SZ);
 }

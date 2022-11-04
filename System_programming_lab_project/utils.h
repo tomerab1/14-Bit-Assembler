@@ -31,6 +31,7 @@ typedef enum
 	OP_PRN, OP_JSR, OP_RTS, OP_STOP, OP_TOTAL, OP_UNKNOWN
 } Opcodes;
 
+
 /* This function takes a string and returns the matching Opcode. */
 Opcodes get_opcode(const char* str);
 
