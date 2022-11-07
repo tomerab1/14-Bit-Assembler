@@ -2,7 +2,7 @@
 #include <string.h>
 #include <ctype.h>
 
-void fill_macro_list_from_file(FILE* in, MacroList* in_list)
+void macro_list_fill_list_from_file(FILE* in, MacroList* in_list)
 {
     char* line, *name;
     LineIterator it;
@@ -25,7 +25,7 @@ void fill_macro_list_from_file(FILE* in, MacroList* in_list)
             name = get_macro_name(&it);
 
             if (current_state == READ_START_MACRO && !did_started_reading) {
-                insert_node_to_macro_list(in_list, create_new_macro_list_node(name));
+                macro_list_insert_node(in_list, macro_list_new_node(name));
                 did_started_reading = TRUE;
             }
             else if (current_state == READ_END_MACRO) {
@@ -33,12 +33,12 @@ void fill_macro_list_from_file(FILE* in, MacroList* in_list)
             }
             else if (did_started_reading) {
                 /* A macro declaration inside of the macro, we need to insert all of it's source line to those of the current macro. */
-                node = get_macro_list_node(in_list, name);
+                node = macro_list_get_node(in_list, name);
                 if (node) {
-                    insert_macro_data_to_list_node(in_list->tail, node);
+                    macro_list_node_insert_macro(in_list->tail, node);
                 }
                 else {
-                    insert_data_to_macro_list_node(in_list->tail, line);
+                    macro_list_node_insert_source(in_list->tail, line);
                 }
             }
         }
@@ -51,13 +51,13 @@ void fill_macro_list_from_file(FILE* in, MacroList* in_list)
 void start_pre_assembler(const char* path)
 {
     FILE* in = open_file(path, MODE_READ), *out = NULL;
-    MacroList* list = get_new_macro_list();
+    MacroList* list = macro_list_new_list();
     char* out_name = NULL;
 
-    fill_macro_list_from_file(in, list);
+    macro_list_fill_list_from_file(in, list);
 
 #ifdef DEBUG
-    dump_macro_list(list);
+    macro_list_dump(list);
 #endif
 
     /* Moves the file pointer back to the starting of the file. */
@@ -69,7 +69,7 @@ void start_pre_assembler(const char* path)
     create_pre_assembler_file(in, out, list);
 
     /* Cleaning up. */
-    free_macro_list(&list);
+    macro_list_free(&list);
     free(out_name);
     fclose(out);
     fclose(in);
@@ -131,19 +131,19 @@ char* get_macro_name(LineIterator* it)
     return name;
 }
 
-MacroList* get_new_macro_list()
+MacroList* macro_list_new_list()
 {
     MacroList* new_list = (MacroList*) xmalloc(sizeof(MacroList));
     new_list->head = new_list->tail = NULL;
     return new_list;
 }
 
-bool is_macro_list_empty(MacroList* list)
+bool macro_list_is_empty(MacroList* list)
 {
     return !list->head && !list->tail;
 }
 
-MacroListNode* create_new_macro_list_node(const char* name)
+MacroListNode* macro_list_new_node(const char* name)
 {
     MacroListNode* new_node = (MacroListNode*) xmalloc(sizeof(MacroListNode));
 
@@ -175,9 +175,9 @@ void expand_macro_to_file(FILE* out, MacroList* list, const char* name)
     }
 }
 
-void insert_node_to_macro_list(MacroList* list, MacroListNode* node)
+void macro_list_insert_node(MacroList* list, MacroListNode* node)
 {
-    if (is_macro_list_empty(list)) {
+    if (macro_list_is_empty(list)) {
         list->head = list->tail = node;
     }
     else {
@@ -186,7 +186,7 @@ void insert_node_to_macro_list(MacroList* list, MacroListNode* node)
     }
 }
 
-void insert_data_to_macro_list_node(MacroListNode* node, const char* line)
+void macro_list_node_insert_source(MacroListNode* node, const char* line)
 {
     size_t text_length = strlen(line);
 
@@ -200,15 +200,15 @@ void insert_data_to_macro_list_node(MacroListNode* node, const char* line)
     node->log_sz++;
 }
 
-void insert_macro_data_to_list_node(MacroListNode* tail, MacroListNode* node)
+void macro_list_node_insert_macro(MacroListNode* tail, MacroListNode* node)
 {
     int i;
     for (i = 0; i < node->log_sz; i++) {
-        insert_data_to_macro_list_node(tail, node->macro_expension[i]);
+        macro_list_node_insert_source(tail, node->macro_expension[i]);
     }
 }
 
-MacroListNode* get_macro_list_node(MacroList* list, const char* entry)
+MacroListNode* macro_list_get_node(MacroList* list, const char* entry)
 {
     MacroListNode* head = list->head;
 
@@ -242,7 +242,7 @@ void create_pre_assembler_file(FILE* in, FILE* out, MacroList* list)
             name = get_macro_name(&it);
 
             /* Check wheter we encountered a valid macro name, and we did not started reading a macro. */
-            if (get_macro_list_node(list, name) && !did_started_reading) {
+            if (macro_list_get_node(list, name) && !did_started_reading) {
                 /* Expand the macro.*/
                 expand_macro_to_file(out, list, name);
                 /* If the state is READ_START_MACRO, change the flag to reflect that we are inside a macro definition. */
@@ -271,7 +271,7 @@ void create_pre_assembler_file(FILE* in, FILE* out, MacroList* list)
     }
 }
 
-void free_macro_expension(char*** macro_expension, int size)
+void macro_free_expension(char*** macro_expension, int size)
 {
     char** ptr = *macro_expension;
     int i;
@@ -284,7 +284,7 @@ void free_macro_expension(char*** macro_expension, int size)
 }
 
 #ifdef  DEBUG
-void dump_macro_list(MacroList* list)
+void macro_list_dump(MacroList* list)
 {
     MacroListNode* head = list->head;
     int i;
@@ -302,14 +302,14 @@ void dump_macro_list(MacroList* list)
 }
 #endif
 
-void free_macro_list(MacroList** list)
+void macro_list_free(MacroList** list)
 {
     MacroListNode* next, *current = (*list)->head;
 
     while (current) {
         next = current->next;
         free(current->macro_name);
-        free_macro_expension(&current->macro_expension, current->log_sz);
+        macro_free_expension(&current->macro_expension, current->log_sz);
         free(current);
         current = next;
     }
