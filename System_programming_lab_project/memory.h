@@ -64,18 +64,18 @@ typedef struct
 /*
 	This is a function for creating a new memory buffer object.
 */
-memoryBuffer get_new_memory_buffer();
+memoryBuffer memory_buffer_get_new();
 
 
 /*
 	This is an internal function that creates a new image memory object. 
 */
-static imageMemory get_new_image_memory();
+static imageMemory image_memory_get_new();
 
 /*
 	This is an internal function used to zero all the image memory. 
 */
-static void init_image_memory(imageMemory* mem);
+static void image_memory_init(imageMemory* mem);
 
 
 #endif

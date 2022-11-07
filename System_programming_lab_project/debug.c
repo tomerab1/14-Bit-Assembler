@@ -1,4 +1,5 @@
 #include "debug.h"
+#include <string.h>
 
 void debug_list_register_node(debugList* list, debugNode* new_node)
 {
@@ -58,24 +59,35 @@ void debug_list_destroy(debugList** list)
 void debug_list_pretty_print(debugList* list)
 {
 	debugNode* head = list->head;
-	size_t len = strlen("Error: ");
-	ptrdiff_t offset = 0;
+	char err_buff[80] = { 0 };
+	ptrdiff_t offset = 0;	
+	size_t err_len = 0;
 
 	while (head) {
 		/* Calculate the spacing between the start of the line and the error pos. */
-		offset = len + ((head->ctx.err_pos) - (head->ctx.start_pos));
+		err_len = sprintf(err_buff, "Line %d:", head->ctx.line_num) + 1;
+		offset = err_len + ((head->ctx.err_pos) - (head->ctx.start_pos));
 
 		switch (head->ctx.err_code) {
 		default:
-			printf("Error: %s\n", head->ctx.start_pos);
+			printf("%s %s\n", err_buff, head->ctx.start_pos);
 			while (offset > 0) {
 				printf(" ");
 				offset--;
 			}
-			printf("^\n");
+			printf("^\t\n%s: Invalid token !\n", debug_map_token_to_err(head->ctx.err_code));
 			break;
 		}
 
 		head = head->next;
+	}
+}
+
+const char* debug_map_token_to_err(errorCodes code)
+{
+	switch (code) {
+
+	default:
+		return "UnknowError";
 	}
 }

@@ -4,7 +4,8 @@
 
 typedef enum
 {
-	ERROR_CODE_UNKNOWN
+	ERROR_CODE_UNKNOWN, ERROR_CODE_INVALID_NAME, ERROR_CODE_TO_MANY_OPERANDS, 
+	ERROR_CODE_TO_LITTLE_OPERANDS, ERROR_CODE_SYNTAX_ERROR
 } errorCodes;
 
 /*
@@ -65,6 +66,12 @@ void debug_list_destroy(debugList** list);
 	Function for printing pretty errors.
 */
 void debug_list_pretty_print(debugList* list);
+
+/*
+	Function for mapping a errorCode to a string
+*/
+
+const char* debug_map_token_to_err(errorCodes code);
 
 
 #endif

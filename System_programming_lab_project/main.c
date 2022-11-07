@@ -5,14 +5,14 @@
 
 int main(int argc, char** argv)
 {
-	start_pre_assembler("SOURCE_FILE_TEST.TXT");
+	//start_pre_assembler("SOURCE_FILE_TEST.TXT");
 	
-	memoryBuffer img = get_new_memory_buffer();
+	//memoryBuffer img = memory_buffer_get_new();
 
 	const char* line = "sub r1, r4";
 
 	debugList* list = debug_list_new_list();
-	debugNode* node = debug_list_new_node(line, line + 8, 0, ERROR_CODE_UNKNOWN);
+	debugNode* node = debug_list_new_node(line, line + 8, 100, ERROR_CODE_UNKNOWN);
 
 	debug_list_register_node(list, node);
 
