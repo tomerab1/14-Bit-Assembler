@@ -45,8 +45,9 @@ bool symbol_table_is_empty(SymbolTable* table)
 
 void symbol_table_destroy(SymbolTable** table)
 {
-    SymbolTableNode* next;
-    LIST_FOR_EACH(SymbolTableNode, (*table)->head, head) {
+    SymbolTableNode* head = (*table)->head, *next;
+    
+    while (head) {
         next = head->next;
         free(head);
         head = next;
