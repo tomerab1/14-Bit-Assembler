@@ -2,14 +2,13 @@
 #include <string.h>
 #include <ctype.h>
 
-bool fill_macro_list_from_file(FILE* in, MacroList* in_list)
+void macro_list_fill_list_from_file(FILE* in, MacroList* in_list)
 {
-    int current_line = 1;
     char* line, *name;
     LineIterator it;
     MacroListNode* node;
     ReadState current_state = READ_UNKNOWN;
-    bool did_started_reading = FALSE, did_error_occurred = FALSE;
+    bool did_started_reading = FALSE;
 
     while ((line = get_line(in)) != NULL) {
         name = NULL;
@@ -25,63 +24,40 @@ bool fill_macro_list_from_file(FILE* in, MacroList* in_list)
         if (current_state != READ_COMMENT) {
             name = get_macro_name(&it);
 
-            /* Check if a macro was decalred before it was defined. */
-            if (current_state == READ_UNKNOWN && is_a_macro_name(name) && !get_macro_list_node(in_list, name)) {
-                printf("Error on line: %d - Macro defined before declared !\n", current_line);
-                did_error_occurred = TRUE;
-            }
             if (current_state == READ_START_MACRO && !did_started_reading) {
-                /* Verify that a macros name is not a reserved keyword. */
-                if (get_opcode(name) != OP_UNKNOWN) {
-                    printf("Error on line: %d - '%s' is a reserved keyword ! It cannot be used as a macro's name...\n", current_line, name);
-                    did_error_occurred = TRUE;
-                }
-                insert_node_to_macro_list(in_list, create_new_macro_list_node(name));
+                macro_list_insert_node(in_list, macro_list_new_node(name));
                 did_started_reading = TRUE;
-            }
-            else if (current_state == READ_START_MACRO && did_started_reading) {
-                printf("Error on line: %d - Nested macro defenition detected !\n", current_line);
-                did_error_occurred = TRUE;
             }
             else if (current_state == READ_END_MACRO) {
                 did_started_reading = FALSE;
             }
             else if (did_started_reading) {
                 /* A macro declaration inside of the macro, we need to insert all of it's source line to those of the current macro. */
-                node = get_macro_list_node(in_list, name);
+                node = macro_list_get_node(in_list, name);
                 if (node) {
-                    insert_macro_data_to_list_node(in_list->tail, node);
+                    macro_list_node_insert_macro(in_list->tail, node);
                 }
                 else {
-                    insert_data_to_macro_list_node(in_list->tail, line);
+                    macro_list_node_insert_source(in_list->tail, line);
                 }
             }
         }
-        current_line++;
+
         free(name);
         free(line);
     }
-
-    return did_error_occurred;
 }
 
-bool start_pre_assembler(const char* path)
+void start_pre_assembler(const char* path)
 {
     FILE* in = open_file(path, MODE_READ), *out = NULL;
-    MacroList* list = get_new_macro_list();
-    bool did_error_occurred = fill_macro_list_from_file(in, list);
+    MacroList* list = macro_list_new_list();
     char* out_name = NULL;
 
-    /* If an error occurred, we dont create an expanded file, we terminate the assembling process. */
-    if (did_error_occurred) {
-        /* Cleaning up. */
-        free_macro_list(&list);
-        fclose(in);
-        return FALSE;
-    }
+    macro_list_fill_list_from_file(in, list);
 
 #ifdef DEBUG
-    dump_macro_list(list);
+    macro_list_dump(list);
 #endif
 
     /* Moves the file pointer back to the starting of the file. */
@@ -93,12 +69,10 @@ bool start_pre_assembler(const char* path)
     create_pre_assembler_file(in, out, list);
 
     /* Cleaning up. */
-    free_macro_list(&list);
+    macro_list_free(&list);
     free(out_name);
     fclose(out);
     fclose(in);
-
-    return TRUE;
 }
 
 ReadState get_current_reading_state(LineIterator* it)
@@ -106,40 +80,30 @@ ReadState get_current_reading_state(LineIterator* it)
     int i;
     char ch = line_iterator_peek(it);
 
-    if (ch == START_COMMENT_CHAR) {
-        return READ_COMMENT;
-    }
+    line_iterator_advance(it);
 
-    if (ch == START_MACRO_DEFENITION[0]) { /* Matches first char, 'm' */
-        line_iterator_advance(it);
+    switch (ch) {
+    case START_COMMENT_CHAR: 
+        return READ_COMMENT;
+    case START_MACRO_DEF_CHAR:
         for (i = 1; i < START_MACRO_DEF_LEN && !line_iterator_is_end(it); i++, line_iterator_advance(it)) {
             if (line_iterator_peek(it) != START_MACRO_DEFENITION[i]) {
                 line_iterator_backwards(it);
                 return READ_UNKNOWN;
             }
         }
-
         return READ_START_MACRO;
-    }
-
-    if (ch == END_MACRO_DEFENITION[0]) { /* Matches first char, 'e' */
-        line_iterator_advance(it);
+    case END_MACRO_DEF_CHAR: 
         for (i = 1; i < END_MACRO_DEF_LEN && !line_iterator_is_end(it); i++, line_iterator_advance(it)) {
             if (line_iterator_peek(it) != END_MACRO_DEFENITION[i]) {
                 line_iterator_backwards(it);
                 return READ_UNKNOWN;
             }
         }
-
         return READ_END_MACRO;
+    default:
+        return READ_UNKNOWN;
     }
-
-    return READ_UNKNOWN;
-}
-
-bool is_a_macro_name(const char* name)
-{
-    return get_opcode(name) == OP_UNKNOWN && !(strchr(name, ':'));
 }
 
 char* get_macro_name(LineIterator* it)
@@ -167,19 +131,19 @@ char* get_macro_name(LineIterator* it)
     return name;
 }
 
-MacroList* get_new_macro_list()
+MacroList* macro_list_new_list()
 {
     MacroList* new_list = (MacroList*) xmalloc(sizeof(MacroList));
     new_list->head = new_list->tail = NULL;
     return new_list;
 }
 
-bool is_macro_list_empty(MacroList* list)
+bool macro_list_is_empty(MacroList* list)
 {
     return !list->head && !list->tail;
 }
 
-MacroListNode* create_new_macro_list_node(const char* name)
+MacroListNode* macro_list_new_node(const char* name)
 {
     MacroListNode* new_node = (MacroListNode*) xmalloc(sizeof(MacroListNode));
 
@@ -211,9 +175,9 @@ void expand_macro_to_file(FILE* out, MacroList* list, const char* name)
     }
 }
 
-void insert_node_to_macro_list(MacroList* list, MacroListNode* node)
+void macro_list_insert_node(MacroList* list, MacroListNode* node)
 {
-    if (is_macro_list_empty(list)) {
+    if (macro_list_is_empty(list)) {
         list->head = list->tail = node;
     }
     else {
@@ -222,7 +186,7 @@ void insert_node_to_macro_list(MacroList* list, MacroListNode* node)
     }
 }
 
-void insert_data_to_macro_list_node(MacroListNode* node, const char* line)
+void macro_list_node_insert_source(MacroListNode* node, const char* line)
 {
     size_t text_length = strlen(line);
 
@@ -236,15 +200,15 @@ void insert_data_to_macro_list_node(MacroListNode* node, const char* line)
     node->log_sz++;
 }
 
-void insert_macro_data_to_list_node(MacroListNode* tail, MacroListNode* node)
+void macro_list_node_insert_macro(MacroListNode* tail, MacroListNode* node)
 {
     int i;
     for (i = 0; i < node->log_sz; i++) {
-        insert_data_to_macro_list_node(tail, node->macro_expension[i]);
+        macro_list_node_insert_source(tail, node->macro_expension[i]);
     }
 }
 
-MacroListNode* get_macro_list_node(MacroList* list, const char* entry)
+MacroListNode* macro_list_get_node(MacroList* list, const char* entry)
 {
     MacroListNode* head = list->head;
 
@@ -278,7 +242,7 @@ void create_pre_assembler_file(FILE* in, FILE* out, MacroList* list)
             name = get_macro_name(&it);
 
             /* Check wheter we encountered a valid macro name, and we did not started reading a macro. */
-            if (get_macro_list_node(list, name) && !did_started_reading) {
+            if (macro_list_get_node(list, name) && !did_started_reading) {
                 /* Expand the macro.*/
                 expand_macro_to_file(out, list, name);
                 /* If the state is READ_START_MACRO, change the flag to reflect that we are inside a macro definition. */
@@ -295,7 +259,7 @@ void create_pre_assembler_file(FILE* in, FILE* out, MacroList* list)
                     If we reached the end of a macro definitons, and we are not currently reading a macro.
                     So the macro wont be copied twice. 
                 */
-                if (current_state != READ_END_MACRO && !did_started_reading) {
+                if (!did_started_reading) {
                     fputs(line, out);
                     fputc('\n', out);
                 }
@@ -307,7 +271,7 @@ void create_pre_assembler_file(FILE* in, FILE* out, MacroList* list)
     }
 }
 
-void free_macro_expension(char*** macro_expension, int size)
+void macro_free_expension(char*** macro_expension, int size)
 {
     char** ptr = *macro_expension;
     int i;
@@ -320,7 +284,7 @@ void free_macro_expension(char*** macro_expension, int size)
 }
 
 #ifdef  DEBUG
-void dump_macro_list(MacroList* list)
+void macro_list_dump(MacroList* list)
 {
     MacroListNode* head = list->head;
     int i;
@@ -338,14 +302,14 @@ void dump_macro_list(MacroList* list)
 }
 #endif
 
-void free_macro_list(MacroList** list)
+void macro_list_free(MacroList** list)
 {
     MacroListNode* next, *current = (*list)->head;
 
     while (current) {
         next = current->next;
         free(current->macro_name);
-        free_macro_expension(&current->macro_expension, current->log_sz);
+        macro_free_expension(&current->macro_expension, current->log_sz);
         free(current);
         current = next;
     }

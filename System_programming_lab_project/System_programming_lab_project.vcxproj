@@ -127,6 +127,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="debug.c" />
     <ClCompile Include="first_pass.c" />
     <ClCompile Include="line_iterator.c" />
     <ClCompile Include="main.c" />
@@ -138,6 +139,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="constants.h" />
+    <ClInclude Include="debug.h" />
     <ClInclude Include="first_pass.h" />
     <ClInclude Include="line_iterator.h" />
     <ClInclude Include="memory.h" />
