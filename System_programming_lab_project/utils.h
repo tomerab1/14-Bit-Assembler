@@ -20,6 +20,10 @@ typedef unsigned short bool;
 #define GROW_ARRAY(type, pointer, new_count, size) (type)xrealloc((pointer), (new_count) * (size))
 #define FREE_ARRAY(pointer) free((pointer))
 
+/* Macro for iterating over each element of the list. */
+#define LIST_FOR_EACH(type, head, out) \
+for(type* out = head; out != NULL; out = out->next)
+
 /*
 	This enumeration is used to represent each opcode with a specific numeric constant.
 */
