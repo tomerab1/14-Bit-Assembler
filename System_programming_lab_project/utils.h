@@ -21,14 +21,14 @@ typedef unsigned short bool;
 #define FREE_ARRAY(pointer) free((pointer))
 
 
-//Defines error data, used by error handlers functions
+/*Defines error data, used by error handlers functions*/
 typedef struct error {
 	int errorCode;
 	char* errorData
 }error;
 
 
-//Error codes
+/*Error codes*/
 typedef enum
 {
 	ERROR_GENERAL = 400,

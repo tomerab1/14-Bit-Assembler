@@ -35,32 +35,34 @@ void* handle_dot_entry(){
 	 
 }
 
-//Searchs if entry exists, used later on while generating files
+/*Searchs if entry exists, used later on while generating files*/
 bool entry_exists(){
 
 }
 
-//Searchs if extern exists, used later on while generating files
+/*Searchs if extern exists, used later on while generating files* /
 bool extern_exists(){
 
 }
 
-//Error handling process
-void handle_errors(error err){
+/*Error handling process*/
+void handle_errors(error err) {
 
 }
 
-//Finds symbols in table
-int find_symbol_in_table(char* symbol){
+/*Finds symbols in table*/
+int find_symbol_in_table(char* symbol) {
 
 }
 
-//Convert decimal to binary
+/*Convert decimal to binary*/
 void convert_to_binary(char* data){
 
 }
 
-//Converts binary to decimal
+/*Converts binary to decimal*/
 void convert_to_deciaml(char* data){
 
 }
+
+
