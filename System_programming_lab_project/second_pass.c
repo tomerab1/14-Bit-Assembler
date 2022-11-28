@@ -1,20 +1,38 @@
 #include "second_pass.h"
+
 bool initiate_second_pass(char* path) {
-}
-
-bool generate_object_file(FILE* out, char* data, int orders_length, int data_length){
 
 }
 
-bool generate_externals_file(FILE* out, void* data, bool isExists){
+bool generate_object_file(FILE* out, char* data, int orders_length, int data_length) {
 
 }
 
-bool generate_entries_file(FILE* out, void* data, bool isExists){
+bool generate_externals_file(FILE* out, void* data, bool isExists) {
 
 }
 
-int extract_order_type(char* line){
+bool generate_entries_file(FILE* out, void* data, bool isExists) {
+
+}
+
+
+void skip_label(LineIterator* line) {
+
+}
+
+int extract_order_type(LineIterator* line, flags* flag) {
+	if (order_exists) {
+
+	}
+	else {
+		flag->dot_entry = false;
+		flag->dot_extern = false;
+	}
+}
+
+void find_command(LineIterator* line) {
+	bool error = false;
 
 }
 
@@ -30,20 +48,30 @@ void* handle_dot_extern(){
 
 }
 
-
 void* handle_dot_entry(){
 	 
 }
 
+bool order_exists(LineIterator* line) {
+	while (!line_iterator_is_end(line)) {
+		if (line_iterator_peek(line) == DOT) {
+			extract_order_type(line_iterator_advance(line));
+			return true;
+		}
+		line_iterator_advance(tempLine);
+	}
+}
 /*Searchs if entry exists, used later on while generating files*/
-bool entry_exists(){
-
+void entry_exists(flags* flag){
+	flag->dot_entry = true;
 }
 
-/*Searchs if extern exists, used later on while generating files* /
-bool extern_exists(){
-
+/*Searchs if extern exists, used later on while generating files*/
+void extern_exists(flags* flag){
+	flag->dot_extern = true;
 }
+
+
 
 /*Error handling process*/
 void handle_errors(error err) {

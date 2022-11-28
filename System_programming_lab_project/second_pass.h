@@ -6,12 +6,16 @@
 #include "constants.h"
 #include "utils.h"
 
+#define DOT '.'
+
 typedef struct lines_list_node
 {
 	int log_sz;
 	int phy_sz;
 	int address;
 	char* data; /* 14 bits string strings. */
+	char* machine_data; /* 14 bits string strings. */
+	char* line_type; /*empty, comment, guidence, command*/
 	struct lines_list_node* next;
 } LinesListNode;
 
@@ -23,6 +27,20 @@ typedef struct
 	LinesListNode* head;
 	LinesListNode* tail;
 } LinesList;
+
+typedef struct item
+{
+	int index;
+	int type;
+} item;
+
+typedef struct flags
+{
+	bool dot_entry;
+	bool dot_extern;
+} flags;
+
+
 
 typedef enum
 {
