@@ -44,9 +44,9 @@ void debug_list_destroy_node(debugNode* node)
 
 void debug_list_destroy(debugList** list)
 {
-	debugNode* head = (*list)->head, * next;
+	debugNode* next;
 
-	while (head) {
+	LIST_FOR_EACH(debugNode, (*list)->head, head) {
 		next = head->next;
 		debug_list_destroy_node(head);
 		free(head);

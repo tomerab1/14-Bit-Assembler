@@ -22,7 +22,7 @@ typedef unsigned short bool;
 
 /* Macro for iterating over each element of the list. */
 #define LIST_FOR_EACH(type, head, out) \
-for(type* out = head; out != NULL; out = out->next)
+for(type* out = head; out != NULL; out = (out) ? out->next : NULL)
 
 /*
 	This enumeration is used to represent each opcode with a specific numeric constant.

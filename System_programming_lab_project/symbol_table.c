@@ -8,12 +8,12 @@ SymbolTable* symbol_table_new_table()
     return new_table;
 }
 
-SymbolTableNode* symbol_table_new_node(const char* name, MemoryWord word)
+SymbolTableNode* symbol_table_new_node(const char* name, long line)
 {
     SymbolTableNode* node = (SymbolTableNode*)xmalloc(sizeof(SymbolTableNode));
     node->next = NULL;
     node->sym.name = name; /* Don't free me :) */
-    node->sym.mem_word = word;
+    node->sym.line = line;
     return node;
 }
 
@@ -45,12 +45,12 @@ bool symbol_table_is_empty(SymbolTable* table)
 
 void symbol_table_destroy(SymbolTable** table)
 {
-    SymbolTableNode* head = (*table)->head, *next;
+    SymbolTableNode* next;
     
-    while (head) {
+    LIST_FOR_EACH(SymbolTableNode, (*table)->head, head) {
         next = head->next;
         free(head);
         head = next;
     }
-    free(table);
+    free(*table);
 }
