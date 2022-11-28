@@ -4,8 +4,9 @@
 
 typedef enum
 {
-	ERROR_CODE_UNKNOWN, ERROR_CODE_INVALID_NAME, ERROR_CODE_TO_MANY_OPERANDS, 
-	ERROR_CODE_TO_LITTLE_OPERANDS, ERROR_CODE_SYNTAX_ERROR
+	ERROR_CODE_OK, ERROR_CODE_UNKNOWN, ERROR_CODE_INVALID_NAME, ERROR_CODE_TO_MANY_OPERANDS, 
+	ERROR_CODE_TO_LITTLE_OPERANDS, ERROR_CODE_SYNTAX_ERROR, ERROR_CODE_SYMBOL_REDEFINITION,
+	ERROR_CODE_INVALID_SYM_TYPE
 } errorCodes;
 
 /*
@@ -73,5 +74,9 @@ void debug_list_pretty_print(debugList* list);
 
 const char* debug_map_token_to_err(errorCodes code);
 
+/* Function for printing the errors
+	
+*/
+void debug_print_error(errorContext* err_ctx, char err_buff[]);
 
 #endif

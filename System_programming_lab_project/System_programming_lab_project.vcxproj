@@ -134,6 +134,7 @@
     <ClCompile Include="memory.c" />
     <ClCompile Include="pre_assembler.c" />
     <ClCompile Include="second_pass.c" />
+    <ClCompile Include="symbol_table.c" />
     <ClCompile Include="syntactical_analysis.c" />
     <ClCompile Include="utils.c" />
   </ItemGroup>
