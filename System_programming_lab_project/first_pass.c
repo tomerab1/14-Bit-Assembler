@@ -5,7 +5,7 @@ bool do_first_pass(const char* path, memoryBuffer* img, SymbolTable* sym_table, 
 	FILE* in = open_file(path, MODE_READ);
 	LineIterator it;
 	firstPassStates curr_state = FP_NONE;
-	char* line = NULL, *prev = NULL;
+	char* line = NULL, *next = NULL;
 	int line = 1;
 	bool did_error_occurred = FALSE;
 
@@ -33,19 +33,37 @@ bool do_first_pass(const char* path, memoryBuffer* img, SymbolTable* sym_table, 
 					trim_symbol_name(word);
 					symbol_table_insert_symbol(sym_table, symbol_table_new_node(word, SYM_CODE, img->instruction_image.counter));
 					/* Keep processing the rest of the instruction, and encode instructions in memory.*/
-					did_error_occurred = first_pass_process_and_encode_instructions(&it, img, sym_table, dbg_list);
+					did_error_occurred |= first_pass_process_and_encode_instructions(&it, img, sym_table, dbg_list);
 				}
 			}
 			else {
-				switch (get_symbol_type(word)) {
+				/* Get the labels name. */
+				next = line_iterator_next_word(&it);
+				switch (curr_state) {
+				case FP_SYM_STR:
 				case FP_SYM_DATA:
-					symbol_table_insert_symbol(sym_table, symbol_table_new_node(word, SYM_DATA, img->data_image.counter));
-					/* Encode data in memory, and update the counter. */
+					if (symbol_table_search_symbol(sym_table, word) == NULL) {
+						debug_list_register_node(dbg_list, debug_list_new_node(it.start, it.current, line, ERROR_CODE_SYMBOL_REDEFINITION));
+						did_error_occurred = TRUE;
+					}
+					else {
+						symbol_table_insert_symbol(sym_table, symbol_table_new_node(word, SYM_DATA, img->data_image.counter));
+						/* Encode data in memory, and update the counter. */
+					}
 					break;
 				case FP_SYM_ENT:
-					// symbol_table_insert_all_externs(LineIterator* it, memoryBuffer* img, SymbolTable* sym_table, debugList* dbg_list);
+					if (symbol_table_search_symbol(sym_table, next) == NULL) {
+						debug_list_register_node(dbg_list, debug_list_new_node(it.start, it.current, line, ERROR_CODE_SYMBOL_REDEFINITION));
+						did_error_occurred = TRUE;
+					}
+					symbol_table_insert_symbol(sym_table, symbol_table_new_node(word, SYM_ENTRY, img->data_image.counter));
 					break;
 				case FP_SYM_EXT:
+					if (symbol_table_search_symbol(sym_table, next) == NULL) {
+						debug_list_register_node(dbg_list, debug_list_new_node(it.start, it.current, line, ERROR_CODE_SYMBOL_REDEFINITION));
+						did_error_occurred = TRUE;
+					}
+					symbol_table_insert_symbol(sym_table, symbol_table_new_node(word, SYM_EXTERN, img->data_image.counter));
 					break;
 				default: /* Invalid symbol definition. */
 					debug_list_register_node(dbg_list, debug_list_new_node(it.start, it.current, line, ERROR_CODE_INVALID_SYM_TYPE));
