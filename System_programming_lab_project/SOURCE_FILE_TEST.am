@@ -27,8 +27,3 @@ END: stop
 STR: .string “abcdef”
 LENGTH: .data 6,-9,15
 K: .data 22
-sub r1, r4
-bne END
-sub	r1, r5
-bne LOOP(r4, r3)
-dec	r1
