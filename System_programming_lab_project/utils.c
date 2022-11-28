@@ -90,5 +90,5 @@ char* get_line(FILE* in)
 
 unsigned int get_2s_complement(int n)
 {
-    return (unsigned int)n;
+    return (~n) + 1;
 }

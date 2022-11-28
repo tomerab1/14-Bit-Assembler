@@ -8,12 +8,13 @@ SymbolTable* symbol_table_new_table()
     return new_table;
 }
 
-SymbolTableNode* symbol_table_new_node(const char* name, long line)
+SymbolTableNode* symbol_table_new_node(const char* name, symbolType type, long counter)
 {
     SymbolTableNode* node = (SymbolTableNode*)xmalloc(sizeof(SymbolTableNode));
     node->next = NULL;
     node->sym.name = name; /* Don't free me :) */
-    node->sym.line = line;
+    node->sym.counter = counter;
+    node->sym.type = type;
     return node;
 }
 
