@@ -24,6 +24,9 @@ void line_iterator_consume_blanks(LineIterator* it);
 /* Returns the current char 'current' points to. */
 char line_iterator_peek(LineIterator* it);
 
+/* Returns the next word. */
+char* line_iterator_next_word(LineIterator* it);
+
 /* Checks if the iterator reached its end, i.e '\0'. */
 bool line_iterator_is_end(LineIterator* it);
 

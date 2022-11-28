@@ -44,9 +44,9 @@ void debug_list_destroy_node(debugNode* node)
 
 void debug_list_destroy(debugList** list)
 {
-	debugNode* head = (*list)->head, *next;
+	debugNode* next;
 
-	while (head) {
+	LIST_FOR_EACH(debugNode, (*list)->head, head) {
 		next = head->next;
 		debug_list_destroy_node(head);
 		free(head);
@@ -58,29 +58,29 @@ void debug_list_destroy(debugList** list)
 
 void debug_list_pretty_print(debugList* list)
 {
-	debugNode* head = list->head;
 	char err_buff[80] = { 0 };
-	ptrdiff_t offset = 0;	
-	size_t err_len = 0;
 
-	while (head) {
-		/* Calculate the spacing between the start of the line and the error pos. */
-		err_len = sprintf(err_buff, "Line %d:", head->ctx.line_num) + 1;
-		offset = err_len + ((head->ctx.err_pos) - (head->ctx.start_pos));
-
+	LIST_FOR_EACH(debugNode, list->head, head) {
 		switch (head->ctx.err_code) {
 		default:
-			printf("%s %s\n", err_buff, head->ctx.start_pos);
-			while (offset > 0) {
-				printf(" ");
-				offset--;
-			}
-			printf("^\t\n%s: Invalid token !\n", debug_map_token_to_err(head->ctx.err_code));
+			debug_print_error(&head->ctx, err_buff);
 			break;
 		}
-
-		head = head->next;
 	}
+}
+
+void debug_print_error(errorContext* err_ctx, char err_buff[])
+{
+	/* Calculate the spacing between the start of the line and the error pos. */
+	size_t err_len = sprintf(err_buff, "Line %d:", err_ctx->line_num) + 1;
+	ptrdiff_t offset = err_len + ((err_ctx->err_pos) - (err_ctx->start_pos));
+
+	printf("%s %s\n", err_buff, err_ctx->start_pos);
+	while (offset > 0) {
+		printf(" ");
+		offset--;
+	}
+	printf("^\t\n%s: Invalid token !\n", debug_map_token_to_err(err_ctx->err_code));
 }
 
 const char* debug_map_token_to_err(errorCodes code)

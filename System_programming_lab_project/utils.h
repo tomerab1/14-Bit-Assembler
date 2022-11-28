@@ -20,20 +20,9 @@ typedef unsigned short bool;
 #define GROW_ARRAY(type, pointer, new_count, size) (type)xrealloc((pointer), (new_count) * (size))
 #define FREE_ARRAY(pointer) free((pointer))
 
-
-/*Defines error data, used by error handlers functions*/
-typedef struct error {
-	int errorCode;
-	char* errorData
-}error;
-
-
-/*Error codes*/
-typedef enum
-{
-	ERROR_GENERAL = 400,
-	ERROR_WRONG_OPCODE
-};
+/* Macro for iterating over each element of the list. */
+#define LIST_FOR_EACH(type, head, out) \
+for(type* out = head; out != NULL; out = (out) ? out->next : NULL)
 
 /*
 	This enumeration is used to represent each opcode with a specific numeric constant.
