@@ -4,9 +4,8 @@
 #include "line_iterator.h"
 #include "symbol_table.h"
 #include "constants.h"
+#include "debug.h"
 #include "utils.h"
-
-#define DOT '.'
 
 typedef struct lines_list_node
 {
@@ -44,10 +43,10 @@ typedef struct flags
 
 typedef enum
 {
-	DOT_DATA = 1,
-	DOT_STRING,
-	DOT_ENTRY,
-	DOT_EXTERN
+	DOT_DATA_CODE = 1,
+	DOT_STRING_CODE,
+	DOT_ENTRY_CODE,
+	DOT_EXTERN_CODE
 };
 
 bool initiate_second_pass(char* path);
@@ -56,16 +55,13 @@ bool generate_object_file(FILE* out, char* data, int orders_length, int data_len
 bool generate_externals_file(FILE* out, void* data, bool isExists);
 bool generate_entries_file(FILE* out, void* data, bool isExists);
 
-int extract_order_type(char* line);
+bool extract_order_type(LineIterator* line, flags* flag);
 void* handle_dot_data();
 void* handle_dot_string();
 void* handle_dot_extern();
 void* handle_dot_entry();
 
-bool entry_exists();
-bool extern_exists();
-
-void handle_errors(error err);
+bool handle_errors(errorContext* error);
 int find_symbol_in_table(char* symbol)
 
 void convert_to_binary(char* data);

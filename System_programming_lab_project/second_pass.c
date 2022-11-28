@@ -21,14 +21,32 @@ void skip_label(LineIterator* line) {
 
 }
 
-int extract_order_type(LineIterator* line, flags* flag) {
+bool extract_order_type(LineIterator* line, flags* flag) {
 	if (order_exists) {
-
+		char* command = line_iterator_next_word(line);
+		if (strcmp(command, DOT_DATA)) {
+			handle_dot_data();
+		}
+		else if (strcmp(command, DOT_STRING)) {
+			handle_dot_string();
+		}
+		else if (strcmp(command, DOT_EXTERN)) {
+			handle_dot_extern();
+		}
+		else if (strcmp(command, DOT_ENTRY)) {
+			handle_dot_entry();
+		}
+		else {
+			errorContext err;
+			return handle_errors(&err);
+		}
+		free(command);
 	}
 	else {
 		flag->dot_entry = false;
 		flag->dot_extern = false;
 	}
+	return false;
 }
 
 void find_command(LineIterator* line) {
@@ -74,8 +92,9 @@ void extern_exists(flags* flag){
 
 
 /*Error handling process*/
-void handle_errors(error err) {
+bool handle_errors(errorContext* error) {
 
+	return true;
 }
 
 /*Finds symbols in table*/
