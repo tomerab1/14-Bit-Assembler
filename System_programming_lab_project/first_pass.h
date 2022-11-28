@@ -27,5 +27,11 @@ bool do_first_pass(const char* path, memoryBuffer* img, SymbolTable* sym_table, 
 */
 firstPassStates get_symbol_type(char* word);
 
+/* This function trims the symbol name, i.e. trims the ':'
+ * @param - The symbol to fix.
+*/
+void trim_symbol_name(char* sym);
+
+bool first_pass_process_and_encode_instructions(LineIterator* it, imageMemory* img, symbolType* sym_table, debugList* dbg_list);
 
 #endif

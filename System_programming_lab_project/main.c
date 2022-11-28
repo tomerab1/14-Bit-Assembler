@@ -13,8 +13,12 @@ int main(int argc, char** argv)
 	SymbolTable* sym_table = symbol_table_new_table();
 	debugList* dbg_list = debug_list_new_list();
 
-	do_first_pass(pre_assembled_path, &img, sym_table, dbg_list);
+	if (do_first_pass(pre_assembled_path, &img, sym_table, dbg_list)) {
+		/* Create all the appropriate files, continue to second pass. */
+	}
 
+	symbol_table_destroy(&sym_table);
+	debug_list_destroy(&dbg_list);
 
 	return 0;
 }
