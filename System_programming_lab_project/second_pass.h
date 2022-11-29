@@ -6,6 +6,7 @@
 #include "constants.h"
 #include "debug.h"
 #include "utils.h"
+#include "debug.h"
 
 typedef struct lines_list_node
 {
@@ -73,6 +74,8 @@ void* handle_dot_string();
 void* handle_dot_extern();
 void* handle_dot_entry();
 
+bool entry_exists();
+bool extern_exists();
 bool handle_errors(errorContext* error);
 
 void convert_to_binary(char* data);

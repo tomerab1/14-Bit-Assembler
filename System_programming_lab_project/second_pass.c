@@ -163,8 +163,6 @@ void extern_exists(flags* flag){
 	flag->dot_extern = TRUE;
 }
 
-
-
 /*Error handling process*/
 bool handle_errors(errorContext* error) {
 
