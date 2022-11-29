@@ -30,4 +30,6 @@ char* line_iterator_next_word(LineIterator* it);
 /* Checks if the iterator reached its end, i.e '\0'. */
 bool line_iterator_is_end(LineIterator* it);
 
+/*Checks if the iterator reached line beginning*/
+bool line_iterator_is_start(LineIterator* it);
 #endif

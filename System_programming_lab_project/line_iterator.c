@@ -65,3 +65,9 @@ bool line_iterator_is_end(LineIterator* it)
 {
     return *(it->current) == '\0';
 }
+
+
+bool line_iterator_is_start(LineIterator* it)
+{
+    return (it->current) - (it->start) == 0;
+}

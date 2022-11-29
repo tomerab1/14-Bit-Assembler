@@ -1,6 +1,5 @@
 #include "utils.h"
-#include "constants.h"
-#include <string.h>
+
 
 Opcodes get_opcode(const char* str)
 {

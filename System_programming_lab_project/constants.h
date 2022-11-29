@@ -27,4 +27,10 @@
 #define MODE_WRITE_READ "w+"
 #define MODE_APP_READ "a+"
 
+
+#define DOT_COMMAND '.'
+#define DOT_DATA "data"
+#define DOT_STRING "string"
+#define DOT_ENTRY "entry"
+#define DOT_EXTERN "extern"
 #endif
