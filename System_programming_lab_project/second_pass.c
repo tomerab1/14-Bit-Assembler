@@ -40,13 +40,18 @@ bool entry_exists(){
 
 }
 
+bool extern_exists()
+{
+	return FALSE;
+}
+
 /*Searchs if extern exists, used later on while generating files* /
 bool extern_exists(){
 
 }
 
 /*Error handling process*/
-void handle_errors(error err) {
+void handle_errors(errorCodes err) {
 
 }
 

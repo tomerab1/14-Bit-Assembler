@@ -1,4 +1,5 @@
 #include "first_pass.h"
+#include "syntactical_analysis.h"
 #include <string.h>
 
 bool do_first_pass(const char* path, memoryBuffer* img, SymbolTable* sym_table, debugList* dbg_list)
@@ -6,17 +7,17 @@ bool do_first_pass(const char* path, memoryBuffer* img, SymbolTable* sym_table, 
 	FILE* in = open_file(path, MODE_READ);
 	LineIterator it;
 	firstPassStates curr_state = FP_NONE;
-	char* line = NULL, *next = NULL;
+	char* curr_line = NULL, *next = NULL;
 	int line = 1;
 	bool did_error_occurred = FALSE;
 	errorCodes err_code;
 
 
-	while ((line = get_line(in)) != NULL) {
+	while ((curr_line = get_line(in)) != NULL) {
 		char* word = NULL;
 		
 		/* Feed the iterator with a new line. */
-		line_iterator_put_line(&it, line);
+		line_iterator_put_line(&it, curr_line);
 		/* Trim white spaces. */
 		line_iterator_consume_blanks(&it);
 
@@ -120,9 +121,9 @@ bool first_pass_process_and_encode_instructions(LineIterator* it, memoryBuffer* 
 
 void build_memory_word(LineIterator* it, memoryBuffer* img, debugList* dbg_list)
 {
-	char* word;
+	char* word = NULL;
 	
-	while ((word = line_iterator_next_word(word)) != NULL) {
+	while ((word = line_iterator_next_word(it)) != NULL) {
 
 	}
 }

@@ -5,6 +5,7 @@
 #include "symbol_table.h"
 #include "constants.h"
 #include "utils.h"
+#include "debug.h"
 
 typedef struct lines_list_node
 {
@@ -47,8 +48,8 @@ void* handle_dot_entry();
 bool entry_exists();
 bool extern_exists();
 
-void handle_errors(error err);
-int find_symbol_in_table(char* symbol)
+void handle_errors(errorCodes err);
+int find_symbol_in_table(char* symbol);
 
 void convert_to_binary(char* data);
 void convert_to_deciaml(char* data);
