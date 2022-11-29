@@ -1,47 +1,48 @@
 #include "second_pass.h"
 
-bool initiate_second_pass(char* path, SymbolTable* table, int* DC, int* L) {
+bool initiate_second_pass(char* path, SymbolTable* table, memoryBuffer* memory) {
 	FILE* in = open_file(path, MODE_READ);
 
 	programFinalStatus finalStatus;
-	LinesListNode lines;
 	errorContext* error = NULL;
 	flags phaseFlags;
 	
-	int curLineIndex = 1, IC = 0;
+	int curLineIndex = 1;
 	char* line = NULL;
 
 	while ((line = get_line(in)) != NULL) {
 		LineIterator curLine;
 		line_iterator_put_line(&curLine, line);
 		skip_label(&curLine);
-
+		//stopped here
 
 	}
-	finalStatus.createdObject = generate_object_file(&lines, path, IC, (*DC),error);
-	finalStatus.createdExternals = generate_externals_file(&lines, table, path);
-	finalStatus.createdEntry = generate_entries_file(&lines, table,path);
+
+	finalStatus.createdObject = generate_object_file(memory, path, error);
+	finalStatus.createdExternals = generate_externals_file(table, path);
+	finalStatus.createdEntry = generate_entries_file(table,path);
 
 	fclose(in);
 	free(line);
 	free(error);
 }
 
-bool generate_object_file(LinesListNode* data, char* path, int orders_length, int data_length, errorContext* err) {
+bool generate_object_file(memoryBuffer* memory, char* path, errorContext* err) {
 	char* outfileName = NULL;
 	FILE* out = NULL;
+	LinesListNode translatedMemory;
 
-	translate_to_machine_data(data,*err);
+	translatedMemory = translate_to_machine_data(memory,*err);
 
 	if(err->err_code == ERROR_CODE_OK){
 		outfileName = get_outfile_name(path, ".object");
 		out = open_file(outfileName, MODE_WRITE);
 
-		fputs(("%9d\t%-9d", orders_length, data_length), out);
+		fputs(("%9d\t%-9d", memory->data_image.counter, memory->instruction_image.counter), out);
 		fputs("\n", out);
 
-		while (data != NULL) {
-			fputs(("%04d\t%14d", data->address, data->machine_data),out);
+		while (memory != NULL) {
+			fputs(("%04d\t%14d", translatedMemory.address, translatedMemory.machine_data),out);
 			fputs("\n", out);
 		}
 	}
@@ -52,11 +53,11 @@ bool generate_object_file(LinesListNode* data, char* path, int orders_length, in
 	fclose(out);
 }
 
-void translate_to_machine_data(LinesListNode* data, errorContext err) {
+LinesListNode translate_to_machine_data(memoryBuffer* memory, errorContext err) {
 
 }
 
-bool generate_externals_file(LinesListNode* data, SymbolTable* table, char* path){
+bool generate_externals_file(SymbolTable* table, char* path){
 	char* outfileName = NULL;
 	FILE* out = NULL;
 	SymbolTableNode* symTableHead = table->head;
@@ -73,7 +74,7 @@ bool generate_externals_file(LinesListNode* data, SymbolTable* table, char* path
 	fclose(out);
 }
 
-bool generate_entries_file(LinesListNode* data, SymbolTable* table, char* path) {
+bool generate_entries_file(SymbolTable* table, char* path) {
 	char* outfileName = NULL;
 	FILE* out = NULL;
 	SymbolTableNode* symTableHead = table->head;

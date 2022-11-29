@@ -4,6 +4,7 @@
 #include "line_iterator.h"
 #include "symbol_table.h"
 #include "constants.h"
+#include "memory.h"
 #include "debug.h"
 #include "utils.h"
 
@@ -57,11 +58,11 @@ typedef enum
 
 bool initiate_second_pass(char* path, SymbolTable* table, int* DC, int* L);
 
-bool generate_object_file(LinesListNode* data, char* path, int orders_length, int data_length, errorContext* err);
-void translate_to_machine_data(LinesListNode* data, errorContext err);
+bool generate_object_file(memoryBuffer* memory, char* path, errorContext* err);
+LinesListNode translate_to_machine_data(memoryBuffer* memory, errorContext err);
 
-bool generate_externals_file(LinesListNode* data, SymbolTable* table, char* path);
-bool generate_entries_file(LinesListNode* data, SymbolTable* table, char* path);
+bool generate_externals_file(SymbolTable* table, char* path);
+bool generate_entries_file(SymbolTable* table, char* path);
 
 bool order_exists(LineIterator* line, flags* flag);
 bool extract_order_type(LineIterator* line, flags* flag);
