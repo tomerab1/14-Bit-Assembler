@@ -19,33 +19,35 @@ bool initiate_second_pass(char* path, SymbolTable* table, int* DC, int* L) {
 	finalStatus.createdObject = generate_object_file(lines, path, IC, DC);
 	finalStatus.createdExternals = generate_externals_file(lines, table, path);
 	finalStatus.createdEntry = generate_entries_file(lines, table,path);
+
+	fcloseall();
+	free(curLine);
+	free(error);
 }
 
 bool generate_object_file(LinesListNode* data, char* path, int orders_length, int data_length, errorContext* err) {
 	char* outfileName = NULL;
 	FILE* out = NULL;
-	
 
 	translate_to_machine_data(data,err);
 
 	if(err->err_code == ERROR_CODE_OK){
+		outfileName = get_outfile_name(path, ".object");
+		out = open_file(outfileName, MODE_WRITE);
+
 		fputs(("%9d\t%-9d", orders_length, data_length), out);
 		fputs("\n", out);
 
 		while (data != NULL) {
-			fputs(("%4d\t%14d", data->address, data->machine_data),out);
+			fputs(("%04d\t%14d", data->address, data->machine_data),out);
 			fputs("\n", out);
 		}
-
-		outfileName = get_outfile_name(path, ".object");
-		out = open_file(out_name, MODE_WRITE);
-		
-		free(outfileName);
-		fclose(out);
 	}
 	else {
 		debug_print_error(err);
 	}
+	free(outfileName);
+	fclose(out);
 }
 
 void translate_to_machine_data(LinesListNode* data, errorContext err) {
@@ -55,9 +57,15 @@ void translate_to_machine_data(LinesListNode* data, errorContext err) {
 bool generate_externals_file(LinesListNode* data, SymbolTable* table, char* path){
 	char* outfileName = NULL;
 	FILE* out = NULL;
+	SymbolTableNode symTableHead = table->head;
 
 	outfileName = get_outfile_name(path, ".external");
 	out = open_file(out_name, MODE_WRITE);
+
+	while (symTableHead != NULL && symTableHead.sym.type == SYM_EXTERN) {
+		fputs(("%-10s\t%4d", symTableHead.sym.name, symTableHead.sym.counter), out);
+		fputs("\n", out);
+	}
 
 	free(outfileName);
 	fclose(out);
@@ -66,10 +74,16 @@ bool generate_externals_file(LinesListNode* data, SymbolTable* table, char* path
 bool generate_entries_file(LinesListNode* data, SymbolTable* table, char* path) {
 	char* outfileName = NULL;
 	FILE* out = NULL;
+	SymbolTableNode symTableHead = table->head;
 
 	outfileName = get_outfile_name(path, ".entry");
 	out = open_file(out_name, MODE_WRITE);
-	
+
+	while (symTableHead != NULL && symTableHead.sym.type == SYM_ENTRY) {
+		fputs(("%-10s%4d", symTableHead.sym.name, symTableHead.sym.counter), out);
+		fputs("\n", out);
+	}
+
 	free(outfileName);
 	fclose(out);
 }
@@ -107,7 +121,6 @@ bool extract_order_type(LineIterator* line, flags* flag) {
 }
 
 void find_command(LineIterator* line) {
-	bool error = false;
 
 }
 
@@ -129,11 +142,11 @@ void* handle_dot_entry(){
 
 bool order_exists(LineIterator* line) {
 	while (!line_iterator_is_end(line)) {
-		if (line_iterator_peek(line) == DOT) {
+		if (line_iterator_peek(line) == DOT_COMMAND) {
 			extract_order_type(line_iterator_advance(line));
 			return true;
 		}
-		line_iterator_advance(tempLine);
+		line_iterator_advance(line);
 	}
 }
 /*Searchs if entry exists, used later on while generating files*/

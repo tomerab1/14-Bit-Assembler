@@ -58,7 +58,7 @@ typedef enum
 bool initiate_second_pass(char* path, SymbolTable* table, int* DC, int* L);
 
 bool generate_object_file(LinesListNode* data, char* path, int orders_length, int data_length, errorContext* err);
-void translate_to_machine_data(LinesListNode* data, errorContext err)
+void translate_to_machine_data(LinesListNode* data, errorContext err);
 
 bool generate_externals_file(LinesListNode* data, SymbolTable* table, char* path);
 bool generate_entries_file(LinesListNode* data, SymbolTable* table, char* path);
@@ -70,7 +70,7 @@ void* handle_dot_extern();
 void* handle_dot_entry();
 
 bool handle_errors(errorContext* error);
-int find_symbol_in_table(char* symbol)
+int find_symbol_in_table(char* symbol);
 
 void convert_to_binary(char* data);
 void convert_to_deciaml(char* data);
