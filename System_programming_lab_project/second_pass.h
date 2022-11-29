@@ -9,8 +9,6 @@
 
 typedef struct lines_list_node
 {
-	int log_sz;
-	int phy_sz;
 	int address;
 	char* data; /* 14 bits string strings. */
 	char* machine_data; /* 14 bits string strings. */
@@ -39,6 +37,14 @@ typedef struct flags
 	bool dot_extern;
 } flags;
 
+typedef struct programFinalStatus
+{
+	bool createdObject;
+	bool createdExternals = true;
+	bool createdEntry = true;
+	errorContext error = NULL;
+} programFinalStatus;
+
 
 
 typedef enum
@@ -49,11 +55,13 @@ typedef enum
 	DOT_EXTERN_CODE
 };
 
-bool initiate_second_pass(char* path);
+bool initiate_second_pass(char* path, SymbolTable* table, int* DC, int* L);
 
-bool generate_object_file(FILE* out, char* data, int orders_length, int data_length);
-bool generate_externals_file(FILE* out, void* data, bool isExists);
-bool generate_entries_file(FILE* out, void* data, bool isExists);
+bool generate_object_file(LinesListNode* data, char* path, int orders_length, int data_length, errorContext* err);
+void translate_to_machine_data(LinesListNode* data, errorContext err)
+
+bool generate_externals_file(LinesListNode* data, SymbolTable* table, char* path);
+bool generate_entries_file(LinesListNode* data, SymbolTable* table, char* path);
 
 bool extract_order_type(LineIterator* line, flags* flag);
 void* handle_dot_data();

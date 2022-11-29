@@ -1,21 +1,78 @@
 #include "second_pass.h"
 
-bool initiate_second_pass(char* path) {
+bool initiate_second_pass(char* path, SymbolTable* table, int* DC, int* L) {
+	FILE* in = open_file(path, MODE_READ);
+	LinesListNode lines;
+	flags phaseFlags;
+	programFinalStatus finalStatus;
+	errorContext* error;
+	char* curLine = NULL;
+	int curLineIndex = 1, IC = 0;
+
+	while ((line = get_line(in)) != NULL) {
+		LineIterator curLine;
+		line_iterator_put_line(&curLine, line);
+		skip_label(curLine);
+
+
+	}
+	finalStatus.createdObject = generate_object_file(lines, path, IC, DC);
+	finalStatus.createdExternals = generate_externals_file(lines, table, path);
+	finalStatus.createdEntry = generate_entries_file(lines, table,path);
+}
+
+bool generate_object_file(LinesListNode* data, char* path, int orders_length, int data_length, errorContext* err) {
+	char* outfileName = NULL;
+	FILE* out = NULL;
+	
+
+	translate_to_machine_data(data,err);
+
+	if(err->err_code == ERROR_CODE_OK){
+		fputs(("%9d\t%-9d", orders_length, data_length), out);
+		fputs("\n", out);
+
+		while (data != NULL) {
+			fputs(("%4d\t%14d", data->address, data->machine_data),out);
+			fputs("\n", out);
+		}
+
+		outfileName = get_outfile_name(path, ".object");
+		out = open_file(out_name, MODE_WRITE);
+		
+		free(outfileName);
+		fclose(out);
+	}
+	else {
+		debug_print_error(err);
+	}
+}
+
+void translate_to_machine_data(LinesListNode* data, errorContext err) {
 
 }
 
-bool generate_object_file(FILE* out, char* data, int orders_length, int data_length) {
+bool generate_externals_file(LinesListNode* data, SymbolTable* table, char* path){
+	char* outfileName = NULL;
+	FILE* out = NULL;
 
+	outfileName = get_outfile_name(path, ".external");
+	out = open_file(out_name, MODE_WRITE);
+
+	free(outfileName);
+	fclose(out);
 }
 
-bool generate_externals_file(FILE* out, void* data, bool isExists) {
+bool generate_entries_file(LinesListNode* data, SymbolTable* table, char* path) {
+	char* outfileName = NULL;
+	FILE* out = NULL;
 
+	outfileName = get_outfile_name(path, ".entry");
+	out = open_file(out_name, MODE_WRITE);
+	
+	free(outfileName);
+	fclose(out);
 }
-
-bool generate_entries_file(FILE* out, void* data, bool isExists) {
-
-}
-
 
 void skip_label(LineIterator* line) {
 
