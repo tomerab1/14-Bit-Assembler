@@ -2,26 +2,28 @@
 
 bool initiate_second_pass(char* path, SymbolTable* table, int* DC, int* L) {
 	FILE* in = open_file(path, MODE_READ);
-	LinesListNode lines;
-	flags phaseFlags;
+
 	programFinalStatus finalStatus;
-	errorContext* error;
-	char* curLine = NULL;
+	LinesListNode lines;
+	errorContext* error = NULL;
+	flags phaseFlags;
+	
 	int curLineIndex = 1, IC = 0;
+	char* line = NULL;
 
 	while ((line = get_line(in)) != NULL) {
 		LineIterator curLine;
 		line_iterator_put_line(&curLine, line);
-		skip_label(curLine);
+		skip_label(&curLine);
 
 
 	}
-	finalStatus.createdObject = generate_object_file(lines, path, IC, DC);
-	finalStatus.createdExternals = generate_externals_file(lines, table, path);
-	finalStatus.createdEntry = generate_entries_file(lines, table,path);
+	finalStatus.createdObject = generate_object_file(&lines, path, IC, (*DC),error);
+	finalStatus.createdExternals = generate_externals_file(&lines, table, path);
+	finalStatus.createdEntry = generate_entries_file(&lines, table,path);
 
-	fcloseall();
-	free(curLine);
+	fclose(in);
+	free(line);
 	free(error);
 }
 
@@ -29,7 +31,7 @@ bool generate_object_file(LinesListNode* data, char* path, int orders_length, in
 	char* outfileName = NULL;
 	FILE* out = NULL;
 
-	translate_to_machine_data(data,err);
+	translate_to_machine_data(data,*err);
 
 	if(err->err_code == ERROR_CODE_OK){
 		outfileName = get_outfile_name(path, ".object");
@@ -44,7 +46,7 @@ bool generate_object_file(LinesListNode* data, char* path, int orders_length, in
 		}
 	}
 	else {
-		debug_print_error(err);
+		/*debug_print_error(err);*/
 	}
 	free(outfileName);
 	fclose(out);
@@ -57,13 +59,13 @@ void translate_to_machine_data(LinesListNode* data, errorContext err) {
 bool generate_externals_file(LinesListNode* data, SymbolTable* table, char* path){
 	char* outfileName = NULL;
 	FILE* out = NULL;
-	SymbolTableNode symTableHead = table->head;
+	SymbolTableNode* symTableHead = table->head;
 
 	outfileName = get_outfile_name(path, ".external");
-	out = open_file(out_name, MODE_WRITE);
+	out = open_file(outfileName, MODE_WRITE);
 
-	while (symTableHead != NULL && symTableHead.sym.type == SYM_EXTERN) {
-		fputs(("%-10s\t%4d", symTableHead.sym.name, symTableHead.sym.counter), out);
+	while (symTableHead != NULL && symTableHead->sym.type == SYM_EXTERN) {
+		fputs(("%-10s\t%4d", symTableHead->sym.name, symTableHead->sym.counter), out);
 		fputs("\n", out);
 	}
 
@@ -74,13 +76,13 @@ bool generate_externals_file(LinesListNode* data, SymbolTable* table, char* path
 bool generate_entries_file(LinesListNode* data, SymbolTable* table, char* path) {
 	char* outfileName = NULL;
 	FILE* out = NULL;
-	SymbolTableNode symTableHead = table->head;
+	SymbolTableNode* symTableHead = table->head;
 
 	outfileName = get_outfile_name(path, ".entry");
-	out = open_file(out_name, MODE_WRITE);
+	out = open_file(outfileName, MODE_WRITE);
 
-	while (symTableHead != NULL && symTableHead.sym.type == SYM_ENTRY) {
-		fputs(("%-10s%4d", symTableHead.sym.name, symTableHead.sym.counter), out);
+	while (symTableHead != NULL && symTableHead->sym.type == SYM_ENTRY) {
+		fputs(("%-10s%4d", symTableHead->sym.name, symTableHead->sym.counter), out);
 		fputs("\n", out);
 	}
 
@@ -93,7 +95,7 @@ void skip_label(LineIterator* line) {
 }
 
 bool extract_order_type(LineIterator* line, flags* flag) {
-	if (order_exists) {
+	if (order_exists(line,flag)) {
 		char* command = line_iterator_next_word(line);
 		if (strcmp(command, DOT_DATA)) {
 			handle_dot_data();
@@ -114,10 +116,10 @@ bool extract_order_type(LineIterator* line, flags* flag) {
 		free(command);
 	}
 	else {
-		flag->dot_entry = false;
-		flag->dot_extern = false;
+		flag->dot_entry = FALSE;
+		flag->dot_extern = FALSE;
 	}
-	return false;
+	return FALSE;
 }
 
 void find_command(LineIterator* line) {
@@ -140,23 +142,25 @@ void* handle_dot_entry(){
 	 
 }
 
-bool order_exists(LineIterator* line) {
+bool order_exists(LineIterator* line, flags* flag) {
 	while (!line_iterator_is_end(line)) {
 		if (line_iterator_peek(line) == DOT_COMMAND) {
-			extract_order_type(line_iterator_advance(line));
-			return true;
+			line_iterator_advance(line);
+			extract_order_type(line,flag);
+			printf("");
+			return TRUE;
 		}
 		line_iterator_advance(line);
 	}
 }
 /*Searchs if entry exists, used later on while generating files*/
 void entry_exists(flags* flag){
-	flag->dot_entry = true;
+	flag->dot_entry = TRUE;
 }
 
 /*Searchs if extern exists, used later on while generating files*/
 void extern_exists(flags* flag){
-	flag->dot_extern = true;
+	flag->dot_extern = TRUE;
 }
 
 
@@ -164,12 +168,7 @@ void extern_exists(flags* flag){
 /*Error handling process*/
 bool handle_errors(errorContext* error) {
 
-	return true;
-}
-
-/*Finds symbols in table*/
-int find_symbol_in_table(char* symbol) {
-
+	return TRUE;
 }
 
 /*Convert decimal to binary*/

@@ -40,9 +40,9 @@ typedef struct flags
 typedef struct programFinalStatus
 {
 	bool createdObject;
-	bool createdExternals = true;
-	bool createdEntry = true;
-	errorContext error = NULL;
+	bool createdExternals;
+	bool createdEntry;
+	errorContext error;
 } programFinalStatus;
 
 
@@ -63,14 +63,17 @@ void translate_to_machine_data(LinesListNode* data, errorContext err);
 bool generate_externals_file(LinesListNode* data, SymbolTable* table, char* path);
 bool generate_entries_file(LinesListNode* data, SymbolTable* table, char* path);
 
+bool order_exists(LineIterator* line, flags* flag);
 bool extract_order_type(LineIterator* line, flags* flag);
+void skip_label(LineIterator* line);
+
+
 void* handle_dot_data();
 void* handle_dot_string();
 void* handle_dot_extern();
 void* handle_dot_entry();
 
 bool handle_errors(errorContext* error);
-int find_symbol_in_table(char* symbol);
 
 void convert_to_binary(char* data);
 void convert_to_deciaml(char* data);
