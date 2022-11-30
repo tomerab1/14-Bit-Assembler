@@ -153,13 +153,9 @@ bool order_exists(LineIterator* line, flags* flag) {
 		line_iterator_advance(line);
 	}
 }
-/*Searchs if entry exists, used later on while generating files*/
-void entry_exists(flags* flag){
-	flag->dot_entry = TRUE;
-}
 
 /*Searchs if extern exists, used later on while generating files*/
-void extern_exists(flags* flag){
+bool extern_exists(flags* flag){
 	flag->dot_extern = TRUE;
 }
 

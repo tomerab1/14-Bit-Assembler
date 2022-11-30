@@ -75,7 +75,6 @@ void* handle_dot_extern();
 void* handle_dot_entry();
 
 bool entry_exists();
-bool extern_exists();
 bool handle_errors(errorContext* error);
 
 void convert_to_binary(char* data);
