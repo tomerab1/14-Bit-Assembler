@@ -8,7 +8,7 @@
 #include <string.h>
 #include "constants.h"
 
-#define DEBUG
+//#define DEBUG
 
 /* TODO: Remove later, just defined for visual studio. */
 #ifndef __cplusplus
@@ -28,21 +28,6 @@ typedef unsigned short bool;
 #define LIST_FOR_EACH(type, head, out) \
 for(type* out = head; out != NULL; out = (out) ? out->next : NULL)
 /*>>>>>>> master*/
-
-/*
-	This enumeration is used to represent each opcode with a specific numeric constant.
-*/
-typedef enum
-{
-	OP_MOV = 0, OP_CMP, OP_ADD, OP_SUB,
-	OP_NOT, OP_CLR, OP_LEA, OP_INC,
-	OP_DEC, OP_JMP, OP_BNE, OP_RED,
-	OP_PRN, OP_JSR, OP_RTS, OP_STOP, OP_TOTAL, OP_UNKNOWN
-} Opcodes;
-
-
-/* This function takes a string and returns the matching Opcode. */
-Opcodes get_opcode(const char* str);
 
 /* Wrapper function of malloc, calloc and realloc, they check whether an allocation was successful or not. */
 void* xrealloc(void* ptr, size_t alloc_sz);
