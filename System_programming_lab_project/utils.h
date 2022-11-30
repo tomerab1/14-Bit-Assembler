@@ -6,7 +6,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define DEBUG
+//#define DEBUG
 
 /* TODO: Remove later, just defined for visual studio. */
 #ifndef __cplusplus

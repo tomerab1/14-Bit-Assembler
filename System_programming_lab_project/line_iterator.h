@@ -18,6 +18,9 @@ void line_iterator_advance(LineIterator* it);
 /* Advances the line iterator by -1. */
 void line_iterator_backwards(LineIterator* it);
 
+/* Advances the line iterator by the words length. */
+void line_iterator_unget_word(LineIterator* it, const char* word);
+
 /* Consumes blanks, i.e white spaces and tabs. */
 void line_iterator_consume_blanks(LineIterator* it);
 
