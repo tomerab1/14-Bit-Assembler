@@ -1,47 +1,53 @@
 #include "second_pass.h"
-
-bool initiate_second_pass(char* path, SymbolTable* table, int* DC, int* L) {
+//error context appearances are temp 
+bool initiate_second_pass(char* path, SymbolTable* table, memoryBuffer* memory) {
 	FILE* in = open_file(path, MODE_READ);
 
 	programFinalStatus finalStatus;
-	LinesListNode lines;
 	errorContext* error = NULL;
 	flags phaseFlags;
 	
-	int curLineIndex = 1, IC = 0;
+	int curLineIndex = 1;
 	char* line = NULL;
 
 	while ((line = get_line(in)) != NULL) {
 		LineIterator curLine;
-		line_iterator_put_line(&curLine, line);
-		skip_label(&curLine);
-
+		LineIterator* ptrCurLine;
+		bool labelFlag = FALSE;
+		line_iterator_put_line(ptrCurLine, line);
+		skip_label(ptrCurLine, &labelFlag, table, error);
+		extract_order_type(ptrCurLine, &phaseFlags);
+		//stopped here
 
 	}
-	finalStatus.createdObject = generate_object_file(&lines, path, IC, (*DC),error);
-	finalStatus.createdExternals = generate_externals_file(&lines, table, path);
-	finalStatus.createdEntry = generate_entries_file(&lines, table,path);
+
+	finalStatus.createdObject = generate_object_file(memory, path, error);
+	finalStatus.createdExternals = generate_externals_file(table, path);
+	finalStatus.createdEntry = generate_entries_file(table,path);
 
 	fclose(in);
 	free(line);
 	free(error);
 }
 
-bool generate_object_file(LinesListNode* data, char* path, int orders_length, int data_length, errorContext* err) {
+bool generate_object_file(memoryBuffer* memory, char* path, errorContext* err) {
 	char* outfileName = NULL;
 	FILE* out = NULL;
+	LinesList* translatedMemory;
+	LinesListNode* lineNode;
 
-	translate_to_machine_data(data,*err);
+	translatedMemory = translate_to_machine_data(memory,*err);
+	lineNode = translatedMemory->head;
 
 	if(err->err_code == ERROR_CODE_OK){
 		outfileName = get_outfile_name(path, ".object");
 		out = open_file(outfileName, MODE_WRITE);
 
-		fputs(("%9d\t%-9d", orders_length, data_length), out);
+		fputs(("%9d\t%-9d", memory->data_image.counter, memory->instruction_image.counter), out);
 		fputs("\n", out);
 
-		while (data != NULL) {
-			fputs(("%04d\t%14d", data->address, data->machine_data),out);
+		while (lineNode != NULL) {
+			fputs(("%04d\t%14d", lineNode->address, lineNode->machine_data),out);
 			fputs("\n", out);
 		}
 	}
@@ -52,11 +58,50 @@ bool generate_object_file(LinesListNode* data, char* path, int orders_length, in
 	fclose(out);
 }
 
-void translate_to_machine_data(LinesListNode* data, errorContext err) {
-
+LinesList* translate_to_machine_data(memoryBuffer* memory, errorContext* err) {
+	int i,j;
+	LinesList* translatedMemory = (LinesList*)xmalloc(sizeof(LinesList)*memory->instruction_image.counter);
+	LinesListNode* lineNode = translatedMemory->head;
+	for (i = 0; i <= memory->instruction_image.counter; i++) {
+		int countSize = 0;
+		for (j = 0; j < PARAM_ONE_SIZE; j++) {
+			transform_binary(memory->data_image.memory[i].param2, lineNode->machine_data, j, countSize++);
+			countSize++;
+		}
+		for (j; j < PARAM_TWO_SIZE; j++) {
+			transform_binary(memory->data_image.memory[i].param2, lineNode->machine_data, j, countSize++);
+			countSize++;
+		}
+		for (j; j < OPCODE_SIZE; j++) {
+			transform_binary(memory->data_image.memory[i].param2, lineNode->machine_data, j, countSize++);
+			countSize++;
+		}
+		for (j; j < DEST_SIZE; j++) {
+			transform_binary(memory->data_image.memory[i].param2, lineNode->machine_data, j, countSize++);
+			countSize++;
+		}
+		for (j; j < SOURCE_SIZE; j++) {
+			transform_binary(memory->data_image.memory[i].param2, lineNode->machine_data, j, countSize++);
+			countSize++;
+		}
+		for (j; j < E_R_A_SIZE; j++) {
+			transform_binary(memory->data_image.memory[i].param2, lineNode->machine_data, j, countSize++);
+			countSize++;
+		}
+		
+	}
+	return translatedMemory;
 }
 
-bool generate_externals_file(LinesListNode* data, SymbolTable* table, char* path){
+void transform_binary(char* data,char* machineCodeString, int currentIndexData, int currentIndexMCS) {
+	if (*(data + currentIndexData) == 0) {
+		*(machineCodeString + currentIndexMCS) = OBJECT_PRINT_DOT;
+		return;
+	}
+	*(machineCodeString + currentIndexMCS) = OBJECT_PRINT_SLASH;
+}
+
+bool generate_externals_file(SymbolTable* table, char* path){
 	char* outfileName = NULL;
 	FILE* out = NULL;
 	SymbolTableNode* symTableHead = table->head;
@@ -73,7 +118,7 @@ bool generate_externals_file(LinesListNode* data, SymbolTable* table, char* path
 	fclose(out);
 }
 
-bool generate_entries_file(LinesListNode* data, SymbolTable* table, char* path) {
+bool generate_entries_file(SymbolTable* table, char* path) {
 	char* outfileName = NULL;
 	FILE* out = NULL;
 	SymbolTableNode* symTableHead = table->head;
@@ -90,8 +135,21 @@ bool generate_entries_file(LinesListNode* data, SymbolTable* table, char* path) 
 	fclose(out);
 }
 
-void skip_label(LineIterator* line) {
-
+void skip_label(LineIterator* line, bool* labelFlag,SymbolTable* table, errorContext* err) {
+	if(symbol_table_search_symbol(table,line_iterator_next_word(line))){ //if exists
+		line = line->start;
+		if (line_iterator_peek(line) >= LETTER_A && line_iterator_peek(line) <= LETTER_Z) {
+			while (line_iterator_peek(line) != COLON) {
+				line_iterator_advance(line);
+			}
+		line_iterator_advance(line);
+		line_iterator_consume_blanks(line);
+		labelFlag = TRUE;
+		}
+		return;
+	}
+	err = TRUE; //TEMP
+	return;
 }
 
 bool extract_order_type(LineIterator* line, flags* flag) {
@@ -153,13 +211,9 @@ bool order_exists(LineIterator* line, flags* flag) {
 		line_iterator_advance(line);
 	}
 }
-/*Searchs if entry exists, used later on while generating files*/
-void entry_exists(flags* flag){
-	flag->dot_entry = TRUE;
-}
 
 /*Searchs if extern exists, used later on while generating files*/
-void extern_exists(flags* flag){
+bool extern_exists(flags* flag){
 	flag->dot_extern = TRUE;
 }
 

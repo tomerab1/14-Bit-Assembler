@@ -1,5 +1,6 @@
 #include "line_iterator.h"
 #include "utils.h"
+#include <string.h>
 #include <ctype.h>
 
 void line_iterator_put_line(LineIterator* it, const char* line)
@@ -17,6 +18,14 @@ void line_iterator_backwards(LineIterator* it)
 {
     if (it->current - 1 >= it->start)
         it->current--;
+}
+
+void line_iterator_unget_word(LineIterator* it, const char* word)
+{
+    size_t length = strlen(word);
+    while (length-- > 0) {
+        line_iterator_backwards(it);
+    }
 }
 
 void line_iterator_consume_blanks(LineIterator* it)

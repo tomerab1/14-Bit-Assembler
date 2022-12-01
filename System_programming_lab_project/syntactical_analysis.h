@@ -13,7 +13,7 @@ typedef enum
 	OP_MOV = 0, OP_CMP, OP_ADD, OP_SUB,
 	OP_NOT, OP_CLR, OP_LEA, OP_INC,
 	OP_DEC, OP_JMP, OP_BNE, OP_RED,
-	OP_PRN, OP_JSR, OP_RTS, OP_STOP, OP_TOTAL, OP_UNKNOWN
+	OP_PRN, OP_JSR, OP_RTS, OP_STOP, OP_UNKNOWN
 } Opcodes;
 
 
@@ -35,5 +35,15 @@ bool is_valid_label(const char* label);
 /* This function verifies the command syntax. */
 bool verify_command_syntax(LineIterator* it, debugList* dbg_list);
 
+/* Check if 'str' is a registers name. */
+bool is_register_name(const char* str);
+
+/* This function trims the symbol name, i.e. trims the ':'
+ * @param - The symbol to fix.
+*/
+void trim_symbol_name(char* sym);
+
+/* Verifies the source code syntax */
+bool validate_syntax(LineIterator it, debugList* dbg_list);
 
 #endif

@@ -8,24 +8,52 @@ errorCodes check_label_syntax(const char* label)
     int i;
     char* colon_loc = strrchr(label, ':');
 
-    if (colon_loc && isspace(*(colon_loc - 1)))
+    if (colon_loc == NULL)
+        return ERROR_CODE_SYNTAX_ERROR;
+
+    if (isspace(*(colon_loc - 1)))
         return ERROR_CODE_SPACE_BEFORE_COLON;
 
-    for (i = 0; label[i]; i++) {
-        if (!isalpha(label[i]) && !isdigit(label[i]))
+    while (label < colon_loc) {
+        if (!isalpha(*label) && !isdigit(*label))
             return ERROR_CODE_INVALID_CHAR_IN_LABEL;
+        label++;
     }
+
+    trim_symbol_name(label);
+    if (is_register_name(label))
+        return ERROR_CODE_RESERVED_KEYWORD_DEF;
 
     return ERROR_CODE_OK;
 }
 
 bool is_valid_label(const char* label)
 {
-    return (is_valid_label(label) == ERROR_CODE_OK) ? TRUE : FALSE;
+    return (check_label_syntax(label) == ERROR_CODE_OK) ? TRUE : FALSE;
 }
 
 bool verify_command_syntax(LineIterator* it, debugList* dbg_list)
 {
+    return FALSE;
+}
+
+void trim_symbol_name(char* sym)
+{
+    /* The ':' must be coupled with the name*/
+    sym[strlen(sym) - 1] = '\0';
+}
+
+bool is_register_name(const char* str)
+{
+    
+    if (strcmp(str, "r0") == 0) return TRUE;
+    if (strcmp(str, "r1") == 0) return TRUE;
+    if (strcmp(str, "r2") == 0) return TRUE;
+    if (strcmp(str, "r3") == 0) return TRUE;
+    if (strcmp(str, "r4") == 0) return TRUE;
+    if (strcmp(str, "r5") == 0) return TRUE;
+    if (strcmp(str, "r6") == 0) return TRUE;
+    if (strcmp(str, "r7") == 0) return TRUE;
     return FALSE;
 }
 
@@ -49,4 +77,18 @@ Opcodes get_opcode(const char* str)
     if (strcmp(str, "stop") == 0) return OP_STOP;
 
     return OP_UNKNOWN;
+}
+
+bool validate_syntax(LineIterator it, debugList* dbg_list)
+{
+    char* word;
+
+
+    while ((word = line_iterator_next_word(&it)) != NULL) {
+        /* Get the type of instruction */
+        /* Large state machine, according to the type of instruction. */
+    }
+
+
+    return TRUE;
 }

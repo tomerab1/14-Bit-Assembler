@@ -8,7 +8,7 @@ int main(int argc, char** argv)
 {
 	start_pre_assembler("SOURCE_FILE_TEST.TXT");
 	
-	const char* pre_assembled_path = get_outfile_name("SOURCE_FILE_TEST", ".am");
+	const char* pre_assembled_path = get_outfile_name("SOURCE_FILE_TEST.TXT", ".am");
 	memoryBuffer img = memory_buffer_get_new();
 	SymbolTable* sym_table = symbol_table_new_table();
 	debugList* dbg_list = debug_list_new_list();

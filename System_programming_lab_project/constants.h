@@ -10,6 +10,14 @@
 #define INIT_PHY_SZ 4
 #define INIT_LOG_SZ 0
 
+#define SINGLE_ORDER_SIZE 14
+#define E_R_A_SIZE 2
+#define SOURCE_SIZE 2
+#define DEST_SIZE 2
+#define OPCODE_SIZE 4
+#define PARAM_ONE_SIZE 2
+#define PARAM_TWO_SIZE 2
+
 #define END_LABEL_CHAR ':'
 #define START_COMMENT_CHAR ';'
 #define START_MACRO_DEF_CHAR 'm'
@@ -33,4 +41,11 @@
 #define DOT_STRING "string"
 #define DOT_ENTRY "entry"
 #define DOT_EXTERN "extern"
+
+#define LETTER_A 'A'
+#define LETTER_Z 'Z'
+#define COLON ':'
+
+#define OBJECT_PRINT_DOT '.'
+#define OBJECT_PRINT_SLASH '/'
 #endif

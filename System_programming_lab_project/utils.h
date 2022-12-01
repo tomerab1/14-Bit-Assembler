@@ -8,7 +8,7 @@
 #include <string.h>
 #include "constants.h"
 
-#define DEBUG
+//#define DEBUG
 
 /* TODO: Remove later, just defined for visual studio. */
 #ifndef __cplusplus
