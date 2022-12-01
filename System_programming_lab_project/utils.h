@@ -22,12 +22,11 @@ typedef unsigned short bool;
 #define GROW_ARRAY(type, pointer, new_count, size) (type)xrealloc((pointer), (new_count) * (size))
 #define FREE_ARRAY(pointer) free((pointer))
 
-/*<<<<<<< HEAD
-=======*/
+
 /* Macro for iterating over each element of the list. */
 #define LIST_FOR_EACH(type, head, out) \
 for(type* out = head; out != NULL; out = (out) ? out->next : NULL)
-/*>>>>>>> master*/
+
 
 /* Wrapper function of malloc, calloc and realloc, they check whether an allocation was successful or not. */
 void* xrealloc(void* ptr, size_t alloc_sz);
@@ -45,5 +44,7 @@ char* get_line(FILE* in);
 
 /* This function takes a negative value, and returns it's 2's complement form. */
 unsigned int get_2s_complement(int n);
+
+char* get_copy_string(const char* str);
 
 #endif

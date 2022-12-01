@@ -67,6 +67,13 @@ char* get_line(FILE* in)
     return read_buffer;
 }
 
+char* get_copy_string(const char* str)
+{
+    char* res = (char*)xcalloc(strlen(str), sizeof(char));
+    memcpy(res, str, sizeof(char) * strlen(str));
+    return res;
+}
+
 unsigned int get_2s_complement(int n)
 {
     return (~n) + 1;

@@ -17,6 +17,8 @@ int main(int argc, char** argv)
 		/* Create all the appropriate files, continue to second pass. */
 	}
 
+	debug_list_pretty_print(dbg_list);
+
 	symbol_table_destroy(&sym_table);
 	debug_list_destroy(&dbg_list);
 

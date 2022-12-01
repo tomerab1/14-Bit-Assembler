@@ -23,8 +23,9 @@ void line_iterator_backwards(LineIterator* it)
 void line_iterator_unget_word(LineIterator* it, const char* word)
 {
     size_t length = strlen(word);
-    while (length-- > 0) {
+    while (length > 0) {
         line_iterator_backwards(it);
+        length--;
     }
 }
 

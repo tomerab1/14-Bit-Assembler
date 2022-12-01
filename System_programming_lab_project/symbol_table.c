@@ -1,4 +1,5 @@
 #include "symbol_table.h"
+#include "utils.h"
 #include <string.h>
 
 SymbolTable* symbol_table_new_table()
@@ -12,7 +13,7 @@ SymbolTableNode* symbol_table_new_node(const char* name, symbolType type, long c
 {
     SymbolTableNode* node = (SymbolTableNode*)xmalloc(sizeof(SymbolTableNode));
     node->next = NULL;
-    node->sym.name = name; /* Don't free me :) */
+    node->sym.name = get_copy_string(name);
     node->sym.counter = counter;
     node->sym.type = type;
     return node;
@@ -50,6 +51,7 @@ void symbol_table_destroy(SymbolTable** table)
     
     LIST_FOR_EACH(SymbolTableNode, (*table)->head, head) {
         next = head->next;
+        free(head->sym.name);
         free(head);
         head = next;
     }
