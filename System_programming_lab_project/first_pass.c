@@ -77,6 +77,8 @@ firstPassStates get_symbol_type(LineIterator* it, char* word)
 			return FP_SYM_STR;
 		}
 		if (strcmp(next_word, ".extern") == 0 || strcmp(next_word, ".entry") == 0) {
+			line_iterator_unget_word(it, next_word);
+			line_iterator_unget_word(it, word);
 			return FP_SYM_IGNORED;
 		}
 
@@ -131,10 +133,10 @@ bool first_pass_process_sym_def(LineIterator* it, memoryBuffer* img, SymbolTable
 	symbol_table_insert_symbol(sym_table, symbol_table_new_node(name, SYM_CODE, img->instruction_image.counter));
 
 	/* Check the syntax, we want a copy of the iterator because if the syntax is correct we will encode the instructions to memory. */
-	if (!validate_syntax(*it, dbg_list)) {
+	if (!validate_syntax(*it, FP_SYM_DEF, line, dbg_list)) {
 		return FALSE;
 	}
-
+	build_memory_word(it, img, dbg_list);
 	return TRUE;
 }
 
