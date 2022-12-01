@@ -36,18 +36,22 @@ bool generate_object_file(memoryBuffer* memory, char* path, errorContext* err) {
 	LinesList* translatedMemory;
 	LinesListNode* lineNode;
 
-	translatedMemory = translate_to_machine_data(memory,*err);
+	translatedMemory = translate_to_machine_data(memory,err);
 	lineNode = translatedMemory->head;
 
 	if(err->err_code == ERROR_CODE_OK){
 		outfileName = get_outfile_name(path, ".object");
 		out = open_file(outfileName, MODE_WRITE);
 
-		fputs(("%9d\t%-9d", memory->data_image.counter, memory->instruction_image.counter), out);
+		char placeholder[20];
+		sprintf(placeholder, ("%9d\t%-9d", memory->data_image.counter, memory->instruction_image.counter));
+
+		fputs(placeholder, out);
 		fputs("\n", out);
 
 		while (lineNode != NULL) {
-			fputs(("%04d\t%14d", lineNode->address, lineNode->machine_data),out);
+			sprintf(placeholder, ("%04d\t%14d", lineNode->address, lineNode->machine_data));
+			fputs(placeholder,out);
 			fputs("\n", out);
 		}
 	}
@@ -136,9 +140,9 @@ bool generate_entries_file(SymbolTable* table, char* path) {
 }
 
 void skip_label(LineIterator* line, bool* labelFlag,SymbolTable* table, errorContext* err) {
-	if(symbol_table_search_symbol(table,line_iterator_next_word(line))){ //if exists
-		line = line->start;
-		if (line_iterator_peek(line) >= LETTER_A && line_iterator_peek(line) <= LETTER_Z) {
+	if (isLabel(line)) {
+			if (symbol_table_search_symbol(table, line_iterator_next_word(line))) { //if exists, needs to edit code so it would care the colon
+				line = line->start;
 			while (line_iterator_peek(line) != COLON) {
 				line_iterator_advance(line);
 			}
@@ -150,6 +154,21 @@ void skip_label(LineIterator* line, bool* labelFlag,SymbolTable* table, errorCon
 	}
 	err = TRUE; //TEMP
 	return;
+}
+
+bool isLabel(LineIterator* line) {
+	LineIterator* tempLineIterator;
+	line_iterator_put_line(tempLineIterator, line_iterator_next_word(line));
+	line_iterator_backwards(tempLineIterator);
+	line->current = line->start;
+
+	if (line_iterator_peek(tempLineIterator) == COLON){
+		free(tempLineIterator);
+		return TRUE;
+	}
+
+	free(tempLineIterator);
+	return FALSE;
 }
 
 bool extract_order_type(LineIterator* line, flags* flag) {
@@ -215,6 +234,10 @@ bool order_exists(LineIterator* line, flags* flag) {
 /*Searchs if extern exists, used later on while generating files*/
 bool extern_exists(flags* flag){
 	flag->dot_extern = TRUE;
+}
+/*Searchs if extern exists, used later on while generating files*/
+bool entry_exists(flags* flag) {
+	flag->dot_entry = TRUE;
 }
 
 /*Error handling process*/

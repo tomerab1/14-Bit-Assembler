@@ -57,17 +57,25 @@ typedef enum
 	DOT_EXTERN_CODE
 };
 
-bool initiate_second_pass(char* path, SymbolTable* table, int* DC, int* L);
+//starts second pass process
+bool initiate_second_pass(char* path, SymbolTable* table, memoryBuffer* memory);
 
+//generates object file 
 bool generate_object_file(memoryBuffer* memory, char* path, errorContext* err);
-LinesListNode* translate_to_machine_data(memoryBuffer* memory, errorContext err);
-
+//translates data from memory to object text style configuration
+LinesList* translate_to_machine_data(memoryBuffer* memory, errorContext* err);
+//generates external file
 bool generate_externals_file(SymbolTable* table, char* path);
+//generates entries file
 bool generate_entries_file(SymbolTable* table, char* path);
-
+//checks if any order type (extern or entry) commands exists in the program
 bool order_exists(LineIterator* line, flags* flag);
+//checks if extern commands exists in the program
+bool extern_exists(flags* flag);
+//checks if entry commands exists in the program
+bool entry_exists(flags* flag);
+
 bool extract_order_type(LineIterator* line, flags* flag);
-void skip_label(LineIterator* line, bool* labelFlag, SymbolTable* table, errorContext* err);
 
 
 void* handle_dot_data();
@@ -75,7 +83,11 @@ void* handle_dot_string();
 void* handle_dot_extern();
 void* handle_dot_entry();
 
-bool entry_exists();
+//checks if first world is label
+bool isLabel(LineIterator* line);
+//skip label if exists
+void skip_label(LineIterator* line, bool* labelFlag, SymbolTable* table, errorContext* err);
+
 bool handle_errors(errorContext* error);
 
 void convert_to_binary(char* data);
