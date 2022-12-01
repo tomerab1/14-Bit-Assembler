@@ -27,6 +27,11 @@ typedef enum
 
 typedef enum
 {
+	AG_GROUP_0, AG_GROUP_1, AG_GROUP_2, AG_GROUP_3, AG_GROUP_UNKNOWN
+} AddressingGroups;
+
+typedef enum
+{
 	OP_TYPE_OPCDE, OP_TYPE_LABEL, OP_TYPE_DATA, OP_TYPE_STRING,
 	OP_TYPE_EXTERN, OP_TYPE_ENTRY, OP_TYPE_UNKNOWN
 } OperationTypes;
@@ -92,5 +97,7 @@ bool match_addressing_group_three(LineIterator* it, const char* word, long line,
 
 /* Verifies that the substring starting at word and ending at other is an integer. */
 bool verify_int(char* word, char* other);
+
+AddressingGroups classify_to_addressing_group(const char* word);
 
 #endif
