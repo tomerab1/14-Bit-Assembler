@@ -112,6 +112,8 @@ bool validate_syntax_sym_def(LineIterator* it, long line, debugList* dbg_list)
                 return FALSE;
             }
         }
+        /* Check syntax for .data/.string, otherwise it's an error. */
+        free(word);
     }
 
     return TRUE;
@@ -122,8 +124,12 @@ bool check_syntax_group_zero(LineIterator* it, long line, debugList* dbg_list)
     char* next = line_iterator_next_word(it);
     if (next != NULL) {
         debug_list_register_node(dbg_list, debug_list_new_node(it->start, it->current, line, ERROR_CODE_INVALID_AMOUNT_OF_OPERANDS));
+        free(next);
         return FALSE;
     }
+    
+    free(next);
+
     return TRUE;
 }
 
@@ -135,13 +141,18 @@ bool check_syntax_group_one(LineIterator* it, long line, Opcodes opcode, debugLi
         if (strchr(word, '#') != NULL)
             return match_addressing_group_zero(it, word + 1, line, dbg_list);
     }
-    return match_addressing_group_zero(it, word + 1, line, dbg_list);
+    match_addressing_group_zero(it, word + 1, line, dbg_list);
+    free(word);
+    return TRUE;
 }
 
 bool check_syntax_group_two(LineIterator* it, long line, Opcodes opcode, debugList* dbg_list)
 {
     char* word = line_iterator_next_word(it);
-    return match_addressing_group_zero(it, word + 1, line, dbg_list);
+    match_addressing_group_zero(it, word + 1, line, dbg_list);
+
+    free(word);
+    return TRUE;
 }
 
 InstructionGroup get_instruction_group(const char* str)
@@ -221,4 +232,11 @@ bool verify_int(char* word, char* other)
     }
 
     return TRUE;
+}
+
+AddressingGroups classify_to_addressing_group(const char* word)
+{
+
+
+    return AG_GROUP_UNKNOWN;
 }
