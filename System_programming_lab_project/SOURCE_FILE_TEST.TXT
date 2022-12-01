@@ -1,4 +1,4 @@
-prn #-5
+END: mov #-1,r7
 bne LOOP(r4,r3)
 mcr m1
 sub r1, r4
@@ -13,6 +13,7 @@ dec	r1
 endmcr
 L1: inc K
 bne LOOP(K,STR)
+END: prn #-5
 END: stop
 STR: .string “abcdef”
 LENGTH: .data 6,-9,15

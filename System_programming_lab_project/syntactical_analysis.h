@@ -77,11 +77,20 @@ bool check_syntax_group_zero(LineIterator* it, long line, debugList* dbg_list);
 
 /* Verifies syntax for the group of operation that can take 1 operands.
 */
-bool check_syntax_group_one(LineIterator* it, long line, debugList* dbg_list);
+bool check_syntax_group_one(LineIterator* it, long line, Opcodes opcode, debugList* dbg_list);
 
 
 /* Verifies syntax for the group of operation that can take 2 operands.
 */
-bool check_syntax_group_two(LineIterator* it, long line, debugList* dbg_list);
+bool check_syntax_group_two(LineIterator* it, long line, Opcodes opcode, debugList* dbg_list);
+
+/* Checks the syntax according to the addressing group, in page 32 (PDF).*/
+bool match_addressing_group_zero(LineIterator* it, const char* word, long line, debugList* dbg_list);
+bool match_addressing_group_one(LineIterator* it, const char* word, long line, debugList* dbg_list);
+bool match_addressing_group_two(LineIterator* it, const char* word, long line, debugList* dbg_list);
+bool match_addressing_group_three(LineIterator* it, const char* word, long line, debugList* dbg_list);
+
+/* Verifies that the substring starting at word and ending at other is an integer. */
+bool verify_int(char* word, char* other);
 
 #endif
