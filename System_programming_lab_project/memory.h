@@ -26,12 +26,12 @@ typedef enum
 */
 typedef struct
 {
-	char e_r_a  : 2;
-	char source : 2;
-	char dest   : 2;
-	char opcode : 4;
-	char param1 : 2;
-	char param2 : 2;
+	char e_r_a  : E_R_A_SIZE;
+	char source : SOURCE_SIZE;
+	char dest   : DEST_SIZE;
+	char opcode : OPCODE_SIZE;
+	char param1 : PARAM_ONE_SIZE;
+	char param2 : PARAM_TWO_SIZE;
 } MemoryWord;
 
 /*

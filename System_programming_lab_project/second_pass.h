@@ -13,7 +13,7 @@ typedef struct lines_list_node
 {
 	int address;
 	char* data; /* 14 bits string strings. */
-	char* machine_data; /* 14 bits string strings. */
+	char* machine_data[SINGLE_ORDER_SIZE]; /* 14 bits string strings. */
 	char* line_type; /*empty, comment, guidence, command*/
 	struct lines_list_node* next;
 } LinesListNode;
@@ -60,14 +60,14 @@ typedef enum
 bool initiate_second_pass(char* path, SymbolTable* table, int* DC, int* L);
 
 bool generate_object_file(memoryBuffer* memory, char* path, errorContext* err);
-LinesListNode translate_to_machine_data(memoryBuffer* memory, errorContext err);
+LinesListNode* translate_to_machine_data(memoryBuffer* memory, errorContext err);
 
 bool generate_externals_file(SymbolTable* table, char* path);
 bool generate_entries_file(SymbolTable* table, char* path);
 
 bool order_exists(LineIterator* line, flags* flag);
 bool extract_order_type(LineIterator* line, flags* flag);
-void skip_label(LineIterator* line);
+void skip_label(LineIterator* line, bool* labelFlag, SymbolTable* table, errorContext* err);
 
 
 void* handle_dot_data();
