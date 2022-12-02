@@ -2,6 +2,7 @@
 #include "syntactical_analysis.h"
 #include "constants.h"
 #include <string.h>
+#include <ctype.h>
 
 void* xrealloc(void* ptr, size_t alloc_sz)
 {
@@ -58,7 +59,7 @@ char* get_line(FILE* in)
         read_buffer[read++] = ch;
     }
 
-    if (ch == '\n') {
+    if (ch == '\n' && read == 0) {
         return read_buffer;
     }
 
@@ -68,7 +69,23 @@ char* get_line(FILE* in)
         return NULL;
     }
 
+    if (is_line_only_blanks(read_buffer)) {
+        /* Mark for later functions in the pipeline to ignore. */
+        *read_buffer = '\0';
+        return read_buffer;
+    }
+
     return read_buffer;
+}
+
+bool is_line_only_blanks(const char* line)
+{
+    while (*line) {
+        if (!isspace(*line)) 
+            return FALSE;
+        line++;
+    }
+    return TRUE;
 }
 
 char* get_copy_string(const char* str)

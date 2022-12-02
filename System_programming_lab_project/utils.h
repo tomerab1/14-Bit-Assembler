@@ -59,4 +59,6 @@ unsigned int get_2s_complement(int n);
 
 char* get_copy_string(const char* str);
 
+bool is_line_only_blanks(const char* line);
+
 #endif
