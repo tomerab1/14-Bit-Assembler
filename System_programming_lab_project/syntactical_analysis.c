@@ -132,7 +132,6 @@ bool check_syntax_group_zero(LineIterator* it, long line, debugList* dbg_list)
     }
     
     free(next);
-
     return TRUE;
 }
 
@@ -141,21 +140,22 @@ bool check_syntax_group_one(LineIterator* it, long line, Opcodes opcode, debugLi
     char* word = line_iterator_next_word(it);
     AddressingGroups ad_group = classify_to_addressing_group(word);
 
+    line_iterator_unget_word(it, word);
+    free(word);
+
     /* Only the 'prn' opcode can have addressing group zero in group one. */
     if (ad_group ==  AG_GROUP_0 && opcode != OP_PRN) {
         return FALSE;
     }
 
     switch (ad_group) {
-    case AG_GROUP_0: return match_addressing_group_zero(it, word, line, dbg_list);
-    case AG_GROUP_1: return match_addressing_group_one(it, word, line, dbg_list);
-    case AG_GROUP_2: return match_addressing_group_two(it, word, line, dbg_list);
-    case AG_GROUP_3: return match_addressing_group_three(it, word, line, dbg_list);
+    case AG_GROUP_0: return match_addressing_group_zero(it, line, dbg_list);
+    case AG_GROUP_1: return match_addressing_group_one(it, line, dbg_list);
+    case AG_GROUP_2: return match_addressing_group_two(it, line, dbg_list);
+    case AG_GROUP_3: return match_addressing_group_three(it, line, dbg_list);
     default: return FALSE;
     }
 
-
-    free(word);
     return TRUE;
 }
 
@@ -188,113 +188,90 @@ InstructionGroup get_instruction_group(const char* str)
     return IG_GROUP_INVALID;
 }
 
-bool match_addressing_group_zero(LineIterator* it, const char* word, long line, debugList* dbg_list)
+bool match_addressing_group_zero(LineIterator* it, long line, debugList* dbg_list)
 {
-    // Find the commas location.
-    char* comma_loc = strchr(word, ',');
+    /* By matching to this addressing group we know that the first char is '#' so we skip it. */
+    line_iterator_advance(it);
 
-    if (comma_loc == NULL) {
-        debug_list_register_node(dbg_list, debug_list_new_node(it->start, it->current, line, ERROR_CODE_MISSING_COMMA));
+    /* There can not be a white char between the '#' and the beginning of the int. */
+    if (isspace(line_iterator_peek(it))) {
+        debug_list_register_node(dbg_list, debug_list_new_node(it->start, it->current, line, ERROR_CODE_INVALID_INT));
         return FALSE;
     }
 
-    if (!verify_int(word, comma_loc)) {
-        debug_list_register_node(dbg_list, debug_list_new_node(it->start, it->current, line, ERROR_CODE_VALUE_ERROR));
-        return FALSE;
+    /* Skip the sign */
+    if (line_iterator_peek(it) == '-') {
+        line_iterator_advance(it);
     }
 
-    /* Advance word by the distance between the beginning and the first comma. */
-    word += (comma_loc - word) + 1;
-    comma_loc = strchr(word, ',');
-
-    if (comma_loc != NULL) {
-        debug_list_register_node(dbg_list, debug_list_new_node(it->start, it->current, line, ERROR_CODE_EXTRA_COMMA));
-        return FALSE;
+    while (line_iterator_peek(it) != ',') {
+        if (!isdigit(line_iterator_peek(it))) {
+            debug_list_register_node(dbg_list, debug_list_new_node(it->start, it->current, line, ERROR_CODE_INVALID_INT));
+            return FALSE;
+        }
+        line_iterator_advance(it);
     }
 
-    if (!is_register_name(word)) {
-        debug_list_register_node(dbg_list, debug_list_new_node(it->start, it->current, line, ERROR_CODE_INVALID_NAME));
+    /* Skip the ',' */
+    line_iterator_advance(it);
+    /* Skip white chars. */
+    line_iterator_consume_blanks(it);
+
+    if (line_iterator_peek(it) == 'r') {
+        line_iterator_advance(it);
+        if (line_iterator_peek(it) < '0' && line_iterator_peek(it) > '7') {
+            debug_list_register_node(dbg_list, debug_list_new_node(it->start, it->current, line, ERROR_CODE_INVALID_NAME));
+            return FALSE;
+        }
+    }
+    else {
+        debug_list_register_node(dbg_list, debug_list_new_node(it->start, it->current, line, ERROR_CODE_INVALID_OPERAND));
         return FALSE;
     }
 
     return TRUE;
 }
 
-bool match_addressing_group_one(LineIterator* it, const char* word, long line, debugList* dbg_list)
+bool match_addressing_group_one(LineIterator* it, long line, debugList* dbg_list)
 {
 
+    return TRUE;
 }
 
-bool match_addressing_group_two(LineIterator* it, const char* word, long line, debugList* dbg_list)
+bool match_addressing_group_two(LineIterator* it, long line, debugList* dbg_list)
 {
 
+    return TRUE;
 }
 
-bool match_addressing_group_three(LineIterator* it, const char* word, long line, debugList* dbg_list)
+bool match_addressing_group_three(LineIterator* it, long line, debugList* dbg_list)
 {
 
 }
 
 bool is_matching_adressing_group_zero(const char* word)
 {
-    const char* hash_loc = strchr(word, '#');
-    word += (hash_loc - word) + 1; /* Advance by the difference. */
-
-    if (strchr(word, '#') != NULL)
-        return FALSE; /* More than one '#' */
-
-    const char* comma_loc = strchr(word, ',');
-    word += (comma_loc - word) + 1; /* Advance by the difference. */
-
-    if (strchr(word, ',') != NULL) {
-        return FALSE; /* Morethan one ',' */
-    }
-
-    return TRUE;
+    return (*word == '#');
 }
 
 bool is_matching_adressing_group_one(const char* word)
 {
-    /* Check if the label starts with a valid char. */
     if (!isalpha(*word))
         return FALSE;
 
-    while (*word != '\0') {
-        /* A valid label name contains digits and chars only. */
+    word++;
+    while (*word != '\0' && *word != '(') {
         if (!isalpha(*word) && !isdigit(*word))
             return FALSE;
         word++;
     }
-    return TRUE;
+
+    return (*word == '(');
 }
 
 bool is_matching_adressing_group_two(const char* word)
 {
-    const char* open_paren_loc = strchr(word, '('), *comma_loc = strchr(word, ','),
-               *close_paren_loc = strchr(word, ')');
-
-    /* Check if the label starts with a valid char. */
-    if (!isalpha(*word))
-        return FALSE;
-
-    /* Must contain a parentheses */
-    if (open_paren_loc == NULL)
-        return FALSE;
-    /* Must contain a comma, and the comma must be after the first parentheses. */
-    if (comma_loc == NULL || (comma_loc < open_paren_loc))
-        return FALSE;
-    /* Must contain a closing parentheses, and the parentheses must be after the comma. */
-    if (close_paren_loc == NULL || (close_paren_loc < comma_loc))
-        return FALSE;
-
-    while (word < open_paren_loc) {
-        /* A valid label name contains digits and chars only. */
-        if (!isalpha(*word) && !isdigit(*word))
-            return FALSE;
-        word++;
-    }
-
-    return TRUE;
+    return !is_matching_adressing_group_one(word);
 }
 
 bool is_matching_adressing_group_three(const char* word)
@@ -306,8 +283,8 @@ bool is_matching_adressing_group_three(const char* word)
         return FALSE;
     word += (comma_loc - word) + 1; /* Advance by the diff */
 
-    /* Check for extra comma. */
-    return (strchr(word, ',') != NULL) ? FALSE : TRUE;
+    /* Check for valid register name */
+    return (*word == 'r') && (*(word + 1) >= '0' && *(word + 1) <= '7');
 }
 
 
