@@ -100,4 +100,10 @@ bool verify_int(char* word, char* other);
 
 AddressingGroups classify_to_addressing_group(const char* word);
 
+/* Boolean function for classifying to each addressing group */
+bool is_matching_adressing_group_zero(const char* word);
+bool is_matching_adressing_group_one(const char* word);
+bool is_matching_adressing_group_two(const char* word);
+bool is_matching_adressing_group_three(const char* word);
+
 #endif

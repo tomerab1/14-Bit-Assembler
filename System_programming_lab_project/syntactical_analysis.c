@@ -9,6 +9,9 @@ errorCodes check_label_syntax(const char* label)
     int i;
     char* colon_loc = strrchr(label, ':');
 
+    if (!isalpha(*label))
+        return ERROR_CODE_INVALID_LABEL_DEF;
+
     if (colon_loc == NULL)
         return ERROR_CODE_SYNTAX_ERROR;
 
@@ -136,12 +139,22 @@ bool check_syntax_group_zero(LineIterator* it, long line, debugList* dbg_list)
 bool check_syntax_group_one(LineIterator* it, long line, Opcodes opcode, debugList* dbg_list)
 {
     char* word = line_iterator_next_word(it);
+    AddressingGroups ad_group = classify_to_addressing_group(word);
 
-    if (opcode == OP_PRN) {
-        if (strchr(word, '#') != NULL)
-            return match_addressing_group_zero(it, word + 1, line, dbg_list);
+    /* Only the 'prn' opcode can have addressing group zero in group one. */
+    if (ad_group ==  AG_GROUP_0 && opcode != OP_PRN) {
+        return FALSE;
     }
-    match_addressing_group_zero(it, word + 1, line, dbg_list);
+
+    switch (ad_group) {
+    case AG_GROUP_0: return match_addressing_group_zero(it, word, line, dbg_list);
+    case AG_GROUP_1: return match_addressing_group_one(it, word, line, dbg_list);
+    case AG_GROUP_2: return match_addressing_group_two(it, word, line, dbg_list);
+    case AG_GROUP_3: return match_addressing_group_three(it, word, line, dbg_list);
+    default: return FALSE;
+    }
+
+
     free(word);
     return TRUE;
 }
@@ -222,6 +235,96 @@ bool match_addressing_group_three(LineIterator* it, const char* word, long line,
 
 }
 
+bool is_matching_adressing_group_zero(const char* word)
+{
+    const char* hash_loc = strchr(word, '#');
+    word += (hash_loc - word) + 1; /* Advance by the difference. */
+
+    if (strchr(word, '#') != NULL)
+        return FALSE; /* More than one '#' */
+
+    const char* comma_loc = strchr(word, ',');
+    word += (comma_loc - word) + 1; /* Advance by the difference. */
+
+    if (strchr(word, ',') != NULL) {
+        return FALSE; /* Morethan one ',' */
+    }
+
+    return TRUE;
+}
+
+bool is_matching_adressing_group_one(const char* word)
+{
+    /* Check if the label starts with a valid char. */
+    if (!isalpha(*word))
+        return FALSE;
+
+    while (*word != '\0') {
+        /* A valid label name contains digits and chars only. */
+        if (!isalpha(*word) && !isdigit(*word))
+            return FALSE;
+        word++;
+    }
+    return TRUE;
+}
+
+bool is_matching_adressing_group_two(const char* word)
+{
+    const char* open_paren_loc = strchr(word, '('), *comma_loc = strchr(word, ','),
+               *close_paren_loc = strchr(word, ')');
+
+    /* Check if the label starts with a valid char. */
+    if (!isalpha(*word))
+        return FALSE;
+
+    /* Must contain a parentheses */
+    if (open_paren_loc == NULL)
+        return FALSE;
+    /* Must contain a comma, and the comma must be after the first parentheses. */
+    if (comma_loc == NULL || (comma_loc < open_paren_loc))
+        return FALSE;
+    /* Must contain a closing parentheses, and the parentheses must be after the comma. */
+    if (close_paren_loc == NULL || (close_paren_loc < comma_loc))
+        return FALSE;
+
+    while (word < open_paren_loc) {
+        /* A valid label name contains digits and chars only. */
+        if (!isalpha(*word) && !isdigit(*word))
+            return FALSE;
+        word++;
+    }
+
+    return TRUE;
+}
+
+bool is_matching_adressing_group_three(const char* word)
+{
+    const char* comma_loc = strchr(word, ',');
+    
+    /* Must contain a comma between the operands*/
+    if (comma_loc == NULL)
+        return FALSE;
+    word += (comma_loc - word) + 1; /* Advance by the diff */
+
+    /* Check for extra comma. */
+    return (strchr(word, ',') != NULL) ? FALSE : TRUE;
+}
+
+
+AddressingGroups classify_to_addressing_group(const char* word)
+{
+    if (is_matching_adressing_group_zero(word))
+        return AG_GROUP_0;
+    if (is_matching_adressing_group_one(word))
+        return AG_GROUP_1;
+    if (is_matching_adressing_group_two(word))
+        return AG_GROUP_2;
+    if (is_matching_adressing_group_three(word))
+        return AG_GROUP_3;
+
+    return AG_GROUP_UNKNOWN;
+}
+
 bool verify_int(char* word, char* other)
 {
     /* If negative skip '-' */
@@ -232,11 +335,4 @@ bool verify_int(char* word, char* other)
     }
 
     return TRUE;
-}
-
-AddressingGroups classify_to_addressing_group(const char* word)
-{
-
-
-    return AG_GROUP_UNKNOWN;
 }
