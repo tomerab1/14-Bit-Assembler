@@ -35,4 +35,9 @@ bool line_iterator_is_end(LineIterator* it);
 
 /*Checks if the iterator reached line beginning*/
 bool line_iterator_is_start(LineIterator* it);
+
+/* Check if the iterator current char, matche any of the seperators. */
+bool line_iterator_match_any(LineIterator* it, char* seps);
+
+
 #endif

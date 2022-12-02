@@ -27,6 +27,7 @@ typedef unsigned short bool;
 #define COLON_CHAR ':'
 #define OPEN_PAREN_CHAR '('
 #define CLOSE_PAREN_CHAR ')'
+#define SPACE_CHAR ' '
 
 
 #define GROW_CAPACITY(old_sz) (old_sz) *= 2

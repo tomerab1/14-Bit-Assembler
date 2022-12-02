@@ -203,18 +203,8 @@ bool match_addressing_group_zero(LineIterator* it, long line, debugList* dbg_lis
         return FALSE;
     }
 
-    /* Skip the sign */
-    if (line_iterator_peek(it) == NEG_SIGN_CHAR || line_iterator_peek(it) == POS_SIGN_CHAR) {
-        line_iterator_advance(it);
-    }
-
-    while (!line_iterator_is_end(it) && line_iterator_peek(it) != COMMA_CHAR) {
-        if (!isdigit(line_iterator_peek(it))) {
-            debug_list_register_node(dbg_list, debug_list_new_node(it->start, it->current, line, ERROR_CODE_INVALID_INT));
-            return FALSE;
-        }
-        line_iterator_advance(it);
-    }
+    /* Verify integer */
+    verify_int(it, line, ",", dbg_list);
 
     /* Skip the ',' */
     line_iterator_advance(it);
@@ -223,7 +213,7 @@ bool match_addressing_group_zero(LineIterator* it, long line, debugList* dbg_lis
 
     if (line_iterator_peek(it) == REG_BEG_CHAR) {
         line_iterator_advance(it);
-        if (line_iterator_peek(it) < REG_MIN_NUM && line_iterator_peek(it) > REG_MAX_NUM) {
+        if (line_iterator_peek(it) < REG_MIN_NUM || line_iterator_peek(it) > REG_MAX_NUM) {
             debug_list_register_node(dbg_list, debug_list_new_node(it->start, it->current, line, ERROR_CODE_INVALID_NAME));
             return FALSE;
         }
@@ -245,25 +235,59 @@ bool match_addressing_group_one(LineIterator* it, long line, debugList* dbg_list
 bool match_addressing_group_two(LineIterator* it, long line, debugList* dbg_list)
 {
     /* If we classified to this addressing group we can advance to '(', because the label is a valid one. */
-
     while (!line_iterator_is_end(it) && line_iterator_peek(it) != OPEN_PAREN_CHAR)
         line_iterator_advance(it);
 
     /* Reached '(', skip it. */
     line_iterator_advance(it);
+    /* Skip any blanks */
+    line_iterator_consume_blanks(it);
+
+    if (!recursive_match_addressing_group_two(it, line, dbg_list))
+        return FALSE;
+
+    return TRUE;
+}
+
+bool recursive_match_addressing_group_two(LineIterator* it, long line, debugList* dbg_list)
+{
+    if (line_iterator_is_end(it))
+        return TRUE;
 
     if (line_iterator_peek(it) == HASH_CHAR) {
-
+        line_iterator_advance(it);
+        if (!verify_int(it, line, ",)", dbg_list)) {
+            debug_list_register_node(dbg_list, debug_list_new_node(it->start, it->current, line, ERROR_CODE_INVALID_INT));
+            return FALSE;
+        }
     }
+    /* Match label or register. */
     else if (isalpha(line_iterator_peek(it))) {
-
+        if (line_iterator_peek(it) == REG_BEG_CHAR) {
+            line_iterator_advance(it);
+            if (line_iterator_peek(it) < REG_MIN_NUM || line_iterator_peek(it) > REG_MAX_NUM) {
+                debug_list_register_node(dbg_list, debug_list_new_node(it->start, it->current, line, ERROR_CODE_INVALID_NAME));
+                return FALSE;
+            }
+        }
+        else {
+            while (!line_iterator_is_end(it) && line_iterator_match_any(it, ",)")) {
+                if (!isalpha(line_iterator_peek(it)) && !isdigit(line_iterator_peek(it))) {
+                    debug_list_register_node(dbg_list, debug_list_new_node(it->start, it->current, line, ERROR_CODE_INVALID_CHAR_IN_LABEL));
+                    return FALSE;
+                }
+                line_iterator_advance(it);
+            }
+             
+        }
     }
-    else {
-        debug_list_register_node(dbg_list, debug_list_new_node(it->start, it->current, line, ERROR_CODE_INVALID_OPERAND));
+    else if (isspace(line_iterator_peek(it))) {
+        debug_list_register_node(dbg_list, debug_list_new_node(it->start, it->current, line, ERROR_CODE_INVALID_WHITE_SPACE));
         return FALSE;
     }
 
-    return TRUE;
+    line_iterator_advance(it);
+    return recursive_match_addressing_group_two(it, line, dbg_list);
 }
 
 bool match_addressing_group_three(LineIterator* it, long line, debugList* dbg_list)
@@ -324,13 +348,18 @@ AddressingGroups classify_to_addressing_group(const char* word)
     return AG_GROUP_UNKNOWN;
 }
 
-bool verify_int(char* word, char* other)
+bool verify_int(LineIterator* it, long line, char* seps, debugList* dbg_list)
 {
-    /* If negative skip '-' */
-    word += ((*word) == NEG_SIGN_CHAR) ? 1 : 0;
-    while (word < other) {
-        if (!isdigit(*word)) return FALSE;
-        word++;
+    if (line_iterator_peek(it) == NEG_SIGN_CHAR || line_iterator_peek(it) == POS_SIGN_CHAR) {
+        line_iterator_advance(it);
+    }
+
+    while (!line_iterator_is_end(it) && line_iterator_match_any(it, seps)) {
+        if (!isdigit(line_iterator_peek(it))) {
+            debug_list_register_node(dbg_list, debug_list_new_node(it->start, it->current, line, ERROR_CODE_INVALID_INT));
+            return FALSE;
+        }
+        line_iterator_advance(it);
     }
 
     return TRUE;
