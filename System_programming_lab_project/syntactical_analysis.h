@@ -90,14 +90,22 @@ bool check_syntax_group_one(LineIterator* it, long line, Opcodes opcode, debugLi
 bool check_syntax_group_two(LineIterator* it, long line, Opcodes opcode, debugList* dbg_list);
 
 /* Checks the syntax according to the addressing group, in page 32 (PDF).*/
-bool match_addressing_group_zero(LineIterator* it, const char* word, long line, debugList* dbg_list);
-bool match_addressing_group_one(LineIterator* it, const char* word, long line, debugList* dbg_list);
-bool match_addressing_group_two(LineIterator* it, const char* word, long line, debugList* dbg_list);
-bool match_addressing_group_three(LineIterator* it, const char* word, long line, debugList* dbg_list);
+bool match_addressing_group_zero(LineIterator* it, long line, debugList* dbg_list);
+bool match_addressing_group_one(LineIterator* it, long line, debugList* dbg_list);
+bool match_addressing_group_two(LineIterator* it, long line, debugList* dbg_list);
+bool match_addressing_group_three(LineIterator* it, long line, debugList* dbg_list);
 
 /* Verifies that the substring starting at word and ending at other is an integer. */
-bool verify_int(char* word, char* other);
+bool verify_int(LineIterator* it, long line, char* seps, debugList* dbg_list);
 
 AddressingGroups classify_to_addressing_group(const char* word);
+
+/* Boolean function for classifying to each addressing group */
+bool is_matching_adressing_group_zero(const char* word);
+bool is_matching_adressing_group_one(const char* word);
+bool is_matching_adressing_group_two(const char* word);
+bool is_matching_adressing_group_three(const char* word);
+
+bool recursive_match_addressing_group_two(LineIterator* it, long line, debugList* dbg_list);
 
 #endif

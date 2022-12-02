@@ -1,4 +1,4 @@
-END: mov #-1,r7
+END: prn #-5
 bne LOOP(r4,r3)
 sub r1, r4
 bne END

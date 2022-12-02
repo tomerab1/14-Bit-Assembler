@@ -71,6 +71,17 @@ char* line_iterator_next_word(LineIterator* it)
     return word;
 }
 
+bool line_iterator_match_any(LineIterator* it, char* seps)
+{
+    while (*seps) {
+        if (line_iterator_peek(it) == *seps)
+            return TRUE;
+        seps++;
+    }
+
+    return FALSE;
+}
+
 bool line_iterator_is_end(LineIterator* it)
 {
     return *(it->current) == '\0';

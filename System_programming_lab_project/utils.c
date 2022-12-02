@@ -58,8 +58,12 @@ char* get_line(FILE* in)
         read_buffer[read++] = ch;
     }
 
+    if (ch == '\n') {
+        return read_buffer;
+    }
+
     /* If nothing was read from the file */
-    if (read == 0) {
+    if (read == 0 && ch == EOF) {
         free(read_buffer);
         return NULL;
     }
