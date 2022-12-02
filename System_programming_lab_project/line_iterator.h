@@ -24,6 +24,9 @@ void line_iterator_unget_word(LineIterator* it, const char* word);
 /* Consumes blanks, i.e white spaces and tabs. */
 void line_iterator_consume_blanks(LineIterator* it);
 
+/* Advances the line iterator until the specified char */
+void line_iterator_jump_to(LineIterator* it, char sep);
+
 /* Returns the current char 'current' points to. */
 char line_iterator_peek(LineIterator* it);
 
