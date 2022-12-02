@@ -64,10 +64,10 @@ bool generate_entries_file(SymbolTable* table, char* path);
 bool directive_exists(LineIterator* line);
 
 /*If extern exists changes flag to true, used later on while generating files*/
-bool extern_exists(flags* flag);
+void extern_exists(flags* flag);
 
 /*if extern exists changes flag to true, used later on while generating files*/
-bool entry_exists(flags* flag);
+void entry_exists(flags* flag);
 
 int extract_directive_type(LineIterator* line, flags* flag);
 

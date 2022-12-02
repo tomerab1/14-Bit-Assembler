@@ -212,11 +212,11 @@ bool directive_exists(LineIterator* line) {
 }
 
 
-bool extern_exists(flags* flag){
+void extern_exists(flags* flag){
 	flag->dot_extern_exists = TRUE;
 }
 
-bool entry_exists(flags* flag) {
+void entry_exists(flags* flag) {
 	flag->dot_entry_exists = TRUE;
 }
 
