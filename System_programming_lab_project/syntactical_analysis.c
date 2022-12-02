@@ -246,7 +246,7 @@ bool match_addressing_group_two(LineIterator* it, long line, debugList* dbg_list
 {
     /* If we classified to this addressing group we can advance to '(', because the label is a valid one. */
 
-    while (!line_iterator_is_end(it) && line_iterator_peek(it) != '(')
+    while (!line_iterator_is_end(it) && line_iterator_peek(it) != OPEN_PAREN_CHAR)
         line_iterator_advance(it);
 
     /* Reached '(', skip it. */
@@ -273,7 +273,7 @@ bool match_addressing_group_three(LineIterator* it, long line, debugList* dbg_li
 
 bool is_matching_adressing_group_zero(const char* word)
 {
-    return (*word == '#');
+    return (*word == HASH_CHAR);
 }
 
 bool is_matching_adressing_group_one(const char* word)
@@ -282,13 +282,13 @@ bool is_matching_adressing_group_one(const char* word)
         return FALSE;
 
     word++;
-    while (*word != '\0' && *word != '(') {
+    while (*word != '\0' && *word != OPEN_PAREN_CHAR) {
         if (!isalpha(*word) && !isdigit(*word))
             return FALSE;
         word++;
     }
 
-    return (*word == '(');
+    return (*word == OPEN_PAREN_CHAR);
 }
 
 bool is_matching_adressing_group_two(const char* word)
@@ -298,7 +298,7 @@ bool is_matching_adressing_group_two(const char* word)
 
 bool is_matching_adressing_group_three(const char* word)
 {
-    const char* comma_loc = strchr(word, ',');
+    const char* comma_loc = strchr(word, COMMA_CHAR);
     
     /* Must contain a comma between the operands*/
     if (comma_loc == NULL)
@@ -306,7 +306,7 @@ bool is_matching_adressing_group_three(const char* word)
     word += (comma_loc - word) + 1; /* Advance by the diff */
 
     /* Check for valid register name */
-    return (*word == 'r') && (*(word + 1) >= '0' && *(word + 1) <= '7');
+    return (*word == REG_BEG_CHAR) && (*(word + 1) >= REG_MIN_NUM && *(word + 1) <= REG_MAX_NUM);
 }
 
 
@@ -327,7 +327,7 @@ AddressingGroups classify_to_addressing_group(const char* word)
 bool verify_int(char* word, char* other)
 {
     /* If negative skip '-' */
-    word += ((*word) == '-') ? 1 : 0;
+    word += ((*word) == NEG_SIGN_CHAR) ? 1 : 0;
     while (word < other) {
         if (!isdigit(*word)) return FALSE;
         word++;
