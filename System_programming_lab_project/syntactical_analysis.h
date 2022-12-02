@@ -16,6 +16,22 @@ typedef enum
 	OP_PRN, OP_JSR, OP_RTS, OP_STOP, OP_UNKNOWN
 } Opcodes;
 
+typedef enum
+{
+	DOT_DATA_CODE = 1,
+	DOT_STRING_CODE,
+	DOT_ENTRY_CODE,
+	DOT_EXTERN_CODE
+};
+
+typedef enum
+{
+	EMPTY_SENTENCE = 1,
+	COMMENT_SENTENCE,
+	DIRECTIVE_SENTENCE,
+	INSTRUCTION_SENTENCE
+};
+
 
 /* This function takes a string and returns the matching Opcode. */
 Opcodes get_opcode(const char* str);
@@ -32,6 +48,9 @@ errorCodes check_label_syntax(const char* label);
 */
 bool is_valid_label(const char* label);
 
+/*checks if the first word is a label, used during second pass*/
+bool isLabel(LineIterator* line);
+
 /* This function verifies the command syntax. */
 bool verify_command_syntax(LineIterator* it, debugList* dbg_list);
 
@@ -46,4 +65,9 @@ void trim_symbol_name(char* sym);
 /* Verifies the source code syntax */
 bool validate_syntax(LineIterator it, debugList* dbg_list);
 
+/*param - line iterator pointed to start | return sentence type (page 24), returns empty = 1, comment = 2, directive = 3, instruction =4*/
+int extract_sentence_type(LineIterator* it);
+
+/*returns true/false if directive(.something) exists, doesn't ensure propriety of order and/or order type*/
+bool directive_exists_basic(LineIterator* line);
 #endif

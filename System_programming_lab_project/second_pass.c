@@ -16,7 +16,6 @@ bool initiate_second_pass(char* path, SymbolTable* table, memoryBuffer* memory) 
 		bool labelFlag = FALSE;
 		line_iterator_put_line(ptrCurLine, line);
 		skip_label(ptrCurLine, &labelFlag, table, error);
-		extract_order_type(ptrCurLine, &phaseFlags);
 		//stopped here
 
 	}
@@ -113,8 +112,11 @@ bool generate_externals_file(SymbolTable* table, char* path){
 	outfileName = get_outfile_name(path, ".external");
 	out = open_file(outfileName, MODE_WRITE);
 
+	char placeholder[20];
+	sprintf(placeholder, ("%-10s\t%4d", symTableHead->sym.name, symTableHead->sym.counter));
+
 	while (symTableHead != NULL && symTableHead->sym.type == SYM_EXTERN) {
-		fputs(("%-10s\t%4d", symTableHead->sym.name, symTableHead->sym.counter), out);
+		fputs(placeholder, out); //needs to be fixed
 		fputs("\n", out);
 	}
 
@@ -130,8 +132,11 @@ bool generate_entries_file(SymbolTable* table, char* path) {
 	outfileName = get_outfile_name(path, ".entry");
 	out = open_file(outfileName, MODE_WRITE);
 
+	char placeholder[20];
+	sprintf(placeholder, ("%-10s\t%4d", ("%-10s%4d", symTableHead->sym.name, symTableHead->sym.counter)));
+
 	while (symTableHead != NULL && symTableHead->sym.type == SYM_ENTRY) {
-		fputs(("%-10s%4d", symTableHead->sym.name, symTableHead->sym.counter), out);
+		fputs(placeholder, out); //needs to be fixed
 		fputs("\n", out);
 	}
 
@@ -141,14 +146,14 @@ bool generate_entries_file(SymbolTable* table, char* path) {
 
 void skip_label(LineIterator* line, bool* labelFlag,SymbolTable* table, errorContext* err) {
 	if (isLabel(line)) {
-			if (symbol_table_search_symbol(table, line_iterator_next_word(line))) { //if exists, needs to edit code so it would care the colon
+		if (symbol_table_search_symbol(table, line_iterator_next_word(line))) { //if exists, needs to edit code so it would care the colon
 				line = line->start;
 			while (line_iterator_peek(line) != COLON) {
 				line_iterator_advance(line);
 			}
-		line_iterator_advance(line);
-		line_iterator_consume_blanks(line);
-		labelFlag = TRUE;
+			line_iterator_advance(line);
+			line_iterator_consume_blanks(line);
+			labelFlag = TRUE;
 		}
 		return;
 	}
@@ -156,23 +161,8 @@ void skip_label(LineIterator* line, bool* labelFlag,SymbolTable* table, errorCon
 	return;
 }
 
-bool isLabel(LineIterator* line) {
-	LineIterator* tempLineIterator;
-	line_iterator_put_line(tempLineIterator, line_iterator_next_word(line));
-	line_iterator_backwards(tempLineIterator);
-	line->current = line->start;
-
-	if (line_iterator_peek(tempLineIterator) == COLON){
-		free(tempLineIterator);
-		return TRUE;
-	}
-
-	free(tempLineIterator);
-	return FALSE;
-}
-
-bool extract_order_type(LineIterator* line, flags* flag) {
-	if (order_exists(line,flag)) {
+bool extract_directive_type(LineIterator* line, flags* flag) {
+	if (directive_exists(line,flag)) {
 		char* command = line_iterator_next_word(line);
 		if (strcmp(command, DOT_DATA)) {
 			handle_dot_data();
@@ -219,16 +209,19 @@ void* handle_dot_entry(){
 	 
 }
 
-bool order_exists(LineIterator* line, flags* flag) {
+bool directive_exists(LineIterator* line, flags* flag) {
+	int tempCur = line->current;
 	while (!line_iterator_is_end(line)) {
 		if (line_iterator_peek(line) == DOT_COMMAND) {
 			line_iterator_advance(line);
-			extract_order_type(line,flag);
-			printf("");
 			return TRUE;
 		}
+
 		line_iterator_advance(line);
 	}
+
+	line->current = tempCur;
+	return FALSE;
 }
 
 /*Searchs if extern exists, used later on while generating files*/
