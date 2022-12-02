@@ -33,7 +33,7 @@ bool is_valid_label(const char* label)
 }
 
 bool isLabel(LineIterator* line) {
-    LineIterator* tempLineIterator;
+    LineIterator* tempLineIterator = NULL;
     line_iterator_put_line(tempLineIterator, line_iterator_next_word(line));
     line_iterator_backwards(tempLineIterator);
     line->current = line->start;
@@ -109,15 +109,14 @@ bool validate_syntax(LineIterator it, debugList* dbg_list)
 }
 
 int extract_sentence_type(LineIterator* it) {
-    /*empty*/
     it->current = it->start;
+    /*empty sentence*/
     if (line_iterator_is_end(it)) {
         it->current = it->start;
         return EMPTY_SENTENCE;
     }
-    if (line_iterator_peek(it) == START_COMMENT_CHAR) return COMMENT_SENTENCE;
-    if (directive_exists_basic(it)) return DIRECTIVE_SENTENCE;
-    if (find_if_instruction_exists(it))  return INSTRUCTION_SENTENCE;
+    if (directive_exists_basic(it)) return DIRECTIVE_SENTENCE; /*directive sentence*/
+    if (find_if_instruction_exists(it))  return INSTRUCTION_SENTENCE; /*instruction sentence*/
      
     return -ERROR_CODE_UNKNOWN;
 }
@@ -125,7 +124,6 @@ int extract_sentence_type(LineIterator* it) {
 bool directive_exists_basic(LineIterator* line) {
     while (!line_iterator_is_end(line)) {
         if (line_iterator_peek(line) == DOT_COMMAND) {
-            
             return TRUE;
         }
         line_iterator_advance(line);

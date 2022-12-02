@@ -28,61 +28,53 @@ typedef struct
 	LinesListNode* tail;
 } LinesList;
 
-typedef struct item
-{
-	int index;
-	int type;
-} item;
-
 typedef struct flags
 {
-	bool dot_entry;
-	bool dot_extern;
+	bool dot_entry_exists;
+	bool dot_extern_exists;
 } flags;
 
 typedef struct programFinalStatus
 {
+	flags entryAndExternFlag;
 	bool createdObject;
 	bool createdExternals;
 	bool createdEntry;
-	errorContext error;
+	debugList errors;
+	bool error_flag;
 } programFinalStatus;
-
-
-
 
 
 //starts second pass process
 bool initiate_second_pass(char* path, SymbolTable* table, memoryBuffer* memory);
 
 //generates object file 
-bool generate_object_file(memoryBuffer* memory, char* path, errorContext* err);
+bool generate_object_file(memoryBuffer* memory, char* path, debugList* err);
+
 //translates data from memory to object text style configuration
 LinesList* translate_to_machine_data(memoryBuffer* memory, errorContext* err);
+
 //generates external file
 bool generate_externals_file(SymbolTable* table, char* path);
+
 //generates entries file
 bool generate_entries_file(SymbolTable* table, char* path);
+
 //checks if any order type (extern or entry) commands exists in the program
-bool directive_exists(LineIterator* line, flags* flag);
-//checks if extern commands exists in the program
+bool directive_exists(LineIterator* line);
+
+/*If extern exists changes flag to true, used later on while generating files*/
 bool extern_exists(flags* flag);
-//checks if entry commands exists in the program
+
+/*if extern exists changes flag to true, used later on while generating files*/
 bool entry_exists(flags* flag);
 
-bool extract_directive_type(LineIterator* line, flags* flag);
-
-
-void* handle_dot_data();
-void* handle_dot_string();
-void* handle_dot_extern();
-void* handle_dot_entry();
+int extract_directive_type(LineIterator* line, flags* flag);
 
 //skip label if exists
-void skip_label(LineIterator* line, bool* labelFlag, SymbolTable* table, errorContext* err);
+void skip_label(LineIterator* line, bool* labelFlag, SymbolTable* table, debugList* err);
 
-bool handle_errors(errorContext* error);
+/*Error handling process*/
+bool handle_errors(debugList* error);
 
-void convert_to_binary(char* data);
-void convert_to_deciaml(char* data);
 #endif

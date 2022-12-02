@@ -4,32 +4,41 @@ bool initiate_second_pass(char* path, SymbolTable* table, memoryBuffer* memory) 
 	FILE* in = open_file(path, MODE_READ);
 
 	programFinalStatus finalStatus;
-	errorContext* error = NULL;
-	flags phaseFlags;
-	
-	int curLineIndex = 1;
+	LineIterator curLine;
+	LineIterator* ptrCurLine;
 	char* line = NULL;
-
+	
+	memory->instruction_image.counter = 0; /*init IC counter*/
 	while ((line = get_line(in)) != NULL) {
-		LineIterator curLine;
-		LineIterator* ptrCurLine;
-		bool labelFlag = FALSE;
+		bool labelFlag = FALSE; /*is current line first word is label*/
+
 		line_iterator_put_line(ptrCurLine, line);
-		skip_label(ptrCurLine, &labelFlag, table, error);
-		//stopped here
+		skip_label(ptrCurLine, &labelFlag, table, &(finalStatus.errors));
 
+		if (directive_exists(ptrCurLine)) { /*checks if any kind of instruction exists (.something)*/
+			if (extract_directive_type(ptrCurLine, &(finalStatus.entryAndExternFlag) == DOT_ENTRY_CODE)) { /*only*/
+				/*do 6 and forward to next loop*/
+			}
+		}
+		else {
+			/*do point 7 to 9*/
+		}
 	}
-
-	finalStatus.createdObject = generate_object_file(memory, path, error);
-	finalStatus.createdExternals = generate_externals_file(table, path);
-	finalStatus.createdEntry = generate_entries_file(table,path);
+	if (finalStatus.error_flag) {
+		handle_errors(&(finalStatus.errors));
+	}
+	else {
+		finalStatus.createdObject = generate_object_file(memory, path, &(finalStatus.errors));
+		finalStatus.createdExternals = generate_externals_file(table, path);
+		finalStatus.createdEntry = generate_entries_file(table, path);
+	}
 
 	fclose(in);
 	free(line);
-	free(error);
+	free(ptrCurLine);
 }
 
-bool generate_object_file(memoryBuffer* memory, char* path, errorContext* err) {
+bool generate_object_file(memoryBuffer* memory, char* path, debugList* err) {
 	char* outfileName = NULL;
 	FILE* out = NULL;
 	LinesList* translatedMemory;
@@ -38,7 +47,6 @@ bool generate_object_file(memoryBuffer* memory, char* path, errorContext* err) {
 	translatedMemory = translate_to_machine_data(memory,err);
 	lineNode = translatedMemory->head;
 
-	if(err->err_code == ERROR_CODE_OK){
 		outfileName = get_outfile_name(path, ".object");
 		out = open_file(outfileName, MODE_WRITE);
 
@@ -53,10 +61,7 @@ bool generate_object_file(memoryBuffer* memory, char* path, errorContext* err) {
 			fputs(placeholder,out);
 			fputs("\n", out);
 		}
-	}
-	else {
-		/*debug_print_error(err);*/
-	}
+
 	free(outfileName);
 	fclose(out);
 }
@@ -144,7 +149,7 @@ bool generate_entries_file(SymbolTable* table, char* path) {
 	fclose(out);
 }
 
-void skip_label(LineIterator* line, bool* labelFlag,SymbolTable* table, errorContext* err) {
+void skip_label(LineIterator* line, bool* labelFlag,SymbolTable* table, debugList* err) {
 	if (isLabel(line)) {
 		if (symbol_table_search_symbol(table, line_iterator_next_word(line))) { //if exists, needs to edit code so it would care the colon
 			line = line->start;
@@ -161,60 +166,42 @@ void skip_label(LineIterator* line, bool* labelFlag,SymbolTable* table, errorCon
 	return;
 }
 
-bool extract_directive_type(LineIterator* line, flags* flag) {
+int extract_directive_type(LineIterator* line, flags* flag) {
 	if (directive_exists(line,flag)) {
 		char* command = line_iterator_next_word(line);
 		if (strcmp(command, DOT_DATA)) {
-			handle_dot_data();
+			return DOT_DATA_CODE;
 		}
 		else if (strcmp(command, DOT_STRING)) {
-			handle_dot_string();
+			return DOT_STRING_CODE;
 		}
 		else if (strcmp(command, DOT_EXTERN)) {
-			handle_dot_extern();
+			extern_exists(flag);
+			return DOT_EXTERN_CODE;
 		}
 		else if (strcmp(command, DOT_ENTRY)) {
-			handle_dot_entry();
+			extern_exists(flag);
+			return DOT_ENTRY_CODE;
 		}
 		else {
-			errorContext err;
-			return handle_errors(&err);
+			debugNode err; /*debug_list_new_node, should also add debug list later on function headline*/
+			return ERROR_CODE_SYNTAX_ERROR;
 		}
 		free(command);
 	}
 	else {
-		flag->dot_entry = FALSE;
-		flag->dot_extern = FALSE;
+		flag->dot_entry_exists = FALSE;
+		flag->dot_extern_exists = FALSE;
 	}
 	return FALSE;
 }
 
-void find_command(LineIterator* line) {
-
-}
-
-void* handle_dot_data(){
-
-}
-
-void* handle_dot_string(){
-
-}
-
-void* handle_dot_extern(){
-
-}
-
-void* handle_dot_entry(){
-	 
-}
-
-bool directive_exists(LineIterator* line, flags* flag) {
+bool directive_exists(LineIterator* line) {
 	int tempCur = line->current;
 	while (!line_iterator_is_end(line)) {
 		if (line_iterator_peek(line) == DOT_COMMAND) {
 			line_iterator_advance(line);
-			return TRUE;
+			return TRUE; /*in case does exists, return afterward */
 		}
 
 		line_iterator_advance(line);
@@ -224,29 +211,17 @@ bool directive_exists(LineIterator* line, flags* flag) {
 	return FALSE;
 }
 
-/*Searchs if extern exists, used later on while generating files*/
+
 bool extern_exists(flags* flag){
-	flag->dot_extern = TRUE;
-}
-/*Searchs if extern exists, used later on while generating files*/
-bool entry_exists(flags* flag) {
-	flag->dot_entry = TRUE;
+	flag->dot_extern_exists = TRUE;
 }
 
-/*Error handling process*/
-bool handle_errors(errorContext* error) {
+bool entry_exists(flags* flag) {
+	flag->dot_entry_exists = TRUE;
+}
+
+
+bool handle_errors(debugList* error) {
 
 	return TRUE;
 }
-
-/*Convert decimal to binary*/
-void convert_to_binary(char* data){
-
-}
-
-/*Converts binary to decimal*/
-void convert_to_deciaml(char* data){
-
-}
-
-
