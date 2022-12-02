@@ -35,6 +35,14 @@ void line_iterator_consume_blanks(LineIterator* it)
         line_iterator_advance(it);
 }
 
+void line_iterator_jump_to(LineIterator* it, char sep)
+{
+    const char* loc = strchr(it->current, sep);
+    if (sep == NULL)
+        return;
+    it->current = loc + 1;
+}
+
 char line_iterator_peek(LineIterator* it)
 {
     return *(it->current);

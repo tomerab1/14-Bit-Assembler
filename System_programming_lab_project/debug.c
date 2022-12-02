@@ -73,7 +73,7 @@ void debug_print_error(errorContext* err_ctx, char err_buff[])
 {
 	/* Calculate the spacing between the start of the line and the error pos. */
 	size_t err_len = sprintf(err_buff, "Line %d:", err_ctx->line_num);
-	ptrdiff_t offset = strlen(err_buff) + ((err_ctx->err_pos) - (err_ctx->start_pos));
+	ptrdiff_t offset = strlen(err_buff) + ((err_ctx->err_pos) - (err_ctx->start_pos)) + 1;
 
 	printf("%s %s\n", err_buff, err_ctx->start_pos);
 	while (offset > 0) {

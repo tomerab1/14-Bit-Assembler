@@ -16,29 +16,26 @@ typedef enum
 	OP_PRN, OP_JSR, OP_RTS, OP_STOP, OP_UNKNOWN
 } Opcodes;
 
-/*
-	The instructions group can be divided to three groups,
-	those taking 1 operand, 2 operands or no operands
-*/
-typedef enum
-{
-	IG_GROUP_0, IG_GROUP_1, IG_GROUP_2, IG_GROUP_INVALID
-} InstructionGroup;
-
-typedef enum
-{
-	AG_GROUP_0, AG_GROUP_1, AG_GROUP_2, AG_GROUP_3, AG_GROUP_UNKNOWN
-} AddressingGroups;
-
 typedef enum
 {
 	OP_TYPE_OPCDE, OP_TYPE_LABEL, OP_TYPE_DATA, OP_TYPE_STRING,
 	OP_TYPE_EXTERN, OP_TYPE_ENTRY, OP_TYPE_UNKNOWN
 } OperationTypes;
 
+/* Division of operands to groups with the same syntax. */
+typedef enum
+{
+	SG_GROUP_1, SG_GROUP_2, SG_GROUP_3, SG_GROUP_4, SG_GROUP_5,
+	SG_GROUP_6, SG_GROUP_7, SG_GROUP_INVALID
+} SyntaxGroups;
+
 /* Forward decleration. */
 typedef enum firstPassStates firstPassStates;
 
+#define FLAG_NUMBER      1
+#define FLAG_LABEL       2
+#define FLAG_REGISTER    4
+#define FLAG_PARAM_LABEL 8
 
 /* This function takes a string and returns the matching Opcode. */
 Opcodes get_opcode(const char* str);
@@ -59,7 +56,7 @@ bool is_valid_label(const char* label);
 bool verify_command_syntax(LineIterator* it, debugList* dbg_list);
 
 /* Check if 'str' is a registers name. */
-bool is_register_name(const char* str);
+bool cmp_register_name(const char* str);
 
 /* This function trims the symbol name, i.e. trims the ':'
  * @param - The symbol to fix.
@@ -72,40 +69,31 @@ bool validate_syntax(LineIterator it, firstPassStates state, long line, debugLis
 /* Validates the syntax that may appear after a symbol definition. */
 bool validate_syntax_sym_def(LineIterator* it, long line, debugList* dbg_list);
 
-/* Returns the instruction group of 'str'. */
-InstructionGroup get_instruction_group(const char* str);
 
-/* Verifies syntax for the group of operation that can take 0 operands.
-*/
-bool check_syntax_group_zero(LineIterator* it, long line, debugList* dbg_list);
-
-
-/* Verifies syntax for the group of operation that can take 1 operands.
-*/
-bool check_syntax_group_one(LineIterator* it, long line, Opcodes opcode, debugList* dbg_list);
-
-
-/* Verifies syntax for the group of operation that can take 2 operands.
-*/
-bool check_syntax_group_two(LineIterator* it, long line, Opcodes opcode, debugList* dbg_list);
-
-/* Checks the syntax according to the addressing group, in page 32 (PDF).*/
-bool match_addressing_group_zero(LineIterator* it, long line, debugList* dbg_list);
-bool match_addressing_group_one(LineIterator* it, long line, debugList* dbg_list);
-bool match_addressing_group_two(LineIterator* it, long line, debugList* dbg_list);
-bool match_addressing_group_three(LineIterator* it, long line, debugList* dbg_list);
 
 /* Verifies that the substring starting at word and ending at other is an integer. */
 bool verify_int(LineIterator* it, long line, char* seps, debugList* dbg_list);
 
-AddressingGroups classify_to_addressing_group(const char* word);
+/* Matching syntax for each opcode type. */
+bool match_syntax_group_1(LineIterator* it, long line, debugList* dbg_list);
+bool match_syntax_group_2(LineIterator* it, long line, debugList* dbg_list);
+bool match_syntax_group_3(LineIterator* it, long line, debugList* dbg_list);
+bool match_syntax_group_4(LineIterator* it, long line, debugList* dbg_list);
+bool match_syntax_group_5(LineIterator* it, long line, debugList* dbg_list);
+bool match_syntax_group_6(LineIterator* it, long line, debugList* dbg_list);
+bool match_syntax_group_7(LineIterator* it, long line, debugList* dbg_list);
 
-/* Boolean function for classifying to each addressing group */
-bool is_matching_adressing_group_zero(const char* word);
-bool is_matching_adressing_group_one(const char* word);
-bool is_matching_adressing_group_two(const char* word);
-bool is_matching_adressing_group_three(const char* word);
+bool match_syntax_opcode_dot_string(LineIterator* it, long line, debugList* dbg_list);
+bool match_syntax_opcode_dot_data(LineIterator* it, long line, debugList* dbg_list);
 
-bool recursive_match_addressing_group_two(LineIterator* it, long line, debugList* dbg_list);
+bool is_register_name_heuristic(LineIterator it);
+bool is_register_name(LineIterator* it);
+bool is_label_name(LineIterator* it);
+
+bool match_operand(LineIterator* it, long line, int flags, debugList* dbg_list);
+
+SyntaxGroups get_syntax_group(const char* name);
+
+bool recursive_match_pamaetrized_label(LineIterator* it, long line, debugList* dbg_list);
 
 #endif

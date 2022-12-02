@@ -4,6 +4,8 @@
 #include "debug.h"
 #include "first_pass.h"
 
+#include "syntactical_analysis.h"
+
 int main(int argc, char** argv)
 {
 	start_pre_assembler("SOURCE_FILE_TEST.TXT");
@@ -13,9 +15,17 @@ int main(int argc, char** argv)
 	SymbolTable* sym_table = symbol_table_new_table();
 	debugList* dbg_list = debug_list_new_list();
 
-	if (do_first_pass(pre_assembled_path, &img, sym_table, dbg_list)) {
+	//if (do_first_pass(pre_assembled_path, &img, sym_table, dbg_list)) {
 		/* Create all the appropriate files, continue to second pass. */
-	}
+//	}
+
+	const char* line = "jsr L1(#3,#4)";
+	LineIterator it;
+
+	line_iterator_put_line(&it, line);
+
+	printf("%d\n", validate_syntax_sym_def(&it, 1, dbg_list));
+
 
 	debug_list_pretty_print(dbg_list);
 
