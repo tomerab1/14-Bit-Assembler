@@ -7,7 +7,11 @@
 errorCodes check_label_syntax(const char* label)
 {
     int i;
-    char* colon_loc = strrchr(label, ':');
+    char* colon_loc = strrchr(label, COLON_CHAR);
+
+    /* Must end with a colon. */
+    if (*(colon_loc + 1) != '\0')
+        return ERROR_CODE_INVALID_LABEL_DEF;
 
     if (!isalpha(*label))
         return ERROR_CODE_INVALID_LABEL_DEF;
@@ -200,11 +204,11 @@ bool match_addressing_group_zero(LineIterator* it, long line, debugList* dbg_lis
     }
 
     /* Skip the sign */
-    if (line_iterator_peek(it) == '-') {
+    if (line_iterator_peek(it) == NEG_SIGN_CHAR || line_iterator_peek(it) == POS_SIGN_CHAR) {
         line_iterator_advance(it);
     }
 
-    while (!line_iterator_is_end(it) && line_iterator_peek(it) != ',') {
+    while (!line_iterator_is_end(it) && line_iterator_peek(it) != COMMA_CHAR) {
         if (!isdigit(line_iterator_peek(it))) {
             debug_list_register_node(dbg_list, debug_list_new_node(it->start, it->current, line, ERROR_CODE_INVALID_INT));
             return FALSE;
@@ -217,9 +221,9 @@ bool match_addressing_group_zero(LineIterator* it, long line, debugList* dbg_lis
     /* Skip white chars. */
     line_iterator_consume_blanks(it);
 
-    if (line_iterator_peek(it) == 'r') {
+    if (line_iterator_peek(it) == REG_BEG_CHAR) {
         line_iterator_advance(it);
-        if (line_iterator_peek(it) < '0' && line_iterator_peek(it) > '7') {
+        if (line_iterator_peek(it) < REG_MIN_NUM && line_iterator_peek(it) > REG_MAX_NUM) {
             debug_list_register_node(dbg_list, debug_list_new_node(it->start, it->current, line, ERROR_CODE_INVALID_NAME));
             return FALSE;
         }
@@ -248,7 +252,7 @@ bool match_addressing_group_two(LineIterator* it, long line, debugList* dbg_list
     /* Reached '(', skip it. */
     line_iterator_advance(it);
 
-    if (line_iterator_peek(it) == '#') {
+    if (line_iterator_peek(it) == HASH_CHAR) {
 
     }
     else if (isalpha(line_iterator_peek(it))) {
