@@ -22,12 +22,20 @@ typedef enum
 	OP_TYPE_EXTERN, OP_TYPE_ENTRY, OP_TYPE_UNKNOWN
 } OperationTypes;
 
+/* Division of operands to groups with the same syntax. */
+typedef enum
+{
+	SG_GROUP_1, SG_GROUP_2, SG_GROUP_3, SG_GROUP_4, SG_GROUP_5,
+	SG_GROUP_6, SG_GROUP_7, SG_GROUP_INVALID
+} SyntaxGroups;
+
 /* Forward decleration. */
 typedef enum firstPassStates firstPassStates;
 
-#define FLAG_NUMBER   1
-#define FLAG_LABEL    2
-#define FLAG_REGISTER 4
+#define FLAG_NUMBER      1
+#define FLAG_LABEL       2
+#define FLAG_REGISTER    4
+#define FLAG_PARAM_LABEL 8
 
 /* This function takes a string and returns the matching Opcode. */
 Opcodes get_opcode(const char* str);
@@ -67,23 +75,13 @@ bool validate_syntax_sym_def(LineIterator* it, long line, debugList* dbg_list);
 bool verify_int(LineIterator* it, long line, char* seps, debugList* dbg_list);
 
 /* Matching syntax for each opcode type. */
-bool match_syntax_opcode_mov(LineIterator* it, long line, debugList* dbg_list);
-bool match_syntax_opcode_cmp(LineIterator* it, long line, debugList* dbg_list);
-bool match_syntax_opcode_add(LineIterator* it, long line, debugList* dbg_list);
-bool match_syntax_opcode_sub(LineIterator* it, long line, debugList* dbg_list);
-bool match_syntax_opcode_not(LineIterator* it, long line, debugList* dbg_list);
-bool match_syntax_opcode_clr(LineIterator* it, long line, debugList* dbg_list);
-bool match_syntax_opcode_lea(LineIterator* it, long line, debugList* dbg_list);
-bool match_syntax_opcode_inc(LineIterator* it, long line, debugList* dbg_list);
-bool match_syntax_opcode_dec(LineIterator* it, long line, debugList* dbg_list);
-bool match_syntax_opcode_jmp(LineIterator* it, long line, debugList* dbg_list);
-bool match_syntax_opcode_bne(LineIterator* it, long line, debugList* dbg_list);
-bool match_syntax_opcode_red(LineIterator* it, long line, debugList* dbg_list);
-bool match_syntax_opcode_prn(LineIterator* it, long line, debugList* dbg_list);
-bool match_syntax_opcode_jsr(LineIterator* it, long line, debugList* dbg_list);
-bool match_syntax_opcode_rts(LineIterator* it, long line, debugList* dbg_list);
-bool match_syntax_opcode_stop(LineIterator* it, long line, debugList* dbg_list);
-
+bool match_syntax_group_1(LineIterator* it, long line, debugList* dbg_list);
+bool match_syntax_group_2(LineIterator* it, long line, debugList* dbg_list);
+bool match_syntax_group_3(LineIterator* it, long line, debugList* dbg_list);
+bool match_syntax_group_4(LineIterator* it, long line, debugList* dbg_list);
+bool match_syntax_group_5(LineIterator* it, long line, debugList* dbg_list);
+bool match_syntax_group_6(LineIterator* it, long line, debugList* dbg_list);
+bool match_syntax_group_7(LineIterator* it, long line, debugList* dbg_list);
 
 bool match_syntax_opcode_dot_string(LineIterator* it, long line, debugList* dbg_list);
 bool match_syntax_opcode_dot_data(LineIterator* it, long line, debugList* dbg_list);
@@ -93,5 +91,9 @@ bool is_register_name(LineIterator* it);
 bool is_label_name(LineIterator* it);
 
 bool match_operand(LineIterator* it, long line, int flags, debugList* dbg_list);
+
+SyntaxGroups get_syntax_group(const char* name);
+
+bool recursive_match_pamaetrized_label(LineIterator* it, long line, debugList* dbg_list);
 
 #endif

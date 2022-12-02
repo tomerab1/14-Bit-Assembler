@@ -19,12 +19,12 @@ int main(int argc, char** argv)
 		/* Create all the appropriate files, continue to second pass. */
 //	}
 
-	const char* line = "#646,#548";
+	const char* line = "jsr L1(#3,#4)";
 	LineIterator it;
 
 	line_iterator_put_line(&it, line);
 
-	printf("%d\n", match_syntax_opcode_cmp(&it, 1, dbg_list));
+	printf("%d\n", validate_syntax_sym_def(&it, 1, dbg_list));
 
 
 	debug_list_pretty_print(dbg_list);
