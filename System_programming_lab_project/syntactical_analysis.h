@@ -92,7 +92,6 @@ bool is_register_name_heuristic(LineIterator it);
 bool is_register_name(LineIterator* it);
 bool is_label_name(LineIterator* it);
 
-bool match_source_operand(LineIterator* it, long line, int flags, debugList* dbg_list);
-bool match_dest_operand(LineIterator* it, long line, int flags, debugList* dbg_list);
+bool match_operand(LineIterator* it, long line, int flags, debugList* dbg_list);
 
 #endif
