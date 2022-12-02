@@ -20,6 +20,7 @@
 
 #define END_LABEL_CHAR ':'
 #define START_COMMENT_CHAR ';'
+
 #define START_MACRO_DEF_CHAR 'm'
 #define END_MACRO_DEF_CHAR 'e'
 

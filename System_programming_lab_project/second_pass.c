@@ -147,7 +147,7 @@ bool generate_entries_file(SymbolTable* table, char* path) {
 void skip_label(LineIterator* line, bool* labelFlag,SymbolTable* table, errorContext* err) {
 	if (isLabel(line)) {
 		if (symbol_table_search_symbol(table, line_iterator_next_word(line))) { //if exists, needs to edit code so it would care the colon
-				line = line->start;
+			line = line->start;
 			while (line_iterator_peek(line) != COLON) {
 				line_iterator_advance(line);
 			}

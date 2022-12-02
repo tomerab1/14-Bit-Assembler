@@ -70,4 +70,10 @@ int extract_sentence_type(LineIterator* it);
 
 /*returns true/false if directive(.something) exists, doesn't ensure propriety of order and/or order type*/
 bool directive_exists_basic(LineIterator* line);
+
+/*returns true/false if instruction(any of opcode) exists*/
+bool find_if_instruction_exists(LineIterator* line);
+
+/*skips label and and consume blanks if exists after the label*/
+void skip_label_basic(LineIterator* line);
 #endif

@@ -115,15 +115,10 @@ int extract_sentence_type(LineIterator* it) {
         it->current = it->start;
         return EMPTY_SENTENCE;
     }
-    else if (line_iterator_peek(it) == START_COMMENT_CHAR) {
-        return COMMENT_SENTENCE;
-    }
-    else if (directive_exists_basic(it)) {
-        return DIRECTIVE_SENTENCE;
-    }
-    else if(find_if_instruction_exists(it)){
-        return INSTRUCTION_SENTENCE;
-    }
+    if (line_iterator_peek(it) == START_COMMENT_CHAR) return COMMENT_SENTENCE;
+    if (directive_exists_basic(it)) return DIRECTIVE_SENTENCE;
+    if (find_if_instruction_exists(it))  return INSTRUCTION_SENTENCE;
+     
     return -ERROR_CODE_UNKNOWN;
 }
 
