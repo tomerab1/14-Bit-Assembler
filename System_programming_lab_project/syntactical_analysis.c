@@ -406,7 +406,6 @@ bool recursive_match_pamaetrized_label(LineIterator* it, long line, debugList* d
     if (line_iterator_peek(it) == HASH_CHAR) {
         line_iterator_advance(it);
         if (!verify_int(it, line, ",)", dbg_list)) {
-            debug_list_register_node(dbg_list, debug_list_new_node(it->start, it->current, line, ERROR_CODE_INVALID_INT));
             return FALSE;
         }
         /* Consume comma or paren. */
