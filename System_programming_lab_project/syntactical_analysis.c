@@ -266,10 +266,17 @@ bool match_syntax_group_5(LineIterator* it, long line, debugList* dbg_list)
             return FALSE;
     }
     else if (open_paren_loc) {
+        if (line_iterator_peek(it) == REG_BEG_CHAR) {
+            if (is_register_name(it)) {
+                debug_list_register_node(dbg_list, debug_list_new_node(it->start, it->current, line, ERROR_CODE_RESERVED_KEYWORD_DEF));
+                return FALSE;
+            }
+            line_iterator_backwards(it);
+        }
         if (!is_label_name(it)) {
             return FALSE;
         }
-
+        
         line_iterator_jump_to(it, "(");
 
         if (!match_operand(it, line, FLAG_PARAM_LABEL, dbg_list)) {
