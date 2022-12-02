@@ -204,7 +204,7 @@ bool match_addressing_group_zero(LineIterator* it, long line, debugList* dbg_lis
         line_iterator_advance(it);
     }
 
-    while (line_iterator_peek(it) != ',') {
+    while (!line_iterator_is_end(it) && line_iterator_peek(it) != ',') {
         if (!isdigit(line_iterator_peek(it))) {
             debug_list_register_node(dbg_list, debug_list_new_node(it->start, it->current, line, ERROR_CODE_INVALID_INT));
             return FALSE;
@@ -234,12 +234,30 @@ bool match_addressing_group_zero(LineIterator* it, long line, debugList* dbg_lis
 
 bool match_addressing_group_one(LineIterator* it, long line, debugList* dbg_list)
 {
-
+    /* If we classified to this addressing group we can return TRUE, because the label is a valid one. */
     return TRUE;
 }
 
 bool match_addressing_group_two(LineIterator* it, long line, debugList* dbg_list)
 {
+    /* If we classified to this addressing group we can advance to '(', because the label is a valid one. */
+
+    while (!line_iterator_is_end(it) && line_iterator_peek(it) != '(')
+        line_iterator_advance(it);
+
+    /* Reached '(', skip it. */
+    line_iterator_advance(it);
+
+    if (line_iterator_peek(it) == '#') {
+
+    }
+    else if (isalpha(line_iterator_peek(it))) {
+
+    }
+    else {
+        debug_list_register_node(dbg_list, debug_list_new_node(it->start, it->current, line, ERROR_CODE_INVALID_OPERAND));
+        return FALSE;
+    }
 
     return TRUE;
 }
