@@ -314,11 +314,7 @@ bool recursive_match_addressing_group_two(LineIterator* it, long line, debugList
         debug_list_register_node(dbg_list, debug_list_new_node(it->start, it->current, line, ERROR_CODE_EXTRA_COMMA));
         return FALSE;
     }
-    else if (line_iterator_peek(it) == CLOSE_PAREN_CHAR) {
-        debug_list_register_node(dbg_list, debug_list_new_node(it->start, it->current, line, ERROR_CODE_EXTRA_PAREN));
-        return FALSE;
-    }
-    else if (line_iterator_peek(it) == OPEN_PAREN_CHAR) {
+    else if (line_iterator_peek(it) == CLOSE_PAREN_CHAR || line_iterator_peek(it) == OPEN_PAREN_CHAR) {
         debug_list_register_node(dbg_list, debug_list_new_node(it->start, it->current, line, ERROR_CODE_EXTRA_PAREN));
         return FALSE;
     }
@@ -393,7 +389,6 @@ bool is_matching_adressing_group_three(const char* word)
     /* Check for valid register name */
     return (*word == REG_BEG_CHAR) && (*(word + 1) >= REG_MIN_NUM && *(word + 1) <= REG_MAX_NUM);
 }
-
 
 AddressingGroups classify_to_addressing_group(const char* word)
 {
