@@ -72,21 +72,23 @@ void debug_list_pretty_print(debugList* list)
 void debug_print_error(errorContext* err_ctx, char err_buff[])
 {
 	/* Calculate the spacing between the start of the line and the error pos. */
-	size_t err_len = sprintf(err_buff, "Line %d:", err_ctx->line_num) + 1;
-	ptrdiff_t offset = err_len + ((err_ctx->err_pos) - (err_ctx->start_pos));
+	size_t err_len = sprintf(err_buff, "Line %d:", err_ctx->line_num);
+	ptrdiff_t offset = strlen(err_buff) + ((err_ctx->err_pos) - (err_ctx->start_pos)) + 1;
 
 	printf("%s %s\n", err_buff, err_ctx->start_pos);
 	while (offset > 0) {
 		printf(" ");
 		offset--;
 	}
-	printf("^\t\n%s: Invalid token !\n", debug_map_token_to_err(err_ctx->err_code));
+	printf("^\t\nError: %s\n\n", debug_map_token_to_err(err_ctx->err_code));
 }
 
 const char* debug_map_token_to_err(errorCodes code)
 {
 	switch (code) {
-
+	case ERROR_CODE_TO_MANY_OPERANDS: return "To many operands";
+	case ERROR_CODE_SYNTAX_ERROR: return "Syntax error";
+	case ERROR_CODE_EXTRA_COMMA: return "Extra comma";
 	default:
 		return "UnknowError";
 	}

@@ -23,8 +23,9 @@ void line_iterator_backwards(LineIterator* it)
 void line_iterator_unget_word(LineIterator* it, const char* word)
 {
     size_t length = strlen(word);
-    while (length-- > 0) {
+    while (length > 0) {
         line_iterator_backwards(it);
+        length--;
     }
 }
 
@@ -32,6 +33,14 @@ void line_iterator_consume_blanks(LineIterator* it)
 {
     while (isblank(line_iterator_peek(it)))
         line_iterator_advance(it);
+}
+
+void line_iterator_jump_to(LineIterator* it, char sep)
+{
+    const char* loc = strchr(it->current, sep);
+    if (loc == NULL)
+        return;
+    it->current = loc + 1;
 }
 
 char line_iterator_peek(LineIterator* it)
@@ -68,6 +77,17 @@ char* line_iterator_next_word(LineIterator* it)
 
     word[log_sz] = '\0';
     return word;
+}
+
+bool line_iterator_match_any(LineIterator* it, char* seps)
+{
+    while (*seps) {
+        if (line_iterator_peek(it) == *seps)
+            return TRUE;
+        seps++;
+    }
+
+    return FALSE;
 }
 
 bool line_iterator_is_end(LineIterator* it)

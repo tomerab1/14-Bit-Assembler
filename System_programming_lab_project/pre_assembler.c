@@ -14,6 +14,11 @@ void macro_list_fill_list_from_file(FILE* in, MacroList* in_list)
         name = NULL;
         line_iterator_put_line(&it, line);
 
+        if (line_iterator_is_end(&it)) {
+            free(line);
+            continue;
+        }
+
         /* If blanks are encountered, consume them. */
         line_iterator_consume_blanks(&it);
 
@@ -230,6 +235,11 @@ void create_pre_assembler_file(FILE* in, FILE* out, MacroList* list)
     while ((line = get_line(in)) != NULL) {
         name = NULL;
         line_iterator_put_line(&it, line);
+
+        if (line_iterator_peek(&it) == '\0') {
+            free(line);
+            continue;
+        }
 
         /* If blanks are encountered, consume them. */
         line_iterator_consume_blanks(&it);

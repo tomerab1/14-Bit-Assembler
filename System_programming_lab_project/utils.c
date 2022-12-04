@@ -2,6 +2,7 @@
 #include "syntactical_analysis.h"
 #include "constants.h"
 #include <string.h>
+#include <ctype.h>
 
 void* xrealloc(void* ptr, size_t alloc_sz)
 {
@@ -55,16 +56,43 @@ char* get_line(FILE* in)
     char ch;
 
     while ((ch = (char)fgetc(in)) != EOF && ch != '\n' && read < SOURCE_LINE_MAX_LENGTH) {
-        read_buffer[read++] = ch;
+        read_buffer[read++] = (ch == TAB_CHAR) ? SPACE_CHAR : ch;
+    }
+
+    if (ch == '\n' && read == 0) {
+        return read_buffer;
     }
 
     /* If nothing was read from the file */
-    if (read == 0) {
+    if (read == 0 && ch == EOF) {
         free(read_buffer);
         return NULL;
     }
 
+    if (is_line_only_blanks(read_buffer)) {
+        /* Mark for later functions in the pipeline to ignore. */
+        *read_buffer = '\0';
+        return read_buffer;
+    }
+
     return read_buffer;
+}
+
+bool is_line_only_blanks(const char* line)
+{
+    while (*line) {
+        if (!isspace(*line)) 
+            return FALSE;
+        line++;
+    }
+    return TRUE;
+}
+
+char* get_copy_string(const char* str)
+{
+    char* res = (char*)xcalloc(strlen(str), sizeof(char));
+    memcpy(res, str, sizeof(char) * strlen(str));
+    return res;
 }
 
 unsigned int get_2s_complement(int n)

@@ -24,6 +24,9 @@ void line_iterator_unget_word(LineIterator* it, const char* word);
 /* Consumes blanks, i.e white spaces and tabs. */
 void line_iterator_consume_blanks(LineIterator* it);
 
+/* Advances the line iterator until the specified char */
+void line_iterator_jump_to(LineIterator* it, char sep);
+
 /* Returns the current char 'current' points to. */
 char line_iterator_peek(LineIterator* it);
 
@@ -35,4 +38,9 @@ bool line_iterator_is_end(LineIterator* it);
 
 /*Checks if the iterator reached line beginning*/
 bool line_iterator_is_start(LineIterator* it);
+
+/* Check if the iterator current char, matche any of the seperators. */
+bool line_iterator_match_any(LineIterator* it, char* seps);
+
+
 #endif
