@@ -152,17 +152,26 @@ bool validate_syntax_string(LineIterator* it, long line, debugList* dbg_list)
 
 bool validate_syntax_data(LineIterator* it, long line, debugList* dbg_list)
 {
-    bool did_error_occurred = FALSE;
+    bool is_valid = TRUE;
 
     /* Consume blanks */
     line_iterator_consume_blanks(it);
     
     /* Routine to check digit list */
-    while (!line_iterator_is_end(it) && (did_error_occurred = verify_int(it, line, ",", dbg_list)) != FALSE)
+    while (!line_iterator_is_end(it) && is_valid) {
+        line_iterator_consume_blanks(it);
+        is_valid = verify_int(it, line, ", ", dbg_list);
         line_iterator_advance(it);
+    }
+
+    if (!is_valid) {
+        return FALSE;
+    }
 
     /* Go backwards */
-    line_iterator_backwards(it);
+    while (isspace(line_iterator_peek(it)) || line_iterator_peek(it) == '\0') {
+        line_iterator_backwards(it);
+    }
 
     /* Check last char.*/
     if (!isdigit(line_iterator_peek(it))) {
@@ -170,7 +179,7 @@ bool validate_syntax_data(LineIterator* it, long line, debugList* dbg_list)
         return FALSE;
     }
 
-    return !did_error_occurred;
+    return TRUE;
 }
 
 bool validate_syntax_extern_and_entry(LineIterator* it, long line, debugList* dbg_list)
