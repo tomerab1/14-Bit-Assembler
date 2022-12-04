@@ -165,7 +165,6 @@ bool validate_syntax_string(LineIterator* it, long line, debugList* dbg_list)
     return TRUE;
 }
 
-<<<<<<< HEAD
 int extract_sentence_type(LineIterator* it) {
     it->current = it->start;
     /*empty sentence*/
@@ -210,7 +209,7 @@ void skip_label_basic(LineIterator* line) {
     line_iterator_consume_blanks(line);
     return;
 }
-=======
+
 bool validate_syntax_data(LineIterator* it, long line, debugList* dbg_list)
 {
     bool is_valid = TRUE;
@@ -669,4 +668,4 @@ SyntaxGroups get_syntax_group(const char* name)
         return SG_GROUP_7;
     return SG_GROUP_INVALID;
 }
->>>>>>> master
+

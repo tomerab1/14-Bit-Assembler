@@ -18,7 +18,6 @@ typedef enum
 
 typedef enum
 {
-<<<<<<< HEAD
 	DOT_DATA_CODE = 1,
 	DOT_STRING_CODE,
 	DOT_ENTRY_CODE,
@@ -33,7 +32,8 @@ typedef enum
 	INSTRUCTION_SENTENCE
 };
 
-=======
+typedef enum
+{
 	OP_TYPE_OPCDE, OP_TYPE_LABEL, OP_TYPE_DATA, OP_TYPE_STRING,
 	OP_TYPE_EXTERN, OP_TYPE_ENTRY, OP_TYPE_UNKNOWN
 } OperationTypes;
@@ -52,7 +52,6 @@ typedef enum firstPassStates firstPassStates;
 #define FLAG_LABEL       2
 #define FLAG_REGISTER    4
 #define FLAG_PARAM_LABEL 8
->>>>>>> master
 
 /* This function takes a string and returns the matching Opcode. */
 Opcodes get_opcode(const char* str);
