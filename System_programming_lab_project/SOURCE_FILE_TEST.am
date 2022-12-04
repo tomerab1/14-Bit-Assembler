@@ -1,4 +1,4 @@
-LENGTH: .data 6,-9,15
+LENGTH: .data 6,-9,15A
 END: prn #-5
 bne LOOP(r4,r3)
 sub r1, r4

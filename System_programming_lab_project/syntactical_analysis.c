@@ -146,12 +146,26 @@ bool validate_syntax_string(LineIterator* it, long line, debugList* dbg_list)
 
 bool validate_syntax_data(LineIterator* it, long line, debugList* dbg_list)
 {
+    bool did_error_occurred = FALSE;
+
     /* Consume blanks */
     line_iterator_consume_blanks(it);
     
     /* Routine to check digit list */
+    while (!line_iterator_is_end(it) && (did_error_occurred = verify_int(it, line, ",", dbg_list)) != FALSE)
+        line_iterator_advance(it);
 
-    return TRUE;
+    /* Go backwards */
+    line_iterator_backwards(it);
+
+    /* Check last char.*/
+
+    if (!isdigit(line_iterator_peek(it))) {
+        debug_list_register_node(dbg_list, debug_list_new_node(it->start, it->current, line, ERROR_CODE_TEXT_AFTER_END));
+        return FALSE;
+    }
+
+    return !did_error_occurred;
 }
 
 bool validate_syntax_extern_and_entry(LineIterator* it, long line, debugList* dbg_list)
@@ -550,6 +564,10 @@ bool verify_int(LineIterator* it, long line, char* seps, debugList* dbg_list)
 {
     if (line_iterator_peek(it) == NEG_SIGN_CHAR || line_iterator_peek(it) == POS_SIGN_CHAR) {
         line_iterator_advance(it);
+    }
+    else if (line_iterator_peek(it) == COMMA_CHAR) {
+        debug_list_register_node(dbg_list, debug_list_new_node(it->start, it->current, line, ERROR_CODE_EXTRA_COMMA));
+        return FALSE;
     }
 
     while (!line_iterator_is_end(it) && !line_iterator_match_any(it, seps)) {
