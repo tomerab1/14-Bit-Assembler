@@ -17,7 +17,7 @@ typedef unsigned short bool;
 
 #define TRUE 1
 #define FALSE 0
-#define REG_MIN_NUM '1'
+#define REG_MIN_NUM '0'
 #define REG_MAX_NUM '7'
 #define REG_BEG_CHAR 'r'
 #define POS_SIGN_CHAR '+'

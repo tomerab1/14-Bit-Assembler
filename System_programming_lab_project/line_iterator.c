@@ -38,7 +38,7 @@ void line_iterator_consume_blanks(LineIterator* it)
 void line_iterator_jump_to(LineIterator* it, char sep)
 {
     const char* loc = strchr(it->current, sep);
-    if (sep == NULL)
+    if (loc == NULL)
         return;
     it->current = loc + 1;
 }

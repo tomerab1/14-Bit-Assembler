@@ -53,7 +53,7 @@ bool do_first_pass(const char* path, memoryBuffer* img, SymbolTable* sym_table, 
 		}
 		/* none of the above, must be an error. */
 		else {
-
+			debug_list_register_node(dbg_list, debug_list_new_node(it.start, it.current, line, ERROR_CODE_SYNTAX_ERROR));
 		}
 
 		free(word);
@@ -65,8 +65,23 @@ bool do_first_pass(const char* path, memoryBuffer* img, SymbolTable* sym_table, 
 
 firstPassStates get_symbol_type(LineIterator* it, char* word)
 {
+	firstPassStates fp_state = FP_NONE;
+
+	/* An .entry definition. */
+	if (strcmp(word, ".entry") == 0) {
+		return FP_SYM_ENT;
+	}
+	/* An .extern definition. */
+	else if (strcmp(word, ".extern") == 0) {
+		return FP_SYM_EXT;
+	}
+	else if (get_opcode(word) != OP_UNKNOWN) {
+		/* Unget the opcode. */
+		line_iterator_unget_word(it, word);
+		return FP_OPCODE;
+	}
 	/* Symbol definition, may follow, .data or .string*/
-	if (is_valid_label(word)) {
+	else if ((fp_state = check_label_syntax(word)) == ERROR_CODE_OK) {
 		const char* next_word = line_iterator_next_word(it);
 		/* Check if .data */
 		if (strcmp(next_word, ".data") == 0) {
@@ -86,20 +101,9 @@ firstPassStates get_symbol_type(LineIterator* it, char* word)
 		line_iterator_unget_word(it, next_word);
 		return FP_SYM_DEF;
 	}
-	/* An .entry definition. */
-	else if (strcmp(word, ".entry") == 0) {
-		return FP_SYM_ENT;
-	}
-	/* An .extern definition. */
-	else if (strcmp(word, ".extern") == 0) {
-		return FP_SYM_EXT;
-	}
-	else if (get_opcode(word)) {
-		/* Unget the opcode. */
-		line_iterator_unget_word(it, word);
-		return FP_OPCODE;
-	}
-	return FP_NONE;
+
+
+	return fp_state;
 }
 
 bool first_pass_process_and_encode_instructions(LineIterator* it, memoryBuffer* img, symbolType* sym_table, debugList* dbg_list)
