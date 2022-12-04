@@ -1,4 +1,6 @@
-LENGTH: .data 6,  -9,15,-1
+.entry ENTRY   fas
+.extern EXTREN
+LENGTH: .data 6,-9,15
 END: prn #-5
 bne LOOP(r4,r3)
 sub r1, r4

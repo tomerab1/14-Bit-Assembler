@@ -97,15 +97,11 @@ bool validate_syntax(LineIterator it, firstPassStates state, long line, debugLis
 {
     switch (state) {
     case FP_SYM_DEF:
-    case FP_OPCODE:
-        return validate_syntax_opcode(&it, line, dbg_list);
-    case FP_SYM_DATA:
-        return validate_syntax_data(&it, line, dbg_list);
-    case FP_SYM_STR:
-        return validate_syntax_string(&it, line, dbg_list);
+    case FP_OPCODE: return validate_syntax_opcode(&it, line, dbg_list);
+    case FP_SYM_DATA: return validate_syntax_data(&it, line, dbg_list);
+    case FP_SYM_STR: return validate_syntax_string(&it, line, dbg_list);
     case FP_SYM_ENT:
-    case FP_SYM_EXT:
-        return validate_syntax_extern_and_entry(&it, line, dbg_list);
+    case FP_SYM_EXT: return validate_syntax_extern_and_entry(&it, line, dbg_list);
     }
 
     return TRUE;
@@ -184,7 +180,14 @@ bool validate_syntax_data(LineIterator* it, long line, debugList* dbg_list)
 
 bool validate_syntax_extern_and_entry(LineIterator* it, long line, debugList* dbg_list)
 {
+    line_iterator_consume_blanks(it);
 
+    if (!line_iterator_is_end(it)) {
+        debug_list_register_node(dbg_list, debug_list_new_node(it->start, it->current, line, ERROR_CODE_TEXT_AFTER_END));
+        return FALSE;
+    }
+
+    return TRUE;
 }
 
 bool validate_syntax_opcode(LineIterator* it, long line, debugList* dbg_list)
@@ -542,7 +545,7 @@ bool is_label_name(LineIterator* it)
         return FALSE;
     }
 
-    while (!line_iterator_is_end(it) && (line_iterator_peek(it) != COMMA_CHAR && line_iterator_peek(it) != OPEN_PAREN_CHAR && line_iterator_peek(it) != CLOSE_PAREN_CHAR)) {
+    while (!line_iterator_is_end(it) && !line_iterator_match_any(it, ",() ")) {
         if (!isalpha(line_iterator_peek(it)) && !isdigit(line_iterator_peek(it))) {
             return FALSE;
         }

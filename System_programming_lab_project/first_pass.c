@@ -190,18 +190,21 @@ bool first_pass_process_sym_string(LineIterator* it, memoryBuffer* img, SymbolTa
 bool first_pass_process_sym_ent(LineIterator* it, memoryBuffer* img, SymbolTable* sym_table, debugList* dbg_list, const char* name, long line)
 {
 	const char* word = line_iterator_next_word(it);
-	errorCodes err;
 
+	line_iterator_unget_word(it, word);
 	if (!word) {
 		debug_list_register_node(dbg_list, debug_list_new_node(it->start, it->current, line, ERROR_CODE_SYNTAX_ERROR));
+		free(word);
 		return FALSE;
 	}
-	if ((err = check_label_syntax(word)) != ERROR_CODE_OK) {
-		debug_list_register_node(dbg_list, debug_list_new_node(it->start, it->current, line, err));
+	if (!is_label_name(it)) {
+		debug_list_register_node(dbg_list, debug_list_new_node(it->start, it->current, line, ERROR_CODE_INVALID_LABEL_DEF));
+		free(word);
 		return FALSE;
 	}
 	if (symbol_table_search_symbol(sym_table, word)) {
 		debug_list_register_node(dbg_list, debug_list_new_node(it->start, it->current, line, ERROR_CODE_SYMBOL_REDEFINITION));
+		free(word);
 		return FALSE;
 	}
 
@@ -211,34 +214,43 @@ bool first_pass_process_sym_ent(LineIterator* it, memoryBuffer* img, SymbolTable
 	if (!validate_syntax(*it, FP_SYM_ENT, line, dbg_list)) {
 		return FALSE;
 	}
+	
 	build_memory_word(it, img, dbg_list);
+	free(word);
+
 	return TRUE;
 }
 
 bool first_pass_process_sym_ext(LineIterator* it, memoryBuffer* img, SymbolTable* sym_table, debugList* dbg_list, const char* name, long line)
 {
 	const char* word = line_iterator_next_word(it);
-	errorCodes err;
 
+	line_iterator_unget_word(it, word);
 	if (!word) {
 		debug_list_register_node(dbg_list, debug_list_new_node(it->start, it->current, line, ERROR_CODE_SYNTAX_ERROR));
+		free(word);
 		return FALSE;
 	}
-	if ((err = check_label_syntax(word)) != ERROR_CODE_OK) {
-		debug_list_register_node(dbg_list, debug_list_new_node(it->start, it->current, line, err));
+	if (!is_label_name(it)) {
+		debug_list_register_node(dbg_list, debug_list_new_node(it->start, it->current, line, ERROR_CODE_INVALID_LABEL_DEF));
+		free(word);
 		return FALSE;
 	}
 	if (symbol_table_search_symbol(sym_table, word)) {
 		debug_list_register_node(dbg_list, debug_list_new_node(it->start, it->current, line, ERROR_CODE_SYMBOL_REDEFINITION));
+		free(word);
 		return FALSE;
 	}
 
 	symbol_table_insert_symbol(sym_table, symbol_table_new_node(word, SYM_EXTERN, 0));
 
 	/* Check the syntax, we want a copy of the iterator because if the syntax is correct we will encode the instructions to memory. */
-	if (!validate_syntax(*it, FP_SYM_EXT, line, dbg_list)) {
+	if (!validate_syntax(*it, FP_SYM_ENT, line, dbg_list)) {
 		return FALSE;
 	}
+
 	build_memory_word(it, img, dbg_list);
+	free(word);
+
 	return TRUE;
 }
