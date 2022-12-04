@@ -17,7 +17,7 @@ typedef unsigned short bool;
 
 #define TRUE 1
 #define FALSE 0
-#define REG_MIN_NUM '1'
+#define REG_MIN_NUM '0'
 #define REG_MAX_NUM '7'
 #define REG_BEG_CHAR 'r'
 #define POS_SIGN_CHAR '+'
@@ -28,7 +28,8 @@ typedef unsigned short bool;
 #define OPEN_PAREN_CHAR '('
 #define CLOSE_PAREN_CHAR ')'
 #define SPACE_CHAR ' '
-
+#define QUOTE_CHAR '\"'
+#define TAB_CHAR '\t'
 
 #define GROW_CAPACITY(old_sz) (old_sz) *= 2
 #define GROW_ARRAY(type, pointer, new_count, size) (type)xrealloc((pointer), (new_count) * (size))

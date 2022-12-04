@@ -29,23 +29,23 @@ bool do_first_pass(const char* path, memoryBuffer* img, SymbolTable* sym_table, 
 		}
 		/* .data def */
 		else if (state == FP_SYM_DATA) {
-
+			did_error_occurred |= first_pass_process_sym_data(&it, img, sym_table, dbg_list, word, line);
 		}
 		/* .string def */
 		else if (state == FP_SYM_STR) {
-
+			did_error_occurred |= first_pass_process_sym_string(&it, img, sym_table, dbg_list, word, line);
 		}
 		/* .extern def */
 		else if (state == FP_SYM_EXT) {
-
+			did_error_occurred |= first_pass_process_sym_ext(&it, img, sym_table, dbg_list, word, line);
 		}
 		/* .entry def */
 		else if (state == FP_SYM_ENT) {
-
+			did_error_occurred |= first_pass_process_sym_ent(&it, img, sym_table, dbg_list, word, line);
 		}
 		/* opcode */
 		else if (state == FP_OPCODE) {
-
+			did_error_occurred |= first_pass_process_opcode(&it, img, sym_table, dbg_list, line);
 		}
 		/* e.g MAIN .extern/entry LOOP, MAIN will be ignored. */
 		else if (state == FP_SYM_IGNORED) {
@@ -53,7 +53,7 @@ bool do_first_pass(const char* path, memoryBuffer* img, SymbolTable* sym_table, 
 		}
 		/* none of the above, must be an error. */
 		else {
-
+			debug_list_register_node(dbg_list, debug_list_new_node(it.start, it.current, line, ERROR_CODE_SYNTAX_ERROR));
 		}
 
 		free(word);
@@ -65,8 +65,23 @@ bool do_first_pass(const char* path, memoryBuffer* img, SymbolTable* sym_table, 
 
 firstPassStates get_symbol_type(LineIterator* it, char* word)
 {
+	firstPassStates fp_state = FP_NONE;
+
+	/* An .entry definition. */
+	if (strcmp(word, ".entry") == 0) {
+		return FP_SYM_ENT;
+	}
+	/* An .extern definition. */
+	else if (strcmp(word, ".extern") == 0) {
+		return FP_SYM_EXT;
+	}
+	else if (get_opcode(word) != OP_UNKNOWN) {
+		/* Unget the opcode. */
+		line_iterator_unget_word(it, word);
+		return FP_OPCODE;
+	}
 	/* Symbol definition, may follow, .data or .string*/
-	if (is_valid_label(word)) {
+	else if ((fp_state = check_label_syntax(word)) == ERROR_CODE_OK) {
 		const char* next_word = line_iterator_next_word(it);
 		/* Check if .data */
 		if (strcmp(next_word, ".data") == 0) {
@@ -86,20 +101,9 @@ firstPassStates get_symbol_type(LineIterator* it, char* word)
 		line_iterator_unget_word(it, next_word);
 		return FP_SYM_DEF;
 	}
-	/* An .entry definition. */
-	else if (strcmp(word, ".entry") == 0) {
-		return FP_SYM_ENT;
-	}
-	/* An .extern definition. */
-	else if (strcmp(word, ".extern") == 0) {
-		return FP_SYM_EXT;
-	}
-	else if (get_opcode(word)) {
-		/* Unget the opcode. */
-		line_iterator_unget_word(it, word);
-		return FP_OPCODE;
-	}
-	return FP_NONE;
+
+
+	return fp_state;
 }
 
 bool first_pass_process_and_encode_instructions(LineIterator* it, memoryBuffer* img, symbolType* sym_table, debugList* dbg_list)
@@ -140,6 +144,17 @@ bool first_pass_process_sym_def(LineIterator* it, memoryBuffer* img, SymbolTable
 	return TRUE;
 }
 
+bool first_pass_process_opcode(LineIterator* it, memoryBuffer* img, SymbolTable* sym_table, debugList* dbg_list, long line)
+{
+	/* Check the syntax, we want a copy of the iterator because if the syntax is correct we will encode the instructions to memory. */
+	if (!validate_syntax(*it, FP_OPCODE, line, dbg_list)) {
+		return FALSE;
+	}
+	build_memory_word(it, img, dbg_list);
+	return TRUE;
+}
+
+
 bool first_pass_process_sym_data(LineIterator* it, memoryBuffer* img, SymbolTable* sym_table, debugList* dbg_list, const char* name, long line)
 {
 	if (symbol_table_search_symbol(sym_table, name)) {
@@ -147,6 +162,12 @@ bool first_pass_process_sym_data(LineIterator* it, memoryBuffer* img, SymbolTabl
 		return FALSE;
 	}
 	symbol_table_insert_symbol(sym_table, symbol_table_new_node(name, SYM_DATA, img->data_image.counter));
+
+	/* Check the syntax, we want a copy of the iterator because if the syntax is correct we will encode the instructions to memory. */
+	if (!validate_syntax(*it, FP_SYM_DATA, line, dbg_list)) {
+		return FALSE;
+	}
+	build_memory_word(it, img, dbg_list);
 	return TRUE;
 }
 
@@ -157,10 +178,16 @@ bool first_pass_process_sym_string(LineIterator* it, memoryBuffer* img, SymbolTa
 		return FALSE;
 	}
 	symbol_table_insert_symbol(sym_table, symbol_table_new_node(name, SYM_DATA, img->data_image.counter));
+
+	/* Check the syntax, we want a copy of the iterator because if the syntax is correct we will encode the instructions to memory. */
+	if (!validate_syntax(*it, FP_SYM_STR, line, dbg_list)) {
+		return FALSE;
+	}
+	build_memory_word(it, img, dbg_list);
 	return TRUE;
 }
 
-bool first_pass_process_sym_ent(LineIterator* it, memoryBuffer* img, SymbolTable* sym_table, debugList* dbg_list, long line)
+bool first_pass_process_sym_ent(LineIterator* it, memoryBuffer* img, SymbolTable* sym_table, debugList* dbg_list, const char* name, long line)
 {
 	const char* word = line_iterator_next_word(it);
 	errorCodes err;
@@ -180,10 +207,15 @@ bool first_pass_process_sym_ent(LineIterator* it, memoryBuffer* img, SymbolTable
 
 	symbol_table_insert_symbol(sym_table, symbol_table_new_node(word, SYM_ENTRY, 0));
 
+	/* Check the syntax, we want a copy of the iterator because if the syntax is correct we will encode the instructions to memory. */
+	if (!validate_syntax(*it, FP_SYM_ENT, line, dbg_list)) {
+		return FALSE;
+	}
+	build_memory_word(it, img, dbg_list);
 	return TRUE;
 }
 
-bool first_pass_process_sym_ext(LineIterator* it, memoryBuffer* img, SymbolTable* sym_table, debugList* dbg_list, long line)
+bool first_pass_process_sym_ext(LineIterator* it, memoryBuffer* img, SymbolTable* sym_table, debugList* dbg_list, const char* name, long line)
 {
 	const char* word = line_iterator_next_word(it);
 	errorCodes err;
@@ -203,15 +235,10 @@ bool first_pass_process_sym_ext(LineIterator* it, memoryBuffer* img, SymbolTable
 
 	symbol_table_insert_symbol(sym_table, symbol_table_new_node(word, SYM_EXTERN, 0));
 
+	/* Check the syntax, we want a copy of the iterator because if the syntax is correct we will encode the instructions to memory. */
+	if (!validate_syntax(*it, FP_SYM_EXT, line, dbg_list)) {
+		return FALSE;
+	}
+	build_memory_word(it, img, dbg_list);
 	return TRUE;
-}
-
-bool first_pass_process_instruction(LineIterator* it, memoryBuffer* img, SymbolTable* sym_table, debugList* dbg_list, long line)
-{
-	
-}
-
-bool first_pass_is_instruction(LineIterator* it, SymbolTable* sym_table, debugList* dbg_list, long line)
-{
-	
 }
