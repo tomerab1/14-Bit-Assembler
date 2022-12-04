@@ -56,7 +56,7 @@ char* get_line(FILE* in)
     char ch;
 
     while ((ch = (char)fgetc(in)) != EOF && ch != '\n' && read < SOURCE_LINE_MAX_LENGTH) {
-        read_buffer[read++] = ch;
+        read_buffer[read++] = (ch == TAB_CHAR) ? SPACE_CHAR : ch;
     }
 
     if (ch == '\n' && read == 0) {

@@ -29,23 +29,23 @@ bool do_first_pass(const char* path, memoryBuffer* img, SymbolTable* sym_table, 
 		}
 		/* .data def */
 		else if (state == FP_SYM_DATA) {
-
+			did_error_occurred |= first_pass_process_sym_data(&it, img, sym_table, dbg_list, word, line);
 		}
 		/* .string def */
 		else if (state == FP_SYM_STR) {
-
+			did_error_occurred |= first_pass_process_sym_string(&it, img, sym_table, dbg_list, word, line);
 		}
 		/* .extern def */
 		else if (state == FP_SYM_EXT) {
-
+			did_error_occurred |= first_pass_process_sym_ext(&it, img, sym_table, dbg_list, word, line);
 		}
 		/* .entry def */
 		else if (state == FP_SYM_ENT) {
-
+			did_error_occurred |= first_pass_process_sym_ent(&it, img, sym_table, dbg_list, word, line);
 		}
 		/* opcode */
 		else if (state == FP_OPCODE) {
-
+			did_error_occurred |= first_pass_process_opcode(&it, img, sym_table, dbg_list, line);
 		}
 		/* e.g MAIN .extern/entry LOOP, MAIN will be ignored. */
 		else if (state == FP_SYM_IGNORED) {
@@ -140,6 +140,17 @@ bool first_pass_process_sym_def(LineIterator* it, memoryBuffer* img, SymbolTable
 	return TRUE;
 }
 
+bool first_pass_process_opcode(LineIterator* it, memoryBuffer* img, SymbolTable* sym_table, debugList* dbg_list, long line)
+{
+	/* Check the syntax, we want a copy of the iterator because if the syntax is correct we will encode the instructions to memory. */
+	if (!validate_syntax(*it, FP_OPCODE, line, dbg_list)) {
+		return FALSE;
+	}
+	build_memory_word(it, img, dbg_list);
+	return TRUE;
+}
+
+
 bool first_pass_process_sym_data(LineIterator* it, memoryBuffer* img, SymbolTable* sym_table, debugList* dbg_list, const char* name, long line)
 {
 	if (symbol_table_search_symbol(sym_table, name)) {
@@ -147,6 +158,12 @@ bool first_pass_process_sym_data(LineIterator* it, memoryBuffer* img, SymbolTabl
 		return FALSE;
 	}
 	symbol_table_insert_symbol(sym_table, symbol_table_new_node(name, SYM_DATA, img->data_image.counter));
+
+	/* Check the syntax, we want a copy of the iterator because if the syntax is correct we will encode the instructions to memory. */
+	if (!validate_syntax(*it, FP_SYM_DATA, line, dbg_list)) {
+		return FALSE;
+	}
+	build_memory_word(it, img, dbg_list);
 	return TRUE;
 }
 
@@ -157,10 +174,16 @@ bool first_pass_process_sym_string(LineIterator* it, memoryBuffer* img, SymbolTa
 		return FALSE;
 	}
 	symbol_table_insert_symbol(sym_table, symbol_table_new_node(name, SYM_DATA, img->data_image.counter));
+
+	/* Check the syntax, we want a copy of the iterator because if the syntax is correct we will encode the instructions to memory. */
+	if (!validate_syntax(*it, FP_SYM_STR, line, dbg_list)) {
+		return FALSE;
+	}
+	build_memory_word(it, img, dbg_list);
 	return TRUE;
 }
 
-bool first_pass_process_sym_ent(LineIterator* it, memoryBuffer* img, SymbolTable* sym_table, debugList* dbg_list, long line)
+bool first_pass_process_sym_ent(LineIterator* it, memoryBuffer* img, SymbolTable* sym_table, debugList* dbg_list, const char* name, long line)
 {
 	const char* word = line_iterator_next_word(it);
 	errorCodes err;
@@ -180,10 +203,15 @@ bool first_pass_process_sym_ent(LineIterator* it, memoryBuffer* img, SymbolTable
 
 	symbol_table_insert_symbol(sym_table, symbol_table_new_node(word, SYM_ENTRY, 0));
 
+	/* Check the syntax, we want a copy of the iterator because if the syntax is correct we will encode the instructions to memory. */
+	if (!validate_syntax(*it, FP_SYM_ENT, line, dbg_list)) {
+		return FALSE;
+	}
+	build_memory_word(it, img, dbg_list);
 	return TRUE;
 }
 
-bool first_pass_process_sym_ext(LineIterator* it, memoryBuffer* img, SymbolTable* sym_table, debugList* dbg_list, long line)
+bool first_pass_process_sym_ext(LineIterator* it, memoryBuffer* img, SymbolTable* sym_table, debugList* dbg_list, const char* name, long line)
 {
 	const char* word = line_iterator_next_word(it);
 	errorCodes err;
@@ -203,15 +231,10 @@ bool first_pass_process_sym_ext(LineIterator* it, memoryBuffer* img, SymbolTable
 
 	symbol_table_insert_symbol(sym_table, symbol_table_new_node(word, SYM_EXTERN, 0));
 
+	/* Check the syntax, we want a copy of the iterator because if the syntax is correct we will encode the instructions to memory. */
+	if (!validate_syntax(*it, FP_SYM_EXT, line, dbg_list)) {
+		return FALSE;
+	}
+	build_memory_word(it, img, dbg_list);
 	return TRUE;
-}
-
-bool first_pass_process_instruction(LineIterator* it, memoryBuffer* img, SymbolTable* sym_table, debugList* dbg_list, long line)
-{
-	
-}
-
-bool first_pass_is_instruction(LineIterator* it, SymbolTable* sym_table, debugList* dbg_list, long line)
-{
-	
 }

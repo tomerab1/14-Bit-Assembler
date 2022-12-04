@@ -28,7 +28,8 @@ typedef unsigned short bool;
 #define OPEN_PAREN_CHAR '('
 #define CLOSE_PAREN_CHAR ')'
 #define SPACE_CHAR ' '
-
+#define QUOTE_CHAR '\"'
+#define TAB_CHAR '\t'
 
 #define GROW_CAPACITY(old_sz) (old_sz) *= 2
 #define GROW_ARRAY(type, pointer, new_count, size) (type)xrealloc((pointer), (new_count) * (size))

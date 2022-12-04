@@ -1,3 +1,4 @@
+LENGTH: .data 6,-9,15
 END: prn #-5
 bne LOOP(r4,r3)
 mcr m1
@@ -8,14 +9,14 @@ m1
 mcr	m2
 m1
 sub	r1, r5
-bne LOOP(r4, r3)
+bne LOOP(r4,r3)
 dec	r1
 endmcr
 L1: inc K
 bne LOOP(K,STR)
 END: prn #-5
 END: stop
-STR: .string “abcdef”
+STR: .string "abcdef"
 LENGTH: .data 6,-9,15
 K: .data 22
 MAIN: mov r3 ,LENGTH
@@ -27,7 +28,7 @@ bne END
 L1: inc K
 bne LOOP(K,STR)
 END: stop
-STR: .string “abcdef”
+STR: .string "abcdef"
 LENGTH: .data 6,-9,15
 K: .data 22
 m2

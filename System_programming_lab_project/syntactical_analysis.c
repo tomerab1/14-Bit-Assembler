@@ -91,16 +91,75 @@ bool validate_syntax(LineIterator it, firstPassStates state, long line, debugLis
 {
     switch (state) {
     case FP_SYM_DEF:
-        return validate_syntax_sym_def(&it, line, dbg_list);
-
-    default:
-        break;
+    case FP_OPCODE:
+        return validate_syntax_opcode(&it, line, dbg_list);
+    case FP_SYM_DATA:
+        return validate_syntax_data(&it, line, dbg_list);
+    case FP_SYM_STR:
+        return validate_syntax_string(&it, line, dbg_list);
+    case FP_SYM_ENT:
+    case FP_SYM_EXT:
+        return validate_syntax_extern_and_entry(&it, line, dbg_list);
     }
 
     return TRUE;
 }
 
-bool validate_syntax_sym_def(LineIterator* it, long line, debugList* dbg_list)
+bool validate_syntax_string(LineIterator* it, long line, debugList* dbg_list)
+{
+    /* Search for opening quotes. */
+    for (; !line_iterator_is_end(it) && line_iterator_peek(it) != QUOTE_CHAR && !isalpha(line_iterator_peek(it)); line_iterator_advance(it))
+        ;
+
+    if (line_iterator_peek(it) != QUOTE_CHAR) {
+        debug_list_register_node(dbg_list, debug_list_new_node(it->start, it->current, line, ERROR_CODE_MISSING_OPEN_QUOTES));
+        return FALSE;
+    }
+
+    /* Consume quotes. */
+    line_iterator_advance(it);
+
+    /* Search for closing quotes. */
+    for (; !line_iterator_is_end(it) && line_iterator_peek(it) != QUOTE_CHAR; line_iterator_advance(it))
+        ;
+
+    if (line_iterator_peek(it) != QUOTE_CHAR) {
+        debug_list_register_node(dbg_list, debug_list_new_node(it->start, it->current, line, ERROR_CODE_MISSING_CLOSE_QUOTES));
+        return FALSE;
+    }
+
+    /* Consume quotes. */
+    line_iterator_advance(it);
+
+    /* Search for invalid text after string termination. */
+    while (!line_iterator_is_end(it) && isspace(line_iterator_peek(it))) {
+        line_iterator_advance(it);
+    }
+
+    if (!line_iterator_is_end(it)) {
+        debug_list_register_node(dbg_list, debug_list_new_node(it->start, it->current, line, ERROR_CODE_TEXT_AFTER_END));
+        return FALSE;
+    }
+
+    return TRUE;
+}
+
+bool validate_syntax_data(LineIterator* it, long line, debugList* dbg_list)
+{
+    /* Consume blanks */
+    line_iterator_consume_blanks(it);
+    
+    /* Routine to check digit list */
+
+    return TRUE;
+}
+
+bool validate_syntax_extern_and_entry(LineIterator* it, long line, debugList* dbg_list)
+{
+
+}
+
+bool validate_syntax_opcode(LineIterator* it, long line, debugList* dbg_list)
 {
     const char* word;
 
@@ -274,12 +333,14 @@ bool match_syntax_group_5(LineIterator* it, long line, debugList* dbg_list)
             line_iterator_backwards(it);
         }
         if (!is_label_name(it)) {
+            debug_list_register_node(dbg_list, debug_list_new_node(it->start, it->current, line, ERROR_CODE_INVALID_LABEL_DEF));
             return FALSE;
         }
         
         line_iterator_jump_to(it, "(");
 
         if (!match_operand(it, line, FLAG_PARAM_LABEL, dbg_list)) {
+            debug_list_register_node(dbg_list, debug_list_new_node(it->start, it->current, line, ERROR_CODE_INVALID_LABEL_DEF));
             return FALSE;
         }
     }
@@ -395,16 +456,6 @@ bool match_operand(LineIterator* it, long line, int flags, debugList* dbg_list)
     return TRUE;
 }
 
-bool match_syntax_opcode_dot_string(LineIterator* it, long line, debugList* dbg_list)
-{
-    return FALSE;
-}
-
-bool match_syntax_opcode_dot_data(LineIterator* it, long line, debugList* dbg_list)
-{
-    return FALSE;
-}
-
 bool recursive_match_pamaetrized_label(LineIterator* it, long line, debugList* dbg_list)
 {
     if (line_iterator_is_end(it))
@@ -463,6 +514,12 @@ bool recursive_match_pamaetrized_label(LineIterator* it, long line, debugList* d
 
 bool is_label_name(LineIterator* it)
 {
+    line_iterator_consume_blanks(it);
+
+    if (isdigit(line_iterator_peek(it))) {
+        return FALSE;
+    }
+
     while (!line_iterator_is_end(it) && (line_iterator_peek(it) != COMMA_CHAR && line_iterator_peek(it) != OPEN_PAREN_CHAR)) {
         if (!isalpha(line_iterator_peek(it)) && !isdigit(line_iterator_peek(it))) {
             return FALSE;

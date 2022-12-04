@@ -67,7 +67,7 @@ void trim_symbol_name(char* sym);
 bool validate_syntax(LineIterator it, firstPassStates state, long line, debugList* dbg_list);
 
 /* Validates the syntax that may appear after a symbol definition. */
-bool validate_syntax_sym_def(LineIterator* it, long line, debugList* dbg_list);
+bool validate_syntax_opcode(LineIterator* it, long line, debugList* dbg_list);
 
 
 
@@ -83,8 +83,9 @@ bool match_syntax_group_5(LineIterator* it, long line, debugList* dbg_list);
 bool match_syntax_group_6(LineIterator* it, long line, debugList* dbg_list);
 bool match_syntax_group_7(LineIterator* it, long line, debugList* dbg_list);
 
-bool match_syntax_opcode_dot_string(LineIterator* it, long line, debugList* dbg_list);
-bool match_syntax_opcode_dot_data(LineIterator* it, long line, debugList* dbg_list);
+bool validate_syntax_string(LineIterator* it, long line, debugList* dbg_list);
+bool validate_syntax_data(LineIterator* it, long line, debugList* dbg_list);
+bool validate_syntax_extern_and_entry(LineIterator* it, long line, debugList* dbg_list);
 
 bool is_register_name_heuristic(LineIterator it);
 bool is_register_name(LineIterator* it);
