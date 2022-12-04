@@ -48,7 +48,18 @@ typedef struct programFinalStatus
 //starts second pass process
 bool initiate_second_pass(char* path, SymbolTable* table, memoryBuffer* memory);
 
-//generates object file 
+/**
+ * Generates an object file from the data in a memory buffer.
+ *
+ * This function takes a `memoryBuffer` structure and a file path, and generates an object file
+ * containing the data from the memory buffer. The object file is created using the `translate_to_machine_data()`
+ * and `get_outfile_name()` functions, and it is written to the specified path.
+ *
+ * @param memory The memory buffer to generate the object file from.
+ * @param path The path to the output file.
+ * @param err A pointer to a `debugList` structure that will be used to store any errors that occur.
+ * @return true if the object file was generated successfully, or false if an error occurred.
+ */
 bool generate_object_file(memoryBuffer* memory, char* path, debugList* err);
 
 //translates data from memory to object text style configuration

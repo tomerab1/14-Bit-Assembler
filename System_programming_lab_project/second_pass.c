@@ -51,19 +51,20 @@ bool generate_object_file(memoryBuffer* memory, char* path, debugList* err) {
 		out = open_file(outfileName, MODE_WRITE);
 
 		char placeholder[20];
-		sprintf(placeholder, ("%9d\t%-9d", memory->data_image.counter, memory->instruction_image.counter));
+		sprintf(placeholder, "%9d\t%-9d", memory->data_image.counter, memory->instruction_image.counter);
 
 		fputs(placeholder, out);
 		fputs("\n", out);
 
 		while (lineNode != NULL) {
-			sprintf(placeholder, ("%04d\t%14d", lineNode->address, lineNode->machine_data));
+			sprintf(placeholder, "%04d\t%14d", lineNode->address, lineNode->machine_data);
 			fputs(placeholder,out);
 			fputs("\n", out);
 		}
 
 	free(outfileName);
 	fclose(out);
+	
 }
 
 LinesList* translate_to_machine_data(memoryBuffer* memory, errorContext* err) {
@@ -210,7 +211,6 @@ bool directive_exists(LineIterator* line) {
 	line->current = tempCur;
 	return FALSE;
 }
-
 
 void extern_exists(flags* flag){
 	flag->dot_extern_exists = TRUE;
