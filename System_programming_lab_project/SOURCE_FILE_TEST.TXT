@@ -1,3 +1,5 @@
+.entry ENTRY
+.extern EXTREN
 LENGTH: .data 6,-9,15
 END: prn #-5
 bne LOOP(r4,r3)
