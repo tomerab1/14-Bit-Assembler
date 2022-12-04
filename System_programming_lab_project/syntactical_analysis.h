@@ -18,6 +18,22 @@ typedef enum
 
 typedef enum
 {
+	DOT_DATA_CODE = 1,
+	DOT_STRING_CODE,
+	DOT_ENTRY_CODE,
+	DOT_EXTERN_CODE
+};
+
+typedef enum
+{
+	EMPTY_SENTENCE = 1,
+	COMMENT_SENTENCE,
+	DIRECTIVE_SENTENCE,
+	INSTRUCTION_SENTENCE
+};
+
+typedef enum
+{
 	OP_TYPE_OPCDE, OP_TYPE_LABEL, OP_TYPE_DATA, OP_TYPE_STRING,
 	OP_TYPE_EXTERN, OP_TYPE_ENTRY, OP_TYPE_UNKNOWN
 } OperationTypes;
@@ -51,6 +67,9 @@ errorCodes check_label_syntax(const char* label);
  * @return - TRUE if valid, FALSE otherwise.
 */
 bool is_valid_label(const char* label);
+
+/*checks if the first word is a label, used during second pass*/
+bool isLabel(LineIterator* line);
 
 /* This function verifies the command syntax. */
 bool verify_command_syntax(LineIterator* it, debugList* dbg_list);
@@ -97,4 +116,15 @@ SyntaxGroups get_syntax_group(const char* name);
 
 bool recursive_match_pamaetrized_label(LineIterator* it, long line, debugList* dbg_list);
 
+/*param - line iterator pointed to start | return sentence type (page 24), returns empty = 1, comment = 2, directive = 3, instruction =4*/
+int extract_sentence_type(LineIterator* it);
+
+/*returns true/false if directive(.something) exists, doesn't ensure propriety of order and/or order type*/
+bool directive_exists_basic(LineIterator* line);
+
+/*returns true/false if instruction(any of opcode) exists*/
+bool find_if_instruction_exists(LineIterator* line);
+
+/*skips label and and consume blanks if exists after the label*/
+void skip_label_basic(LineIterator* line);
 #endif
