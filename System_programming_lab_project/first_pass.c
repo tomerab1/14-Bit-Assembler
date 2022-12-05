@@ -2,6 +2,8 @@
 #include "syntactical_analysis.h"
 #include <string.h>
 
+typedef bool (*fpass_dispatch_table)(LineIterator* it, memoryBuffer* img, SymbolTable* sym_table, debugList* dbg_list, const char* name, long line);
+
 bool do_first_pass(const char* path, memoryBuffer* img, SymbolTable* sym_table, debugList* dbg_list)
 {
 	FILE* in = open_file(path, MODE_READ);
@@ -10,6 +12,15 @@ bool do_first_pass(const char* path, memoryBuffer* img, SymbolTable* sym_table, 
 	long line = 1;
 	bool did_error_occurred = FALSE;
 	errorCodes err_code = FALSE;
+
+	fpass_dispatch_table table[FP_TOTAL] = {
+		first_pass_process_sym_def,
+		first_pass_process_sym_data,
+		first_pass_process_sym_string,
+		first_pass_process_sym_ext,
+		first_pass_process_sym_ent,
+		first_pass_process_opcode
+	};
 
 
 	while ((curr_line = get_line(in)) != NULL) {
@@ -23,37 +34,16 @@ bool do_first_pass(const char* path, memoryBuffer* img, SymbolTable* sym_table, 
 		word = line_iterator_next_word(&it);
 		firstPassStates state = get_symbol_type(&it, word);
 
-		/* Symbol defenition. */
-		if (state == FP_SYM_DEF) {
-			did_error_occurred |= first_pass_process_sym_def(&it, img, sym_table, dbg_list, word, line);
-		}
-		/* .data def */
-		else if (state == FP_SYM_DATA) {
-			did_error_occurred |= first_pass_process_sym_data(&it, img, sym_table, dbg_list, word, line);
-		}
-		/* .string def */
-		else if (state == FP_SYM_STR) {
-			did_error_occurred |= first_pass_process_sym_string(&it, img, sym_table, dbg_list, word, line);
-		}
-		/* .extern def */
-		else if (state == FP_SYM_EXT) {
-			did_error_occurred |= first_pass_process_sym_ext(&it, img, sym_table, dbg_list, word, line);
-		}
-		/* .entry def */
-		else if (state == FP_SYM_ENT) {
-			did_error_occurred |= first_pass_process_sym_ent(&it, img, sym_table, dbg_list, word, line);
-		}
-		/* opcode */
-		else if (state == FP_OPCODE) {
-			did_error_occurred |= first_pass_process_opcode(&it, img, sym_table, dbg_list, line);
-		}
 		/* e.g MAIN .extern/entry LOOP, MAIN will be ignored. */
-		else if (state == FP_SYM_IGNORED) {
+		if (state == FP_SYM_IGNORED) {
 			debug_list_register_node(dbg_list, debug_list_new_node(it.start, it.current, line, ERROR_CODE_SYMBOL_IGNORED_WARN));
 		}
 		/* none of the above, must be an error. */
-		else {
+		else if (state == FP_NONE) {
 			debug_list_register_node(dbg_list, debug_list_new_node(it.start, it.current, line, ERROR_CODE_SYNTAX_ERROR));
+		}
+		else {
+			did_error_occurred |= table[state](&it, img, sym_table, dbg_list, word, line);
 		}
 
 		free(word);
@@ -128,7 +118,7 @@ void build_memory_word(LineIterator* it, memoryBuffer* img, debugList* dbg_list)
 	char* word = NULL;
 	
 	while ((word = line_iterator_next_word(it)) != NULL) {
-
+		puts(word);
 	}
 }
 
@@ -148,7 +138,7 @@ bool first_pass_process_sym_def(LineIterator* it, memoryBuffer* img, SymbolTable
 	return TRUE;
 }
 
-bool first_pass_process_opcode(LineIterator* it, memoryBuffer* img, SymbolTable* sym_table, debugList* dbg_list, long line)
+bool first_pass_process_opcode(LineIterator* it, memoryBuffer* img, SymbolTable* sym_table, debugList* dbg_list, const char* name, long line)
 {
 	/* Check the syntax, we want a copy of the iterator because if the syntax is correct we will encode the instructions to memory. */
 	if (!validate_syntax(*it, FP_OPCODE, line, dbg_list)) {
