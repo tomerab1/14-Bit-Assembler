@@ -62,13 +62,13 @@ bool initiate_second_pass(char* path, SymbolTable* table, memoryBuffer* memory);
  */
 bool generate_object_file(memoryBuffer* memory, char* path, debugList* err);
 
-//translates data from memory to object text style configuration
+/*translates data from memory to object text style configuration*/
 LinesList* translate_to_machine_data(memoryBuffer* memory, errorContext* err);
 
-//generates external file
+/*generates external file*/
 bool generate_externals_file(SymbolTable* table, char* path);
 
-//generates entries file
+/*generates entries file*/
 bool generate_entries_file(SymbolTable* table, char* path);
 
 /*calls file generation functions*/
@@ -83,6 +83,7 @@ void extern_exists(flags* flag);
 /*if extern exists changes flag to true, used later on while generating files*/
 void entry_exists(flags* flag);
 
+/*finds if the type of the directive*/
 void extract_directive_type(LineIterator* line, flags* flag);
 
 //skip label if exists
@@ -91,6 +92,17 @@ void skip_label(LineIterator* line, bool* labelFlag, SymbolTable* table, debugLi
 /*Error handling process*/
 bool handle_errors(debugList* error);
 
-/*analyizes a single line afterward skipping label*/
-void analyize_line(LineIterator* it, memoryBuffer* memory);
+/**
+ * execute_line
+ *
+ * Executes the next line of code from the LineIterator, using the provided memoryBuffer.
+ *
+ * @param it Pointer to a LineIterator that contains the line of code to execute
+ * @param memory Pointer to a memoryBuffer that contains memory for the line of code to use
+ *
+ * @return void
+ */
+void execute_line(LineIterator* it, memoryBuffer* memory);
+
+void execute_command(memoryBuffer* memory, LineIterator* restOfLine, char* method, int syntaxGroup);
 #endif
