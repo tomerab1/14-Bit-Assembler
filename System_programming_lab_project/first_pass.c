@@ -65,7 +65,7 @@ bool do_first_pass(const char* path, memoryBuffer* img, SymbolTable* sym_table, 
 
 firstPassStates get_symbol_type(LineIterator* it, char* word)
 {
-	firstPassStates fp_state = FP_NONE;
+	bool is_valid = TRUE;
 
 	/* An .entry definition. */
 	if (strcmp(word, ".entry") == 0) {
@@ -81,7 +81,7 @@ firstPassStates get_symbol_type(LineIterator* it, char* word)
 		return FP_OPCODE;
 	}
 	/* Symbol definition, may follow, .data or .string*/
-	else if ((fp_state = check_label_syntax(word)) == ERROR_CODE_OK) {
+	else if ((is_valid = is_valid_label(word)) == TRUE) {
 		const char* next_word = line_iterator_next_word(it);
 		/* Check if .data */
 		if (strcmp(next_word, ".data") == 0) {
@@ -91,7 +91,7 @@ firstPassStates get_symbol_type(LineIterator* it, char* word)
 		if (strcmp(next_word, ".string") == 0) {
 			return FP_SYM_STR;
 		}
-		if (strcmp(next_word, ".extern") == 0 || strcmp(next_word, ".entry") == 0) {
+		if (strcmp(next_word, "entry") == 0 || strcmp(next_word, "extern") == 0) {
 			line_iterator_unget_word(it, next_word);
 			line_iterator_unget_word(it, word);
 			return FP_SYM_IGNORED;
@@ -102,8 +102,12 @@ firstPassStates get_symbol_type(LineIterator* it, char* word)
 		return FP_SYM_DEF;
 	}
 
+	if (!is_valid) {
+		return FP_NONE;
+	}
 
-	return fp_state;
+
+	return FP_NONE;
 }
 
 bool first_pass_process_and_encode_instructions(LineIterator* it, memoryBuffer* img, symbolType* sym_table, debugList* dbg_list)

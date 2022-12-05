@@ -1,3 +1,4 @@
+STR: .string "abcdef"
 .entry ENTRY
 .extern EXTREN
 LENGTH: .data 6,-9,15

@@ -1,4 +1,5 @@
-.entry ENTRY   fas
+STR: .string "abcdef"  asf
+.entry ENTRY
 .extern EXTREN
 LENGTH: .data 6,-9,15
 END: prn #-5

@@ -109,34 +109,32 @@ bool validate_syntax(LineIterator it, firstPassStates state, long line, debugLis
 
 bool validate_syntax_string(LineIterator* it, long line, debugList* dbg_list)
 {
-    /* Search for opening quotes. */
-    for (; !line_iterator_is_end(it) && line_iterator_peek(it) != QUOTE_CHAR && !isalpha(line_iterator_peek(it)); line_iterator_advance(it))
-        ;
+    /* Consume all preceding blanks */
+    line_iterator_consume_blanks(it);
 
+    /* Next char of a valid string must be '\"' */
     if (line_iterator_peek(it) != QUOTE_CHAR) {
         debug_list_register_node(dbg_list, debug_list_new_node(it->start, it->current, line, ERROR_CODE_MISSING_OPEN_QUOTES));
         return FALSE;
     }
 
-    /* Consume quotes. */
+    /* Consume quotes*/
     line_iterator_advance(it);
 
-    /* Search for closing quotes. */
-    for (; !line_iterator_is_end(it) && line_iterator_peek(it) != QUOTE_CHAR; line_iterator_advance(it))
-        ;
+    while (!line_iterator_is_end(it) && line_iterator_peek(it) != QUOTE_CHAR)
+        line_iterator_advance(it); 
 
+    /* Check closing quotes */
     if (line_iterator_peek(it) != QUOTE_CHAR) {
         debug_list_register_node(dbg_list, debug_list_new_node(it->start, it->current, line, ERROR_CODE_MISSING_CLOSE_QUOTES));
         return FALSE;
     }
 
-    /* Consume quotes. */
+    /* Consume quotes*/
     line_iterator_advance(it);
 
-    /* Search for invalid text after string termination. */
-    while (!line_iterator_is_end(it) && isspace(line_iterator_peek(it))) {
-        line_iterator_advance(it);
-    }
+    /* Consume all blanks */
+    line_iterator_consume_blanks(it);
 
     if (!line_iterator_is_end(it)) {
         debug_list_register_node(dbg_list, debug_list_new_node(it->start, it->current, line, ERROR_CODE_TEXT_AFTER_END));
@@ -197,13 +195,31 @@ bool validate_syntax_opcode(LineIterator* it, long line, debugList* dbg_list)
     while ((word = line_iterator_next_word(it)) != NULL) {
         /* check_for_invalid_comma(word); */
         switch (get_syntax_group(word)) {
-        case SG_GROUP_1: return match_syntax_group_1(it, line, dbg_list);
-        case SG_GROUP_2: return match_syntax_group_2(it, line, dbg_list);
-        case SG_GROUP_3: return match_syntax_group_3(it, line, dbg_list);
-        case SG_GROUP_4: return match_syntax_group_4(it, line, dbg_list);
-        case SG_GROUP_5: return match_syntax_group_5(it, line, dbg_list);
-        case SG_GROUP_6: return match_syntax_group_6(it, line, dbg_list);
-        case SG_GROUP_7: return match_syntax_group_7(it, line, dbg_list);
+        case SG_GROUP_1: 
+            free(word);
+            return match_syntax_group_1(it, line, dbg_list);
+        case SG_GROUP_2: 
+            free(word);
+            return match_syntax_group_2(it, line, dbg_list);
+        case SG_GROUP_3: 
+            free(word);
+            return match_syntax_group_3(it, line, dbg_list);
+        case SG_GROUP_4: 
+            free(word);
+            return match_syntax_group_4(it, line, dbg_list);
+        case SG_GROUP_5: 
+            free(word);
+            return match_syntax_group_5(it, line, dbg_list);
+        case SG_GROUP_6:
+            free(word);
+            return match_syntax_group_6(it, line, dbg_list);
+        case SG_GROUP_7:
+            free(word);
+            return match_syntax_group_7(it, line, dbg_list);
+        case SG_GROUP_INVALID:
+            free(word);
+            debug_list_register_node(dbg_list, debug_list_new_node(it->start, it->current, line, ERROR_CODE_SYNTAX_ERROR));
+            return FALSE;
         }
         /* Check syntax for .data/.string, otherwise it's an error. */
         free(word);
