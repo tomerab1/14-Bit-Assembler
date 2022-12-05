@@ -87,7 +87,7 @@ bool line_iterator_match_any(LineIterator* it, char* seps)
         seps++;
     }
 
-    return FALSE;
+    return line_iterator_peek(it) == *seps;
 }
 
 bool line_iterator_is_end(LineIterator* it)

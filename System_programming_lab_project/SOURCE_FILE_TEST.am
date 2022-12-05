@@ -1,4 +1,5 @@
-.entry ENTRY   fas
+bne LOOP(r4,#+515)  
+.entry ENTRY
 .extern EXTREN
 LENGTH: .data 6,-9,15
 END: prn #-5

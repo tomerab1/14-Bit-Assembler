@@ -8,7 +8,7 @@
 #include "memory.h"
 #include "debug.h"
 
-typedef enum { FP_NONE, FP_SYM_DEF, FP_SYM_DATA, FP_SYM_STR, FP_SYM_EXT, FP_SYM_ENT, FP_OPCODE, FP_SYM_IGNORED } firstPassStates;
+typedef enum { FP_SYM_DEF, FP_SYM_DATA, FP_SYM_STR, FP_SYM_EXT, FP_SYM_ENT, FP_OPCODE, FP_TOTAL, FP_NONE, FP_SYM_IGNORED } firstPassStates;
 
 
 /* This function implements the first pass algorithm.
@@ -51,7 +51,6 @@ bool first_pass_process_sym_ext(LineIterator* it, memoryBuffer* img, SymbolTable
 
 bool first_pass_process_sym_ent(LineIterator* it, memoryBuffer* img, SymbolTable* sym_table, debugList* dbg_list, const char* name, long line);
 
-
-bool first_pass_process_opcode(LineIterator* it, memoryBuffer* img, SymbolTable* sym_table, debugList* dbg_list, long line);
+bool first_pass_process_opcode(LineIterator* it, memoryBuffer* img, SymbolTable* sym_table, debugList* dbg_list, const char* name, long line);
 
 #endif
