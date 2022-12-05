@@ -88,18 +88,23 @@ bool validate_syntax(LineIterator it, firstPassStates state, long line, debugLis
 /* Validates the syntax that may appear after a symbol definition. */
 bool validate_syntax_opcode(LineIterator* it, long line, debugList* dbg_list);
 
-
-
 /* Verifies that the substring starting at word and ending at other is an integer. */
 bool verify_int(LineIterator* it, long line, char* seps, debugList* dbg_list);
 
 /* Matching syntax for each opcode type. */
+/*groups: mov, add,sub */
 bool match_syntax_group_1(LineIterator* it, long line, debugList* dbg_list);
+/*groups: cmp */
 bool match_syntax_group_2(LineIterator* it, long line, debugList* dbg_list);
+/*groups: not, clr, inc, dec, red */
 bool match_syntax_group_3(LineIterator* it, long line, debugList* dbg_list);
+/*groups: rts,stop */
 bool match_syntax_group_4(LineIterator* it, long line, debugList* dbg_list);
+/*groups: jmp, bne, jsr */
 bool match_syntax_group_5(LineIterator* it, long line, debugList* dbg_list);
+/*groups: prn */
 bool match_syntax_group_6(LineIterator* it, long line, debugList* dbg_list);
+/*groups: lea */
 bool match_syntax_group_7(LineIterator* it, long line, debugList* dbg_list);
 
 bool validate_syntax_string(LineIterator* it, long line, debugList* dbg_list);
@@ -127,4 +132,5 @@ bool find_if_instruction_exists(LineIterator* line);
 
 /*skips label and and consume blanks if exists after the label*/
 void skip_label_basic(LineIterator* line);
+
 #endif

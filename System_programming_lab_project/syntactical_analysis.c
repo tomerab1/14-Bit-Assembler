@@ -710,4 +710,3 @@ SyntaxGroups get_syntax_group(const char* name)
         return SG_GROUP_7;
     return SG_GROUP_INVALID;
 }
-
