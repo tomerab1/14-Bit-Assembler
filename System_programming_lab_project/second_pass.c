@@ -11,27 +11,23 @@ bool initiate_second_pass(char* path, SymbolTable* table, memoryBuffer* memory) 
 	memory->instruction_image.counter = 0; /*init IC counter*/
 	while ((line = get_line(in)) != NULL) {
 		bool labelFlag = FALSE; /*is current line first word is label*/
-
 		line_iterator_put_line(ptrCurLine, line);
 		skip_label(ptrCurLine, &labelFlag, table, &(finalStatus.errors));
 
-		if (directive_exists(ptrCurLine)) { /*checks if any kind of instruction exists (.something)*/
-			if (extract_directive_type(ptrCurLine, &(finalStatus.entryAndExternFlag) == DOT_ENTRY_CODE)) { /*only*/
-				/*do 6 and forward to next loop*/
-			}
+		if (!directive_exists(ptrCurLine)) { /*checks if any kind of instruction exists (.something)*/
+			analyize_line(ptrCurLine, memory);
+			memory->instruction_image.counter++;
 		}
 		else {
-			/*do point 7 to 9*/
+			extract_directive_type(line, &finalStatus.entryAndExternFlag);
 		}
+		
 	}
-	if (finalStatus.error_flag) {
+	/*finished reading all lines in file*/
+	if (finalStatus.error_flag) 
 		handle_errors(&(finalStatus.errors));
-	}
-	else {
-		finalStatus.createdObject = generate_object_file(memory, path, &(finalStatus.errors));
-		finalStatus.createdExternals = generate_externals_file(table, path);
-		finalStatus.createdEntry = generate_entries_file(table, path);
-	}
+	else 
+		create_files(memory, path, &finalStatus, table,  &(finalStatus.errors));
 
 	fclose(in);
 	free(line);
@@ -124,6 +120,7 @@ bool generate_externals_file(SymbolTable* table, char* path){
 	while (symTableHead != NULL && symTableHead->sym.type == SYM_EXTERN) {
 		fputs(placeholder, out); //needs to be fixed
 		fputs("\n", out);
+		symTableHead->next;
 	}
 
 	free(outfileName);
@@ -144,10 +141,17 @@ bool generate_entries_file(SymbolTable* table, char* path) {
 	while (symTableHead != NULL && symTableHead->sym.type == SYM_ENTRY) {
 		fputs(placeholder, out); //needs to be fixed
 		fputs("\n", out);
+		symTableHead->next;
 	}
 
 	free(outfileName);
 	fclose(out);
+}
+
+void create_files(memoryBuffer* memory, char* path, programFinalStatus* finalStatus ,SymbolTable* table,debugList* err) {
+	(*finalStatus).createdObject = generate_object_file(memory, path, &(*finalStatus).errors);
+	(*finalStatus).createdExternals = generate_externals_file(table, path);
+	(*finalStatus).createdEntry = generate_entries_file(table, path);
 }
 
 void skip_label(LineIterator* line, bool* labelFlag,SymbolTable* table, debugList* err) {
@@ -167,34 +171,18 @@ void skip_label(LineIterator* line, bool* labelFlag,SymbolTable* table, debugLis
 	return;
 }
 
-int extract_directive_type(LineIterator* line, flags* flag) {
-	if (directive_exists(line,flag)) {
+void extract_directive_type(LineIterator* line, flags* flag) {
 		char* command = line_iterator_next_word(line);
-		if (strcmp(command, DOT_DATA)) {
-			return DOT_DATA_CODE;
-		}
-		else if (strcmp(command, DOT_STRING)) {
-			return DOT_STRING_CODE;
-		}
-		else if (strcmp(command, DOT_EXTERN)) {
+		if (strcmp(command, DOT_EXTERN)) {
 			extern_exists(flag);
-			return DOT_EXTERN_CODE;
 		}
 		else if (strcmp(command, DOT_ENTRY)) {
 			extern_exists(flag);
-			return DOT_ENTRY_CODE;
 		}
-		else {
+		else if(){
 			debugNode err; /*debug_list_new_node, should also add debug list later on function headline*/
-			return ERROR_CODE_SYNTAX_ERROR;
 		}
 		free(command);
-	}
-	else {
-		flag->dot_entry_exists = FALSE;
-		flag->dot_extern_exists = FALSE;
-	}
-	return FALSE;
 }
 
 bool directive_exists(LineIterator* line) {
@@ -224,4 +212,8 @@ void entry_exists(flags* flag) {
 bool handle_errors(debugList* error) {
 
 	return TRUE;
+}
+
+void analyize_line(LineIterator* it, memoryBuffer* memory) {
+
 }

@@ -71,6 +71,9 @@ bool generate_externals_file(SymbolTable* table, char* path);
 //generates entries file
 bool generate_entries_file(SymbolTable* table, char* path);
 
+/*calls file generation functions*/
+void create_files(memoryBuffer* memory, char* path, programFinalStatus* finalStatus, SymbolTable* table, debugList* err);
+
 //checks if any order type (extern or entry) commands exists in the program
 bool directive_exists(LineIterator* line);
 
@@ -80,7 +83,7 @@ void extern_exists(flags* flag);
 /*if extern exists changes flag to true, used later on while generating files*/
 void entry_exists(flags* flag);
 
-int extract_directive_type(LineIterator* line, flags* flag);
+void extract_directive_type(LineIterator* line, flags* flag);
 
 //skip label if exists
 void skip_label(LineIterator* line, bool* labelFlag, SymbolTable* table, debugList* err);
@@ -88,4 +91,6 @@ void skip_label(LineIterator* line, bool* labelFlag, SymbolTable* table, debugLi
 /*Error handling process*/
 bool handle_errors(debugList* error);
 
+/*analyizes a single line afterward skipping label*/
+void analyize_line(LineIterator* it, memoryBuffer* memory);
 #endif
