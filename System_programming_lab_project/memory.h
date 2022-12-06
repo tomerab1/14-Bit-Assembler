@@ -2,6 +2,24 @@
 #define MEMORY_H
 #include "constants.h"
 
+#define SIZEOF_MEMORY_WORD 2 /* We only need 14 bits, so we will use an array of 2 chars. */
+
+#define FLAG_ERA     0x01
+#define FLAG_SOURCE  0x02
+#define FLAG_DEST    0x04
+#define FLAG_OPCODE1 0x08
+#define FLAG_OPCODE2 0x10
+#define FLAG_PARAM1  0x20
+#define FLAG_PARAM2  0x40
+
+#define MASK_ERA     0x03
+#define MASK_SOURCE  0x0c
+#define MASK_DEST    0x30
+#define MASK_OPCODE1 0xc0
+#define MASK_OPCODE2 0x03
+#define MASK_PARAM1  0x0c
+#define MASK_PARAM2  0x30
+
 /*
 	This enumeration is used to represent each encoding type with a specific numeric constant. 
 */
@@ -26,12 +44,7 @@ typedef enum
 */
 typedef struct
 {
-	char e_r_a  : 2;
-	char source : 2;
-	char dest   : 2;
-	char opcode : 4;
-	char param1 : 2;
-	char param2 : 2;
+	unsigned char mem[SIZEOF_MEMORY_WORD];
 } MemoryWord;
 
 /*
@@ -66,6 +79,10 @@ typedef struct
 */
 memoryBuffer memory_buffer_get_new();
 
+/* This function sets bytes appropriately in a memoryWord
+*/
+void set_image_memory(imageMemory* mem, const char bytes, int flags);
+
 
 /*
 	This is an internal function that creates a new image memory object. 
@@ -76,6 +93,27 @@ static imageMemory image_memory_get_new();
 	This is an internal function used to zero all the image memory. 
 */
 static void image_memory_init(imageMemory* mem);
+
+/* This function is for setting the e.r.a flag */
+void set_era_bits(MemoryWord* mem, const char byte);
+
+/* This function is for setting the e.r.a flag */
+void set_source_bits(MemoryWord* mem, const char byte);
+
+/* This function is for setting the e.r.a flag */
+void set_dest_bits(MemoryWord* mem, const char byte);
+
+/* This function is for setting the e.r.a flag */
+void set_opcode_cell_1_bits(MemoryWord* mem, const char byte);
+
+/* This function is for setting the e.r.a flag */
+void set_opcode_cell_2_bits(MemoryWord* mem, const char byte);
+
+/* This function is for setting the e.r.a flag */
+void set_param1_bits(MemoryWord* mem, const char byte);
+
+/* This function is for setting the e.r.a flag */
+void set_param2_bits(MemoryWord* mem, const char byte);
 
 
 #endif
