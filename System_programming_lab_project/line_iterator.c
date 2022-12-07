@@ -100,3 +100,83 @@ bool line_iterator_is_start(LineIterator* it)
 {
     return (it->current) - (it->start) == 0;
 }
+
+
+char* line_iterator_next_until_comma(LineIterator* it)
+{
+    int log_sz = 0, phy_sz = 4;
+    char* word = (char*)xcalloc(phy_sz, sizeof(char));
+
+    /* Consume all white spaces */
+    line_iterator_consume_blanks(it);
+
+    while (!line_iterator_is_end(it) && !(line_iterator_peek(it) == COMMA_CHAR)) {
+        if (log_sz + 1 >= phy_sz) {
+            GROW_CAPACITY(phy_sz);
+            word = GROW_ARRAY(char*, word, phy_sz, sizeof(char));
+        }
+        word[log_sz++] = line_iterator_peek(it);
+        line_iterator_advance(it);
+    }
+
+    // No more words are available
+    if (log_sz == 0) {
+        free(word);
+        return NULL;
+    }
+
+    if (log_sz + 1 < phy_sz) {
+        word = GROW_ARRAY(char*, word, log_sz + 1, sizeof(char));
+    }
+
+    word[log_sz] = '\0';
+    return word;
+}
+
+char* line_iterator_next_until_parenthesis(LineIterator* it, char* parenSide) //L - left parenthesis, R = right parenthesis
+{
+    int log_sz = 0, phy_sz = 4;
+    char* word = (char*)xcalloc(phy_sz, sizeof(char));
+
+    /* Consume all white spaces */
+    line_iterator_consume_blanks(it);
+
+    while (!line_iterator_is_end(it) && line_iterator_peek(it) == parenSide) {
+        if (log_sz + 1 >= phy_sz) {
+            GROW_CAPACITY(phy_sz);
+            word = GROW_ARRAY(char*, word, phy_sz, sizeof(char));
+        }
+        word[log_sz++] = line_iterator_peek(it);
+        line_iterator_advance(it);
+    }
+
+    // No more words are available
+    if (log_sz == 0) {
+        free(word);
+        return NULL;
+    }
+
+    if (log_sz + 1 < phy_sz) {
+        word = GROW_ARRAY(char*, word, log_sz + 1, sizeof(char));
+    }
+
+    word[log_sz] = '\0';
+    return word;
+}
+
+bool line_iterator_includes(LineIterator* it, char searchFor)
+{
+    bool found = FALSE;
+    int tempLocation = it->current;
+    while (!line_iterator_is_end(it) && !found) {
+        if (line_iterator_peek(it) == searchFor) {
+            it->current = tempLocation;
+            return TRUE;
+        }
+        line_iterator_consume_blanks(it);
+        line_iterator_advance(it);
+    }
+
+    it->current = tempLocation;
+    return FALSE;
+}
