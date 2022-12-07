@@ -1,8 +1,10 @@
 #include "first_pass.h"
 #include "syntactical_analysis.h"
+#include "encoding.h"
 #include <string.h>
 
-typedef bool (*fpass_dispatch_table)(LineIterator* it, memoryBuffer* img, SymbolTable* sym_table, debugList* dbg_list, const char* name, long line);
+typedef bool (*fpass_dispatch_table)(LineIterator* it, memoryBuffer* img, SymbolTable* sym_table, 
+	                                debugList* dbg_list, const char* name, long line, bool did_err_occurred);
 
 bool do_first_pass(const char* path, memoryBuffer* img, SymbolTable* sym_table, debugList* dbg_list)
 {
@@ -10,8 +12,7 @@ bool do_first_pass(const char* path, memoryBuffer* img, SymbolTable* sym_table, 
 	LineIterator it;
 	char* curr_line = NULL, *next = NULL;
 	long line = 1;
-	bool did_error_occurred = FALSE;
-	errorCodes err_code = FALSE;
+	bool should_encode = TRUE;
 
 	fpass_dispatch_table table[FP_TOTAL] = {
 		first_pass_process_sym_def,
@@ -41,16 +42,17 @@ bool do_first_pass(const char* path, memoryBuffer* img, SymbolTable* sym_table, 
 		/* none of the above, must be an error. */
 		else if (state == FP_NONE) {
 			debug_list_register_node(dbg_list, debug_list_new_node(it.start, it.current, line, ERROR_CODE_SYNTAX_ERROR));
+			should_encode = FALSE;
 		}
 		else {
-			did_error_occurred |= table[state](&it, img, sym_table, dbg_list, word, line);
+			should_encode &= table[state](&it, img, sym_table, dbg_list, word, line, should_encode);
 		}
 
 		free(word);
 		line++;
 	}
 
-	return did_error_occurred;
+	return should_encode;
 }
 
 firstPassStates get_symbol_type(LineIterator* it, char* word)
@@ -100,20 +102,7 @@ firstPassStates get_symbol_type(LineIterator* it, char* word)
 	return FP_NONE;
 }
 
-bool first_pass_process_and_encode_instructions(LineIterator* it, memoryBuffer* img, symbolType* sym_table, debugList* dbg_list)
-{
-	bool did_error_occurred = FALSE;
-	int command_len = 0;
-
-	/* Verifies the command syntax */
-	if ((did_error_occurred = verify_command_syntax(it, dbg_list)) != TRUE) {
-		build_memory_word(it, img, dbg_list);
-	}
-
-	return did_error_occurred;
-}
-
-void build_memory_word(LineIterator* it, memoryBuffer* img, debugList* dbg_list)
+void build_memory_word(LineIterator* it, firstPassStates state, memoryBuffer* img, debugList* dbg_list)
 {
 	char* word = NULL;
 	
@@ -122,7 +111,7 @@ void build_memory_word(LineIterator* it, memoryBuffer* img, debugList* dbg_list)
 	}
 }
 
-bool first_pass_process_sym_def(LineIterator* it, memoryBuffer* img, SymbolTable* sym_table, debugList* dbg_list, const char* name, long line)
+bool first_pass_process_sym_def(LineIterator* it, memoryBuffer* img, SymbolTable* sym_table, debugList* dbg_list, const char* name, long line, bool should_encode)
 {
 	if (symbol_table_search_symbol(sym_table, name)) {
 		debug_list_register_node(dbg_list, debug_list_new_node(it->start, it->current, line, ERROR_CODE_SYMBOL_REDEFINITION));
@@ -134,22 +123,26 @@ bool first_pass_process_sym_def(LineIterator* it, memoryBuffer* img, SymbolTable
 	if (!validate_syntax(*it, FP_SYM_DEF, line, dbg_list)) {
 		return FALSE;
 	}
-	build_memory_word(it, img, dbg_list);
+	if (should_encode) {
+		//encode_dot_string(it, img, dbg_list);
+	}
 	return TRUE;
 }
 
-bool first_pass_process_opcode(LineIterator* it, memoryBuffer* img, SymbolTable* sym_table, debugList* dbg_list, const char* name, long line)
+bool first_pass_process_opcode(LineIterator* it, memoryBuffer* img, SymbolTable* sym_table, debugList* dbg_list, const char* name, long line, bool should_encode)
 {
 	/* Check the syntax, we want a copy of the iterator because if the syntax is correct we will encode the instructions to memory. */
 	if (!validate_syntax(*it, FP_OPCODE, line, dbg_list)) {
 		return FALSE;
 	}
-	build_memory_word(it, img, dbg_list);
+	if (should_encode) {
+		//build_memory_word(it, img, dbg_list);
+	}
 	return TRUE;
 }
 
 
-bool first_pass_process_sym_data(LineIterator* it, memoryBuffer* img, SymbolTable* sym_table, debugList* dbg_list, const char* name, long line)
+bool first_pass_process_sym_data(LineIterator* it, memoryBuffer* img, SymbolTable* sym_table, debugList* dbg_list, const char* name, long line, bool should_encode)
 {
 	if (symbol_table_search_symbol(sym_table, name)) {
 		debug_list_register_node(dbg_list, debug_list_new_node(it->start, it->current, line, ERROR_CODE_SYMBOL_REDEFINITION));
@@ -161,11 +154,13 @@ bool first_pass_process_sym_data(LineIterator* it, memoryBuffer* img, SymbolTabl
 	if (!validate_syntax(*it, FP_SYM_DATA, line, dbg_list)) {
 		return FALSE;
 	}
-	build_memory_word(it, img, dbg_list);
+	if (should_encode) {
+		//build_memory_word(it, img, dbg_list);
+	}
 	return TRUE;
 }
 
-bool first_pass_process_sym_string(LineIterator* it, memoryBuffer* img, SymbolTable* sym_table, debugList* dbg_list, const char* name, long line)
+bool first_pass_process_sym_string(LineIterator* it, memoryBuffer* img, SymbolTable* sym_table, debugList* dbg_list, const char* name, long line, bool should_encode)
 {
 	if (symbol_table_search_symbol(sym_table, name)) {
 		debug_list_register_node(dbg_list, debug_list_new_node(it->start, it->current, line, ERROR_CODE_SYMBOL_REDEFINITION));
@@ -177,11 +172,13 @@ bool first_pass_process_sym_string(LineIterator* it, memoryBuffer* img, SymbolTa
 	if (!validate_syntax(*it, FP_SYM_STR, line, dbg_list)) {
 		return FALSE;
 	}
-	build_memory_word(it, img, dbg_list);
+	if (should_encode) {
+		encode_dot_string(it, img, dbg_list);
+	}
 	return TRUE;
 }
 
-bool first_pass_process_sym_ent(LineIterator* it, memoryBuffer* img, SymbolTable* sym_table, debugList* dbg_list, const char* name, long line)
+bool first_pass_process_sym_ent(LineIterator* it, memoryBuffer* img, SymbolTable* sym_table, debugList* dbg_list, const char* name, long line, bool should_encode)
 {
 	const char* word = line_iterator_next_word(it);
 
@@ -206,16 +203,18 @@ bool first_pass_process_sym_ent(LineIterator* it, memoryBuffer* img, SymbolTable
 
 	/* Check the syntax, we want a copy of the iterator because if the syntax is correct we will encode the instructions to memory. */
 	if (!validate_syntax(*it, FP_SYM_ENT, line, dbg_list)) {
+		free(word);
 		return FALSE;
 	}
 	
-	build_memory_word(it, img, dbg_list);
+	if (should_encode) {
+		//build_memory_word(it, img, dbg_list);
+	}
 	free(word);
-
 	return TRUE;
 }
 
-bool first_pass_process_sym_ext(LineIterator* it, memoryBuffer* img, SymbolTable* sym_table, debugList* dbg_list, const char* name, long line)
+bool first_pass_process_sym_ext(LineIterator* it, memoryBuffer* img, SymbolTable* sym_table, debugList* dbg_list, const char* name, long line, bool should_encode)
 {
 	const char* word = line_iterator_next_word(it);
 
@@ -240,10 +239,13 @@ bool first_pass_process_sym_ext(LineIterator* it, memoryBuffer* img, SymbolTable
 
 	/* Check the syntax, we want a copy of the iterator because if the syntax is correct we will encode the instructions to memory. */
 	if (!validate_syntax(*it, FP_SYM_ENT, line, dbg_list)) {
+		free(word);
 		return FALSE;
 	}
 
-	build_memory_word(it, img, dbg_list);
+	if (should_encode) {
+		//build_memory_word(it, img, dbg_list);
+	}
 	free(word);
 
 	return TRUE;

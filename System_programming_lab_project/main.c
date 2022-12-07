@@ -1,8 +1,11 @@
 #include <stdio.h>
+
 #include "pre_assembler.h"
 #include "memory.h"
 #include "debug.h"
 #include "first_pass.h"
+
+#include "encoding.h"
 
 int main(int argc, char** argv)
 {
