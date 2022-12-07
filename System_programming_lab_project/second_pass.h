@@ -1,9 +1,11 @@
 #ifndef SECOND_PASS_H
 #define SECOND_PASS_h
 
+#include "syntactical_analysis.h"
 #include "line_iterator.h"
 #include "symbol_table.h"
 #include "constants.h"
+#include "memory.h"
 #include "debug.h"
 #include "utils.h"
 #include "debug.h"
@@ -12,7 +14,7 @@ typedef struct lines_list_node
 {
 	int address;
 	char* data; /* 14 bits string strings. */
-	char* machine_data; /* 14 bits string strings. */
+	char* machine_data[SINGLE_ORDER_SIZE]; /* 14 bits string strings. */
 	char* line_type; /*empty, comment, guidence, command*/
 	struct lines_list_node* next;
 } LinesListNode;
@@ -26,57 +28,81 @@ typedef struct
 	LinesListNode* tail;
 } LinesList;
 
-typedef struct item
-{
-	int index;
-	int type;
-} item;
-
 typedef struct flags
 {
-	bool dot_entry;
-	bool dot_extern;
+	bool dot_entry_exists;
+	bool dot_extern_exists;
 } flags;
 
 typedef struct programFinalStatus
 {
+	flags entryAndExternFlag;
 	bool createdObject;
 	bool createdExternals;
 	bool createdEntry;
-	errorContext error;
+	debugList errors;
+	bool error_flag;
 } programFinalStatus;
 
 
+//starts second pass process
+bool initiate_second_pass(char* path, SymbolTable* table, memoryBuffer* memory);
 
-typedef enum
-{
-	DOT_DATA_CODE = 1,
-	DOT_STRING_CODE,
-	DOT_ENTRY_CODE,
-	DOT_EXTERN_CODE
-};
+/**
+ * Generates an object file from the data in a memory buffer.
+ *
+ * This function takes a `memoryBuffer` structure and a file path, and generates an object file
+ * containing the data from the memory buffer. The object file is created using the `translate_to_machine_data()`
+ * and `get_outfile_name()` functions, and it is written to the specified path.
+ *
+ * @param memory The memory buffer to generate the object file from.
+ * @param path The path to the output file.
+ * @param err A pointer to a `debugList` structure that will be used to store any errors that occur.
+ * @return true if the object file was generated successfully, or false if an error occurred.
+ */
+bool generate_object_file(memoryBuffer* memory, char* path, debugList* err);
 
-bool initiate_second_pass(char* path, SymbolTable* table, int* DC, int* L);
+/*translates data from memory to object text style configuration*/
+LinesList* translate_to_machine_data(memoryBuffer* memory, errorContext* err);
 
-bool generate_object_file(LinesListNode* data, char* path, int orders_length, int data_length, errorContext* err);
-void translate_to_machine_data(LinesListNode* data, errorContext err);
+/*generates external file*/
+bool generate_externals_file(SymbolTable* table, char* path);
 
-bool generate_externals_file(LinesListNode* data, SymbolTable* table, char* path);
-bool generate_entries_file(LinesListNode* data, SymbolTable* table, char* path);
+/*generates entries file*/
+bool generate_entries_file(SymbolTable* table, char* path);
 
-bool order_exists(LineIterator* line, flags* flag);
-bool extract_order_type(LineIterator* line, flags* flag);
-void skip_label(LineIterator* line);
+/*calls file generation functions*/
+void create_files(memoryBuffer* memory, char* path, programFinalStatus* finalStatus, SymbolTable* table, debugList* err);
 
+//checks if any order type (extern or entry) commands exists in the program
+bool directive_exists(LineIterator* line);
 
-void* handle_dot_data();
-void* handle_dot_string();
-void* handle_dot_extern();
-void* handle_dot_entry();
+/*If extern exists changes flag to true, used later on while generating files*/
+void extern_exists(flags* flag);
 
-bool entry_exists();
-bool handle_errors(errorContext* error);
+/*if extern exists changes flag to true, used later on while generating files*/
+void entry_exists(flags* flag);
 
-void convert_to_binary(char* data);
-void convert_to_deciaml(char* data);
+/*finds if the type of the directive*/
+void extract_directive_type(LineIterator* line, flags* flag);
+
+//skip label if exists
+void skip_label(LineIterator* line, bool* labelFlag, SymbolTable* table, debugList* err);
+
+/*Error handling process*/
+bool handle_errors(debugList* error);
+
+/**
+ * execute_line
+ *
+ * Executes the next line of code from the LineIterator, using the provided memoryBuffer.
+ *
+ * @param it Pointer to a LineIterator that contains the line of code to execute
+ * @param memory Pointer to a memoryBuffer that contains memory for the line of code to use
+ *
+ * @return void
+ */
+void execute_line(LineIterator* it, memoryBuffer* memory);
+
+void execute_command(memoryBuffer* memory, LineIterator* restOfLine, char* method, int syntaxGroup);
 #endif

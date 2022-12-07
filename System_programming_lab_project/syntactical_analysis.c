@@ -46,6 +46,21 @@ bool is_valid_label(const char* label)
     return (check_label_syntax(label) == ERROR_CODE_OK) ? TRUE : FALSE;
 }
 
+bool isLabel(LineIterator* line) {
+    LineIterator* tempLineIterator = NULL;
+    line_iterator_put_line(tempLineIterator, line_iterator_next_word(line));
+    line_iterator_backwards(tempLineIterator);
+    line->current = line->start;
+
+    if (line_iterator_peek(tempLineIterator) == COLON) {
+        free(tempLineIterator);
+        return TRUE;
+    }
+
+    free(tempLineIterator);
+    return FALSE;
+}
+
 bool verify_command_syntax(LineIterator* it, debugList* dbg_list)
 {
     return FALSE;
@@ -142,6 +157,51 @@ bool validate_syntax_string(LineIterator* it, long line, debugList* dbg_list)
     }
 
     return TRUE;
+}
+
+int extract_sentence_type(LineIterator* it) {
+    it->current = it->start;
+    /*empty sentence*/
+    if (line_iterator_is_end(it)) {
+        it->current = it->start;
+        return EMPTY_SENTENCE;
+    }
+    if (directive_exists_basic(it)) return DIRECTIVE_SENTENCE; /*directive sentence*/
+    if (find_if_instruction_exists(it))  return INSTRUCTION_SENTENCE; /*instruction sentence*/
+     
+    return -ERROR_CODE_UNKNOWN;
+}
+
+bool directive_exists_basic(LineIterator* line) {
+    while (!line_iterator_is_end(line)) {
+        if (line_iterator_peek(line) == DOT_COMMAND) {
+            return TRUE;
+        }
+        line_iterator_advance(line);
+    }
+    return FALSE;
+    line->current = line->start;
+}
+
+bool find_if_instruction_exists(LineIterator* line) {
+    if (isLabel(line)) {
+        skip_label_basic(line);
+        int localOpcode= get_opcode(line_iterator_next_word(line));
+
+        if (localOpcode != 16)
+            return TRUE;
+    }
+    return FALSE;
+}
+
+void skip_label_basic(LineIterator* line) {
+    line = line->start;
+    while (!line_iterator_is_end(line) && line_iterator_peek(line) != COLON) {
+        line_iterator_advance(line);
+    }
+    line_iterator_advance(line);
+    line_iterator_consume_blanks(line);
+    return;
 }
 
 bool validate_syntax_data(LineIterator* it, long line, debugList* dbg_list)
