@@ -178,17 +178,17 @@ void encode_syntax_group_1(LineIterator* it, Opcodes op, memoryBuffer* img)
 
 void encode_syntax_group_2(LineIterator* it, Opcodes op, memoryBuffer* img)
 {
-
+	return;
 }
 
 void encode_syntax_group_3(LineIterator* it, Opcodes op, memoryBuffer* img)
 {
-
+	return;
 }
 
 void encode_syntax_group_4(LineIterator* it, Opcodes op, memoryBuffer* img)
 {
-	
+	return;
 }
 
 void encode_syntax_group_5(LineIterator* it, Opcodes op, memoryBuffer* img)
@@ -204,6 +204,12 @@ void encode_syntax_group_5(LineIterator* it, Opcodes op, memoryBuffer* img)
 	line_iterator_advance(it);
 
 	dest = line_iterator_next_word(it, ")");
+
+	if (!dest) {
+		/* Label with no params */
+		img->instruction_image.counter++;
+		return;
+	}
 
 	/* Encode the first memory word. */
 	encode_preceding_word(&img->instruction_image, op, source, dest, TRUE);
