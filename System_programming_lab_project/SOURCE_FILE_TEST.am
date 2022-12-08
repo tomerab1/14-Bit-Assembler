@@ -1,3 +1,4 @@
+LOOP: jmp L1(#-1,r6)
 mov r3 ,LENGTH
 bne LOOP(r4,#+515)  
 .entry ENTRY

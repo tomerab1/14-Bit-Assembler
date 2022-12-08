@@ -124,7 +124,7 @@ bool first_pass_process_sym_def(LineIterator* it, memoryBuffer* img, SymbolTable
 		return FALSE;
 	}
 	if (should_encode) {
-		//encode_dot_string(it, img, dbg_list);
+		encode_opcode(it, img);
 	}
 	return TRUE;
 }

@@ -47,29 +47,46 @@ void encode_integer(imageMemory* img, unsigned int num)
 	img->counter++;
 }
 
-void encode_preceding_word(imageMemory* img, Opcodes op, const char* source, const char* dest)
+void encode_preceding_word(imageMemory* img, Opcodes op, const char* source, const char* dest, bool is_jmp_label)
 {
-	set_image_memory(img, op, FLAG_OPCODE1);
-	set_image_memory(img, op >> 2, FLAG_OPCODE2);
+	set_image_memory(img, op << OFFSET_OPCODE1, FLAG_OPCODE1);
+	set_image_memory(img, (op >> 2) << OFFSET_OPCODE2, FLAG_OPCODE2);
 
-	if (source) {
+	if (is_jmp_label) {
+		set_image_memory(img, ADDRESSING_PARAM << OFFSET_DEST, FLAG_DEST);
+
 		if (*source == HASH_CHAR)
-			set_image_memory(img, ADDRESSING_IMM << OFFSET_SOURCE, FLAG_SOURCE);
+			set_image_memory(img, ADDRESSING_IMM << OFFSET_PARAM2, FLAG_PARAM2);
 		else if (cmp_register_name(source))
-			set_image_memory(img, ADDRESSING_REG << OFFSET_SOURCE, FLAG_SOURCE);
-		else if (strchr(source, OPEN_PAREN_CHAR))
-			set_image_memory(img, ADDRESSING_PARAM << OFFSET_SOURCE, FLAG_SOURCE);
+			set_image_memory(img, ADDRESSING_REG << OFFSET_PARAM2, FLAG_PARAM2);
 		else
-			set_image_memory(img, ADDRESSING_DIR << OFFSET_SOURCE, FLAG_SOURCE);
-	}
-	
-	if (dest) {
+			set_image_memory(img, ADDRESSING_DIR << OFFSET_PARAM2, FLAG_PARAM2);
+
 		if (*dest == HASH_CHAR)
-			set_image_memory(img, ADDRESSING_IMM << OFFSET_DEST, FLAG_DEST);
+			set_image_memory(img, ADDRESSING_IMM << OFFSET_PARAM1, FLAG_PARAM1);
 		else if (cmp_register_name(dest))
-			set_image_memory(img, ADDRESSING_REG << OFFSET_DEST, FLAG_DEST);
+			set_image_memory(img, ADDRESSING_REG << OFFSET_PARAM1, FLAG_PARAM1);
 		else
-			set_image_memory(img, ADDRESSING_DIR << OFFSET_DEST, FLAG_DEST);
+			set_image_memory(img, ADDRESSING_DIR << OFFSET_PARAM1, FLAG_PARAM1);
+	}
+	else {
+		if (source) {
+			if (*source == HASH_CHAR)
+				set_image_memory(img, ADDRESSING_IMM << OFFSET_SOURCE, FLAG_SOURCE);
+			else if (cmp_register_name(source))
+				set_image_memory(img, ADDRESSING_REG << OFFSET_SOURCE, FLAG_SOURCE);
+			else
+				set_image_memory(img, ADDRESSING_DIR << OFFSET_SOURCE, FLAG_SOURCE);
+		}
+
+		if (dest) {
+			if (*dest == HASH_CHAR)
+				set_image_memory(img, ADDRESSING_IMM << OFFSET_DEST, FLAG_DEST);
+			else if (cmp_register_name(dest))
+				set_image_memory(img, ADDRESSING_REG << OFFSET_DEST, FLAG_DEST);
+			else
+				set_image_memory(img, ADDRESSING_DIR << OFFSET_DEST, FLAG_DEST);
+		}
 	}
 
 	img->counter++;
@@ -106,7 +123,7 @@ void encode_syntax_group_1(LineIterator* it, Opcodes op, memoryBuffer* img)
 
 	dest = line_iterator_next_word(it, " ");
 
-	encode_preceding_word(img, op, source, dest);
+	encode_preceding_word(img, op, source, dest, FALSE);
 
 
 	free(source);
@@ -130,7 +147,23 @@ void encode_syntax_group_4(LineIterator* it, Opcodes op, memoryBuffer* img)
 
 void encode_syntax_group_5(LineIterator* it, Opcodes op, memoryBuffer* img)
 {
+	/* Source operand can be immediate, register or label. */
+	/* Dest operand can be register or label. */
+	const char* source = NULL, * dest = NULL;
 
+	line_iterator_jump_to(it, OPEN_PAREN_CHAR);
+
+	source = line_iterator_next_word(it, ",");
+
+	line_iterator_advance(it);
+
+	dest = line_iterator_next_word(it, ")");
+
+	encode_preceding_word(&img->instruction_image, op, source, dest, TRUE);
+
+
+	free(source);
+	free(dest);
 }
 
 void encode_syntax_group_6(LineIterator* it, Opcodes op, memoryBuffer* img)
