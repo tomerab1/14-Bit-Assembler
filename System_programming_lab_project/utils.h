@@ -62,4 +62,6 @@ char* get_copy_string(const char* str);
 
 bool is_line_only_blanks(const char* line);
 
+unsigned int get_num(const char* num);
+
 #endif

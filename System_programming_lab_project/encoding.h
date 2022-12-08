@@ -14,6 +14,7 @@ typedef struct
 	char* label;
 } varData;
 
+typedef enum { KIND_IMM, KIND_LABEL, KIND_LABEL_PARAM, KIND_REG, KIND_NONE } OperandKind;
 typedef enum { ADDRESSING_IMM, ADDRESSING_DIR, ADDRESSING_PARAM, ADDRESSING_REG } AddressingType;
 
 void encode_dot_string(LineIterator* it, memoryBuffer* img);
@@ -42,6 +43,8 @@ void encode_syntax_group_4(LineIterator* it, Opcodes op, memoryBuffer* img);
 void encode_syntax_group_5(LineIterator* it, Opcodes op, memoryBuffer* img);
 void encode_syntax_group_6(LineIterator* it, Opcodes op, memoryBuffer* img);
 void encode_syntax_group_7(LineIterator* it, Opcodes op, memoryBuffer* img);
+
+OperandKind get_operand_kind(const char* op);
 
 
 #endif
