@@ -5,6 +5,7 @@
 #include "debug.h"
 #include "memory.h"
 
-void encode_dot_string(LineIterator* it, memoryBuffer* img, debugList* dbg_list);
+void encode_dot_string(LineIterator* it, memoryBuffer* img);
+void encode_dot_data(LineIterator* it, memoryBuffer* img);
 
 #endif

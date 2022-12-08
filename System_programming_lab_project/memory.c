@@ -27,7 +27,7 @@ void image_memory_init(imageMemory* mem)
 
 void set_image_memory(imageMemory* mem, const char byte, int flags)
 {
-    MemoryWord* curr_block = &(mem->memory[mem->counter]);
+    MemoryWord* curr_block = &mem->memory[mem->counter];
 
     if (flags & FLAG_ERA)     set_era_bits(curr_block, byte);
     if (flags & FLAG_SOURCE)  set_source_bits(curr_block, byte);
