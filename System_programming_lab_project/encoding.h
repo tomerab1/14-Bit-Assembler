@@ -22,6 +22,7 @@ void encode_dot_data(LineIterator* it, memoryBuffer* img);
 void encode_opcode(LineIterator* it, memoryBuffer* img);
 void encode_integer(imageMemory* img, unsigned int num);
 void encode_preceding_word(imageMemory* img, Opcodes op, const char* source, const char* dest, bool is_jump_label);
+void encode_source_and_dest(imageMemory* img, const char* source, const char* dest);
 
 /*groups: mov, add,sub,cmp,lea | expected input is the char next to end of command (i.e mov 
 																						   ^ */

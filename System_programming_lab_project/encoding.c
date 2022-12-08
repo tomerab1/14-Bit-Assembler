@@ -107,7 +107,7 @@ void encode_opcode(LineIterator* it, memoryBuffer* img)
 	}
 }
 
-void encode_source_and_dest(imageMemory* img, Opcodes op, const char* source, const char* dest)
+void encode_source_and_dest(imageMemory* img, const char* source, const char* dest)
 {
 	const char* operands[] = { source, dest, NULL };
 	int i, num;
@@ -129,8 +129,6 @@ void encode_source_and_dest(imageMemory* img, Opcodes op, const char* source, co
 			set_image_memory(img, num >> 0x08, FLAG_PARAM1 | FLAG_PARAM2 | FLAG_OPCODE2);
 			break;
 		case KIND_LABEL: /* Cannot encode label in first pass. */
-			break;
-		case KIND_LABEL_PARAM:
 			break;
 		case KIND_REG:
 			/* Two different cases for source and dest. */
@@ -172,7 +170,7 @@ void encode_syntax_group_1(LineIterator* it, Opcodes op, memoryBuffer* img)
 	encode_preceding_word(&img->instruction_image, op, source, dest, FALSE);
 
 	/* Encode the source and dest. */
-	encode_source_and_dest(img, op, source, dest);
+	encode_source_and_dest(&img->instruction_image, source, dest);
 
 	free(source);
 	free(dest);
@@ -210,9 +208,11 @@ void encode_syntax_group_5(LineIterator* it, Opcodes op, memoryBuffer* img)
 	/* Encode the first memory word. */
 	encode_preceding_word(&img->instruction_image, op, source, dest, TRUE);
 
+	/* Skip the labels name, we cannot encode it in the first pass */
+	img->instruction_image.counter++;
+
 	/* Encode the source and dest. */
-
-
+	encode_source_and_dest(&img->instruction_image, source, dest);
 
 	free(source);
 	free(dest);
