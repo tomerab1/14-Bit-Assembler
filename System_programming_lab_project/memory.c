@@ -27,7 +27,7 @@ void image_memory_init(imageMemory* mem)
 
 void set_image_memory(imageMemory* mem, const char byte, int flags)
 {
-    MemoryWord* curr_block = &(mem->memory[mem->counter]);
+    MemoryWord* curr_block = &mem->memory[mem->counter];
 
     if (flags & FLAG_ERA)     set_era_bits(curr_block, byte);
     if (flags & FLAG_SOURCE)  set_source_bits(curr_block, byte);
@@ -36,46 +36,79 @@ void set_image_memory(imageMemory* mem, const char byte, int flags)
     if (flags & FLAG_OPCODE2) set_opcode_cell_2_bits(curr_block, byte);
     if (flags & FLAG_PARAM1)  set_param1_bits(curr_block, byte);
     if (flags & FLAG_PARAM2)  set_param2_bits(curr_block, byte);
-
-    mem->counter++;
 }
 
-#define OFFSET_0 0x00
-#define OFFSET_1 0x01
+#define OFFSET_0 0
+#define OFFSET_1 1
 
-void set_era_bits(MemoryWord* mem, const char byte)
+void set_era_bits(MemoryWord* mem, const unsigned char byte)
 {
     mem->mem[OFFSET_0] |= byte & MASK_ERA;
 }
 
-void set_source_bits(MemoryWord* mem, const char byte)
+void set_source_bits(MemoryWord* mem, const unsigned char byte)
 {
     mem->mem[OFFSET_0] |= byte & MASK_SOURCE;
 }
 
-void set_dest_bits(MemoryWord* mem, const char byte)
+void set_dest_bits(MemoryWord* mem, const unsigned char byte)
 {
     mem->mem[OFFSET_0] |= byte & MASK_DEST;
 }
 
-void set_opcode_cell_1_bits(MemoryWord* mem, const char byte)
+void set_opcode_cell_1_bits(MemoryWord* mem, const unsigned char byte)
 {
     mem->mem[OFFSET_0] |= byte & MASK_OPCODE1;
 }
 
-void set_opcode_cell_2_bits(MemoryWord* mem, const char byte)
+void set_opcode_cell_2_bits(MemoryWord* mem, const unsigned char byte)
 {
     mem->mem[OFFSET_1] |= byte & MASK_OPCODE2;
 }
 
-void set_param1_bits(MemoryWord* mem, const char byte)
+void set_param1_bits(MemoryWord* mem, const unsigned char byte)
 {
     mem->mem[OFFSET_1] |= byte & MASK_PARAM1;
 }
 
-void set_param2_bits(MemoryWord* mem, const char byte)
+void set_param2_bits(MemoryWord* mem, const unsigned char byte)
 {
     mem->mem[OFFSET_1] |= byte & MASK_PARAM2;
+}
+
+unsigned char get_era_bits(MemoryWord* mem)
+{
+    return mem->mem[OFFSET_0] & MASK_ERA;
+}
+
+unsigned char get_source_bits(MemoryWord* mem)
+{
+    return mem->mem[OFFSET_0] & MASK_SOURCE;
+}
+
+unsigned char get_dest_bits(MemoryWord* mem)
+{
+    return mem->mem[OFFSET_0] & MASK_DEST;
+}
+
+unsigned char get_opcode_cell_1_bits(MemoryWord* mem)
+{
+    return mem->mem[OFFSET_0] & MASK_OPCODE1;
+}
+
+unsigned char get_opcode_cell_2_bits(MemoryWord* mem)
+{
+    return mem->mem[OFFSET_1] & MASK_OPCODE2;
+}
+
+unsigned char get_param1_bits(MemoryWord* mem)
+{
+    return mem->mem[OFFSET_1] & MASK_PARAM1;
+}
+
+unsigned char get_param2_bits(MemoryWord* mem)
+{
+    return mem->mem[OFFSET_1] & MASK_PARAM2;
 }
 
 #undef OFFSET_0

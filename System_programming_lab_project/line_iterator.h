@@ -31,7 +31,7 @@ void line_iterator_jump_to(LineIterator* it, char sep);
 char line_iterator_peek(LineIterator* it);
 
 /* Returns the next word. */
-char* line_iterator_next_word(LineIterator* it);
+char* line_iterator_next_word(LineIterator* it, const char* seps);
 
 /* Checks if the iterator reached its end, i.e '\0'. */
 bool line_iterator_is_end(LineIterator* it);
@@ -41,12 +41,6 @@ bool line_iterator_is_start(LineIterator* it);
 
 /* Check if the iterator current char, matche any of the seperators. */
 bool line_iterator_match_any(LineIterator* it, char* seps);
-
-/* Returns the next word until the next comma */
-char* line_iterator_next_until_comma(LineIterator* it);
-
-/* Returns the next word until the next paren (according to input) */
-char* line_iterator_next_until_parenthesis(LineIterator* it, char* side);
 
 /* Checks if any char exists in line*/
 bool line_iterator_includes(LineIterator* it, char searchFor);

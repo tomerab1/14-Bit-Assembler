@@ -32,7 +32,7 @@ bool do_first_pass(const char* path, memoryBuffer* img, SymbolTable* sym_table, 
 		/* Trim white spaces. */
 		line_iterator_consume_blanks(&it);
 
-		word = line_iterator_next_word(&it);
+		word = line_iterator_next_word(&it, " ");
 		firstPassStates state = get_symbol_type(&it, word);
 
 		/* e.g MAIN .extern/entry LOOP, MAIN will be ignored. */
@@ -74,7 +74,7 @@ firstPassStates get_symbol_type(LineIterator* it, char* word)
 	}
 	/* Symbol definition, may follow, .data or .string*/
 	else if ((is_valid = is_valid_label(word)) == TRUE) {
-		const char* next_word = line_iterator_next_word(it);
+		const char* next_word = line_iterator_next_word(it, " ");
 		/* Check if .data */
 		if (strcmp(next_word, ".data") == 0) {
 			return FP_SYM_DATA;
@@ -106,7 +106,7 @@ void build_memory_word(LineIterator* it, firstPassStates state, memoryBuffer* im
 {
 	char* word = NULL;
 	
-	while ((word = line_iterator_next_word(it)) != NULL) {
+	while ((word = line_iterator_next_word(it, " ")) != NULL) {
 		puts(word);
 	}
 }
@@ -124,7 +124,7 @@ bool first_pass_process_sym_def(LineIterator* it, memoryBuffer* img, SymbolTable
 		return FALSE;
 	}
 	if (should_encode) {
-		//encode_dot_string(it, img, dbg_list);
+		encode_opcode(it, img);
 	}
 	return TRUE;
 }
@@ -136,7 +136,7 @@ bool first_pass_process_opcode(LineIterator* it, memoryBuffer* img, SymbolTable*
 		return FALSE;
 	}
 	if (should_encode) {
-		//build_memory_word(it, img, dbg_list);
+		encode_opcode(it,img);
 	}
 	return TRUE;
 }
@@ -155,7 +155,7 @@ bool first_pass_process_sym_data(LineIterator* it, memoryBuffer* img, SymbolTabl
 		return FALSE;
 	}
 	if (should_encode) {
-		//build_memory_word(it, img, dbg_list);
+		encode_dot_data(it, img);
 	}
 	return TRUE;
 }
@@ -180,7 +180,7 @@ bool first_pass_process_sym_string(LineIterator* it, memoryBuffer* img, SymbolTa
 
 bool first_pass_process_sym_ent(LineIterator* it, memoryBuffer* img, SymbolTable* sym_table, debugList* dbg_list, const char* name, long line, bool should_encode)
 {
-	const char* word = line_iterator_next_word(it);
+	const char* word = line_iterator_next_word(it, " ");
 
 	line_iterator_unget_word(it, word);
 	if (!word) {
@@ -216,7 +216,7 @@ bool first_pass_process_sym_ent(LineIterator* it, memoryBuffer* img, SymbolTable
 
 bool first_pass_process_sym_ext(LineIterator* it, memoryBuffer* img, SymbolTable* sym_table, debugList* dbg_list, const char* name, long line, bool should_encode)
 {
-	const char* word = line_iterator_next_word(it);
+	const char* word = line_iterator_next_word(it, " ");
 
 	line_iterator_unget_word(it, word);
 	if (!word) {

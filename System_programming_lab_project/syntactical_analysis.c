@@ -48,7 +48,7 @@ bool is_valid_label(const char* label)
 
 bool isLabel(LineIterator* line) {
     LineIterator* tempLineIterator = NULL;
-    line_iterator_put_line(tempLineIterator, line_iterator_next_word(line));
+    line_iterator_put_line(tempLineIterator, line_iterator_next_word(line, " "));
     line_iterator_backwards(tempLineIterator);
     line->current = line->start;
 
@@ -186,7 +186,7 @@ bool directive_exists_basic(LineIterator* line) {
 bool find_if_instruction_exists(LineIterator* line) {
     if (isLabel(line)) {
         skip_label_basic(line);
-        int localOpcode= get_opcode(line_iterator_next_word(line));
+        int localOpcode= get_opcode(line_iterator_next_word(line, " "));
 
         if (localOpcode != 16)
             return TRUE;
@@ -252,7 +252,7 @@ bool validate_syntax_opcode(LineIterator* it, long line, debugList* dbg_list)
 {
     const char* word;
 
-    while ((word = line_iterator_next_word(it)) != NULL) {
+    while ((word = line_iterator_next_word(it, " ")) != NULL) {
         /* check_for_invalid_comma(word); */
         switch (get_syntax_group(word)) {
         case SG_GROUP_1: 

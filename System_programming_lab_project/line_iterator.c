@@ -48,7 +48,7 @@ char line_iterator_peek(LineIterator* it)
     return *(it->current);
 }
 
-char* line_iterator_next_word(LineIterator* it)
+char* line_iterator_next_word(LineIterator* it, const char* seps)
 {
     int log_sz = 0, phy_sz = 4;
     char* word = (char*)xcalloc(phy_sz, sizeof(char));
@@ -56,7 +56,7 @@ char* line_iterator_next_word(LineIterator* it)
     /* Consume all white spaces */
     line_iterator_consume_blanks(it);
 
-    while (!line_iterator_is_end(it) && !isblank(line_iterator_peek(it))) {
+    while (!line_iterator_is_end(it) && !line_iterator_match_any(it, seps)) {
         if (log_sz + 1 >= phy_sz) {
             GROW_CAPACITY(phy_sz);
             word = GROW_ARRAY(char*, word, phy_sz, sizeof(char));
@@ -99,69 +99,6 @@ bool line_iterator_is_end(LineIterator* it)
 bool line_iterator_is_start(LineIterator* it)
 {
     return (it->current) - (it->start) == 0;
-}
-
-
-char* line_iterator_next_until_comma(LineIterator* it)
-{
-    int log_sz = 0, phy_sz = 4;
-    char* word = (char*)xcalloc(phy_sz, sizeof(char));
-
-    /* Consume all white spaces */
-    line_iterator_consume_blanks(it);
-
-    while (!line_iterator_is_end(it) && !(line_iterator_peek(it) == COMMA_CHAR)) {
-        if (log_sz + 1 >= phy_sz) {
-            GROW_CAPACITY(phy_sz);
-            word = GROW_ARRAY(char*, word, phy_sz, sizeof(char));
-        }
-        word[log_sz++] = line_iterator_peek(it);
-        line_iterator_advance(it);
-    }
-
-    // No more words are available
-    if (log_sz == 0) {
-        free(word);
-        return NULL;
-    }
-
-    if (log_sz + 1 < phy_sz) {
-        word = GROW_ARRAY(char*, word, log_sz + 1, sizeof(char));
-    }
-
-    word[log_sz] = '\0';
-    return word;
-}
-
-char* line_iterator_next_until_parenthesis(LineIterator* it, char* parenSide) //L - left parenthesis, R = right parenthesis
-{
-    int log_sz = 0, phy_sz = 4;
-    char* word = (char*)xcalloc(phy_sz, sizeof(char));
-
-    /* Consume all white spaces */
-    line_iterator_consume_blanks(it);
-
-    while (!line_iterator_is_end(it) && line_iterator_peek(it) == parenSide) {
-        if (log_sz + 1 >= phy_sz) {
-            GROW_CAPACITY(phy_sz);
-            word = GROW_ARRAY(char*, word, phy_sz, sizeof(char));
-        }
-        word[log_sz++] = line_iterator_peek(it);
-        line_iterator_advance(it);
-    }
-
-    // No more words are available
-    if (log_sz == 0) {
-        free(word);
-        return NULL;
-    }
-
-    if (log_sz + 1 < phy_sz) {
-        word = GROW_ARRAY(char*, word, log_sz + 1, sizeof(char));
-    }
-
-    word[log_sz] = '\0';
-    return word;
 }
 
 bool line_iterator_includes(LineIterator* it, char searchFor)
