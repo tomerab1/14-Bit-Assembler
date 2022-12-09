@@ -30,7 +30,7 @@ debugNode* debug_list_new_node(char* start, char* err, long line, errorCodes err
 	/* The node does not own the start and err pointers, we should not call 'free' on them ! */
 	new_node->ctx.start_pos = get_copy_string(start);
 	new_node->ctx.err_pos = get_copy_string(err);
-    new_node->ctx.err_len = (err - start);
+    	new_node->ctx.err_len = (err - start);
 	new_node->ctx.line_num = line;
 	new_node->ctx.err_code = err_code;
 	new_node->next = NULL;
