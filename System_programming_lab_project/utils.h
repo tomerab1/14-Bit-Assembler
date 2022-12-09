@@ -17,6 +17,7 @@ typedef unsigned short bool;
 
 #define TRUE 1
 #define FALSE 0
+
 #define REG_MIN_NUM '0'
 #define REG_MAX_NUM '7'
 #define REG_BEG_CHAR 'r'
@@ -38,7 +39,7 @@ typedef unsigned short bool;
 
 /* Macro for iterating over each element of the list. */
 #define LIST_FOR_EACH(type, head, out) \
-for(type* out = head; out != NULL; out = (out) ? out->next : NULL)
+for(type* (out) = (head); (out) != NULL; (out) = (out) ? (out)->next : NULL)
 
 
 /* Wrapper function of malloc, calloc and realloc, they check whether an allocation was successful or not. */
@@ -47,10 +48,10 @@ void* xcalloc(size_t count, size_t alloc_sz);
 void* xmalloc(size_t alloc_sz);
 
 /* Creates a new file name, that end with 'postfix'. */
-const char* get_outfile_name(const char* path, const char* postfix);
+char* get_outfile_name(char* path, char* postfix);
 
 /* Opens a file for the specified I/O mode. */
-FILE* open_file(const char* path, const char* mode);
+FILE* open_file(char* path, char* mode);
 
 /* Reads a new line from 'in'. */
 char* get_line(FILE* in);
@@ -58,8 +59,10 @@ char* get_line(FILE* in);
 /* This function takes a negative value, and returns it's 2's complement form. */
 unsigned int get_2s_complement(int n);
 
-char* get_copy_string(const char* str);
+char* get_copy_string(char* str);
 
-bool is_line_only_blanks(const char* line);
+bool is_line_only_blanks(char* line);
+
+unsigned int get_num(char* num);
 
 #endif

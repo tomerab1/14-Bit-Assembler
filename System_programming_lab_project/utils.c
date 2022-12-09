@@ -25,7 +25,7 @@ void* xmalloc(size_t alloc_sz)
     return mem;
 }
 
-const char* get_outfile_name(const char* path, const char* postfix)
+char* get_outfile_name(char* path, char* postfix)
 {
     char* new_name = (char*)xcalloc(strlen(path) + strlen(postfix) + 1, sizeof(char));
     char* dot_loc = strrchr(path, POSTFIX_DOT_CHAR); /* Assuming path will contain a dot and then a postfix. */
@@ -37,7 +37,7 @@ const char* get_outfile_name(const char* path, const char* postfix)
     return new_name;
 }
 
-FILE* open_file(const char* path, const char* mode)
+FILE* open_file(char* path, char* mode)
 {
     FILE* f = fopen(path, mode);
 
@@ -78,7 +78,7 @@ char* get_line(FILE* in)
     return read_buffer;
 }
 
-bool is_line_only_blanks(const char* line)
+bool is_line_only_blanks(char* line)
 {
     while (*line) {
         if (!isspace(*line)) 
@@ -88,11 +88,18 @@ bool is_line_only_blanks(const char* line)
     return TRUE;
 }
 
-char* get_copy_string(const char* str)
+char* get_copy_string(char* str)
 {
-    char* res = (char*)xcalloc(strlen(str), sizeof(char));
-    memcpy(res, str, sizeof(char) * strlen(str));
+    char* res = (char*)xcalloc(strlen(str) + 1, sizeof(char));
+    memcpy(res, str, sizeof(char) * (strlen(str) + 1));
     return res;
+}
+
+unsigned int get_num(char* num)
+{
+    int n;
+    (void) sscanf(num, "%u", &n);
+    return n;
 }
 
 unsigned int get_2s_complement(int n)

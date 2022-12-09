@@ -53,7 +53,7 @@ void macro_list_fill_list_from_file(FILE* in, MacroList* in_list)
     }
 }
 
-void start_pre_assembler(const char* path)
+void start_pre_assembler(char* path)
 {
     FILE* in = open_file(path, MODE_READ), *out = NULL;
     MacroList* list = macro_list_new_list();
@@ -148,7 +148,7 @@ bool macro_list_is_empty(MacroList* list)
     return !list->head && !list->tail;
 }
 
-MacroListNode* macro_list_new_node(const char* name)
+MacroListNode* macro_list_new_node(char* name)
 {
     MacroListNode* new_node = (MacroListNode*) xmalloc(sizeof(MacroListNode));
 
@@ -164,7 +164,7 @@ MacroListNode* macro_list_new_node(const char* name)
     return new_node;
 }
 
-void expand_macro_to_file(FILE* out, MacroList* list, const char* name)
+void expand_macro_to_file(FILE* out, MacroList* list, char* name)
 {
     int i;
     MacroListNode* head = list->head;
@@ -191,7 +191,7 @@ void macro_list_insert_node(MacroList* list, MacroListNode* node)
     }
 }
 
-void macro_list_node_insert_source(MacroListNode* node, const char* line)
+void macro_list_node_insert_source(MacroListNode* node, char* line)
 {
     size_t text_length = strlen(line);
 
@@ -213,7 +213,7 @@ void macro_list_node_insert_macro(MacroListNode* tail, MacroListNode* node)
     }
 }
 
-MacroListNode* macro_list_get_node(MacroList* list, const char* entry)
+MacroListNode* macro_list_get_node(MacroList* list, char* entry)
 {
     MacroListNode* head = list->head;
 

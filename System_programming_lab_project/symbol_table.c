@@ -9,7 +9,7 @@ SymbolTable* symbol_table_new_table()
     return new_table;
 }
 
-SymbolTableNode* symbol_table_new_node(const char* name, symbolType type, long counter)
+SymbolTableNode* symbol_table_new_node(char* name, symbolType type, long counter)
 {
     SymbolTableNode* node = (SymbolTableNode*)xmalloc(sizeof(SymbolTableNode));
     node->next = NULL;
@@ -19,7 +19,7 @@ SymbolTableNode* symbol_table_new_node(const char* name, symbolType type, long c
     return node;
 }
 
-SymbolTableNode* symbol_table_search_symbol(SymbolTable* table, const char* name)
+SymbolTableNode* symbol_table_search_symbol(SymbolTable* table, char* name)
 {
     LIST_FOR_EACH(SymbolTableNode, table->head, head) {
         if (strcmp(head->sym.name, name) == 0) {
@@ -27,6 +27,16 @@ SymbolTableNode* symbol_table_search_symbol(SymbolTable* table, const char* name
         }
     }
     return NULL;
+}
+
+bool symbol_table_search_symbol_bool(SymbolTable* table, char* name)
+{
+    LIST_FOR_EACH(SymbolTableNode, table->head, head) {
+        if (strcmp(head->sym.name, name) == 0) {
+            return TRUE;
+        }
+    }
+    return FALSE;
 }
 
 void symbol_table_insert_symbol(SymbolTable* table, SymbolTableNode* symbol)
@@ -48,12 +58,14 @@ bool symbol_table_is_empty(SymbolTable* table)
 void symbol_table_destroy(SymbolTable** table)
 {
     SymbolTableNode* next;
-    
-    LIST_FOR_EACH(SymbolTableNode, (*table)->head, head) {
+    SymbolTableNode* head = (*table)->head;
+
+   while (head) {
         next = head->next;
         free(head->sym.name);
         free(head);
         head = next;
     }
+
     free(*table);
 }

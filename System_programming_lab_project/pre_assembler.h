@@ -30,7 +30,7 @@ typedef struct
 } MacroList;
 
 /* Starts the pre-assembler phase. */
-void start_pre_assembler(const char* path);
+void start_pre_assembler(char* path);
 
 /* Reads a file, fills 'in_list' with the macros data, if all is valid, it returns TRUE, otherwise FALSE. */
 void macro_list_fill_list_from_file(FILE* in, MacroList* in_list);
@@ -48,22 +48,22 @@ MacroList* macro_list_new_list();
 bool macro_list_is_empty(MacroList* list);
 
 /* Create a new macro list node */
-MacroListNode* macro_list_new_node(const char* name);
+MacroListNode* macro_list_new_node(char* name);
 
 /* Expands a macro to file 'out'. */
-void expand_macro_to_file(FILE* out, MacroList* list, const char* name);
+void expand_macro_to_file(FILE* out, MacroList* list, char* name);
 
 /* Inserts a new node to the macro list */
 void macro_list_insert_node(MacroList* list, MacroListNode* node);
 
 /* Inserts a line into '__list_node.macro_expension' member. */
-void macro_list_node_insert_source(MacroListNode* node, const char* line);
+void macro_list_node_insert_source(MacroListNode* node, char* line);
 
 /* Insert all of the data inside the macro specified in 'line' to the current node */
 void macro_list_node_insert_macro(MacroListNode* tail, MacroListNode* node);
 
 /* Returns the node in which its name matches to entry*/
-MacroListNode* macro_list_get_node(MacroList* list, const char* entry);
+MacroListNode* macro_list_get_node(MacroList* list, char* entry);
 
 /* Creates an expanded source file inside 'out' */
 void create_pre_assembler_file(FILE* in, FILE* out, MacroList* list);

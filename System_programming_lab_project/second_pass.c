@@ -1,10 +1,16 @@
 #include "second_pass.h"
+#include "constants.h"
+
 //error context appearances are temp 
 bool initiate_second_pass(char* path, SymbolTable* table, memoryBuffer* memory) {
 	FILE* in = open_file(path, MODE_READ);
 
 	programFinalStatus finalStatus;
 	LineIterator curLine;
+<<<<<<< HEAD
+=======
+	LineIterator* ptrCurLine = &curLine;
+>>>>>>> master
 	char* line = NULL;
 	
 	memory->instruction_image.counter = 0; /*init IC counter*/
@@ -20,7 +26,6 @@ bool initiate_second_pass(char* path, SymbolTable* table, memoryBuffer* memory) 
 		else {
 			extract_directive_type(line, &finalStatus.entryAndExternFlag);
 		}
-		
 	}
 	/*finished reading all lines in file*/
 	if (finalStatus.error_flag) 
@@ -34,7 +39,7 @@ bool initiate_second_pass(char* path, SymbolTable* table, memoryBuffer* memory) 
 }
 
 void execute_line(LineIterator* it, memoryBuffer* memory) {
-	char* method = line_iterator_next_word(it);
+	char* method = line_iterator_next_word(it, " ");
 	int syntaxGroup = get_syntax_group(method);
 
 	execute_command(memory, it, method, syntaxGroup);
@@ -48,10 +53,10 @@ void execute_command(memoryBuffer* memory, LineIterator* restOfLine, char* metho
 bool generate_object_file(memoryBuffer* memory, char* path, debugList* err) {
 	char* outfileName = NULL;
 	FILE* out = NULL;
-	LinesList* translatedMemory;
-	LinesListNode* lineNode;
+	LinesList* translatedMemory = NULL;
+	LinesListNode* lineNode = NULL;
 
-	translatedMemory = translate_to_machine_data(memory,err);
+	//translatedMemory = translate_to_machine_data(memory,err);
 	lineNode = translatedMemory->head;
 
 		outfileName = get_outfile_name(path, ".object");
@@ -73,7 +78,7 @@ bool generate_object_file(memoryBuffer* memory, char* path, debugList* err) {
 	fclose(out);
 	
 }
-
+/*
 LinesList* translate_to_machine_data(memoryBuffer* memory, errorContext* err) {
 	int i,j;
 	LinesList* translatedMemory = (LinesList*)xmalloc(sizeof(LinesList)*memory->instruction_image.counter);
@@ -107,7 +112,7 @@ LinesList* translate_to_machine_data(memoryBuffer* memory, errorContext* err) {
 		
 	}
 	return translatedMemory;
-}
+}*/
 
 void transform_binary(char* data,char* machineCodeString, int currentIndexData, int currentIndexMCS) {
 	if (*(data + currentIndexData) == 0) {
@@ -164,14 +169,14 @@ bool generate_entries_file(SymbolTable* table, char* path) {
 }
 
 void create_files(memoryBuffer* memory, char* path, programFinalStatus* finalStatus ,SymbolTable* table,debugList* err) {
-	(*finalStatus).createdObject = generate_object_file(memory, path, &(*finalStatus).errors);
-	(*finalStatus).createdExternals = generate_externals_file(table, path);
-	(*finalStatus).createdEntry = generate_entries_file(table, path);
+	finalStatus->createdObject = generate_object_file(memory, path, &(*finalStatus).errors);
+	finalStatus->createdExternals = generate_externals_file(table, path);
+	finalStatus->createdEntry = generate_entries_file(table, path);
 }
 
 void skip_label(LineIterator* line, bool* labelFlag,SymbolTable* table, debugList* err) {
 	if (isLabel(line)) {
-		if (symbol_table_search_symbol(table, line_iterator_next_word(line))) { //if exists, needs to edit code so it would care the colon
+		if (symbol_table_search_symbol(table, line_iterator_next_word(line, " "))) { //if exists, needs to edit code so it would care the colon
 			line = line->start;
 			while (line_iterator_peek(line) != COLON) {
 				line_iterator_advance(line);
@@ -187,7 +192,7 @@ void skip_label(LineIterator* line, bool* labelFlag,SymbolTable* table, debugLis
 }
 
 void extract_directive_type(LineIterator* line, flags* flag) {
-		char* command = line_iterator_next_word(line);
+		char* command = line_iterator_next_word(line, " ");
 		if (strcmp(command, DOT_EXTERN)) {
 			extern_exists(flag);
 		}

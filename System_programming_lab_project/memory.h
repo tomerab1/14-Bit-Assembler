@@ -13,19 +13,27 @@
 #define FLAG_PARAM2  0x40
 
 #define MASK_ERA     0x03
-#define MASK_SOURCE  0x0c
-#define MASK_DEST    0x30
+#define MASK_DEST    0x0c
+#define MASK_SOURCE  0x30
 #define MASK_OPCODE1 0xc0
 #define MASK_OPCODE2 0x03
 #define MASK_PARAM1  0x0c
 #define MASK_PARAM2  0x30
+
+#define OFFSET_ERA     0x00
+#define OFFSET_DEST    0x02
+#define OFFSET_SOURCE  0x04
+#define OFFSET_OPCODE1 0x06
+#define OFFSET_OPCODE2 0x00
+#define OFFSET_PARAM1  0x02
+#define OFFSET_PARAM2  0x04
 
 /*
 	This enumeration is used to represent each encoding type with a specific numeric constant. 
 */
 typedef enum 
 {
-	ENCODING_ABS = 0, ENCODING_EXT, ENCODING_RELOC, ENCODING_TOTAL
+	ENCODING_ABS = 0, ENCODING_EXT, ENCODING_RELOC
 } EncodingTypes;
 
 
@@ -81,7 +89,7 @@ memoryBuffer memory_buffer_get_new();
 
 /* This function sets bytes appropriately in a memoryWord
 */
-void set_image_memory(imageMemory* mem, const char bytes, int flags);
+void set_image_memory(imageMemory* mem, unsigned char bytes, int flags);
 
 
 /*
@@ -95,25 +103,48 @@ static imageMemory image_memory_get_new();
 static void image_memory_init(imageMemory* mem);
 
 /* This function is for setting the e.r.a flag */
-void set_era_bits(MemoryWord* mem, const char byte);
+void set_era_bits(MemoryWord* mem, unsigned char byte);
 
 /* This function is for setting the e.r.a flag */
-void set_source_bits(MemoryWord* mem, const char byte);
+void set_source_bits(MemoryWord* mem, unsigned char byte);
 
 /* This function is for setting the e.r.a flag */
-void set_dest_bits(MemoryWord* mem, const char byte);
+void set_dest_bits(MemoryWord* mem,  unsigned char byte);
 
 /* This function is for setting the e.r.a flag */
-void set_opcode_cell_1_bits(MemoryWord* mem, const char byte);
+void set_opcode_cell_1_bits(MemoryWord* mem, unsigned char byte);
 
 /* This function is for setting the e.r.a flag */
-void set_opcode_cell_2_bits(MemoryWord* mem, const char byte);
+void set_opcode_cell_2_bits(MemoryWord* mem, unsigned char byte);
 
 /* This function is for setting the e.r.a flag */
-void set_param1_bits(MemoryWord* mem, const char byte);
+void set_param1_bits(MemoryWord* mem, unsigned char byte);
 
 /* This function is for setting the e.r.a flag */
-void set_param2_bits(MemoryWord* mem, const char byte);
+void set_param2_bits(MemoryWord* mem, unsigned char byte);
 
+
+/* This function is for getting the e.r.a flag */
+unsigned char get_era_bits(MemoryWord* mem);
+
+/* This function is for getting the e.r.a flag */
+unsigned char get_source_bits(MemoryWord* mem);
+
+/* This function is for getting the e.r.a flag */
+unsigned char get_dest_bits(MemoryWord* mem);
+
+/* This function is for getting the e.r.a flag */
+unsigned char get_opcode_cell_1_bits(MemoryWord* mem);
+
+/* This function is for getting the e.r.a flag */
+unsigned char get_opcode_cell_2_bits(MemoryWord* mem);
+
+/* This function is for getting the e.r.a flag */
+unsigned char get_param1_bits(MemoryWord* mem);
+
+/* This function is for getting the e.r.a flag */
+unsigned char get_param2_bits(MemoryWord* mem);
+
+void dump_memory(memoryBuffer* buf);
 
 #endif
