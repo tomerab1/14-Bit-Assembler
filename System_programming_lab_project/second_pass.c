@@ -5,17 +5,16 @@ bool initiate_second_pass(char* path, SymbolTable* table, memoryBuffer* memory) 
 
 	programFinalStatus finalStatus;
 	LineIterator curLine;
-	LineIterator* ptrCurLine;
 	char* line = NULL;
 	
 	memory->instruction_image.counter = 0; /*init IC counter*/
 	while ((line = get_line(in)) != NULL) {
 		bool labelFlag = FALSE; /*is current line first word is label*/
-		line_iterator_put_line(ptrCurLine, line);
-		skip_label(ptrCurLine, &labelFlag, table, &(finalStatus.errors));
+		line_iterator_put_line(&curLine, line);
+		skip_label(&curLine, &labelFlag, table, &(finalStatus.errors));
 
-		if (!directive_exists(ptrCurLine)) { /*checks if any kind of instruction exists (.something)*/
-			execute_line(ptrCurLine, memory);
+		if (!directive_exists(&curLine)) { /*checks if any kind of instruction exists (.something)*/
+			execute_line(&curLine, memory);
 			memory->instruction_image.counter++;
 		}
 		else {
@@ -31,7 +30,7 @@ bool initiate_second_pass(char* path, SymbolTable* table, memoryBuffer* memory) 
 
 	fclose(in);
 	free(line);
-	free(ptrCurLine);
+	free(&curLine);
 }
 
 void execute_line(LineIterator* it, memoryBuffer* memory) {
