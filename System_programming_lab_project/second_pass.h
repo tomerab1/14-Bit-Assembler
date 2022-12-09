@@ -13,9 +13,8 @@
 typedef struct lines_list_node
 {
 	int address;
-	char* data; /* 14 bits string strings. */
-	char* machine_data[SINGLE_ORDER_SIZE]; /* 14 bits string strings. */
-	char* line_type; /*empty, comment, guidence, command*/
+	char* machineData; /* 14 bits string strings. */
+	char dataForObject[SINGLE_ORDER_SIZE]; /* 14 bits string strings. */
 	struct lines_list_node* next;
 } LinesListNode;
 

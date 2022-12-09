@@ -5,12 +5,10 @@
 bool initiate_second_pass(char* path, SymbolTable* table, memoryBuffer* memory) {
 	FILE* in = open_file(path, MODE_READ);
 
-	programFinalStatus finalStatus;
+	programFinalStatus finalStatus = { NULL };
 	LineIterator curLine;
-<<<<<<< HEAD
-=======
+
 	LineIterator* ptrCurLine = &curLine;
->>>>>>> master
 	char* line = NULL;
 	
 	memory->instruction_image.counter = 0; /*init IC counter*/
@@ -50,14 +48,16 @@ void execute_line(LineIterator* it, memoryBuffer* memory) {
 void execute_command(memoryBuffer* memory, LineIterator* restOfLine, char* method, int syntaxGroup) {
 	
 }
+
 bool generate_object_file(memoryBuffer* memory, char* path, debugList* err) {
 	char* outfileName = NULL;
 	FILE* out = NULL;
 	LinesList* translatedMemory = NULL;
 	LinesListNode* lineNode = NULL;
 
-	//translatedMemory = translate_to_machine_data(memory,err);
+	translatedMemory = translate_to_machine_data(memory,err);
 	lineNode = translatedMemory->head;
+		if(!lineNode) lineNode = NULL;
 
 		outfileName = get_outfile_name(path, ".object");
 		out = open_file(outfileName, MODE_WRITE);
@@ -69,7 +69,7 @@ bool generate_object_file(memoryBuffer* memory, char* path, debugList* err) {
 		fputs("\n", out);
 
 		while (lineNode != NULL) {
-			sprintf(placeholder, "%04d\t%14d", lineNode->address, lineNode->machine_data);
+			sprintf(placeholder, "%04d\t%14s", lineNode->address, &lineNode->dataForObject);
 			fputs(placeholder,out);
 			fputs("\n", out);
 		}
@@ -78,48 +78,31 @@ bool generate_object_file(memoryBuffer* memory, char* path, debugList* err) {
 	fclose(out);
 	
 }
-/*
-LinesList* translate_to_machine_data(memoryBuffer* memory, errorContext* err) {
-	int i,j;
-	LinesList* translatedMemory = (LinesList*)xmalloc(sizeof(LinesList)*memory->instruction_image.counter);
-	LinesListNode* lineNode = translatedMemory->head;
-	for (i = 0; i <= memory->instruction_image.counter; i++) {
-		int countSize = 0;
-		for (j = 0; j < PARAM_ONE_SIZE; j++) {
-			transform_binary(memory->data_image.memory[i].param2, lineNode->machine_data, j, countSize++);
-			countSize++;
-		}
-		for (j; j < PARAM_TWO_SIZE; j++) {
-			transform_binary(memory->data_image.memory[i].param2, lineNode->machine_data, j, countSize++);
-			countSize++;
-		}
-		for (j; j < OPCODE_SIZE; j++) {
-			transform_binary(memory->data_image.memory[i].param2, lineNode->machine_data, j, countSize++);
-			countSize++;
-		}
-		for (j; j < DEST_SIZE; j++) {
-			transform_binary(memory->data_image.memory[i].param2, lineNode->machine_data, j, countSize++);
-			countSize++;
-		}
-		for (j; j < SOURCE_SIZE; j++) {
-			transform_binary(memory->data_image.memory[i].param2, lineNode->machine_data, j, countSize++);
-			countSize++;
-		}
-		for (j; j < E_R_A_SIZE; j++) {
-			transform_binary(memory->data_image.memory[i].param2, lineNode->machine_data, j, countSize++);
-			countSize++;
-		}
-		
-	}
-	return translatedMemory;
-}*/
 
-void transform_binary(char* data,char* machineCodeString, int currentIndexData, int currentIndexMCS) {
-	if (*(data + currentIndexData) == 0) {
-		*(machineCodeString + currentIndexMCS) = OBJECT_PRINT_DOT;
-		return;
+LinesList* translate_to_machine_data(memoryBuffer* memory, errorContext* err) {
+	int i, j;
+	MemoryWord* instImg = memory->instruction_image.memory;
+	LinesList* translatedMemory = (LinesList*)xmalloc(sizeof(LinesList) * memory->instruction_image.counter);
+	LinesListNode* lineNode = translatedMemory->head;
+
+	for (i = 0; i <= memory->instruction_image.counter; i++) {
+		lineNode->address = i;
+		unsigned int bits = (instImg[i].mem[1] << 0x08) | (instImg[i].mem[0]);
+		for (j = 13; j >= 0; j--) {
+			unsigned int mask = 1 << j;
+			if ((bits & mask) != 0) {
+				lineNode->dataForObject[13 - j] = OBJECT_PRINT_SLASH;
+				lineNode->machineData[13 - j] = 1;
+			}
+			else {
+				lineNode->dataForObject[13 - j] = OBJECT_PRINT_DOT;
+				lineNode->machineData[13 - j] = 0;
+			}
+			lineNode = lineNode->next;
+		}
+		return translatedMemory;
 	}
-	*(machineCodeString + currentIndexMCS) = OBJECT_PRINT_SLASH;
+
 }
 
 bool generate_externals_file(SymbolTable* table, char* path){
@@ -200,7 +183,7 @@ void extract_directive_type(LineIterator* line, flags* flag) {
 			extern_exists(flag);
 		}
 		else if(!(strcmp(command, DOT_STRING) || strcmp(command, DOT_DATA))){//isn't any exists command
-			debugNode err; /*debug_list_new_node, should also add debug list later on function headline*/
+			debugNode err; //should also add debug list later on function headline
 		}
 		free(command);
 }
@@ -210,7 +193,7 @@ bool directive_exists(LineIterator* line) {
 	while (!line_iterator_is_end(line)) {
 		if (line_iterator_peek(line) == DOT_COMMAND) {
 			line_iterator_advance(line);
-			return TRUE; /*in case does exists, return afterward */
+			return TRUE; /*in case does exists, return afterward*/
 		}
 
 		line_iterator_advance(line);
