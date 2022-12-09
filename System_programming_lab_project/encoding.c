@@ -96,13 +96,27 @@ void encode_opcode(LineIterator* it, memoryBuffer* img)
 	SyntaxGroups group = get_syntax_group(opcode);
 	
 	switch (group) {
-	case SG_GROUP_1: encode_syntax_group_1(it, op, img);
-	case SG_GROUP_2: encode_syntax_group_2(it, op, img);
-	case SG_GROUP_3: encode_syntax_group_3(it, op, img);
-	case SG_GROUP_4: encode_syntax_group_4(it, op, img);
-	case SG_GROUP_5: encode_syntax_group_5(it, op, img);
-	case SG_GROUP_6: encode_syntax_group_6(it, op, img);
-	case SG_GROUP_7: encode_syntax_group_7(it, op, img);
+	case SG_GROUP_1:
+		encode_syntax_group_1(it, op, img);
+		break;
+	case SG_GROUP_2: 
+		encode_syntax_group_2(it, op, img);
+		break;
+	case SG_GROUP_3: 
+		encode_syntax_group_3(it, op, img);
+		break;
+	case SG_GROUP_4: 
+		encode_syntax_group_4(it, op, img);
+		break;
+	case SG_GROUP_5: 
+		encode_syntax_group_5(it, op, img);
+		break;
+	case SG_GROUP_6: 
+		encode_syntax_group_6(it, op, img);
+		break;
+	case SG_GROUP_7: 
+		encode_syntax_group_7(it, op, img);
+		break;
 	default: break;
 	}
 }
@@ -183,12 +197,26 @@ void encode_syntax_group_2(LineIterator* it, Opcodes op, memoryBuffer* img)
 
 void encode_syntax_group_3(LineIterator* it, Opcodes op, memoryBuffer* img)
 {
-	return;
+	/* Source operand can be immediate, register or label. */
+	/* Dest operand can be register or label. */
+	const char* source = NULL;
+
+	source = line_iterator_next_word(it, ", ");
+
+	/* Encode the first memory word. */
+	encode_preceding_word(&img->instruction_image, op, source, NULL, FALSE);
+
+	/* Encode the source and dest. */
+	encode_source_and_dest(&img->instruction_image, source, NULL);
+
+	free(source);
 }
 
 void encode_syntax_group_4(LineIterator* it, Opcodes op, memoryBuffer* img)
 {
-	return;
+	/* Encodes rts and stop */
+	/* Encode the first memory word. */
+	encode_preceding_word(&img->instruction_image, op, NULL, NULL, FALSE);
 }
 
 void encode_syntax_group_5(LineIterator* it, Opcodes op, memoryBuffer* img)
