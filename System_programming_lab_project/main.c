@@ -22,6 +22,8 @@ int main(int argc, char** argv)
 		/* Create all the appropriate files, continue to second pass. */
 		puts("[+] First pass was done with no errors...");
 		puts("[!] Trying to do the second pass...");
+
+		dump_memory(img);
 	}
 
 	puts("[-] First pass failed with these errors: ");
