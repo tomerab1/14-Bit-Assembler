@@ -113,3 +113,37 @@ unsigned char get_param2_bits(MemoryWord* mem)
 
 #undef OFFSET_0
 #undef OFFSET_1
+
+void dump_memory(memoryBuffer* buf)
+{
+    MemoryWord*  inst = buf->instruction_image.memory,
+                *data = buf->data_image.memory;
+    int i, j;
+
+    for (i = 0; i < buf->instruction_image.counter; i++) {
+        unsigned int bits = (inst[i].mem[1] << 0x08) | (inst[i].mem[0]);
+
+        if (bits == 0) {
+            printf("?");
+        }
+        else {
+            for (int i = 13; i >= 0; i--) {
+                if (bits & (0x01 << i)) printf("1");
+                else printf("0");
+            }
+        }
+
+        printf("\n");
+    }
+
+    for (i = 0; i < buf->data_image.counter; i++) {
+        unsigned int bits = (data[i].mem[1] << 0x08) | (data[i].mem[0]);
+
+        for (int i = 13; i >= 0; i--) {
+            if (bits & (0x01 << i)) printf("1");
+            else printf("0");
+        }
+
+        printf("\n");
+    }
+}

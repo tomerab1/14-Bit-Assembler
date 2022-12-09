@@ -14,6 +14,7 @@ typedef struct
 	char* label;
 } varData;
 
+typedef enum { KIND_IMM, KIND_LABEL, KIND_LABEL_PARAM, KIND_REG, KIND_NONE } OperandKind;
 typedef enum { ADDRESSING_IMM, ADDRESSING_DIR, ADDRESSING_PARAM, ADDRESSING_REG } AddressingType;
 
 void encode_dot_string(LineIterator* it, memoryBuffer* img);
@@ -21,6 +22,7 @@ void encode_dot_data(LineIterator* it, memoryBuffer* img);
 void encode_opcode(LineIterator* it, memoryBuffer* img);
 void encode_integer(imageMemory* img, unsigned int num);
 void encode_preceding_word(imageMemory* img, Opcodes op, const char* source, const char* dest, bool is_jump_label);
+void encode_source_and_dest(imageMemory* img, const char* source, const char* dest);
 
 /*groups: mov, add,sub,cmp,lea | expected input is the char next to end of command (i.e mov 
 																						   ^ */
@@ -42,6 +44,8 @@ void encode_syntax_group_4(LineIterator* it, Opcodes op, memoryBuffer* img);
 void encode_syntax_group_5(LineIterator* it, Opcodes op, memoryBuffer* img);
 void encode_syntax_group_6(LineIterator* it, Opcodes op, memoryBuffer* img);
 void encode_syntax_group_7(LineIterator* it, Opcodes op, memoryBuffer* img);
+
+OperandKind get_operand_kind(const char* op);
 
 
 #endif

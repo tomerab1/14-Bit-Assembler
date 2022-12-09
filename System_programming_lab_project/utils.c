@@ -95,6 +95,13 @@ char* get_copy_string(const char* str)
     return res;
 }
 
+unsigned int get_num(const char* num)
+{
+    int n;
+    (void) sscanf(num, "%u", &n);
+    return n;
+}
+
 unsigned int get_2s_complement(int n)
 {
     return (~n) + 1;
