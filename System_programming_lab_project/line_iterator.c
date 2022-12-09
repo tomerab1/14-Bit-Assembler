@@ -3,7 +3,7 @@
 #include <string.h>
 #include <ctype.h>
 
-void line_iterator_put_line(LineIterator* it, const char* line)
+void line_iterator_put_line(LineIterator* it, char* line)
 {
     it->current = it->start = line;
 }
@@ -20,7 +20,7 @@ void line_iterator_backwards(LineIterator* it)
         it->current--;
 }
 
-void line_iterator_unget_word(LineIterator* it, const char* word)
+void line_iterator_unget_word(LineIterator* it, char* word)
 {
     size_t length = strlen(word);
     while (length > 0) {
@@ -37,7 +37,7 @@ void line_iterator_consume_blanks(LineIterator* it)
 
 void line_iterator_jump_to(LineIterator* it, char sep)
 {
-    const char* loc = strchr(it->current, sep);
+    char* loc = strchr(it->current, sep);
     if (loc == NULL)
         return;
     it->current = loc + 1;
@@ -48,7 +48,7 @@ char line_iterator_peek(LineIterator* it)
     return *(it->current);
 }
 
-char* line_iterator_next_word(LineIterator* it, const char* seps)
+char* line_iterator_next_word(LineIterator* it, char* seps)
 {
     int log_sz = 0, phy_sz = 4;
     char* word = (char*)xcalloc(phy_sz, sizeof(char));
@@ -104,7 +104,7 @@ bool line_iterator_is_start(LineIterator* it)
 bool line_iterator_includes(LineIterator* it, char searchFor)
 {
     bool found = FALSE;
-    int tempLocation = it->current;
+    char* tempLocation = it->current;
     while (!line_iterator_is_end(it) && !found) {
         if (line_iterator_peek(it) == searchFor) {
             it->current = tempLocation;

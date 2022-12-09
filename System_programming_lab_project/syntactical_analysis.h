@@ -1,6 +1,7 @@
 #ifndef SYNTACTICAL_ANALYSIS_H
 #define SYNTACTICAL_ANALYSIS_H
 
+#include "first_pass.h"
 #include "line_iterator.h"
 #include "debug.h"
 #include "utils.h"
@@ -22,7 +23,7 @@ typedef enum
 	DOT_STRING_CODE,
 	DOT_ENTRY_CODE,
 	DOT_EXTERN_CODE
-};
+} ENUM_1;
 
 typedef enum
 {
@@ -30,7 +31,7 @@ typedef enum
 	COMMENT_SENTENCE,
 	DIRECTIVE_SENTENCE,
 	INSTRUCTION_SENTENCE
-};
+} ENUM_2;
 
 typedef enum
 {
@@ -45,28 +46,25 @@ typedef enum
 	SG_GROUP_6, SG_GROUP_7, SG_GROUP_INVALID
 } SyntaxGroups;
 
-/* Forward decleration. */
-typedef enum firstPassStates firstPassStates;
-
 #define FLAG_NUMBER      1
 #define FLAG_LABEL       2
 #define FLAG_REGISTER    4
 #define FLAG_PARAM_LABEL 8
 
 /* This function takes a string and returns the matching Opcode. */
-Opcodes get_opcode(const char* str);
+Opcodes get_opcode(char* str);
 
 /* This function checks the lable syntax.
  * @param - The label to do the syntax check upon.  
  * @return - An appropriate error code, if no errors found, returns ERROR_CODE_OK.
  */
-errorCodes check_label_syntax(const char* label);
+errorCodes check_label_syntax(char* label);
 
 /* Checks if the label syntax is valid.
  * @param - The label string.
  * @return - TRUE if valid, FALSE otherwise.
 */
-bool is_valid_label(const char* label);
+bool is_valid_label(char* label);
 
 /*checks if the first word is a label, used during second pass*/
 bool isLabel(LineIterator* line);
@@ -75,7 +73,7 @@ bool isLabel(LineIterator* line);
 bool verify_command_syntax(LineIterator* it, debugList* dbg_list);
 
 /* Check if 'str' is a registers name. */
-bool cmp_register_name(const char* str);
+bool cmp_register_name(char* str);
 
 /* This function trims the symbol name, i.e. trims the ':'
  * @param - The symbol to fix.
@@ -117,7 +115,7 @@ bool is_label_name(LineIterator* it);
 
 bool match_operand(LineIterator* it, long line, int flags, debugList* dbg_list);
 
-SyntaxGroups get_syntax_group(const char* name);
+SyntaxGroups get_syntax_group(char* name);
 
 bool recursive_match_pamaetrized_label(LineIterator* it, long line, debugList* dbg_list);
 

@@ -1,29 +1,6 @@
-bne LOOP(r4,r5)
-mov r3 ,LENGTH
-bne LOOP(r4,#+515)  
-.entry ENTRY
-.extern EXTREN
-LENGTH: .data 6,-9,15
-END: prn #-5
-bne LOOP(r4,r3)
+LOOP: jmp L1(#-1,r6)
 sub r1, r4
 bne END
-sub r1, r4
-bne END
-sub r1, r4
-bne END
-sub r1, r5
-bne LOOP(r4,r3)
-dec r1
-L1: inc K
-bne LOOP(K,STR)
-END: prn #-5
-END: stop
-STR: .string "abcdef"
-LENGTH: .data 6,-9,15
-K: .data 22
-MAIN: mov r3 ,LENGTH
-LOOP: jmp L1(#-1,r7)
 prn #-5
 bne LOOP(r4,r3)
 sub r1, r4
@@ -34,8 +11,4 @@ END: stop
 STR: .string "abcdef"
 LENGTH: .data 6,-9,15
 K: .data 22
-sub r1, r4
-bne END
-sub r1, r5
-bne LOOP(r4,r3)
-dec r1
+MAIN: mov r3 ,LENGTH

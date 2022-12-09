@@ -5,14 +5,12 @@
 #include "debug.h"
 #include "first_pass.h"
 
-#include "encoding.h"
-
 int main(int argc, char** argv)
 {
-	start_pre_assembler("SOURCE_FILE_TEST.TXT");
+	start_pre_assembler("/home/tomer/CLionProjects/System_programming_lab_project/System_programming_lab_project/SOURCE_FILE_TEST.txt");
 	puts("[+] Pre-Assembler was done with no errors...");
 	
-	const char* pre_assembled_path = get_outfile_name("SOURCE_FILE_TEST.TXT", ".am");
+    char* pre_assembled_path = get_outfile_name("/home/tomer/CLionProjects/System_programming_lab_project/System_programming_lab_project/SOURCE_FILE_TEST.txt", ".am");
 	memoryBuffer img = memory_buffer_get_new();
 	SymbolTable* sym_table = symbol_table_new_table();
 	debugList* dbg_list = debug_list_new_list();
@@ -23,7 +21,7 @@ int main(int argc, char** argv)
 		puts("[+] First pass was done with no errors...");
 		puts("[!] Trying to do the second pass...");
 
-		dump_memory(img);
+		dump_memory(&img);
 	}
 
 	puts("[-] First pass failed with these errors: ");
@@ -31,6 +29,7 @@ int main(int argc, char** argv)
 
 	symbol_table_destroy(&sym_table);
 	debug_list_destroy(&dbg_list);
+    free(pre_assembled_path);
 
 	return 0;
 }

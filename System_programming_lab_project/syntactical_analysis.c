@@ -1,12 +1,10 @@
 #include "syntactical_analysis.h"
 #include "line_iterator.h"
-#include "first_pass.h"
 #include <string.h>
 #include <ctype.h>
 
-errorCodes check_label_syntax(const char* label)
+errorCodes check_label_syntax(char* label)
 {
-    int i;
     char* colon_loc = strrchr(label, COLON_CHAR);
 
     if (colon_loc == NULL)
@@ -41,7 +39,7 @@ errorCodes check_label_syntax(const char* label)
     return ERROR_CODE_OK;
 }
 
-bool is_valid_label(const char* label)
+bool is_valid_label(char* label)
 {
     return (check_label_syntax(label) == ERROR_CODE_OK) ? TRUE : FALSE;
 }
@@ -72,7 +70,7 @@ void trim_symbol_name(char* sym)
     sym[strlen(sym) - 1] = '\0';
 }
 
-bool cmp_register_name(const char* str)
+bool cmp_register_name(char* str)
 {
     
     if (strcmp(str, "r0") == 0) return TRUE;
@@ -86,7 +84,7 @@ bool cmp_register_name(const char* str)
     return FALSE;
 }
 
-Opcodes get_opcode(const char* str)
+Opcodes get_opcode(char* str)
 {
     if (strcmp(str, "mov") == 0) return OP_MOV;
     if (strcmp(str, "cmp") == 0) return OP_CMP;
@@ -201,7 +199,6 @@ void skip_label_basic(LineIterator* line) {
     }
     line_iterator_advance(line);
     line_iterator_consume_blanks(line);
-    return;
 }
 
 bool validate_syntax_data(LineIterator* it, long line, debugList* dbg_list)
@@ -250,7 +247,7 @@ bool validate_syntax_extern_and_entry(LineIterator* it, long line, debugList* db
 
 bool validate_syntax_opcode(LineIterator* it, long line, debugList* dbg_list)
 {
-    const char* word;
+    char* word = NULL;
 
     while ((word = line_iterator_next_word(it, " ")) != NULL) {
         /* check_for_invalid_comma(word); */
@@ -422,7 +419,7 @@ bool match_syntax_group_4(LineIterator* it, long line, debugList* dbg_list)
 
 bool match_syntax_group_5(LineIterator* it, long line, debugList* dbg_list)
 {
-    const char* open_paren_loc = strchr(it->current, OPEN_PAREN_CHAR);
+    char* open_paren_loc = strchr(it->current, OPEN_PAREN_CHAR);
 
     line_iterator_consume_blanks(it);
 
@@ -691,7 +688,7 @@ bool verify_int(LineIterator* it, long line, char* seps, debugList* dbg_list)
     return TRUE;
 }
 
-SyntaxGroups get_syntax_group(const char* name)
+SyntaxGroups get_syntax_group(char* name)
 {
     if (strcmp(name, "mov") == 0 || strcmp(name, "add") == 0 || strcmp(name, "sub") == 0)
         return SG_GROUP_1;

@@ -1,5 +1,6 @@
 #include "memory.h"
 #include <string.h>
+#include <stdio.h>
 
 memoryBuffer memory_buffer_get_new()
 {
@@ -25,7 +26,7 @@ void image_memory_init(imageMemory* mem)
     memset(mem->memory, RAM_INIT_VAL, sizeof(MemoryWord) * RAM_MEMORY_SZ);
 }
 
-void set_image_memory(imageMemory* mem, const char byte, int flags)
+void set_image_memory(imageMemory* mem, unsigned char byte, int flags)
 {
     MemoryWord* curr_block = &mem->memory[mem->counter];
 
@@ -41,37 +42,37 @@ void set_image_memory(imageMemory* mem, const char byte, int flags)
 #define OFFSET_0 0
 #define OFFSET_1 1
 
-void set_era_bits(MemoryWord* mem, const unsigned char byte)
+void set_era_bits(MemoryWord* mem, unsigned char byte)
 {
     mem->mem[OFFSET_0] |= byte & MASK_ERA;
 }
 
-void set_source_bits(MemoryWord* mem, const unsigned char byte)
+void set_source_bits(MemoryWord* mem, unsigned char byte)
 {
     mem->mem[OFFSET_0] |= byte & MASK_SOURCE;
 }
 
-void set_dest_bits(MemoryWord* mem, const unsigned char byte)
+void set_dest_bits(MemoryWord* mem, unsigned char byte)
 {
     mem->mem[OFFSET_0] |= byte & MASK_DEST;
 }
 
-void set_opcode_cell_1_bits(MemoryWord* mem, const unsigned char byte)
+void set_opcode_cell_1_bits(MemoryWord* mem, unsigned char byte)
 {
     mem->mem[OFFSET_0] |= byte & MASK_OPCODE1;
 }
 
-void set_opcode_cell_2_bits(MemoryWord* mem, const unsigned char byte)
+void set_opcode_cell_2_bits(MemoryWord* mem, unsigned char byte)
 {
     mem->mem[OFFSET_1] |= byte & MASK_OPCODE2;
 }
 
-void set_param1_bits(MemoryWord* mem, const unsigned char byte)
+void set_param1_bits(MemoryWord* mem, unsigned char byte)
 {
     mem->mem[OFFSET_1] |= byte & MASK_PARAM1;
 }
 
-void set_param2_bits(MemoryWord* mem, const unsigned char byte)
+void set_param2_bits(MemoryWord* mem, unsigned char byte)
 {
     mem->mem[OFFSET_1] |= byte & MASK_PARAM2;
 }
@@ -127,8 +128,8 @@ void dump_memory(memoryBuffer* buf)
             printf("?");
         }
         else {
-            for (int i = 13; i >= 0; i--) {
-                if (bits & (0x01 << i)) printf("1");
+            for (j = 13; j >= 0; j--) {
+                if (bits & (0x01 << j)) printf("1");
                 else printf("0");
             }
         }
@@ -139,8 +140,8 @@ void dump_memory(memoryBuffer* buf)
     for (i = 0; i < buf->data_image.counter; i++) {
         unsigned int bits = (data[i].mem[1] << 0x08) | (data[i].mem[0]);
 
-        for (int i = 13; i >= 0; i--) {
-            if (bits & (0x01 << i)) printf("1");
+        for (j = 13; j >= 0; j--) {
+            if (bits & (0x01 << j)) printf("1");
             else printf("0");
         }
 

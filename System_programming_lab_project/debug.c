@@ -24,12 +24,13 @@ debugList* debug_list_new_list()
 	return new_list;
 }
 
-debugNode* debug_list_new_node(char* start, char* err, int line, errorCodes err_code)
+debugNode* debug_list_new_node(char* start, char* err, long line, errorCodes err_code)
 {
 	debugNode* new_node = (debugNode*)xmalloc(sizeof(debugNode));
 	/* The node does not own the start and err pointers, we should not call 'free' on them ! */
-	new_node->ctx.start_pos = start;
-	new_node->ctx.err_pos = err;
+	new_node->ctx.start_pos = get_copy_string(start);
+	new_node->ctx.err_pos = get_copy_string(err);
+    new_node->ctx.err_len = (err - start);
 	new_node->ctx.line_num = line;
 	new_node->ctx.err_code = err_code;
 	new_node->next = NULL;
@@ -38,15 +39,15 @@ debugNode* debug_list_new_node(char* start, char* err, int line, errorCodes err_
 
 void debug_list_destroy_node(debugNode* node)
 {
-	node->ctx.start_pos = NULL;
-	node->ctx.err_pos = NULL;
+	free(node->ctx.start_pos);
+	free(node->ctx.err_pos);
 }
 
 void debug_list_destroy(debugList** list)
 {
-	debugNode* next;
+	debugNode* head = (*list)->head, *next;
 
-	LIST_FOR_EACH(debugNode, (*list)->head, head) {
+	while(head) {
 		next = head->next;
 		debug_list_destroy_node(head);
 		free(head);
@@ -72,8 +73,8 @@ void debug_list_pretty_print(debugList* list)
 void debug_print_error(errorContext* err_ctx, char err_buff[])
 {
 	/* Calculate the spacing between the start of the line and the error pos. */
-	size_t err_len = sprintf(err_buff, "Line %d:", err_ctx->line_num);
-	ptrdiff_t offset = strlen(err_buff) + ((err_ctx->err_pos) - (err_ctx->start_pos)) + 1;
+	sprintf(err_buff, "Line %li:", err_ctx->line_num);
+	ptrdiff_t offset = (int) strlen(err_buff) + err_ctx->err_len + 1;
 
 	printf("%s %s\n", err_buff, err_ctx->start_pos);
 	while (offset > 0) {
@@ -83,13 +84,14 @@ void debug_print_error(errorContext* err_ctx, char err_buff[])
 	printf("^\t\nError: %s\n\n", debug_map_token_to_err(err_ctx->err_code));
 }
 
-const char* debug_map_token_to_err(errorCodes code)
+char* debug_map_token_to_err(errorCodes code)
 {
 	switch (code) {
 	case ERROR_CODE_TO_MANY_OPERANDS: return "To many operands";
 	case ERROR_CODE_SYNTAX_ERROR: return "Syntax error";
 	case ERROR_CODE_EXTRA_COMMA: return "Extra comma";
+    case ERROR_CODE_SYMBOL_REDEFINITION: return "Symbol redefinition";
 	default:
-		return "UnknowError";
+		return "UnknownError";
 	}
 }

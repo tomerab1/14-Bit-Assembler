@@ -1,6 +1,7 @@
 #ifndef  DEBUG_H
 #define DEBUG_H
 #include "utils.h"
+#include <stddef.h>
 
 typedef enum
 {
@@ -22,7 +23,8 @@ typedef struct
 {
 	char* start_pos;
 	char* err_pos;
-	int line_num;
+    ptrdiff_t err_len;
+	long line_num;
 	errorCodes err_code;
 } errorContext;
 
@@ -56,7 +58,7 @@ debugList* debug_list_new_list();
 /*
 	Function for creating a new debugNode
 */
-debugNode* debug_list_new_node(char* start, char* err, int line, errorCodes err_code);
+debugNode* debug_list_new_node(char* start, char* err, long line, errorCodes err_code);
 
 /*
 	Function for freeing a debugList node
@@ -77,7 +79,7 @@ void debug_list_pretty_print(debugList* list);
 	Function for mapping a errorCode to a string
 */
 
-const char* debug_map_token_to_err(errorCodes code);
+char* debug_map_token_to_err(errorCodes code);
 
 /* Function for printing the errors
 	

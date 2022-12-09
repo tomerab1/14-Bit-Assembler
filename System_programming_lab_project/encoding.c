@@ -44,7 +44,7 @@ void encode_integer(imageMemory* img, unsigned int num)
 	img->counter++;
 }
 
-void encode_preceding_word(imageMemory* img, Opcodes op, const char* source, const char* dest, bool is_jmp_label)
+void encode_preceding_word(imageMemory* img, Opcodes op, char* source, char* dest, bool is_jmp_label)
 {
 	set_image_memory(img, op << OFFSET_OPCODE1, FLAG_OPCODE1);
 	set_image_memory(img, (op >> 2) << OFFSET_OPCODE2, FLAG_OPCODE2);
@@ -94,7 +94,7 @@ void encode_preceding_word(imageMemory* img, Opcodes op, const char* source, con
 
 void encode_opcode(LineIterator* it, memoryBuffer* img)
 {
-	const char* opcode = line_iterator_next_word(it, " ");
+	char* opcode = line_iterator_next_word(it, " ");
 	Opcodes op = get_opcode(opcode);
 	SyntaxGroups group = get_syntax_group(opcode);
 	
@@ -122,16 +122,18 @@ void encode_opcode(LineIterator* it, memoryBuffer* img)
 		break;
 	default: break;
 	}
+
+    free(opcode);
 }
 
-void encode_source_and_dest(imageMemory* img, const char* source, const char* dest)
+void encode_source_and_dest(imageMemory* img, char* source, char* dest)
 {
-	const char* operands[] = { source, dest, NULL };
+	char* operands[] = { source, dest, NULL };
 	int i, num;
 
 	if (get_operand_kind(source) == KIND_REG && get_operand_kind(dest) == KIND_REG) {
 		/* Bits 2 - 7 -> First register. Bits 8 - 13 -> Second register. */
-		set_image_memory(img, *(source + 1) - '0', FLAG_OPCODE2 | FLAG_PARAM1 | FLAG_PARAM2);
+		set_image_memory(img, (unsigned char)(*(source + 1) - '0'), FLAG_OPCODE2 | FLAG_PARAM1 | FLAG_PARAM2);
 		set_image_memory(img, (*(dest + 1) - '0') << 2, FLAG_OPCODE1 | FLAG_DEST | FLAG_SOURCE);
 		img->counter++;
 		return;
@@ -165,7 +167,7 @@ void encode_source_and_dest(imageMemory* img, const char* source, const char* de
 	}
 }
 
-OperandKind get_operand_kind(const char* op)
+OperandKind get_operand_kind(char* op)
 {
 	if (!op) return KIND_NONE;
 	if (*op == HASH_CHAR) return KIND_IMM;
@@ -178,7 +180,7 @@ void encode_syntax_group_1(LineIterator* it, Opcodes op, memoryBuffer* img)
 {
 	/* Source operand can be immediate, register or label. */
 	/* Dest operand can be register or label. */
-	const char* source = NULL, *dest = NULL;
+	char* source = NULL, *dest = NULL;
 		
 	source = line_iterator_next_word(it, ", ");
 	
@@ -201,7 +203,7 @@ void encode_syntax_group_2(LineIterator* it, Opcodes op, memoryBuffer* img)
 {
 	/* Source operand can be immediate, register or label. */
 	/* Dest operand can be register or label. */
-	const char* source = NULL, * dest = NULL;
+	char* source = NULL, * dest = NULL;
 
 	source = line_iterator_next_word(it, ", ");
 
@@ -224,7 +226,7 @@ void encode_syntax_group_3(LineIterator* it, Opcodes op, memoryBuffer* img)
 {
 	/* Source operand can be immediate, register or label. */
 	/* Dest operand can be register or label. */
-	const char* dest = NULL;
+	char* dest = NULL;
 
 	dest = line_iterator_next_word(it, ", ");
 
@@ -248,7 +250,7 @@ void encode_syntax_group_5(LineIterator* it, Opcodes op, memoryBuffer* img)
 {
 	/* Source operand can be immediate, register or label. */
 	/* Dest operand can be register or label. */
-	const char* source = NULL, *dest = NULL;
+	char* source = NULL, *dest = NULL;
 
 	line_iterator_jump_to(it, OPEN_PAREN_CHAR);
 
@@ -279,7 +281,7 @@ void encode_syntax_group_6(LineIterator* it, Opcodes op, memoryBuffer* img)
 {
 	/* Source operand can be immediate, register or label. */
 	/* Dest operand can be register or label. */
-	const char* dest = NULL;
+	char* dest = NULL;
 
 	dest = line_iterator_next_word(it, ", ");
 
@@ -296,7 +298,7 @@ void encode_syntax_group_7(LineIterator* it, Opcodes op, memoryBuffer* img)
 {
 	/* Source operand can be immediate, register or label. */
 	/* Dest operand can be register or label. */
-	const char* source = NULL, * dest = NULL;
+	char* source = NULL, * dest = NULL;
 
 	source = line_iterator_next_word(it, ", ");
 

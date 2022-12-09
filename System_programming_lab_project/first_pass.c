@@ -4,13 +4,13 @@
 #include <string.h>
 
 typedef bool (*fpass_dispatch_table)(LineIterator* it, memoryBuffer* img, SymbolTable* sym_table, 
-	                                debugList* dbg_list, const char* name, long line, bool did_err_occurred);
+	                                debugList* dbg_list, char* name, long line, bool did_err_occurred);
 
-bool do_first_pass(const char* path, memoryBuffer* img, SymbolTable* sym_table, debugList* dbg_list)
+bool do_first_pass(char* path, memoryBuffer* img, SymbolTable* sym_table, debugList* dbg_list)
 {
 	FILE* in = open_file(path, MODE_READ);
 	LineIterator it;
-	char* curr_line = NULL, *next = NULL;
+	char* curr_line = NULL;
 	long line = 1;
 	bool should_encode = TRUE;
 
@@ -22,7 +22,6 @@ bool do_first_pass(const char* path, memoryBuffer* img, SymbolTable* sym_table, 
 		first_pass_process_sym_ent,
 		first_pass_process_opcode
 	};
-
 
 	while ((curr_line = get_line(in)) != NULL) {
 		char* word = NULL;
@@ -49,8 +48,11 @@ bool do_first_pass(const char* path, memoryBuffer* img, SymbolTable* sym_table, 
 		}
 
 		free(word);
+        free(curr_line);
 		line++;
 	}
+
+    fclose(in);
 
 	return should_encode;
 }
@@ -74,23 +76,27 @@ firstPassStates get_symbol_type(LineIterator* it, char* word)
 	}
 	/* Symbol definition, may follow, .data or .string*/
 	else if ((is_valid = is_valid_label(word)) == TRUE) {
-		const char* next_word = line_iterator_next_word(it, " ");
+		char* next_word = line_iterator_next_word(it, " ");
 		/* Check if .data */
 		if (strcmp(next_word, ".data") == 0) {
+            free(next_word);
 			return FP_SYM_DATA;
 		}
 		/* Check if .string */
 		if (strcmp(next_word, ".string") == 0) {
+            free(next_word);
 			return FP_SYM_STR;
 		}
 		if (strcmp(next_word, "entry") == 0 || strcmp(next_word, "extern") == 0) {
 			line_iterator_unget_word(it, next_word);
 			line_iterator_unget_word(it, word);
+            free(next_word);
 			return FP_SYM_IGNORED;
 		}
 
 		/* Unget the word, and return FP_SYM_DEF */
 		line_iterator_unget_word(it, next_word);
+        free(next_word);
 		return FP_SYM_DEF;
 	}
 
@@ -98,22 +104,12 @@ firstPassStates get_symbol_type(LineIterator* it, char* word)
 		return FP_NONE;
 	}
 
-
 	return FP_NONE;
 }
 
-void build_memory_word(LineIterator* it, firstPassStates state, memoryBuffer* img, debugList* dbg_list)
+bool first_pass_process_sym_def(LineIterator* it, memoryBuffer* img, SymbolTable* sym_table, debugList* dbg_list, char* name, long line, bool should_encode)
 {
-	char* word = NULL;
-	
-	while ((word = line_iterator_next_word(it, " ")) != NULL) {
-		puts(word);
-	}
-}
-
-bool first_pass_process_sym_def(LineIterator* it, memoryBuffer* img, SymbolTable* sym_table, debugList* dbg_list, const char* name, long line, bool should_encode)
-{
-	if (symbol_table_search_symbol(sym_table, name)) {
+	if (symbol_table_search_symbol_bool(sym_table, name)) {
 		debug_list_register_node(dbg_list, debug_list_new_node(it->start, it->current, line, ERROR_CODE_SYMBOL_REDEFINITION));
 		return FALSE;
 	}
@@ -129,7 +125,7 @@ bool first_pass_process_sym_def(LineIterator* it, memoryBuffer* img, SymbolTable
 	return TRUE;
 }
 
-bool first_pass_process_opcode(LineIterator* it, memoryBuffer* img, SymbolTable* sym_table, debugList* dbg_list, const char* name, long line, bool should_encode)
+bool first_pass_process_opcode(LineIterator* it, memoryBuffer* img, SymbolTable* sym_table, debugList* dbg_list, char* name, long line, bool should_encode)
 {
 	/* Check the syntax, we want a copy of the iterator because if the syntax is correct we will encode the instructions to memory. */
 	if (!validate_syntax(*it, FP_OPCODE, line, dbg_list)) {
@@ -142,9 +138,9 @@ bool first_pass_process_opcode(LineIterator* it, memoryBuffer* img, SymbolTable*
 }
 
 
-bool first_pass_process_sym_data(LineIterator* it, memoryBuffer* img, SymbolTable* sym_table, debugList* dbg_list, const char* name, long line, bool should_encode)
+bool first_pass_process_sym_data(LineIterator* it, memoryBuffer* img, SymbolTable* sym_table, debugList* dbg_list, char* name, long line, bool should_encode)
 {
-	if (symbol_table_search_symbol(sym_table, name)) {
+	if (symbol_table_search_symbol_bool(sym_table, name)) {
 		debug_list_register_node(dbg_list, debug_list_new_node(it->start, it->current, line, ERROR_CODE_SYMBOL_REDEFINITION));
 		return FALSE;
 	}
@@ -157,12 +153,13 @@ bool first_pass_process_sym_data(LineIterator* it, memoryBuffer* img, SymbolTabl
 	if (should_encode) {
 		encode_dot_data(it, img);
 	}
+
 	return TRUE;
 }
 
-bool first_pass_process_sym_string(LineIterator* it, memoryBuffer* img, SymbolTable* sym_table, debugList* dbg_list, const char* name, long line, bool should_encode)
+bool first_pass_process_sym_string(LineIterator* it, memoryBuffer* img, SymbolTable* sym_table, debugList* dbg_list, char* name, long line, bool should_encode)
 {
-	if (symbol_table_search_symbol(sym_table, name)) {
+	if (symbol_table_search_symbol_bool(sym_table, name)) {
 		debug_list_register_node(dbg_list, debug_list_new_node(it->start, it->current, line, ERROR_CODE_SYMBOL_REDEFINITION));
 		return FALSE;
 	}
@@ -173,14 +170,14 @@ bool first_pass_process_sym_string(LineIterator* it, memoryBuffer* img, SymbolTa
 		return FALSE;
 	}
 	if (should_encode) {
-		encode_dot_string(it, img, dbg_list);
+		encode_dot_string(it, img);
 	}
 	return TRUE;
 }
 
-bool first_pass_process_sym_ent(LineIterator* it, memoryBuffer* img, SymbolTable* sym_table, debugList* dbg_list, const char* name, long line, bool should_encode)
+bool first_pass_process_sym_ent(LineIterator* it, memoryBuffer* img, SymbolTable* sym_table, debugList* dbg_list, char* name, long line, bool should_encode)
 {
-	const char* word = line_iterator_next_word(it, " ");
+    char* word = line_iterator_next_word(it, " ");
 
 	line_iterator_unget_word(it, word);
 	if (!word) {
@@ -214,9 +211,9 @@ bool first_pass_process_sym_ent(LineIterator* it, memoryBuffer* img, SymbolTable
 	return TRUE;
 }
 
-bool first_pass_process_sym_ext(LineIterator* it, memoryBuffer* img, SymbolTable* sym_table, debugList* dbg_list, const char* name, long line, bool should_encode)
+bool first_pass_process_sym_ext(LineIterator* it, memoryBuffer* img, SymbolTable* sym_table, debugList* dbg_list, char* name, long line, bool should_encode)
 {
-	const char* word = line_iterator_next_word(it, " ");
+    char* word = line_iterator_next_word(it, " ");
 
 	line_iterator_unget_word(it, word);
 	if (!word) {
