@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['registerstype_0',['RegistersType',['../memory_8h.html#a3e3ad86bd10ce04fea0bc583130474b6',1,'memory.h']]]
+  ['pre_5fassembler_2eh_0',['pre_assembler.h',['../pre__assembler_8h.html',1,'']]],
+  ['programfinalstatus_1',['programFinalStatus',['../structprogram_final_status.html',1,'']]]
 ];

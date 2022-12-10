@@ -1,3 +1,6 @@
+/** @file
+*/
+
 #include "first_pass.h"
 #include "syntactical_analysis.h"
 #include "encoding.h"

@@ -1,0 +1,108 @@
+\hypertarget{utils_8h}{}\doxysection{utils.\+h File Reference}
+\label{utils_8h}\index{utils.h@{utils.h}}
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}constants.\+h\char`\"{}}\newline
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{utils_8h_af08ec37a8c99d747fb60fa15bc28678b}\label{utils_8h_af08ec37a8c99d747fb60fa15bc28678b}} 
+\#define {\bfseries \+\_\+\+CRT\+\_\+\+SECURE\+\_\+\+NO\+\_\+\+WARNINGS}
+\item 
+\mbox{\Hypertarget{utils_8h_aa8cecfc5c5c054d2875c03e77b7be15d}\label{utils_8h_aa8cecfc5c5c054d2875c03e77b7be15d}} 
+\#define {\bfseries TRUE}~1
+\item 
+\mbox{\Hypertarget{utils_8h_aa93f0eb578d23995850d61f7d61c55c1}\label{utils_8h_aa93f0eb578d23995850d61f7d61c55c1}} 
+\#define {\bfseries FALSE}~0
+\item 
+\mbox{\Hypertarget{utils_8h_add89287aed7fbfc428e8bbefd0fb9abd}\label{utils_8h_add89287aed7fbfc428e8bbefd0fb9abd}} 
+\#define {\bfseries REG\+\_\+\+MIN\+\_\+\+NUM}~\textquotesingle{}0\textquotesingle{}
+\item 
+\mbox{\Hypertarget{utils_8h_a6c6b66dc0c5f29c81a28d1e0311c1df7}\label{utils_8h_a6c6b66dc0c5f29c81a28d1e0311c1df7}} 
+\#define {\bfseries REG\+\_\+\+MAX\+\_\+\+NUM}~\textquotesingle{}7\textquotesingle{}
+\item 
+\mbox{\Hypertarget{utils_8h_aff48320cd0569d3ecc730f881005e286}\label{utils_8h_aff48320cd0569d3ecc730f881005e286}} 
+\#define {\bfseries REG\+\_\+\+BEG\+\_\+\+CHAR}~\textquotesingle{}r\textquotesingle{}
+\item 
+\mbox{\Hypertarget{utils_8h_a0bcf87f38672f78624e28eb8f9e88428}\label{utils_8h_a0bcf87f38672f78624e28eb8f9e88428}} 
+\#define {\bfseries POS\+\_\+\+SIGN\+\_\+\+CHAR}~\textquotesingle{}+\textquotesingle{}
+\item 
+\mbox{\Hypertarget{utils_8h_a9c39e55e022e4a6c5d1cd962f064d294}\label{utils_8h_a9c39e55e022e4a6c5d1cd962f064d294}} 
+\#define {\bfseries NEG\+\_\+\+SIGN\+\_\+\+CHAR}~\textquotesingle{}-\/\textquotesingle{}
+\item 
+\mbox{\Hypertarget{utils_8h_a8a1b099d74b43d25b6d9c4fb66ea4d07}\label{utils_8h_a8a1b099d74b43d25b6d9c4fb66ea4d07}} 
+\#define {\bfseries HASH\+\_\+\+CHAR}~\textquotesingle{}\#\textquotesingle{}
+\item 
+\mbox{\Hypertarget{utils_8h_a9f1e8030d47b799c898f12c3a08410a2}\label{utils_8h_a9f1e8030d47b799c898f12c3a08410a2}} 
+\#define {\bfseries COMMA\+\_\+\+CHAR}~\textquotesingle{},\textquotesingle{}
+\item 
+\mbox{\Hypertarget{utils_8h_ac97223f9b70652f539f3116d16a19fbb}\label{utils_8h_ac97223f9b70652f539f3116d16a19fbb}} 
+\#define {\bfseries COLON\+\_\+\+CHAR}~\textquotesingle{}\+:\textquotesingle{}
+\item 
+\mbox{\Hypertarget{utils_8h_af18de2cb716ff11adb6da7d0d3200961}\label{utils_8h_af18de2cb716ff11adb6da7d0d3200961}} 
+\#define {\bfseries OPEN\+\_\+\+PAREN\+\_\+\+CHAR}~\textquotesingle{}(\textquotesingle{}
+\item 
+\mbox{\Hypertarget{utils_8h_a0c0f7b37ea28badbe1f919ce5c3d76dd}\label{utils_8h_a0c0f7b37ea28badbe1f919ce5c3d76dd}} 
+\#define {\bfseries CLOSE\+\_\+\+PAREN\+\_\+\+CHAR}~\textquotesingle{})\textquotesingle{}
+\item 
+\mbox{\Hypertarget{utils_8h_af05fbe3f7666f4c5e2131431cb62a6be}\label{utils_8h_af05fbe3f7666f4c5e2131431cb62a6be}} 
+\#define {\bfseries SPACE\+\_\+\+CHAR}~\textquotesingle{} \textquotesingle{}
+\item 
+\mbox{\Hypertarget{utils_8h_a03e065f4d4918dca574c81fadc101843}\label{utils_8h_a03e065f4d4918dca574c81fadc101843}} 
+\#define {\bfseries QUOTE\+\_\+\+CHAR}~\textquotesingle{}\textbackslash{}\char`\"{}\textquotesingle{}
+\item 
+\mbox{\Hypertarget{utils_8h_a8d0362e80a31515c10407817048d1a08}\label{utils_8h_a8d0362e80a31515c10407817048d1a08}} 
+\#define {\bfseries TAB\+\_\+\+CHAR}~\textquotesingle{}\textbackslash{}t\textquotesingle{}
+\item 
+\mbox{\Hypertarget{utils_8h_af24e82b0ff16b0fdee6c8907f445392d}\label{utils_8h_af24e82b0ff16b0fdee6c8907f445392d}} 
+\#define {\bfseries GROW\+\_\+\+CAPACITY}(old\+\_\+sz)~(old\+\_\+sz) $\ast$= 2
+\item 
+\mbox{\Hypertarget{utils_8h_ae38939967eeb52254edf0da088a2f305}\label{utils_8h_ae38939967eeb52254edf0da088a2f305}} 
+\#define {\bfseries GROW\+\_\+\+ARRAY}(type,  pointer,  new\+\_\+count,  size)~(type)xrealloc((pointer), (new\+\_\+count) $\ast$ (size))
+\item 
+\mbox{\Hypertarget{utils_8h_a906113b3c786edc0ed31b60b168dbc35}\label{utils_8h_a906113b3c786edc0ed31b60b168dbc35}} 
+\#define {\bfseries FREE\+\_\+\+ARRAY}(pointer)~free((pointer))
+\item 
+\mbox{\Hypertarget{utils_8h_a51e151b737be36f9501bfe40a7803a7a}\label{utils_8h_a51e151b737be36f9501bfe40a7803a7a}} 
+\#define {\bfseries LIST\+\_\+\+FOR\+\_\+\+EACH}(type,  head,  out)~for(type$\ast$ (out) = (head); (out) != NULL; (out) = (out) ? (out)-\/$>$next \+: NULL)
+\end{DoxyCompactItemize}
+\doxysubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{utils_8h_ae446fa48abb81ea13e37ebad6ed974ce}\label{utils_8h_ae446fa48abb81ea13e37ebad6ed974ce}} 
+typedef unsigned short {\bfseries bool}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{utils_8h_a2731ebd2e67c149f3d35faeb5cc88264}\label{utils_8h_a2731ebd2e67c149f3d35faeb5cc88264}} 
+void $\ast$ {\bfseries xrealloc} (void $\ast$ptr, size\+\_\+t alloc\+\_\+sz)
+\item 
+\mbox{\Hypertarget{utils_8h_ac5d8b2ef78f1412f6cc1336e0a0fb614}\label{utils_8h_ac5d8b2ef78f1412f6cc1336e0a0fb614}} 
+void $\ast$ {\bfseries xcalloc} (size\+\_\+t count, size\+\_\+t alloc\+\_\+sz)
+\item 
+\mbox{\Hypertarget{utils_8h_a6bcccd75603aaa14ffbf13a106da8f17}\label{utils_8h_a6bcccd75603aaa14ffbf13a106da8f17}} 
+void $\ast$ {\bfseries xmalloc} (size\+\_\+t alloc\+\_\+sz)
+\item 
+\mbox{\Hypertarget{utils_8h_a432a9be3e58960e8ea3ce6dcf358e16d}\label{utils_8h_a432a9be3e58960e8ea3ce6dcf358e16d}} 
+char $\ast$ {\bfseries get\+\_\+outfile\+\_\+name} (char $\ast$path, char $\ast$postfix)
+\item 
+\mbox{\Hypertarget{utils_8h_aac7d8fc77f17b44006b8cce30ed001b8}\label{utils_8h_aac7d8fc77f17b44006b8cce30ed001b8}} 
+FILE $\ast$ {\bfseries open\+\_\+file} (char $\ast$path, char $\ast$mode)
+\item 
+\mbox{\Hypertarget{utils_8h_a7fd23b36ac26546fd3f8406b1e08298a}\label{utils_8h_a7fd23b36ac26546fd3f8406b1e08298a}} 
+char $\ast$ {\bfseries get\+\_\+line} (FILE $\ast$in)
+\item 
+\mbox{\Hypertarget{utils_8h_ad8b80874cc0471b561e6029f1aa93abe}\label{utils_8h_ad8b80874cc0471b561e6029f1aa93abe}} 
+unsigned int {\bfseries get\+\_\+2s\+\_\+complement} (int n)
+\item 
+\mbox{\Hypertarget{utils_8h_ad0882a0871ce54af3eb1128919bf443b}\label{utils_8h_ad0882a0871ce54af3eb1128919bf443b}} 
+char $\ast$ {\bfseries get\+\_\+copy\+\_\+string} (char $\ast$str)
+\item 
+\mbox{\Hypertarget{utils_8h_ad54449b57b0314ff376500b04ce04602}\label{utils_8h_ad54449b57b0314ff376500b04ce04602}} 
+bool {\bfseries is\+\_\+line\+\_\+only\+\_\+blanks} (char $\ast$line)
+\item 
+\mbox{\Hypertarget{utils_8h_a0e2e8b3f02866d94a27b04baca2a7669}\label{utils_8h_a0e2e8b3f02866d94a27b04baca2a7669}} 
+unsigned int {\bfseries get\+\_\+num} (char $\ast$num)
+\end{DoxyCompactItemize}

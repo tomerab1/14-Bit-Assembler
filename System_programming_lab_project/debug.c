@@ -1,5 +1,9 @@
+/** @file
+*/
+
 #include "debug.h"
 #include <string.h>
+
 
 void debug_list_register_node(debugList* list, debugNode* new_node)
 {

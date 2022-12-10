@@ -1,40 +1,40 @@
 \hypertarget{symbol__table_8h_source}{}\doxysection{symbol\+\_\+table.\+h}
-
+\mbox{\hyperlink{symbol__table_8h}{Go to the documentation of this file.}}
 \begin{DoxyCode}{0}
 \DoxyCodeLine{1 \textcolor{preprocessor}{\#ifndef SYMBOAL\_TABLE\_H}}
 \DoxyCodeLine{2 \textcolor{preprocessor}{\#define SYMBOAL\_TABLE\_H}}
 \DoxyCodeLine{3 }
-\DoxyCodeLine{4 \textcolor{preprocessor}{\#include "{}utils.h"{}}}
-\DoxyCodeLine{5 }
-\DoxyCodeLine{6 \textcolor{keyword}{typedef} \textcolor{keyword}{enum} \{ SYM\_DATA, SYM\_CODE, SYM\_ENTRY, SYM\_EXTERN \} symbolType;}
-\DoxyCodeLine{7 }
-\DoxyCodeLine{8 \textcolor{keyword}{typedef} \textcolor{keyword}{struct}}
-\DoxyCodeLine{9 \{}
-\DoxyCodeLine{10     \textcolor{keywordtype}{char}* name;}
-\DoxyCodeLine{11     \textcolor{keywordtype}{long} counter;}
-\DoxyCodeLine{12     symbolType type;}
-\DoxyCodeLine{13 \} \mbox{\hyperlink{struct_symbol}{Symbol}};}
-\DoxyCodeLine{14 }
-\DoxyCodeLine{15 \textcolor{keyword}{typedef} \textcolor{keyword}{struct }\mbox{\hyperlink{struct____sym__table__node}{\_\_sym\_table\_node}}}
-\DoxyCodeLine{16 \{}
-\DoxyCodeLine{17     \mbox{\hyperlink{struct_symbol}{Symbol}} sym;}
-\DoxyCodeLine{18     \textcolor{keyword}{struct }\mbox{\hyperlink{struct____sym__table__node}{\_\_sym\_table\_node}}* next;}
-\DoxyCodeLine{19 \} \mbox{\hyperlink{struct____sym__table__node}{SymbolTableNode}};}
-\DoxyCodeLine{20 }
-\DoxyCodeLine{21 \textcolor{keyword}{typedef} \textcolor{keyword}{struct}}
-\DoxyCodeLine{22 \{}
-\DoxyCodeLine{23     \mbox{\hyperlink{struct____sym__table__node}{SymbolTableNode}}* head;}
-\DoxyCodeLine{24     \mbox{\hyperlink{struct____sym__table__node}{SymbolTableNode}}* tail;}
-\DoxyCodeLine{25 \} \mbox{\hyperlink{struct_symbol_table}{SymbolTable}};}
-\DoxyCodeLine{26 }
-\DoxyCodeLine{27 \mbox{\hyperlink{struct_symbol_table}{SymbolTable}}* symbol\_table\_new\_table();}
-\DoxyCodeLine{28 \mbox{\hyperlink{struct____sym__table__node}{SymbolTableNode}}* symbol\_table\_new\_node(\textcolor{keywordtype}{char}* name, symbolType type, \textcolor{keywordtype}{long} counter);}
-\DoxyCodeLine{29 \mbox{\hyperlink{struct____sym__table__node}{SymbolTableNode}}* symbol\_table\_search\_symbol(\mbox{\hyperlink{struct_symbol_table}{SymbolTable}}* table, \textcolor{keywordtype}{char}* name);}
-\DoxyCodeLine{30 \textcolor{keywordtype}{bool} symbol\_table\_search\_symbol\_bool(\mbox{\hyperlink{struct_symbol_table}{SymbolTable}}* table, \textcolor{keywordtype}{char}* name);}
-\DoxyCodeLine{31 \textcolor{keywordtype}{void} symbol\_table\_insert\_symbol(\mbox{\hyperlink{struct_symbol_table}{SymbolTable}}* table, \mbox{\hyperlink{struct____sym__table__node}{SymbolTableNode}}* symbol);}
-\DoxyCodeLine{32 \textcolor{keywordtype}{bool} symbol\_table\_is\_empty(\mbox{\hyperlink{struct_symbol_table}{SymbolTable}}* table);}
-\DoxyCodeLine{33 \textcolor{keywordtype}{void} symbol\_table\_destroy(\mbox{\hyperlink{struct_symbol_table}{SymbolTable}}** table);}
-\DoxyCodeLine{34 }
-\DoxyCodeLine{35 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{7 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{utils_8h}{utils.h}}"{}}}
+\DoxyCodeLine{8 }
+\DoxyCodeLine{9 \textcolor{keyword}{typedef} \textcolor{keyword}{enum} \{ SYM\_DATA, SYM\_CODE, SYM\_ENTRY, SYM\_EXTERN \} symbolType;}
+\DoxyCodeLine{10 }
+\DoxyCodeLine{11 \textcolor{keyword}{typedef} \textcolor{keyword}{struct}}
+\DoxyCodeLine{12 \{}
+\DoxyCodeLine{13     \textcolor{keywordtype}{char}* name;}
+\DoxyCodeLine{14     \textcolor{keywordtype}{long} counter;}
+\DoxyCodeLine{15     symbolType type;}
+\DoxyCodeLine{16 \} \mbox{\hyperlink{struct_symbol}{Symbol}};}
+\DoxyCodeLine{17 }
+\DoxyCodeLine{18 \textcolor{keyword}{typedef} \textcolor{keyword}{struct }\mbox{\hyperlink{struct____sym__table__node}{\_\_sym\_table\_node}}}
+\DoxyCodeLine{19 \{}
+\DoxyCodeLine{20     \mbox{\hyperlink{struct_symbol}{Symbol}} sym;}
+\DoxyCodeLine{21     \textcolor{keyword}{struct }\mbox{\hyperlink{struct____sym__table__node}{\_\_sym\_table\_node}}* next;}
+\DoxyCodeLine{22 \} \mbox{\hyperlink{struct____sym__table__node}{SymbolTableNode}};}
+\DoxyCodeLine{23 }
+\DoxyCodeLine{24 \textcolor{keyword}{typedef} \textcolor{keyword}{struct}}
+\DoxyCodeLine{25 \{}
+\DoxyCodeLine{26     \mbox{\hyperlink{struct____sym__table__node}{SymbolTableNode}}* head;}
+\DoxyCodeLine{27     \mbox{\hyperlink{struct____sym__table__node}{SymbolTableNode}}* tail;}
+\DoxyCodeLine{28 \} \mbox{\hyperlink{struct_symbol_table}{SymbolTable}};}
+\DoxyCodeLine{29 }
+\DoxyCodeLine{30 \mbox{\hyperlink{struct_symbol_table}{SymbolTable}}* symbol\_table\_new\_table();}
+\DoxyCodeLine{31 \mbox{\hyperlink{struct____sym__table__node}{SymbolTableNode}}* symbol\_table\_new\_node(\textcolor{keywordtype}{char}* name, symbolType type, \textcolor{keywordtype}{long} counter);}
+\DoxyCodeLine{32 \mbox{\hyperlink{struct____sym__table__node}{SymbolTableNode}}* symbol\_table\_search\_symbol(\mbox{\hyperlink{struct_symbol_table}{SymbolTable}}* table, \textcolor{keywordtype}{char}* name);}
+\DoxyCodeLine{33 \textcolor{keywordtype}{bool} symbol\_table\_search\_symbol\_bool(\mbox{\hyperlink{struct_symbol_table}{SymbolTable}}* table, \textcolor{keywordtype}{char}* name);}
+\DoxyCodeLine{34 \textcolor{keywordtype}{void} symbol\_table\_insert\_symbol(\mbox{\hyperlink{struct_symbol_table}{SymbolTable}}* table, \mbox{\hyperlink{struct____sym__table__node}{SymbolTableNode}}* symbol);}
+\DoxyCodeLine{35 \textcolor{keywordtype}{bool} symbol\_table\_is\_empty(\mbox{\hyperlink{struct_symbol_table}{SymbolTable}}* table);}
+\DoxyCodeLine{36 \textcolor{keywordtype}{void} symbol\_table\_destroy(\mbox{\hyperlink{struct_symbol_table}{SymbolTable}}** table);}
+\DoxyCodeLine{37 }
+\DoxyCodeLine{38 \textcolor{preprocessor}{\#endif}}
 
 \end{DoxyCode}

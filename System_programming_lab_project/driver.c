@@ -1,5 +1,7 @@
-#include "driver.h"
+/** @file
+*/
 
+#include "driver.h"
 #include "pre_assembler.h"
 #include "memory.h"
 #include "debug.h"

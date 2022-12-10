@@ -1,0 +1,40 @@
+\hypertarget{utils_8c}{}\doxysection{utils.\+c File Reference}
+\label{utils_8c}\index{utils.c@{utils.c}}
+{\ttfamily \#include \char`\"{}utils.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}syntactical\+\_\+analysis.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}constants.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$ctype.\+h$>$}\newline
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{utils_8c_a2731ebd2e67c149f3d35faeb5cc88264}\label{utils_8c_a2731ebd2e67c149f3d35faeb5cc88264}} 
+void $\ast$ {\bfseries xrealloc} (void $\ast$ptr, size\+\_\+t alloc\+\_\+sz)
+\item 
+\mbox{\Hypertarget{utils_8c_ac5d8b2ef78f1412f6cc1336e0a0fb614}\label{utils_8c_ac5d8b2ef78f1412f6cc1336e0a0fb614}} 
+void $\ast$ {\bfseries xcalloc} (size\+\_\+t count, size\+\_\+t alloc\+\_\+sz)
+\item 
+\mbox{\Hypertarget{utils_8c_a6bcccd75603aaa14ffbf13a106da8f17}\label{utils_8c_a6bcccd75603aaa14ffbf13a106da8f17}} 
+void $\ast$ {\bfseries xmalloc} (size\+\_\+t alloc\+\_\+sz)
+\item 
+\mbox{\Hypertarget{utils_8c_a432a9be3e58960e8ea3ce6dcf358e16d}\label{utils_8c_a432a9be3e58960e8ea3ce6dcf358e16d}} 
+char $\ast$ {\bfseries get\+\_\+outfile\+\_\+name} (char $\ast$path, char $\ast$postfix)
+\item 
+\mbox{\Hypertarget{utils_8c_aac7d8fc77f17b44006b8cce30ed001b8}\label{utils_8c_aac7d8fc77f17b44006b8cce30ed001b8}} 
+FILE $\ast$ {\bfseries open\+\_\+file} (char $\ast$path, char $\ast$mode)
+\item 
+\mbox{\Hypertarget{utils_8c_a7fd23b36ac26546fd3f8406b1e08298a}\label{utils_8c_a7fd23b36ac26546fd3f8406b1e08298a}} 
+char $\ast$ {\bfseries get\+\_\+line} (FILE $\ast$in)
+\item 
+\mbox{\Hypertarget{utils_8c_ad54449b57b0314ff376500b04ce04602}\label{utils_8c_ad54449b57b0314ff376500b04ce04602}} 
+bool {\bfseries is\+\_\+line\+\_\+only\+\_\+blanks} (char $\ast$line)
+\item 
+\mbox{\Hypertarget{utils_8c_ad0882a0871ce54af3eb1128919bf443b}\label{utils_8c_ad0882a0871ce54af3eb1128919bf443b}} 
+char $\ast$ {\bfseries get\+\_\+copy\+\_\+string} (char $\ast$str)
+\item 
+\mbox{\Hypertarget{utils_8c_a0e2e8b3f02866d94a27b04baca2a7669}\label{utils_8c_a0e2e8b3f02866d94a27b04baca2a7669}} 
+unsigned int {\bfseries get\+\_\+num} (char $\ast$num)
+\item 
+\mbox{\Hypertarget{utils_8c_ad8b80874cc0471b561e6029f1aa93abe}\label{utils_8c_ad8b80874cc0471b561e6029f1aa93abe}} 
+unsigned int {\bfseries get\+\_\+2s\+\_\+complement} (int n)
+\end{DoxyCompactItemize}

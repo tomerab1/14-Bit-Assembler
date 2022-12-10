@@ -1,86 +1,86 @@
 \hypertarget{pre__assembler_8h_source}{}\doxysection{pre\+\_\+assembler.\+h}
-
+\mbox{\hyperlink{pre__assembler_8h}{Go to the documentation of this file.}}
 \begin{DoxyCode}{0}
 \DoxyCodeLine{1 \textcolor{preprocessor}{\#ifndef PRE\_ASSEMBLER\_H}}
 \DoxyCodeLine{2 \textcolor{preprocessor}{\#define PRE\_ASSEMBLER\_H}}
 \DoxyCodeLine{3 }
-\DoxyCodeLine{4 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{line__iterator_8h}{line\_iterator.h}}"{}}}
-\DoxyCodeLine{5 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{constants_8h}{constants.h}}"{}}}
-\DoxyCodeLine{6 \textcolor{preprocessor}{\#include "{}utils.h"{}}}
-\DoxyCodeLine{7 }
-\DoxyCodeLine{8 \textcolor{keyword}{typedef} \textcolor{keyword}{enum} \{ READ\_UNKNOWN, READ\_COMMENT, READ\_START\_MACRO, READ\_END\_MACRO \} ReadState;}
-\DoxyCodeLine{9 }
-\DoxyCodeLine{10 \textcolor{comment}{/* }}
-\DoxyCodeLine{11 \textcolor{comment}{    Struct to represent a list node. }}
-\DoxyCodeLine{12 \textcolor{comment}{    'macro\_expension' -\/ Holds the source code of the macro.}}
-\DoxyCodeLine{13 \textcolor{comment}{*/}}
-\DoxyCodeLine{14 \textcolor{keyword}{typedef} \textcolor{keyword}{struct }\mbox{\hyperlink{struct____list__node}{\_\_list\_node}}}
-\DoxyCodeLine{15 \{}
-\DoxyCodeLine{16     \textcolor{keywordtype}{int} log\_sz;}
-\DoxyCodeLine{17     \textcolor{keywordtype}{int} phy\_sz;}
-\DoxyCodeLine{18     \textcolor{keywordtype}{char}* macro\_name;}
-\DoxyCodeLine{19     \textcolor{keywordtype}{char}** macro\_expension; \textcolor{comment}{/* A dynamic array of strings. */}}
-\DoxyCodeLine{20     \textcolor{keyword}{struct }\mbox{\hyperlink{struct____list__node}{\_\_list\_node}}* next;}
-\DoxyCodeLine{21 \} \mbox{\hyperlink{struct____list__node}{MacroListNode}};}
-\DoxyCodeLine{22 }
-\DoxyCodeLine{23 \textcolor{comment}{/*}}
-\DoxyCodeLine{24 \textcolor{comment}{    Struct to represent a linked list.}}
-\DoxyCodeLine{25 \textcolor{comment}{*/}}
-\DoxyCodeLine{26 \textcolor{keyword}{typedef} \textcolor{keyword}{struct}}
-\DoxyCodeLine{27 \{}
-\DoxyCodeLine{28     \mbox{\hyperlink{struct____list__node}{MacroListNode}}* head;}
-\DoxyCodeLine{29     \mbox{\hyperlink{struct____list__node}{MacroListNode}}* tail;}
-\DoxyCodeLine{30 \} \mbox{\hyperlink{struct_macro_list}{MacroList}};}
-\DoxyCodeLine{31 }
-\DoxyCodeLine{32 \textcolor{comment}{/* Starts the pre-\/assembler phase. */}}
-\DoxyCodeLine{33 \textcolor{keywordtype}{void} start\_pre\_assembler(\textcolor{keywordtype}{char}* path);}
+\DoxyCodeLine{7 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{line__iterator_8h}{line\_iterator.h}}"{}}}
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{constants_8h}{constants.h}}"{}}}
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{utils_8h}{utils.h}}"{}}}
+\DoxyCodeLine{10 }
+\DoxyCodeLine{11 \textcolor{keyword}{typedef} \textcolor{keyword}{enum} \{ READ\_UNKNOWN, READ\_COMMENT, READ\_START\_MACRO, READ\_END\_MACRO \} ReadState;}
+\DoxyCodeLine{12 }
+\DoxyCodeLine{13 \textcolor{comment}{/* }}
+\DoxyCodeLine{14 \textcolor{comment}{    Struct to represent a list node. }}
+\DoxyCodeLine{15 \textcolor{comment}{    'macro\_expension' -\/ Holds the source code of the macro.}}
+\DoxyCodeLine{16 \textcolor{comment}{*/}}
+\DoxyCodeLine{17 \textcolor{keyword}{typedef} \textcolor{keyword}{struct }\mbox{\hyperlink{struct____list__node}{\_\_list\_node}}}
+\DoxyCodeLine{18 \{}
+\DoxyCodeLine{19     \textcolor{keywordtype}{int} log\_sz;}
+\DoxyCodeLine{20     \textcolor{keywordtype}{int} phy\_sz;}
+\DoxyCodeLine{21     \textcolor{keywordtype}{char}* macro\_name;}
+\DoxyCodeLine{22     \textcolor{keywordtype}{char}** macro\_expension; \textcolor{comment}{/* A dynamic array of strings. */}}
+\DoxyCodeLine{23     \textcolor{keyword}{struct }\mbox{\hyperlink{struct____list__node}{\_\_list\_node}}* next;}
+\DoxyCodeLine{24 \} \mbox{\hyperlink{struct____list__node}{MacroListNode}};}
+\DoxyCodeLine{25 }
+\DoxyCodeLine{26 \textcolor{comment}{/*}}
+\DoxyCodeLine{27 \textcolor{comment}{    Struct to represent a linked list.}}
+\DoxyCodeLine{28 \textcolor{comment}{*/}}
+\DoxyCodeLine{29 \textcolor{keyword}{typedef} \textcolor{keyword}{struct}}
+\DoxyCodeLine{30 \{}
+\DoxyCodeLine{31     \mbox{\hyperlink{struct____list__node}{MacroListNode}}* head;}
+\DoxyCodeLine{32     \mbox{\hyperlink{struct____list__node}{MacroListNode}}* tail;}
+\DoxyCodeLine{33 \} \mbox{\hyperlink{struct_macro_list}{MacroList}};}
 \DoxyCodeLine{34 }
-\DoxyCodeLine{35 \textcolor{comment}{/* Reads a file, fills 'in\_list' with the macros data, if all is valid, it returns TRUE, otherwise FALSE. */}}
-\DoxyCodeLine{36 \textcolor{keywordtype}{void} macro\_list\_fill\_list\_from\_file(FILE* in, \mbox{\hyperlink{struct_macro_list}{MacroList}}* in\_list);}
+\DoxyCodeLine{35 \textcolor{comment}{/* Starts the pre-\/assembler phase. */}}
+\DoxyCodeLine{36 \textcolor{keywordtype}{void} start\_pre\_assembler(\textcolor{keywordtype}{char}* path);}
 \DoxyCodeLine{37 }
-\DoxyCodeLine{38 \textcolor{comment}{/* Returns the current reading state. */}}
-\DoxyCodeLine{39 ReadState get\_current\_reading\_state(\mbox{\hyperlink{struct_line_iterator}{LineIterator}}* it);}
+\DoxyCodeLine{38 \textcolor{comment}{/* Reads a file, fills 'in\_list' with the macros data, if all is valid, it returns TRUE, otherwise FALSE. */}}
+\DoxyCodeLine{39 \textcolor{keywordtype}{void} macro\_list\_fill\_list\_from\_file(FILE* in, \mbox{\hyperlink{struct_macro_list}{MacroList}}* in\_list);}
 \DoxyCodeLine{40 }
-\DoxyCodeLine{41 \textcolor{comment}{/* Returns the macro label name. */}}
-\DoxyCodeLine{42 \textcolor{keywordtype}{char}* get\_macro\_name(\mbox{\hyperlink{struct_line_iterator}{LineIterator}}* it);}
+\DoxyCodeLine{41 \textcolor{comment}{/* Returns the current reading state. */}}
+\DoxyCodeLine{42 ReadState get\_current\_reading\_state(\mbox{\hyperlink{struct_line_iterator}{LineIterator}}* it);}
 \DoxyCodeLine{43 }
-\DoxyCodeLine{44 \textcolor{comment}{/* Creates a new macro list */}}
-\DoxyCodeLine{45 \mbox{\hyperlink{struct_macro_list}{MacroList}}* macro\_list\_new\_list();}
+\DoxyCodeLine{44 \textcolor{comment}{/* Returns the macro label name. */}}
+\DoxyCodeLine{45 \textcolor{keywordtype}{char}* get\_macro\_name(\mbox{\hyperlink{struct_line_iterator}{LineIterator}}* it);}
 \DoxyCodeLine{46 }
-\DoxyCodeLine{47 \textcolor{comment}{/* Checks if macro list is empty */}}
-\DoxyCodeLine{48 \textcolor{keywordtype}{bool} macro\_list\_is\_empty(\mbox{\hyperlink{struct_macro_list}{MacroList}}* list);}
+\DoxyCodeLine{47 \textcolor{comment}{/* Creates a new macro list */}}
+\DoxyCodeLine{48 \mbox{\hyperlink{struct_macro_list}{MacroList}}* macro\_list\_new\_list();}
 \DoxyCodeLine{49 }
-\DoxyCodeLine{50 \textcolor{comment}{/* Create a new macro list node */}}
-\DoxyCodeLine{51 \mbox{\hyperlink{struct____list__node}{MacroListNode}}* macro\_list\_new\_node(\textcolor{keywordtype}{char}* name);}
+\DoxyCodeLine{50 \textcolor{comment}{/* Checks if macro list is empty */}}
+\DoxyCodeLine{51 \textcolor{keywordtype}{bool} macro\_list\_is\_empty(\mbox{\hyperlink{struct_macro_list}{MacroList}}* list);}
 \DoxyCodeLine{52 }
-\DoxyCodeLine{53 \textcolor{comment}{/* Expands a macro to file 'out'. */}}
-\DoxyCodeLine{54 \textcolor{keywordtype}{void} expand\_macro\_to\_file(FILE* out, \mbox{\hyperlink{struct_macro_list}{MacroList}}* list, \textcolor{keywordtype}{char}* name);}
+\DoxyCodeLine{53 \textcolor{comment}{/* Create a new macro list node */}}
+\DoxyCodeLine{54 \mbox{\hyperlink{struct____list__node}{MacroListNode}}* macro\_list\_new\_node(\textcolor{keywordtype}{char}* name);}
 \DoxyCodeLine{55 }
-\DoxyCodeLine{56 \textcolor{comment}{/* Inserts a new node to the macro list */}}
-\DoxyCodeLine{57 \textcolor{keywordtype}{void} macro\_list\_insert\_node(\mbox{\hyperlink{struct_macro_list}{MacroList}}* list, \mbox{\hyperlink{struct____list__node}{MacroListNode}}* node);}
+\DoxyCodeLine{56 \textcolor{comment}{/* Expands a macro to file 'out'. */}}
+\DoxyCodeLine{57 \textcolor{keywordtype}{void} expand\_macro\_to\_file(FILE* out, \mbox{\hyperlink{struct_macro_list}{MacroList}}* list, \textcolor{keywordtype}{char}* name);}
 \DoxyCodeLine{58 }
-\DoxyCodeLine{59 \textcolor{comment}{/* Inserts a line into '\_\_list\_node.macro\_expension' member. */}}
-\DoxyCodeLine{60 \textcolor{keywordtype}{void} macro\_list\_node\_insert\_source(\mbox{\hyperlink{struct____list__node}{MacroListNode}}* node, \textcolor{keywordtype}{char}* line);}
+\DoxyCodeLine{59 \textcolor{comment}{/* Inserts a new node to the macro list */}}
+\DoxyCodeLine{60 \textcolor{keywordtype}{void} macro\_list\_insert\_node(\mbox{\hyperlink{struct_macro_list}{MacroList}}* list, \mbox{\hyperlink{struct____list__node}{MacroListNode}}* node);}
 \DoxyCodeLine{61 }
-\DoxyCodeLine{62 \textcolor{comment}{/* Insert all of the data inside the macro specified in 'line' to the current node */}}
-\DoxyCodeLine{63 \textcolor{keywordtype}{void} macro\_list\_node\_insert\_macro(\mbox{\hyperlink{struct____list__node}{MacroListNode}}* tail, \mbox{\hyperlink{struct____list__node}{MacroListNode}}* node);}
+\DoxyCodeLine{62 \textcolor{comment}{/* Inserts a line into '\_\_list\_node.macro\_expension' member. */}}
+\DoxyCodeLine{63 \textcolor{keywordtype}{void} macro\_list\_node\_insert\_source(\mbox{\hyperlink{struct____list__node}{MacroListNode}}* node, \textcolor{keywordtype}{char}* line);}
 \DoxyCodeLine{64 }
-\DoxyCodeLine{65 \textcolor{comment}{/* Returns the node in which its name matches to entry*/}}
-\DoxyCodeLine{66 \mbox{\hyperlink{struct____list__node}{MacroListNode}}* macro\_list\_get\_node(\mbox{\hyperlink{struct_macro_list}{MacroList}}* list, \textcolor{keywordtype}{char}* entry);}
+\DoxyCodeLine{65 \textcolor{comment}{/* Insert all of the data inside the macro specified in 'line' to the current node */}}
+\DoxyCodeLine{66 \textcolor{keywordtype}{void} macro\_list\_node\_insert\_macro(\mbox{\hyperlink{struct____list__node}{MacroListNode}}* tail, \mbox{\hyperlink{struct____list__node}{MacroListNode}}* node);}
 \DoxyCodeLine{67 }
-\DoxyCodeLine{68 \textcolor{comment}{/* Creates an expanded source file inside 'out' */}}
-\DoxyCodeLine{69 \textcolor{keywordtype}{void} create\_pre\_assembler\_file(FILE* in, FILE* out, \mbox{\hyperlink{struct_macro_list}{MacroList}}* list);}
+\DoxyCodeLine{68 \textcolor{comment}{/* Returns the node in which its name matches to entry*/}}
+\DoxyCodeLine{69 \mbox{\hyperlink{struct____list__node}{MacroListNode}}* macro\_list\_get\_node(\mbox{\hyperlink{struct_macro_list}{MacroList}}* list, \textcolor{keywordtype}{char}* entry);}
 \DoxyCodeLine{70 }
-\DoxyCodeLine{71 \textcolor{comment}{/* Frees the 'macro\_expension' member */}}
-\DoxyCodeLine{72 \textcolor{keywordtype}{void} macro\_free\_expension(\textcolor{keywordtype}{char}*** macro\_expension, \textcolor{keywordtype}{int} size);}
+\DoxyCodeLine{71 \textcolor{comment}{/* Creates an expanded source file inside 'out' */}}
+\DoxyCodeLine{72 \textcolor{keywordtype}{void} create\_pre\_assembler\_file(FILE* in, FILE* out, \mbox{\hyperlink{struct_macro_list}{MacroList}}* list);}
 \DoxyCodeLine{73 }
-\DoxyCodeLine{74 \textcolor{preprocessor}{\#ifdef DEBUG}}
-\DoxyCodeLine{75 \textcolor{keywordtype}{void} macro\_list\_dump(\mbox{\hyperlink{struct_macro_list}{MacroList}}* list);}
-\DoxyCodeLine{76 \textcolor{preprocessor}{\#endif }}
-\DoxyCodeLine{77 }
-\DoxyCodeLine{78 \textcolor{comment}{/* Frees a macro list */}}
-\DoxyCodeLine{79 \textcolor{keywordtype}{void} macro\_list\_free(\mbox{\hyperlink{struct_macro_list}{MacroList}}** list);}
+\DoxyCodeLine{74 \textcolor{comment}{/* Frees the 'macro\_expension' member */}}
+\DoxyCodeLine{75 \textcolor{keywordtype}{void} macro\_free\_expension(\textcolor{keywordtype}{char}*** macro\_expension, \textcolor{keywordtype}{int} size);}
+\DoxyCodeLine{76 }
+\DoxyCodeLine{77 \textcolor{preprocessor}{\#ifdef DEBUG}}
+\DoxyCodeLine{78 \textcolor{keywordtype}{void} macro\_list\_dump(\mbox{\hyperlink{struct_macro_list}{MacroList}}* list);}
+\DoxyCodeLine{79 \textcolor{preprocessor}{\#endif }}
 \DoxyCodeLine{80 }
-\DoxyCodeLine{81 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{81 \textcolor{comment}{/* Frees a macro list */}}
+\DoxyCodeLine{82 \textcolor{keywordtype}{void} macro\_list\_free(\mbox{\hyperlink{struct_macro_list}{MacroList}}** list);}
+\DoxyCodeLine{83 }
+\DoxyCodeLine{84 \textcolor{preprocessor}{\#endif}}
 
 \end{DoxyCode}
