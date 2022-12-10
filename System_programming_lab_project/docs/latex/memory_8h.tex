@@ -1,0 +1,178 @@
+\hypertarget{memory_8h}{}\doxysection{memory.\+h File Reference}
+\label{memory_8h}\index{memory.h@{memory.h}}
+{\ttfamily \#include \char`\"{}constants.\+h\char`\"{}}\newline
+\doxysubsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{struct_memory_word}{Memory\+Word}}
+\begin{DoxyCompactList}\small\item\em This sturct is used to represent a memory word as specified in the project\textquotesingle{}s description. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structimage_memory}{image\+Memory}}
+\begin{DoxyCompactList}\small\item\em This struct is used to represent \textquotesingle{}instruction/data image\textquotesingle{} and the \textquotesingle{}instruction/data counter\textquotesingle{}. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structmemory_buffer}{memory\+Buffer}}
+\begin{DoxyCompactList}\small\item\em This struct is used to represent all the memory buffers, the \textquotesingle{}cpu\textquotesingle{} registers and the instruction/data image. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{memory_8h_a94c7bfd8d6b2f2d34c76d51829c6d05f}\label{memory_8h_a94c7bfd8d6b2f2d34c76d51829c6d05f}} 
+\#define {\bfseries SIZEOF\+\_\+\+MEMORY\+\_\+\+WORD}~2 /$\ast$ We only need 14 bits, so we will use an array of 2 chars. $\ast$/
+\item 
+\mbox{\Hypertarget{memory_8h_accce6d6bc42ec82762494ececd351222}\label{memory_8h_accce6d6bc42ec82762494ececd351222}} 
+\#define {\bfseries FLAG\+\_\+\+ERA}~0x01
+\item 
+\mbox{\Hypertarget{memory_8h_aeea3b2f138cfaa2159020e0c76684f32}\label{memory_8h_aeea3b2f138cfaa2159020e0c76684f32}} 
+\#define {\bfseries FLAG\+\_\+\+SOURCE}~0x02
+\item 
+\mbox{\Hypertarget{memory_8h_ad503f653fa553821ddee21c3bf54cbf7}\label{memory_8h_ad503f653fa553821ddee21c3bf54cbf7}} 
+\#define {\bfseries FLAG\+\_\+\+DEST}~0x04
+\item 
+\mbox{\Hypertarget{memory_8h_a4fe45b19f733aa7cf01b0aa55604055f}\label{memory_8h_a4fe45b19f733aa7cf01b0aa55604055f}} 
+\#define {\bfseries FLAG\+\_\+\+OPCODE1}~0x08
+\item 
+\mbox{\Hypertarget{memory_8h_a6f595da23f0c608a2f5d5833b78e072b}\label{memory_8h_a6f595da23f0c608a2f5d5833b78e072b}} 
+\#define {\bfseries FLAG\+\_\+\+OPCODE2}~0x10
+\item 
+\mbox{\Hypertarget{memory_8h_a3b6cb587c3262054e6108eeeeef9d599}\label{memory_8h_a3b6cb587c3262054e6108eeeeef9d599}} 
+\#define {\bfseries FLAG\+\_\+\+PARAM1}~0x20
+\item 
+\mbox{\Hypertarget{memory_8h_a9bb8a0be53eafe26415aab923739bf1b}\label{memory_8h_a9bb8a0be53eafe26415aab923739bf1b}} 
+\#define {\bfseries FLAG\+\_\+\+PARAM2}~0x40
+\item 
+\mbox{\Hypertarget{memory_8h_a4bb0243b31313a9a5cc60266c05d8fc6}\label{memory_8h_a4bb0243b31313a9a5cc60266c05d8fc6}} 
+\#define {\bfseries MASK\+\_\+\+ERA}~0x03
+\item 
+\mbox{\Hypertarget{memory_8h_a0063aa5a83926660b935de19b944edc5}\label{memory_8h_a0063aa5a83926660b935de19b944edc5}} 
+\#define {\bfseries MASK\+\_\+\+DEST}~0x0c
+\item 
+\mbox{\Hypertarget{memory_8h_adc5d1d407181cec7e0f24e5638080a13}\label{memory_8h_adc5d1d407181cec7e0f24e5638080a13}} 
+\#define {\bfseries MASK\+\_\+\+SOURCE}~0x30
+\item 
+\mbox{\Hypertarget{memory_8h_a769d2cfb247a1177870d3268c82928b2}\label{memory_8h_a769d2cfb247a1177870d3268c82928b2}} 
+\#define {\bfseries MASK\+\_\+\+OPCODE1}~0xc0
+\item 
+\mbox{\Hypertarget{memory_8h_a7a3e4a866d92e34fbd9ca308632c2670}\label{memory_8h_a7a3e4a866d92e34fbd9ca308632c2670}} 
+\#define {\bfseries MASK\+\_\+\+OPCODE2}~0x03
+\item 
+\mbox{\Hypertarget{memory_8h_a250f63b9cdb6444941837f3105d9c280}\label{memory_8h_a250f63b9cdb6444941837f3105d9c280}} 
+\#define {\bfseries MASK\+\_\+\+PARAM1}~0x0c
+\item 
+\mbox{\Hypertarget{memory_8h_a5786494e3b01952de013634dde266878}\label{memory_8h_a5786494e3b01952de013634dde266878}} 
+\#define {\bfseries MASK\+\_\+\+PARAM2}~0x30
+\item 
+\mbox{\Hypertarget{memory_8h_ad2aa7595484e90485074ba66a981f09d}\label{memory_8h_ad2aa7595484e90485074ba66a981f09d}} 
+\#define {\bfseries OFFSET\+\_\+\+ERA}~0x00
+\item 
+\mbox{\Hypertarget{memory_8h_ac5f58500d29c49630163e3f8b33182a0}\label{memory_8h_ac5f58500d29c49630163e3f8b33182a0}} 
+\#define {\bfseries OFFSET\+\_\+\+DEST}~0x02
+\item 
+\mbox{\Hypertarget{memory_8h_aa1a9e49a5573bd31e0e10414b8cb2098}\label{memory_8h_aa1a9e49a5573bd31e0e10414b8cb2098}} 
+\#define {\bfseries OFFSET\+\_\+\+SOURCE}~0x04
+\item 
+\mbox{\Hypertarget{memory_8h_af3285070f7425498ee38cfe644586d67}\label{memory_8h_af3285070f7425498ee38cfe644586d67}} 
+\#define {\bfseries OFFSET\+\_\+\+OPCODE1}~0x06
+\item 
+\mbox{\Hypertarget{memory_8h_a386610882fb056469b9f1530d743a6c9}\label{memory_8h_a386610882fb056469b9f1530d743a6c9}} 
+\#define {\bfseries OFFSET\+\_\+\+OPCODE2}~0x00
+\item 
+\mbox{\Hypertarget{memory_8h_a94e1047ce6b42a51a671cb9c257b539f}\label{memory_8h_a94e1047ce6b42a51a671cb9c257b539f}} 
+\#define {\bfseries OFFSET\+\_\+\+PARAM1}~0x02
+\item 
+\mbox{\Hypertarget{memory_8h_ac55214882b93c225bd72bd7417f77a6d}\label{memory_8h_ac55214882b93c225bd72bd7417f77a6d}} 
+\#define {\bfseries OFFSET\+\_\+\+PARAM2}~0x04
+\end{DoxyCompactItemize}
+\doxysubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{memory_8h_a0b9039f87c8a2980c4a6ab14b511760a}{Encoding\+Types}} \{ {\bfseries ENCODING\+\_\+\+ABS} = 0
+, {\bfseries ENCODING\+\_\+\+EXT}
+, {\bfseries ENCODING\+\_\+\+RELOC}
+ \}
+\item 
+enum \mbox{\hyperlink{memory_8h_a3e3ad86bd10ce04fea0bc583130474b6}{Registers\+Type}} \{ \newline
+{\bfseries REG\+\_\+\+R0} = 0
+, {\bfseries REG\+\_\+\+R1}
+, {\bfseries REG\+\_\+\+R2}
+, {\bfseries REG\+\_\+\+R3}
+, \newline
+{\bfseries REG\+\_\+\+R4}
+, {\bfseries REG\+\_\+\+R5}
+, {\bfseries REG\+\_\+\+R6}
+, {\bfseries REG\+\_\+\+R7}
+, \newline
+{\bfseries REG\+\_\+\+PSW}
+, {\bfseries REG\+\_\+\+PC}
+, {\bfseries REG\+\_\+\+TOTAL}
+ \}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{memory_8h_adf23764132d697803f1dbbf260b86f7a}\label{memory_8h_adf23764132d697803f1dbbf260b86f7a}} 
+\mbox{\hyperlink{structmemory_buffer}{memory\+Buffer}} {\bfseries memory\+\_\+buffer\+\_\+get\+\_\+new} ()
+\begin{DoxyCompactList}\small\item\em This is a function for creating a new memory buffer object. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{memory_8h_a3336aa8be04b4a57da3ac881aa13e399}\label{memory_8h_a3336aa8be04b4a57da3ac881aa13e399}} 
+void {\bfseries set\+\_\+image\+\_\+memory} (\mbox{\hyperlink{structimage_memory}{image\+Memory}} $\ast$mem, unsigned char bytes, int \mbox{\hyperlink{structflags}{flags}})
+\begin{DoxyCompactList}\small\item\em This function sets bytes appropriately in a memory\+Word. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{memory_8h_a93e3f81e0962233b51525ba94b65b497}\label{memory_8h_a93e3f81e0962233b51525ba94b65b497}} 
+void {\bfseries set\+\_\+era\+\_\+bits} (\mbox{\hyperlink{struct_memory_word}{Memory\+Word}} $\ast$mem, unsigned char byte)
+\begin{DoxyCompactList}\small\item\em This function is for setting the e.\+r.\+a flag. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{memory_8h_ade0c49a7d50ab537e5a0430f03fed99b}\label{memory_8h_ade0c49a7d50ab537e5a0430f03fed99b}} 
+void {\bfseries set\+\_\+source\+\_\+bits} (\mbox{\hyperlink{struct_memory_word}{Memory\+Word}} $\ast$mem, unsigned char byte)
+\begin{DoxyCompactList}\small\item\em This function is for setting the e.\+r.\+a flag. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{memory_8h_a72d3c6f627586efbcd6996a4dd391fb2}\label{memory_8h_a72d3c6f627586efbcd6996a4dd391fb2}} 
+void {\bfseries set\+\_\+dest\+\_\+bits} (\mbox{\hyperlink{struct_memory_word}{Memory\+Word}} $\ast$mem, unsigned char byte)
+\begin{DoxyCompactList}\small\item\em This function is for setting the e.\+r.\+a flag. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{memory_8h_ac9bcd66be7ee1d40cb336193f7e254c0}\label{memory_8h_ac9bcd66be7ee1d40cb336193f7e254c0}} 
+void {\bfseries set\+\_\+opcode\+\_\+cell\+\_\+1\+\_\+bits} (\mbox{\hyperlink{struct_memory_word}{Memory\+Word}} $\ast$mem, unsigned char byte)
+\begin{DoxyCompactList}\small\item\em This function is for setting the e.\+r.\+a flag. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{memory_8h_a96444c2a4c994cac4f3ab865953dd2c6}\label{memory_8h_a96444c2a4c994cac4f3ab865953dd2c6}} 
+void {\bfseries set\+\_\+opcode\+\_\+cell\+\_\+2\+\_\+bits} (\mbox{\hyperlink{struct_memory_word}{Memory\+Word}} $\ast$mem, unsigned char byte)
+\begin{DoxyCompactList}\small\item\em This function is for setting the e.\+r.\+a flag. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{memory_8h_ae38ae715ce595c2a6b8c0744c49d9597}\label{memory_8h_ae38ae715ce595c2a6b8c0744c49d9597}} 
+void {\bfseries set\+\_\+param1\+\_\+bits} (\mbox{\hyperlink{struct_memory_word}{Memory\+Word}} $\ast$mem, unsigned char byte)
+\begin{DoxyCompactList}\small\item\em This function is for setting the e.\+r.\+a flag. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{memory_8h_a62312d8255fbb931cca75788ff112cc5}\label{memory_8h_a62312d8255fbb931cca75788ff112cc5}} 
+void {\bfseries set\+\_\+param2\+\_\+bits} (\mbox{\hyperlink{struct_memory_word}{Memory\+Word}} $\ast$mem, unsigned char byte)
+\begin{DoxyCompactList}\small\item\em This function is for setting the e.\+r.\+a flag. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{memory_8h_a73f839bda8be7302d9b850df4ee37cd8}\label{memory_8h_a73f839bda8be7302d9b850df4ee37cd8}} 
+unsigned char {\bfseries get\+\_\+era\+\_\+bits} (\mbox{\hyperlink{struct_memory_word}{Memory\+Word}} $\ast$mem)
+\item 
+\mbox{\Hypertarget{memory_8h_a852dac4653c086451f347d827078c2af}\label{memory_8h_a852dac4653c086451f347d827078c2af}} 
+unsigned char {\bfseries get\+\_\+source\+\_\+bits} (\mbox{\hyperlink{struct_memory_word}{Memory\+Word}} $\ast$mem)
+\item 
+\mbox{\Hypertarget{memory_8h_a5c4442f29f0f8f7b818a838dc338d934}\label{memory_8h_a5c4442f29f0f8f7b818a838dc338d934}} 
+unsigned char {\bfseries get\+\_\+dest\+\_\+bits} (\mbox{\hyperlink{struct_memory_word}{Memory\+Word}} $\ast$mem)
+\item 
+\mbox{\Hypertarget{memory_8h_abb53ab7a1ea78aaa067b6447cae2c5e8}\label{memory_8h_abb53ab7a1ea78aaa067b6447cae2c5e8}} 
+unsigned char {\bfseries get\+\_\+opcode\+\_\+cell\+\_\+1\+\_\+bits} (\mbox{\hyperlink{struct_memory_word}{Memory\+Word}} $\ast$mem)
+\item 
+\mbox{\Hypertarget{memory_8h_a09ef0858416e195189451b89cb3768ff}\label{memory_8h_a09ef0858416e195189451b89cb3768ff}} 
+unsigned char {\bfseries get\+\_\+opcode\+\_\+cell\+\_\+2\+\_\+bits} (\mbox{\hyperlink{struct_memory_word}{Memory\+Word}} $\ast$mem)
+\item 
+\mbox{\Hypertarget{memory_8h_a60cb56495d4817ac202b7efb2ba1c6cc}\label{memory_8h_a60cb56495d4817ac202b7efb2ba1c6cc}} 
+unsigned char {\bfseries get\+\_\+param1\+\_\+bits} (\mbox{\hyperlink{struct_memory_word}{Memory\+Word}} $\ast$mem)
+\item 
+\mbox{\Hypertarget{memory_8h_a94e06931082678360737348195f14da6}\label{memory_8h_a94e06931082678360737348195f14da6}} 
+unsigned char {\bfseries get\+\_\+param2\+\_\+bits} (\mbox{\hyperlink{struct_memory_word}{Memory\+Word}} $\ast$mem)
+\item 
+\mbox{\Hypertarget{memory_8h_a57531ac1359c9341baefbeec8ccc3cfe}\label{memory_8h_a57531ac1359c9341baefbeec8ccc3cfe}} 
+void {\bfseries dump\+\_\+memory} (\mbox{\hyperlink{structmemory_buffer}{memory\+Buffer}} $\ast$buf)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+This header is used to specify all memory related data structures, i.\+e. \mbox{\hyperlink{struct_memory_word}{Memory\+Word}}, \mbox{\hyperlink{structmemory_buffer}{memory\+Buffer}} etc. This header also includes all the appropriate routines for manipulating and creating those data structures. 
+
+\doxysubsection{Enumeration Type Documentation}
+\mbox{\Hypertarget{memory_8h_a0b9039f87c8a2980c4a6ab14b511760a}\label{memory_8h_a0b9039f87c8a2980c4a6ab14b511760a}} 
+\index{memory.h@{memory.h}!EncodingTypes@{EncodingTypes}}
+\index{EncodingTypes@{EncodingTypes}!memory.h@{memory.h}}
+\doxysubsubsection{\texorpdfstring{EncodingTypes}{EncodingTypes}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{memory_8h_a0b9039f87c8a2980c4a6ab14b511760a}{Encoding\+Types}}}
+
+This enumeration is used to represent each encoding type with a specific numeric constant. \mbox{\Hypertarget{memory_8h_a3e3ad86bd10ce04fea0bc583130474b6}\label{memory_8h_a3e3ad86bd10ce04fea0bc583130474b6}} 
+\index{memory.h@{memory.h}!RegistersType@{RegistersType}}
+\index{RegistersType@{RegistersType}!memory.h@{memory.h}}
+\doxysubsubsection{\texorpdfstring{RegistersType}{RegistersType}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{memory_8h_a3e3ad86bd10ce04fea0bc583130474b6}{Registers\+Type}}}
+
+This enumeration is used to represent each register type with a specific numeric constant. 

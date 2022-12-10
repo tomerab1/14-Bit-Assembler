@@ -1,6 +1,9 @@
 #ifndef CONSTANTS_H
 #define CONSTANTS_H
 
+/** @file
+*/
+
 #define SOURCE_LINE_MAX_LENGTH 81
 #define LABEL_MAX_LENGTH 31
 

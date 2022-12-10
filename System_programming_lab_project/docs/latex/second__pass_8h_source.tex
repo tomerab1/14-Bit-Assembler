@@ -1,0 +1,91 @@
+\hypertarget{second__pass_8h_source}{}\doxysection{second\+\_\+pass.\+h}
+\mbox{\hyperlink{second__pass_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#ifndef SECOND\_PASS\_H}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#define SECOND\_PASS\_h}}
+\DoxyCodeLine{3 }
+\DoxyCodeLine{7 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{syntactical__analysis_8h}{syntactical\_analysis.h}}"{}}}
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{line__iterator_8h}{line\_iterator.h}}"{}}}
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#include "{}symbol\_table.h"{}}}
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{memory_8h}{memory.h}}"{}}}
+\DoxyCodeLine{11 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{debug_8h}{debug.h}}"{}}}
+\DoxyCodeLine{12 \textcolor{preprocessor}{\#include "{}utils.h"{}}}
+\DoxyCodeLine{13 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{debug_8h}{debug.h}}"{}}}
+\DoxyCodeLine{14 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{constants_8h}{constants.h}}"{}}}
+\DoxyCodeLine{15 }
+\DoxyCodeLine{16 \textcolor{keyword}{typedef} \textcolor{keyword}{struct }\mbox{\hyperlink{structlines__list__node}{lines\_list\_node}}}
+\DoxyCodeLine{17 \{}
+\DoxyCodeLine{18     \textcolor{keywordtype}{int} address;}
+\DoxyCodeLine{19     \textcolor{keywordtype}{char}* data; \textcolor{comment}{/* 14 bits string strings. */}}
+\DoxyCodeLine{20     \textcolor{keywordtype}{char}* machine\_data[SINGLE\_ORDER\_SIZE]; \textcolor{comment}{/* 14 bits string strings. */}}
+\DoxyCodeLine{21     \textcolor{keywordtype}{char}* line\_type; \textcolor{comment}{/*empty, comment, guidence, command*/}}
+\DoxyCodeLine{22     \textcolor{keyword}{struct }\mbox{\hyperlink{structlines__list__node}{lines\_list\_node}}* next;}
+\DoxyCodeLine{23 \} \mbox{\hyperlink{structlines__list__node}{LinesListNode}};}
+\DoxyCodeLine{24 }
+\DoxyCodeLine{25 \textcolor{comment}{/*}}
+\DoxyCodeLine{26 \textcolor{comment}{    Struct to represent a linked list.}}
+\DoxyCodeLine{27 \textcolor{comment}{*/}}
+\DoxyCodeLine{28 \textcolor{keyword}{typedef} \textcolor{keyword}{struct}}
+\DoxyCodeLine{29 \{}
+\DoxyCodeLine{30     \mbox{\hyperlink{structlines__list__node}{LinesListNode}}* head;}
+\DoxyCodeLine{31     \mbox{\hyperlink{structlines__list__node}{LinesListNode}}* tail;}
+\DoxyCodeLine{32 \} \mbox{\hyperlink{struct_lines_list}{LinesList}};}
+\DoxyCodeLine{33 }
+\DoxyCodeLine{34 \textcolor{keyword}{typedef} \textcolor{keyword}{struct }\mbox{\hyperlink{structflags}{flags}}}
+\DoxyCodeLine{35 \{}
+\DoxyCodeLine{36     \textcolor{keywordtype}{bool} dot\_entry\_exists;}
+\DoxyCodeLine{37     \textcolor{keywordtype}{bool} dot\_extern\_exists;}
+\DoxyCodeLine{38 \} \mbox{\hyperlink{structflags}{flags}};}
+\DoxyCodeLine{39 }
+\DoxyCodeLine{40 \textcolor{keyword}{typedef} \textcolor{keyword}{struct }\mbox{\hyperlink{structprogram_final_status}{programFinalStatus}}}
+\DoxyCodeLine{41 \{}
+\DoxyCodeLine{42     \mbox{\hyperlink{structflags}{flags}} entryAndExternFlag;}
+\DoxyCodeLine{43     \textcolor{keywordtype}{bool} createdObject;}
+\DoxyCodeLine{44     \textcolor{keywordtype}{bool} createdExternals;}
+\DoxyCodeLine{45     \textcolor{keywordtype}{bool} createdEntry;}
+\DoxyCodeLine{46     \mbox{\hyperlink{structdebug_list}{debugList}} errors;}
+\DoxyCodeLine{47     \textcolor{keywordtype}{bool} error\_flag;}
+\DoxyCodeLine{48 \} \mbox{\hyperlink{structprogram_final_status}{programFinalStatus}};}
+\DoxyCodeLine{49 }
+\DoxyCodeLine{50 }
+\DoxyCodeLine{51 \textcolor{comment}{//starts second pass process}}
+\DoxyCodeLine{52 \textcolor{keywordtype}{bool} initiate\_second\_pass(\textcolor{keywordtype}{char}* path, \mbox{\hyperlink{struct_symbol_table}{SymbolTable}}* table, \mbox{\hyperlink{structmemory_buffer}{memoryBuffer}}* memory);}
+\DoxyCodeLine{53 }
+\DoxyCodeLine{66 \textcolor{keywordtype}{bool} \mbox{\hyperlink{second__pass_8h_afc04421d0895c01983e6e7086d0cbfa7}{generate\_object\_file}}(\mbox{\hyperlink{structmemory_buffer}{memoryBuffer}}* memory, \textcolor{keywordtype}{char}* path, \mbox{\hyperlink{structdebug_list}{debugList}}* err);}
+\DoxyCodeLine{67 }
+\DoxyCodeLine{68 \textcolor{comment}{/*translates data from memory to object text style configuration*/}}
+\DoxyCodeLine{69 \mbox{\hyperlink{struct_lines_list}{LinesList}}* translate\_to\_machine\_data(\mbox{\hyperlink{structmemory_buffer}{memoryBuffer}}* memory, \mbox{\hyperlink{structerror_context}{errorContext}}* err);}
+\DoxyCodeLine{70 }
+\DoxyCodeLine{71 \textcolor{comment}{/*generates external file*/}}
+\DoxyCodeLine{72 \textcolor{keywordtype}{bool} generate\_externals\_file(\mbox{\hyperlink{struct_symbol_table}{SymbolTable}}* table, \textcolor{keywordtype}{char}* path);}
+\DoxyCodeLine{73 }
+\DoxyCodeLine{74 \textcolor{comment}{/*generates entries file*/}}
+\DoxyCodeLine{75 \textcolor{keywordtype}{bool} generate\_entries\_file(\mbox{\hyperlink{struct_symbol_table}{SymbolTable}}* table, \textcolor{keywordtype}{char}* path);}
+\DoxyCodeLine{76 }
+\DoxyCodeLine{77 \textcolor{comment}{/*calls file generation functions*/}}
+\DoxyCodeLine{78 \textcolor{keywordtype}{void} create\_files(\mbox{\hyperlink{structmemory_buffer}{memoryBuffer}}* memory, \textcolor{keywordtype}{char}* path, \mbox{\hyperlink{structprogram_final_status}{programFinalStatus}}* finalStatus, \mbox{\hyperlink{struct_symbol_table}{SymbolTable}}* table, \mbox{\hyperlink{structdebug_list}{debugList}}* err);}
+\DoxyCodeLine{79 }
+\DoxyCodeLine{80 \textcolor{comment}{//checks if any order type (extern or entry) commands exists in the program}}
+\DoxyCodeLine{81 \textcolor{keywordtype}{bool} directive\_exists(\mbox{\hyperlink{struct_line_iterator}{LineIterator}}* line);}
+\DoxyCodeLine{82 }
+\DoxyCodeLine{83 \textcolor{comment}{/*If extern exists changes flag to true, used later on while generating files*/}}
+\DoxyCodeLine{84 \textcolor{keywordtype}{void} extern\_exists(\mbox{\hyperlink{structflags}{flags}}* flag);}
+\DoxyCodeLine{85 }
+\DoxyCodeLine{86 \textcolor{comment}{/*if extern exists changes flag to true, used later on while generating files*/}}
+\DoxyCodeLine{87 \textcolor{keywordtype}{void} entry\_exists(\mbox{\hyperlink{structflags}{flags}}* flag);}
+\DoxyCodeLine{88 }
+\DoxyCodeLine{89 \textcolor{comment}{/*finds if the type of the directive*/}}
+\DoxyCodeLine{90 \textcolor{keywordtype}{void} extract\_directive\_type(\mbox{\hyperlink{struct_line_iterator}{LineIterator}}* line, \mbox{\hyperlink{structflags}{flags}}* flag);}
+\DoxyCodeLine{91 }
+\DoxyCodeLine{92 \textcolor{comment}{//skip label if exists}}
+\DoxyCodeLine{93 \textcolor{keywordtype}{void} skip\_label(\mbox{\hyperlink{struct_line_iterator}{LineIterator}}* line, \textcolor{keywordtype}{bool}* labelFlag, \mbox{\hyperlink{struct_symbol_table}{SymbolTable}}* table, \mbox{\hyperlink{structdebug_list}{debugList}}* err);}
+\DoxyCodeLine{94 }
+\DoxyCodeLine{95 \textcolor{comment}{/*Error handling process*/}}
+\DoxyCodeLine{96 \textcolor{keywordtype}{bool} handle\_errors(\mbox{\hyperlink{structdebug_list}{debugList}}* error);}
+\DoxyCodeLine{97 }
+\DoxyCodeLine{108 \textcolor{keywordtype}{void} \mbox{\hyperlink{second__pass_8h_aa7729deb55f6c5b089bbf5d913a6c282}{execute\_line}}(\mbox{\hyperlink{struct_line_iterator}{LineIterator}}* it, \mbox{\hyperlink{structmemory_buffer}{memoryBuffer}}* memory);}
+\DoxyCodeLine{109 }
+\DoxyCodeLine{110 \textcolor{keywordtype}{void} execute\_command(\mbox{\hyperlink{structmemory_buffer}{memoryBuffer}}* memory, \mbox{\hyperlink{struct_line_iterator}{LineIterator}}* restOfLine, \textcolor{keywordtype}{char}* method, \textcolor{keywordtype}{int} syntaxGroup);}
+\DoxyCodeLine{111 \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

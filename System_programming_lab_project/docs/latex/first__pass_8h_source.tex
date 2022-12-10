@@ -1,0 +1,37 @@
+\hypertarget{first__pass_8h_source}{}\doxysection{first\+\_\+pass.\+h}
+\mbox{\hyperlink{first__pass_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#ifndef FIRST\_PASS\_H}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#define FIRST\_PASS\_H}}
+\DoxyCodeLine{3 }
+\DoxyCodeLine{7 \textcolor{preprocessor}{\#include "{}symbol\_table.h"{}}}
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{line__iterator_8h}{line\_iterator.h}}"{}}}
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#include "{}utils.h"{}}}
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{memory_8h}{memory.h}}"{}}}
+\DoxyCodeLine{11 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{debug_8h}{debug.h}}"{}}}
+\DoxyCodeLine{12 }
+\DoxyCodeLine{13 \textcolor{keyword}{typedef} \textcolor{keyword}{enum} \{ FP\_SYM\_DEF, FP\_SYM\_DATA, FP\_SYM\_STR, FP\_SYM\_EXT, FP\_SYM\_ENT, FP\_OPCODE, FP\_TOTAL, FP\_NONE, FP\_SYM\_IGNORED \} firstPassStates;}
+\DoxyCodeLine{14 }
+\DoxyCodeLine{15 }
+\DoxyCodeLine{23 \textcolor{keywordtype}{bool} \mbox{\hyperlink{first__pass_8h_ae3d15ca0f34657e4715827c439839e1e}{do\_first\_pass}}(\textcolor{keywordtype}{char}* path, \mbox{\hyperlink{structmemory_buffer}{memoryBuffer}}* img, \mbox{\hyperlink{struct_symbol_table}{SymbolTable}}* sym\_table, \mbox{\hyperlink{structdebug_list}{debugList}}* dbg\_list);}
+\DoxyCodeLine{24 }
+\DoxyCodeLine{30 firstPassStates \mbox{\hyperlink{first__pass_8h_ae1188ec2abf0484be50c8b2f96ade70a}{get\_symbol\_type}}(\mbox{\hyperlink{struct_line_iterator}{LineIterator}}* it, \textcolor{keywordtype}{char}* word);}
+\DoxyCodeLine{31 }
+\DoxyCodeLine{32 \textcolor{comment}{/* This function calls to function that process and encode the instructions.}}
+\DoxyCodeLine{33 \textcolor{comment}{*/}}
+\DoxyCodeLine{34 }
+\DoxyCodeLine{35 \textcolor{keywordtype}{bool} first\_pass\_process\_sym\_def(\mbox{\hyperlink{struct_line_iterator}{LineIterator}}* it, \mbox{\hyperlink{structmemory_buffer}{memoryBuffer}}* img, \mbox{\hyperlink{struct_symbol_table}{SymbolTable}}* sym\_table, \mbox{\hyperlink{structdebug_list}{debugList}}* dbg\_list, \textcolor{keywordtype}{char}* name, \textcolor{keywordtype}{long} line, \textcolor{keywordtype}{bool} should\_encode);}
+\DoxyCodeLine{36 }
+\DoxyCodeLine{37 \textcolor{keywordtype}{bool} first\_pass\_process\_sym\_ent(\mbox{\hyperlink{struct_line_iterator}{LineIterator}}* it, \mbox{\hyperlink{structmemory_buffer}{memoryBuffer}}* img, \mbox{\hyperlink{struct_symbol_table}{SymbolTable}}* sym\_table, \mbox{\hyperlink{structdebug_list}{debugList}}* dbg\_list, \textcolor{keywordtype}{char}* name, \textcolor{keywordtype}{long} line, \textcolor{keywordtype}{bool} should\_encode);}
+\DoxyCodeLine{38 }
+\DoxyCodeLine{39 \textcolor{keywordtype}{bool} first\_pass\_process\_sym\_string(\mbox{\hyperlink{struct_line_iterator}{LineIterator}}* it, \mbox{\hyperlink{structmemory_buffer}{memoryBuffer}}* img, \mbox{\hyperlink{struct_symbol_table}{SymbolTable}}* sym\_table, \mbox{\hyperlink{structdebug_list}{debugList}}* dbg\_list, \textcolor{keywordtype}{char}* name, \textcolor{keywordtype}{long} line, \textcolor{keywordtype}{bool} should\_encode);}
+\DoxyCodeLine{40 }
+\DoxyCodeLine{41 \textcolor{keywordtype}{bool} first\_pass\_process\_sym\_data(\mbox{\hyperlink{struct_line_iterator}{LineIterator}}* it, \mbox{\hyperlink{structmemory_buffer}{memoryBuffer}}* img, \mbox{\hyperlink{struct_symbol_table}{SymbolTable}}* sym\_table, \mbox{\hyperlink{structdebug_list}{debugList}}* dbg\_list, \textcolor{keywordtype}{char}* name, \textcolor{keywordtype}{long} line, \textcolor{keywordtype}{bool} should\_encode);}
+\DoxyCodeLine{42 }
+\DoxyCodeLine{43 \textcolor{keywordtype}{bool} first\_pass\_process\_sym\_ext(\mbox{\hyperlink{struct_line_iterator}{LineIterator}}* it, \mbox{\hyperlink{structmemory_buffer}{memoryBuffer}}* img, \mbox{\hyperlink{struct_symbol_table}{SymbolTable}}* sym\_table, \mbox{\hyperlink{structdebug_list}{debugList}}* dbg\_list, \textcolor{keywordtype}{char}* name, \textcolor{keywordtype}{long} line, \textcolor{keywordtype}{bool} should\_encode);}
+\DoxyCodeLine{44 }
+\DoxyCodeLine{45 \textcolor{keywordtype}{bool} first\_pass\_process\_opcode(\mbox{\hyperlink{struct_line_iterator}{LineIterator}}* it, \mbox{\hyperlink{structmemory_buffer}{memoryBuffer}}* img, \mbox{\hyperlink{struct_symbol_table}{SymbolTable}}* sym\_table, \mbox{\hyperlink{structdebug_list}{debugList}}* dbg\_list, \textcolor{keywordtype}{char}* name, \textcolor{keywordtype}{long} line, \textcolor{keywordtype}{bool} should\_encode);}
+\DoxyCodeLine{46 }
+\DoxyCodeLine{47 \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

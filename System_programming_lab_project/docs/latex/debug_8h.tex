@@ -1,0 +1,90 @@
+\hypertarget{debug_8h}{}\doxysection{debug.\+h File Reference}
+\label{debug_8h}\index{debug.h@{debug.h}}
+{\ttfamily \#include \char`\"{}utils.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$stddef.\+h$>$}\newline
+\doxysubsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structerror_context}{error\+Context}}
+\item 
+struct \mbox{\hyperlink{struct____debug__node}{\+\_\+\+\_\+debug\+\_\+node}}
+\item 
+struct \mbox{\hyperlink{structdebug_list}{debug\+List}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{debug_8h_ae6c94927a05d66c70598a16d1f5f01e4}\label{debug_8h_ae6c94927a05d66c70598a16d1f5f01e4}} 
+typedef struct \mbox{\hyperlink{struct____debug__node}{\+\_\+\+\_\+debug\+\_\+node}} {\bfseries debug\+Node}
+\end{DoxyCompactItemize}
+\doxysubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{debug_8h_a88edd67ec29d18293fae821840fef3ac}\label{debug_8h_a88edd67ec29d18293fae821840fef3ac}} 
+enum {\bfseries error\+Codes} \{ \newline
+{\bfseries ERROR\+\_\+\+CODE\+\_\+\+OK}
+, {\bfseries ERROR\+\_\+\+CODE\+\_\+\+UNKNOWN}
+, {\bfseries ERROR\+\_\+\+CODE\+\_\+\+INVALID\+\_\+\+NAME}
+, {\bfseries ERROR\+\_\+\+CODE\+\_\+\+TO\+\_\+\+MANY\+\_\+\+OPERANDS}
+, \newline
+{\bfseries ERROR\+\_\+\+CODE\+\_\+\+TO\+\_\+\+LITTLE\+\_\+\+OPERANDS}
+, {\bfseries ERROR\+\_\+\+CODE\+\_\+\+SYNTAX\+\_\+\+ERROR}
+, {\bfseries ERROR\+\_\+\+CODE\+\_\+\+SYMBOL\+\_\+\+REDEFINITION}
+, {\bfseries ERROR\+\_\+\+CODE\+\_\+\+INVALID\+\_\+\+SYM\+\_\+\+TYPE}
+, \newline
+{\bfseries ERROR\+\_\+\+CODE\+\_\+\+SPACE\+\_\+\+BEFORE\+\_\+\+COLON}
+, {\bfseries ERROR\+\_\+\+CODE\+\_\+\+INVALID\+\_\+\+CHAR\+\_\+\+IN\+\_\+\+LABEL}
+, {\bfseries ERROR\+\_\+\+CODE\+\_\+\+RESERVED\+\_\+\+KEYWORD\+\_\+\+DEF}
+, {\bfseries ERROR\+\_\+\+CODE\+\_\+\+SYMBOL\+\_\+\+IGNORED\+\_\+\+WARN}
+, \newline
+{\bfseries ERROR\+\_\+\+CODE\+\_\+\+INVALID\+\_\+\+AMOUNT\+\_\+\+OF\+\_\+\+OPERANDS}
+, {\bfseries ERROR\+\_\+\+CODE\+\_\+\+COMMA\+\_\+\+AFTER\+\_\+\+INSTRUCTION}
+, {\bfseries ERROR\+\_\+\+CODE\+\_\+\+MISSING\+\_\+\+COMMA}
+, {\bfseries ERROR\+\_\+\+CODE\+\_\+\+VALUE\+\_\+\+ERROR}
+, \newline
+{\bfseries ERROR\+\_\+\+CODE\+\_\+\+EXTRA\+\_\+\+COMMA}
+, {\bfseries ERROR\+\_\+\+CODE\+\_\+\+INVALID\+\_\+\+LABEL\+\_\+\+DEF}
+, {\bfseries ERROR\+\_\+\+CODE\+\_\+\+MISSING\+\_\+\+OPEN\+\_\+\+PAREN}
+, {\bfseries ERROR\+\_\+\+CODE\+\_\+\+INVALID\+\_\+\+COMMA\+\_\+\+POS}
+, \newline
+{\bfseries ERROR\+\_\+\+CODE\+\_\+\+INVALID\+\_\+\+INT}
+, {\bfseries ERROR\+\_\+\+CODE\+\_\+\+SPACE\+\_\+\+AFTER\+\_\+\+OPERAND}
+, {\bfseries ERROR\+\_\+\+CODE\+\_\+\+INVALID\+\_\+\+OPERAND}
+, {\bfseries ERROR\+\_\+\+CODE\+\_\+\+INVALID\+\_\+\+WHITE\+\_\+\+SPACE}
+, \newline
+{\bfseries ERROR\+\_\+\+CODE\+\_\+\+EXTRA\+\_\+\+PAREN}
+, {\bfseries ERROR\+\_\+\+CODE\+\_\+\+MISSING\+\_\+\+OPEN\+\_\+\+QUOTES}
+, {\bfseries ERROR\+\_\+\+CODE\+\_\+\+MISSING\+\_\+\+CLOSE\+\_\+\+QUOTES}
+, {\bfseries ERROR\+\_\+\+CODE\+\_\+\+TEXT\+\_\+\+AFTER\+\_\+\+END}
+ \}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{debug_8h_a0f6d6fff6b6702b16bed17185e1ae496}\label{debug_8h_a0f6d6fff6b6702b16bed17185e1ae496}} 
+void {\bfseries debug\+\_\+list\+\_\+register\+\_\+node} (\mbox{\hyperlink{structdebug_list}{debug\+List}} $\ast$list, \mbox{\hyperlink{struct____debug__node}{debug\+Node}} $\ast$new\+\_\+node)
+\item 
+\mbox{\Hypertarget{debug_8h_afcccf5c3264d88f8fb617cd31ff79874}\label{debug_8h_afcccf5c3264d88f8fb617cd31ff79874}} 
+bool {\bfseries debug\+\_\+list\+\_\+is\+\_\+empty} (\mbox{\hyperlink{structdebug_list}{debug\+List}} $\ast$list)
+\item 
+\mbox{\Hypertarget{debug_8h_a9083c7d418de19fa4a8eda030cfec609}\label{debug_8h_a9083c7d418de19fa4a8eda030cfec609}} 
+\mbox{\hyperlink{structdebug_list}{debug\+List}} $\ast$ {\bfseries debug\+\_\+list\+\_\+new\+\_\+list} ()
+\item 
+\mbox{\Hypertarget{debug_8h_ae8a834723f2b0da97ec682e732a8c667}\label{debug_8h_ae8a834723f2b0da97ec682e732a8c667}} 
+\mbox{\hyperlink{struct____debug__node}{debug\+Node}} $\ast$ {\bfseries debug\+\_\+list\+\_\+new\+\_\+node} (char $\ast$start, char $\ast$err, long line, error\+Codes err\+\_\+code)
+\item 
+\mbox{\Hypertarget{debug_8h_aa9c2f6da6fb0e580a6a822fc4ab93d04}\label{debug_8h_aa9c2f6da6fb0e580a6a822fc4ab93d04}} 
+void {\bfseries debug\+\_\+list\+\_\+destroy\+\_\+node} (\mbox{\hyperlink{struct____debug__node}{debug\+Node}} $\ast$node)
+\item 
+\mbox{\Hypertarget{debug_8h_ab549b9b54d931a5e324856b8a0ec859b}\label{debug_8h_ab549b9b54d931a5e324856b8a0ec859b}} 
+void {\bfseries debug\+\_\+list\+\_\+destroy} (\mbox{\hyperlink{structdebug_list}{debug\+List}} $\ast$$\ast$list)
+\item 
+\mbox{\Hypertarget{debug_8h_aff845343a5b3c908da86478ac7a14343}\label{debug_8h_aff845343a5b3c908da86478ac7a14343}} 
+void {\bfseries debug\+\_\+list\+\_\+pretty\+\_\+print} (\mbox{\hyperlink{structdebug_list}{debug\+List}} $\ast$list)
+\item 
+\mbox{\Hypertarget{debug_8h_a0efb3e81924b5d40b07d927d929fceee}\label{debug_8h_a0efb3e81924b5d40b07d927d929fceee}} 
+char $\ast$ {\bfseries debug\+\_\+map\+\_\+token\+\_\+to\+\_\+err} (error\+Codes code)
+\item 
+\mbox{\Hypertarget{debug_8h_a3a146c90c856701f4e95ec9a6b893469}\label{debug_8h_a3a146c90c856701f4e95ec9a6b893469}} 
+void {\bfseries debug\+\_\+print\+\_\+error} (\mbox{\hyperlink{structerror_context}{error\+Context}} $\ast$err\+\_\+ctx, char err\+\_\+buff\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}

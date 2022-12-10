@@ -1,0 +1,95 @@
+\hypertarget{debug_8h_source}{}\doxysection{debug.\+h}
+\mbox{\hyperlink{debug_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#ifndef  DEBUG\_H}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#define DEBUG\_H}}
+\DoxyCodeLine{3 }
+\DoxyCodeLine{7 \textcolor{preprocessor}{\#include "{}utils.h"{}}}
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#include <stddef.h>}}
+\DoxyCodeLine{9 }
+\DoxyCodeLine{10 \textcolor{keyword}{typedef} \textcolor{keyword}{enum}}
+\DoxyCodeLine{11 \{}
+\DoxyCodeLine{12     ERROR\_CODE\_OK, ERROR\_CODE\_UNKNOWN, ERROR\_CODE\_INVALID\_NAME, ERROR\_CODE\_TO\_MANY\_OPERANDS, }
+\DoxyCodeLine{13     ERROR\_CODE\_TO\_LITTLE\_OPERANDS, ERROR\_CODE\_SYNTAX\_ERROR, ERROR\_CODE\_SYMBOL\_REDEFINITION,}
+\DoxyCodeLine{14     ERROR\_CODE\_INVALID\_SYM\_TYPE, ERROR\_CODE\_SPACE\_BEFORE\_COLON, ERROR\_CODE\_INVALID\_CHAR\_IN\_LABEL,}
+\DoxyCodeLine{15     ERROR\_CODE\_RESERVED\_KEYWORD\_DEF, ERROR\_CODE\_SYMBOL\_IGNORED\_WARN, ERROR\_CODE\_INVALID\_AMOUNT\_OF\_OPERANDS,}
+\DoxyCodeLine{16     ERROR\_CODE\_COMMA\_AFTER\_INSTRUCTION, ERROR\_CODE\_MISSING\_COMMA, ERROR\_CODE\_VALUE\_ERROR, ERROR\_CODE\_EXTRA\_COMMA,}
+\DoxyCodeLine{17     ERROR\_CODE\_INVALID\_LABEL\_DEF, ERROR\_CODE\_MISSING\_OPEN\_PAREN, ERROR\_CODE\_INVALID\_COMMA\_POS, ERROR\_CODE\_INVALID\_INT,}
+\DoxyCodeLine{18     ERROR\_CODE\_SPACE\_AFTER\_OPERAND, ERROR\_CODE\_INVALID\_OPERAND, ERROR\_CODE\_INVALID\_WHITE\_SPACE, ERROR\_CODE\_EXTRA\_PAREN,}
+\DoxyCodeLine{19     ERROR\_CODE\_MISSING\_OPEN\_QUOTES, ERROR\_CODE\_MISSING\_CLOSE\_QUOTES, ERROR\_CODE\_TEXT\_AFTER\_END}
+\DoxyCodeLine{20 \} errorCodes;}
+\DoxyCodeLine{21 }
+\DoxyCodeLine{22 \textcolor{comment}{/*}}
+\DoxyCodeLine{23 \textcolor{comment}{    A struct that represents an error context, i.e the line number of the error and error code.}}
+\DoxyCodeLine{24 \textcolor{comment}{    The 'start\_pos' and 'end\_pos' are used for formatting purposes.}}
+\DoxyCodeLine{25 \textcolor{comment}{*/}}
+\DoxyCodeLine{26 \textcolor{keyword}{typedef} \textcolor{keyword}{struct}}
+\DoxyCodeLine{27 \{}
+\DoxyCodeLine{28     \textcolor{keywordtype}{char}* start\_pos;}
+\DoxyCodeLine{29     \textcolor{keywordtype}{char}* err\_pos;}
+\DoxyCodeLine{30     ptrdiff\_t err\_len;}
+\DoxyCodeLine{31     \textcolor{keywordtype}{long} line\_num;}
+\DoxyCodeLine{32     errorCodes err\_code;}
+\DoxyCodeLine{33 \} \mbox{\hyperlink{structerror_context}{errorContext}};}
+\DoxyCodeLine{34 }
+\DoxyCodeLine{35 \textcolor{keyword}{typedef} \textcolor{keyword}{struct }\mbox{\hyperlink{struct____debug__node}{\_\_debug\_node}}}
+\DoxyCodeLine{36 \{}
+\DoxyCodeLine{37     \mbox{\hyperlink{structerror_context}{errorContext}} ctx;}
+\DoxyCodeLine{38     \textcolor{keyword}{struct }\mbox{\hyperlink{struct____debug__node}{\_\_debug\_node}}* next;}
+\DoxyCodeLine{39 \} \mbox{\hyperlink{struct____debug__node}{debugNode}};}
+\DoxyCodeLine{40 }
+\DoxyCodeLine{41 \textcolor{keyword}{typedef} \textcolor{keyword}{struct}}
+\DoxyCodeLine{42 \{}
+\DoxyCodeLine{43     \mbox{\hyperlink{struct____debug__node}{debugNode}}* head;}
+\DoxyCodeLine{44     \mbox{\hyperlink{struct____debug__node}{debugNode}}* tail;}
+\DoxyCodeLine{45 \} \mbox{\hyperlink{structdebug_list}{debugList}};}
+\DoxyCodeLine{46 }
+\DoxyCodeLine{47 \textcolor{comment}{/*}}
+\DoxyCodeLine{48 \textcolor{comment}{    Function for inserting nodes to the list.}}
+\DoxyCodeLine{49 \textcolor{comment}{*/}}
+\DoxyCodeLine{50 \textcolor{keywordtype}{void} debug\_list\_register\_node(\mbox{\hyperlink{structdebug_list}{debugList}}* list, \mbox{\hyperlink{struct____debug__node}{debugNode}}* new\_node);}
+\DoxyCodeLine{51 }
+\DoxyCodeLine{52 \textcolor{comment}{/*}}
+\DoxyCodeLine{53 \textcolor{comment}{    Function for checking if the list is empty.}}
+\DoxyCodeLine{54 \textcolor{comment}{*/}}
+\DoxyCodeLine{55 \textcolor{keywordtype}{bool} debug\_list\_is\_empty(\mbox{\hyperlink{structdebug_list}{debugList}}* list);}
+\DoxyCodeLine{56 }
+\DoxyCodeLine{57 \textcolor{comment}{/*}}
+\DoxyCodeLine{58 \textcolor{comment}{    Function for creating a new list.}}
+\DoxyCodeLine{59 \textcolor{comment}{*/}}
+\DoxyCodeLine{60 \mbox{\hyperlink{structdebug_list}{debugList}}* debug\_list\_new\_list();}
+\DoxyCodeLine{61 }
+\DoxyCodeLine{62 \textcolor{comment}{/*}}
+\DoxyCodeLine{63 \textcolor{comment}{    Function for creating a new debugNode}}
+\DoxyCodeLine{64 \textcolor{comment}{*/}}
+\DoxyCodeLine{65 \mbox{\hyperlink{struct____debug__node}{debugNode}}* debug\_list\_new\_node(\textcolor{keywordtype}{char}* start, \textcolor{keywordtype}{char}* err, \textcolor{keywordtype}{long} line, errorCodes err\_code);}
+\DoxyCodeLine{66 }
+\DoxyCodeLine{67 \textcolor{comment}{/*}}
+\DoxyCodeLine{68 \textcolor{comment}{    Function for freeing a debugList node}}
+\DoxyCodeLine{69 \textcolor{comment}{*/}}
+\DoxyCodeLine{70 \textcolor{keywordtype}{void} debug\_list\_destroy\_node(\mbox{\hyperlink{struct____debug__node}{debugNode}}* node);}
+\DoxyCodeLine{71 }
+\DoxyCodeLine{72 \textcolor{comment}{/*}}
+\DoxyCodeLine{73 \textcolor{comment}{    Function for freeing the list.}}
+\DoxyCodeLine{74 \textcolor{comment}{*/}}
+\DoxyCodeLine{75 \textcolor{keywordtype}{void} debug\_list\_destroy(\mbox{\hyperlink{structdebug_list}{debugList}}** list);}
+\DoxyCodeLine{76 }
+\DoxyCodeLine{77 \textcolor{comment}{/*}}
+\DoxyCodeLine{78 \textcolor{comment}{    Function for printing pretty errors.}}
+\DoxyCodeLine{79 \textcolor{comment}{*/}}
+\DoxyCodeLine{80 \textcolor{keywordtype}{void} debug\_list\_pretty\_print(\mbox{\hyperlink{structdebug_list}{debugList}}* list);}
+\DoxyCodeLine{81 }
+\DoxyCodeLine{82 \textcolor{comment}{/*}}
+\DoxyCodeLine{83 \textcolor{comment}{    Function for mapping a errorCode to a string}}
+\DoxyCodeLine{84 \textcolor{comment}{*/}}
+\DoxyCodeLine{85 }
+\DoxyCodeLine{86 \textcolor{keywordtype}{char}* debug\_map\_token\_to\_err(errorCodes code);}
+\DoxyCodeLine{87 }
+\DoxyCodeLine{88 \textcolor{comment}{/* Function for printing the errors}}
+\DoxyCodeLine{89 \textcolor{comment}{    }}
+\DoxyCodeLine{90 \textcolor{comment}{*/}}
+\DoxyCodeLine{91 \textcolor{keywordtype}{void} debug\_print\_error(\mbox{\hyperlink{structerror_context}{errorContext}}* err\_ctx, \textcolor{keywordtype}{char} err\_buff[]);}
+\DoxyCodeLine{92 }
+\DoxyCodeLine{93 \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}
