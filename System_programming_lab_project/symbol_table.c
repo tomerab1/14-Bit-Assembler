@@ -50,6 +50,16 @@ void symbol_table_insert_symbol(SymbolTable* table, SymbolTableNode* symbol)
     }
 }
 
+void update_amount_of_items(SymbolTable* table) {
+    int count = 0;
+    SymbolTableNode* node = table->head;
+    while (node != NULL) {
+        count++;
+        node = node->next;
+    }
+    table->amountOfSymbols = count;
+}
+
 bool symbol_table_is_empty(SymbolTable* table)
 {
     return !table->head && !table->tail;

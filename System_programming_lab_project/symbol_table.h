@@ -22,6 +22,7 @@ typedef struct
 {
 	SymbolTableNode* head;
 	SymbolTableNode* tail;
+	int amountOfSymbols;
 } SymbolTable;
 
 SymbolTable* symbol_table_new_table();
@@ -31,5 +32,6 @@ bool symbol_table_search_symbol_bool(SymbolTable* table, char* name);
 void symbol_table_insert_symbol(SymbolTable* table, SymbolTableNode* symbol);
 bool symbol_table_is_empty(SymbolTable* table);
 void symbol_table_destroy(SymbolTable** table);
+void update_amount_of_items(SymbolTable* table);
 
 #endif

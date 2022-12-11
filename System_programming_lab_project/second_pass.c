@@ -40,13 +40,13 @@ void execute_line(LineIterator* it, memoryBuffer* memory) {
 	char* method = line_iterator_next_word(it, " ");
 	int syntaxGroup = get_syntax_group(method);
 
-	execute_command(memory, it, method, syntaxGroup);
+	execute_command(memory, table,it, method, syntaxGroup);
 
 	free(method);
 }
 
-void execute_command(memoryBuffer* memory, LineIterator* restOfLine, char* method, int syntaxGroup) {
-	
+void execute_command(memoryBuffer* memory, SymbolTable* table,LineIterator* restOfLine, char* method, int syntaxGroup) {
+	if(line_iterator_includes(restOfLine,))
 }
 
 bool generate_object_file(memoryBuffer* memory, char* path, debugList* err) {
