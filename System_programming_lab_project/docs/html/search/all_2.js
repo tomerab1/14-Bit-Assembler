@@ -3,7 +3,7 @@ var searchData=
   ['debug_2ec_0',['debug.c',['../debug_8c.html',1,'']]],
   ['debug_2eh_1',['debug.h',['../debug_8h.html',1,'']]],
   ['debuglist_2',['debugList',['../structdebug_list.html',1,'']]],
-  ['do_5ffirst_5fpass_3',['do_first_pass',['../first__pass_8h.html#ae3d15ca0f34657e4715827c439839e1e',1,'first_pass.c']]],
+  ['do_5ffirst_5fpass_3',['do_first_pass',['../first__pass_8c.html#ae3d15ca0f34657e4715827c439839e1e',1,'do_first_pass(char *path, memoryBuffer *img, SymbolTable *sym_table, debugList *dbg_list):&#160;first_pass.c'],['../first__pass_8h.html#ae3d15ca0f34657e4715827c439839e1e',1,'do_first_pass(char *path, memoryBuffer *img, SymbolTable *sym_table, debugList *dbg_list):&#160;first_pass.c']]],
   ['driver_4',['driver',['../structdriver.html',1,'']]],
   ['driver_5',['Driver',['../driver_8h.html#ac564aa572319766032ea14293cc44929',1,'driver.h']]],
   ['driver_2ec_6',['driver.c',['../driver_8c.html',1,'']]],

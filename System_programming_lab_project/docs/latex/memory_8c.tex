@@ -1,0 +1,85 @@
+\hypertarget{memory_8c}{}\doxysection{memory.\+c File Reference}
+\label{memory_8c}\index{memory.c@{memory.c}}
+{\ttfamily \#include \char`\"{}memory.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{memory_8c_a9184a9b4adf05727b4c84b724f3bdec7}\label{memory_8c_a9184a9b4adf05727b4c84b724f3bdec7}} 
+\#define {\bfseries OFFSET\+\_\+0}~0
+\item 
+\mbox{\Hypertarget{memory_8c_aadf8fab30223203f7aad927cbaccd9a3}\label{memory_8c_aadf8fab30223203f7aad927cbaccd9a3}} 
+\#define {\bfseries OFFSET\+\_\+1}~1
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{memory_8c_adf23764132d697803f1dbbf260b86f7a}\label{memory_8c_adf23764132d697803f1dbbf260b86f7a}} 
+\mbox{\hyperlink{structmemory_buffer}{memory\+Buffer}} {\bfseries memory\+\_\+buffer\+\_\+get\+\_\+new} ()
+\begin{DoxyCompactList}\small\item\em This is a function for creating a new memory buffer object. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structimage_memory}{image\+Memory}} \mbox{\hyperlink{memory_8c_af258129e28dea9a2451dd46c78918ad8}{image\+\_\+memory\+\_\+get\+\_\+new}} ()
+\item 
+\mbox{\Hypertarget{memory_8c_a201369fd1364dfd09ac9e80dc293e01c}\label{memory_8c_a201369fd1364dfd09ac9e80dc293e01c}} 
+void {\bfseries image\+\_\+memory\+\_\+init} (\mbox{\hyperlink{structimage_memory}{image\+Memory}} $\ast$mem)
+\begin{DoxyCompactList}\small\item\em This is an internal function used to zero all the image memory. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{memory_8c_a47a187b835560955eefd3cd9d35028bc}\label{memory_8c_a47a187b835560955eefd3cd9d35028bc}} 
+void {\bfseries set\+\_\+image\+\_\+memory} (\mbox{\hyperlink{structimage_memory}{image\+Memory}} $\ast$mem, unsigned char byte, int \mbox{\hyperlink{structflags}{flags}})
+\begin{DoxyCompactList}\small\item\em This function sets bytes appropriately in a memory\+Word. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{memory_8c_a93e3f81e0962233b51525ba94b65b497}\label{memory_8c_a93e3f81e0962233b51525ba94b65b497}} 
+void {\bfseries set\+\_\+era\+\_\+bits} (\mbox{\hyperlink{struct_memory_word}{Memory\+Word}} $\ast$mem, unsigned char byte)
+\begin{DoxyCompactList}\small\item\em This function is for setting the e.\+r.\+a flag. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{memory_8c_ade0c49a7d50ab537e5a0430f03fed99b}\label{memory_8c_ade0c49a7d50ab537e5a0430f03fed99b}} 
+void {\bfseries set\+\_\+source\+\_\+bits} (\mbox{\hyperlink{struct_memory_word}{Memory\+Word}} $\ast$mem, unsigned char byte)
+\begin{DoxyCompactList}\small\item\em This function is for setting the e.\+r.\+a flag. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{memory_8c_a72d3c6f627586efbcd6996a4dd391fb2}\label{memory_8c_a72d3c6f627586efbcd6996a4dd391fb2}} 
+void {\bfseries set\+\_\+dest\+\_\+bits} (\mbox{\hyperlink{struct_memory_word}{Memory\+Word}} $\ast$mem, unsigned char byte)
+\begin{DoxyCompactList}\small\item\em This function is for setting the e.\+r.\+a flag. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{memory_8c_ac9bcd66be7ee1d40cb336193f7e254c0}\label{memory_8c_ac9bcd66be7ee1d40cb336193f7e254c0}} 
+void {\bfseries set\+\_\+opcode\+\_\+cell\+\_\+1\+\_\+bits} (\mbox{\hyperlink{struct_memory_word}{Memory\+Word}} $\ast$mem, unsigned char byte)
+\begin{DoxyCompactList}\small\item\em This function is for setting the e.\+r.\+a flag. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{memory_8c_a96444c2a4c994cac4f3ab865953dd2c6}\label{memory_8c_a96444c2a4c994cac4f3ab865953dd2c6}} 
+void {\bfseries set\+\_\+opcode\+\_\+cell\+\_\+2\+\_\+bits} (\mbox{\hyperlink{struct_memory_word}{Memory\+Word}} $\ast$mem, unsigned char byte)
+\begin{DoxyCompactList}\small\item\em This function is for setting the e.\+r.\+a flag. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{memory_8c_ae38ae715ce595c2a6b8c0744c49d9597}\label{memory_8c_ae38ae715ce595c2a6b8c0744c49d9597}} 
+void {\bfseries set\+\_\+param1\+\_\+bits} (\mbox{\hyperlink{struct_memory_word}{Memory\+Word}} $\ast$mem, unsigned char byte)
+\begin{DoxyCompactList}\small\item\em This function is for setting the e.\+r.\+a flag. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{memory_8c_a62312d8255fbb931cca75788ff112cc5}\label{memory_8c_a62312d8255fbb931cca75788ff112cc5}} 
+void {\bfseries set\+\_\+param2\+\_\+bits} (\mbox{\hyperlink{struct_memory_word}{Memory\+Word}} $\ast$mem, unsigned char byte)
+\begin{DoxyCompactList}\small\item\em This function is for setting the e.\+r.\+a flag. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{memory_8c_a73f839bda8be7302d9b850df4ee37cd8}\label{memory_8c_a73f839bda8be7302d9b850df4ee37cd8}} 
+unsigned char {\bfseries get\+\_\+era\+\_\+bits} (\mbox{\hyperlink{struct_memory_word}{Memory\+Word}} $\ast$mem)
+\item 
+\mbox{\Hypertarget{memory_8c_a852dac4653c086451f347d827078c2af}\label{memory_8c_a852dac4653c086451f347d827078c2af}} 
+unsigned char {\bfseries get\+\_\+source\+\_\+bits} (\mbox{\hyperlink{struct_memory_word}{Memory\+Word}} $\ast$mem)
+\item 
+\mbox{\Hypertarget{memory_8c_a5c4442f29f0f8f7b818a838dc338d934}\label{memory_8c_a5c4442f29f0f8f7b818a838dc338d934}} 
+unsigned char {\bfseries get\+\_\+dest\+\_\+bits} (\mbox{\hyperlink{struct_memory_word}{Memory\+Word}} $\ast$mem)
+\item 
+\mbox{\Hypertarget{memory_8c_abb53ab7a1ea78aaa067b6447cae2c5e8}\label{memory_8c_abb53ab7a1ea78aaa067b6447cae2c5e8}} 
+unsigned char {\bfseries get\+\_\+opcode\+\_\+cell\+\_\+1\+\_\+bits} (\mbox{\hyperlink{struct_memory_word}{Memory\+Word}} $\ast$mem)
+\item 
+\mbox{\Hypertarget{memory_8c_a09ef0858416e195189451b89cb3768ff}\label{memory_8c_a09ef0858416e195189451b89cb3768ff}} 
+unsigned char {\bfseries get\+\_\+opcode\+\_\+cell\+\_\+2\+\_\+bits} (\mbox{\hyperlink{struct_memory_word}{Memory\+Word}} $\ast$mem)
+\item 
+\mbox{\Hypertarget{memory_8c_a60cb56495d4817ac202b7efb2ba1c6cc}\label{memory_8c_a60cb56495d4817ac202b7efb2ba1c6cc}} 
+unsigned char {\bfseries get\+\_\+param1\+\_\+bits} (\mbox{\hyperlink{struct_memory_word}{Memory\+Word}} $\ast$mem)
+\item 
+\mbox{\Hypertarget{memory_8c_a94e06931082678360737348195f14da6}\label{memory_8c_a94e06931082678360737348195f14da6}} 
+unsigned char {\bfseries get\+\_\+param2\+\_\+bits} (\mbox{\hyperlink{struct_memory_word}{Memory\+Word}} $\ast$mem)
+\item 
+\mbox{\Hypertarget{memory_8c_a57531ac1359c9341baefbeec8ccc3cfe}\label{memory_8c_a57531ac1359c9341baefbeec8ccc3cfe}} 
+void {\bfseries dump\+\_\+memory} (\mbox{\hyperlink{structmemory_buffer}{memory\+Buffer}} $\ast$buf)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{memory_8c_af258129e28dea9a2451dd46c78918ad8}\label{memory_8c_af258129e28dea9a2451dd46c78918ad8}} 
+\index{memory.c@{memory.c}!image\_memory\_get\_new@{image\_memory\_get\_new}}
+\index{image\_memory\_get\_new@{image\_memory\_get\_new}!memory.c@{memory.c}}
+\doxysubsubsection{\texorpdfstring{image\_memory\_get\_new()}{image\_memory\_get\_new()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structimage_memory}{image\+Memory}} image\+\_\+memory\+\_\+get\+\_\+new (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+This is an internal function that creates a new image memory object. \begin{DoxyReturn}{Returns}
+-\/ A new image memory structure. 
+\end{DoxyReturn}

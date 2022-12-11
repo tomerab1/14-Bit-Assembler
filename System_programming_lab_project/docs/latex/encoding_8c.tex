@@ -1,0 +1,57 @@
+\hypertarget{encoding_8c}{}\doxysection{encoding.\+c File Reference}
+\label{encoding_8c}\index{encoding.c@{encoding.c}}
+{\ttfamily \#include \char`\"{}encoding.\+h\char`\"{}}\newline
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{encoding_8c_a2a4658203d0c32a628b8d1c0ff669f86}\label{encoding_8c_a2a4658203d0c32a628b8d1c0ff669f86}} 
+void {\bfseries encode\+\_\+dot\+\_\+string} (\mbox{\hyperlink{struct_line_iterator}{Line\+Iterator}} $\ast$it, \mbox{\hyperlink{structmemory_buffer}{memory\+Buffer}} $\ast$img)
+\item 
+\mbox{\Hypertarget{encoding_8c_a587b5ede677177c9262b6bf40511d60a}\label{encoding_8c_a587b5ede677177c9262b6bf40511d60a}} 
+void {\bfseries encode\+\_\+dot\+\_\+data} (\mbox{\hyperlink{struct_line_iterator}{Line\+Iterator}} $\ast$it, \mbox{\hyperlink{structmemory_buffer}{memory\+Buffer}} $\ast$img)
+\item 
+\mbox{\Hypertarget{encoding_8c_abf24d88c1e9f3955d3446299cb09781f}\label{encoding_8c_abf24d88c1e9f3955d3446299cb09781f}} 
+void {\bfseries encode\+\_\+integer} (\mbox{\hyperlink{structimage_memory}{image\+Memory}} $\ast$img, unsigned int num)
+\item 
+\mbox{\Hypertarget{encoding_8c_a1f68c041de50a450af52718fe19495b3}\label{encoding_8c_a1f68c041de50a450af52718fe19495b3}} 
+void {\bfseries encode\+\_\+preceding\+\_\+word} (\mbox{\hyperlink{structimage_memory}{image\+Memory}} $\ast$img, Opcodes op, char $\ast$source, char $\ast$dest, bool is\+\_\+jmp\+\_\+label)
+\item 
+\mbox{\Hypertarget{encoding_8c_a5e11ca7717b5440fb6baebdf0da9cfda}\label{encoding_8c_a5e11ca7717b5440fb6baebdf0da9cfda}} 
+void {\bfseries encode\+\_\+opcode} (\mbox{\hyperlink{struct_line_iterator}{Line\+Iterator}} $\ast$it, \mbox{\hyperlink{structmemory_buffer}{memory\+Buffer}} $\ast$img)
+\item 
+\mbox{\Hypertarget{encoding_8c_a3017052dc8d455d662f5234da3f59fc8}\label{encoding_8c_a3017052dc8d455d662f5234da3f59fc8}} 
+void {\bfseries encode\+\_\+source\+\_\+and\+\_\+dest} (\mbox{\hyperlink{structimage_memory}{image\+Memory}} $\ast$img, char $\ast$source, char $\ast$dest)
+\item 
+\mbox{\Hypertarget{encoding_8c_a6f106ab0328c50ee0e147f2eb95cdc29}\label{encoding_8c_a6f106ab0328c50ee0e147f2eb95cdc29}} 
+Operand\+Kind {\bfseries get\+\_\+operand\+\_\+kind} (char $\ast$op)
+\item 
+\mbox{\Hypertarget{encoding_8c_a8b9bc71f73ddbdfc2b4e936ea008f9bc}\label{encoding_8c_a8b9bc71f73ddbdfc2b4e936ea008f9bc}} 
+void {\bfseries encode\+\_\+syntax\+\_\+group\+\_\+1} (\mbox{\hyperlink{struct_line_iterator}{Line\+Iterator}} $\ast$it, Opcodes op, \mbox{\hyperlink{structmemory_buffer}{memory\+Buffer}} $\ast$img)
+\item 
+\mbox{\Hypertarget{encoding_8c_aad295aeb1fd1a079ff337843c4dca909}\label{encoding_8c_aad295aeb1fd1a079ff337843c4dca909}} 
+void {\bfseries encode\+\_\+syntax\+\_\+group\+\_\+2} (\mbox{\hyperlink{struct_line_iterator}{Line\+Iterator}} $\ast$it, Opcodes op, \mbox{\hyperlink{structmemory_buffer}{memory\+Buffer}} $\ast$img)
+\item 
+\mbox{\Hypertarget{encoding_8c_a5f29114a13525dc324c78b7b31879c88}\label{encoding_8c_a5f29114a13525dc324c78b7b31879c88}} 
+void {\bfseries encode\+\_\+syntax\+\_\+group\+\_\+3} (\mbox{\hyperlink{struct_line_iterator}{Line\+Iterator}} $\ast$it, Opcodes op, \mbox{\hyperlink{structmemory_buffer}{memory\+Buffer}} $\ast$img)
+\item 
+\mbox{\Hypertarget{encoding_8c_acf82941e19eb39762290b8e98a7bf39d}\label{encoding_8c_acf82941e19eb39762290b8e98a7bf39d}} 
+void {\bfseries encode\+\_\+syntax\+\_\+group\+\_\+4} (\mbox{\hyperlink{struct_line_iterator}{Line\+Iterator}} $\ast$it, Opcodes op, \mbox{\hyperlink{structmemory_buffer}{memory\+Buffer}} $\ast$img)
+\item 
+\mbox{\Hypertarget{encoding_8c_a97919c7b730d4080230b6d6c1e499cdb}\label{encoding_8c_a97919c7b730d4080230b6d6c1e499cdb}} 
+void {\bfseries encode\+\_\+syntax\+\_\+group\+\_\+5} (\mbox{\hyperlink{struct_line_iterator}{Line\+Iterator}} $\ast$it, Opcodes op, \mbox{\hyperlink{structmemory_buffer}{memory\+Buffer}} $\ast$img)
+\item 
+\mbox{\Hypertarget{encoding_8c_a1bf869e59e47c1eab36adb3b1f7a4339}\label{encoding_8c_a1bf869e59e47c1eab36adb3b1f7a4339}} 
+void {\bfseries encode\+\_\+syntax\+\_\+group\+\_\+6} (\mbox{\hyperlink{struct_line_iterator}{Line\+Iterator}} $\ast$it, Opcodes op, \mbox{\hyperlink{structmemory_buffer}{memory\+Buffer}} $\ast$img)
+\item 
+\mbox{\Hypertarget{encoding_8c_a689f60c1be32c59d1c650cc1232d4ee1}\label{encoding_8c_a689f60c1be32c59d1c650cc1232d4ee1}} 
+void {\bfseries encode\+\_\+syntax\+\_\+group\+\_\+7} (\mbox{\hyperlink{struct_line_iterator}{Line\+Iterator}} $\ast$it, Opcodes op, \mbox{\hyperlink{structmemory_buffer}{memory\+Buffer}} $\ast$img)
+\item 
+\mbox{\Hypertarget{encoding_8c_ab2f32af3c56923a62fbab97c48e52afe}\label{encoding_8c_ab2f32af3c56923a62fbab97c48e52afe}} 
+\mbox{\hyperlink{structvar_data}{var\+Data}} {\bfseries extract\+\_\+variables\+\_\+group\+\_\+1\+\_\+and\+\_\+2\+\_\+and\+\_\+7} (\mbox{\hyperlink{struct_line_iterator}{Line\+Iterator}} $\ast$it, \mbox{\hyperlink{structdebug_list}{debug\+List}} $\ast$dbg\+\_\+list)
+\item 
+\mbox{\Hypertarget{encoding_8c_a2effd106dff4d46afea7ce7bdf85ba84}\label{encoding_8c_a2effd106dff4d46afea7ce7bdf85ba84}} 
+\mbox{\hyperlink{structvar_data}{var\+Data}} {\bfseries extract\+\_\+variables\+\_\+group\+\_\+3\+\_\+and\+\_\+6} (\mbox{\hyperlink{struct_line_iterator}{Line\+Iterator}} $\ast$it, Opcodes command, \mbox{\hyperlink{structdebug_list}{debug\+List}} $\ast$dbg\+\_\+list)
+\item 
+\mbox{\Hypertarget{encoding_8c_aa0bb15efbfbe10f0097483212f6a73c1}\label{encoding_8c_aa0bb15efbfbe10f0097483212f6a73c1}} 
+\mbox{\hyperlink{structvar_data}{var\+Data}} {\bfseries extract\+\_\+variables\+\_\+group\+\_\+5} (\mbox{\hyperlink{struct_line_iterator}{Line\+Iterator}} $\ast$it, Opcodes command, \mbox{\hyperlink{structdebug_list}{debug\+List}} $\ast$dbg\+\_\+list)
+\end{DoxyCompactItemize}
