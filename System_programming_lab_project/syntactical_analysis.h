@@ -115,12 +115,13 @@ bool validate_syntax_extern_and_entry(LineIterator* it, long line, debugList* db
 bool is_register_name_heuristic(LineIterator it);
 bool is_register_name(LineIterator* it);
 bool is_label_name(LineIterator* it);
+bool validate_label_ending(LineIterator* it);
 
 bool match_operand(LineIterator* it, long line, int flags, debugList* dbg_list);
 
 SyntaxGroups get_syntax_group(char* name);
 
-bool recursive_match_pamaetrized_label(LineIterator* it, long line, debugList* dbg_list);
+bool match_pamaetrized_label(LineIterator* it, long line, debugList* dbg_list);
 
 /*param - line iterator pointed to start | return sentence type (page 24), returns empty = 1, comment = 2, directive = 3, instruction =4*/
 int extract_sentence_type(LineIterator* it);

@@ -417,6 +417,15 @@ bool match_syntax_group_3(LineIterator* it, long line, debugList* dbg_list)
 bool match_syntax_group_4(LineIterator* it, long line, debugList* dbg_list)
 {
     /* Check that they dont get any operand. */
+    char* op = line_iterator_next_word(it, " ");
+
+    if (op != NULL) {
+        free(op);
+        debug_list_register_node(dbg_list, debug_list_new_node(it->start, it->current, line, ERROR_CODE_INVALID_OPERAND));
+        return FALSE;
+    }
+
+    free(op);
     return TRUE;
 }
 
@@ -531,6 +540,11 @@ bool match_operand(LineIterator* it, long line, int flags, debugList* dbg_list)
             debug_list_register_node(dbg_list, debug_list_new_node(it->start, it->current, line, ERROR_CODE_INVALID_NAME));
             return FALSE;
         }
+        if (!validate_label_ending(it)) {
+            debug_list_register_node(dbg_list, debug_list_new_node(it->start, it->current, line, ERROR_CODE_TEXT_AFTER_END));
+            return FALSE;
+        }
+
         break;
     case FLAG_NUMBER: 
         /* Consume the '#' */
@@ -550,7 +564,7 @@ bool match_operand(LineIterator* it, long line, int flags, debugList* dbg_list)
         }
         break;
     case FLAG_PARAM_LABEL:
-        if (!recursive_match_pamaetrized_label(it, line, dbg_list)) {
+        if (!match_pamaetrized_label(it, line, dbg_list)) {
             return FALSE;
         }
         break;
@@ -564,9 +578,9 @@ bool match_operand(LineIterator* it, long line, int flags, debugList* dbg_list)
     return TRUE;
 }
 
-bool recursive_match_pamaetrized_label(LineIterator* it, long line, debugList* dbg_list)
+bool match_pamaetrized_label(LineIterator* it, long line, debugList* dbg_list)
 {
-    int comma_counter = 0;
+    int comma_counter = 0, close_paren_counter = 0;
 
     while (!line_iterator_is_end(it) && line_iterator_peek(it) != CLOSE_PAREN_CHAR) {
         if (line_iterator_peek(it) == HASH_CHAR) {
@@ -584,7 +598,7 @@ bool recursive_match_pamaetrized_label(LineIterator* it, long line, debugList* d
                 line_iterator_advance(it);
             }
             else {
-                if (!match_operand(it, line, FLAG_LABEL, dbg_list)) {
+                if (!is_label_name(it)) {
                     return FALSE;
                 }
             }
@@ -617,15 +631,20 @@ bool recursive_match_pamaetrized_label(LineIterator* it, long line, debugList* d
         }
     }
 
-    if (!line_iterator_is_end(it))
+    while (!line_iterator_is_end(it)) {
+        if (line_iterator_peek(it) == CLOSE_PAREN_CHAR) {
+            close_paren_counter++;
+        }
+        if (!line_iterator_match_any(it, " )")) {
+            debug_list_register_node(dbg_list, debug_list_new_node(it->start, it->current, line, ERROR_CODE_TEXT_AFTER_END));
+            return FALSE;
+        }
+
         line_iterator_advance(it);
+    }
 
-    /* Go backwards if there are any spaces. */
-    while (line_iterator_match_any(it, " \0"))
-        line_iterator_backwards(it);
-
-    if (line_iterator_peek(it) != CLOSE_PAREN_CHAR) {
-        debug_list_register_node(dbg_list, debug_list_new_node(it->start, it->current, line, ERROR_CODE_TEXT_AFTER_END));
+    if (close_paren_counter > 1) {
+        debug_list_register_node(dbg_list, debug_list_new_node(it->start, it->current, line, ERROR_CODE_EXTRA_PAREN));
         return FALSE;
     }
 
@@ -646,7 +665,14 @@ bool is_label_name(LineIterator* it)
         }
         line_iterator_advance(it);
     }
+
     return TRUE;
+}
+
+bool validate_label_ending(LineIterator* it)
+{
+    line_iterator_consume_blanks(it);
+    return line_iterator_is_end(it);
 }
 
 bool is_register_name_heuristic(LineIterator it)
