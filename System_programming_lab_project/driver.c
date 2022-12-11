@@ -17,6 +17,7 @@ typedef struct driver {
 Driver* driver_new_driver()
 {
     Driver* driver = (Driver*)xmalloc(sizeof(Driver));
+    driver->exec = exec_impl;
     on_initialization(driver);
     return driver;
 }
@@ -41,6 +42,9 @@ int exec_impl(Driver* driver, int argc, char** argv)
         if (do_first_pass(pre_assembler_path, &driver->mem_buffer, driver->sym_table, driver->dbg_list)) {
             dump_memory(&driver->mem_buffer);
         }
+        else {
+            debug_list_pretty_print(driver->dbg_list);
+        }
 
         on_exit(driver);
         free(pre_assembler_path);
@@ -54,7 +58,6 @@ void on_initialization(Driver* driver)
     driver->dbg_list = debug_list_new_list();
     driver->sym_table = symbol_table_new_table();
     driver->mem_buffer = memory_buffer_get_new();
-    driver->exec = exec_impl;
 }
 
 void on_exit(Driver* driver)
