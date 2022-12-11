@@ -1,3 +1,6 @@
+/** @file
+*/
+
 #include "memory.h"
 #include <string.h>
 #include <stdio.h>
@@ -8,7 +11,6 @@ memoryBuffer memory_buffer_get_new()
 
     mem_buff.instruction_image = image_memory_get_new();
     mem_buff.data_image = image_memory_get_new();
-    memset(mem_buff.registers, REG_INIT_VAL, sizeof(Register) * REG_TOTAL);
 
     return mem_buff;
 }

@@ -1,3 +1,6 @@
+/** @file
+*/
+
 #include "syntactical_analysis.h"
 #include "line_iterator.h"
 #include <string.h>

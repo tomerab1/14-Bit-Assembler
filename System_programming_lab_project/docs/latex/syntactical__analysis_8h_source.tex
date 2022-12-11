@@ -1,0 +1,128 @@
+\hypertarget{syntactical__analysis_8h_source}{}\doxysection{syntactical\+\_\+analysis.\+h}
+\mbox{\hyperlink{syntactical__analysis_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#ifndef SYNTACTICAL\_ANALYSIS\_H}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#define SYNTACTICAL\_ANALYSIS\_H}}
+\DoxyCodeLine{3 }
+\DoxyCodeLine{7 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{first__pass_8h}{first\_pass.h}}"{}}}
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{line__iterator_8h}{line\_iterator.h}}"{}}}
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{debug_8h}{debug.h}}"{}}}
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{utils_8h}{utils.h}}"{}}}
+\DoxyCodeLine{11 }
+\DoxyCodeLine{12 \textcolor{comment}{/*}}
+\DoxyCodeLine{13 \textcolor{comment}{    This enumeration is used to represent each opcode with a specific numeric constant.}}
+\DoxyCodeLine{14 \textcolor{comment}{*/}}
+\DoxyCodeLine{15 \textcolor{keyword}{typedef} \textcolor{keyword}{enum}}
+\DoxyCodeLine{16 \{}
+\DoxyCodeLine{17     OP\_MOV = 0, OP\_CMP, OP\_ADD, OP\_SUB,}
+\DoxyCodeLine{18     OP\_NOT, OP\_CLR, OP\_LEA, OP\_INC,}
+\DoxyCodeLine{19     OP\_DEC, OP\_JMP, OP\_BNE, OP\_RED,}
+\DoxyCodeLine{20     OP\_PRN, OP\_JSR, OP\_RTS, OP\_STOP, OP\_UNKNOWN}
+\DoxyCodeLine{21 \} Opcodes;}
+\DoxyCodeLine{22 }
+\DoxyCodeLine{23 \textcolor{keyword}{typedef} \textcolor{keyword}{enum}}
+\DoxyCodeLine{24 \{}
+\DoxyCodeLine{25     DOT\_DATA\_CODE = 1,}
+\DoxyCodeLine{26     DOT\_STRING\_CODE,}
+\DoxyCodeLine{27     DOT\_ENTRY\_CODE,}
+\DoxyCodeLine{28     DOT\_EXTERN\_CODE}
+\DoxyCodeLine{29 \} ENUM\_1;}
+\DoxyCodeLine{30 }
+\DoxyCodeLine{31 \textcolor{keyword}{typedef} \textcolor{keyword}{enum}}
+\DoxyCodeLine{32 \{}
+\DoxyCodeLine{33     EMPTY\_SENTENCE = 1,}
+\DoxyCodeLine{34     COMMENT\_SENTENCE,}
+\DoxyCodeLine{35     DIRECTIVE\_SENTENCE,}
+\DoxyCodeLine{36     INSTRUCTION\_SENTENCE}
+\DoxyCodeLine{37 \} ENUM\_2;}
+\DoxyCodeLine{38 }
+\DoxyCodeLine{39 \textcolor{keyword}{typedef} \textcolor{keyword}{enum}}
+\DoxyCodeLine{40 \{}
+\DoxyCodeLine{41     OP\_TYPE\_OPCDE, OP\_TYPE\_LABEL, OP\_TYPE\_DATA, OP\_TYPE\_STRING,}
+\DoxyCodeLine{42     OP\_TYPE\_EXTERN, OP\_TYPE\_ENTRY, OP\_TYPE\_UNKNOWN}
+\DoxyCodeLine{43 \} OperationTypes;}
+\DoxyCodeLine{44 }
+\DoxyCodeLine{45 \textcolor{comment}{/* Division of operands to groups with the same syntax. */}}
+\DoxyCodeLine{46 \textcolor{keyword}{typedef} \textcolor{keyword}{enum}}
+\DoxyCodeLine{47 \{}
+\DoxyCodeLine{48     SG\_GROUP\_1, SG\_GROUP\_2, SG\_GROUP\_3, SG\_GROUP\_4, SG\_GROUP\_5,}
+\DoxyCodeLine{49     SG\_GROUP\_6, SG\_GROUP\_7, SG\_GROUP\_INVALID}
+\DoxyCodeLine{50 \} SyntaxGroups;}
+\DoxyCodeLine{51 }
+\DoxyCodeLine{52 \textcolor{preprocessor}{\#define FLAG\_NUMBER      1}}
+\DoxyCodeLine{53 \textcolor{preprocessor}{\#define FLAG\_LABEL       2}}
+\DoxyCodeLine{54 \textcolor{preprocessor}{\#define FLAG\_REGISTER    4}}
+\DoxyCodeLine{55 \textcolor{preprocessor}{\#define FLAG\_PARAM\_LABEL 8}}
+\DoxyCodeLine{56 }
+\DoxyCodeLine{57 \textcolor{comment}{/* This function takes a string and returns the matching Opcode. */}}
+\DoxyCodeLine{58 Opcodes get\_opcode(\textcolor{keywordtype}{char}* str);}
+\DoxyCodeLine{59 }
+\DoxyCodeLine{64 errorCodes \mbox{\hyperlink{syntactical__analysis_8h_ab026e29379dc2aca95b5ae14a4045010}{check\_label\_syntax}}(\textcolor{keywordtype}{char}* label);}
+\DoxyCodeLine{65 }
+\DoxyCodeLine{70 \textcolor{keywordtype}{bool} \mbox{\hyperlink{syntactical__analysis_8h_a855c8939951fd3d960b071b143af6df5}{is\_valid\_label}}(\textcolor{keywordtype}{char}* label);}
+\DoxyCodeLine{71 }
+\DoxyCodeLine{72 \textcolor{comment}{/*checks if the first word is a label, used during second pass*/}}
+\DoxyCodeLine{73 \textcolor{keywordtype}{bool} isLabel(\mbox{\hyperlink{struct_line_iterator}{LineIterator}}* line);}
+\DoxyCodeLine{74 }
+\DoxyCodeLine{75 \textcolor{comment}{/* This function verifies the command syntax. */}}
+\DoxyCodeLine{76 \textcolor{keywordtype}{bool} verify\_command\_syntax(\mbox{\hyperlink{struct_line_iterator}{LineIterator}}* it, \mbox{\hyperlink{structdebug_list}{debugList}}* dbg\_list);}
+\DoxyCodeLine{77 }
+\DoxyCodeLine{78 \textcolor{comment}{/* Check if 'str' is a registers name. */}}
+\DoxyCodeLine{79 \textcolor{keywordtype}{bool} cmp\_register\_name(\textcolor{keywordtype}{char}* str);}
+\DoxyCodeLine{80 }
+\DoxyCodeLine{84 \textcolor{keywordtype}{void} \mbox{\hyperlink{syntactical__analysis_8h_a6b4c7eb08fbefdb1bad8755c52666824}{trim\_symbol\_name}}(\textcolor{keywordtype}{char}* sym);}
+\DoxyCodeLine{85 }
+\DoxyCodeLine{86 \textcolor{comment}{/* Verifies the source code syntax */}}
+\DoxyCodeLine{87 \textcolor{keywordtype}{bool} validate\_syntax(\mbox{\hyperlink{struct_line_iterator}{LineIterator}} it, firstPassStates state, \textcolor{keywordtype}{long} line, \mbox{\hyperlink{structdebug_list}{debugList}}* dbg\_list);}
+\DoxyCodeLine{88 }
+\DoxyCodeLine{89 \textcolor{comment}{/* Validates the syntax that may appear after a symbol definition. */}}
+\DoxyCodeLine{90 \textcolor{keywordtype}{bool} validate\_syntax\_opcode(\mbox{\hyperlink{struct_line_iterator}{LineIterator}}* it, \textcolor{keywordtype}{long} line, \mbox{\hyperlink{structdebug_list}{debugList}}* dbg\_list);}
+\DoxyCodeLine{91 }
+\DoxyCodeLine{92 \textcolor{comment}{/* Verifies that the substring starting at word and ending at other is an integer. */}}
+\DoxyCodeLine{93 \textcolor{keywordtype}{bool} verify\_int(\mbox{\hyperlink{struct_line_iterator}{LineIterator}}* it, \textcolor{keywordtype}{long} line, \textcolor{keywordtype}{char}* seps, \mbox{\hyperlink{structdebug_list}{debugList}}* dbg\_list);}
+\DoxyCodeLine{94 }
+\DoxyCodeLine{95 \textcolor{comment}{/* Matching syntax for each opcode type. */}}
+\DoxyCodeLine{96 \textcolor{comment}{/*groups: mov, add,sub */}}
+\DoxyCodeLine{97 \textcolor{keywordtype}{bool} match\_syntax\_group\_1(\mbox{\hyperlink{struct_line_iterator}{LineIterator}}* it, \textcolor{keywordtype}{long} line, \mbox{\hyperlink{structdebug_list}{debugList}}* dbg\_list);}
+\DoxyCodeLine{98 \textcolor{comment}{/*groups: cmp */}}
+\DoxyCodeLine{99 \textcolor{keywordtype}{bool} match\_syntax\_group\_2(\mbox{\hyperlink{struct_line_iterator}{LineIterator}}* it, \textcolor{keywordtype}{long} line, \mbox{\hyperlink{structdebug_list}{debugList}}* dbg\_list);}
+\DoxyCodeLine{100 \textcolor{comment}{/*groups: not, clr, inc, dec, red */}}
+\DoxyCodeLine{101 \textcolor{keywordtype}{bool} match\_syntax\_group\_3(\mbox{\hyperlink{struct_line_iterator}{LineIterator}}* it, \textcolor{keywordtype}{long} line, \mbox{\hyperlink{structdebug_list}{debugList}}* dbg\_list);}
+\DoxyCodeLine{102 \textcolor{comment}{/*groups: rts,stop */}}
+\DoxyCodeLine{103 \textcolor{keywordtype}{bool} match\_syntax\_group\_4(\mbox{\hyperlink{struct_line_iterator}{LineIterator}}* it, \textcolor{keywordtype}{long} line, \mbox{\hyperlink{structdebug_list}{debugList}}* dbg\_list);}
+\DoxyCodeLine{104 \textcolor{comment}{/*groups: jmp, bne, jsr */}}
+\DoxyCodeLine{105 \textcolor{keywordtype}{bool} match\_syntax\_group\_5(\mbox{\hyperlink{struct_line_iterator}{LineIterator}}* it, \textcolor{keywordtype}{long} line, \mbox{\hyperlink{structdebug_list}{debugList}}* dbg\_list);}
+\DoxyCodeLine{106 \textcolor{comment}{/*groups: prn */}}
+\DoxyCodeLine{107 \textcolor{keywordtype}{bool} match\_syntax\_group\_6(\mbox{\hyperlink{struct_line_iterator}{LineIterator}}* it, \textcolor{keywordtype}{long} line, \mbox{\hyperlink{structdebug_list}{debugList}}* dbg\_list);}
+\DoxyCodeLine{108 \textcolor{comment}{/*groups: lea */}}
+\DoxyCodeLine{109 \textcolor{keywordtype}{bool} match\_syntax\_group\_7(\mbox{\hyperlink{struct_line_iterator}{LineIterator}}* it, \textcolor{keywordtype}{long} line, \mbox{\hyperlink{structdebug_list}{debugList}}* dbg\_list);}
+\DoxyCodeLine{110 }
+\DoxyCodeLine{111 \textcolor{keywordtype}{bool} validate\_syntax\_string(\mbox{\hyperlink{struct_line_iterator}{LineIterator}}* it, \textcolor{keywordtype}{long} line, \mbox{\hyperlink{structdebug_list}{debugList}}* dbg\_list);}
+\DoxyCodeLine{112 \textcolor{keywordtype}{bool} validate\_syntax\_data(\mbox{\hyperlink{struct_line_iterator}{LineIterator}}* it, \textcolor{keywordtype}{long} line, \mbox{\hyperlink{structdebug_list}{debugList}}* dbg\_list);}
+\DoxyCodeLine{113 \textcolor{keywordtype}{bool} validate\_syntax\_extern\_and\_entry(\mbox{\hyperlink{struct_line_iterator}{LineIterator}}* it, \textcolor{keywordtype}{long} line, \mbox{\hyperlink{structdebug_list}{debugList}}* dbg\_list);}
+\DoxyCodeLine{114 }
+\DoxyCodeLine{115 \textcolor{keywordtype}{bool} is\_register\_name\_heuristic(\mbox{\hyperlink{struct_line_iterator}{LineIterator}} it);}
+\DoxyCodeLine{116 \textcolor{keywordtype}{bool} is\_register\_name(\mbox{\hyperlink{struct_line_iterator}{LineIterator}}* it);}
+\DoxyCodeLine{117 \textcolor{keywordtype}{bool} is\_label\_name(\mbox{\hyperlink{struct_line_iterator}{LineIterator}}* it);}
+\DoxyCodeLine{118 }
+\DoxyCodeLine{119 \textcolor{keywordtype}{bool} match\_operand(\mbox{\hyperlink{struct_line_iterator}{LineIterator}}* it, \textcolor{keywordtype}{long} line, \textcolor{keywordtype}{int} \mbox{\hyperlink{structflags}{flags}}, \mbox{\hyperlink{structdebug_list}{debugList}}* dbg\_list);}
+\DoxyCodeLine{120 }
+\DoxyCodeLine{121 SyntaxGroups get\_syntax\_group(\textcolor{keywordtype}{char}* name);}
+\DoxyCodeLine{122 }
+\DoxyCodeLine{123 \textcolor{keywordtype}{bool} recursive\_match\_pamaetrized\_label(\mbox{\hyperlink{struct_line_iterator}{LineIterator}}* it, \textcolor{keywordtype}{long} line, \mbox{\hyperlink{structdebug_list}{debugList}}* dbg\_list);}
+\DoxyCodeLine{124 }
+\DoxyCodeLine{125 \textcolor{comment}{/*param -\/ line iterator pointed to start | return sentence type (page 24), returns empty = 1, comment = 2, directive = 3, instruction =4*/}}
+\DoxyCodeLine{126 \textcolor{keywordtype}{int} extract\_sentence\_type(\mbox{\hyperlink{struct_line_iterator}{LineIterator}}* it);}
+\DoxyCodeLine{127 }
+\DoxyCodeLine{128 \textcolor{comment}{/*returns true/false if directive(.something) exists, doesn't ensure propriety of order and/or order type*/}}
+\DoxyCodeLine{129 \textcolor{keywordtype}{bool} directive\_exists\_basic(\mbox{\hyperlink{struct_line_iterator}{LineIterator}}* line);}
+\DoxyCodeLine{130 }
+\DoxyCodeLine{131 \textcolor{comment}{/*returns true/false if instruction(any of opcode) exists*/}}
+\DoxyCodeLine{132 \textcolor{keywordtype}{bool} find\_if\_instruction\_exists(\mbox{\hyperlink{struct_line_iterator}{LineIterator}}* line);}
+\DoxyCodeLine{133 }
+\DoxyCodeLine{134 \textcolor{comment}{/*skips label and and consume blanks if exists after the label*/}}
+\DoxyCodeLine{135 \textcolor{keywordtype}{void} skip\_label\_basic(\mbox{\hyperlink{struct_line_iterator}{LineIterator}}* line);}
+\DoxyCodeLine{136 }
+\DoxyCodeLine{137 \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

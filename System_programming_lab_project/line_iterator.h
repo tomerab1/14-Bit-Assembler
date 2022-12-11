@@ -1,6 +1,9 @@
 #ifndef LINE_ITERATOR_H
 #define LINE_ITERATOR_H
 
+/** @file
+*/
+
 #include "utils.h"
 
 typedef struct

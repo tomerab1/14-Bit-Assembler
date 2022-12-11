@@ -1,0 +1,29 @@
+\hypertarget{symbol__table_8c}{}\doxysection{symbol\+\_\+table.\+c File Reference}
+\label{symbol__table_8c}\index{symbol\_table.c@{symbol\_table.c}}
+{\ttfamily \#include \char`\"{}symbol\+\_\+table.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}utils.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{symbol__table_8c_a53ee66f1de6f20b68a130922a34221d6}\label{symbol__table_8c_a53ee66f1de6f20b68a130922a34221d6}} 
+\mbox{\hyperlink{struct_symbol_table}{Symbol\+Table}} $\ast$ {\bfseries symbol\+\_\+table\+\_\+new\+\_\+table} ()
+\item 
+\mbox{\Hypertarget{symbol__table_8c_a1b234901d5a9c5c2e7e9194faec22915}\label{symbol__table_8c_a1b234901d5a9c5c2e7e9194faec22915}} 
+\mbox{\hyperlink{struct____sym__table__node}{Symbol\+Table\+Node}} $\ast$ {\bfseries symbol\+\_\+table\+\_\+new\+\_\+node} (char $\ast$name, symbol\+Type type, long counter)
+\item 
+\mbox{\Hypertarget{symbol__table_8c_aac7ab4a84f5dd5b8f88a9e5bd2d30b38}\label{symbol__table_8c_aac7ab4a84f5dd5b8f88a9e5bd2d30b38}} 
+\mbox{\hyperlink{struct____sym__table__node}{Symbol\+Table\+Node}} $\ast$ {\bfseries symbol\+\_\+table\+\_\+search\+\_\+symbol} (\mbox{\hyperlink{struct_symbol_table}{Symbol\+Table}} $\ast$table, char $\ast$name)
+\item 
+\mbox{\Hypertarget{symbol__table_8c_a481f1684949bafc5d4487a12287a420f}\label{symbol__table_8c_a481f1684949bafc5d4487a12287a420f}} 
+bool {\bfseries symbol\+\_\+table\+\_\+search\+\_\+symbol\+\_\+bool} (\mbox{\hyperlink{struct_symbol_table}{Symbol\+Table}} $\ast$table, char $\ast$name)
+\item 
+\mbox{\Hypertarget{symbol__table_8c_af7ceb2c0ffe3e3ea80e925ba655c3710}\label{symbol__table_8c_af7ceb2c0ffe3e3ea80e925ba655c3710}} 
+void {\bfseries symbol\+\_\+table\+\_\+insert\+\_\+symbol} (\mbox{\hyperlink{struct_symbol_table}{Symbol\+Table}} $\ast$table, \mbox{\hyperlink{struct____sym__table__node}{Symbol\+Table\+Node}} $\ast$symbol)
+\item 
+\mbox{\Hypertarget{symbol__table_8c_a89500f95e0d429616157b09668f1da29}\label{symbol__table_8c_a89500f95e0d429616157b09668f1da29}} 
+bool {\bfseries symbol\+\_\+table\+\_\+is\+\_\+empty} (\mbox{\hyperlink{struct_symbol_table}{Symbol\+Table}} $\ast$table)
+\item 
+\mbox{\Hypertarget{symbol__table_8c_a01109b630db52c46d594ea3062a3b8c8}\label{symbol__table_8c_a01109b630db52c46d594ea3062a3b8c8}} 
+void {\bfseries symbol\+\_\+table\+\_\+destroy} (\mbox{\hyperlink{struct_symbol_table}{Symbol\+Table}} $\ast$$\ast$table)
+\end{DoxyCompactItemize}

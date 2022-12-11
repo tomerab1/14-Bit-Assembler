@@ -1,0 +1,120 @@
+\hypertarget{second__pass_8h}{}\doxysection{second\+\_\+pass.\+h File Reference}
+\label{second__pass_8h}\index{second\_pass.h@{second\_pass.h}}
+{\ttfamily \#include \char`\"{}syntactical\+\_\+analysis.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}line\+\_\+iterator.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}symbol\+\_\+table.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}memory.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}debug.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}utils.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}constants.\+h\char`\"{}}\newline
+\doxysubsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structlines__list__node}{lines\+\_\+list\+\_\+node}}
+\item 
+struct \mbox{\hyperlink{struct_lines_list}{Lines\+List}}
+\item 
+struct \mbox{\hyperlink{structflags}{flags}}
+\item 
+struct \mbox{\hyperlink{structprogram_final_status}{program\+Final\+Status}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{second__pass_8h_a25efa6177dd04fc0c9742db4d3603e0b}\label{second__pass_8h_a25efa6177dd04fc0c9742db4d3603e0b}} 
+typedef struct \mbox{\hyperlink{structlines__list__node}{lines\+\_\+list\+\_\+node}} {\bfseries Lines\+List\+Node}
+\item 
+\mbox{\Hypertarget{second__pass_8h_ace323546978903eb91fe1639c20904c3}\label{second__pass_8h_ace323546978903eb91fe1639c20904c3}} 
+typedef struct \mbox{\hyperlink{structflags}{flags}} {\bfseries flags}
+\item 
+\mbox{\Hypertarget{second__pass_8h_a6ae8af57a733ce0c27c74811c79f8371}\label{second__pass_8h_a6ae8af57a733ce0c27c74811c79f8371}} 
+typedef struct \mbox{\hyperlink{structprogram_final_status}{program\+Final\+Status}} {\bfseries program\+Final\+Status}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{second__pass_8h_a0f5030f16b61fc0cfe08c3b44e4aa467}\label{second__pass_8h_a0f5030f16b61fc0cfe08c3b44e4aa467}} 
+bool {\bfseries initiate\+\_\+second\+\_\+pass} (char $\ast$path, \mbox{\hyperlink{struct_symbol_table}{Symbol\+Table}} $\ast$table, \mbox{\hyperlink{structmemory_buffer}{memory\+Buffer}} $\ast$memory)
+\item 
+bool \mbox{\hyperlink{second__pass_8h_afc04421d0895c01983e6e7086d0cbfa7}{generate\+\_\+object\+\_\+file}} (\mbox{\hyperlink{structmemory_buffer}{memory\+Buffer}} $\ast$memory, char $\ast$path, \mbox{\hyperlink{structdebug_list}{debug\+List}} $\ast$err)
+\item 
+\mbox{\Hypertarget{second__pass_8h_a4c3e30c427e4d69903a08b495a3bf46a}\label{second__pass_8h_a4c3e30c427e4d69903a08b495a3bf46a}} 
+\mbox{\hyperlink{struct_lines_list}{Lines\+List}} $\ast$ {\bfseries translate\+\_\+to\+\_\+machine\+\_\+data} (\mbox{\hyperlink{structmemory_buffer}{memory\+Buffer}} $\ast$memory, \mbox{\hyperlink{structerror_context}{error\+Context}} $\ast$err)
+\item 
+\mbox{\Hypertarget{second__pass_8h_af969b5aef11a97160dd29f2402b35d1e}\label{second__pass_8h_af969b5aef11a97160dd29f2402b35d1e}} 
+bool {\bfseries generate\+\_\+externals\+\_\+file} (\mbox{\hyperlink{struct_symbol_table}{Symbol\+Table}} $\ast$table, char $\ast$path)
+\item 
+\mbox{\Hypertarget{second__pass_8h_a2bd718eb223c109ac098038bd74150f1}\label{second__pass_8h_a2bd718eb223c109ac098038bd74150f1}} 
+bool {\bfseries generate\+\_\+entries\+\_\+file} (\mbox{\hyperlink{struct_symbol_table}{Symbol\+Table}} $\ast$table, char $\ast$path)
+\item 
+\mbox{\Hypertarget{second__pass_8h_a9629a24b748a8ffc0dd91a9bb6f68bd1}\label{second__pass_8h_a9629a24b748a8ffc0dd91a9bb6f68bd1}} 
+void {\bfseries create\+\_\+files} (\mbox{\hyperlink{structmemory_buffer}{memory\+Buffer}} $\ast$memory, char $\ast$path, \mbox{\hyperlink{structprogram_final_status}{program\+Final\+Status}} $\ast$final\+Status, \mbox{\hyperlink{struct_symbol_table}{Symbol\+Table}} $\ast$table, \mbox{\hyperlink{structdebug_list}{debug\+List}} $\ast$err)
+\item 
+\mbox{\Hypertarget{second__pass_8h_ae7738981401d4c8c01a35e5b3c19c254}\label{second__pass_8h_ae7738981401d4c8c01a35e5b3c19c254}} 
+bool {\bfseries directive\+\_\+exists} (\mbox{\hyperlink{struct_line_iterator}{Line\+Iterator}} $\ast$line)
+\item 
+\mbox{\Hypertarget{second__pass_8h_aa431e489ad76934ec4a5a10ba870dd58}\label{second__pass_8h_aa431e489ad76934ec4a5a10ba870dd58}} 
+void {\bfseries extern\+\_\+exists} (\mbox{\hyperlink{structflags}{flags}} $\ast$flag)
+\item 
+\mbox{\Hypertarget{second__pass_8h_a7f99caea774341d00d92fd11a029ee63}\label{second__pass_8h_a7f99caea774341d00d92fd11a029ee63}} 
+void {\bfseries entry\+\_\+exists} (\mbox{\hyperlink{structflags}{flags}} $\ast$flag)
+\item 
+\mbox{\Hypertarget{second__pass_8h_a1507c1f8d81acaede18a7d7107af9876}\label{second__pass_8h_a1507c1f8d81acaede18a7d7107af9876}} 
+void {\bfseries extract\+\_\+directive\+\_\+type} (\mbox{\hyperlink{struct_line_iterator}{Line\+Iterator}} $\ast$line, \mbox{\hyperlink{structflags}{flags}} $\ast$flag)
+\item 
+\mbox{\Hypertarget{second__pass_8h_a0d29bca9ef06cf4c5a2d28dd7770f4ca}\label{second__pass_8h_a0d29bca9ef06cf4c5a2d28dd7770f4ca}} 
+void {\bfseries skip\+\_\+label} (\mbox{\hyperlink{struct_line_iterator}{Line\+Iterator}} $\ast$line, bool $\ast$label\+Flag, \mbox{\hyperlink{struct_symbol_table}{Symbol\+Table}} $\ast$table, \mbox{\hyperlink{structdebug_list}{debug\+List}} $\ast$err)
+\item 
+\mbox{\Hypertarget{second__pass_8h_a9c406c6269dcf91127af8cebd37c11f0}\label{second__pass_8h_a9c406c6269dcf91127af8cebd37c11f0}} 
+bool {\bfseries handle\+\_\+errors} (\mbox{\hyperlink{structdebug_list}{debug\+List}} $\ast$error)
+\item 
+void \mbox{\hyperlink{second__pass_8h_aa7729deb55f6c5b089bbf5d913a6c282}{execute\+\_\+line}} (\mbox{\hyperlink{struct_line_iterator}{Line\+Iterator}} $\ast$it, \mbox{\hyperlink{structmemory_buffer}{memory\+Buffer}} $\ast$memory)
+\item 
+\mbox{\Hypertarget{second__pass_8h_a2fa32df79ea3d4171a2a78aba2b8323f}\label{second__pass_8h_a2fa32df79ea3d4171a2a78aba2b8323f}} 
+void {\bfseries execute\+\_\+command} (\mbox{\hyperlink{structmemory_buffer}{memory\+Buffer}} $\ast$memory, \mbox{\hyperlink{struct_line_iterator}{Line\+Iterator}} $\ast$rest\+Of\+Line, char $\ast$method, int syntax\+Group)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{second__pass_8h_aa7729deb55f6c5b089bbf5d913a6c282}\label{second__pass_8h_aa7729deb55f6c5b089bbf5d913a6c282}} 
+\index{second\_pass.h@{second\_pass.h}!execute\_line@{execute\_line}}
+\index{execute\_line@{execute\_line}!second\_pass.h@{second\_pass.h}}
+\doxysubsubsection{\texorpdfstring{execute\_line()}{execute\_line()}}
+{\footnotesize\ttfamily void execute\+\_\+line (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_line_iterator}{Line\+Iterator}} $\ast$}]{it,  }\item[{\mbox{\hyperlink{structmemory_buffer}{memory\+Buffer}} $\ast$}]{memory }\end{DoxyParamCaption})}
+
+execute\+\_\+line
+
+Executes the next line of code from the \mbox{\hyperlink{struct_line_iterator}{Line\+Iterator}}, using the provided \mbox{\hyperlink{structmemory_buffer}{memory\+Buffer}}.
+
+
+\begin{DoxyParams}{Parameters}
+{\em it} & Pointer to a \mbox{\hyperlink{struct_line_iterator}{Line\+Iterator}} that contains the line of code to execute \\
+\hline
+{\em memory} & Pointer to a \mbox{\hyperlink{structmemory_buffer}{memory\+Buffer}} that contains memory for the line of code to use\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+\mbox{\Hypertarget{second__pass_8h_afc04421d0895c01983e6e7086d0cbfa7}\label{second__pass_8h_afc04421d0895c01983e6e7086d0cbfa7}} 
+\index{second\_pass.h@{second\_pass.h}!generate\_object\_file@{generate\_object\_file}}
+\index{generate\_object\_file@{generate\_object\_file}!second\_pass.h@{second\_pass.h}}
+\doxysubsubsection{\texorpdfstring{generate\_object\_file()}{generate\_object\_file()}}
+{\footnotesize\ttfamily bool generate\+\_\+object\+\_\+file (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structmemory_buffer}{memory\+Buffer}} $\ast$}]{memory,  }\item[{char $\ast$}]{path,  }\item[{\mbox{\hyperlink{structdebug_list}{debug\+List}} $\ast$}]{err }\end{DoxyParamCaption})}
+
+Generates an object file from the data in a memory buffer.
+
+This function takes a {\ttfamily \mbox{\hyperlink{structmemory_buffer}{memory\+Buffer}}} structure and a file path, and generates an object file containing the data from the memory buffer. The object file is created using the {\ttfamily translate\+\_\+to\+\_\+machine\+\_\+data()} and {\ttfamily get\+\_\+outfile\+\_\+name()} functions, and it is written to the specified path.
+
+
+\begin{DoxyParams}{Parameters}
+{\em memory} & The memory buffer to generate the object file from. \\
+\hline
+{\em path} & The path to the output file. \\
+\hline
+{\em err} & A pointer to a {\ttfamily \mbox{\hyperlink{structdebug_list}{debug\+List}}} structure that will be used to store any errors that occur. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the object file was generated successfully, or false if an error occurred. 
+\end{DoxyReturn}

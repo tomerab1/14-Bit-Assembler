@@ -1,6 +1,9 @@
 #ifndef PRE_ASSEMBLER_H
 #define PRE_ASSEMBLER_H
 
+/** @file
+*/
+
 #include "line_iterator.h"
 #include "constants.h"
 #include "utils.h"

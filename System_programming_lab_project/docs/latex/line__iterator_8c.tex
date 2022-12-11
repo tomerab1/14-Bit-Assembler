@@ -1,0 +1,45 @@
+\hypertarget{line__iterator_8c}{}\doxysection{line\+\_\+iterator.\+c File Reference}
+\label{line__iterator_8c}\index{line\_iterator.c@{line\_iterator.c}}
+{\ttfamily \#include \char`\"{}line\+\_\+iterator.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}utils.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$ctype.\+h$>$}\newline
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{line__iterator_8c_ac1b8f60981510a4292e0d7445b56ee40}\label{line__iterator_8c_ac1b8f60981510a4292e0d7445b56ee40}} 
+void {\bfseries line\+\_\+iterator\+\_\+put\+\_\+line} (\mbox{\hyperlink{struct_line_iterator}{Line\+Iterator}} $\ast$it, char $\ast$line)
+\item 
+\mbox{\Hypertarget{line__iterator_8c_a8b58a063092e1a8b28c858c57afe32d0}\label{line__iterator_8c_a8b58a063092e1a8b28c858c57afe32d0}} 
+void {\bfseries line\+\_\+iterator\+\_\+advance} (\mbox{\hyperlink{struct_line_iterator}{Line\+Iterator}} $\ast$it)
+\item 
+\mbox{\Hypertarget{line__iterator_8c_a2f993ffca538f86d89d5f108d6bdccfd}\label{line__iterator_8c_a2f993ffca538f86d89d5f108d6bdccfd}} 
+void {\bfseries line\+\_\+iterator\+\_\+backwards} (\mbox{\hyperlink{struct_line_iterator}{Line\+Iterator}} $\ast$it)
+\item 
+\mbox{\Hypertarget{line__iterator_8c_a5fa7f71ca4d9cd0b6821d6a0c2fcf277}\label{line__iterator_8c_a5fa7f71ca4d9cd0b6821d6a0c2fcf277}} 
+void {\bfseries line\+\_\+iterator\+\_\+unget\+\_\+word} (\mbox{\hyperlink{struct_line_iterator}{Line\+Iterator}} $\ast$it, char $\ast$word)
+\item 
+\mbox{\Hypertarget{line__iterator_8c_ab0aced61622ee67c65f41958811d9030}\label{line__iterator_8c_ab0aced61622ee67c65f41958811d9030}} 
+void {\bfseries line\+\_\+iterator\+\_\+consume\+\_\+blanks} (\mbox{\hyperlink{struct_line_iterator}{Line\+Iterator}} $\ast$it)
+\item 
+\mbox{\Hypertarget{line__iterator_8c_a7c73618333a8f414e314597dc5a0e083}\label{line__iterator_8c_a7c73618333a8f414e314597dc5a0e083}} 
+void {\bfseries line\+\_\+iterator\+\_\+jump\+\_\+to} (\mbox{\hyperlink{struct_line_iterator}{Line\+Iterator}} $\ast$it, char sep)
+\item 
+\mbox{\Hypertarget{line__iterator_8c_a867c7dd44031f153ba460069755b1977}\label{line__iterator_8c_a867c7dd44031f153ba460069755b1977}} 
+char {\bfseries line\+\_\+iterator\+\_\+peek} (\mbox{\hyperlink{struct_line_iterator}{Line\+Iterator}} $\ast$it)
+\item 
+\mbox{\Hypertarget{line__iterator_8c_a409de5504e359bf5cd801a27186cfc22}\label{line__iterator_8c_a409de5504e359bf5cd801a27186cfc22}} 
+char $\ast$ {\bfseries line\+\_\+iterator\+\_\+next\+\_\+word} (\mbox{\hyperlink{struct_line_iterator}{Line\+Iterator}} $\ast$it, char $\ast$seps)
+\item 
+\mbox{\Hypertarget{line__iterator_8c_a2f194940cc8bb02e15e1ca0fd9fe7166}\label{line__iterator_8c_a2f194940cc8bb02e15e1ca0fd9fe7166}} 
+bool {\bfseries line\+\_\+iterator\+\_\+match\+\_\+any} (\mbox{\hyperlink{struct_line_iterator}{Line\+Iterator}} $\ast$it, char $\ast$seps)
+\item 
+\mbox{\Hypertarget{line__iterator_8c_aa033cd64a95cc98146d618f2c2ed0e50}\label{line__iterator_8c_aa033cd64a95cc98146d618f2c2ed0e50}} 
+bool {\bfseries line\+\_\+iterator\+\_\+is\+\_\+end} (\mbox{\hyperlink{struct_line_iterator}{Line\+Iterator}} $\ast$it)
+\item 
+\mbox{\Hypertarget{line__iterator_8c_a9ee4113760e4af135416fe5da96a90ec}\label{line__iterator_8c_a9ee4113760e4af135416fe5da96a90ec}} 
+bool {\bfseries line\+\_\+iterator\+\_\+is\+\_\+start} (\mbox{\hyperlink{struct_line_iterator}{Line\+Iterator}} $\ast$it)
+\item 
+\mbox{\Hypertarget{line__iterator_8c_ae140fb1bd34f9ecaa5ba5be5ca271f58}\label{line__iterator_8c_ae140fb1bd34f9ecaa5ba5be5ca271f58}} 
+bool {\bfseries line\+\_\+iterator\+\_\+includes} (\mbox{\hyperlink{struct_line_iterator}{Line\+Iterator}} $\ast$it, char search\+For)
+\end{DoxyCompactItemize}

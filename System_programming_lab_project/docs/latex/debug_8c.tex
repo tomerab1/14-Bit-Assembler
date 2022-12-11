@@ -1,0 +1,34 @@
+\hypertarget{debug_8c}{}\doxysection{debug.\+c File Reference}
+\label{debug_8c}\index{debug.c@{debug.c}}
+{\ttfamily \#include \char`\"{}debug.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{debug_8c_a0f6d6fff6b6702b16bed17185e1ae496}\label{debug_8c_a0f6d6fff6b6702b16bed17185e1ae496}} 
+void {\bfseries debug\+\_\+list\+\_\+register\+\_\+node} (\mbox{\hyperlink{structdebug_list}{debug\+List}} $\ast$list, \mbox{\hyperlink{struct____debug__node}{debug\+Node}} $\ast$new\+\_\+node)
+\item 
+\mbox{\Hypertarget{debug_8c_afcccf5c3264d88f8fb617cd31ff79874}\label{debug_8c_afcccf5c3264d88f8fb617cd31ff79874}} 
+bool {\bfseries debug\+\_\+list\+\_\+is\+\_\+empty} (\mbox{\hyperlink{structdebug_list}{debug\+List}} $\ast$list)
+\item 
+\mbox{\Hypertarget{debug_8c_a9083c7d418de19fa4a8eda030cfec609}\label{debug_8c_a9083c7d418de19fa4a8eda030cfec609}} 
+\mbox{\hyperlink{structdebug_list}{debug\+List}} $\ast$ {\bfseries debug\+\_\+list\+\_\+new\+\_\+list} ()
+\item 
+\mbox{\Hypertarget{debug_8c_ae8a834723f2b0da97ec682e732a8c667}\label{debug_8c_ae8a834723f2b0da97ec682e732a8c667}} 
+\mbox{\hyperlink{struct____debug__node}{debug\+Node}} $\ast$ {\bfseries debug\+\_\+list\+\_\+new\+\_\+node} (char $\ast$start, char $\ast$err, long line, error\+Codes err\+\_\+code)
+\item 
+\mbox{\Hypertarget{debug_8c_aa9c2f6da6fb0e580a6a822fc4ab93d04}\label{debug_8c_aa9c2f6da6fb0e580a6a822fc4ab93d04}} 
+void {\bfseries debug\+\_\+list\+\_\+destroy\+\_\+node} (\mbox{\hyperlink{struct____debug__node}{debug\+Node}} $\ast$node)
+\item 
+\mbox{\Hypertarget{debug_8c_ab549b9b54d931a5e324856b8a0ec859b}\label{debug_8c_ab549b9b54d931a5e324856b8a0ec859b}} 
+void {\bfseries debug\+\_\+list\+\_\+destroy} (\mbox{\hyperlink{structdebug_list}{debug\+List}} $\ast$$\ast$list)
+\item 
+\mbox{\Hypertarget{debug_8c_aff845343a5b3c908da86478ac7a14343}\label{debug_8c_aff845343a5b3c908da86478ac7a14343}} 
+void {\bfseries debug\+\_\+list\+\_\+pretty\+\_\+print} (\mbox{\hyperlink{structdebug_list}{debug\+List}} $\ast$list)
+\item 
+\mbox{\Hypertarget{debug_8c_a3a146c90c856701f4e95ec9a6b893469}\label{debug_8c_a3a146c90c856701f4e95ec9a6b893469}} 
+void {\bfseries debug\+\_\+print\+\_\+error} (\mbox{\hyperlink{structerror_context}{error\+Context}} $\ast$err\+\_\+ctx, char err\+\_\+buff\mbox{[}$\,$\mbox{]})
+\item 
+\mbox{\Hypertarget{debug_8c_a0efb3e81924b5d40b07d927d929fceee}\label{debug_8c_a0efb3e81924b5d40b07d927d929fceee}} 
+char $\ast$ {\bfseries debug\+\_\+map\+\_\+token\+\_\+to\+\_\+err} (error\+Codes code)
+\end{DoxyCompactItemize}

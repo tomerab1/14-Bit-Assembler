@@ -1,0 +1,115 @@
+\hypertarget{memory_8h_source}{}\doxysection{memory.\+h}
+\mbox{\hyperlink{memory_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#ifndef MEMORY\_H}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#define MEMORY\_H}}
+\DoxyCodeLine{3 }
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{constants_8h}{constants.h}}"{}}}
+\DoxyCodeLine{10 }
+\DoxyCodeLine{11 \textcolor{preprocessor}{\#define SIZEOF\_MEMORY\_WORD 2 }\textcolor{comment}{/* We only need 14 bits, so we will use an array of 2 chars. */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{12 }
+\DoxyCodeLine{13 \textcolor{preprocessor}{\#define FLAG\_ERA     0x01}}
+\DoxyCodeLine{14 \textcolor{preprocessor}{\#define FLAG\_SOURCE  0x02}}
+\DoxyCodeLine{15 \textcolor{preprocessor}{\#define FLAG\_DEST    0x04}}
+\DoxyCodeLine{16 \textcolor{preprocessor}{\#define FLAG\_OPCODE1 0x08}}
+\DoxyCodeLine{17 \textcolor{preprocessor}{\#define FLAG\_OPCODE2 0x10}}
+\DoxyCodeLine{18 \textcolor{preprocessor}{\#define FLAG\_PARAM1  0x20}}
+\DoxyCodeLine{19 \textcolor{preprocessor}{\#define FLAG\_PARAM2  0x40}}
+\DoxyCodeLine{20 }
+\DoxyCodeLine{21 \textcolor{preprocessor}{\#define MASK\_ERA     0x03}}
+\DoxyCodeLine{22 \textcolor{preprocessor}{\#define MASK\_DEST    0x0c}}
+\DoxyCodeLine{23 \textcolor{preprocessor}{\#define MASK\_SOURCE  0x30}}
+\DoxyCodeLine{24 \textcolor{preprocessor}{\#define MASK\_OPCODE1 0xc0}}
+\DoxyCodeLine{25 \textcolor{preprocessor}{\#define MASK\_OPCODE2 0x03}}
+\DoxyCodeLine{26 \textcolor{preprocessor}{\#define MASK\_PARAM1  0x0c}}
+\DoxyCodeLine{27 \textcolor{preprocessor}{\#define MASK\_PARAM2  0x30}}
+\DoxyCodeLine{28 }
+\DoxyCodeLine{29 \textcolor{preprocessor}{\#define OFFSET\_ERA     0x00}}
+\DoxyCodeLine{30 \textcolor{preprocessor}{\#define OFFSET\_DEST    0x02}}
+\DoxyCodeLine{31 \textcolor{preprocessor}{\#define OFFSET\_SOURCE  0x04}}
+\DoxyCodeLine{32 \textcolor{preprocessor}{\#define OFFSET\_OPCODE1 0x06}}
+\DoxyCodeLine{33 \textcolor{preprocessor}{\#define OFFSET\_OPCODE2 0x00}}
+\DoxyCodeLine{34 \textcolor{preprocessor}{\#define OFFSET\_PARAM1  0x02}}
+\DoxyCodeLine{35 \textcolor{preprocessor}{\#define OFFSET\_PARAM2  0x04}}
+\DoxyCodeLine{36 }
+\DoxyCodeLine{40 \textcolor{keyword}{typedef} \textcolor{keyword}{enum} }
+\DoxyCodeLine{41 \{}
+\DoxyCodeLine{42     ENCODING\_ABS = 0, ENCODING\_EXT, ENCODING\_RELOC}
+\DoxyCodeLine{43 \} \mbox{\hyperlink{memory_8h_a0b9039f87c8a2980c4a6ab14b511760a}{EncodingTypes}};}
+\DoxyCodeLine{44 }
+\DoxyCodeLine{45 }
+\DoxyCodeLine{49 \textcolor{keyword}{typedef} \textcolor{keyword}{enum}}
+\DoxyCodeLine{50 \{}
+\DoxyCodeLine{51     REG\_R0 = 0, REG\_R1, REG\_R2, REG\_R3,}
+\DoxyCodeLine{52     REG\_R4, REG\_R5, REG\_R6, REG\_R7,}
+\DoxyCodeLine{53     REG\_PSW, REG\_PC, REG\_TOTAL}
+\DoxyCodeLine{54 \} \mbox{\hyperlink{memory_8h_a3e3ad86bd10ce04fea0bc583130474b6}{RegistersType}};}
+\DoxyCodeLine{55 }
+\DoxyCodeLine{59 \textcolor{keyword}{typedef} \textcolor{keyword}{struct}}
+\DoxyCodeLine{60 \{}
+\DoxyCodeLine{61     \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} mem[SIZEOF\_MEMORY\_WORD];}
+\DoxyCodeLine{62 \} \mbox{\hyperlink{struct_memory_word}{MemoryWord}};}
+\DoxyCodeLine{63 }
+\DoxyCodeLine{67 \textcolor{keyword}{typedef} \textcolor{keyword}{struct}}
+\DoxyCodeLine{68 \{}
+\DoxyCodeLine{69     \textcolor{keywordtype}{long} counter;}
+\DoxyCodeLine{70     \mbox{\hyperlink{struct_memory_word}{MemoryWord}} memory[RAM\_MEMORY\_SZ];}
+\DoxyCodeLine{71 \} \mbox{\hyperlink{structimage_memory}{imageMemory}};}
+\DoxyCodeLine{72 }
+\DoxyCodeLine{73 }
+\DoxyCodeLine{77 \textcolor{keyword}{typedef} \textcolor{keyword}{struct}}
+\DoxyCodeLine{78 \{}
+\DoxyCodeLine{79     \mbox{\hyperlink{structimage_memory}{imageMemory}} instruction\_image;}
+\DoxyCodeLine{80     \mbox{\hyperlink{structimage_memory}{imageMemory}} data\_image;}
+\DoxyCodeLine{81 \} \mbox{\hyperlink{structmemory_buffer}{memoryBuffer}};}
+\DoxyCodeLine{82 }
+\DoxyCodeLine{86 \mbox{\hyperlink{structmemory_buffer}{memoryBuffer}} \mbox{\hyperlink{memory_8h_adf23764132d697803f1dbbf260b86f7a}{memory\_buffer\_get\_new}}();}
+\DoxyCodeLine{87 }
+\DoxyCodeLine{90 \textcolor{keywordtype}{void} \mbox{\hyperlink{memory_8h_a3336aa8be04b4a57da3ac881aa13e399}{set\_image\_memory}}(\mbox{\hyperlink{structimage_memory}{imageMemory}}* mem, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} bytes, \textcolor{keywordtype}{int} \mbox{\hyperlink{structflags}{flags}});}
+\DoxyCodeLine{91 }
+\DoxyCodeLine{92 }
+\DoxyCodeLine{97 \textcolor{keyword}{static} \mbox{\hyperlink{structimage_memory}{imageMemory}} \mbox{\hyperlink{memory_8c_af258129e28dea9a2451dd46c78918ad8}{image\_memory\_get\_new}}();}
+\DoxyCodeLine{98 }
+\DoxyCodeLine{102 \textcolor{keyword}{static} \textcolor{keywordtype}{void} \mbox{\hyperlink{memory_8c_a201369fd1364dfd09ac9e80dc293e01c}{image\_memory\_init}}(\mbox{\hyperlink{structimage_memory}{imageMemory}}* mem);}
+\DoxyCodeLine{103 }
+\DoxyCodeLine{105 \textcolor{keywordtype}{void} \mbox{\hyperlink{memory_8h_a93e3f81e0962233b51525ba94b65b497}{set\_era\_bits}}(\mbox{\hyperlink{struct_memory_word}{MemoryWord}}* mem, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} \textcolor{keywordtype}{byte});}
+\DoxyCodeLine{106 }
+\DoxyCodeLine{108 \textcolor{keywordtype}{void} \mbox{\hyperlink{memory_8h_ade0c49a7d50ab537e5a0430f03fed99b}{set\_source\_bits}}(\mbox{\hyperlink{struct_memory_word}{MemoryWord}}* mem, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} \textcolor{keywordtype}{byte});}
+\DoxyCodeLine{109 }
+\DoxyCodeLine{111 \textcolor{keywordtype}{void} \mbox{\hyperlink{memory_8h_a72d3c6f627586efbcd6996a4dd391fb2}{set\_dest\_bits}}(\mbox{\hyperlink{struct_memory_word}{MemoryWord}}* mem,  \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} \textcolor{keywordtype}{byte});}
+\DoxyCodeLine{112 }
+\DoxyCodeLine{114 \textcolor{keywordtype}{void} \mbox{\hyperlink{memory_8h_ac9bcd66be7ee1d40cb336193f7e254c0}{set\_opcode\_cell\_1\_bits}}(\mbox{\hyperlink{struct_memory_word}{MemoryWord}}* mem, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} \textcolor{keywordtype}{byte});}
+\DoxyCodeLine{115 }
+\DoxyCodeLine{117 \textcolor{keywordtype}{void} \mbox{\hyperlink{memory_8h_a96444c2a4c994cac4f3ab865953dd2c6}{set\_opcode\_cell\_2\_bits}}(\mbox{\hyperlink{struct_memory_word}{MemoryWord}}* mem, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} \textcolor{keywordtype}{byte});}
+\DoxyCodeLine{118 }
+\DoxyCodeLine{120 \textcolor{keywordtype}{void} \mbox{\hyperlink{memory_8h_ae38ae715ce595c2a6b8c0744c49d9597}{set\_param1\_bits}}(\mbox{\hyperlink{struct_memory_word}{MemoryWord}}* mem, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} \textcolor{keywordtype}{byte});}
+\DoxyCodeLine{121 }
+\DoxyCodeLine{123 \textcolor{keywordtype}{void} \mbox{\hyperlink{memory_8h_a62312d8255fbb931cca75788ff112cc5}{set\_param2\_bits}}(\mbox{\hyperlink{struct_memory_word}{MemoryWord}}* mem, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} \textcolor{keywordtype}{byte});}
+\DoxyCodeLine{124 }
+\DoxyCodeLine{125 }
+\DoxyCodeLine{126 \textcolor{comment}{/* This function is for getting the e.r.a flag */}}
+\DoxyCodeLine{127 \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} get\_era\_bits(\mbox{\hyperlink{struct_memory_word}{MemoryWord}}* mem);}
+\DoxyCodeLine{128 }
+\DoxyCodeLine{129 \textcolor{comment}{/* This function is for getting the e.r.a flag */}}
+\DoxyCodeLine{130 \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} get\_source\_bits(\mbox{\hyperlink{struct_memory_word}{MemoryWord}}* mem);}
+\DoxyCodeLine{131 }
+\DoxyCodeLine{132 \textcolor{comment}{/* This function is for getting the e.r.a flag */}}
+\DoxyCodeLine{133 \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} get\_dest\_bits(\mbox{\hyperlink{struct_memory_word}{MemoryWord}}* mem);}
+\DoxyCodeLine{134 }
+\DoxyCodeLine{135 \textcolor{comment}{/* This function is for getting the e.r.a flag */}}
+\DoxyCodeLine{136 \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} get\_opcode\_cell\_1\_bits(\mbox{\hyperlink{struct_memory_word}{MemoryWord}}* mem);}
+\DoxyCodeLine{137 }
+\DoxyCodeLine{138 \textcolor{comment}{/* This function is for getting the e.r.a flag */}}
+\DoxyCodeLine{139 \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} get\_opcode\_cell\_2\_bits(\mbox{\hyperlink{struct_memory_word}{MemoryWord}}* mem);}
+\DoxyCodeLine{140 }
+\DoxyCodeLine{141 \textcolor{comment}{/* This function is for getting the e.r.a flag */}}
+\DoxyCodeLine{142 \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} get\_param1\_bits(\mbox{\hyperlink{struct_memory_word}{MemoryWord}}* mem);}
+\DoxyCodeLine{143 }
+\DoxyCodeLine{144 \textcolor{comment}{/* This function is for getting the e.r.a flag */}}
+\DoxyCodeLine{145 \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} get\_param2\_bits(\mbox{\hyperlink{struct_memory_word}{MemoryWord}}* mem);}
+\DoxyCodeLine{146 }
+\DoxyCodeLine{147 \textcolor{keywordtype}{void} dump\_memory(\mbox{\hyperlink{structmemory_buffer}{memoryBuffer}}* buf);}
+\DoxyCodeLine{148 }
+\DoxyCodeLine{149 \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

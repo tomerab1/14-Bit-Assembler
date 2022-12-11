@@ -1,3 +1,6 @@
+/** @file
+*/
+
 #include "encoding.h"
 
 void encode_dot_string(LineIterator* it, memoryBuffer* img)

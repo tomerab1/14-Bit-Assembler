@@ -1,3 +1,6 @@
+/** @file
+*/
+
 #include "symbol_table.h"
 #include "utils.h"
 #include <string.h>

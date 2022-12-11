@@ -1,5 +1,9 @@
 #ifndef  DEBUG_H
 #define DEBUG_H
+
+/** @file
+*/
+
 #include "utils.h"
 #include <stddef.h>
 

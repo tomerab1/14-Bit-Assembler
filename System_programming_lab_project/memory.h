@@ -1,5 +1,11 @@
 #ifndef MEMORY_H
 #define MEMORY_H
+
+/** @file
+*	This header is used to specify all memory related data structures, i.e. MemoryWord, memoryBuffer etc.
+*   This header also includes all the appropriate routines for manipulating and creating those data structures.
+*/
+
 #include "constants.h"
 
 #define SIZEOF_MEMORY_WORD 2 /* We only need 14 bits, so we will use an array of 2 chars. */
@@ -28,7 +34,7 @@
 #define OFFSET_PARAM1  0x02
 #define OFFSET_PARAM2  0x04
 
-/*
+/**
 	This enumeration is used to represent each encoding type with a specific numeric constant. 
 */
 typedef enum 
@@ -37,7 +43,7 @@ typedef enum
 } EncodingTypes;
 
 
-/* 
+/** 
 	This enumeration is used to represent each register type with a specific numeric constant. 
 */
 typedef enum
@@ -47,16 +53,16 @@ typedef enum
 	REG_PSW, REG_PC, REG_TOTAL
 } RegistersType;
 
-/*
-	This sturct is used to represent a memory word as specified in the project's description.
+/**
+	@brief This sturct is used to represent a memory word as specified in the project's description.
 */
 typedef struct
 {
 	unsigned char mem[SIZEOF_MEMORY_WORD];
 } MemoryWord;
 
-/*
-	This struct is used to represent 'instruction/data image' and the 'instruction/data counter'.
+/**
+	@brief This struct is used to represent 'instruction/data image' and the 'instruction/data counter'.
 */
 typedef struct
 {
@@ -64,63 +70,56 @@ typedef struct
 	MemoryWord memory[RAM_MEMORY_SZ];
 } imageMemory;
 
-/* 
-	This struct is used to represent a 14bit register
-*/
-typedef struct 
-{
-	MemoryWord memory;
-} Register;
 
-/*
-	This struct is used to represent all the memory buffers, the 'cpu' registers and the instruction/data image.
+/**
+	@brief This struct is used to represent all the memory buffers, the 'cpu' registers and the instruction/data image.
 */
 typedef struct
 {
-	Register registers[REG_TOTAL];
 	imageMemory instruction_image;
 	imageMemory data_image;
 } memoryBuffer;
 
-/*
-	This is a function for creating a new memory buffer object.
+/**
+	@brief This is a function for creating a new memory buffer object.
 */
 memoryBuffer memory_buffer_get_new();
 
-/* This function sets bytes appropriately in a memoryWord
+/** @brief This function sets bytes appropriately in a memoryWord
 */
 void set_image_memory(imageMemory* mem, unsigned char bytes, int flags);
 
 
-/*
+/**
 	This is an internal function that creates a new image memory object. 
+	@return - A new image memory structure.
 */
 static imageMemory image_memory_get_new();
 
-/*
-	This is an internal function used to zero all the image memory. 
+/**
+	@brief This is an internal function used to zero all the image memory. 
 */
 static void image_memory_init(imageMemory* mem);
 
-/* This function is for setting the e.r.a flag */
+/** @brief This function is for setting the e.r.a flag */
 void set_era_bits(MemoryWord* mem, unsigned char byte);
 
-/* This function is for setting the e.r.a flag */
+/** @brief This function is for setting the e.r.a flag */
 void set_source_bits(MemoryWord* mem, unsigned char byte);
 
-/* This function is for setting the e.r.a flag */
+/** @brief This function is for setting the e.r.a flag */
 void set_dest_bits(MemoryWord* mem,  unsigned char byte);
 
-/* This function is for setting the e.r.a flag */
+/** @brief This function is for setting the e.r.a flag */
 void set_opcode_cell_1_bits(MemoryWord* mem, unsigned char byte);
 
-/* This function is for setting the e.r.a flag */
+/** @brief This function is for setting the e.r.a flag */
 void set_opcode_cell_2_bits(MemoryWord* mem, unsigned char byte);
 
-/* This function is for setting the e.r.a flag */
+/** @brief This function is for setting the e.r.a flag */
 void set_param1_bits(MemoryWord* mem, unsigned char byte);
 
-/* This function is for setting the e.r.a flag */
+/** @brief This function is for setting the e.r.a flag */
 void set_param2_bits(MemoryWord* mem, unsigned char byte);
 
 

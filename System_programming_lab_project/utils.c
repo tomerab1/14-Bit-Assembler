@@ -1,3 +1,6 @@
+/** @file
+*/
+
 #include "utils.h"
 #include "syntactical_analysis.h"
 #include "constants.h"
