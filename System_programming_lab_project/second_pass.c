@@ -8,7 +8,7 @@
 bool initiate_second_pass(char* path, SymbolTable* table, memoryBuffer* memory) {
 	FILE* in = open_file(path, MODE_READ);
 
-	programFinalStatus finalStatus = { NULL };
+	programFinalStatus finalStatus = {NULL};
 	LineIterator curLine;
 
 	LineIterator* ptrCurLine = &curLine;
@@ -21,35 +21,44 @@ bool initiate_second_pass(char* path, SymbolTable* table, memoryBuffer* memory) 
 		skip_label(&curLine, &labelFlag, table, &(finalStatus.errors));
 
 		if (!directive_exists(&curLine)) { /*checks if any kind of instruction exists (.something)*/
-			execute_line(&curLine, memory);
+			execute_line(&curLine,table, memory);
 			memory->instruction_image.counter++;
 		}
 		else {
-			extract_directive_type(line, &finalStatus.entryAndExternFlag);
+			extract_directive_type(ptrCurLine, &finalStatus.entryAndExternFlag);
 		}
 	}
+
 	/*finished reading all lines in file*/
-	if (finalStatus.error_flag) 
+	if (finalStatus.error_flag) {
 		handle_errors(&(finalStatus.errors));
+		return FALSE;
+	}
 	else 
 		create_files(memory, path, &finalStatus, table,  &(finalStatus.errors));
 
 	fclose(in);
 	free(line);
 	free(&curLine);
+	return TRUE;
 }
 
-void execute_line(LineIterator* it, memoryBuffer* memory) {
-	char* method = line_iterator_next_word(it, " ");
-	int syntaxGroup = get_syntax_group(method);
+void execute_line(LineIterator* it, SymbolTable* table, memoryBuffer* memory) {
+	char* method = line_iterator_next_word(it, " "); /*get method type*/
+	int syntaxGroup = get_syntax_group(method); /*returns the syntax group*/
 
-	execute_command(memory, table,it, method, syntaxGroup);
+	execute_command(memory, table,it, syntaxGroup);
 
 	free(method);
 }
 
-void execute_command(memoryBuffer* memory, SymbolTable* table,LineIterator* restOfLine, char* method, int syntaxGroup) {
-	if(line_iterator_includes(restOfLine,))
+void execute_command(memoryBuffer* memory, SymbolTable* table,LineIterator* restOfLine, int syntaxGroup) {
+	if (is_label_exists_in_line((*restOfLine), (*table))) {
+		 encode_line_w_label(memory, table, restOfLine, syntaxGroup);
+	}
+	else {
+		memory->instruction_image.counter += get_line_IC_amount(restOfLine, syntaxGroup);
+	}
 }
 
 bool generate_object_file(memoryBuffer* memory, char* path, debugList* err) {
@@ -79,10 +88,10 @@ bool generate_object_file(memoryBuffer* memory, char* path, debugList* err) {
 
 	free(outfileName);
 	fclose(out);
-	
+	return TRUE;
 }
 
-LinesList* translate_to_machine_data(memoryBuffer* memory, errorContext* err) {
+LinesList* translate_to_machine_data(memoryBuffer* memory, debugList* err) {
 	int i, j;
 	MemoryWord* instImg = memory->instruction_image.memory;
 	LinesList* translatedMemory = (LinesList*)xmalloc(sizeof(LinesList) * memory->instruction_image.counter);
@@ -103,9 +112,8 @@ LinesList* translate_to_machine_data(memoryBuffer* memory, errorContext* err) {
 			}
 			lineNode = lineNode->next;
 		}
-		return translatedMemory;
 	}
-
+	return translatedMemory;
 }
 
 bool generate_externals_file(SymbolTable* table, char* path){
@@ -117,7 +125,8 @@ bool generate_externals_file(SymbolTable* table, char* path){
 	out = open_file(outfileName, MODE_WRITE);
 
 	char placeholder[20];
-	sprintf(placeholder, ("%-10s\t%4d", symTableHead->sym.name, symTableHead->sym.counter));
+	strcpy(placeholder,symTableHead->sym.name);
+	sprintf(placeholder+strlen(placeholder), symTableHead->sym.counter);
 
 	while (symTableHead != NULL) {
 		if(symTableHead->sym.type == SYM_EXTERN){
@@ -129,6 +138,7 @@ bool generate_externals_file(SymbolTable* table, char* path){
 
 	free(outfileName);
 	fclose(out);
+	return TRUE;
 }
 
 bool generate_entries_file(SymbolTable* table, char* path) {
@@ -140,8 +150,8 @@ bool generate_entries_file(SymbolTable* table, char* path) {
 	out = open_file(outfileName, MODE_WRITE);
 
 	char placeholder[20];
-	sprintf(placeholder, ("%-10s\t%4d", ("%-10s%4d", symTableHead->sym.name, symTableHead->sym.counter)));
-
+	strcpy(placeholder, symTableHead->sym.name);
+	sprintf(placeholder + strlen(placeholder), symTableHead->sym.counter);
 	while (symTableHead != NULL) {
 		if(symTableHead->sym.type == SYM_ENTRY){
 			fputs(placeholder, out);
@@ -152,6 +162,7 @@ bool generate_entries_file(SymbolTable* table, char* path) {
 
 	free(outfileName);
 	fclose(out);
+	return TRUE;
 }
 
 void create_files(memoryBuffer* memory, char* path, programFinalStatus* finalStatus ,SymbolTable* table,debugList* err) {
@@ -163,13 +174,13 @@ void create_files(memoryBuffer* memory, char* path, programFinalStatus* finalSta
 void skip_label(LineIterator* line, bool* labelFlag,SymbolTable* table, debugList* err) {
 	if (isLabel(line)) {
 		if (symbol_table_search_symbol(table, line_iterator_next_word(line, " "))) { //if exists, needs to edit code so it would care the colon
-			line = line->start;
+			line->current = line->start;
 			while (line_iterator_peek(line) != COLON) {
 				line_iterator_advance(line);
 			}
 			line_iterator_advance(line);
 			line_iterator_consume_blanks(line);
-			labelFlag = TRUE;
+			(*labelFlag) = TRUE;
 		}
 		return;
 	}
@@ -186,13 +197,13 @@ void extract_directive_type(LineIterator* line, flags* flag) {
 			extern_exists(flag);
 		}
 		else if(!(strcmp(command, DOT_STRING) || strcmp(command, DOT_DATA))){//isn't any exists command
-			debugNode err; //should also add debug list later on function headline
+			debugNode err = { NULL }; //should also add debug list later on function headline
 		}
 		free(command);
 }
 
 bool directive_exists(LineIterator* line) {
-	int tempCur = line->current;
+	char* tempCur = line->current;
 	while (!line_iterator_is_end(line)) {
 		if (line_iterator_peek(line) == DOT_COMMAND) {
 			line_iterator_advance(line);
@@ -217,4 +228,14 @@ void entry_exists(flags* flag) {
 bool handle_errors(debugList* error) {
 	
 	return TRUE;
+}
+
+int get_line_IC_amount(LineIterator* line, int syntaxGroup) {
+	int count = 0;
+
+	return count;
+}
+
+void encode_line_w_label(memoryBuffer* memory, SymbolTable* table, LineIterator* restOfLine, int syntaxGroup) {
+
 }

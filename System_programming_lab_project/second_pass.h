@@ -65,7 +65,7 @@ bool initiate_second_pass(char* path, SymbolTable* table, memoryBuffer* memory);
 bool generate_object_file(memoryBuffer* memory, char* path, debugList* err);
 
 /*translates data from memory to object text style configuration*/
-LinesList* translate_to_machine_data(memoryBuffer* memory, errorContext* err);
+LinesList* translate_to_machine_data(memoryBuffer* memory, debugList* err);
 
 /*generates external file*/
 bool generate_externals_file(SymbolTable* table, char* path);
@@ -104,7 +104,11 @@ bool handle_errors(debugList* error);
  *
  * @return void
  */
-void execute_line(LineIterator* it, memoryBuffer* memory);
+void execute_line(LineIterator* it, SymbolTable* table, memoryBuffer* memory);
 
-void execute_command(memoryBuffer* memory, LineIterator* restOfLine, char* method, int syntaxGroup);
+void execute_command(memoryBuffer* memory, SymbolTable* table, LineIterator* restOfLine, int syntaxGroup);
+
+int get_line_IC_amount(LineIterator* line, int syntaxGroup);
+
+void encode_line_w_label(memoryBuffer* memory, SymbolTable* table, LineIterator* restOfLine,int syntaxGroup);
 #endif
