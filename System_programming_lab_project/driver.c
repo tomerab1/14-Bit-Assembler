@@ -14,6 +14,9 @@ typedef struct driver {
     int (*exec)(Driver* self, int argc, char** argv);
 } Driver;
 
+#define FIRST_PASS_FAILED 1
+#define SECOND_PASS_FAILED 2
+
 Driver* driver_new_driver()
 {
     Driver* driver = (Driver*)xmalloc(sizeof(Driver));
@@ -44,6 +47,9 @@ int exec_impl(Driver* driver, int argc, char** argv)
         }
         else {
             debug_list_pretty_print(driver->dbg_list);
+            on_exit(driver);
+            free(pre_assembler_path);
+            return FIRST_PASS_FAILED;
         }
 
         on_exit(driver);
