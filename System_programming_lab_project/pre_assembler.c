@@ -1,3 +1,6 @@
+/** @file
+*/
+
 #include "pre_assembler.h"
 #include <string.h>
 #include <ctype.h>

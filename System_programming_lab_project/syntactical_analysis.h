@@ -1,6 +1,9 @@
 #ifndef SYNTACTICAL_ANALYSIS_H
 #define SYNTACTICAL_ANALYSIS_H
 
+/** @file
+*/
+
 #include "first_pass.h"
 #include "line_iterator.h"
 #include "debug.h"
@@ -54,13 +57,13 @@ typedef enum
 /* This function takes a string and returns the matching Opcode. */
 Opcodes get_opcode(char* str);
 
-/* This function checks the lable syntax.
+/** This function checks the lable syntax.
  * @param - The label to do the syntax check upon.  
  * @return - An appropriate error code, if no errors found, returns ERROR_CODE_OK.
  */
 errorCodes check_label_syntax(char* label);
 
-/* Checks if the label syntax is valid.
+/** Checks if the label syntax is valid.
  * @param - The label string.
  * @return - TRUE if valid, FALSE otherwise.
 */
@@ -75,7 +78,7 @@ bool verify_command_syntax(LineIterator* it, debugList* dbg_list);
 /* Check if 'str' is a registers name. */
 bool cmp_register_name(char* str);
 
-/* This function trims the symbol name, i.e. trims the ':'
+/** This function trims the symbol name, i.e. trims the ':'
  * @param - The symbol to fix.
 */
 void trim_symbol_name(char* sym);

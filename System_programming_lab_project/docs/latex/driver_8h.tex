@@ -1,0 +1,45 @@
+\hypertarget{driver_8h}{}\doxysection{driver.\+h File Reference}
+\label{driver_8h}\index{driver.h@{driver.h}}
+\doxysubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{driver_8h_ac564aa572319766032ea14293cc44929}\label{driver_8h_ac564aa572319766032ea14293cc44929}} 
+typedef struct \mbox{\hyperlink{structdriver}{driver}} {\bfseries Driver}
+\begin{DoxyCompactList}\small\item\em Forward decleration for the programs driver. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{structdriver}{Driver}} $\ast$ \mbox{\hyperlink{driver_8h_adaca347624dfcda59e729aecdbeb14de}{driver\+\_\+new\+\_\+driver}} ()
+\item 
+int \mbox{\hyperlink{driver_8h_a18f1313bc66e773ff0239a7f40382b43}{driver\+\_\+exec}} (\mbox{\hyperlink{structdriver}{Driver}} $\ast$\mbox{\hyperlink{structdriver}{driver}}, int argc, char $\ast$$\ast$argv)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{driver_8h_a18f1313bc66e773ff0239a7f40382b43}\label{driver_8h_a18f1313bc66e773ff0239a7f40382b43}} 
+\index{driver.h@{driver.h}!driver\_exec@{driver\_exec}}
+\index{driver\_exec@{driver\_exec}!driver.h@{driver.h}}
+\doxysubsubsection{\texorpdfstring{driver\_exec()}{driver\_exec()}}
+{\footnotesize\ttfamily int driver\+\_\+exec (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structdriver}{Driver}} $\ast$}]{driver,  }\item[{int}]{argc,  }\item[{char $\ast$$\ast$}]{argv }\end{DoxyParamCaption})}
+
+Function for executing the driver. 
+\begin{DoxyParams}{Parameters}
+{\em The} & driver to execute. \\
+\hline
+{\em The} & mains argc \\
+\hline
+{\em The} & mains argv \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+An appropriate exit code. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{driver_8h_adaca347624dfcda59e729aecdbeb14de}\label{driver_8h_adaca347624dfcda59e729aecdbeb14de}} 
+\index{driver.h@{driver.h}!driver\_new\_driver@{driver\_new\_driver}}
+\index{driver\_new\_driver@{driver\_new\_driver}!driver.h@{driver.h}}
+\doxysubsubsection{\texorpdfstring{driver\_new\_driver()}{driver\_new\_driver()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structdriver}{Driver}} $\ast$ driver\+\_\+new\+\_\+driver (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Function for getting a new driver. \begin{DoxyReturn}{Returns}
+A new pointer to a driver. 
+\end{DoxyReturn}

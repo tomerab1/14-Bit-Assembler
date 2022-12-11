@@ -1,3 +1,6 @@
+/** @file
+*/
+
 #include "second_pass.h"
 #include "constants.h"
 

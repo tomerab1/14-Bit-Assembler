@@ -1,6 +1,9 @@
 #ifndef SECOND_PASS_H
 #define SECOND_PASS_h
 
+/** @file
+*/
+
 #include "syntactical_analysis.h"
 #include "line_iterator.h"
 #include "symbol_table.h"

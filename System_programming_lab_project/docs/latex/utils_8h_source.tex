@@ -1,0 +1,73 @@
+\hypertarget{utils_8h_source}{}\doxysection{utils.\+h}
+\mbox{\hyperlink{utils_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#ifndef UTILS\_H}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#define UTILS\_H}}
+\DoxyCodeLine{3 }
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#define \_CRT\_SECURE\_NO\_WARNINGS}}
+\DoxyCodeLine{5 }
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#include <stdio.h>}}
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#include <stdlib.h>}}
+\DoxyCodeLine{11 \textcolor{preprocessor}{\#include <string.h>}}
+\DoxyCodeLine{12 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{constants_8h}{constants.h}}"{}}}
+\DoxyCodeLine{13 }
+\DoxyCodeLine{14 \textcolor{comment}{//\#define DEBUG}}
+\DoxyCodeLine{15 }
+\DoxyCodeLine{16 \textcolor{comment}{/* TODO: Remove later, just defined for visual studio. */}}
+\DoxyCodeLine{17 \textcolor{preprocessor}{\#ifndef \_\_cplusplus}}
+\DoxyCodeLine{18 \textcolor{keyword}{typedef} \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{short} bool;}
+\DoxyCodeLine{19 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{20 }
+\DoxyCodeLine{21 \textcolor{preprocessor}{\#define TRUE 1}}
+\DoxyCodeLine{22 \textcolor{preprocessor}{\#define FALSE 0}}
+\DoxyCodeLine{23 }
+\DoxyCodeLine{24 \textcolor{preprocessor}{\#define REG\_MIN\_NUM '0'}}
+\DoxyCodeLine{25 \textcolor{preprocessor}{\#define REG\_MAX\_NUM '7'}}
+\DoxyCodeLine{26 \textcolor{preprocessor}{\#define REG\_BEG\_CHAR 'r'}}
+\DoxyCodeLine{27 \textcolor{preprocessor}{\#define POS\_SIGN\_CHAR '+'}}
+\DoxyCodeLine{28 \textcolor{preprocessor}{\#define NEG\_SIGN\_CHAR '-\/'}}
+\DoxyCodeLine{29 \textcolor{preprocessor}{\#define HASH\_CHAR '\#'}}
+\DoxyCodeLine{30 \textcolor{preprocessor}{\#define COMMA\_CHAR ','}}
+\DoxyCodeLine{31 \textcolor{preprocessor}{\#define COLON\_CHAR ':'}}
+\DoxyCodeLine{32 \textcolor{preprocessor}{\#define OPEN\_PAREN\_CHAR '('}}
+\DoxyCodeLine{33 \textcolor{preprocessor}{\#define CLOSE\_PAREN\_CHAR ')'}}
+\DoxyCodeLine{34 \textcolor{preprocessor}{\#define SPACE\_CHAR ' '}}
+\DoxyCodeLine{35 \textcolor{preprocessor}{\#define QUOTE\_CHAR '\(\backslash\)"{}'}}
+\DoxyCodeLine{36 \textcolor{preprocessor}{\#define TAB\_CHAR '\(\backslash\)t'}}
+\DoxyCodeLine{37 \textcolor{preprocessor}{}}
+\DoxyCodeLine{38 \textcolor{preprocessor}{\#define GROW\_CAPACITY(old\_sz) (old\_sz) *= 2}}
+\DoxyCodeLine{39 \textcolor{preprocessor}{\#define GROW\_ARRAY(type, pointer, new\_count, size) (type)xrealloc((pointer), (new\_count) * (size))}}
+\DoxyCodeLine{40 \textcolor{preprocessor}{\#define FREE\_ARRAY(pointer) free((pointer))}}
+\DoxyCodeLine{41 \textcolor{preprocessor}{}}
+\DoxyCodeLine{42 \textcolor{preprocessor}{}}
+\DoxyCodeLine{43 \textcolor{preprocessor}{/* Macro for iterating over each element of the list. */}}
+\DoxyCodeLine{44 \textcolor{preprocessor}{\#define LIST\_FOR\_EACH(type, head, out) \(\backslash\)}}
+\DoxyCodeLine{45 \textcolor{preprocessor}{for(type* (out) = (head); (out) != NULL; (out) = (out) ? (out)-\/>next : NULL)}}
+\DoxyCodeLine{46 \textcolor{preprocessor}{}}
+\DoxyCodeLine{47 \textcolor{preprocessor}{}}
+\DoxyCodeLine{48 \textcolor{preprocessor}{/* Wrapper function of malloc, calloc and realloc, they check whether an allocation was successful or not. */}}
+\DoxyCodeLine{49 \textcolor{preprocessor}{void* xrealloc(void* ptr, size\_t alloc\_sz);}}
+\DoxyCodeLine{50 \textcolor{preprocessor}{void* xcalloc(size\_t count, size\_t alloc\_sz);}}
+\DoxyCodeLine{51 \textcolor{preprocessor}{void* xmalloc(size\_t alloc\_sz);}}
+\DoxyCodeLine{52 \textcolor{preprocessor}{}}
+\DoxyCodeLine{53 \textcolor{preprocessor}{/* Creates a new file name, that end with 'postfix'. */}}
+\DoxyCodeLine{54 \textcolor{preprocessor}{char* get\_outfile\_name(char* path, char* postfix);}}
+\DoxyCodeLine{55 \textcolor{preprocessor}{}}
+\DoxyCodeLine{56 \textcolor{preprocessor}{/* Opens a file for the specified I/O mode. */}}
+\DoxyCodeLine{57 \textcolor{preprocessor}{FILE* open\_file(char* path, char* mode);}}
+\DoxyCodeLine{58 \textcolor{preprocessor}{}}
+\DoxyCodeLine{59 \textcolor{preprocessor}{/* Reads a new line from 'in'. */}}
+\DoxyCodeLine{60 \textcolor{preprocessor}{char* get\_line(FILE* in);}}
+\DoxyCodeLine{61 \textcolor{preprocessor}{}}
+\DoxyCodeLine{62 \textcolor{preprocessor}{/* This function takes a negative value, and returns it's 2's complement form. */}}
+\DoxyCodeLine{63 \textcolor{preprocessor}{unsigned int get\_2s\_complement(int n);}}
+\DoxyCodeLine{64 \textcolor{preprocessor}{}}
+\DoxyCodeLine{65 \textcolor{preprocessor}{char* get\_copy\_string(char* str);}}
+\DoxyCodeLine{66 \textcolor{preprocessor}{}}
+\DoxyCodeLine{67 \textcolor{preprocessor}{bool is\_line\_only\_blanks(char* line);}}
+\DoxyCodeLine{68 \textcolor{preprocessor}{}}
+\DoxyCodeLine{69 \textcolor{preprocessor}{unsigned int get\_num(char* num);}}
+\DoxyCodeLine{70 \textcolor{preprocessor}{}}
+\DoxyCodeLine{71 \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

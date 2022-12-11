@@ -1,0 +1,52 @@
+\hypertarget{line__iterator_8h_source}{}\doxysection{line\+\_\+iterator.\+h}
+\mbox{\hyperlink{line__iterator_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#ifndef LINE\_ITERATOR\_H}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#define LINE\_ITERATOR\_H}}
+\DoxyCodeLine{3 }
+\DoxyCodeLine{7 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{utils_8h}{utils.h}}"{}}}
+\DoxyCodeLine{8 }
+\DoxyCodeLine{9 \textcolor{keyword}{typedef} \textcolor{keyword}{struct}}
+\DoxyCodeLine{10 \{}
+\DoxyCodeLine{11     \textcolor{keywordtype}{char}* start; \textcolor{comment}{// Pointer to the start of the line.}}
+\DoxyCodeLine{12     \textcolor{keywordtype}{char}* current; \textcolor{comment}{// Pointer to the current position in the line.}}
+\DoxyCodeLine{13 \} \mbox{\hyperlink{struct_line_iterator}{LineIterator}};}
+\DoxyCodeLine{14 }
+\DoxyCodeLine{15 \textcolor{comment}{/* Puts a new line into the iterator. */}}
+\DoxyCodeLine{16 \textcolor{keywordtype}{void} line\_iterator\_put\_line(\mbox{\hyperlink{struct_line_iterator}{LineIterator}}* it, \textcolor{keywordtype}{char}* line);}
+\DoxyCodeLine{17 }
+\DoxyCodeLine{18 \textcolor{comment}{/* Advances the line iterator by 1. */}}
+\DoxyCodeLine{19 \textcolor{keywordtype}{void} line\_iterator\_advance(\mbox{\hyperlink{struct_line_iterator}{LineIterator}}* it);}
+\DoxyCodeLine{20 }
+\DoxyCodeLine{21 \textcolor{comment}{/* Advances the line iterator by -\/1. */}}
+\DoxyCodeLine{22 \textcolor{keywordtype}{void} line\_iterator\_backwards(\mbox{\hyperlink{struct_line_iterator}{LineIterator}}* it);}
+\DoxyCodeLine{23 }
+\DoxyCodeLine{24 \textcolor{comment}{/* Advances the line iterator by the words length. */}}
+\DoxyCodeLine{25 \textcolor{keywordtype}{void} line\_iterator\_unget\_word(\mbox{\hyperlink{struct_line_iterator}{LineIterator}}* it, \textcolor{keywordtype}{char}* word);}
+\DoxyCodeLine{26 }
+\DoxyCodeLine{27 \textcolor{comment}{/* Consumes blanks, i.e white spaces and tabs. */}}
+\DoxyCodeLine{28 \textcolor{keywordtype}{void} line\_iterator\_consume\_blanks(\mbox{\hyperlink{struct_line_iterator}{LineIterator}}* it);}
+\DoxyCodeLine{29 }
+\DoxyCodeLine{30 \textcolor{comment}{/* Advances the line iterator until the specified char */}}
+\DoxyCodeLine{31 \textcolor{keywordtype}{void} line\_iterator\_jump\_to(\mbox{\hyperlink{struct_line_iterator}{LineIterator}}* it, \textcolor{keywordtype}{char} sep);}
+\DoxyCodeLine{32 }
+\DoxyCodeLine{33 \textcolor{comment}{/* Returns the current char 'current' points to. */}}
+\DoxyCodeLine{34 \textcolor{keywordtype}{char} line\_iterator\_peek(\mbox{\hyperlink{struct_line_iterator}{LineIterator}}* it);}
+\DoxyCodeLine{35 }
+\DoxyCodeLine{36 \textcolor{comment}{/* Returns the next word. */}}
+\DoxyCodeLine{37 \textcolor{keywordtype}{char}* line\_iterator\_next\_word(\mbox{\hyperlink{struct_line_iterator}{LineIterator}}* it, \textcolor{keywordtype}{char}* seps);}
+\DoxyCodeLine{38 }
+\DoxyCodeLine{39 \textcolor{comment}{/* Checks if the iterator reached its end, i.e '\(\backslash\)0'. */}}
+\DoxyCodeLine{40 \textcolor{keywordtype}{bool} line\_iterator\_is\_end(\mbox{\hyperlink{struct_line_iterator}{LineIterator}}* it);}
+\DoxyCodeLine{41 }
+\DoxyCodeLine{42 \textcolor{comment}{/*Checks if the iterator reached line beginning*/}}
+\DoxyCodeLine{43 \textcolor{keywordtype}{bool} line\_iterator\_is\_start(\mbox{\hyperlink{struct_line_iterator}{LineIterator}}* it);}
+\DoxyCodeLine{44 }
+\DoxyCodeLine{45 \textcolor{comment}{/* Check if the iterator current char, matche any of the seperators. */}}
+\DoxyCodeLine{46 \textcolor{keywordtype}{bool} line\_iterator\_match\_any(\mbox{\hyperlink{struct_line_iterator}{LineIterator}}* it, \textcolor{keywordtype}{char}* seps);}
+\DoxyCodeLine{47 }
+\DoxyCodeLine{48 \textcolor{comment}{/* Checks if any char exists in line*/}}
+\DoxyCodeLine{49 \textcolor{keywordtype}{bool} line\_iterator\_includes(\mbox{\hyperlink{struct_line_iterator}{LineIterator}}* it, \textcolor{keywordtype}{char} searchFor);}
+\DoxyCodeLine{50 \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

@@ -128,6 +128,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="debug.c" />
+    <ClCompile Include="driver.c" />
     <ClCompile Include="encoding.c" />
     <ClCompile Include="first_pass.c" />
     <ClCompile Include="line_iterator.c" />
@@ -142,6 +143,7 @@
   <ItemGroup>
     <ClInclude Include="constants.h" />
     <ClInclude Include="debug.h" />
+    <ClInclude Include="driver.h" />
     <ClInclude Include="encoding.h" />
     <ClInclude Include="first_pass.h" />
     <ClInclude Include="line_iterator.h" />

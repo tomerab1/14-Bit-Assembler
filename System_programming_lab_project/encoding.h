@@ -1,10 +1,15 @@
 #ifndef ENCODING_H
 #define ENCODING_H
 
+/** @file
+*/
+
 #include "syntactical_analysis.h"
 #include "line_iterator.h"
 #include "debug.h"
 #include "memory.h"
+
+
 
 typedef struct
 { //should add type of var (#, register and so on)
