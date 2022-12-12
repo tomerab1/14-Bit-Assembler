@@ -663,7 +663,7 @@ bool is_label_name(LineIterator* it)
 {
     line_iterator_consume_blanks(it);
 
-    if (isdigit(line_iterator_peek(it))) {
+    if (!isalpha(line_iterator_peek(it))) {
         return FALSE;
     }
 

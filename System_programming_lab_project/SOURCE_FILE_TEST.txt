@@ -1,6 +1,6 @@
+LOOP: jmp L1(#-1,r6)
 bne LOOP(K,LOOP)
 L1: inc K
-LOOP: jmp L1(#-1,r6)
 mcr m1
 sub r1, r4
 bne END
