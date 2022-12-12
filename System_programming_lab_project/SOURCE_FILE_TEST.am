@@ -1,10 +1,10 @@
-bne LOOP(K,STR)
-L1: inc K
 LOOP: jmp L1(#-1,r6)
+bne LOOP(K,LOOP)
+L1: inc K
 sub r1, r4
 bne END
 prn #-5
-bne LOOP(r4,r3),
+bne LOOP(r4,r3)
 sub r1, r4
 bne END
 END: stop

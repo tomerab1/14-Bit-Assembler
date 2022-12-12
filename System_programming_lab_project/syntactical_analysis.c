@@ -580,7 +580,7 @@ bool match_operand(LineIterator* it, long line, int flags, debugList* dbg_list)
 
 bool match_pamaetrized_label(LineIterator* it, long line, debugList* dbg_list)
 {
-    int comma_counter = 0, close_paren_counter = 0;
+    int comma_counter = 0, close_paren_counter = 0, args_count = 0;
 
     while (!line_iterator_is_end(it) && line_iterator_peek(it) != CLOSE_PAREN_CHAR) {
         if (line_iterator_peek(it) == HASH_CHAR) {
@@ -588,6 +588,7 @@ bool match_pamaetrized_label(LineIterator* it, long line, debugList* dbg_list)
             if (!verify_int(it, line, ",)", dbg_list)) {
                 return FALSE;
             }
+            args_count++;
         }
         else if (isalpha(line_iterator_peek(it))) {
             if (line_iterator_peek(it) == REG_BEG_CHAR) {
@@ -596,11 +597,13 @@ bool match_pamaetrized_label(LineIterator* it, long line, debugList* dbg_list)
                 }
                 /* Consume the digit. */
                 line_iterator_advance(it);
+                args_count++;
             }
             else {
                 if (!is_label_name(it)) {
                     return FALSE;
                 }
+                args_count++;
             }
         }
         else if (line_iterator_peek(it) == COMMA_CHAR && comma_counter < 1) {
@@ -631,6 +634,11 @@ bool match_pamaetrized_label(LineIterator* it, long line, debugList* dbg_list)
         }
     }
 
+    if (args_count != 2) {
+        debug_list_register_node(dbg_list, debug_list_new_node(it->start, it->current, line, ERROR_CODE_MISSING_OPERAND));
+        return FALSE;
+    }
+
     while (!line_iterator_is_end(it)) {
         if (line_iterator_peek(it) == CLOSE_PAREN_CHAR) {
             close_paren_counter++;
@@ -655,7 +663,7 @@ bool is_label_name(LineIterator* it)
 {
     line_iterator_consume_blanks(it);
 
-    if (isdigit(line_iterator_peek(it))) {
+    if (!isalpha(line_iterator_peek(it))) {
         return FALSE;
     }
 

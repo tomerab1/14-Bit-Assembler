@@ -80,6 +80,12 @@ firstPassStates get_symbol_type(LineIterator* it, char* word)
 	/* Symbol definition, may follow, .data or .string*/
 	else if ((is_valid = is_valid_label(word)) == TRUE) {
 		char* next_word = line_iterator_next_word(it, " ");
+
+		if (!next_word) {
+			free(next_word);
+			return FP_NONE;
+		}
+
 		/* Check if .data */
 		if (strcmp(next_word, ".data") == 0) {
             free(next_word);
