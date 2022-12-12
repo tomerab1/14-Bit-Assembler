@@ -1,4 +1,4 @@
-bne LOOP(K,STR)
+bne LOOP(K,LOOP)
 L1: inc K
 LOOP: jmp L1(#-1,r6)
 mcr m1
