@@ -22,7 +22,6 @@ bool initiate_second_pass(char* path, SymbolTable* table, memoryBuffer* memory) 
 
 		if (!directive_exists(&curLine)) { /*checks if any kind of instruction exists (.something)*/
 			execute_line(&curLine,table, memory);
-			memory->instruction_image.counter++;
 		}
 		else {
 			extract_directive_type(ptrCurLine, &finalStatus.entryAndExternFlag);
@@ -34,8 +33,9 @@ bool initiate_second_pass(char* path, SymbolTable* table, memoryBuffer* memory) 
 		handle_errors(&(finalStatus.errors));
 		return FALSE;
 	}
-	else 
+	else {
 		create_files(memory, path, &finalStatus, table,  &(finalStatus.errors));
+	}
 
 	fclose(in);
 	free(line);
@@ -44,21 +44,18 @@ bool initiate_second_pass(char* path, SymbolTable* table, memoryBuffer* memory) 
 }
 
 void execute_line(LineIterator* it, SymbolTable* table, memoryBuffer* memory) {
-	char* method = line_iterator_next_word(it, " "); /*get method type*/
-	int syntaxGroup = get_syntax_group(method); /*returns the syntax group*/
+	if (is_label_exists_in_line((*it), (*table))) {
 
-	execute_command(memory, table,it, syntaxGroup);
-
-	free(method);
-}
-
-void execute_command(memoryBuffer* memory, SymbolTable* table,LineIterator* restOfLine, int syntaxGroup) {
-	if (is_label_exists_in_line((*restOfLine), (*table))) {
-		 encode_line_w_label(memory, table, restOfLine, syntaxGroup);
 	}
 	else {
-		memory->instruction_image.counter += get_line_IC_amount(restOfLine, syntaxGroup);
+		skip_first_pass_mem(memory);
 	}
+}
+
+
+void skip_first_pass_mem(memoryBuffer* memory) {
+	int memCellsToJump = memory->instruction_image.memory[memory->instruction_image.counter].encodingCount;
+	memory->instruction_image.counter += memCellsToJump;
 }
 
 bool generate_object_file(memoryBuffer* memory, char* path, debugList* err) {
@@ -230,12 +227,3 @@ bool handle_errors(debugList* error) {
 	return TRUE;
 }
 
-int get_line_IC_amount(LineIterator* line, int syntaxGroup) {
-	int count = 0;
-
-	return count;
-}
-
-void encode_line_w_label(memoryBuffer* memory, SymbolTable* table, LineIterator* restOfLine, int syntaxGroup) {
-
-}

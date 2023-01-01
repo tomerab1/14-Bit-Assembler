@@ -59,6 +59,7 @@ typedef enum
 typedef struct
 {
 	unsigned char mem[SIZEOF_MEMORY_WORD];
+	int encodingCount;
 } MemoryWord;
 
 /**

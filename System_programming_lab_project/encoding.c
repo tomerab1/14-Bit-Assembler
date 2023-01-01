@@ -13,10 +13,12 @@ void encode_dot_string(LineIterator* it, memoryBuffer* img)
 
 	while (line_iterator_peek(it) != QUOTE_CHAR) {
 		set_image_memory(&img->data_image, line_iterator_peek(it), FLAG_ERA | FLAG_SOURCE | FLAG_DEST | FLAG_OPCODE1);
+		img->instruction_image.memory[img->instruction_image.counter].encodingCount++;
 		img->data_image.counter++;
 		line_iterator_advance(it);
 	}
 	set_image_memory(&img->data_image, '\0', FLAG_ERA | FLAG_SOURCE | FLAG_DEST | FLAG_OPCODE1);
+	img->instruction_image.memory[img->instruction_image.counter].encodingCount++;
 	img->data_image.counter++;
 }
 
@@ -44,6 +46,7 @@ void encode_integer(imageMemory* img, unsigned int num)
 
 	/* Copy second 8 bits */
 	set_image_memory(img, (num & 0xff00) >> 0x08, FLAG_OPCODE2 | FLAG_PARAM1 | FLAG_PARAM2);
+	img->memory[img->counter].encodingCount++;
 	img->counter++;
 }
 
@@ -91,7 +94,7 @@ void encode_preceding_word(imageMemory* img, Opcodes op, char* source, char* des
 				set_image_memory(img, ADDRESSING_DIR << OFFSET_DEST, FLAG_DEST);
 		}
 	}
-
+	img->memory[img->counter].encodingCount++;
 	img->counter++;
 }
 
@@ -138,6 +141,7 @@ void encode_source_and_dest(imageMemory* img, char* source, char* dest)
 		/* Bits 2 - 7 -> First register. Bits 8 - 13 -> Second register. */
 		set_image_memory(img, (unsigned char)(*(source + 1) - '0'), FLAG_OPCODE2 | FLAG_PARAM1 | FLAG_PARAM2);
 		set_image_memory(img, (*(dest + 1) - '0') << 2, FLAG_OPCODE1 | FLAG_DEST | FLAG_SOURCE);
+		img->memory[img->counter].encodingCount++;
 		img->counter++;
 		return;
 	}
@@ -166,6 +170,7 @@ void encode_source_and_dest(imageMemory* img, char* source, char* dest)
 			}
 			break;
 		}
+		img->memory[img->counter].encodingCount++;
 		img->counter++;
 	}
 }
@@ -184,7 +189,7 @@ void encode_syntax_group_1(LineIterator* it, Opcodes op, memoryBuffer* img)
 	/* Source operand can be immediate, register or label. */
 	/* Dest operand can be register or label. */
 	char* source = NULL, *dest = NULL;
-		
+	
 	source = line_iterator_next_word(it, ", ");
 	
 	line_iterator_consume_blanks(it);
@@ -266,6 +271,7 @@ void encode_syntax_group_5(LineIterator* it, Opcodes op, memoryBuffer* img)
 	/* Encode the first memory word. */
 	if (source && dest) {
 		encode_preceding_word(&img->instruction_image, op, source, dest, TRUE);
+		img->instruction_image.memory[img->instruction_image.counter].encodingCount++;
 		img->instruction_image.counter++;
 
 		/* Encode the source and dest. */
@@ -273,6 +279,7 @@ void encode_syntax_group_5(LineIterator* it, Opcodes op, memoryBuffer* img)
 	}
 	else {
 		encode_preceding_word(&img->instruction_image, op, dest, source, FALSE);
+		img->instruction_image.memory[img->instruction_image.counter].encodingCount++;
 		img->instruction_image.counter++;
 	}
 

@@ -7,6 +7,7 @@
 #include "syntactical_analysis.h"
 #include "line_iterator.h"
 #include "symbol_table.h"
+#include "encoding.h"
 #include "memory.h"
 #include "debug.h"
 #include "utils.h"
@@ -108,7 +109,7 @@ void execute_line(LineIterator* it, SymbolTable* table, memoryBuffer* memory);
 
 void execute_command(memoryBuffer* memory, SymbolTable* table, LineIterator* restOfLine, int syntaxGroup);
 
-int get_line_IC_amount(LineIterator* line, int syntaxGroup);
+void skip_first_pass_mem(memoryBuffer* memory);
 
 void encode_line_w_label(memoryBuffer* memory, SymbolTable* table, LineIterator* restOfLine,int syntaxGroup);
 #endif

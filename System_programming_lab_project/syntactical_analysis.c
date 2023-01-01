@@ -710,6 +710,7 @@ SyntaxGroups get_syntax_group(char* name)
         return SG_GROUP_7;
     return SG_GROUP_INVALID;
 }
+
 bool is_label_exists_in_line(LineIterator line, SymbolTable table) {
     int i = 0;
     LineIterator* linePtr = &line;
@@ -717,6 +718,8 @@ bool is_label_exists_in_line(LineIterator line, SymbolTable table) {
     while (node != NULL) {
         if (line_iterator_includes(&line, node->sym.name)) {
             return TRUE;
+        }
+        else {
             node = node->next;
         }
     }
