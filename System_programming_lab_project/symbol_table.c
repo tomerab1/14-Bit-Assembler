@@ -9,6 +9,7 @@ SymbolTable* symbol_table_new_table()
 {
     SymbolTable* new_table = (SymbolTable*)xmalloc(sizeof(SymbolTable));
     new_table->head = new_table->tail = NULL;
+    new_table->completed = FALSE;
     return new_table;
 }
 

@@ -50,7 +50,7 @@ void encode_integer(imageMemory* img, unsigned int num)
 	img->counter++;
 }
 
-void encode_preceding_word(imageMemory* img, Opcodes op, char* source, char* dest, bool is_jmp_label)
+void encode_preceding_word(imageMemory* img, Opcodes op, char* source, char* dest, bool is_jmp_label, SymbolTable* table)
 {
 	set_image_memory(img, op << OFFSET_OPCODE1, FLAG_OPCODE1);
 	set_image_memory(img, (op >> 2) << OFFSET_OPCODE2, FLAG_OPCODE2);
@@ -98,33 +98,32 @@ void encode_preceding_word(imageMemory* img, Opcodes op, char* source, char* des
 	img->counter++;
 }
 
-void encode_opcode(LineIterator* it, memoryBuffer* img)
+void encode_opcode(LineIterator* it, SymbolTable* table, memoryBuffer* img)
 {
 	char* opcode = line_iterator_next_word(it, " ");
 	Opcodes op = get_opcode(opcode);
 	SyntaxGroups group = get_syntax_group(opcode);
-	
 	switch (group) {
 	case SG_GROUP_1:
-		encode_syntax_group_1(it, op, img);
+		table->completed ? encode_syntax_group_1(it, op, img,table): encode_syntax_group_1(it, op, img, NULL);
 		break;
 	case SG_GROUP_2: 
-		encode_syntax_group_2(it, op, img);
+		table->completed ? encode_syntax_group_2(it, op, img, table) : encode_syntax_group_2(it, op, img, NULL);
 		break;
-	case SG_GROUP_3: 
-		encode_syntax_group_3(it, op, img);
+	case SG_GROUP_3:
+		table->completed ? encode_syntax_group_3(it, op, img, table) : encode_syntax_group_3(it, op, img, NULL);
 		break;
-	case SG_GROUP_4: 
-		encode_syntax_group_4(it, op, img);
+	case SG_GROUP_4:
+		table->completed ? encode_syntax_group_4(it, op, img, table) : encode_syntax_group_4(it, op, img, NULL);
 		break;
-	case SG_GROUP_5: 
-		encode_syntax_group_5(it, op, img);
+	case SG_GROUP_5:
+		table->completed ? encode_syntax_group_5(it, op, img, table) : encode_syntax_group_5(it, op, img, NULL);
 		break;
-	case SG_GROUP_6: 
-		encode_syntax_group_6(it, op, img);
+	case SG_GROUP_6:
+		table->completed ? encode_syntax_group_6(it, op, img, table) : encode_syntax_group_6(it, op, img, NULL);
 		break;
-	case SG_GROUP_7: 
-		encode_syntax_group_7(it, op, img);
+	case SG_GROUP_7:
+		table->completed ? encode_syntax_group_7(it, op, img, table) : encode_syntax_group_7(it, op, img, NULL);
 		break;
 	default: break;
 	}
@@ -184,7 +183,7 @@ OperandKind get_operand_kind(char* op)
 	return KIND_LABEL;
 }
 
-void encode_syntax_group_1(LineIterator* it, Opcodes op, memoryBuffer* img)
+void encode_syntax_group_1(LineIterator* it, Opcodes op, memoryBuffer* img, SymbolTable* table)
 {
 	/* Source operand can be immediate, register or label. */
 	/* Dest operand can be register or label. */
@@ -207,7 +206,7 @@ void encode_syntax_group_1(LineIterator* it, Opcodes op, memoryBuffer* img)
 	free(dest);
 }
 
-void encode_syntax_group_2(LineIterator* it, Opcodes op, memoryBuffer* img)
+void encode_syntax_group_2(LineIterator* it, Opcodes op, memoryBuffer* img, SymbolTable* table)
 {
 	/* Source operand can be immediate, register or label. */
 	/* Dest operand can be register or label. */
@@ -230,7 +229,7 @@ void encode_syntax_group_2(LineIterator* it, Opcodes op, memoryBuffer* img)
 	free(dest);
 }
 
-void encode_syntax_group_3(LineIterator* it, Opcodes op, memoryBuffer* img)
+void encode_syntax_group_3(LineIterator* it, Opcodes op, memoryBuffer* img, SymbolTable* table)
 {
 	/* Source operand can be immediate, register or label. */
 	/* Dest operand can be register or label. */
@@ -247,14 +246,14 @@ void encode_syntax_group_3(LineIterator* it, Opcodes op, memoryBuffer* img)
 	free(dest);
 }
 
-void encode_syntax_group_4(LineIterator* it, Opcodes op, memoryBuffer* img)
+void encode_syntax_group_4(LineIterator* it, Opcodes op, memoryBuffer* img, SymbolTable* table)
 {
 	/* Encodes rts and stop */
 	/* Encode the first memory word. */
 	encode_preceding_word(&img->instruction_image, op, NULL, NULL, FALSE);
 }
 
-void encode_syntax_group_5(LineIterator* it, Opcodes op, memoryBuffer* img)
+void encode_syntax_group_5(LineIterator* it, Opcodes op, memoryBuffer* img, SymbolTable* table)
 {
 	/* Source operand can be immediate, register or label. */
 	/* Dest operand can be register or label. */
@@ -287,7 +286,7 @@ void encode_syntax_group_5(LineIterator* it, Opcodes op, memoryBuffer* img)
 	free(dest);
 }
 
-void encode_syntax_group_6(LineIterator* it, Opcodes op, memoryBuffer* img)
+void encode_syntax_group_6(LineIterator* it, Opcodes op, memoryBuffer* img, SymbolTable* table)
 {
 	/* Source operand can be immediate, register or label. */
 	/* Dest operand can be register or label. */
@@ -304,7 +303,7 @@ void encode_syntax_group_6(LineIterator* it, Opcodes op, memoryBuffer* img)
 	free(dest);
 }
 
-void encode_syntax_group_7(LineIterator* it, Opcodes op, memoryBuffer* img)
+void encode_syntax_group_7(LineIterator* it, Opcodes op, memoryBuffer* img, SymbolTable* table)
 {
 	/* Source operand can be immediate, register or label. */
 	/* Dest operand can be register or label. */

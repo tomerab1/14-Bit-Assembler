@@ -26,6 +26,7 @@ typedef struct
 	SymbolTableNode* head;
 	SymbolTableNode* tail;
 	int amountOfSymbols;
+	bool completed;
 } SymbolTable;
 
 SymbolTable* symbol_table_new_table();
