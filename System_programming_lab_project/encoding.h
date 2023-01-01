@@ -24,9 +24,9 @@ typedef enum { ADDRESSING_IMM, ADDRESSING_DIR, ADDRESSING_PARAM, ADDRESSING_REG 
 
 void encode_dot_string(LineIterator* it, memoryBuffer* img);
 void encode_dot_data(LineIterator* it, memoryBuffer* img);
-void encode_opcode(LineIterator* it, memoryBuffer* img);
+void encode_opcode(LineIterator* it, SymbolTable* table, memoryBuffer* img);
 void encode_integer(imageMemory* img, unsigned int num);
-void encode_preceding_word(imageMemory* img, Opcodes op, char* source, char* dest, bool is_jump_label);
+void encode_preceding_word(imageMemory* img, Opcodes op, char* source, char* dest, bool is_jmp_label, SymbolTable* table);
 void encode_source_and_dest(imageMemory* img, char* source, char* dest);
 
 /*groups: mov, add,sub,cmp,lea | expected input is the char next to end of command (i.e mov 
@@ -42,13 +42,13 @@ varData extract_variables_group_3_and_6(LineIterator* it, Opcodes command, debug
 varData extract_variables_group_5(LineIterator* it, Opcodes command, debugList* dbg_list);
 
 
-void encode_syntax_group_1(LineIterator* it, Opcodes op, memoryBuffer* img);
-void encode_syntax_group_2(LineIterator* it, Opcodes op, memoryBuffer* img);
-void encode_syntax_group_3(LineIterator* it, Opcodes op, memoryBuffer* img);
-void encode_syntax_group_4(LineIterator* it, Opcodes op, memoryBuffer* img);
-void encode_syntax_group_5(LineIterator* it, Opcodes op, memoryBuffer* img);
-void encode_syntax_group_6(LineIterator* it, Opcodes op, memoryBuffer* img);
-void encode_syntax_group_7(LineIterator* it, Opcodes op, memoryBuffer* img);
+void encode_syntax_group_1(LineIterator* it, Opcodes op, memoryBuffer* img, SymbolTable* table);
+void encode_syntax_group_2(LineIterator* it, Opcodes op, memoryBuffer* img, SymbolTable* table);
+void encode_syntax_group_3(LineIterator* it, Opcodes op, memoryBuffer* img, SymbolTable* table);
+void encode_syntax_group_4(LineIterator* it, Opcodes op, memoryBuffer* img, SymbolTable* table);
+void encode_syntax_group_5(LineIterator* it, Opcodes op, memoryBuffer* img, SymbolTable* table);
+void encode_syntax_group_6(LineIterator* it, Opcodes op, memoryBuffer* img, SymbolTable* table);
+void encode_syntax_group_7(LineIterator* it, Opcodes op, memoryBuffer* img, SymbolTable* table);
 
 OperandKind get_operand_kind(char* op);
 

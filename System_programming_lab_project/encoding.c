@@ -197,7 +197,7 @@ void encode_syntax_group_1(LineIterator* it, Opcodes op, memoryBuffer* img, Symb
 	dest = line_iterator_next_word(it, " ");
 
 	/* Encode the first memory word. */
-	encode_preceding_word(&img->instruction_image, op, source, dest, FALSE);
+	table == NULL ? encode_preceding_word(&img->instruction_image, op, source, dest, FALSE, NULL) : encode_preceding_word(&img->instruction_image, op, source, dest, FALSE, table);
 
 	/* Encode the source and dest. */
 	encode_source_and_dest(&img->instruction_image, source, dest);
@@ -220,7 +220,7 @@ void encode_syntax_group_2(LineIterator* it, Opcodes op, memoryBuffer* img, Symb
 	dest = line_iterator_next_word(it, " ");
 
 	/* Encode the first memory word. */
-	encode_preceding_word(&img->instruction_image, op, source, dest, FALSE);
+	table == NULL ? encode_preceding_word(&img->instruction_image, op, source, dest, FALSE, NULL) : encode_preceding_word(&img->instruction_image, op, source, dest, FALSE, table);
 
 	/* Encode the source and dest. */
 	encode_source_and_dest(&img->instruction_image, source, dest);
@@ -238,7 +238,7 @@ void encode_syntax_group_3(LineIterator* it, Opcodes op, memoryBuffer* img, Symb
 	dest = line_iterator_next_word(it, ", ");
 
 	/* Encode the first memory word. */
-	encode_preceding_word(&img->instruction_image, op, NULL, dest, FALSE);
+	table == NULL ? encode_preceding_word(&img->instruction_image, op, NULL, dest, FALSE, NULL) : encode_preceding_word(&img->instruction_image, op, NULL, dest, FALSE, table);
 
 	/* Encode the source and dest. */
 	encode_source_and_dest(&img->instruction_image, NULL, dest);
@@ -250,7 +250,8 @@ void encode_syntax_group_4(LineIterator* it, Opcodes op, memoryBuffer* img, Symb
 {
 	/* Encodes rts and stop */
 	/* Encode the first memory word. */
-	encode_preceding_word(&img->instruction_image, op, NULL, NULL, FALSE);
+	table == NULL ? encode_preceding_word(&img->instruction_image, op, NULL, NULL, FALSE,NULL) : encode_preceding_word(&img->instruction_image, op, NULL, NULL, FALSE,table);
+
 }
 
 void encode_syntax_group_5(LineIterator* it, Opcodes op, memoryBuffer* img, SymbolTable* table)
@@ -269,7 +270,7 @@ void encode_syntax_group_5(LineIterator* it, Opcodes op, memoryBuffer* img, Symb
 
 	/* Encode the first memory word. */
 	if (source && dest) {
-		encode_preceding_word(&img->instruction_image, op, source, dest, TRUE);
+		table == NULL ? encode_preceding_word(&img->instruction_image, op, source, dest, TRUE, NULL): encode_preceding_word(&img->instruction_image, op, source, dest, TRUE,table);
 		img->instruction_image.memory[img->instruction_image.counter].encodingCount++;
 		img->instruction_image.counter++;
 
@@ -277,7 +278,7 @@ void encode_syntax_group_5(LineIterator* it, Opcodes op, memoryBuffer* img, Symb
 		encode_source_and_dest(&img->instruction_image, source, dest);
 	}
 	else {
-		encode_preceding_word(&img->instruction_image, op, dest, source, FALSE);
+		table == NULL ? encode_preceding_word(&img->instruction_image, op, dest, source, FALSE,NULL) : encode_preceding_word(&img->instruction_image, op, dest, source, FALSE, table);
 		img->instruction_image.memory[img->instruction_image.counter].encodingCount++;
 		img->instruction_image.counter++;
 	}
@@ -295,7 +296,7 @@ void encode_syntax_group_6(LineIterator* it, Opcodes op, memoryBuffer* img, Symb
 	dest = line_iterator_next_word(it, ", ");
 
 	/* Encode the first memory word. */
-	encode_preceding_word(&img->instruction_image, op, NULL, dest, FALSE);
+	table == NULL ? encode_preceding_word(&img->instruction_image, op, NULL, dest, FALSE,NULL): encode_preceding_word(&img->instruction_image, op, NULL, dest, FALSE, table);
 
 	/* Encode the source and dest. */
 	encode_source_and_dest(&img->instruction_image, NULL, dest);
@@ -317,7 +318,7 @@ void encode_syntax_group_7(LineIterator* it, Opcodes op, memoryBuffer* img, Symb
 	dest = line_iterator_next_word(it, " ");
 
 	/* Encode the first memory word. */
-	encode_preceding_word(&img->instruction_image, op, source, dest, FALSE);
+	table == NULL ? encode_preceding_word(&img->instruction_image, op, source, dest, FALSE, NULL): encode_preceding_word(&img->instruction_image, op, source, dest, FALSE, table);
 
 	/* Encode the source and dest. */
 	encode_source_and_dest(&img->instruction_image, source, dest);

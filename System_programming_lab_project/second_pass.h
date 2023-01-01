@@ -111,5 +111,4 @@ void execute_command(memoryBuffer* memory, SymbolTable* table, LineIterator* res
 
 void skip_first_pass_mem(memoryBuffer* memory);
 
-void encode_line_w_label(memoryBuffer* memory, SymbolTable* table, LineIterator* restOfLine,int syntaxGroup);
 #endif

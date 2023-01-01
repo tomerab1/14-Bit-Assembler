@@ -45,7 +45,7 @@ bool initiate_second_pass(char* path, SymbolTable* table, memoryBuffer* memory) 
 
 void execute_line(LineIterator* it, SymbolTable* table, memoryBuffer* memory) {
 	if (is_label_exists_in_line((*it), (*table))) {
-		encode_opcode(it,table,memory)
+		encode_opcode(it, table, memory);
 	}
 	else {
 		skip_first_pass_mem(memory);
