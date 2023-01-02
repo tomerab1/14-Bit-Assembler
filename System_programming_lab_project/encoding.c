@@ -50,7 +50,7 @@ void encode_integer(imageMemory* img, unsigned int num)
 	img->counter++;
 }
 
-void encode_preceding_word(imageMemory* img, Opcodes op, char* source, char* dest, bool is_jmp_label, SymbolTable* table)
+void encode_preceding_word(imageMemory* img, Opcodes op, char* source, char* dest, bool is_jmp_label)
 {
 	set_image_memory(img, op << OFFSET_OPCODE1, FLAG_OPCODE1);
 	set_image_memory(img, (op >> 2) << OFFSET_OPCODE2, FLAG_OPCODE2);
@@ -131,12 +131,12 @@ void encode_opcode(LineIterator* it, SymbolTable* table, memoryBuffer* img)
     free(opcode);
 }
 
-void encode_source_and_dest(imageMemory* img, char* source, char* dest)
+void encode_source_and_dest(imageMemory* img, char* source, char* dest, SymbolTable* table)
 {
 	char* operands[] = { source, dest, NULL };
 	int i, num;
 
-	if (get_operand_kind(source) == KIND_REG && get_operand_kind(dest) == KIND_REG) {
+	if (get_operand_kind(source,table) == KIND_REG && get_operand_kind(dest,table) == KIND_REG) {
 		/* Bits 2 - 7 -> First register. Bits 8 - 13 -> Second register. */
 		set_image_memory(img, (unsigned char)(*(source + 1) - '0'), FLAG_OPCODE2 | FLAG_PARAM1 | FLAG_PARAM2);
 		set_image_memory(img, (*(dest + 1) - '0') << 2, FLAG_OPCODE1 | FLAG_DEST | FLAG_SOURCE);
@@ -147,17 +147,27 @@ void encode_source_and_dest(imageMemory* img, char* source, char* dest)
 
 	for (i = 0; i < 2; i++) {
 		OperandKind kind;
+		int address;
 		if (!operands[i]) 
 			continue;
 		 
-		kind = get_operand_kind(operands[i]);
+		kind = get_operand_kind(operands[i], table);
 		switch (kind) {
 		case KIND_IMM:
 			num = get_num(operands[i] + 1); /* +1 to ignore the '#' */
 			set_image_memory(img, num << 2, FLAG_DEST | FLAG_SOURCE | FLAG_OPCODE1);
 			set_image_memory(img, num >> 0x08, FLAG_PARAM1 | FLAG_PARAM2 | FLAG_OPCODE2);
 			break;
-		case KIND_LABEL: /* Cannot encode label in first pass. */
+		case KIND_LABEL:
+			
+			if (operands[i] == source) {
+				address = symbol_table_search_symbol(table, source)->sym.counter;
+				set_image_memory(img, *(img->memory[address].mem), FLAG_OPCODE2 | FLAG_PARAM1 | FLAG_PARAM2);
+			}
+			else if (operands[i] == dest) {
+				address = symbol_table_search_symbol(table, dest)->sym.counter;
+				set_image_memory(img, *(img->memory[address].mem) << 2, FLAG_OPCODE1 | FLAG_DEST | FLAG_SOURCE);
+			}
 			break;
 		case KIND_REG:
 			/* Two different cases for source and dest. */
@@ -174,13 +184,13 @@ void encode_source_and_dest(imageMemory* img, char* source, char* dest)
 	}
 }
 
-OperandKind get_operand_kind(char* op)
+OperandKind get_operand_kind(char* op, SymbolTable* table)
 {
 	if (!op) return KIND_NONE;
 	if (*op == HASH_CHAR) return KIND_IMM;
 	if (cmp_register_name(op)) return KIND_REG;
 	if (strchr(op, OPEN_PAREN_CHAR)) return KIND_LABEL_PARAM;
-	return KIND_LABEL;
+	if(symbol_table_search_symbol(table,op)) return KIND_LABEL;
 }
 
 void encode_syntax_group_1(LineIterator* it, Opcodes op, memoryBuffer* img, SymbolTable* table)
@@ -197,10 +207,10 @@ void encode_syntax_group_1(LineIterator* it, Opcodes op, memoryBuffer* img, Symb
 	dest = line_iterator_next_word(it, " ");
 
 	/* Encode the first memory word. */
-	table == NULL ? encode_preceding_word(&img->instruction_image, op, source, dest, FALSE, NULL) : encode_preceding_word(&img->instruction_image, op, source, dest, FALSE, table);
+	encode_preceding_word(&img->instruction_image, op, source, dest, FALSE);
 
 	/* Encode the source and dest. */
-	encode_source_and_dest(&img->instruction_image, source, dest);
+	encode_source_and_dest(&img->instruction_image, source, dest, table);
 
 	free(source);
 	free(dest);
@@ -220,10 +230,10 @@ void encode_syntax_group_2(LineIterator* it, Opcodes op, memoryBuffer* img, Symb
 	dest = line_iterator_next_word(it, " ");
 
 	/* Encode the first memory word. */
-	table == NULL ? encode_preceding_word(&img->instruction_image, op, source, dest, FALSE, NULL) : encode_preceding_word(&img->instruction_image, op, source, dest, FALSE, table);
+	encode_preceding_word(&img->instruction_image, op, source, dest, FALSE, NULL);
 
 	/* Encode the source and dest. */
-	encode_source_and_dest(&img->instruction_image, source, dest);
+	encode_source_and_dest(&img->instruction_image, source, dest,table);
 
 	free(source);
 	free(dest);
@@ -235,13 +245,13 @@ void encode_syntax_group_3(LineIterator* it, Opcodes op, memoryBuffer* img, Symb
 	/* Dest operand can be register or label. */
 	char* dest = NULL;
 
-	dest = line_iterator_next_word(it, ", ");
+	dest = set_dest_groups_3_and_6(it);
 
 	/* Encode the first memory word. */
-	table == NULL ? encode_preceding_word(&img->instruction_image, op, NULL, dest, FALSE, NULL) : encode_preceding_word(&img->instruction_image, op, NULL, dest, FALSE, table);
+	encode_preceding_word(&img->instruction_image, op, NULL, dest, FALSE);
 
 	/* Encode the source and dest. */
-	encode_source_and_dest(&img->instruction_image, NULL, dest);
+	encode_source_and_dest(&img->instruction_image, NULL, dest, table);
 
 	free(dest);
 }
@@ -250,16 +260,16 @@ void encode_syntax_group_4(LineIterator* it, Opcodes op, memoryBuffer* img, Symb
 {
 	/* Encodes rts and stop */
 	/* Encode the first memory word. */
-	table == NULL ? encode_preceding_word(&img->instruction_image, op, NULL, NULL, FALSE,NULL) : encode_preceding_word(&img->instruction_image, op, NULL, NULL, FALSE,table);
-
+	encode_preceding_word(&img->instruction_image, op, NULL, NULL, FALSE);
 }
 
+/*TBD will be discussed 03/01*/
 void encode_syntax_group_5(LineIterator* it, Opcodes op, memoryBuffer* img, SymbolTable* table)
 {
 	/* Source operand can be immediate, register or label. */
 	/* Dest operand can be register or label. */
 	char* source = NULL, *dest = NULL;
-
+	if(!(table)){
 	line_iterator_jump_to(it, OPEN_PAREN_CHAR);
 
 	source = line_iterator_next_word(it, ",");
@@ -267,18 +277,25 @@ void encode_syntax_group_5(LineIterator* it, Opcodes op, memoryBuffer* img, Symb
 	line_iterator_advance(it);
 
 	dest = line_iterator_next_word(it, ")");
-
+	}else{
+		if (line_iterator_includes(it, OPEN_PAREN_CHAR)) {
+			
+		}
+		else {
+			
+		}
+	}
 	/* Encode the first memory word. */
 	if (source && dest) {
-		table == NULL ? encode_preceding_word(&img->instruction_image, op, source, dest, TRUE, NULL): encode_preceding_word(&img->instruction_image, op, source, dest, TRUE,table);
+		encode_preceding_word(&img->instruction_image, op, source, dest, TRUE);
 		img->instruction_image.memory[img->instruction_image.counter].encodingCount++;
 		img->instruction_image.counter++;
 
 		/* Encode the source and dest. */
-		encode_source_and_dest(&img->instruction_image, source, dest);
+		encode_source_and_dest(&img->instruction_image, source, dest, table);
 	}
 	else {
-		table == NULL ? encode_preceding_word(&img->instruction_image, op, dest, source, FALSE,NULL) : encode_preceding_word(&img->instruction_image, op, dest, source, FALSE, table);
+		encode_preceding_word(&img->instruction_image, op, dest, source, FALSE, NULL);
 		img->instruction_image.memory[img->instruction_image.counter].encodingCount++;
 		img->instruction_image.counter++;
 	}
@@ -287,19 +304,20 @@ void encode_syntax_group_5(LineIterator* it, Opcodes op, memoryBuffer* img, Symb
 	free(dest);
 }
 
+/*Should actully print?*/
 void encode_syntax_group_6(LineIterator* it, Opcodes op, memoryBuffer* img, SymbolTable* table)
 {
 	/* Source operand can be immediate, register or label. */
 	/* Dest operand can be register or label. */
 	char* dest = NULL;
 
-	dest = line_iterator_next_word(it, ", ");
+	dest = set_dest_groups_3_and_6(it);
 
 	/* Encode the first memory word. */
-	table == NULL ? encode_preceding_word(&img->instruction_image, op, NULL, dest, FALSE,NULL): encode_preceding_word(&img->instruction_image, op, NULL, dest, FALSE, table);
+	encode_preceding_word(&img->instruction_image, op, NULL, dest, FALSE);
 
 	/* Encode the source and dest. */
-	encode_source_and_dest(&img->instruction_image, NULL, dest);
+	encode_source_and_dest(&img->instruction_image, NULL, dest, table);
 
 	free(dest);
 }
@@ -318,10 +336,10 @@ void encode_syntax_group_7(LineIterator* it, Opcodes op, memoryBuffer* img, Symb
 	dest = line_iterator_next_word(it, " ");
 
 	/* Encode the first memory word. */
-	table == NULL ? encode_preceding_word(&img->instruction_image, op, source, dest, FALSE, NULL): encode_preceding_word(&img->instruction_image, op, source, dest, FALSE, table);
+	encode_preceding_word(&img->instruction_image, op, source, dest, FALSE);
 
 	/* Encode the source and dest. */
-	encode_source_and_dest(&img->instruction_image, source, dest);
+	encode_source_and_dest(&img->instruction_image, source, dest, table);
 
 	free(source);
 	free(dest);
@@ -360,3 +378,10 @@ varData extract_variables_group_5(LineIterator* it, Opcodes command, debugList* 
 	return variablesData;
 }
 
+char* set_dest_groups_3_and_6(LineIterator* it) {
+	char* tempItLocation = it->current;
+	line_iterator_jump_to(it, '\0');
+	line_iterator_backwards(it);
+	if (*(it->current) == SPACE_CHAR) return line_iterator_next_word(it, SPACE_CHAR);
+	else return line_iterator_next_word(it, "\0");
+}

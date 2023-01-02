@@ -226,4 +226,3 @@ bool handle_errors(debugList* error) {
 	
 	return TRUE;
 }
-

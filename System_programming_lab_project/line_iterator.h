@@ -10,6 +10,7 @@ typedef struct
 {
 	char* start; // Pointer to the start of the line.
 	char* current; // Pointer to the current position in the line.
+	char* end;
 } LineIterator;
 
 /* Puts a new line into the iterator. */

@@ -11,7 +11,6 @@ memoryBuffer memory_buffer_get_new()
 
     mem_buff.instruction_image = image_memory_get_new();
     mem_buff.data_image = image_memory_get_new();
-
     return mem_buff;
 }
 

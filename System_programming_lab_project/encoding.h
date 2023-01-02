@@ -26,8 +26,8 @@ void encode_dot_string(LineIterator* it, memoryBuffer* img);
 void encode_dot_data(LineIterator* it, memoryBuffer* img);
 void encode_opcode(LineIterator* it, SymbolTable* table, memoryBuffer* img);
 void encode_integer(imageMemory* img, unsigned int num);
-void encode_preceding_word(imageMemory* img, Opcodes op, char* source, char* dest, bool is_jmp_label, SymbolTable* table);
-void encode_source_and_dest(imageMemory* img, char* source, char* dest);
+void encode_preceding_word(imageMemory* img, Opcodes op, char* source, char* dest, bool is_jmp_label);
+void encode_source_and_dest(imageMemory* img, char* source, char* dest, SymbolTable* table);
 
 /*groups: mov, add,sub,cmp,lea | expected input is the char next to end of command (i.e mov 
 																						   ^ */
@@ -41,16 +41,28 @@ varData extract_variables_group_3_and_6(LineIterator* it, Opcodes command, debug
 																				    ^ */
 varData extract_variables_group_5(LineIterator* it, Opcodes command, debugList* dbg_list);
 
-
+/*opcodes: mov, add, sub*/
 void encode_syntax_group_1(LineIterator* it, Opcodes op, memoryBuffer* img, SymbolTable* table);
+
+/*opcodes: cmp*/
 void encode_syntax_group_2(LineIterator* it, Opcodes op, memoryBuffer* img, SymbolTable* table);
+
+/*opcodes: not, clr, inc,dec, red*/
 void encode_syntax_group_3(LineIterator* it, Opcodes op, memoryBuffer* img, SymbolTable* table);
+
+/*opcodes: rts, stop*/
 void encode_syntax_group_4(LineIterator* it, Opcodes op, memoryBuffer* img, SymbolTable* table);
+
+/*opcodes: jmp, bne, jsr*/
 void encode_syntax_group_5(LineIterator* it, Opcodes op, memoryBuffer* img, SymbolTable* table);
+
+/*opcodes: prn*/
 void encode_syntax_group_6(LineIterator* it, Opcodes op, memoryBuffer* img, SymbolTable* table);
+
+/*opcodes: lea*/
 void encode_syntax_group_7(LineIterator* it, Opcodes op, memoryBuffer* img, SymbolTable* table);
 
-OperandKind get_operand_kind(char* op);
+OperandKind get_operand_kind(char* op, SymbolTable* table);
 
 
 #endif

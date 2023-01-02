@@ -71,6 +71,10 @@ typedef struct
 	MemoryWord memory[RAM_MEMORY_SZ];
 } imageMemory;
 
+typedef struct
+{
+	MemoryWord memory;
+}Register;
 
 /**
 	@brief This struct is used to represent all the memory buffers, the 'cpu' registers and the instruction/data image.
@@ -79,6 +83,7 @@ typedef struct
 {
 	imageMemory instruction_image;
 	imageMemory data_image;
+	Register registers[REG_TOTAL];
 } memoryBuffer;
 
 /**
