@@ -59,7 +59,6 @@ typedef enum
 typedef struct
 {
 	unsigned char mem[SIZEOF_MEMORY_WORD];
-	int encodingCount;
 } MemoryWord;
 
 /**
@@ -83,7 +82,6 @@ typedef struct
 {
 	imageMemory instruction_image;
 	imageMemory data_image;
-	Register registers[REG_TOTAL];
 } memoryBuffer;
 
 /**

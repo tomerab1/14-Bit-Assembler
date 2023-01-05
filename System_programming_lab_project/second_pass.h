@@ -107,8 +107,8 @@ bool handle_errors(debugList* error);
  */
 void execute_line(LineIterator* it, SymbolTable* table, memoryBuffer* memory);
 
-void execute_command(memoryBuffer* memory, SymbolTable* table, LineIterator* restOfLine, int syntaxGroup);
+void skip_first_pass_mem(memoryBuffer* memory, LineIterator* it);
 
-void skip_first_pass_mem(memoryBuffer* memory);
+int find_amount_of_lines_to_skip(LineIterator* it);
 
 #endif

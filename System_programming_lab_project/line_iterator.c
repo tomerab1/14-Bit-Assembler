@@ -120,3 +120,42 @@ bool line_iterator_includes(LineIterator* it, char searchFor)
     it->current = tempLocation;
     return FALSE;
 }
+
+bool line_iterator_word_includes(LineIterator* it, char* searchFor)
+{
+    bool found = FALSE, keepGoing = FALSE;
+    char* tempLocation = it->current;
+    int length = strlen(searchFor);
+    int i;
+    while (!line_iterator_is_end(it) && !found) {
+        if (line_iterator_peek(it) == (*searchFor)) {
+            keepGoing = TRUE;
+            i = 1;
+            line_iterator_advance(it);
+            while (!line_iterator_is_end(it) && i < length && keepGoing) {
+                if ((line_iterator_peek(it) == (*(searchFor + i)))) {
+                    i++;
+                }
+                else {
+                    keepGoing = FALSE;
+                }
+            }
+            it->current = tempLocation;
+            return TRUE;
+        }
+        line_iterator_consume_blanks(it);
+        line_iterator_advance(it);
+    }
+
+    it->current = tempLocation;
+    return FALSE;
+}
+
+char* get_last_word(LineIterator* it) {
+    char* tempItLocation = it->current;
+    line_iterator_jump_to(it, '\0');
+    line_iterator_backwards(it);
+    it->current = tempItLocation;
+    if (line_iterator_peek(it) == SPACE_CHAR) return line_iterator_next_word(it, SPACE_CHAR);
+    return line_iterator_next_word(it, "\0");
+}
