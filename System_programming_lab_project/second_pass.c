@@ -45,7 +45,7 @@ bool initiate_second_pass(char* path, SymbolTable* table, memoryBuffer* memory) 
 
 void execute_line(LineIterator* it, SymbolTable* table, memoryBuffer* memory) {
 	if (is_label_exists_in_line((*it), (*table))) {
-		encode_label(it, memory, table);
+		encode_label_start_process(it, memory, table);
 	}
 	else {
 		skip_first_pass_mem(memory,it);
@@ -61,7 +61,7 @@ void skip_first_pass_mem(memoryBuffer* memory,LineIterator* it) {
 int find_amount_of_lines_to_skip(LineIterator* it) {
 	char* op = line_iterator_next_word(it, SPACE_CHAR);
 	SyntaxGroups opGroup = get_syntax_group(op);
-	varData variables = { 0 };
+	VarData variables = { 0 };
 	int totalJumps = 1;
 
 	if (opGroup == 1 || opGroup == 2 || opGroup == 7) {
@@ -85,7 +85,6 @@ int find_amount_of_lines_to_skip(LineIterator* it) {
 		/*throw error here*/
 		return -1;
 	}
-	
 }
 
 bool generate_object_file(memoryBuffer* memory, char* path, debugList* err) {

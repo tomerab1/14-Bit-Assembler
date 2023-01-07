@@ -12,20 +12,24 @@
 
 
 typedef struct
-{ //should add type of var (#, register and so on)
+{ 
 	char* leftVar; /* Pointer to the start of the line. */
-	EncodingTypes leftVarType;
+	EncodingTypes leftVarEncType;
 	char* rightVar; /* Pointer to the current position in the line. */
+	EncodingTypes rightVarEncType;
 	char* label;
+	EncodingTypes labelEncType;
 	int total;
-} varData;
+} VarData;
 
+typedef enum { REGISTER, LABEL, ASCII } VarType;
 typedef enum { KIND_IMM, KIND_LABEL, KIND_LABEL_PARAM, KIND_REG, KIND_NONE } OperandKind;
 typedef enum { ADDRESSING_IMM, ADDRESSING_DIR, ADDRESSING_PARAM, ADDRESSING_REG } AddressingType;
 
 void encode_dot_string(LineIterator* it, memoryBuffer* img);
 void encode_dot_data(LineIterator* it, memoryBuffer* img);
-void encode_label(LineIterator* it, memoryBuffer* img, SymbolTableNode* sym);
+void encode_label_start_process(LineIterator* it, memoryBuffer* img, SymbolTable* symTable);
+void encode_labels(VarData* variables, SyntaxGroups synGroup, SymbolTable* symTable, imageMemory* img);
 void encode_opcode(LineIterator* it, memoryBuffer* img);
 void encode_integer(imageMemory* img, unsigned int num);
 void encode_preceding_word(imageMemory* img, Opcodes op, char* source, char* dest, bool is_jmp_label);
@@ -33,15 +37,15 @@ void encode_source_and_dest(imageMemory* img, char* source, char* dest);
 
 /*groups: mov, add,sub,cmp,lea | expected input is the char next to end of command (i.e mov 
 																						   ^ */
-varData extract_variables_group_1_and_2_and_7(LineIterator* it);
+VarData extract_variables_group_1_and_2_and_7(LineIterator* it);
 
 /*groups: not, clr, inc, dec, red,prn | expected input is the char next to end of command (i.e mov
 																								  ^ */
-varData extract_variables_group_3_and_6(LineIterator* it);
+VarData extract_variables_group_3_and_6(LineIterator* it);
 
 /*groups: jmp, bne, jsr | expected input is the char next to end of command (i.e mov
 																				    ^ */
-varData extract_variables_group_5(LineIterator* it);
+VarData extract_variables_group_5(LineIterator* it);
 
 /*opcodes: mov, add, sub*/
 void encode_syntax_group_1(LineIterator* it, Opcodes op, memoryBuffer* img);
