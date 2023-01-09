@@ -57,6 +57,7 @@ void encode_label_start_process(LineIterator* it, memoryBuffer* img, SymbolTable
 	else {
 		return; /*throw error*/
 	}
+	/*encode ARE missing*/
 	encode_labels(ptrVars, synGroup, symTable, img);
 	
 }
