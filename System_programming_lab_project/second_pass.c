@@ -92,7 +92,7 @@ bool generate_object_file(memoryBuffer* memory, char* path, debugList* err) {
 	char* outfileName = NULL;
 	FILE* out = NULL;
 	LinesListNode* linesNode = NULL;
-	char placeholder[80] = 0;
+	char placeholder[80] = { 0 };
 	bool completed = FALSE;
 
 	linesNode = translate_to_machine_data(memory, err);
@@ -143,7 +143,7 @@ bool generate_externals_file(SymbolTable* table, char* path) {
 	char* outfileName = NULL;
 	FILE* out = NULL;
 	SymbolTableNode* symTableHead = table->head;
-	char placeholder[80] = 0;
+	char placeholder[80] = { 0 };
 
 	outfileName = get_outfile_name(path, ".external");
 	out = open_file(outfileName, MODE_WRITE);
@@ -166,7 +166,7 @@ bool generate_entries_file(SymbolTable* table, char* path) {
 	char* outfileName = NULL;
 	FILE* out = NULL;
 	SymbolTableNode* symTableHead = table->head;
-	char placeholder[80] = 0;
+	char placeholder[80] = { 0 };
 
 	outfileName = get_outfile_name(path, ".entry");
 	out = open_file(outfileName, MODE_WRITE);
