@@ -12,30 +12,19 @@
 #include "debug.h"
 #include "utils.h"
 #include "debug.h"
+#include "encoding.h"
 #include "constants.h"
-
-typedef struct lines_list_node
-{
-	int address;
-	char* machineData; /* 14 bits string strings. */
-	char dataForObject[SINGLE_ORDER_SIZE]; /* 14 bits string strings. */
-	struct lines_list_node* next;
-} LinesListNode;
-
-/*
-	Struct to represent a linked list.
-*/
-typedef struct
-{
-	LinesListNode* head;
-	LinesListNode* tail;
-} LinesList;
 
 typedef struct flags
 {
 	bool dot_entry_exists;
 	bool dot_extern_exists;
 } flags;
+
+typedef struct {
+	long address;
+	char translated[14];
+} TranslatedMachineData;
 
 typedef struct programFinalStatus
 {
@@ -66,7 +55,7 @@ bool initiate_second_pass(char* path, SymbolTable* table, memoryBuffer* memory);
 bool generate_object_file(memoryBuffer* memory, char* path, debugList* err);
 
 /*translates data from memory to object text style configuration*/
-LinesList* translate_to_machine_data(memoryBuffer* memory, debugList* err);
+TranslatedMachineData* translate_to_machine_data(memoryBuffer* memory, debugList* err);
 
 /*generates external file*/
 bool generate_externals_file(SymbolTable* table, char* path);
@@ -88,9 +77,6 @@ void entry_exists(flags* flag);
 
 /*finds if the type of the directive*/
 void extract_directive_type(LineIterator* line, flags* flag);
-
-//skip label if exists
-void skip_label(LineIterator* line, bool* labelFlag, SymbolTable* table, debugList* err);
 
 /*Error handling process*/
 bool handle_errors(debugList* error);
