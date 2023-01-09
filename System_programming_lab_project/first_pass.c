@@ -6,8 +6,7 @@
 #include "encoding.h"
 #include <string.h>
 
-typedef bool (*fpass_dispatch_table)(LineIterator* it, memoryBuffer* img, SymbolTable* sym_table, 
-	                                debugList* dbg_list, char* name, long line, bool did_err_occurred);
+typedef bool (*fpass_dispatch_table)(LineIterator* it, memoryBuffer* img, SymbolTable* sym_table, debugList* dbg_list, char* name, long line, bool did_err_occurred);
 
 bool do_first_pass(char* path, memoryBuffer* img, SymbolTable* sym_table, debugList* dbg_list)
 {
@@ -194,8 +193,7 @@ bool first_pass_process_sym_ent(LineIterator* it, memoryBuffer* img, SymbolTable
 		free(word);
 		return FALSE;
 	}
-	if (!
-		_name(it)) {
+	if (!_name(it)) {
 		debug_list_register_node(dbg_list, debug_list_new_node(it->start, it->current, line, ERROR_CODE_INVALID_LABEL_DEF));
 		free(word);
 		return FALSE;
