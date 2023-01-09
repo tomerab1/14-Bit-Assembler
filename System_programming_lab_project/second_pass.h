@@ -12,6 +12,7 @@
 #include "debug.h"
 #include "utils.h"
 #include "debug.h"
+#include "encoding.h"
 #include "constants.h"
 
 typedef struct lines_list_node
@@ -20,11 +21,17 @@ typedef struct lines_list_node
 	char dataForObject[SINGLE_ORDER_SIZE]; /* 14 bits string strings. */
 } LinesListNode;
 
+
 typedef struct flags
 {
 	bool dot_entry_exists;
 	bool dot_extern_exists;
 } flags;
+
+typedef struct {
+	long address;
+	char translated[14];
+} TranslatedMachineData;
 
 typedef struct programFinalStatus
 {

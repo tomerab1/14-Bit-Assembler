@@ -5,9 +5,9 @@
 #include "constants.h"
 
 //error context appearances are temp 
-bool initiate_second_pass(char* path, SymbolTable* table, memoryBuffer* memory) {
+bool initiate_second_pass(char* path, SymbolTable* table, memoryBuffer* memory)
+{
 	FILE* in = open_file(path, MODE_READ);
-
 	programFinalStatus finalStatus = { NULL };
 	LineIterator curLine = { 0 };
 	char* line = NULL;
@@ -28,7 +28,7 @@ bool initiate_second_pass(char* path, SymbolTable* table, memoryBuffer* memory) 
 
 	/*finished reading all lines in file*/
 	if (finalStatus.error_flag) {
-		handle_errors(&(finalStatus.errors));
+		handle_errors(&finalStatus.errors);
 		return FALSE;
 	}
 	else if (finalStatus.entryAndExternFlag.dot_extern_exists || finalStatus.entryAndExternFlag.dot_entry_exists) {
@@ -37,32 +37,30 @@ bool initiate_second_pass(char* path, SymbolTable* table, memoryBuffer* memory) 
 
 	fclose(in);
 	free(line);
-	free(&curLine);
 	return TRUE;
 }
 
 void execute_line(LineIterator* it, SymbolTable* table, memoryBuffer* memory) {
-	if (is_label_exists_in_line((*it), (*table))) {
+	if (is_label_exists_in_line(*it, *table)) {
 		encode_label_start_process(it, memory, table);
 	}
 	else {
-		skip_first_pass_mem(memory,it);
+		skip_first_pass_mem(memory, it);
 	}
 }
 
-
-void skip_first_pass_mem(memoryBuffer* memory,LineIterator* it) {
+void skip_first_pass_mem(memoryBuffer* memory, LineIterator* it) {
 	int memCellsToJump = find_amount_of_lines_to_skip(it);
 	memory->instruction_image.counter += memCellsToJump;
 }
 
 int find_amount_of_lines_to_skip(LineIterator* it) {
-	char* op = line_iterator_next_word(it, SPACE_CHAR);
+	char* op = line_iterator_next_word(it, " ");
 	SyntaxGroups opGroup = get_syntax_group(op);
 	VarData variables = { 0 };
 	int totalJumps = 1;
 
-	if (opGroup == 1 || opGroup == 2 || opGroup == 7) {
+	if (opGroup == SG_GROUP_1 || opGroup == SG_GROUP_2 || opGroup == SG_GROUP_7) {
 		variables = extract_variables_group_1_and_2_and_7(it);
 		if (get_operand_kind(variables.leftVar) == KIND_REG && get_operand_kind(variables.rightVar) == KIND_REG) {
 			return totalJumps + 1;
@@ -71,24 +69,20 @@ int find_amount_of_lines_to_skip(LineIterator* it) {
 			return totalJumps + 2;
 		}
 	}
-	else if (opGroup == 3 || opGroup == 6){
+	else if (opGroup == SG_GROUP_3 || opGroup == SG_GROUP_6) {
 		return totalJumps + 1;
 	}
-	else if (opGroup == 5){
+	else if (opGroup == SG_GROUP_5) {
 		variables = extract_variables_group_5(it);
 		if (get_operand_kind(variables.leftVar) == KIND_REG && get_operand_kind(variables.rightVar) == KIND_REG) {
 			return totalJumps + 2;
 		}
 		return variables.total + totalJumps;
 	}
-	else
-	{
-		/*throw error here*/
-		return -1;
-	}
 }
 
-bool generate_object_file(memoryBuffer* memory, char* path, debugList* err) {
+bool generate_object_file(memoryBuffer* memory, char* path, debugList* err)
+{
 	char* outfileName = NULL;
 	FILE* out = NULL;
 	LinesListNode* linesNode = NULL;
@@ -96,6 +90,7 @@ bool generate_object_file(memoryBuffer* memory, char* path, debugList* err) {
 	bool completed = FALSE;
 
 	linesNode = translate_to_machine_data(memory, err);
+
 	outfileName = get_outfile_name(path, ".object");
 	out = open_file(outfileName, MODE_WRITE);
 
@@ -110,6 +105,7 @@ bool generate_object_file(memoryBuffer* memory, char* path, debugList* err) {
 			completed = TRUE;
 	}
 
+	free(translatedMemory);
 	free(outfileName);
 	fclose(out);
 
@@ -118,13 +114,13 @@ bool generate_object_file(memoryBuffer* memory, char* path, debugList* err) {
 
 LinesListNode* translate_to_machine_data(memoryBuffer* memory, debugList* err) {
 	int i, j;
-	MemoryWord* instImg = memory->instruction_image.memory;	
+	MemoryWord* instImg = memory->instruction_image.memory;
 	LinesListNode* translatedMemory = (LinesListNode*)xmalloc(sizeof(LinesListNode) * memory->instruction_image.counter);
-	
+
 	for (i = 0; i < memory->instruction_image.counter; i++) {
 		unsigned int bits = (instImg[i].mem[1] << 0x08) | (instImg[i].mem[0]);
-		translatedMemory[i].address = 100+i;
-		
+		translatedMemory[i].address = 100 + i;
+
 		for (j = 13; j >= 0; j--) {
 			unsigned int mask = 1 << j;
 			if ((bits & mask) != 0) {
@@ -154,7 +150,7 @@ bool generate_externals_file(SymbolTable* table, char* path) {
 			sprintf(placeholder, "%s\t%d\n", symTableHead->sym.name, symTableHead->sym.counter);
 			fputs(placeholder, out);
 		}
-		symTableHead->next;
+		symTableHead = symTableHead->next;
 	}
 
 	free(outfileName);
@@ -176,7 +172,7 @@ bool generate_entries_file(SymbolTable* table, char* path) {
 			sprintf(placeholder, "%s\t%d\n", symTableHead->sym.name, symTableHead->sym.counter);
 			fputs(placeholder, out);
 		}
-		symTableHead->next;
+		symTableHead = symTableHead->next;
 	}
 
 	free(outfileName);
@@ -187,10 +183,10 @@ bool generate_entries_file(SymbolTable* table, char* path) {
 void create_files(memoryBuffer* memory, char* path, programFinalStatus* finalStatus, SymbolTable* table, debugList* err) {
 	finalStatus->createdObject = generate_object_file(memory, path, &(*finalStatus).errors);
 
-	if(finalStatus->entryAndExternFlag.dot_extern_exists)
+	if (finalStatus->entryAndExternFlag.dot_extern_exists)
 		finalStatus->createdExternals = generate_externals_file(table, path);
-	
-	if(finalStatus->entryAndExternFlag.dot_entry_exists)
+
+	if (finalStatus->entryAndExternFlag.dot_entry_exists)
 		finalStatus->createdEntry = generate_entries_file(table, path);
 }
 

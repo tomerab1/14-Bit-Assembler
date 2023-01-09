@@ -47,6 +47,7 @@ int exec_impl(Driver* driver, int argc, char** argv)
         on_exit(driver);
         free(pre_assembler_path);
     }
+
     return 0;
 }
 

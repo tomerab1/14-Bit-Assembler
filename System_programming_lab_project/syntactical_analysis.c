@@ -48,16 +48,7 @@ bool is_valid_label(char* label)
 }
 
 bool isLabel(LineIterator* line) {
-    char* temp = line->current;
-    line->current = line->start;
-    if (line_iterator_peek(line) == COLON) {
-        line_iterator_advance(line);
-        free(temp);
-        return TRUE;
-    }
-
-    free(temp);
-    return FALSE;
+    return is_valid_label(line_iterator_next_word(line, " "));
 }
 
 bool verify_command_syntax(LineIterator* it, debugList* dbg_list)
