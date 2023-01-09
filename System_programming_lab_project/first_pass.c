@@ -56,7 +56,7 @@ bool do_first_pass(char* path, memoryBuffer* img, SymbolTable* sym_table, debugL
 	}
 
     fclose(in);
-
+	sym_table->completed = TRUE;
 	return should_encode;
 }
 

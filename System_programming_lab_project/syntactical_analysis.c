@@ -196,7 +196,7 @@ bool find_if_instruction_exists(LineIterator* line) {
 }
 
 void skip_label_basic(LineIterator* line) {
-    line = line->start;
+    line->current = line->start;
     while (!line_iterator_is_end(line) && line_iterator_peek(line) != COLON) {
         line_iterator_advance(line);
     }
@@ -743,4 +743,19 @@ SyntaxGroups get_syntax_group(char* name)
     if (strcmp(name, "lea") == 0)
         return SG_GROUP_7;
     return SG_GROUP_INVALID;
+}
+
+bool is_label_exists_in_line(LineIterator line, SymbolTable table) {
+    int i = 0;
+    LineIterator* linePtr = &line;
+    SymbolTableNode* node = table.head;
+    while (node != NULL) {
+        if (line_iterator_word_includes(&line, node->sym.name)) {
+            return TRUE;
+        }
+        else {
+            node = node->next;
+        }
+    }
+    return FALSE;
 }

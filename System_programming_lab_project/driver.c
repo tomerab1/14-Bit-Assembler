@@ -6,6 +6,7 @@
 #include "memory.h"
 #include "debug.h"
 #include "first_pass.h"
+#include "second_pass.h"
 
 typedef struct driver {
     SymbolTable* sym_table;
@@ -38,24 +39,13 @@ int exec_impl(Driver* driver, int argc, char** argv)
     for (i = 1; i < argc; i++) {
         start_pre_assembler(argv[i]);
         pre_assembler_path = get_outfile_name(argv[i], ".am");
-
-        if (i > 1)
-            on_initialization(driver);
-
-        if (do_first_pass(pre_assembler_path, &driver->mem_buffer, driver->sym_table, driver->dbg_list)) {
-            dump_memory(&driver->mem_buffer);
-        }
-        else {
-            debug_list_pretty_print(driver->dbg_list);
-            on_exit(driver);
-            free(pre_assembler_path);
-            return FIRST_PASS_FAILED;
-        }
+        
+        if (i > 1) on_initialization(driver);
+        if (!do_first_pass(pre_assembler_path, &driver->mem_buffer, driver->sym_table, driver->dbg_list)) debug_list_pretty_print(driver->dbg_list);
+        if (!initiate_second_pass(pre_assembler_path, driver->sym_table, &driver->mem_buffer)) /* Errors */
 
         on_exit(driver);
         free(pre_assembler_path);
-    }
-
     return 0;
 }
 
