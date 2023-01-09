@@ -12,7 +12,7 @@ bool initiate_second_pass(char* path, SymbolTable* table, memoryBuffer* memory) 
 	LineIterator curLine;
 	LineIterator* ptrCurLine = &curLine;
 	char* line = NULL;
-	
+
 	memory->instruction_image.counter = 0; /*init IC counter*/
 	while ((line = get_line(in)) != NULL) {
 		bool labelFlag = FALSE; /*is current line first word is label*/
@@ -28,10 +28,10 @@ bool initiate_second_pass(char* path, SymbolTable* table, memoryBuffer* memory) 
 		}
 	}
 	/*finished reading all lines in file*/
-	if (finalStatus.error_flag) 
+	if (finalStatus.error_flag)
 		handle_errors(&(finalStatus.errors));
-	else 
-		create_files(memory, path, &finalStatus, table,  &(finalStatus.errors));
+	else
+		create_files(memory, path, &finalStatus, table, &(finalStatus.errors));
 
 	fclose(in);
 	free(line);
@@ -48,8 +48,9 @@ void execute_line(LineIterator* it, memoryBuffer* memory) {
 }
 
 void execute_command(memoryBuffer* memory, LineIterator* restOfLine, char* method, int syntaxGroup) {
-	
+
 }
+
 bool generate_object_file(memoryBuffer* memory, char* path, debugList* err) {
 	char* outfileName = NULL;
 	FILE* out = NULL;
@@ -59,24 +60,24 @@ bool generate_object_file(memoryBuffer* memory, char* path, debugList* err) {
 	//translatedMemory = translate_to_machine_data(memory,err);
 	lineNode = translatedMemory->head;
 
-		outfileName = get_outfile_name(path, ".object");
-		out = open_file(outfileName, MODE_WRITE);
+	outfileName = get_outfile_name(path, ".object");
+	out = open_file(outfileName, MODE_WRITE);
 
-		char placeholder[20];
-		sprintf(placeholder, "%9d\t%-9d", memory->data_image.counter, memory->instruction_image.counter);
+	char placeholder[20];
+	sprintf(placeholder, "%9d\t%-9d", memory->data_image.counter, memory->instruction_image.counter);
 
+	fputs(placeholder, out);
+	fputs("\n", out);
+
+	while (lineNode != NULL) {
+		sprintf(placeholder, "%04d\t%14d", lineNode->address, lineNode->machine_data);
 		fputs(placeholder, out);
 		fputs("\n", out);
-
-		while (lineNode != NULL) {
-			sprintf(placeholder, "%04d\t%14d", lineNode->address, lineNode->machine_data);
-			fputs(placeholder,out);
-			fputs("\n", out);
-		}
+	}
 
 	free(outfileName);
 	fclose(out);
-	
+
 }
 /*
 LinesList* translate_to_machine_data(memoryBuffer* memory, errorContext* err) {
@@ -109,12 +110,12 @@ LinesList* translate_to_machine_data(memoryBuffer* memory, errorContext* err) {
 			transform_binary(memory->data_image.memory[i].param2, lineNode->machine_data, j, countSize++);
 			countSize++;
 		}
-		
+
 	}
 	return translatedMemory;
 }*/
 
-void transform_binary(char* data,char* machineCodeString, int currentIndexData, int currentIndexMCS) {
+void transform_binary(char* data, char* machineCodeString, int currentIndexData, int currentIndexMCS) {
 	if (*(data + currentIndexData) == 0) {
 		*(machineCodeString + currentIndexMCS) = OBJECT_PRINT_DOT;
 		return;
@@ -122,7 +123,7 @@ void transform_binary(char* data,char* machineCodeString, int currentIndexData, 
 	*(machineCodeString + currentIndexMCS) = OBJECT_PRINT_SLASH;
 }
 
-bool generate_externals_file(SymbolTable* table, char* path){
+bool generate_externals_file(SymbolTable* table, char* path) {
 	char* outfileName = NULL;
 	FILE* out = NULL;
 	SymbolTableNode* symTableHead = table->head;
@@ -134,10 +135,10 @@ bool generate_externals_file(SymbolTable* table, char* path){
 	sprintf(placeholder, ("%-10s\t%4d", symTableHead->sym.name, symTableHead->sym.counter));
 
 	while (symTableHead != NULL) {
-		if(symTableHead->sym.type == SYM_EXTERN){
-		fputs(placeholder, out);
-		fputs("\n", out);
-		symTableHead->next;
+		if (symTableHead->sym.type == SYM_EXTERN) {
+			fputs(placeholder, out);
+			fputs("\n", out);
+			symTableHead->next;
 		}
 	}
 
@@ -157,7 +158,7 @@ bool generate_entries_file(SymbolTable* table, char* path) {
 	sprintf(placeholder, ("%-10s\t%4d", ("%-10s%4d", symTableHead->sym.name, symTableHead->sym.counter)));
 
 	while (symTableHead != NULL) {
-		if(symTableHead->sym.type == SYM_ENTRY){
+		if (symTableHead->sym.type == SYM_ENTRY) {
 			fputs(placeholder, out);
 			fputs("\n", out);
 			symTableHead->next;
@@ -168,13 +169,13 @@ bool generate_entries_file(SymbolTable* table, char* path) {
 	fclose(out);
 }
 
-void create_files(memoryBuffer* memory, char* path, programFinalStatus* finalStatus ,SymbolTable* table,debugList* err) {
+void create_files(memoryBuffer* memory, char* path, programFinalStatus* finalStatus, SymbolTable* table, debugList* err) {
 	finalStatus->createdObject = generate_object_file(memory, path, &(*finalStatus).errors);
 	finalStatus->createdExternals = generate_externals_file(table, path);
 	finalStatus->createdEntry = generate_entries_file(table, path);
 }
 
-void skip_label(LineIterator* line, bool* labelFlag,SymbolTable* table, debugList* err) {
+void skip_label(LineIterator* line, bool* labelFlag, SymbolTable* table, debugList* err) {
 	if (isLabel(line)) {
 		if (symbol_table_search_symbol(table, line_iterator_next_word(line, " "))) { //if exists, needs to edit code so it would care the colon
 			line = line->start;
@@ -192,17 +193,17 @@ void skip_label(LineIterator* line, bool* labelFlag,SymbolTable* table, debugLis
 }
 
 void extract_directive_type(LineIterator* line, flags* flag) {
-		char* command = line_iterator_next_word(line, " ");
-		if (strcmp(command, DOT_EXTERN)) {
-			extern_exists(flag);
-		}
-		else if (strcmp(command, DOT_ENTRY)) {
-			extern_exists(flag);
-		}
-		else if(!(strcmp(command, DOT_STRING) || strcmp(command, DOT_DATA))){//isn't any exists command
-			debugNode err; /*debug_list_new_node, should also add debug list later on function headline*/
-		}
-		free(command);
+	char* command = line_iterator_next_word(line, " ");
+	if (strcmp(command, DOT_EXTERN)) {
+		extern_exists(flag);
+	}
+	else if (strcmp(command, DOT_ENTRY)) {
+		extern_exists(flag);
+	}
+	else if (!(strcmp(command, DOT_STRING) || strcmp(command, DOT_DATA))) {//isn't any exists command
+		debugNode err; /*debug_list_new_node, should also add debug list later on function headline*/
+	}
+	free(command);
 }
 
 bool directive_exists(LineIterator* line) {
@@ -220,7 +221,7 @@ bool directive_exists(LineIterator* line) {
 	return FALSE;
 }
 
-void extern_exists(flags* flag){
+void extern_exists(flags* flag) {
 	flag->dot_extern_exists = TRUE;
 }
 
@@ -229,6 +230,6 @@ void entry_exists(flags* flag) {
 }
 
 bool handle_errors(debugList* error) {
-	
+
 	return TRUE;
 }
