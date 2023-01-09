@@ -112,6 +112,7 @@ bool generate_object_file(memoryBuffer* memory, char* path, debugList* err) {
 
 	free(outfileName);
 	fclose(out);
+
 	return TRUE;
 }
 

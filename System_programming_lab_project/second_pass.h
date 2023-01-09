@@ -78,9 +78,6 @@ void entry_exists(flags* flag);
 /*finds if the type of the directive*/
 void extract_directive_type(LineIterator* line, flags* flag);
 
-//skip label if exists
-void skip_label(LineIterator* line, bool* labelFlag, SymbolTable* table, debugList* err);
-
 /*Error handling process*/
 bool handle_errors(debugList* error);
 
