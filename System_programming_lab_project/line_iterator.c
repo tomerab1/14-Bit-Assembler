@@ -124,7 +124,7 @@ bool line_iterator_includes(LineIterator* it, char searchFor)
 bool line_iterator_word_includes(LineIterator* it, char* searchFor)
 {
     return strstr(it->current, searchFor);
-    }
+}
 
 char* get_last_word(LineIterator* it) {
     char* tempItLocation = it->current;
