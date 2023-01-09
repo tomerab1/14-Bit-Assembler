@@ -15,7 +15,7 @@
 #include "encoding.h"
 #include "constants.h"
 
-typedef struct flags
+typedef struct
 {
 	bool dot_entry_exists;
 	bool dot_extern_exists;
