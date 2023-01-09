@@ -9,8 +9,6 @@
 #include "debug.h"
 #include "memory.h"
 
-
-
 typedef struct
 { 
 	char* leftVar; /* Pointer to the start of the line. */
