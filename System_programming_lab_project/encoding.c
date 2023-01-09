@@ -126,25 +126,25 @@ void encode_opcode(LineIterator* it, memoryBuffer* img)
 
 	switch (group) {
 	case SG_GROUP_1:
-		encode_syntax_group_1(it, op, img, NULL);
+		encode_syntax_group_1(it, op, img);
 		break;
 	case SG_GROUP_2: 
-		encode_syntax_group_2(it, op, img, NULL);
+		encode_syntax_group_2(it, op, img);
 		break;
 	case SG_GROUP_3:
-		encode_syntax_group_3(it, op, img, NULL);
+		encode_syntax_group_3(it, op, img);
 		break;
 	case SG_GROUP_4:
-		encode_syntax_group_4(it, op, img, NULL);
+		encode_syntax_group_4(it, op, img);
 		break;
 	case SG_GROUP_5:
-		encode_syntax_group_5(it, op, img, NULL);
+		encode_syntax_group_5(it, op, img);
 		break;
 	case SG_GROUP_6:
-		encode_syntax_group_6(it, op, img, NULL);
+		encode_syntax_group_6(it, op, img);
 		break;
 	case SG_GROUP_7:
-		encode_syntax_group_7(it, op, img, NULL);
+		encode_syntax_group_7(it, op, img);
 		break;
 	default: break;
 	}
@@ -167,7 +167,7 @@ void encode_source_and_dest(imageMemory* img, char* source, char* dest)
 
 	for (i = 0; i < 2; i++) {
 		OperandKind kind;
-		int address;
+
 		if (!operands[i]) 
 			continue;
 		 
@@ -374,22 +374,27 @@ VarData extract_variables_group_5(LineIterator* it) {
 	}
 	return variablesData;
 }
-
+/**/
 void encode_labels(VarData* variables, SyntaxGroups synGroup, SymbolTable* symTable, imageMemory* img)
 {
 	SymbolTableNode* leftVar, *rightVar, *preLabel;
+	bool isDualRegister = (get_operand_kind(variables->leftVar) == KIND_REG && get_operand_kind(variables->rightVar) == KIND_REG);
+
 	//variables->label = extract_single_item(variables);
 	if (synGroup == 1 || synGroup == 2 || synGroup == 7) {
-		if (symbol_table_search_symbol_bool(symTable, variables->leftVar)) {
+
+		if (variables->leftVar && symbol_table_search_symbol_bool(symTable, variables->leftVar)) {
 			leftVar = symbol_table_search_symbol(symTable, variables->leftVar);
 			set_image_memory(img, leftVar->sym.counter << 2, FLAG_PARAM1 | FLAG_PARAM2 | FLAG_OPCODE2 | FLAG_OPCODE1 | FLAG_SOURCE | FLAG_DEST);
 			img->counter++;
 		}
-		if (symbol_table_search_symbol_bool(symTable, variables->rightVar)) {
+		else img->counter++;
+		if (variables->rightVar && symbol_table_search_symbol_bool(symTable, variables->rightVar)) {
 			rightVar = symbol_table_search_symbol(symTable, variables->rightVar);
 			set_image_memory(img, rightVar->sym.counter << 2, FLAG_PARAM1 | FLAG_PARAM2 | FLAG_OPCODE2 | FLAG_OPCODE1 | FLAG_SOURCE | FLAG_DEST);
 			img->counter++;
 		}
+		else img->counter++;
 	}
 	else if (synGroup == 3 || synGroup == 6) {
 		leftVar = symbol_table_search_symbol(symTable, variables->leftVar);
@@ -397,23 +402,29 @@ void encode_labels(VarData* variables, SyntaxGroups synGroup, SymbolTable* symTa
 		img->counter++;
 	}
 	else if (synGroup == 5) {
-		if (symbol_table_search_symbol_bool(symTable, variables->label)) {
+		if (variables->leftVar && symbol_table_search_symbol_bool(symTable, variables->label)) {
 			preLabel = symbol_table_search_symbol(symTable, variables->label);
 			set_image_memory(img, preLabel->sym.counter << 2, FLAG_PARAM1 | FLAG_PARAM2 | FLAG_OPCODE2 | FLAG_OPCODE1 | FLAG_SOURCE | FLAG_DEST);
 			img->counter++;
 		}
-		if (symbol_table_search_symbol_bool(symTable, variables->leftVar)) {
-			leftVar = symbol_table_search_symbol(symTable, variables->leftVar);
-			set_image_memory(img, leftVar->sym.counter << 2, FLAG_PARAM1 | FLAG_PARAM2 | FLAG_OPCODE2 | FLAG_OPCODE1 | FLAG_SOURCE | FLAG_DEST);
+		if (isDualRegister) {
 			img->counter++;
 		}
-		if (symbol_table_search_symbol_bool(symTable, variables->rightVar)) {
-			rightVar = symbol_table_search_symbol(symTable, variables->rightVar);
-			set_image_memory(img, rightVar->sym.counter << 2, FLAG_PARAM1 | FLAG_PARAM2 | FLAG_OPCODE2 | FLAG_OPCODE1 | FLAG_SOURCE | FLAG_DEST);
-			img->counter++;
+		else {
+			if (variables->rightVar && symbol_table_search_symbol_bool(symTable, variables->leftVar)) {
+				leftVar = symbol_table_search_symbol(symTable, variables->leftVar);
+				set_image_memory(img, leftVar->sym.counter << 2, FLAG_PARAM1 | FLAG_PARAM2 | FLAG_OPCODE2 | FLAG_OPCODE1 | FLAG_SOURCE | FLAG_DEST);
+				img->counter++;
+			}else img->counter++;
+			if (variables->label && symbol_table_search_symbol_bool(symTable, variables->rightVar)) {
+				rightVar = symbol_table_search_symbol(symTable, variables->rightVar);
+				set_image_memory(img, rightVar->sym.counter << 2, FLAG_PARAM1 | FLAG_PARAM2 | FLAG_OPCODE2 | FLAG_OPCODE1 | FLAG_SOURCE | FLAG_DEST);
+				img->counter++;
+			} else img->counter++;
 		}
 	}
-	else {
+	else
+	{
 		return; /*throw error*/
 	}
 }

@@ -10,21 +10,19 @@ bool initiate_second_pass(char* path, SymbolTable* table, memoryBuffer* memory) 
 
 	programFinalStatus finalStatus = { NULL };
 	LineIterator curLine = { 0 };
-
-	LineIterator* ptrCurLine = &curLine;
 	char* line = NULL;
 
 	memory->instruction_image.counter = 0; /*init IC counter*/
 	while ((line = get_line(in)) != NULL) {
 		bool labelFlag = FALSE; /*is current line first word is label*/
 		line_iterator_put_line(&curLine, line);
-		skip_label(&curLine, &labelFlag, table, &(finalStatus.errors));
+		line_iterator_jump_to(&curLine, COLON);
 
 		if (!directive_exists(&curLine)) { /*checks if any kind of instruction exists (.something)*/
 			execute_line(&curLine, table, memory);
 		}
 		else {
-			extract_directive_type(ptrCurLine, &finalStatus.entryAndExternFlag);
+			extract_directive_type(&curLine, &finalStatus.entryAndExternFlag);
 		}
 	}
 
@@ -78,6 +76,9 @@ int find_amount_of_lines_to_skip(LineIterator* it) {
 	}
 	else if (opGroup == 5){
 		variables = extract_variables_group_5(it);
+		if (get_operand_kind(variables.leftVar) == KIND_REG && get_operand_kind(variables.rightVar) == KIND_REG) {
+			return totalJumps + 2;
+		}
 		return variables.total + totalJumps;
 	}
 	else
@@ -90,25 +91,23 @@ int find_amount_of_lines_to_skip(LineIterator* it) {
 bool generate_object_file(memoryBuffer* memory, char* path, debugList* err) {
 	char* outfileName = NULL;
 	FILE* out = NULL;
-	LinesList* translatedMemory = NULL;
-	LinesListNode* lineNode = NULL;
+	LinesListNode* linesNode = NULL;
 	char placeholder[20];
+	bool completed = FALSE;
 
-	translatedMemory = translate_to_machine_data(memory, err);
-	lineNode = translatedMemory->head;
-	if (!lineNode) lineNode = NULL;
-
+	linesNode = translate_to_machine_data(memory, err);
 	outfileName = get_outfile_name(path, ".object");
 	out = open_file(outfileName, MODE_WRITE);
 
 	sprintf(placeholder, "%9d\t%-9d\n", memory->data_image.counter, memory->instruction_image.counter);
 	fputs(placeholder, out);
 
-	while (lineNode != NULL) {
-		sprintf(placeholder, "%04d\t%14s\n", lineNode->address, lineNode->dataForObject);
+	while (!completed) {
+		sprintf(placeholder, "%04d\t%14s\n", linesNode->address, linesNode->dataForObject);
 		fputs(placeholder, out);
 
-		lineNode = lineNode->next;
+		if (linesNode->address == memory->instruction_image.counter)
+			completed = TRUE;
 	}
 
 	free(outfileName);
@@ -116,28 +115,26 @@ bool generate_object_file(memoryBuffer* memory, char* path, debugList* err) {
 	return TRUE;
 }
 
-LinesList* translate_to_machine_data(memoryBuffer* memory, debugList* err) {
+LinesListNode* translate_to_machine_data(memoryBuffer* memory, debugList* err) {
 	int i, j;
-	MemoryWord* instImg = memory->instruction_image.memory;
-	LinesList* translatedMemory = (LinesList*)xmalloc(sizeof(LinesList) * memory->instruction_image.counter);
-	LinesListNode* lineNode = translatedMemory->head;
-
-	for (i = 0; i <= memory->instruction_image.counter; i++) {
-		lineNode->address = i;
+	MemoryWord* instImg = memory->instruction_image.memory;	
+	LinesListNode* translatedMemory = (LinesListNode*)xmalloc(sizeof(LinesListNode) * memory->instruction_image.counter);
+	
+	for (i = 0; i < memory->instruction_image.counter; i++) {
 		unsigned int bits = (instImg[i].mem[1] << 0x08) | (instImg[i].mem[0]);
+		translatedMemory[i].address = 100+i;
+		
 		for (j = 13; j >= 0; j--) {
 			unsigned int mask = 1 << j;
 			if ((bits & mask) != 0) {
-				lineNode->dataForObject[13 - j] = OBJECT_PRINT_SLASH;
-				lineNode->machineData[13 - j] = 1;
+				translatedMemory[i].dataForObject[13 - j] = OBJECT_PRINT_SLASH;
 			}
 			else {
-				lineNode->dataForObject[13 - j] = OBJECT_PRINT_DOT;
-				lineNode->machineData[13 - j] = 0;
+				translatedMemory[i].dataForObject[13 - j] = OBJECT_PRINT_DOT;
 			}
-			lineNode = lineNode->next;
 		}
 	}
+
 	return translatedMemory;
 }
 
@@ -192,23 +189,6 @@ void create_files(memoryBuffer* memory, char* path, programFinalStatus* finalSta
 	finalStatus->createdEntry = generate_entries_file(table, path);
 }
 
-void skip_label(LineIterator* line, bool* labelFlag, SymbolTable* table, debugList* err) {
-	if (isLabel(line)) {
-		if (symbol_table_search_symbol(table, line_iterator_next_word(line, " "))) { //if exists, needs to edit code so it would care the colon
-			line->current = line->start;
-			while (line_iterator_peek(line) != COLON) {
-				line_iterator_advance(line);
-			}
-			line_iterator_advance(line);
-			line_iterator_consume_blanks(line);
-			(*labelFlag) = TRUE;
-		}
-		return;
-	}
-	line->current = line->start;
-	return;
-}
-
 void extract_directive_type(LineIterator* line, flags* flag) {
 	char* command = line_iterator_next_word(line, " ");
 	if (strcmp(command, DOT_EXTERN)) {
@@ -246,7 +226,7 @@ void entry_exists(flags* flag) {
 	flag->dot_entry_exists = TRUE;
 }
 
-bool handle_errors(debugList* error) {
-
+bool handle_errors(debugList* error)
+{
 	return TRUE;
 }

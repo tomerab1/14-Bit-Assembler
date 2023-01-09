@@ -17,19 +17,8 @@
 typedef struct lines_list_node
 {
 	int address;
-	char* machineData; /* 14 bits string strings. */
 	char dataForObject[SINGLE_ORDER_SIZE]; /* 14 bits string strings. */
-	struct lines_list_node* next;
 } LinesListNode;
-
-/*
-	Struct to represent a linked list.
-*/
-typedef struct
-{
-	LinesListNode* head;
-	LinesListNode* tail;
-} LinesList;
 
 typedef struct flags
 {
@@ -66,7 +55,7 @@ bool initiate_second_pass(char* path, SymbolTable* table, memoryBuffer* memory);
 bool generate_object_file(memoryBuffer* memory, char* path, debugList* err);
 
 /*translates data from memory to object text style configuration*/
-LinesList* translate_to_machine_data(memoryBuffer* memory, debugList* err);
+LinesListNode* translate_to_machine_data(memoryBuffer* memory, debugList* err);
 
 /*generates external file*/
 bool generate_externals_file(SymbolTable* table, char* path);
