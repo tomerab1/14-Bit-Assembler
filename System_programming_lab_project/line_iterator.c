@@ -130,7 +130,7 @@ bool line_iterator_word_includes(LineIterator* it, char* searchFor)
     while (!line_iterator_is_end(it) && !found) {
         if (line_iterator_peek(it) == (*searchFor)) {
             keepGoing = TRUE;
-            i = 1;
+            i = 0;
             line_iterator_advance(it);
             while (!line_iterator_is_end(it) && i < length && keepGoing) {
                 if ((line_iterator_peek(it) == (*(searchFor + i)))) {

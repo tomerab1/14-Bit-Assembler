@@ -193,7 +193,7 @@ bool first_pass_process_sym_ent(LineIterator* it, memoryBuffer* img, SymbolTable
 		free(word);
 		return FALSE;
 	}
-	if (!_name(it)) {
+	if (!is_label_name(it)) {
 		debug_list_register_node(dbg_list, debug_list_new_node(it->start, it->current, line, ERROR_CODE_INVALID_LABEL_DEF));
 		free(word);
 		return FALSE;

@@ -83,6 +83,7 @@ bool cmp_register_name(char* str);
 */
 
 bool is_label_name(LineIterator* it);
+
 void trim_symbol_name(char* sym);
 
 /* Verifies the source code syntax */
@@ -116,8 +117,7 @@ bool validate_syntax_extern_and_entry(LineIterator* it, long line, debugList* db
 
 bool is_register_name_heuristic(LineIterator it);
 bool is_register_name(LineIterator* it);
-bool 
-_name(LineIterator* it);
+
 bool validate_label_ending(LineIterator* it);
 
 bool match_operand(LineIterator* it, long line, int flags, debugList* dbg_list);
