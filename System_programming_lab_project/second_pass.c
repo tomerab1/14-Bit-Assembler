@@ -31,7 +31,7 @@ bool initiate_second_pass(char* path, SymbolTable* table, memoryBuffer* memory) 
 		handle_errors(&(finalStatus.errors));
 		return FALSE;
 	}
-	else if (TRUE) {
+	else if (finalStatus.entryAndExternFlag.dot_extern_exists || finalStatus.entryAndExternFlag.dot_entry_exists) {
 		create_files(memory, path, &finalStatus, table, &(finalStatus.errors));
 	}
 
@@ -92,7 +92,7 @@ bool generate_object_file(memoryBuffer* memory, char* path, debugList* err) {
 	char* outfileName = NULL;
 	FILE* out = NULL;
 	LinesListNode* linesNode = NULL;
-	char placeholder[20];
+	char placeholder[80] = 0;
 	bool completed = FALSE;
 
 	linesNode = translate_to_machine_data(memory, err);
@@ -143,7 +143,7 @@ bool generate_externals_file(SymbolTable* table, char* path) {
 	char* outfileName = NULL;
 	FILE* out = NULL;
 	SymbolTableNode* symTableHead = table->head;
-	char placeholder[20];
+	char placeholder[80] = 0;
 
 	outfileName = get_outfile_name(path, ".external");
 	out = open_file(outfileName, MODE_WRITE);
@@ -166,7 +166,7 @@ bool generate_entries_file(SymbolTable* table, char* path) {
 	char* outfileName = NULL;
 	FILE* out = NULL;
 	SymbolTableNode* symTableHead = table->head;
-	char placeholder[20];
+	char placeholder[80] = 0;
 
 	outfileName = get_outfile_name(path, ".entry");
 	out = open_file(outfileName, MODE_WRITE);
@@ -186,8 +186,12 @@ bool generate_entries_file(SymbolTable* table, char* path) {
 
 void create_files(memoryBuffer* memory, char* path, programFinalStatus* finalStatus, SymbolTable* table, debugList* err) {
 	finalStatus->createdObject = generate_object_file(memory, path, &(*finalStatus).errors);
-	finalStatus->createdExternals = generate_externals_file(table, path);
-	finalStatus->createdEntry = generate_entries_file(table, path);
+
+	if(finalStatus->entryAndExternFlag.dot_extern_exists)
+		finalStatus->createdExternals = generate_externals_file(table, path);
+	
+	if(finalStatus->entryAndExternFlag.dot_entry_exists)
+		finalStatus->createdEntry = generate_entries_file(table, path);
 }
 
 void extract_directive_type(LineIterator* line, flags* flag) {
