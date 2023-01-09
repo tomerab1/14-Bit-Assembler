@@ -23,7 +23,7 @@ typedef struct
 
 typedef struct {
 	long address;
-	char translated[14];
+	char translated[SINGLE_ORDER_SIZE + 1]; /* (+1) for '\0'. */
 } TranslatedMachineData;
 
 typedef struct programFinalStatus

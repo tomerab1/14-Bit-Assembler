@@ -736,15 +736,12 @@ SyntaxGroups get_syntax_group(char* name)
 
 bool is_label_exists_in_line(LineIterator line, SymbolTable table) {
     int i = 0;
-    LineIterator* linePtr = &line;
     SymbolTableNode* node = table.head;
+
     while (node != NULL) {
-        if (line_iterator_word_includes(&line, node->sym.name)) {
-            return TRUE;
-        }
-        else {
-            node = node->next;
-        }
+        if (line_iterator_word_includes(&line, node->sym.name)) return TRUE;
+        node = node->next;
     }
+
     return FALSE;
 }

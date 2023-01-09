@@ -40,32 +40,32 @@ void encode_dot_data(LineIterator* it, memoryBuffer* img)
 /*2 first digits already encodede on first pass*/
 void encode_label_start_process(LineIterator* it, memoryBuffer* img, SymbolTable* symTable) {
 	VarData variables = { 0 };
-	VarData* ptrVars = &variables;
 	char* opcode = line_iterator_next_word(it, " ");
 	Opcodes op = get_opcode(opcode);
-	SyntaxGroups synGroup = get_syntax_group(opcode)+1;
+	SyntaxGroups synGroup = get_syntax_group(opcode);
 
-	if (synGroup == 1 || synGroup == 2 || synGroup == 7) {
+	if (synGroup == SG_GROUP_1 || synGroup == SG_GROUP_2 || synGroup == SG_GROUP_7) {
 		variables = extract_variables_group_1_and_2_and_7(it);
 	}
-	else if (synGroup == 3 || synGroup == 6) {
+	else if (synGroup == SG_GROUP_3 || synGroup == SG_GROUP_6) {
 		variables = extract_variables_group_3_and_6(it);
 	}
-	else if (synGroup == 5) {
+	else if (synGroup == SG_GROUP_5) {
 		variables = extract_variables_group_5(it);
 	}
-	else {
-		return; /*throw error*/
-	}
+
 	/*encode ARE missing*/
-	encode_labels(ptrVars, synGroup, symTable, img);
-	
+	encode_labels(&variables, synGroup, symTable, &img->instruction_image);
+
+	free(variables.label);
+	free(variables.leftVar);
+	free(variables.rightVar);
 }
 
 void encode_integer(imageMemory* img, unsigned int num)
 {
 	/* Copy first 8 bits */
-	set_image_memory(img, num & 0xff, FLAG_ERA | FLAG_SOURCE | FLAG_DEST | FLAG_OPCODE1); 
+	set_image_memory(img, num & 0xff, FLAG_ERA | FLAG_SOURCE | FLAG_DEST | FLAG_OPCODE1);
 
 	/* Copy second 8 bits */
 	set_image_memory(img, (num & 0xff00) >> 0x08, FLAG_OPCODE2 | FLAG_PARAM1 | FLAG_PARAM2);
@@ -135,7 +135,8 @@ void encode_opcode(LineIterator* it, memoryBuffer* img)
 
 	if (group != SG_GROUP_INVALID) table[group](it, op, img);
 
-    free(opcode);
+
+	free(opcode);
 }
 
 void encode_source_and_dest(imageMemory* img, char* source, char* dest)
@@ -191,10 +192,10 @@ void encode_syntax_group_1(LineIterator* it, Opcodes op, memoryBuffer* img)
 {
 	/* Source operand can be immediate, register or label. */
 	/* Dest operand can be register or label. */
-	char* source = NULL, *dest = NULL;
-	
+	char* source = NULL, * dest = NULL;
+
 	source = line_iterator_next_word(it, ", ");
-	
+
 	line_iterator_consume_blanks(it);
 	line_iterator_advance(it);
 
@@ -309,7 +310,7 @@ void encode_syntax_group_7(LineIterator* it, Opcodes op, memoryBuffer* img)
 {
 	/* Source operand can be immediate, register or label. */
 	/* Dest operand can be register or label. */
-	char* source = NULL, * dest = NULL;
+	char* source = NULL, *dest = NULL;
 
 	source = line_iterator_next_word(it, ", ");
 
@@ -331,8 +332,10 @@ void encode_syntax_group_7(LineIterator* it, Opcodes op, memoryBuffer* img)
 VarData extract_variables_group_1_and_2_and_7(LineIterator* it) {
 	VarData variablesData = { NULL };
 	variablesData.leftVar = line_iterator_next_word(it, ", ");
-	/* skips comma */
-	line_iterator_advance(it);
+
+	/* skip to command and consume it */
+	line_iterator_jump_to(it, COMMA_CHAR);
+
 	variablesData.rightVar = line_iterator_next_word(it, " ");
 
 	return variablesData;
@@ -346,14 +349,13 @@ VarData extract_variables_group_3_and_6(LineIterator* it) {
 }
 
 VarData extract_variables_group_5(LineIterator* it) {
-	char* nextWord = line_iterator_next_word(it, " ");
 	VarData variablesData = { NULL };
-	if (line_iterator_includes(it, OPEN_PAREN_CHAR)) {
-		variablesData.label = line_iterator_next_word(it, OPEN_PAREN_CHAR);
+	if (line_iterator_word_includes(it, "(")) {
+		variablesData.label = line_iterator_next_word(it, "(");
 		line_iterator_advance(it);//skips left parenthesis
-		variablesData.leftVar = line_iterator_next_word(it, COMMA_CHAR);
+		variablesData.leftVar = line_iterator_next_word(it, ", ");
 		line_iterator_advance(it);//skips comma
-		variablesData.rightVar = line_iterator_next_word(it, CLOSE_PAREN_CHAR);
+		variablesData.rightVar = line_iterator_next_word(it, ")");
 	}
 	else {
 		variablesData.label = get_last_word(it);
@@ -361,45 +363,41 @@ VarData extract_variables_group_5(LineIterator* it) {
 	return variablesData;
 }
 
+/**/
 void encode_labels(VarData* variables, SyntaxGroups synGroup, SymbolTable* symTable, imageMemory* img)
 {
-	SymbolTableNode* leftVar, *rightVar, *preLabel;
-	//variables->label = extract_single_item(variables);
-	if (synGroup == 1 || synGroup == 2 || synGroup == 7) {
-		if (variables->leftVar && symbol_table_search_symbol_bool(symTable, variables->leftVar)) {
-			leftVar = symbol_table_search_symbol(symTable, variables->leftVar);
-			set_image_memory(img, leftVar->sym.counter << 2, FLAG_PARAM1 | FLAG_PARAM2 | FLAG_OPCODE2 | FLAG_OPCODE1 | FLAG_SOURCE | FLAG_DEST);
-			img->counter++;
-		}
-		if (variables->rightVar && symbol_table_search_symbol_bool(symTable, variables->rightVar)) {
-			rightVar = symbol_table_search_symbol(symTable, variables->rightVar);
-			set_image_memory(img, rightVar->sym.counter << 2, FLAG_PARAM1 | FLAG_PARAM2 | FLAG_OPCODE2 | FLAG_OPCODE1 | FLAG_SOURCE | FLAG_DEST);
-			img->counter++;
-		}
-	}
-	else if (synGroup == 3 || synGroup == 6) {
-		leftVar = symbol_table_search_symbol(symTable, variables->leftVar);
-		set_image_memory(img, leftVar->sym.counter << 2, FLAG_PARAM1 | FLAG_PARAM2 |FLAG_OPCODE2 | FLAG_OPCODE1 | FLAG_SOURCE | FLAG_DEST);
-		img->counter++;
-	}
-	else if (synGroup == 5) {
-		if (variables->label && symbol_table_search_symbol_bool(symTable, variables->label)) {
-			preLabel = symbol_table_search_symbol(symTable, variables->label);
-			set_image_memory(img, preLabel->sym.counter << 2, FLAG_PARAM1 | FLAG_PARAM2 | FLAG_OPCODE2 | FLAG_OPCODE1 | FLAG_SOURCE | FLAG_DEST);
-			img->counter++;
-		}
-		if (variables->leftVar && symbol_table_search_symbol_bool(symTable, variables->leftVar)) {
-			leftVar = symbol_table_search_symbol(symTable, variables->leftVar);
-			set_image_memory(img, leftVar->sym.counter << 2, FLAG_PARAM1 | FLAG_PARAM2 | FLAG_OPCODE2 | FLAG_OPCODE1 | FLAG_SOURCE | FLAG_DEST);
-			img->counter++;
-		}
-		if (variables->rightVar && symbol_table_search_symbol_bool(symTable, variables->rightVar)) {
-			rightVar = symbol_table_search_symbol(symTable, variables->rightVar);
-			set_image_memory(img, rightVar->sym.counter << 2, FLAG_PARAM1 | FLAG_PARAM2 | FLAG_OPCODE2 | FLAG_OPCODE1 | FLAG_SOURCE | FLAG_DEST);
-			img->counter++;
-		}
+	SymbolTableNode* nodePtr = NULL;
+	bool isDualRegister = (get_operand_kind(variables->leftVar) == KIND_REG && get_operand_kind(variables->rightVar) == KIND_REG);
+
+	if (isDualRegister) {
+		img->counter += 2; /* 1 for the labels word, the other is a shared memory word for the 2 registers. */
 	}
 	else {
-		return; /*throw error*/
+		if (variables->label) {
+			nodePtr = symbol_table_search_symbol(symTable, variables->label);
+			if (nodePtr) {
+				set_image_memory(img, nodePtr->sym.counter << 2, FLAG_PARAM1 | FLAG_PARAM2 | FLAG_OPCODE2 | FLAG_OPCODE1 | FLAG_SOURCE | FLAG_DEST);
+				set_image_memory(img, ENCODING_RELOC, FLAG_ERA);
+			}
+			img->counter++;
+		}
+		
+		if (variables->leftVar) {
+			nodePtr = symbol_table_search_symbol(symTable, variables->leftVar);
+			if (nodePtr) {
+				set_image_memory(img, nodePtr->sym.counter << 2, FLAG_PARAM1 | FLAG_PARAM2 | FLAG_OPCODE2 | FLAG_OPCODE1 | FLAG_SOURCE | FLAG_DEST);
+				set_image_memory(img, ENCODING_RELOC, FLAG_ERA);
+			}
+			img->counter++;
+		}
+
+		if (variables->rightVar) {
+			nodePtr = symbol_table_search_symbol(symTable, variables->rightVar);
+			if (nodePtr) {
+				set_image_memory(img, nodePtr->sym.counter << 2, FLAG_PARAM1 | FLAG_PARAM2 | FLAG_OPCODE2 | FLAG_OPCODE1 | FLAG_SOURCE | FLAG_DEST);
+				set_image_memory(img, ENCODING_RELOC, FLAG_ERA);
+			}
+			img->counter++;
+		}
 	}
 }

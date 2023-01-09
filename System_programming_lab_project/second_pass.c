@@ -31,7 +31,7 @@ bool initiate_second_pass(char* path, SymbolTable* table, memoryBuffer* memory)
 		handle_errors(&finalStatus.errors);
 		return FALSE;
 	}
-	else if (TRUE) {
+	else {
 		create_files(memory, path, &finalStatus, table, &finalStatus.errors);
 	}
 
@@ -41,12 +41,12 @@ bool initiate_second_pass(char* path, SymbolTable* table, memoryBuffer* memory)
 }
 
 void execute_line(LineIterator* it, SymbolTable* table, memoryBuffer* memory) {
-	if (is_label_exists_in_line(*it, *table)) {
+	/* Increment counter by one, as every command has a preceding word. */
+	memory->instruction_image.counter++;
+	if (is_label_exists_in_line(*it, *table)) 
 		encode_label_start_process(it, memory, table);
-	}
-	else {
+	else 
 		skip_first_pass_mem(memory, it);
-	}
 }
 
 void skip_first_pass_mem(memoryBuffer* memory, LineIterator* it) {
@@ -55,27 +55,33 @@ void skip_first_pass_mem(memoryBuffer* memory, LineIterator* it) {
 }
 
 int find_amount_of_lines_to_skip(LineIterator* it) {
-	char* op = line_iterator_next_word(it, " ");
-	SyntaxGroups opGroup = get_syntax_group(op);
-	VarData variables = { 0 };
-	int totalJumps = 1;
+	char* op = NULL;
+	char* operand1 = NULL;
+	char* operand2 = NULL;
+	int total = 0;
 
-	if (opGroup == SG_GROUP_1 || opGroup == SG_GROUP_2 || opGroup == SG_GROUP_7) {
-		variables = extract_variables_group_1_and_2_and_7(it);
-		if (get_operand_kind(variables.leftVar) == KIND_REG && get_operand_kind(variables.rightVar) == KIND_REG) {
-			return totalJumps + 1;
-		}
-		else {
-			return totalJumps + 2;
-		}
-	}
-	else if (opGroup == SG_GROUP_3 || opGroup == SG_GROUP_6) {
-		return totalJumps + 1;
-	}
-	else if (opGroup == SG_GROUP_5) {
-		variables = extract_variables_group_5(it);
-		return variables.total + totalJumps;
-	}
+	line_iterator_consume_blanks(it);
+	op = line_iterator_next_word(it, " ");
+
+	line_iterator_consume_blanks(it);
+	operand1 = line_iterator_next_word(it, " ");
+
+	line_iterator_consume_blanks(it);
+	line_iterator_jump_to(it, COMMA_CHAR);
+	operand2 = line_iterator_next_word(it, " ");
+
+	
+	if ((operand1 && operand2) && (*operand1 == REG_BEG_CHAR && *operand2 == REG_BEG_CHAR))
+		return 1; /* 1 for the opcode and one for the shared memory word of 2 registers. */
+
+	total += (operand1) ? 1 : 0;
+	total += (operand2) ? 1 : 0;
+
+	free(op);
+	free(operand1);
+	free(operand2);
+
+	return total; /* 1 for the opcode, 2 for each individual memory word */
 }
 
 bool generate_object_file(memoryBuffer* memory, char* path, debugList* err)
@@ -87,6 +93,11 @@ bool generate_object_file(memoryBuffer* memory, char* path, debugList* err)
 	int i;
 
 	translatedMemory = translate_to_machine_data(memory, err);
+
+	for (i = 0; i < memory->instruction_image.counter; i++) {
+		puts(translatedMemory[i].translated);
+	}
+
 	outfileName = get_outfile_name(path, ".object");
 	out = open_file(outfileName, MODE_WRITE);
 
@@ -164,7 +175,7 @@ bool generate_entries_file(SymbolTable* table, char* path) {
 	out = open_file(outfileName, MODE_WRITE);
 
 	while (symTableHead != NULL) {
-		if (symTableHead->sym.type == SYM_EXTERN) {
+		if (symTableHead->sym.type == SYM_ENTRY) {
 			sprintf(placeholder, "%s\t%d\n", symTableHead->sym.name, symTableHead->sym.counter);
 			fputs(placeholder, out);
 		}
@@ -197,18 +208,10 @@ void extract_directive_type(LineIterator* line, flags* flag) {
 }
 
 bool directive_exists(LineIterator* line) {
-	char* tempCur = line->current;
-	while (!line_iterator_is_end(line)) {
-		if (line_iterator_peek(line) == DOT_COMMAND) {
-			line_iterator_advance(line);
-			return TRUE; /*in case does exists, return afterward*/
-		}
-
-		line_iterator_advance(line);
-	}
-
-	line->current = tempCur;
-	return FALSE;
+	return line_iterator_word_includes(line, ".string") ||
+		   line_iterator_word_includes(line, ".data") ||
+		   line_iterator_word_includes(line, ".extern") ||
+		   line_iterator_word_includes(line, ".entry");
 }
 
 void extern_exists(flags* flag) {

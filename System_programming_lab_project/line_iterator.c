@@ -25,7 +25,10 @@ void line_iterator_backwards(LineIterator* it)
 
 void line_iterator_unget_word(LineIterator* it, char* word)
 {
-    size_t length = strlen(word);
+    size_t length;
+    if (!word) return;
+
+    length = strlen(word);
     while (length > 0) {
         line_iterator_backwards(it);
         length--;
@@ -102,23 +105,6 @@ bool line_iterator_is_end(LineIterator* it)
 bool line_iterator_is_start(LineIterator* it)
 {
     return (it->current) - (it->start) == 0;
-}
-
-bool line_iterator_includes(LineIterator* it, char searchFor)
-{
-    bool found = FALSE;
-    char* tempLocation = it->current;
-    while (!line_iterator_is_end(it) && !found) {
-        if (line_iterator_peek(it) == searchFor) {
-            it->current = tempLocation;
-            return TRUE;
-        }
-        line_iterator_consume_blanks(it);
-        line_iterator_advance(it);
-    }
-
-    it->current = tempLocation;
-    return FALSE;
 }
 
 bool line_iterator_word_includes(LineIterator* it, char* searchFor)

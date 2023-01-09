@@ -118,6 +118,8 @@ firstPassStates get_symbol_type(LineIterator* it, char* word)
 
 bool first_pass_process_sym_def(LineIterator* it, memoryBuffer* img, SymbolTable* sym_table, debugList* dbg_list, char* name, long line, bool should_encode)
 {
+	/* Get a handle to the node, if the type is entry/extern then update its counter to the img->instruction_image.counter. */
+	/* If it is not an extern/entry then register an error. */
 	if (symbol_table_search_symbol_bool(sym_table, name)) {
 		debug_list_register_node(dbg_list, debug_list_new_node(it->start, it->current, line, ERROR_CODE_SYMBOL_REDEFINITION));
 		return FALSE;
@@ -212,10 +214,7 @@ bool first_pass_process_sym_ent(LineIterator* it, memoryBuffer* img, SymbolTable
 		free(word);
 		return FALSE;
 	}
-	
-	if (should_encode) {
-		//build_memory_word(it, img, dbg_list);
-	}
+
 	free(word);
 	return TRUE;
 }
@@ -249,9 +248,6 @@ bool first_pass_process_sym_ext(LineIterator* it, memoryBuffer* img, SymbolTable
 		return FALSE;
 	}
 
-	if (should_encode) {
-		//build_memory_word(it, img, dbg_list);
-	}
 	free(word);
 
 	return TRUE;
