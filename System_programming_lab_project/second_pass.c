@@ -10,6 +10,7 @@ bool initiate_second_pass(char* path, SymbolTable* table, memoryBuffer* memory)
 	FILE* in = open_file(path, MODE_READ);
 	programFinalStatus finalStatus = { NULL };
 	LineIterator curLine = { 0 };
+
 	char* line = NULL;
 
 	memory->instruction_image.counter = 0; /*init IC counter*/
@@ -33,6 +34,7 @@ bool initiate_second_pass(char* path, SymbolTable* table, memoryBuffer* memory)
 	}
 	else if (finalStatus.entryAndExternFlag.dot_extern_exists || finalStatus.entryAndExternFlag.dot_entry_exists) {
 		create_files(memory, path, &finalStatus, table, &(finalStatus.errors));
+
 	}
 
 	fclose(in);
@@ -103,9 +105,9 @@ bool generate_object_file(memoryBuffer* memory, char* path, debugList* err)
 
 		if (linesNode->address == memory->instruction_image.counter)
 			completed = TRUE;
+
 	}
 
-	free(translatedMemory);
 	free(outfileName);
 	fclose(out);
 
@@ -114,13 +116,13 @@ bool generate_object_file(memoryBuffer* memory, char* path, debugList* err)
 
 LinesListNode* translate_to_machine_data(memoryBuffer* memory, debugList* err) {
 	int i, j;
-	MemoryWord* instImg = memory->instruction_image.memory;
+	MemoryWord* instImg = memory->instruction_image.memory;	
 	LinesListNode* translatedMemory = (LinesListNode*)xmalloc(sizeof(LinesListNode) * memory->instruction_image.counter);
-
+	
 	for (i = 0; i < memory->instruction_image.counter; i++) {
 		unsigned int bits = (instImg[i].mem[1] << 0x08) | (instImg[i].mem[0]);
-		translatedMemory[i].address = 100 + i;
-
+		translatedMemory[i].address = 100+i;
+		
 		for (j = 13; j >= 0; j--) {
 			unsigned int mask = 1 << j;
 			if ((bits & mask) != 0) {
@@ -164,6 +166,7 @@ bool generate_entries_file(SymbolTable* table, char* path) {
 	SymbolTableNode* symTableHead = table->head;
 	char placeholder[80] = { 0 };
 
+
 	outfileName = get_outfile_name(path, ".entry");
 	out = open_file(outfileName, MODE_WRITE);
 
@@ -183,10 +186,10 @@ bool generate_entries_file(SymbolTable* table, char* path) {
 void create_files(memoryBuffer* memory, char* path, programFinalStatus* finalStatus, SymbolTable* table, debugList* err) {
 	finalStatus->createdObject = generate_object_file(memory, path, &(*finalStatus).errors);
 
-	if (finalStatus->entryAndExternFlag.dot_extern_exists)
+	if(finalStatus->entryAndExternFlag.dot_extern_exists)
 		finalStatus->createdExternals = generate_externals_file(table, path);
-
-	if (finalStatus->entryAndExternFlag.dot_entry_exists)
+	
+	if(finalStatus->entryAndExternFlag.dot_entry_exists)
 		finalStatus->createdEntry = generate_entries_file(table, path);
 }
 
