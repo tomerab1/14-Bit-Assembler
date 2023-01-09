@@ -9,15 +9,14 @@ bool initiate_second_pass(char* path, SymbolTable* table, memoryBuffer* memory)
 {
 	FILE* in = open_file(path, MODE_READ);
 	programFinalStatus finalStatus = { NULL };
-	LineIterator curLine = { 0 };
-
+	LineIterator curLine;
 	char* line = NULL;
 
 	memory->instruction_image.counter = 0; /*init IC counter*/
 	while ((line = get_line(in)) != NULL) {
 		bool labelFlag = FALSE; /*is current line first word is label*/
 		line_iterator_put_line(&curLine, line);
-		line_iterator_jump_to(&curLine, COLON);
+		line_iterator_jump_to(&curLine, COLON_CHAR);
 
 		if (!directive_exists(&curLine)) { /*checks if any kind of instruction exists (.something)*/
 			execute_line(&curLine, table, memory);
@@ -32,9 +31,8 @@ bool initiate_second_pass(char* path, SymbolTable* table, memoryBuffer* memory)
 		handle_errors(&finalStatus.errors);
 		return FALSE;
 	}
-	else if (finalStatus.entryAndExternFlag.dot_extern_exists || finalStatus.entryAndExternFlag.dot_entry_exists) {
-		create_files(memory, path, &finalStatus, table, &(finalStatus.errors));
-
+	else {
+		create_files(memory, path, &finalStatus, table, &finalStatus.errors);
 	}
 
 	fclose(in);
@@ -43,12 +41,12 @@ bool initiate_second_pass(char* path, SymbolTable* table, memoryBuffer* memory)
 }
 
 void execute_line(LineIterator* it, SymbolTable* table, memoryBuffer* memory) {
-	if (is_label_exists_in_line(*it, *table)) {
+	/* Increment counter by one, as every command has a preceding word. */
+	memory->instruction_image.counter++;
+	if (is_label_exists_in_line(*it, *table)) 
 		encode_label_start_process(it, memory, table);
-	}
-	else {
+	else 
 		skip_first_pass_mem(memory, it);
-	}
 }
 
 void skip_first_pass_mem(memoryBuffer* memory, LineIterator* it) {
@@ -57,41 +55,48 @@ void skip_first_pass_mem(memoryBuffer* memory, LineIterator* it) {
 }
 
 int find_amount_of_lines_to_skip(LineIterator* it) {
-	char* op = line_iterator_next_word(it, " ");
-	SyntaxGroups opGroup = get_syntax_group(op);
-	VarData variables = { 0 };
-	int totalJumps = 1;
+	char* op = NULL;
+	char* operand1 = NULL;
+	char* operand2 = NULL;
+	int total = 0;
 
-	if (opGroup == SG_GROUP_1 || opGroup == SG_GROUP_2 || opGroup == SG_GROUP_7) {
-		variables = extract_variables_group_1_and_2_and_7(it);
-		if (get_operand_kind(variables.leftVar) == KIND_REG && get_operand_kind(variables.rightVar) == KIND_REG) {
-			return totalJumps + 1;
-		}
-		else {
-			return totalJumps + 2;
-		}
-	}
-	else if (opGroup == SG_GROUP_3 || opGroup == SG_GROUP_6) {
-		return totalJumps + 1;
-	}
-	else if (opGroup == SG_GROUP_5) {
-		variables = extract_variables_group_5(it);
-		if (get_operand_kind(variables.leftVar) == KIND_REG && get_operand_kind(variables.rightVar) == KIND_REG) {
-			return totalJumps + 2;
-		}
-		return variables.total + totalJumps;
-	}
+	line_iterator_consume_blanks(it);
+	op = line_iterator_next_word(it, " ");
+
+	line_iterator_consume_blanks(it);
+	operand1 = line_iterator_next_word(it, " ");
+
+	line_iterator_consume_blanks(it);
+	line_iterator_jump_to(it, COMMA_CHAR);
+	operand2 = line_iterator_next_word(it, " ");
+
+	
+	if ((operand1 && operand2) && (*operand1 == REG_BEG_CHAR && *operand2 == REG_BEG_CHAR))
+		return 1; /* 1 for the opcode and one for the shared memory word of 2 registers. */
+
+	total += (operand1) ? 1 : 0;
+	total += (operand2) ? 1 : 0;
+
+	free(op);
+	free(operand1);
+	free(operand2);
+
+	return total; /* 1 for the opcode, 2 for each individual memory word */
 }
 
 bool generate_object_file(memoryBuffer* memory, char* path, debugList* err)
 {
 	char* outfileName = NULL;
 	FILE* out = NULL;
-	LinesListNode* linesNode = NULL;
-	char placeholder[80] = { 0 };
-	bool completed = FALSE;
+	TranslatedMachineData* translatedMemory = NULL;
+	char placeholder[50] = { 0 };
+	int i;
 
-	linesNode = translate_to_machine_data(memory, err);
+	translatedMemory = translate_to_machine_data(memory, err);
+
+	for (i = 0; i < memory->instruction_image.counter; i++) {
+		puts(translatedMemory[i].translated);
+	}
 
 	outfileName = get_outfile_name(path, ".object");
 	out = open_file(outfileName, MODE_WRITE);
@@ -99,37 +104,37 @@ bool generate_object_file(memoryBuffer* memory, char* path, debugList* err)
 	sprintf(placeholder, "%9d\t%-9d\n", memory->data_image.counter, memory->instruction_image.counter);
 	fputs(placeholder, out);
 
-	while (!completed) {
-		sprintf(placeholder, "%04d\t%14s\n", linesNode->address, linesNode->dataForObject);
+
+	for (i = 0; i < memory->instruction_image.counter; i++) {
+		sprintf(placeholder, "%04d\t%s\n", translatedMemory[i].address, translatedMemory[i].translated);
 		fputs(placeholder, out);
-
-		if (linesNode->address == memory->instruction_image.counter)
-			completed = TRUE;
-
 	}
 
+	free(translatedMemory);
 	free(outfileName);
 	fclose(out);
 
 	return TRUE;
 }
 
-LinesListNode* translate_to_machine_data(memoryBuffer* memory, debugList* err) {
+TranslatedMachineData* translate_to_machine_data(memoryBuffer* memory, debugList* err)
+{
 	int i, j;
-	MemoryWord* instImg = memory->instruction_image.memory;	
-	LinesListNode* translatedMemory = (LinesListNode*)xmalloc(sizeof(LinesListNode) * memory->instruction_image.counter);
-	
+	MemoryWord* instImg = memory->instruction_image.memory;
+	TranslatedMachineData* translatedMemory = (char*)xmalloc(memory->instruction_image.counter * sizeof(TranslatedMachineData));
+
 	for (i = 0; i < memory->instruction_image.counter; i++) {
 		unsigned int bits = (instImg[i].mem[1] << 0x08) | (instImg[i].mem[0]);
-		translatedMemory[i].address = 100+i;
-		
+		translatedMemory[i].address = i;
+		memset(translatedMemory[i].translated, 0, sizeof(translatedMemory[i].translated));
+
 		for (j = 13; j >= 0; j--) {
 			unsigned int mask = 1 << j;
 			if ((bits & mask) != 0) {
-				translatedMemory[i].dataForObject[13 - j] = OBJECT_PRINT_SLASH;
+				translatedMemory[i].translated[j] = OBJECT_PRINT_SLASH;
 			}
 			else {
-				translatedMemory[i].dataForObject[13 - j] = OBJECT_PRINT_DOT;
+				translatedMemory[i].translated[j] = OBJECT_PRINT_DOT;
 			}
 		}
 	}
@@ -141,7 +146,7 @@ bool generate_externals_file(SymbolTable* table, char* path) {
 	char* outfileName = NULL;
 	FILE* out = NULL;
 	SymbolTableNode* symTableHead = table->head;
-	char placeholder[80] = { 0 };
+	char placeholder[20] = { 0 };
 
 	outfileName = get_outfile_name(path, ".external");
 	out = open_file(outfileName, MODE_WRITE);
@@ -164,14 +169,13 @@ bool generate_entries_file(SymbolTable* table, char* path) {
 	char* outfileName = NULL;
 	FILE* out = NULL;
 	SymbolTableNode* symTableHead = table->head;
-	char placeholder[80] = { 0 };
-
+	char placeholder[20] = { 0 };
 
 	outfileName = get_outfile_name(path, ".entry");
 	out = open_file(outfileName, MODE_WRITE);
 
 	while (symTableHead != NULL) {
-		if (symTableHead->sym.type == SYM_EXTERN) {
+		if (symTableHead->sym.type == SYM_ENTRY) {
 			sprintf(placeholder, "%s\t%d\n", symTableHead->sym.name, symTableHead->sym.counter);
 			fputs(placeholder, out);
 		}
@@ -184,13 +188,9 @@ bool generate_entries_file(SymbolTable* table, char* path) {
 }
 
 void create_files(memoryBuffer* memory, char* path, programFinalStatus* finalStatus, SymbolTable* table, debugList* err) {
-	finalStatus->createdObject = generate_object_file(memory, path, &(*finalStatus).errors);
-
-	if(finalStatus->entryAndExternFlag.dot_extern_exists)
-		finalStatus->createdExternals = generate_externals_file(table, path);
-	
-	if(finalStatus->entryAndExternFlag.dot_entry_exists)
-		finalStatus->createdEntry = generate_entries_file(table, path);
+	finalStatus->createdObject = generate_object_file(memory, path, &finalStatus->errors);
+	finalStatus->createdExternals = generate_externals_file(table, path);
+	finalStatus->createdEntry = generate_entries_file(table, path);
 }
 
 void extract_directive_type(LineIterator* line, flags* flag) {
@@ -208,18 +208,10 @@ void extract_directive_type(LineIterator* line, flags* flag) {
 }
 
 bool directive_exists(LineIterator* line) {
-	char* tempCur = line->current;
-	while (!line_iterator_is_end(line)) {
-		if (line_iterator_peek(line) == DOT_COMMAND) {
-			line_iterator_advance(line);
-			return TRUE; /*in case does exists, return afterward*/
-		}
-
-		line_iterator_advance(line);
-	}
-
-	line->current = tempCur;
-	return FALSE;
+	return line_iterator_word_includes(line, ".string") ||
+		   line_iterator_word_includes(line, ".data") ||
+		   line_iterator_word_includes(line, ".extern") ||
+		   line_iterator_word_includes(line, ".entry");
 }
 
 void extern_exists(flags* flag) {
@@ -230,7 +222,7 @@ void entry_exists(flags* flag) {
 	flag->dot_entry_exists = TRUE;
 }
 
-bool handle_errors(debugList* error)
-{
+bool handle_errors(debugList* error) {
+
 	return TRUE;
 }
