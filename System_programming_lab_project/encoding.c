@@ -135,6 +135,7 @@ void encode_opcode(LineIterator* it, memoryBuffer* img)
 
 	if (group != SG_GROUP_INVALID) table[group](it, op, img);
 
+
     free(opcode);
 }
 
@@ -360,26 +361,31 @@ VarData extract_variables_group_5(LineIterator* it) {
 	}
 	return variablesData;
 }
-
+/**/
 void encode_labels(VarData* variables, SyntaxGroups synGroup, SymbolTable* symTable, imageMemory* img)
 {
-	SymbolTableNode* leftVar, *rightVar, *preLabel;
+	SymbolTableNode* leftVar, * rightVar, * preLabel;
+	bool isDualRegister = (get_operand_kind(variables->leftVar) == KIND_REG && get_operand_kind(variables->rightVar) == KIND_REG);
+
 	//variables->label = extract_single_item(variables);
 	if (synGroup == 1 || synGroup == 2 || synGroup == 7) {
+
 		if (variables->leftVar && symbol_table_search_symbol_bool(symTable, variables->leftVar)) {
 			leftVar = symbol_table_search_symbol(symTable, variables->leftVar);
 			set_image_memory(img, leftVar->sym.counter << 2, FLAG_PARAM1 | FLAG_PARAM2 | FLAG_OPCODE2 | FLAG_OPCODE1 | FLAG_SOURCE | FLAG_DEST);
 			img->counter++;
 		}
+		else img->counter++;
 		if (variables->rightVar && symbol_table_search_symbol_bool(symTable, variables->rightVar)) {
 			rightVar = symbol_table_search_symbol(symTable, variables->rightVar);
 			set_image_memory(img, rightVar->sym.counter << 2, FLAG_PARAM1 | FLAG_PARAM2 | FLAG_OPCODE2 | FLAG_OPCODE1 | FLAG_SOURCE | FLAG_DEST);
 			img->counter++;
 		}
+		else img->counter++;
 	}
 	else if (synGroup == 3 || synGroup == 6) {
 		leftVar = symbol_table_search_symbol(symTable, variables->leftVar);
-		set_image_memory(img, leftVar->sym.counter << 2, FLAG_PARAM1 | FLAG_PARAM2 |FLAG_OPCODE2 | FLAG_OPCODE1 | FLAG_SOURCE | FLAG_DEST);
+		set_image_memory(img, leftVar->sym.counter << 2, FLAG_PARAM1 | FLAG_PARAM2 | FLAG_OPCODE2 | FLAG_OPCODE1 | FLAG_SOURCE | FLAG_DEST);
 		img->counter++;
 	}
 	else if (synGroup == 5) {
@@ -388,18 +394,26 @@ void encode_labels(VarData* variables, SyntaxGroups synGroup, SymbolTable* symTa
 			set_image_memory(img, preLabel->sym.counter << 2, FLAG_PARAM1 | FLAG_PARAM2 | FLAG_OPCODE2 | FLAG_OPCODE1 | FLAG_SOURCE | FLAG_DEST);
 			img->counter++;
 		}
-		if (variables->leftVar && symbol_table_search_symbol_bool(symTable, variables->leftVar)) {
-			leftVar = symbol_table_search_symbol(symTable, variables->leftVar);
-			set_image_memory(img, leftVar->sym.counter << 2, FLAG_PARAM1 | FLAG_PARAM2 | FLAG_OPCODE2 | FLAG_OPCODE1 | FLAG_SOURCE | FLAG_DEST);
+		if (isDualRegister) {
 			img->counter++;
 		}
-		if (variables->rightVar && symbol_table_search_symbol_bool(symTable, variables->rightVar)) {
-			rightVar = symbol_table_search_symbol(symTable, variables->rightVar);
-			set_image_memory(img, rightVar->sym.counter << 2, FLAG_PARAM1 | FLAG_PARAM2 | FLAG_OPCODE2 | FLAG_OPCODE1 | FLAG_SOURCE | FLAG_DEST);
-			img->counter++;
+		else {
+			if (variables->leftVar && symbol_table_search_symbol_bool(symTable, variables->leftVar)) {
+				leftVar = symbol_table_search_symbol(symTable, variables->leftVar);
+				set_image_memory(img, leftVar->sym.counter << 2, FLAG_PARAM1 | FLAG_PARAM2 | FLAG_OPCODE2 | FLAG_OPCODE1 | FLAG_SOURCE | FLAG_DEST);
+				img->counter++;
+			}
+			else img->counter++;
+			if (variables->rightVar && symbol_table_search_symbol_bool(symTable, variables->rightVar)) {
+				rightVar = symbol_table_search_symbol(symTable, variables->rightVar);
+				set_image_memory(img, rightVar->sym.counter << 2, FLAG_PARAM1 | FLAG_PARAM2 | FLAG_OPCODE2 | FLAG_OPCODE1 | FLAG_SOURCE | FLAG_DEST);
+				img->counter++;
+			}
+			else img->counter++;
 		}
 	}
-	else {
+	else
+	{
 		return; /*throw error*/
 	}
 }

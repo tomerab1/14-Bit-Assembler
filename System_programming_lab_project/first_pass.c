@@ -6,8 +6,7 @@
 #include "encoding.h"
 #include <string.h>
 
-typedef bool (*fpass_dispatch_table)(LineIterator* it, memoryBuffer* img, SymbolTable* sym_table, 
-	                                debugList* dbg_list, char* name, long line, bool did_err_occurred);
+typedef bool (*fpass_dispatch_table)(LineIterator* it, memoryBuffer* img, SymbolTable* sym_table, debugList* dbg_list, char* name, long line, bool did_err_occurred);
 
 bool do_first_pass(char* path, memoryBuffer* img, SymbolTable* sym_table, debugList* dbg_list)
 {

@@ -9,14 +9,15 @@ bool initiate_second_pass(char* path, SymbolTable* table, memoryBuffer* memory)
 {
 	FILE* in = open_file(path, MODE_READ);
 	programFinalStatus finalStatus = { NULL };
-	LineIterator curLine;
+	LineIterator curLine = { 0 };
+
 	char* line = NULL;
 
 	memory->instruction_image.counter = 0; /*init IC counter*/
 	while ((line = get_line(in)) != NULL) {
 		bool labelFlag = FALSE; /*is current line first word is label*/
 		line_iterator_put_line(&curLine, line);
-		line_iterator_jump_to(&curLine, COLON_CHAR);
+		line_iterator_jump_to(&curLine, COLON);
 
 		if (!directive_exists(&curLine)) { /*checks if any kind of instruction exists (.something)*/
 			execute_line(&curLine, table, memory);
@@ -31,8 +32,9 @@ bool initiate_second_pass(char* path, SymbolTable* table, memoryBuffer* memory)
 		handle_errors(&finalStatus.errors);
 		return FALSE;
 	}
-	else if (TRUE) {
-		create_files(memory, path, &finalStatus, table, &finalStatus.errors);
+	else if (finalStatus.entryAndExternFlag.dot_extern_exists || finalStatus.entryAndExternFlag.dot_entry_exists) {
+		create_files(memory, path, &finalStatus, table, &(finalStatus.errors));
+
 	}
 
 	fclose(in);
@@ -74,6 +76,9 @@ int find_amount_of_lines_to_skip(LineIterator* it) {
 	}
 	else if (opGroup == SG_GROUP_5) {
 		variables = extract_variables_group_5(it);
+		if (get_operand_kind(variables.leftVar) == KIND_REG && get_operand_kind(variables.rightVar) == KIND_REG) {
+			return totalJumps + 2;
+		}
 		return variables.total + totalJumps;
 	}
 }
@@ -82,48 +87,49 @@ bool generate_object_file(memoryBuffer* memory, char* path, debugList* err)
 {
 	char* outfileName = NULL;
 	FILE* out = NULL;
-	TranslatedMachineData* translatedMemory = NULL;
-	char placeholder[50] = { 0 };
-	int i;
+	LinesListNode* linesNode = NULL;
+	char placeholder[80] = { 0 };
+	bool completed = FALSE;
 
-	translatedMemory = translate_to_machine_data(memory, err);
+	linesNode = translate_to_machine_data(memory, err);
+
 	outfileName = get_outfile_name(path, ".object");
 	out = open_file(outfileName, MODE_WRITE);
 
 	sprintf(placeholder, "%9d\t%-9d\n", memory->data_image.counter, memory->instruction_image.counter);
 	fputs(placeholder, out);
 
-
-	for (i = 0; i < memory->instruction_image.counter; i++) {
-		sprintf(placeholder, "%04d\t%s\n", translatedMemory[i].address, translatedMemory[i].translated);
+	while (!completed) {
+		sprintf(placeholder, "%04d\t%14s\n", linesNode->address, linesNode->dataForObject);
 		fputs(placeholder, out);
+
+		if (linesNode->address == memory->instruction_image.counter)
+			completed = TRUE;
+
 	}
 
-	free(translatedMemory);
 	free(outfileName);
 	fclose(out);
 
 	return TRUE;
 }
 
-TranslatedMachineData* translate_to_machine_data(memoryBuffer* memory, debugList* err)
-{
+LinesListNode* translate_to_machine_data(memoryBuffer* memory, debugList* err) {
 	int i, j;
-	MemoryWord* instImg = memory->instruction_image.memory;
-	TranslatedMachineData* translatedMemory = (char*)xmalloc(memory->instruction_image.counter * sizeof(TranslatedMachineData));
-
+	MemoryWord* instImg = memory->instruction_image.memory;	
+	LinesListNode* translatedMemory = (LinesListNode*)xmalloc(sizeof(LinesListNode) * memory->instruction_image.counter);
+	
 	for (i = 0; i < memory->instruction_image.counter; i++) {
 		unsigned int bits = (instImg[i].mem[1] << 0x08) | (instImg[i].mem[0]);
-		translatedMemory[i].address = i;
-		memset(translatedMemory[i].translated, 0, sizeof(translatedMemory[i].translated));
-
+		translatedMemory[i].address = 100+i;
+		
 		for (j = 13; j >= 0; j--) {
 			unsigned int mask = 1 << j;
 			if ((bits & mask) != 0) {
-				translatedMemory[i].translated[j] = OBJECT_PRINT_SLASH;
+				translatedMemory[i].dataForObject[13 - j] = OBJECT_PRINT_SLASH;
 			}
 			else {
-				translatedMemory[i].translated[j] = OBJECT_PRINT_DOT;
+				translatedMemory[i].dataForObject[13 - j] = OBJECT_PRINT_DOT;
 			}
 		}
 	}
@@ -135,7 +141,7 @@ bool generate_externals_file(SymbolTable* table, char* path) {
 	char* outfileName = NULL;
 	FILE* out = NULL;
 	SymbolTableNode* symTableHead = table->head;
-	char placeholder[20] = { 0 };
+	char placeholder[80] = { 0 };
 
 	outfileName = get_outfile_name(path, ".external");
 	out = open_file(outfileName, MODE_WRITE);
@@ -158,7 +164,8 @@ bool generate_entries_file(SymbolTable* table, char* path) {
 	char* outfileName = NULL;
 	FILE* out = NULL;
 	SymbolTableNode* symTableHead = table->head;
-	char placeholder[20] = { 0 };
+	char placeholder[80] = { 0 };
+
 
 	outfileName = get_outfile_name(path, ".entry");
 	out = open_file(outfileName, MODE_WRITE);
@@ -177,9 +184,13 @@ bool generate_entries_file(SymbolTable* table, char* path) {
 }
 
 void create_files(memoryBuffer* memory, char* path, programFinalStatus* finalStatus, SymbolTable* table, debugList* err) {
-	finalStatus->createdObject = generate_object_file(memory, path, &finalStatus->errors);
-	finalStatus->createdExternals = generate_externals_file(table, path);
-	finalStatus->createdEntry = generate_entries_file(table, path);
+	finalStatus->createdObject = generate_object_file(memory, path, &(*finalStatus).errors);
+
+	if(finalStatus->entryAndExternFlag.dot_extern_exists)
+		finalStatus->createdExternals = generate_externals_file(table, path);
+	
+	if(finalStatus->entryAndExternFlag.dot_entry_exists)
+		finalStatus->createdEntry = generate_entries_file(table, path);
 }
 
 void extract_directive_type(LineIterator* line, flags* flag) {
@@ -219,7 +230,7 @@ void entry_exists(flags* flag) {
 	flag->dot_entry_exists = TRUE;
 }
 
-bool handle_errors(debugList* error) {
-
+bool handle_errors(debugList* error)
+{
 	return TRUE;
 }
