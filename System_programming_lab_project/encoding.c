@@ -45,7 +45,7 @@ void encode_label_start_process(LineIterator* it, memoryBuffer* img, SymbolTable
 	Opcodes op = get_opcode(opcode);
 	SyntaxGroups synGroup = get_syntax_group(opcode)+1;
 
-	if (synGroup == 1 || synGroup == 2 || synGroup == 7) {
+		if (synGroup == 1 || synGroup == 2 || synGroup == 7) {
 		variables = extract_variables_group_1_and_2_and_7(it);
 	}
 	else if (synGroup == 3 || synGroup == 6) {
@@ -200,7 +200,7 @@ void encode_syntax_group_1(LineIterator* it, Opcodes op, memoryBuffer* img)
 	line_iterator_advance(it);
 
 	dest = line_iterator_next_word(it, " ");
-
+	
 	/* Encode the first memory word. */
 	encode_preceding_word(&img->instruction_image, op, source, dest, FALSE);
 
