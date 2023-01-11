@@ -46,6 +46,7 @@ void encode_label_start_process(LineIterator* it, memoryBuffer* img, SymbolTable
 
 	if (synGroup == SG_GROUP_1 || synGroup == SG_GROUP_2 || synGroup == SG_GROUP_7) {
 		variables = extract_variables_group_1_and_2_and_7(it);
+
 	}
 	else if (synGroup == SG_GROUP_3 || synGroup == SG_GROUP_6) {
 		variables = extract_variables_group_3_and_6(it);
@@ -417,7 +418,4 @@ void encode_labels(VarData* variables, SyntaxGroups synGroup, SymbolTable* symTa
 			img->counter++;
 		}
 	}
-		if (nodePtr == NULL) {
-
-		}
 }
