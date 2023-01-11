@@ -27,7 +27,7 @@ bool initiate_second_pass(char* path, SymbolTable* table, memoryBuffer* memory)
 	}
 
 	/*finished reading all lines in file*/
-	if (finalStatus.error_flag) {
+	if (!(finalStatus.error_flag)) {
 		handle_errors(&finalStatus.errors);
 		return FALSE;
 	}
@@ -187,10 +187,11 @@ bool generate_entries_file(SymbolTable* table, char* path) {
 	return TRUE;
 }
 
-void create_files(memoryBuffer* memory, char* path, programFinalStatus* finalStatus, SymbolTable* table, debugList* err) {
+void create_files(memoryBuffer* memory, char* path, programFinalStatus* finalStatus, SymbolTable* table, debugList* err)
+{
 	finalStatus->createdObject = generate_object_file(memory, path, &finalStatus->errors);
-	finalStatus->createdExternals = generate_externals_file(table, path);
-	finalStatus->createdEntry = generate_entries_file(table, path);
+	table->hasExternals ? finalStatus->createdExternals = generate_externals_file(table, path) : NULL;
+	table->hasEntries ? finalStatus->createdEntry = generate_entries_file(table, path) : NULL;
 }
 
 void extract_directive_type(LineIterator* line, flags* flag) {
@@ -222,7 +223,8 @@ void entry_exists(flags* flag) {
 	flag->dot_entry_exists = TRUE;
 }
 
-bool handle_errors(debugList* error) {
+bool handle_errors(debugList* error)
+{
 
 	return TRUE;
 }

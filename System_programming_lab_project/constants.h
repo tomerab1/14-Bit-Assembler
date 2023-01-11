@@ -52,5 +52,6 @@
 
 #define OBJECT_PRINT_DOT '.'
 #define OBJECT_PRINT_SLASH '/'
+#define BACKSLASH_ZERO '\0'
 
 #endif

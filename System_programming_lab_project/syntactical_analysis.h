@@ -112,10 +112,13 @@ bool match_syntax_group_6(LineIterator* it, long line, debugList* dbg_list);
 bool match_syntax_group_7(LineIterator* it, long line, debugList* dbg_list);
 
 bool validate_syntax_string(LineIterator* it, long line, debugList* dbg_list);
+
 bool validate_syntax_data(LineIterator* it, long line, debugList* dbg_list);
+
 bool validate_syntax_extern_and_entry(LineIterator* it, long line, debugList* dbg_list);
 
 bool is_register_name_heuristic(LineIterator it);
+
 bool is_register_name(LineIterator* it);
 
 bool validate_label_ending(LineIterator* it);

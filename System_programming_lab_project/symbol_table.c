@@ -10,6 +10,8 @@ SymbolTable* symbol_table_new_table()
     SymbolTable* new_table = (SymbolTable*)xmalloc(sizeof(SymbolTable));
     new_table->head = new_table->tail = NULL;
     new_table->completed = FALSE;
+    new_table->hasEntries = FALSE;
+    new_table->hasExternals = FALSE;
     return new_table;
 }
 
@@ -20,6 +22,7 @@ SymbolTableNode* symbol_table_new_node(char* name, symbolType type, long counter
     node->sym.name = get_copy_string(name);
     node->sym.counter = counter;
     node->sym.type = type;
+
     return node;
 }
 
@@ -52,6 +55,8 @@ void symbol_table_insert_symbol(SymbolTable* table, SymbolTableNode* symbol)
         table->tail->next = symbol;
         table->tail = table->tail->next;
     }
+    if (!table->hasEntries) symbol->sym.type == SYM_ENTRY ? table->hasEntries = TRUE : NULL;
+    if (!table->hasExternals) symbol->sym.type == SYM_EXTERN ? table->hasExternals = TRUE : NULL;
 }
 
 int update_amount_of_items(SymbolTable* table) {
