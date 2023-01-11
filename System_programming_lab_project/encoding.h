@@ -67,4 +67,5 @@ void encode_syntax_group_6(LineIterator* it, Opcodes op, memoryBuffer* img);
 void encode_syntax_group_7(LineIterator* it, Opcodes op, memoryBuffer* img);
 
 OperandKind get_operand_kind(char* op);
+
 #endif
