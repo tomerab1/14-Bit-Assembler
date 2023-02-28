@@ -52,4 +52,6 @@ bool line_iterator_word_includes(LineIterator* it, char* searchFor);
 
 char* get_last_word(LineIterator* it);
 
+void line_iterator_replace(LineIterator* it, char* seps, char newSep);
+
 #endif
