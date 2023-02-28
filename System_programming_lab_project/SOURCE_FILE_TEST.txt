@@ -1,6 +1,6 @@
-MAIN: mov r3 ,LENGTH
-LOOP: jmp L1(#-1,r6)
-prn #-5
+MAIN: mov r3 ,LENGTAAA
+LOOP: jmp L2(#-1,r6)
+prn AAAAA
 bne LOOP(r4,r7)
 sub r1, r4
 bne END

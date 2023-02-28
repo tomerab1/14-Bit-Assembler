@@ -689,6 +689,18 @@ bool is_register_name(LineIterator* it)
     return REG_MIN_NUM <= line_iterator_peek(it) && line_iterator_peek(it) <= REG_MAX_NUM;
 }
 
+bool is_register_name_whole(LineIterator* it)
+{
+    bool charFlag = FALSE;
+    bool numFlag = FALSE;
+
+    charFlag = line_iterator_peek(it) == 'r';
+    line_iterator_advance(it);
+    numFlag = REG_MIN_NUM <= line_iterator_peek(it) && line_iterator_peek(it) <= REG_MAX_NUM;
+
+    return charFlag && numFlag;
+}
+
 bool verify_int(LineIterator* it, long line, char* seps, debugList* dbg_list)
 {
     if (line_iterator_peek(it) == NEG_SIGN_CHAR || line_iterator_peek(it) == POS_SIGN_CHAR) {

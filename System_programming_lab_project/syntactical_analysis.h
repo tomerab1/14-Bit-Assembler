@@ -141,5 +141,5 @@ bool find_if_instruction_exists(LineIterator* line);
 /*skips label and and consume blanks if exists after the label*/
 void skip_label_basic(LineIterator* line);
 
-bool is_label_exists_in_line(LineIterator line, SymbolTable table);
+bool is_register_name_whole(LineIterator* it);
 #endif

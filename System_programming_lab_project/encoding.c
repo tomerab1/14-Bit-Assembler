@@ -40,6 +40,7 @@ void encode_dot_data(LineIterator* it, memoryBuffer* img)
 /*2 first digits already encodede on first pass*/
 void encode_label_start_process(LineIterator* it, memoryBuffer* img, SymbolTable* symTable, debugList* dbg_list) {
 	VarData variables = { 0 };
+	it->current = it->start;
 	char* opcode = line_iterator_next_word(it, " ");
 	Opcodes op = get_opcode(opcode);
 	SyntaxGroups synGroup = get_syntax_group(opcode);
@@ -359,11 +360,13 @@ VarData extract_variables_group_5(LineIterator* it) {
 		variablesData.leftVar = line_iterator_next_word(it, ", ");
 		line_iterator_advance(it);//skips comma
 		variablesData.rightVar = line_iterator_next_word(it, ")");
+		variablesData.total = 3;
 	}
 	else {
 		variablesData.label = get_last_word(it);
+		variablesData.total = 1;
 	}
-	variablesData.total = 3;
+
 	
 	return variablesData;
 }

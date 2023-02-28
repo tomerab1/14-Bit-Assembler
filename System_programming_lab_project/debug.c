@@ -95,6 +95,7 @@ char* debug_map_token_to_err(errorCodes code)
 	case ERROR_CODE_SYNTAX_ERROR: return "Syntax error";
 	case ERROR_CODE_EXTRA_COMMA: return "Extra comma";
     case ERROR_CODE_SYMBOL_REDEFINITION: return "Symbol redefinition";
+	case ERROR_CODE_LABEL_DOES_NOT_EXISTS: return "Could not find Label in symbol map.";
 	default:
 		return "UnknownError";
 	}

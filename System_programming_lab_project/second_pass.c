@@ -25,15 +25,10 @@ bool initiate_second_pass(char* path, SymbolTable* table, memoryBuffer* memory, 
 			extract_directive_type(&curLine, &finalStatus.entryAndExternFlag);
 		}
 	}
+	if (finalStatus.error_flag) return FALSE; 
 
-	/*finished reading all lines in file*/
-	if (!(finalStatus.error_flag)) {
-		return FALSE; /*TBD to edit*/
-	}
-	else {
-		create_files(memory, path, &finalStatus, table);
-	}
-
+	create_files(memory, path, &finalStatus, table);
+	
 	fclose(in);
 	free(line);
 	return TRUE;
@@ -207,7 +202,6 @@ void extract_directive_type(LineIterator* line, flags* flag) {
 
 VarData extract_variables(LineIterator* it) {
 	VarData variables = { 0 };
-	it->current = it->start;
 
 	char* opcode = line_iterator_next_word(it, " ");
 	Opcodes op = get_opcode(opcode);
@@ -232,29 +226,35 @@ bool is_label_exists_in_line(LineIterator* line, SymbolTable* table, debugList* 
 	VarData variablesData = { NULL };
 	LineIterator itLeftVar, itRightVar, itLabel;
 	char* tempWord = 0;
-	variablesData = extract_variables(&line);
+	variablesData = extract_variables(line);
 	
 	switch (variablesData.total)
 	{
 	case 1: /*group 3 and 6, left var*/
-		line_iterator_put_line(&itLeftVar, variablesData.leftVar);
-		return investigate_word(line, &itLeftVar, table, dbg_list, flag, line_num, variablesData.leftVar);
+		if (variablesData.leftVar != NULL) {
+			line_iterator_put_line(&itLeftVar, variablesData.leftVar);
+			return investigate_word(line, &itLeftVar, table, dbg_list, flag, line_num, variablesData.leftVar, 1);
+		}
+		else {
+			line_iterator_put_line(&itLabel, variablesData.label);
+			return investigate_word(line, &itLabel, table, dbg_list, flag, line_num, variablesData.label, 1);
+		}
 
 	case 2: /*groups 1,2,7, left var and right var*/
 		
 		line_iterator_put_line(&itLeftVar, variablesData.leftVar);
 		line_iterator_put_line(&itRightVar, variablesData.rightVar);
-		return 	investigate_word(line, &itLeftVar, table, dbg_list, flag, line_num, variablesData.leftVar) &&
-			investigate_word(line, &itRightVar, table, dbg_list, flag, line_num, variablesData.rightVar);
+		return 	investigate_word(line, &itLeftVar, table, dbg_list, flag, line_num, variablesData.leftVar,2) ||
+			investigate_word(line, &itRightVar, table, dbg_list, flag, line_num, variablesData.rightVar, 2);
 
 	case 3: /*groups 5, labe, left var and right var*/
 		line_iterator_put_line(&itLeftVar, variablesData.leftVar);
 		line_iterator_put_line(&itRightVar, variablesData.rightVar);
 		line_iterator_put_line(&itLabel, variablesData.label);
 
-		return 	investigate_word(line, &itLeftVar, table, dbg_list, flag, line_num, variablesData.leftVar) &&
-			investigate_word(line, &itRightVar, table, dbg_list, flag, line_num, variablesData.rightVar) &&
-			investigate_word(line, &itLabel, table, dbg_list, flag, line_num, variablesData.label);
+		return 	investigate_word(line, &itLeftVar, table, dbg_list, flag, line_num, variablesData.leftVar,3) ||
+			investigate_word(line, &itRightVar, table, dbg_list, flag, line_num, variablesData.rightVar, 3) ||
+			investigate_word(line, &itLabel, table, dbg_list, flag, line_num, variablesData.label, 3);
 	default:
 		return;
 	}
@@ -262,14 +262,16 @@ bool is_label_exists_in_line(LineIterator* line, SymbolTable* table, debugList* 
 	
 }
 
-bool investigate_word(LineIterator* originalLine,LineIterator* wordIterator, SymbolTable* table, debugList* dbg_list, bool* flag, long line_num, char* wordToInvestigate) {
-	if ((is_register_name(wordIterator)) || line_iterator_peek(wordIterator) == HASH_CHAR) return FALSE;
+bool investigate_word(LineIterator* originalLine,LineIterator* wordIterator, SymbolTable* table, debugList* dbg_list, bool* flag, long line_num, char* wordToInvestigate,int amountOfVars) {
+	if (is_register_name_whole(wordIterator)) return FALSE;
+	line_iterator_backwards(wordIterator);
+	if ((line_iterator_peek(wordIterator) == HASH_CHAR)) return FALSE;
 	else {
 		if (symbol_table_search_symbol_bool(table, wordToInvestigate)) {
 			return TRUE;
 		}
 		else {
-			find_word_start_point(originalLine->start, wordToInvestigate, 1);
+			find_word_start_point(originalLine, wordToInvestigate, amountOfVars);
 			debug_list_register_node(dbg_list, debug_list_new_node(originalLine->start, originalLine->current, line_num, ERROR_CODE_LABEL_DOES_NOT_EXISTS));
 			(*flag) = TRUE;
 			return FALSE;
@@ -280,8 +282,11 @@ bool investigate_word(LineIterator* originalLine,LineIterator* wordIterator, Sym
 /*type 1 - one var, type*/
 void find_word_start_point(LineIterator* it, char* word, int amountOfVars) {
 	bool found = FALSE;
+	it->current = it->start;
 	line_iterator_jump_to(it, COLON_CHAR);
-	line_iterator_next_word(it, SPACE_CHAR);
+	line_iterator_consume_blanks(it);
+	line_iterator_jump_to(it, SPACE_CHAR);
+
 	switch (amountOfVars)
 	{
 	case 1:
@@ -290,31 +295,28 @@ void find_word_start_point(LineIterator* it, char* word, int amountOfVars) {
 		}
 		return;
 	case 2:
-		if (strcmp(line_iterator_next_word(it, COMMA_CHAR), word)) {
+		if(strcmp(line_iterator_next_word(it, ", "),word) == 0) {
 			line_iterator_unget_word(it, word);
 			line_iterator_consume_blanks(it);
 		}
 		else {
 			line_iterator_jump_to(it,COMMA_CHAR);
-			line_iterator_advance(COMMA_CHAR);
-		
 		}
 		return;
 	case 3:
-		if (strcmp(line_iterator_next_word(it, OPEN_PAREN_CHAR), word)) {
+		if (strcmp(line_iterator_next_word(it, "( "), word) == 0) {
 			line_iterator_unget_word(it, word);
 			line_iterator_consume_blanks(it);
 		}
-		else if(strcmp(line_iterator_next_word(it, COMMA_CHAR), word)){
+		else if(strcmp(line_iterator_next_word(it, ", "), word) == 0){
 			line_iterator_unget_word(it, word);
 			line_iterator_consume_blanks(it);
 		}
 		else {
 			line_iterator_jump_to(it, COMMA_CHAR);
-			line_iterator_advance(COMMA_CHAR);
+			line_iterator_advance(it);
 		}
-	return;
-
+		return;
 	default:
 		return;
 	}
