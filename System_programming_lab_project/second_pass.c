@@ -337,6 +337,7 @@ void update_symbol_address(LineIterator it, memoryBuffer* memory, SymbolTable* t
 {
 	char* word;
 	char* line = (char*)xcalloc(strlen(it.start) + 1, sizeof(char));
+	int offset = 0;
 	LineIterator cpyIt;
 
 	strcpy(line, it.start);
@@ -355,10 +356,10 @@ void update_symbol_address(LineIterator it, memoryBuffer* memory, SymbolTable* t
 			while (head) {
 				if (strcmp(head->sym.name, word) == 0 && head->sym.type == SYM_EXTERN) {
 					if (head->sym.counter == 0) {
-						head->sym.counter = memory->instruction_image.counter;
+						head->sym.counter = memory->instruction_image.counter + offset - 1;
 					}
 					else {
-						symbol_table_insert_symbol(table, symbol_table_new_node(word, SYM_EXTERN, memory->instruction_image.counter));
+						symbol_table_insert_symbol(table, symbol_table_new_node(word, SYM_EXTERN, memory->instruction_image.counter + offset - 1));
 						break;
 					}
 				}
@@ -379,6 +380,7 @@ void update_symbol_address(LineIterator it, memoryBuffer* memory, SymbolTable* t
 			}
 		}
 
+		offset++;
 		free(word);
 	}
 
