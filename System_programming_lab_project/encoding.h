@@ -26,7 +26,7 @@ typedef enum { ADDRESSING_IMM, ADDRESSING_DIR, ADDRESSING_PARAM, ADDRESSING_REG 
 
 void encode_dot_string(LineIterator* it, memoryBuffer* img);
 void encode_dot_data(LineIterator* it, memoryBuffer* img);
-void encode_label_start_process(LineIterator* it, memoryBuffer* img, SymbolTable* symTable);
+void encode_label_start_process(LineIterator* it, memoryBuffer* img, SymbolTable* symTable, debugList* dbg_list);
 void encode_labels(VarData* variables, SyntaxGroups synGroup, SymbolTable* symTable, imageMemory* img);
 void encode_opcode(LineIterator* it, memoryBuffer* img);
 void encode_integer(imageMemory* img, unsigned int num);

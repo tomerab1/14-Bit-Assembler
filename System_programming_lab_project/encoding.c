@@ -38,7 +38,7 @@ void encode_dot_data(LineIterator* it, memoryBuffer* img)
 }
 
 /*2 first digits already encodede on first pass*/
-void encode_label_start_process(LineIterator* it, memoryBuffer* img, SymbolTable* symTable) {
+void encode_label_start_process(LineIterator* it, memoryBuffer* img, SymbolTable* symTable, debugList* dbg_list) {
 	VarData variables = { 0 };
 	char* opcode = line_iterator_next_word(it, " ");
 	Opcodes op = get_opcode(opcode);
@@ -56,7 +56,7 @@ void encode_label_start_process(LineIterator* it, memoryBuffer* img, SymbolTable
 	}
 
 	/*encode ARE missing*/
-	encode_labels(&variables, synGroup, symTable, &img->instruction_image);
+	encode_labels(&variables, synGroup, symTable, &img->instruction_image, dbg_list, it);
 
 	free(variables.label);
 	free(variables.leftVar);
@@ -339,12 +339,14 @@ VarData extract_variables_group_1_and_2_and_7(LineIterator* it) {
 
 	variablesData.rightVar = line_iterator_next_word(it, " ");
 
+	variablesData.total = 2;
 	return variablesData;
 }
 
 VarData extract_variables_group_3_and_6(LineIterator* it) {
 	VarData variablesData = { NULL };
 	variablesData.leftVar = line_iterator_next_word(it, " ");
+	variablesData.total = 1;
 
 	return variablesData;
 }
@@ -361,6 +363,8 @@ VarData extract_variables_group_5(LineIterator* it) {
 	else {
 		variablesData.label = get_last_word(it);
 	}
+	variablesData.total = 3;
+	
 	return variablesData;
 }
 

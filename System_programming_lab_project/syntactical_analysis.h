@@ -4,8 +4,8 @@
 /** @file
 */
 
-#include "first_pass.h"
 #include "line_iterator.h"
+#include "first_pass.h"
 #include "debug.h"
 #include "utils.h"
 
