@@ -120,7 +120,9 @@ bool first_pass_process_sym_def(LineIterator* it, memoryBuffer* img, SymbolTable
 {
 	/* Get a handle to the node, if the type is entry/extern then update its counter to the img->instruction_image.counter. */
 	/* If it is not an extern/entry then register an error. */
-	if (symbol_table_search_symbol_bool(sym_table, name)) {
+	SymbolTableNode* node = symbol_table_search_symbol(sym_table, name);
+
+	if (node && (node->sym.type == SYM_DATA || node->sym.type == SYM_CODE)) {
 		debug_list_register_node(dbg_list, debug_list_new_node(it->start, it->current, line, ERROR_CODE_SYMBOL_REDEFINITION));
 		return FALSE;
 	}
@@ -151,7 +153,11 @@ bool first_pass_process_opcode(LineIterator* it, memoryBuffer* img, SymbolTable*
 
 bool first_pass_process_sym_data(LineIterator* it, memoryBuffer* img, SymbolTable* sym_table, debugList* dbg_list, char* name, long line, bool should_encode)
 {
-	if (symbol_table_search_symbol_bool(sym_table, name)) {
+	/* Get a handle to the node, if the type is entry/extern then update its counter to the img->instruction_image.counter. */
+	/* If it is not an extern/entry then register an error. */
+	SymbolTableNode* node = symbol_table_search_symbol(sym_table, name);
+
+	if (node && (node->sym.type == SYM_DATA || node->sym.type == SYM_CODE)) {
 		debug_list_register_node(dbg_list, debug_list_new_node(it->start, it->current, line, ERROR_CODE_SYMBOL_REDEFINITION));
 		return FALSE;
 	}
@@ -201,13 +207,21 @@ bool first_pass_process_sym_ent(LineIterator* it, memoryBuffer* img, SymbolTable
 		free(word);
 		return FALSE;
 	}
-	if (symbol_table_search_symbol(sym_table, word)) {
+
+	/* Check wheter the symbol already exist as an entry/extern directive */
+	SymbolTableNode* node = symbol_table_search_symbol(sym_table, word);
+
+	if (node && node->sym.type == SYM_ENTRY) {
 		debug_list_register_node(dbg_list, debug_list_new_node(it->start, it->current, line, ERROR_CODE_SYMBOL_REDEFINITION));
 		free(word);
 		return FALSE;
 	}
-
-	symbol_table_insert_symbol(sym_table, symbol_table_new_node(word, SYM_ENTRY, 0));
+	else if (node && (node->sym.type != SYM_ENTRY && node->sym.type != SYM_EXTERN)) {
+		symbol_table_insert_symbol(sym_table, symbol_table_new_node(word, SYM_ENTRY, node->sym.counter));
+	}
+	else {
+		symbol_table_insert_symbol(sym_table, symbol_table_new_node(word, SYM_ENTRY, 0));
+	}
 
 	/* Check the syntax, we want a copy of the iterator because if the syntax is correct we will encode the instructions to memory. */
 	if (!validate_syntax(*it, FP_SYM_ENT, line, dbg_list)) {
@@ -216,6 +230,7 @@ bool first_pass_process_sym_ent(LineIterator* it, memoryBuffer* img, SymbolTable
 	}
 
 	free(word);
+
 	return TRUE;
 }
 
@@ -234,13 +249,21 @@ bool first_pass_process_sym_ext(LineIterator* it, memoryBuffer* img, SymbolTable
 		free(word);
 		return FALSE;
 	}
-	if (symbol_table_search_symbol(sym_table, word)) {
+
+	/* Check wheter the symbol already exist as an entry/extern directive */
+	SymbolTableNode* node = symbol_table_search_symbol(sym_table, word);
+
+	if (node && node->sym.type == SYM_EXTERN) {
 		debug_list_register_node(dbg_list, debug_list_new_node(it->start, it->current, line, ERROR_CODE_SYMBOL_REDEFINITION));
 		free(word);
 		return FALSE;
 	}
-
-	symbol_table_insert_symbol(sym_table, symbol_table_new_node(word, SYM_EXTERN, 0));
+	else if (node && (node->sym.type != SYM_ENTRY && node->sym.type != SYM_EXTERN)) {
+		symbol_table_insert_symbol(sym_table, symbol_table_new_node(word, SYM_EXTERN, node->sym.counter));
+	}
+	else {
+		symbol_table_insert_symbol(sym_table, symbol_table_new_node(word, SYM_EXTERN, 0));
+	}
 
 	/* Check the syntax, we want a copy of the iterator because if the syntax is correct we will encode the instructions to memory. */
 	if (!validate_syntax(*it, FP_SYM_ENT, line, dbg_list)) {

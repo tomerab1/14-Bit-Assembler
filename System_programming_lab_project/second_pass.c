@@ -104,7 +104,6 @@ bool generate_object_file(memoryBuffer* memory, char* path, debugList* err)
 	sprintf(placeholder, "%9d\t%-9d\n", memory->data_image.counter, memory->instruction_image.counter);
 	fputs(placeholder, out);
 
-
 	for (i = 0; i < memory->instruction_image.counter; i++) {
 		sprintf(placeholder, "%04d\t%s\n", translatedMemory[i].address, translatedMemory[i].translated);
 		fputs(placeholder, out);
@@ -131,10 +130,10 @@ TranslatedMachineData* translate_to_machine_data(memoryBuffer* memory, debugList
 		for (j = 13; j >= 0; j--) {
 			unsigned int mask = 1 << j;
 			if ((bits & mask) != 0) {
-				translatedMemory[i].translated[j] = OBJECT_PRINT_SLASH;
+				translatedMemory[i].translated[13 - j] = OBJECT_PRINT_SLASH;
 			}
 			else {
-				translatedMemory[i].translated[j] = OBJECT_PRINT_DOT;
+				translatedMemory[i].translated[13 - j] = OBJECT_PRINT_DOT;
 			}
 		}
 	}
