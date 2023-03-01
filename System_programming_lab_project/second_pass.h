@@ -11,8 +11,6 @@
 #include "memory.h"
 #include "debug.h"
 #include "utils.h"
-#include "debug.h"
-#include "encoding.h"
 #include "constants.h"
 
 typedef struct lines_list_node
@@ -62,7 +60,7 @@ bool initiate_second_pass(char* path, SymbolTable* table, memoryBuffer* memory);
 bool generate_object_file(memoryBuffer* memory, char* path, debugList* err);
 
 /*translates data from memory to object text style configuration*/
-LinesListNode* translate_to_machine_data(memoryBuffer* memory, debugList* err);
+TranslatedMachineData* translate_to_machine_data(memoryBuffer* memory, debugList* err);
 
 /*generates external file*/
 bool generate_externals_file(SymbolTable* table, char* path);
@@ -103,5 +101,7 @@ void execute_line(LineIterator* it, SymbolTable* table, memoryBuffer* memory);
 void skip_first_pass_mem(memoryBuffer* memory, LineIterator* it);
 
 int find_amount_of_lines_to_skip(LineIterator* it);
+
+void update_symbol_address(LineIterator it, memoryBuffer* memory, SymbolTable* table);
 
 #endif
