@@ -333,56 +333,64 @@ bool handle_errors(debugList* error) {
 	return TRUE;
 }
 
+/**
+* Update the address of a symbol. This is done by looking for labels that are in the symbol table and if found we'll add them to the symbol table
+* 
+* @param it - Line iterator to the symbol
+* @param memory - Pointer to the memory buffer that holds the symbol
+* @param table - Pointer to the symbol table that is being updated
+*/
 void update_symbol_address(LineIterator it, memoryBuffer* memory, SymbolTable* table)
 {
-	char* word;
 	char* line = (char*)xcalloc(strlen(it.start) + 1, sizeof(char));
-	int offset = 0;
 	LineIterator cpyIt;
+	int offset = 0;
 
 	strcpy(line, it.start);
-
 	line_iterator_put_line(&cpyIt, line);
 	line_iterator_replace(&cpyIt, "(), ", SPACE_CHAR);
 	line_iterator_jump_to(&cpyIt, COLON_CHAR);
 
-	while ((word = line_iterator_next_word(&cpyIt, " ")) != NULL) {
-		LineIterator tmp;
-		line_iterator_put_line(&tmp, word);
-
-		if (is_label_name(&tmp)) {
-			SymbolTableNode* head = table->head;
-
-			while (head) {
-				if (strcmp(head->sym.name, word) == 0 && head->sym.type == SYM_EXTERN) {
-					if (head->sym.counter == 0) {
-						head->sym.counter = memory->instruction_image.counter + offset - 1;
-					}
-					else {
-						symbol_table_insert_symbol(table, symbol_table_new_node(word, SYM_EXTERN, memory->instruction_image.counter + offset - 1));
-						break;
-					}
-				}
-				else if (strcmp(head->sym.name, word) == 0 && head->sym.type == SYM_ENTRY) {
-					SymbolTableNode* defHead = table->head;
-
-					while (defHead) {
-						if (strcmp(defHead->sym.name, word) == 0 && (defHead->sym.type == SYM_CODE || defHead->sym.type == SYM_DATA)) {
-							head->sym.counter = defHead->sym.counter;
-							break;
-						}
-
-						defHead = defHead->next;
-					}
-				}
-
-				head = head->next;
-			}
-		}
-
-		offset++;
+	for (char* word = line_iterator_next_word(&cpyIt, " "); word != NULL; word = line_iterator_next_word(&cpyIt, " "), offset++) {
+		update_symbol_offset(word, offset, memory, table);
 		free(word);
 	}
 
 	free(line);
+}
+
+void update_symbol_offset(char* word, int offset, memoryBuffer* memory, SymbolTable* table)
+{
+	LineIterator tmp;
+	line_iterator_put_line(&tmp, word);
+
+	if (is_label_name(&tmp)) {
+		SymbolTableNode* head = table->head;
+
+		while (head) {
+			if (strcmp(head->sym.name, word) == 0 && head->sym.type == SYM_EXTERN) {
+				if (head->sym.counter == 0) {
+					head->sym.counter = memory->instruction_image.counter + offset - 1;
+				}
+				else {
+					symbol_table_insert_symbol(table, symbol_table_new_node(word, SYM_EXTERN, 100 + memory->instruction_image.counter + offset - 1));
+					break;
+				}
+			}
+			else if (strcmp(head->sym.name, word) == 0 && head->sym.type == SYM_ENTRY) {
+				SymbolTableNode* defHead = table->head;
+
+				while (defHead) {
+					if (strcmp(defHead->sym.name, word) == 0 && (defHead->sym.type == SYM_CODE || defHead->sym.type == SYM_DATA)) {
+						head->sym.counter = defHead->sym.counter;
+						break;
+					}
+
+					defHead = defHead->next;
+				}
+			}
+
+			head = head->next;
+		}
+	}
 }
