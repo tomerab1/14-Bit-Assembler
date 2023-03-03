@@ -1,9 +1,9 @@
-.entry LENGTH
-.extern W
-MAIN: mov r3 ,LENGTHHHHH
-LOOP: jmp L2(#-1,r6)
+.extern r1
+.entry mov
+MAIN: mov r3 ,LENGTH
+r1: jmp L1(#-1,r6)
 prn #-5
-bne W(r4,r5)
+bne LENGTH(r4,r5)
 sub r1, r4
 bne L3
 L1: inc K

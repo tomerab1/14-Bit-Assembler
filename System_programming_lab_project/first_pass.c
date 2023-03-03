@@ -319,6 +319,18 @@ bool first_pass_process_sym_ent(LineIterator* it, memoryBuffer* img, SymbolTable
 		return FALSE;
 	}
 
+	if (symbol_table_search_symbol_bool(sym_table, word) && check_symbol_existence(sym_table, word, SYM_ENTRY)) {
+		debug_list_register_node(dbg_list, debug_list_new_node(it->start, it->current, line, ERROR_CODE_LABEL_ALREADY_EXISTS_AS_EXTERN));
+		return FALSE;
+	}
+
+	line_iterator_unget_word(it, word);
+	if (get_opcode(word) != OP_UNKNOWN || is_register_name_whole(it)) {
+		debug_list_register_node(dbg_list, debug_list_new_node(it->start, it->current, line, ERROR_CODE_LABEL_CANNOT_BE_DEFINED_AS_OPCODE_OR_REGISTER));
+		return FALSE;
+	}
+	line_iterator_next_word(it, " ");
+
 	/* Check wheter the symbol already exist as an entry/extern directive */
 	SymbolTableNode* node = symbol_table_search_symbol(sym_table, word);
 
@@ -371,6 +383,16 @@ bool first_pass_process_sym_ext(LineIterator* it, memoryBuffer* img, SymbolTable
 		free(word);
 		return FALSE;
 	}
+	if (symbol_table_search_symbol_bool(sym_table, word) && check_symbol_existence(sym_table, word, SYM_EXTERN)) {
+			debug_list_register_node(dbg_list, debug_list_new_node(it->start, it->current, line, ERROR_CODE_LABEL_ALREADY_EXISTS_AS_ENTRY));
+			return FALSE;
+	}
+	line_iterator_unget_word(it, word);
+	if (get_opcode(word) != OP_UNKNOWN || is_register_name_whole(it)) {
+		debug_list_register_node(dbg_list, debug_list_new_node(it->start, it->current, line, ERROR_CODE_LABEL_CANNOT_BE_DEFINED_AS_OPCODE_OR_REGISTER));
+		return FALSE;
+	}
+	line_iterator_next_word(it, " ");
 
 	symbol_table_insert_symbol(sym_table, symbol_table_new_node(word, SYM_EXTERN, 0));
 
@@ -385,3 +407,4 @@ bool first_pass_process_sym_ext(LineIterator* it, memoryBuffer* img, SymbolTable
 
 	return TRUE;
 }
+

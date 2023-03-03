@@ -1,6 +1,5 @@
 /** @file
 */
-
 #include "encoding.h"
 
 void encode_dot_string(LineIterator* it, memoryBuffer* img)
@@ -41,6 +40,7 @@ void encode_dot_data(LineIterator* it, memoryBuffer* img)
 void encode_label_start_process(LineIterator* it, memoryBuffer* img, SymbolTable* symTable, debugList* dbg_list) {
 	VarData variables = { 0 };
 	it->current = it->start;
+	skip_label_basic(it);
 	char* opcode = line_iterator_next_word(it, " ");
 	Opcodes op = get_opcode(opcode);
 	SyntaxGroups synGroup = get_syntax_group(opcode);
@@ -334,7 +334,6 @@ void encode_syntax_group_7(LineIterator* it, Opcodes op, memoryBuffer* img)
 VarData extract_variables_group_1_and_2_and_7(LineIterator* it) {
 	VarData variablesData = { NULL };
 	variablesData.leftVar = line_iterator_next_word(it, ", ");
-
 	/* skip to command and consume it */
 	line_iterator_jump_to(it, COMMA_CHAR);
 
@@ -356,9 +355,9 @@ VarData extract_variables_group_5(LineIterator* it) {
 	VarData variablesData = { NULL };
 	if (line_iterator_word_includes(it, "(")) {
 		variablesData.label = line_iterator_next_word(it, "(");
-		line_iterator_advance(it);//skips left parenthesis
+		line_iterator_advance(it); /*skips left parenthesis*/
 		variablesData.leftVar = line_iterator_next_word(it, ", ");
-		line_iterator_advance(it);//skips comma
+		line_iterator_advance(it); /*skips comma*/
 		variablesData.rightVar = line_iterator_next_word(it, ")");
 		variablesData.total = 3;
 	}
@@ -371,7 +370,8 @@ VarData extract_variables_group_5(LineIterator* it) {
 	return variablesData;
 }
 
-/**/
+/*
+*/
 void encode_labels(VarData* variables, SyntaxGroups synGroup, SymbolTable* symTable, imageMemory* img)
 {
 	SymbolTableNode* nodePtr = NULL;
@@ -391,7 +391,6 @@ void encode_labels(VarData* variables, SyntaxGroups synGroup, SymbolTable* symTa
 			}
 			img->counter++;
 		}
-
 		if (isDualRegister) {
 			img->counter += 2; /* 1 for the labels word, the other is a shared memory word for the 2 registers. */
 		}
