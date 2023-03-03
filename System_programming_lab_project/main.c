@@ -3,6 +3,13 @@
 /** @file
 */
 
+/*
+	TODO:
+	1. Write docs.
+	2. Write data_img to the file.
+	3. Fix encoding of labels.
+*/
+
 /**
 * Entry point for the driver. This is the entry point for the driver to be executed.
 * 

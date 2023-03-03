@@ -56,12 +56,14 @@ bool initiate_second_pass(char* path, SymbolTable* table, memoryBuffer* memory, 
 void execute_line(LineIterator* it, SymbolTable* table, memoryBuffer* memory, debugList* dbg_list, bool* errorFlag, long line_num) {
 	/* Increment counter by one, as every command has a preceding word. */
 	memory->instruction_image.counter++;
+
 	if (is_label_exists_in_line(it, table, dbg_list, errorFlag, line_num)) {
 		update_symbol_address(*it, memory, table);
 		encode_label_start_process(it, memory, table, dbg_list);
    }
-	else 
+	else {
 		skip_first_pass_mem(memory, it);
+	}
 }
 
 /**
@@ -88,14 +90,15 @@ int find_amount_of_lines_to_skip(LineIterator* it) {
 	LineIterator tempIt;
 	int total = 0;
 
+	strcpy(tempLine, it->start);
 	line_iterator_put_line(&tempIt, tempLine);
 	line_iterator_jump_to(&tempIt, COLON_CHAR);
 	line_iterator_replace(&tempIt, "(), ", SPACE_CHAR);
 
-	op = line_iterator_next_word(it, " ");
-	operand1 = line_iterator_next_word(it, " ");
-	operand2 = line_iterator_next_word(it, " ");
-	operand3 = line_iterator_next_word(it, " ");
+	op = line_iterator_next_word(&tempIt, " ");
+	operand1 = line_iterator_next_word(&tempIt, " ");
+	operand2 = line_iterator_next_word(&tempIt, " ");
+	operand3 = line_iterator_next_word(&tempIt, " ");
 	
 	/* 1 for the opcode and one for the shared memory word of 2 registers. */
 	if ((operand1 && operand2) && (*operand1 == REG_BEG_CHAR && *operand2 == REG_BEG_CHAR))

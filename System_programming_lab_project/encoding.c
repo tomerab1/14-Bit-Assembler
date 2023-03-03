@@ -386,9 +386,8 @@ void encode_labels(VarData* variables, SyntaxGroups synGroup, SymbolTable* symTa
 	if (variables->label) {
 		nodePtr = symbol_table_search_symbol(symTable, variables->label);
 		if (nodePtr) {
+			printf("%d\t%s\n", img->counter, nodePtr->sym.name);
 			if (nodePtr->sym.type == SYM_EXTERN) {
-				set_image_memory(img, (nodePtr->sym.counter & 0xff) << 0x02, FLAG_OPCODE1 | FLAG_SOURCE | FLAG_DEST);
-				set_image_memory(img, (nodePtr->sym.counter << 0x02) >> 0x08, FLAG_OPCODE1 | FLAG_SOURCE | FLAG_DEST);
 				set_image_memory(img, ENCODING_EXT, FLAG_ERA);
 			}
 			else {
@@ -401,15 +400,15 @@ void encode_labels(VarData* variables, SyntaxGroups synGroup, SymbolTable* symTa
 	}
 
 	if (isDualRegister) {
+		/* Must be a label with two register params. */
 		img->counter++; /* 1 for the labels word, the other is a shared memory word for the 2 registers. */
 	}
 	else {
 		if (variables->leftVar) {
 			nodePtr = symbol_table_search_symbol(symTable, variables->leftVar);
 			if (nodePtr) {
+				printf("%d\t%s\n", img->counter, nodePtr->sym.name);
 				if (nodePtr->sym.type == SYM_EXTERN) {
-					set_image_memory(img, (nodePtr->sym.counter & 0xff) << 0x02, FLAG_OPCODE1 | FLAG_SOURCE | FLAG_DEST);
-					set_image_memory(img, (nodePtr->sym.counter << 0x02) >> 0x08, FLAG_OPCODE1 | FLAG_SOURCE | FLAG_DEST);
 					set_image_memory(img, ENCODING_EXT, FLAG_ERA);
 				}
 				else {
@@ -423,9 +422,8 @@ void encode_labels(VarData* variables, SyntaxGroups synGroup, SymbolTable* symTa
 		if (variables->rightVar) {
 			nodePtr = symbol_table_search_symbol(symTable, variables->rightVar);
 			if (nodePtr) {
+				printf("%d\t%s\n", img->counter, nodePtr->sym.name);
 				if (nodePtr->sym.type == SYM_EXTERN) {
-					set_image_memory(img, (nodePtr->sym.counter & 0xff) << 0x02, FLAG_OPCODE1 | FLAG_SOURCE | FLAG_DEST);
-					set_image_memory(img, (nodePtr->sym.counter << 0x02) >> 0x08, FLAG_OPCODE1 | FLAG_SOURCE | FLAG_DEST);
 					set_image_memory(img, ENCODING_EXT, FLAG_ERA);
 				}
 				else {
