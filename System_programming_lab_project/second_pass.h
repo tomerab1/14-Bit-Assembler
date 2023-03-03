@@ -11,8 +11,6 @@
 #include "memory.h"
 #include "debug.h"
 #include "utils.h"
-#include "debug.h"
-#include "encoding.h"
 #include "constants.h"
 
 typedef struct lines_list_node
@@ -61,7 +59,7 @@ bool initiate_second_pass(char* path, SymbolTable* table, memoryBuffer* memory, 
 bool generate_object_file(memoryBuffer* memory, char* path);
 
 /*translates data from memory to object text style configuration*/
-TranslatedMachineData* translate_to_machine_data(memoryBuffer* memory);
+TranslatedMachineData* translate_to_machine_data(memoryBuffer* memory, debugList* err);
 
 /*generates external file*/
 bool generate_externals_file(SymbolTable* table, char* path);
@@ -90,9 +88,13 @@ void skip_first_pass_mem(memoryBuffer* memory, LineIterator* it);
 
 int find_amount_of_lines_to_skip(LineIterator* it);
 
+
 bool is_label_exists_in_line(LineIterator* line, SymbolTable* table, debugList* dbg_list, bool* flag, long line_num);
 
 bool investigate_word(LineIterator* originalLine, LineIterator* wordIterator, SymbolTable* table, debugList* dbg_list, bool* flag, long line_num, char* wordToInvestigate);
 
 void find_word_start_point(LineIterator* it, char* word, int amountOfVars);
+
+void update_symbol_address(LineIterator it, memoryBuffer* memory, SymbolTable* table);
+
 #endif

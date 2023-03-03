@@ -7,7 +7,7 @@
 
 void macro_list_fill_list_from_file(FILE* in, MacroList* in_list)
 {
-    char* line, *name;
+    char* line, * name;
     LineIterator it;
     MacroListNode* node;
     ReadState current_state = READ_UNKNOWN;
@@ -58,7 +58,7 @@ void macro_list_fill_list_from_file(FILE* in, MacroList* in_list)
 
 void start_pre_assembler(char* path)
 {
-    FILE* in = open_file(path, MODE_READ), *out = NULL;
+    FILE* in = open_file(path, MODE_READ), * out = NULL;
     MacroList* list = macro_list_new_list();
     char* out_name = NULL;
 
@@ -91,7 +91,7 @@ ReadState get_current_reading_state(LineIterator* it)
     line_iterator_advance(it);
 
     switch (ch) {
-    case START_COMMENT_CHAR: 
+    case START_COMMENT_CHAR:
         return READ_COMMENT;
     case START_MACRO_DEF_CHAR:
         for (i = 1; i < START_MACRO_DEF_LEN && !line_iterator_is_end(it); i++, line_iterator_advance(it)) {
@@ -101,7 +101,7 @@ ReadState get_current_reading_state(LineIterator* it)
             }
         }
         return READ_START_MACRO;
-    case END_MACRO_DEF_CHAR: 
+    case END_MACRO_DEF_CHAR:
         for (i = 1; i < END_MACRO_DEF_LEN && !line_iterator_is_end(it); i++, line_iterator_advance(it)) {
             if (line_iterator_peek(it) != END_MACRO_DEFENITION[i]) {
                 line_iterator_backwards(it);
@@ -141,7 +141,7 @@ char* get_macro_name(LineIterator* it)
 
 MacroList* macro_list_new_list()
 {
-    MacroList* new_list = (MacroList*) xmalloc(sizeof(MacroList));
+    MacroList* new_list = (MacroList*)xmalloc(sizeof(MacroList));
     new_list->head = new_list->tail = NULL;
     return new_list;
 }
@@ -153,15 +153,15 @@ bool macro_list_is_empty(MacroList* list)
 
 MacroListNode* macro_list_new_node(char* name)
 {
-    MacroListNode* new_node = (MacroListNode*) xmalloc(sizeof(MacroListNode));
+    MacroListNode* new_node = (MacroListNode*)xmalloc(sizeof(MacroListNode));
 
-    new_node->macro_name = (char*) xcalloc(strlen(name) + 1, sizeof(char));
+    new_node->macro_name = (char*)xcalloc(strlen(name) + 1, sizeof(char));
     sprintf(new_node->macro_name, "%s", name);
 
     new_node->log_sz = INIT_LOG_SZ;
     new_node->phy_sz = INIT_PHY_SZ;
 
-    new_node->macro_expension = (char**) xcalloc(INIT_PHY_SZ, sizeof(char*));
+    new_node->macro_expension = (char**)xcalloc(INIT_PHY_SZ, sizeof(char*));
     new_node->next = NULL;
 
     return new_node;
@@ -230,7 +230,7 @@ MacroListNode* macro_list_get_node(MacroList* list, char* entry)
 
 void create_pre_assembler_file(FILE* in, FILE* out, MacroList* list)
 {
-    char* line, *name = NULL;
+    char* line, * name = NULL;
     LineIterator it;
     ReadState current_state = READ_UNKNOWN;
     bool did_started_reading = FALSE;
@@ -268,9 +268,9 @@ void create_pre_assembler_file(FILE* in, FILE* out, MacroList* list)
                 did_started_reading = FALSE;
             }
             else {
-                /* 
+                /*
                     If we reached the end of a macro definitons, and we are not currently reading a macro.
-                    So the macro wont be copied twice. 
+                    So the macro wont be copied twice.
                 */
                 if (!did_started_reading) {
                     fputs(line, out);
@@ -317,7 +317,7 @@ void macro_list_dump(MacroList* list)
 
 void macro_list_free(MacroList** list)
 {
-    MacroListNode* next, *current = (*list)->head;
+    MacroListNode* next, * current = (*list)->head;
 
     while (current) {
         next = current->next;
