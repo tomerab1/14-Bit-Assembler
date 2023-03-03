@@ -37,10 +37,35 @@ void encode_dot_data(LineIterator* it, memoryBuffer* img)
 	}
 }
 
+/*2 first digits already encodede on first pass*/
+void encode_label_start_process(LineIterator* it, memoryBuffer* img, SymbolTable* symTable) {
+	VarData variables = { 0 };
+	char* opcode = line_iterator_next_word(it, " ");
+	Opcodes op = get_opcode(opcode);
+	SyntaxGroups synGroup = get_syntax_group(opcode);
+
+	if (synGroup == SG_GROUP_1 || synGroup == SG_GROUP_2 || synGroup == SG_GROUP_7) {
+		variables = extract_variables_group_1_and_2_and_7(it);
+	}
+	else if (synGroup == SG_GROUP_3 || synGroup == SG_GROUP_6) {
+		variables = extract_variables_group_3_and_6(it);
+	}
+	else if (synGroup == SG_GROUP_5) {
+		variables = extract_variables_group_5(it);
+	}
+
+	/*encode ARE missing*/
+	encode_labels(&variables, synGroup, symTable, &img->instruction_image);
+
+	free(variables.label);
+	free(variables.leftVar);
+	free(variables.rightVar);
+}
+
 void encode_integer(imageMemory* img, unsigned int num)
 {
 	/* Copy first 8 bits */
-	set_image_memory(img, num & 0xff, FLAG_ERA | FLAG_SOURCE | FLAG_DEST | FLAG_OPCODE1); 
+	set_image_memory(img, num & 0xff, FLAG_ERA | FLAG_SOURCE | FLAG_DEST | FLAG_OPCODE1);
 
 	/* Copy second 8 bits */
 	set_image_memory(img, (num & 0xff00) >> 0x08, FLAG_OPCODE2 | FLAG_PARAM1 | FLAG_PARAM2);
@@ -91,7 +116,6 @@ void encode_preceding_word(imageMemory* img, Opcodes op, char* source, char* des
 				set_image_memory(img, ADDRESSING_DIR << OFFSET_DEST, FLAG_DEST);
 		}
 	}
-
 	img->counter++;
 }
 
@@ -100,33 +124,19 @@ void encode_opcode(LineIterator* it, memoryBuffer* img)
 	char* opcode = line_iterator_next_word(it, " ");
 	Opcodes op = get_opcode(opcode);
 	SyntaxGroups group = get_syntax_group(opcode);
-	
-	switch (group) {
-	case SG_GROUP_1:
-		encode_syntax_group_1(it, op, img);
-		break;
-	case SG_GROUP_2: 
-		encode_syntax_group_2(it, op, img);
-		break;
-	case SG_GROUP_3: 
-		encode_syntax_group_3(it, op, img);
-		break;
-	case SG_GROUP_4: 
-		encode_syntax_group_4(it, op, img);
-		break;
-	case SG_GROUP_5: 
-		encode_syntax_group_5(it, op, img);
-		break;
-	case SG_GROUP_6: 
-		encode_syntax_group_6(it, op, img);
-		break;
-	case SG_GROUP_7: 
-		encode_syntax_group_7(it, op, img);
-		break;
-	default: break;
-	}
 
-    free(opcode);
+	typedef void (*dispatchTable)(LineIterator*, Opcodes, memoryBuffer*);
+
+	dispatchTable table[] = {
+		encode_syntax_group_1, encode_syntax_group_2, encode_syntax_group_3,
+		encode_syntax_group_4, encode_syntax_group_5, encode_syntax_group_6,
+		encode_syntax_group_7
+	};
+
+	if (group != SG_GROUP_INVALID) table[group](it, op, img);
+
+
+	free(opcode);
 }
 
 void encode_source_and_dest(imageMemory* img, char* source, char* dest)
@@ -144,29 +154,28 @@ void encode_source_and_dest(imageMemory* img, char* source, char* dest)
 
 	for (i = 0; i < 2; i++) {
 		OperandKind kind;
-		if (!operands[i]) 
-			continue;
-		 
-		kind = get_operand_kind(operands[i]);
-		switch (kind) {
-		case KIND_IMM:
-			num = get_num(operands[i] + 1); /* +1 to ignore the '#' */
-			set_image_memory(img, num << 2, FLAG_DEST | FLAG_SOURCE | FLAG_OPCODE1);
-			set_image_memory(img, num >> 0x08, FLAG_PARAM1 | FLAG_PARAM2 | FLAG_OPCODE2);
-			break;
-		case KIND_LABEL: /* Cannot encode label in first pass. */
-			break;
-		case KIND_REG:
-			/* Two different cases for source and dest. */
-			if (operands[i] == source) {
-				set_image_memory(img, *(source + 1) - '0', FLAG_OPCODE2 | FLAG_PARAM1 | FLAG_PARAM2);
+		int address;
+		if (operands[i]) {
+			kind = get_operand_kind(operands[i]);
+
+			switch (kind) {
+			case KIND_IMM:
+				num = get_num(operands[i] + 1); /* +1 to ignore the '#' */
+				set_image_memory(img, num << 2, FLAG_DEST | FLAG_SOURCE | FLAG_OPCODE1);
+				set_image_memory(img, num >> 0x08, FLAG_PARAM1 | FLAG_PARAM2 | FLAG_OPCODE2);
+				break;
+			case KIND_REG:
+				/* Two different cases for source and dest. */
+				if (operands[i] == source) {
+					set_image_memory(img, *(source + 1) - '0', FLAG_OPCODE2 | FLAG_PARAM1 | FLAG_PARAM2);
+				}
+				else if (operands[i] == dest) {
+					set_image_memory(img, (*(dest + 1) - '0') << 2, FLAG_OPCODE1 | FLAG_DEST | FLAG_SOURCE);
+				}
+				break;
 			}
-			else if (operands[i] == dest) {
-				set_image_memory(img, (*(dest + 1) - '0') << 2, FLAG_OPCODE1 | FLAG_DEST | FLAG_SOURCE);
-			}
-			break;
+			img->counter++;
 		}
-		img->counter++;
 	}
 }
 
@@ -183,10 +192,10 @@ void encode_syntax_group_1(LineIterator* it, Opcodes op, memoryBuffer* img)
 {
 	/* Source operand can be immediate, register or label. */
 	/* Dest operand can be register or label. */
-	char* source = NULL, *dest = NULL;
-		
+	char* source = NULL, * dest = NULL;
+
 	source = line_iterator_next_word(it, ", ");
-	
+
 	line_iterator_consume_blanks(it);
 	line_iterator_advance(it);
 
@@ -231,7 +240,7 @@ void encode_syntax_group_3(LineIterator* it, Opcodes op, memoryBuffer* img)
 	/* Dest operand can be register or label. */
 	char* dest = NULL;
 
-	dest = line_iterator_next_word(it, ", ");
+	dest = get_last_word(it);
 
 	/* Encode the first memory word. */
 	encode_preceding_word(&img->instruction_image, op, NULL, dest, FALSE);
@@ -249,12 +258,12 @@ void encode_syntax_group_4(LineIterator* it, Opcodes op, memoryBuffer* img)
 	encode_preceding_word(&img->instruction_image, op, NULL, NULL, FALSE);
 }
 
+/*TBD will be discussed 03/01*/
 void encode_syntax_group_5(LineIterator* it, Opcodes op, memoryBuffer* img)
 {
 	/* Source operand can be immediate, register or label. */
 	/* Dest operand can be register or label. */
 	char* source = NULL, *dest = NULL;
-
 	line_iterator_jump_to(it, OPEN_PAREN_CHAR);
 
 	source = line_iterator_next_word(it, ",");
@@ -286,7 +295,7 @@ void encode_syntax_group_6(LineIterator* it, Opcodes op, memoryBuffer* img)
 	/* Dest operand can be register or label. */
 	char* dest = NULL;
 
-	dest = line_iterator_next_word(it, ", ");
+	dest = get_last_word(it);
 
 	/* Encode the first memory word. */
 	encode_preceding_word(&img->instruction_image, op, NULL, dest, FALSE);
@@ -301,7 +310,7 @@ void encode_syntax_group_7(LineIterator* it, Opcodes op, memoryBuffer* img)
 {
 	/* Source operand can be immediate, register or label. */
 	/* Dest operand can be register or label. */
-	char* source = NULL, * dest = NULL;
+	char* source = NULL, *dest = NULL;
 
 	source = line_iterator_next_word(it, ", ");
 
@@ -320,36 +329,75 @@ void encode_syntax_group_7(LineIterator* it, Opcodes op, memoryBuffer* img)
 	free(dest);
 }
 
-varData extract_variables_group_1_and_2_and_7(LineIterator* it, debugList* dbg_list) {
-	varData variablesData = { NULL };
+VarData extract_variables_group_1_and_2_and_7(LineIterator* it) {
+	VarData variablesData = { NULL };
 	variablesData.leftVar = line_iterator_next_word(it, ", ");
-	/* skips comma */
-	line_iterator_advance(it);
+
+	/* skip to command and consume it */
+	line_iterator_jump_to(it, COMMA_CHAR);
+
 	variablesData.rightVar = line_iterator_next_word(it, " ");
 
 	return variablesData;
 }
 
-varData extract_variables_group_3_and_6(LineIterator* it, Opcodes command, debugList* dbg_list) {
-	varData variablesData = { NULL };
+VarData extract_variables_group_3_and_6(LineIterator* it) {
+	VarData variablesData = { NULL };
 	variablesData.leftVar = line_iterator_next_word(it, " ");
 
 	return variablesData;
 }
 
-varData extract_variables_group_5(LineIterator* it, Opcodes command, debugList* dbg_list) {
-	char* nextWord = line_iterator_next_word(it, " ");
-	varData variablesData = { NULL };
-	if (line_iterator_includes(it, OPEN_PAREN_CHAR)) {
-		variablesData.label = line_iterator_next_word(it, "( ");
+VarData extract_variables_group_5(LineIterator* it) {
+	VarData variablesData = { NULL };
+	if (line_iterator_word_includes(it, "(")) {
+		variablesData.label = line_iterator_next_word(it, "(");
 		line_iterator_advance(it);//skips left parenthesis
 		variablesData.leftVar = line_iterator_next_word(it, ", ");
 		line_iterator_advance(it);//skips comma
-		variablesData.rightVar = line_iterator_next_word(it, "( ");
+		variablesData.rightVar = line_iterator_next_word(it, ")");
 	}
 	else {
-		variablesData.label = line_iterator_next_word(it, " ");
+		variablesData.label = get_last_word(it);
 	}
 	return variablesData;
 }
 
+/**/
+void encode_labels(VarData* variables, SyntaxGroups synGroup, SymbolTable* symTable, imageMemory* img)
+{
+	SymbolTableNode* nodePtr = NULL;
+	bool isDualRegister = (get_operand_kind(variables->leftVar) == KIND_REG && get_operand_kind(variables->rightVar) == KIND_REG);
+
+	if (isDualRegister) {
+		img->counter += 2; /* 1 for the labels word, the other is a shared memory word for the 2 registers. */
+	}
+	else {
+		if (variables->label) {
+			nodePtr = symbol_table_search_symbol(symTable, variables->label);
+			if (nodePtr) {
+				set_image_memory(img, nodePtr->sym.counter << 2, FLAG_PARAM1 | FLAG_PARAM2 | FLAG_OPCODE2 | FLAG_OPCODE1 | FLAG_SOURCE | FLAG_DEST);
+				set_image_memory(img, ENCODING_RELOC, FLAG_ERA);
+			}
+			img->counter++;
+		}
+		
+		if (variables->leftVar) {
+			nodePtr = symbol_table_search_symbol(symTable, variables->leftVar);
+			if (nodePtr) {
+				set_image_memory(img, nodePtr->sym.counter << 2, FLAG_PARAM1 | FLAG_PARAM2 | FLAG_OPCODE2 | FLAG_OPCODE1 | FLAG_SOURCE | FLAG_DEST);
+				set_image_memory(img, ENCODING_RELOC, FLAG_ERA);
+			}
+			img->counter++;
+		}
+
+		if (variables->rightVar) {
+			nodePtr = symbol_table_search_symbol(symTable, variables->rightVar);
+			if (nodePtr) {
+				set_image_memory(img, nodePtr->sym.counter << 2, FLAG_PARAM1 | FLAG_PARAM2 | FLAG_OPCODE2 | FLAG_OPCODE1 | FLAG_SOURCE | FLAG_DEST);
+				set_image_memory(img, ENCODING_RELOC, FLAG_ERA);
+			}
+			img->counter++;
+		}
+	}
+}

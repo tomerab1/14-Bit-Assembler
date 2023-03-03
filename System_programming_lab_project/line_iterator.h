@@ -47,4 +47,11 @@ bool line_iterator_match_any(LineIterator* it, char* seps);
 
 /* Checks if any char exists in line*/
 bool line_iterator_includes(LineIterator* it, char searchFor);
+
+bool line_iterator_word_includes(LineIterator* it, char* searchFor);
+
+char* get_last_word(LineIterator* it);
+
+void line_iterator_replace(LineIterator* it, char* seps, char newSep);
+
 #endif

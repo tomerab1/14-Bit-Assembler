@@ -7,35 +7,29 @@
 #include "syntactical_analysis.h"
 #include "line_iterator.h"
 #include "symbol_table.h"
+#include "encoding.h"
 #include "memory.h"
 #include "debug.h"
 #include "utils.h"
-#include "debug.h"
 #include "constants.h"
 
 typedef struct lines_list_node
 {
 	int address;
-	char* data; /* 14 bits string strings. */
-	char* machine_data[SINGLE_ORDER_SIZE]; /* 14 bits string strings. */
-	char* line_type; /*empty, comment, guidence, command*/
-	struct lines_list_node* next;
+	char dataForObject[SINGLE_ORDER_SIZE]; /* 14 bits string strings. */
 } LinesListNode;
 
-/*
-	Struct to represent a linked list.
-*/
-typedef struct
-{
-	LinesListNode* head;
-	LinesListNode* tail;
-} LinesList;
 
 typedef struct flags
 {
 	bool dot_entry_exists;
 	bool dot_extern_exists;
 } flags;
+
+typedef struct {
+	long address;
+	char translated[SINGLE_ORDER_SIZE + 1]; /* (+1) for '\0'. */
+} TranslatedMachineData;
 
 typedef struct programFinalStatus
 {
@@ -66,7 +60,7 @@ bool initiate_second_pass(char* path, SymbolTable* table, memoryBuffer* memory);
 bool generate_object_file(memoryBuffer* memory, char* path, debugList* err);
 
 /*translates data from memory to object text style configuration*/
-LinesList* translate_to_machine_data(memoryBuffer* memory, errorContext* err);
+TranslatedMachineData* translate_to_machine_data(memoryBuffer* memory, debugList* err);
 
 /*generates external file*/
 bool generate_externals_file(SymbolTable* table, char* path);
@@ -89,9 +83,6 @@ void entry_exists(flags* flag);
 /*finds if the type of the directive*/
 void extract_directive_type(LineIterator* line, flags* flag);
 
-//skip label if exists
-void skip_label(LineIterator* line, bool* labelFlag, SymbolTable* table, debugList* err);
-
 /*Error handling process*/
 bool handle_errors(debugList* error);
 
@@ -105,7 +96,12 @@ bool handle_errors(debugList* error);
  *
  * @return void
  */
-void execute_line(LineIterator* it, memoryBuffer* memory);
+void execute_line(LineIterator* it, SymbolTable* table, memoryBuffer* memory);
 
-void execute_command(memoryBuffer* memory, LineIterator* restOfLine, char* method, int syntaxGroup);
+void skip_first_pass_mem(memoryBuffer* memory, LineIterator* it);
+
+int find_amount_of_lines_to_skip(LineIterator* it);
+
+void update_symbol_address(LineIterator it, memoryBuffer* memory, SymbolTable* table);
+
 #endif

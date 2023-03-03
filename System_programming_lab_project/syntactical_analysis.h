@@ -81,6 +81,9 @@ bool cmp_register_name(char* str);
 /** This function trims the symbol name, i.e. trims the ':'
  * @param - The symbol to fix.
 */
+
+bool is_label_name(LineIterator* it);
+
 void trim_symbol_name(char* sym);
 
 /* Verifies the source code syntax */
@@ -114,7 +117,7 @@ bool validate_syntax_extern_and_entry(LineIterator* it, long line, debugList* db
 
 bool is_register_name_heuristic(LineIterator it);
 bool is_register_name(LineIterator* it);
-bool is_label_name(LineIterator* it);
+
 bool validate_label_ending(LineIterator* it);
 
 bool match_operand(LineIterator* it, long line, int flags, debugList* dbg_list);
@@ -135,4 +138,5 @@ bool find_if_instruction_exists(LineIterator* line);
 /*skips label and and consume blanks if exists after the label*/
 void skip_label_basic(LineIterator* line);
 
+bool is_label_exists_in_line(LineIterator line, SymbolTable table);
 #endif
