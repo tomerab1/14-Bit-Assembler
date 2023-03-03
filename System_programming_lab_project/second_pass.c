@@ -26,9 +26,7 @@ bool initiate_second_pass(char* path, SymbolTable* table, memoryBuffer* memory, 
 		}
 	}
 	if (finalStatus.error_flag) return FALSE; 
-
 	create_files(memory, path, &finalStatus, table);
-	
 	fclose(in);
 	free(line);
 	return TRUE;
