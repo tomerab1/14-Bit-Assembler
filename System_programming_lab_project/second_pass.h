@@ -97,4 +97,6 @@ void update_symbol_offset(char* word, int offset, memoryBuffer* memory, SymbolTa
 
 void add_label_base_address(SymbolTable* table);
 
+void decode_memory(TranslatedMachineData* tmd, MemoryWord* inst, int* startPos, int endPos);
+
 #endif

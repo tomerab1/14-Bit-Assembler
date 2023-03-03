@@ -139,19 +139,14 @@ bool generate_object_file(memoryBuffer* memory, char* path)
 	int i;
 
 	translatedMemory = translate_to_machine_data(memory);
-
-	for (i = 0; i < memory->instruction_image.counter; i++) {
-		puts(translatedMemory[i].translated);
-	}
-
 	outfileName = get_outfile_name(path, ".object");
 	out = open_file(outfileName, MODE_WRITE);
 
-	sprintf(placeholder, "%9d\t%4d\n", memory->data_image.counter, memory->instruction_image.counter);
+	sprintf(placeholder, "%9d\t%4d\n", memory->instruction_image.counter - 1, memory->data_image.counter);
 	fputs(placeholder, out);
 
-	for (i = 0; i < memory->instruction_image.counter; i++) {
-		sprintf(placeholder, "%04d\t%s\n", translatedMemory[i].address, translatedMemory[i].translated);
+	for (i = 0; i < memory->data_image.counter + memory->instruction_image.counter - 1; i++) {
+		sprintf(placeholder, "%04d\t%s\n", DECIMAL_ADDRESS_BASE + translatedMemory[i].address, translatedMemory[i].translated);
 		fputs(placeholder, out);
 	}
 
@@ -172,27 +167,38 @@ bool generate_object_file(memoryBuffer* memory, char* path)
 */
 TranslatedMachineData* translate_to_machine_data(memoryBuffer* memory)
 {
-	int i, j;
+	int i = 0;
 	MemoryWord* instImg = memory->instruction_image.memory;
-	TranslatedMachineData* translatedMemory = (char*)xmalloc(memory->instruction_image.counter * sizeof(TranslatedMachineData));
+	TranslatedMachineData* translatedMemory = (char*)xmalloc((memory->instruction_image.counter + memory->data_image.counter) * sizeof(TranslatedMachineData));
 
-	for (i = 0; i < memory->instruction_image.counter; i++) {
-		unsigned int bits = (instImg[i].mem[1] << 0x08) | (instImg[i].mem[0]);
-		translatedMemory[i].address = i;
-		memset(translatedMemory[i].translated, 0, sizeof(translatedMemory[i].translated));
+	decode_memory(translatedMemory, memory->instruction_image.memory, &i, memory->instruction_image.counter);
+	decode_memory(translatedMemory, memory->data_image.memory, &i, memory->data_image.counter + memory->instruction_image.counter);
+
+	return translatedMemory;
+}
+
+void decode_memory(TranslatedMachineData* tmd, MemoryWord* inst, int* startPos, int endPos)
+{
+	int i, j, k = *startPos;
+	
+	for (i = 0; k < endPos; i++) {
+		unsigned int bits = (inst[i].mem[1] << 0x08) | (inst[i].mem[0]);
+		tmd[k].address = k;
+		memset(tmd[k].translated, 0, sizeof(tmd[k].translated));
 
 		for (j = 13; j >= 0; j--) {
 			unsigned int mask = 1 << j;
 			if ((bits & mask) != 0) {
-				translatedMemory[i].translated[13 - j] = OBJECT_PRINT_SLASH;
+				tmd[k].translated[13 - j] = OBJECT_PRINT_SLASH;
 			}
 			else {
-				translatedMemory[i].translated[13 - j] = OBJECT_PRINT_DOT;
+				tmd[k].translated[13 - j] = OBJECT_PRINT_DOT;
 			}
 		}
+		k++;
 	}
 
-	return translatedMemory;
+	*startPos = k - 1;
 }
 
 /**
@@ -215,7 +221,7 @@ bool generate_externals_file(SymbolTable* table, char* path) {
 
 	while (symTableHead != NULL) {
 		if (symTableHead->sym.type == SYM_EXTERN) {
-			sprintf(placeholder, "%s\t%d\n", symTableHead->sym.name, symTableHead->sym.counter+DECIMAL_ADDRESS_BASE);
+			sprintf(placeholder, "%s\t%d\n", symTableHead->sym.name, symTableHead->sym.counter);
 			fputs(placeholder, out);
 		}
 		symTableHead = symTableHead->next;
@@ -245,7 +251,7 @@ bool generate_entries_file(SymbolTable* table, char* path) {
 
 	while (symTableHead != NULL) {
 		if (symTableHead->sym.type == SYM_ENTRY) {
-			sprintf(placeholder, "%s\t%d\n", symTableHead->sym.name, symTableHead->sym.counter+ DECIMAL_ADDRESS_BASE);
+			sprintf(placeholder, "%s\t%d\n", symTableHead->sym.name, symTableHead->sym.counter);
 			fputs(placeholder, out);
 		}
 		symTableHead = symTableHead->next;
@@ -467,10 +473,10 @@ void update_symbol_offset(char* word, int offset, memoryBuffer* memory, SymbolTa
 		while (head) {
 			if (strcmp(head->sym.name, word) == 0 && head->sym.type == SYM_EXTERN) {
 				if (head->sym.counter == 0) {
-					head->sym.counter = memory->instruction_image.counter + offset;
+					head->sym.counter = DECIMAL_ADDRESS_BASE + memory->instruction_image.counter + offset - 1;
 				}
 				else {
-					symbol_table_insert_symbol(table, symbol_table_new_node(word, SYM_EXTERN, memory->instruction_image.counter + offset));
+					symbol_table_insert_symbol(table, symbol_table_new_node(word, SYM_EXTERN, DECIMAL_ADDRESS_BASE + memory->instruction_image.counter + offset - 1));
 					break;
 				}
 			}
