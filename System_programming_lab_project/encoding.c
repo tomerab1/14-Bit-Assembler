@@ -40,10 +40,16 @@ void encode_dot_data(LineIterator* it, memoryBuffer* img)
 /*2 first digits already encodede on first pass*/
 void encode_label_start_process(LineIterator* it, memoryBuffer* img, SymbolTable* symTable, debugList* dbg_list) {
 	VarData variables = { 0 };
-	it->current = it->start;
-	char* opcode = line_iterator_next_word(it, " ");
-	Opcodes op = get_opcode(opcode);
-	SyntaxGroups synGroup = get_syntax_group(opcode);
+	char* opcode = NULL;
+	Opcodes op;
+	SyntaxGroups synGroup;
+
+	line_iterator_reset(it);
+	line_iterator_jump_to(it, COLON_CHAR);
+
+	opcode = line_iterator_next_word(it, " ");
+	op = get_opcode(opcode);
+	synGroup = get_syntax_group(opcode);
 
 	if (synGroup == SG_GROUP_1 || synGroup == SG_GROUP_2 || synGroup == SG_GROUP_7) {
 		variables = extract_variables_group_1_and_2_and_7(it);
@@ -202,7 +208,7 @@ void encode_syntax_group_1(LineIterator* it, Opcodes op, memoryBuffer* img)
 	line_iterator_advance(it);
 
 	dest = line_iterator_next_word(it, " ");
-	
+
 	/* Encode the first memory word. */
 	encode_preceding_word(&img->instruction_image, op, source, dest, FALSE);
 
@@ -265,7 +271,7 @@ void encode_syntax_group_5(LineIterator* it, Opcodes op, memoryBuffer* img)
 {
 	/* Source operand can be immediate, register or label. */
 	/* Dest operand can be register or label. */
-	char* source = NULL, *dest = NULL;
+	char* source = NULL, * dest = NULL;
 	line_iterator_jump_to(it, OPEN_PAREN_CHAR);
 
 	source = line_iterator_next_word(it, ",");
@@ -312,7 +318,7 @@ void encode_syntax_group_7(LineIterator* it, Opcodes op, memoryBuffer* img)
 {
 	/* Source operand can be immediate, register or label. */
 	/* Dest operand can be register or label. */
-	char* source = NULL, *dest = NULL;
+	char* source = NULL, * dest = NULL;
 
 	source = line_iterator_next_word(it, ", ");
 
@@ -367,7 +373,7 @@ VarData extract_variables_group_5(LineIterator* it) {
 		variablesData.total = 1;
 	}
 
-	
+
 	return variablesData;
 }
 
@@ -377,32 +383,36 @@ void encode_labels(VarData* variables, SyntaxGroups synGroup, SymbolTable* symTa
 	SymbolTableNode* nodePtr = NULL;
 	bool isDualRegister = (get_operand_kind(variables->leftVar) == KIND_REG && get_operand_kind(variables->rightVar) == KIND_REG);
 
-		if (variables->label) {
-			nodePtr = symbol_table_search_symbol(symTable, variables->label);
-			if (nodePtr) {
-				if (nodePtr->sym.type == SYM_EXTERN) {
-					set_image_memory(img, BACKSLASH_ZERO << 2, FLAG_PARAM1 | FLAG_PARAM2 | FLAG_OPCODE2 | FLAG_OPCODE1 | FLAG_SOURCE | FLAG_DEST);
-					set_image_memory(img, ENCODING_EXT, FLAG_ERA);
-				}
-				else {
-					set_image_memory(img, nodePtr->sym.counter << 2, FLAG_PARAM1 | FLAG_PARAM2 | FLAG_OPCODE2 | FLAG_OPCODE1 | FLAG_SOURCE | FLAG_DEST);
-					set_image_memory(img, ENCODING_RELOC, FLAG_ERA);
-				}
+	if (variables->label) {
+		nodePtr = symbol_table_search_symbol(symTable, variables->label);
+		if (nodePtr) {
+			if (nodePtr->sym.type == SYM_EXTERN) {
+				set_image_memory(img, (nodePtr->sym.counter & 0xff) << 0x02, FLAG_OPCODE1 | FLAG_SOURCE | FLAG_DEST);
+				set_image_memory(img, (nodePtr->sym.counter << 0x02) >> 0x08, FLAG_OPCODE1 | FLAG_SOURCE | FLAG_DEST);
+				set_image_memory(img, ENCODING_EXT, FLAG_ERA);
 			}
-			img->counter++;
+			else {
+				set_image_memory(img, (nodePtr->sym.counter & 0xff) << 0x02, FLAG_OPCODE1 | FLAG_SOURCE | FLAG_DEST);
+				set_image_memory(img, (nodePtr->sym.counter << 0x02) >> 0x08, FLAG_OPCODE1 | FLAG_SOURCE | FLAG_DEST);
+				set_image_memory(img, ENCODING_RELOC, FLAG_ERA);
+			}
 		}
+		img->counter++;
+	}
 
-		if (isDualRegister) {
-			img->counter += 2; /* 1 for the labels word, the other is a shared memory word for the 2 registers. */
-		}
-		else {
+	if (isDualRegister) {
+		img->counter++; /* 1 for the labels word, the other is a shared memory word for the 2 registers. */
+	}
+	else {
 		if (variables->leftVar) {
 			nodePtr = symbol_table_search_symbol(symTable, variables->leftVar);
 			if (nodePtr) {
 				if (nodePtr->sym.type == SYM_EXTERN) {
-					set_image_memory(img, BACKSLASH_ZERO << 2, FLAG_PARAM1 | FLAG_PARAM2 | FLAG_OPCODE2 | FLAG_OPCODE1 | FLAG_SOURCE | FLAG_DEST);
+					set_image_memory(img, (nodePtr->sym.counter & 0xff) << 0x02, FLAG_OPCODE1 | FLAG_SOURCE | FLAG_DEST);
+					set_image_memory(img, (nodePtr->sym.counter << 0x02) >> 0x08, FLAG_OPCODE1 | FLAG_SOURCE | FLAG_DEST);
 					set_image_memory(img, ENCODING_EXT, FLAG_ERA);
-				}else{
+				}
+				else {
 					set_image_memory(img, nodePtr->sym.counter << 2, FLAG_PARAM1 | FLAG_PARAM2 | FLAG_OPCODE2 | FLAG_OPCODE1 | FLAG_SOURCE | FLAG_DEST);
 					set_image_memory(img, ENCODING_RELOC, FLAG_ERA);
 				}
@@ -414,11 +424,13 @@ void encode_labels(VarData* variables, SyntaxGroups synGroup, SymbolTable* symTa
 			nodePtr = symbol_table_search_symbol(symTable, variables->rightVar);
 			if (nodePtr) {
 				if (nodePtr->sym.type == SYM_EXTERN) {
-					set_image_memory(img, BACKSLASH_ZERO << 2, FLAG_PARAM1 | FLAG_PARAM2 | FLAG_OPCODE2 | FLAG_OPCODE1 | FLAG_SOURCE | FLAG_DEST);
+					set_image_memory(img, (nodePtr->sym.counter & 0xff) << 0x02, FLAG_OPCODE1 | FLAG_SOURCE | FLAG_DEST);
+					set_image_memory(img, (nodePtr->sym.counter << 0x02) >> 0x08, FLAG_OPCODE1 | FLAG_SOURCE | FLAG_DEST);
 					set_image_memory(img, ENCODING_EXT, FLAG_ERA);
 				}
 				else {
-					set_image_memory(img, nodePtr->sym.counter << 2, FLAG_PARAM1 | FLAG_PARAM2 | FLAG_OPCODE2 | FLAG_OPCODE1 | FLAG_SOURCE | FLAG_DEST);
+					set_image_memory(img, (nodePtr->sym.counter & 0xff) << 0x02, FLAG_OPCODE1 | FLAG_SOURCE | FLAG_DEST);
+					set_image_memory(img, (nodePtr->sym.counter << 0x02) >> 0x08, FLAG_OPCODE2 | FLAG_SOURCE | FLAG_DEST);
 					set_image_memory(img, ENCODING_RELOC, FLAG_ERA);
 				}
 			}

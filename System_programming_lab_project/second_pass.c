@@ -4,6 +4,8 @@
 #include "second_pass.h"
 #include "constants.h"
 
+#include <ctype.h>
+
 /**
 * Executes second pass of program. It is used to create symbol table and memory buffer for execution. In this second pass the file is read from file and executed in instruction_image.
 * 
@@ -20,7 +22,9 @@ bool initiate_second_pass(char* path, SymbolTable* table, memoryBuffer* memory, 
 	LineIterator curLine;
 	char* line = NULL;
 
+	add_label_base_address(table);
 	memory->instruction_image.counter = 0; /*init IC counter*/
+	
 	while ((line = get_line(in)) != NULL) {
 		bool labelFlag = FALSE; /*is current line first word is label*/
 		line_iterator_put_line(&curLine, line);
@@ -53,7 +57,7 @@ void execute_line(LineIterator* it, SymbolTable* table, memoryBuffer* memory, de
 	/* Increment counter by one, as every command has a preceding word. */
 	memory->instruction_image.counter++;
 	if (is_label_exists_in_line(it, table, dbg_list, errorFlag, line_num)) {
-    update_symbol_address(*it, memory, table);
+		update_symbol_address(*it, memory, table);
 		encode_label_start_process(it, memory, table, dbg_list);
    }
 	else 
@@ -79,30 +83,37 @@ void skip_first_pass_mem(memoryBuffer* memory, LineIterator* it) {
 * @return The amount of lines to skip or 0 if there is no code to skip in this case the iterator is positioned on the start of the code
 */
 int find_amount_of_lines_to_skip(LineIterator* it) {
-	char* op = NULL;
-	char* operand1 = NULL;
-	char* operand2 = NULL;
+	char* op = NULL, *operand1 = NULL, *operand2 = NULL, *operand3 = NULL;
+	char* tempLine = (char*)xmalloc(sizeof(char) * (strlen(it->start) + 1));
+	LineIterator tempIt;
 	int total = 0;
 
-	line_iterator_consume_blanks(it);
+	line_iterator_put_line(&tempIt, tempLine);
+	line_iterator_jump_to(&tempIt, COLON_CHAR);
+	line_iterator_replace(&tempIt, "(), ", SPACE_CHAR);
+
 	op = line_iterator_next_word(it, " ");
-
-	line_iterator_consume_blanks(it);
 	operand1 = line_iterator_next_word(it, " ");
-
-	line_iterator_consume_blanks(it);
-	line_iterator_jump_to(it, COMMA_CHAR);
 	operand2 = line_iterator_next_word(it, " ");
+	operand3 = line_iterator_next_word(it, " ");
 	
+	/* 1 for the opcode and one for the shared memory word of 2 registers. */
 	if ((operand1 && operand2) && (*operand1 == REG_BEG_CHAR && *operand2 == REG_BEG_CHAR))
-		return 1; /* 1 for the opcode and one for the shared memory word of 2 registers. */
+		return isdigit(*(operand1 + 1)) && isdigit(*(operand2 + 1)) ? 1 : 2;
+
+	/* 1 for the opcode and one for the shared memory word of 2 registers, and + 1 for the label name (this case is for parametrized labels) */
+	if ((operand2 && operand3) && (*operand2 == REG_BEG_CHAR && *operand3 == REG_BEG_CHAR))
+		return isdigit(*(operand1 + 1)) && isdigit(*(operand2 + 1)) ? 2 : 3;
 
 	total += (operand1) ? 1 : 0;
 	total += (operand2) ? 1 : 0;
+	total += (operand3) ? 1 : 0;
 
 	free(op);
 	free(operand1);
 	free(operand2);
+	free(operand3);
+	free(tempLine);
 
 	return total; /* 1 for the opcode, 2 for each individual memory word */
 }
@@ -338,7 +349,7 @@ bool is_label_exists_in_line(LineIterator* line, SymbolTable* table, debugList* 
 	
 }
 
-bool investigate_word(LineIterator* originalLine,LineIterator* wordIterator, SymbolTable* table, debugList* dbg_list, bool* flag, long line_num, char* wordToInvestigate,int amountOfVars) {
+bool investigate_word(LineIterator* originalLine,LineIterator* wordIterator, SymbolTable* table, debugList* dbg_list, bool* flag, long line_num, char* wordToInvestigate, int amountOfVars) {
 	if (is_register_name_whole(wordIterator)) return FALSE;
 	line_iterator_backwards(wordIterator);
 	if ((line_iterator_peek(wordIterator) == HASH_CHAR)) return FALSE;
@@ -399,20 +410,6 @@ void find_word_start_point(LineIterator* it, char* word, int amountOfVars) {
 }
 
 /**
-* Checks if a directive exists at the current position. This is used to detect if we are going to write a directive or not.
-* 
-* @param line
-* 
-* @return @c true if a directive exists @c false otherwise. The iterator is advanced past the directive's end
-
-bool directive_exists(LineIterator* line) {
-	return line_iterator_word_includes(line, ".string") ||
-		   line_iterator_word_includes(line, ".data") ||
-		   line_iterator_word_includes(line, ".extern") ||
-		   line_iterator_word_includes(line, ".entry");
-}
-
-/**
 * Tell whether or not an externally defined function exists. This is used to determine whether a function is externally defined or not by examining the contents of a. EXE file.
 * 
 * @param flag - Pointer to struct containing information about the function to
@@ -467,10 +464,10 @@ void update_symbol_offset(char* word, int offset, memoryBuffer* memory, SymbolTa
 		while (head) {
 			if (strcmp(head->sym.name, word) == 0 && head->sym.type == SYM_EXTERN) {
 				if (head->sym.counter == 0) {
-					head->sym.counter = memory->instruction_image.counter + offset - 1;
+					head->sym.counter = memory->instruction_image.counter + offset;
 				}
 				else {
-					symbol_table_insert_symbol(table, symbol_table_new_node(word, SYM_EXTERN, 100 + memory->instruction_image.counter + offset - 1));
+					symbol_table_insert_symbol(table, symbol_table_new_node(word, SYM_EXTERN, memory->instruction_image.counter + offset));
 					break;
 				}
 			}
@@ -489,5 +486,13 @@ void update_symbol_offset(char* word, int offset, memoryBuffer* memory, SymbolTa
 
 			head = head->next;
 		}
+	}
+}
+
+void add_label_base_address(SymbolTable* table)
+{
+	LIST_FOR_EACH(SymbolTableNode, table->head, head) {
+		if (head->sym.type == SYM_DATA || head->sym.type == SYM_CODE)
+			head->sym.counter += DECIMAL_ADDRESS_BASE;
 	}
 }
