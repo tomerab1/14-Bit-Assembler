@@ -8,6 +8,7 @@
 	1. Write docs.
 	2. Write data_img to the file.
 	3. Fix encoding of labels.
+	4. Add constant to get rid of magic numbers.
 */
 
 /**
