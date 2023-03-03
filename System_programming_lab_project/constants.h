@@ -6,6 +6,7 @@
 
 #define SOURCE_LINE_MAX_LENGTH 81
 #define LABEL_MAX_LENGTH 31
+#define DECIMAL_ADDRESS_BASE 100
 
 #define RAM_MEMORY_SZ 256
 #define RAM_INIT_VAL 0
@@ -52,5 +53,6 @@
 
 #define OBJECT_PRINT_DOT '.'
 #define OBJECT_PRINT_SLASH '/'
+#define BACKSLASH_ZERO '\0'
 
 #endif

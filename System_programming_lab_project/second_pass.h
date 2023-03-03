@@ -37,13 +37,12 @@ typedef struct programFinalStatus
 	bool createdObject;
 	bool createdExternals;
 	bool createdEntry;
-	debugList errors;
 	bool error_flag;
 } programFinalStatus;
 
 
 //starts second pass process
-bool initiate_second_pass(char* path, SymbolTable* table, memoryBuffer* memory);
+bool initiate_second_pass(char* path, SymbolTable* table, memoryBuffer* memory, debugList* dbg_list);
 
 /**
  * Generates an object file from the data in a memory buffer.
@@ -57,7 +56,7 @@ bool initiate_second_pass(char* path, SymbolTable* table, memoryBuffer* memory);
  * @param err A pointer to a `debugList` structure that will be used to store any errors that occur.
  * @return true if the object file was generated successfully, or false if an error occurred.
  */
-bool generate_object_file(memoryBuffer* memory, char* path, debugList* err);
+bool generate_object_file(memoryBuffer* memory, char* path);
 
 /*translates data from memory to object text style configuration*/
 TranslatedMachineData* translate_to_machine_data(memoryBuffer* memory, debugList* err);
@@ -69,7 +68,7 @@ bool generate_externals_file(SymbolTable* table, char* path);
 bool generate_entries_file(SymbolTable* table, char* path);
 
 /*calls file generation functions*/
-void create_files(memoryBuffer* memory, char* path, programFinalStatus* finalStatus, SymbolTable* table, debugList* err);
+void create_files(memoryBuffer* memory, char* path, programFinalStatus* finalStatus, SymbolTable* table);
 
 //checks if any order type (extern or entry) commands exists in the program
 bool directive_exists(LineIterator* line);
@@ -83,24 +82,18 @@ void entry_exists(flags* flag);
 /*finds if the type of the directive*/
 void extract_directive_type(LineIterator* line, flags* flag);
 
-/*Error handling process*/
-bool handle_errors(debugList* error);
-
-/**
- * execute_line
- *
- * Executes the next line of code from the LineIterator, using the provided memoryBuffer.
- *
- * @param it Pointer to a LineIterator that contains the line of code to execute
- * @param memory Pointer to a memoryBuffer that contains memory for the line of code to use
- *
- * @return void
- */
-void execute_line(LineIterator* it, SymbolTable* table, memoryBuffer* memory);
+void execute_line(LineIterator* it, SymbolTable* table, memoryBuffer* memory, debugList* dbg_list, bool* errorFlag, long line_num);
 
 void skip_first_pass_mem(memoryBuffer* memory, LineIterator* it);
 
 int find_amount_of_lines_to_skip(LineIterator* it);
+
+
+bool is_label_exists_in_line(LineIterator* line, SymbolTable* table, debugList* dbg_list, bool* flag, long line_num);
+
+bool investigate_word(LineIterator* originalLine, LineIterator* wordIterator, SymbolTable* table, debugList* dbg_list, bool* flag, long line_num, char* wordToInvestigate);
+
+void find_word_start_point(LineIterator* it, char* word, int amountOfVars);
 
 void update_symbol_address(LineIterator it, memoryBuffer* memory, SymbolTable* table);
 

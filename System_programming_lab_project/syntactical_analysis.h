@@ -4,8 +4,8 @@
 /** @file
 */
 
-#include "first_pass.h"
 #include "line_iterator.h"
+#include "first_pass.h"
 #include "debug.h"
 #include "utils.h"
 
@@ -112,10 +112,13 @@ bool match_syntax_group_6(LineIterator* it, long line, debugList* dbg_list);
 bool match_syntax_group_7(LineIterator* it, long line, debugList* dbg_list);
 
 bool validate_syntax_string(LineIterator* it, long line, debugList* dbg_list);
+
 bool validate_syntax_data(LineIterator* it, long line, debugList* dbg_list);
+
 bool validate_syntax_extern_and_entry(LineIterator* it, long line, debugList* dbg_list);
 
 bool is_register_name_heuristic(LineIterator it);
+
 bool is_register_name(LineIterator* it);
 
 bool validate_label_ending(LineIterator* it);
@@ -138,5 +141,5 @@ bool find_if_instruction_exists(LineIterator* line);
 /*skips label and and consume blanks if exists after the label*/
 void skip_label_basic(LineIterator* line);
 
-bool is_label_exists_in_line(LineIterator line, SymbolTable table);
+bool is_register_name_whole(LineIterator* it);
 #endif

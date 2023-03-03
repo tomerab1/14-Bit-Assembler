@@ -907,6 +907,18 @@ bool is_register_name(LineIterator* it)
     return REG_MIN_NUM <= line_iterator_peek(it) && line_iterator_peek(it) <= REG_MAX_NUM;
 }
 
+bool is_register_name_whole(LineIterator* it)
+{
+    bool charFlag = FALSE;
+    bool numFlag = FALSE;
+
+    charFlag = line_iterator_peek(it) == 'r';
+    line_iterator_advance(it);
+    numFlag = REG_MIN_NUM <= line_iterator_peek(it) && line_iterator_peek(it) <= REG_MAX_NUM;
+
+    return charFlag && numFlag;
+}
+
 /**
 * Verifies that the next character is a valid integer. This is done by examining the characters that begin with a digit followed by a comma or a comma and verifying that it is a valid integer.
 * 

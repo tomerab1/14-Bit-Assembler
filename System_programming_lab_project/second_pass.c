@@ -4,7 +4,6 @@
 #include "second_pass.h"
 #include "constants.h"
 
-//error context appearances are temp 
 /**
 * Executes second pass of program. It is used to create symbol table and memory buffer for execution. In this second pass the file is read from file and executed in instruction_image.
 * 
@@ -28,17 +27,16 @@ bool initiate_second_pass(char* path, SymbolTable* table, memoryBuffer* memory)
 		line_iterator_jump_to(&curLine, COLON_CHAR);
 
 		if (!directive_exists(&curLine)) { /*checks if any kind of instruction exists (.something)*/
-			execute_line(&curLine, table, memory);
+			execute_line(&curLine, table, memory, dbg_list, &finalStatus.error_flag, memory->instruction_image.counter);
 		}
 		else {
 			extract_directive_type(&curLine, &finalStatus.entryAndExternFlag);
 		}
 	}
-
+  
 	/*finished reading all lines in file*/
 	if (finalStatus.error_flag) {
 		/* Return false. */
-		handle_errors(&finalStatus.errors);
 		return FALSE;
 	}
 	else {
@@ -57,17 +55,13 @@ bool initiate_second_pass(char* path, SymbolTable* table, memoryBuffer* memory)
 * @param table
 * @param memory
 */
-void execute_line(LineIterator* it, SymbolTable* table, memoryBuffer* memory) {
+void execute_line(LineIterator* it, SymbolTable* table, memoryBuffer* memory, debugList* dbg_list, bool* errorFlag, long line_num) {
 	/* Increment counter by one, as every command has a preceding word. */
 	memory->instruction_image.counter++;
-	if (is_label_exists_in_line(*it, *table)) {
-		/* TODO: Add a function to update the address of a label with a type
-			of SYM_ENT/SYM_EXT with the address it resides in.
-		*/
-
-		update_symbol_address(*it, memory, table);
-		encode_label_start_process(it, memory, table);
-	}
+	if (is_label_exists_in_line(it, table, dbg_list, errorFlag, line_num)) {
+    update_symbol_address(*it, memory, table);
+		encode_label_start_process(it, memory, table, dbg_list);
+   }
 	else 
 		skip_first_pass_mem(memory, it);
 }
@@ -136,7 +130,7 @@ bool generate_object_file(memoryBuffer* memory, char* path, debugList* err)
 	char placeholder[50] = { 0 };
 	int i;
 
-	translatedMemory = translate_to_machine_data(memory, err);
+	translatedMemory = translate_to_machine_data(memory);
 
 	for (i = 0; i < memory->instruction_image.counter; i++) {
 		puts(translatedMemory[i].translated);
@@ -145,7 +139,7 @@ bool generate_object_file(memoryBuffer* memory, char* path, debugList* err)
 	outfileName = get_outfile_name(path, ".object");
 	out = open_file(outfileName, MODE_WRITE);
 
-	sprintf(placeholder, "%9d\t%-9d\n", memory->data_image.counter, memory->instruction_image.counter);
+	sprintf(placeholder, "%9d\t%4d\n", memory->data_image.counter, memory->instruction_image.counter);
 	fputs(placeholder, out);
 
 	for (i = 0; i < memory->instruction_image.counter; i++) {
@@ -213,7 +207,7 @@ bool generate_externals_file(SymbolTable* table, char* path) {
 
 	while (symTableHead != NULL) {
 		if (symTableHead->sym.type == SYM_EXTERN) {
-			sprintf(placeholder, "%s\t%d\n", symTableHead->sym.name, symTableHead->sym.counter);
+			sprintf(placeholder, "%s\t%d\n", symTableHead->sym.name, symTableHead->sym.counter+DECIMAL_ADDRESS_BASE);
 			fputs(placeholder, out);
 		}
 		symTableHead = symTableHead->next;
@@ -243,7 +237,7 @@ bool generate_entries_file(SymbolTable* table, char* path) {
 
 	while (symTableHead != NULL) {
 		if (symTableHead->sym.type == SYM_ENTRY) {
-			sprintf(placeholder, "%s\t%d\n", symTableHead->sym.name, symTableHead->sym.counter);
+			sprintf(placeholder, "%s\t%d\n", symTableHead->sym.name, symTableHead->sym.counter+ DECIMAL_ADDRESS_BASE);
 			fputs(placeholder, out);
 		}
 		symTableHead = symTableHead->next;
@@ -263,10 +257,11 @@ bool generate_entries_file(SymbolTable* table, char* path) {
 * @param table - The symbol table to use for symbol lookup or NULL
 * @param err
 */
-void create_files(memoryBuffer* memory, char* path, programFinalStatus* finalStatus, SymbolTable* table, debugList* err) {
-	finalStatus->createdObject = generate_object_file(memory, path, &finalStatus->errors);
-	finalStatus->createdExternals = generate_externals_file(table, path);
-	finalStatus->createdEntry = generate_entries_file(table, path);
+void create_files(memoryBuffer* memory, char* path, programFinalStatus* finalStatus, SymbolTable* table)
+{
+	finalStatus->createdObject = generate_object_file(memory, path);
+	table->hasExternals ? (finalStatus->createdExternals = generate_externals_file(table, path)) : NULL;
+	table->hasEntries ? (finalStatus->createdEntry = generate_entries_file(table, path)) : NULL;
 }
 
 /**
@@ -283,10 +278,130 @@ void extract_directive_type(LineIterator* line, flags* flag) {
 	else if (strcmp(command, DOT_ENTRY)) {
 		extern_exists(flag);
 	}
-	else if (!(strcmp(command, DOT_STRING) || strcmp(command, DOT_DATA))) {//isn't any exists command
-		debugNode err = { NULL }; //should also add debug list later on function headline
-	}
+
 	free(command);
+}
+
+VarData extract_variables(LineIterator* it) {
+	VarData variables = { 0 };
+
+	char* opcode = line_iterator_next_word(it, " ");
+	Opcodes op = get_opcode(opcode);
+	SyntaxGroups synGroup = get_syntax_group(opcode);
+
+	if (synGroup == SG_GROUP_1 || synGroup == SG_GROUP_2 || synGroup == SG_GROUP_7) {
+		variables = extract_variables_group_1_and_2_and_7(it);
+	}
+
+	else if (synGroup == SG_GROUP_3 || synGroup == SG_GROUP_6) {
+		variables = extract_variables_group_3_and_6(it);
+	}
+
+	else if (synGroup == SG_GROUP_5) {
+		variables = extract_variables_group_5(it);
+	}
+
+	return variables;
+}
+
+bool is_label_exists_in_line(LineIterator* line, SymbolTable* table, debugList* dbg_list, bool* flag, long line_num) {
+	VarData variablesData = { NULL };
+	LineIterator itLeftVar, itRightVar, itLabel;
+	char* tempWord = 0;
+	variablesData = extract_variables(line);
+	
+	switch (variablesData.total)
+	{
+	case 1: /*group 3 and 6, left var*/
+		if (variablesData.leftVar != NULL) {
+			line_iterator_put_line(&itLeftVar, variablesData.leftVar);
+			return investigate_word(line, &itLeftVar, table, dbg_list, flag, line_num, variablesData.leftVar, 1);
+		}
+		else {
+			line_iterator_put_line(&itLabel, variablesData.label);
+			return investigate_word(line, &itLabel, table, dbg_list, flag, line_num, variablesData.label, 1);
+		}
+
+	case 2: /*groups 1,2,7, left var and right var*/
+		
+		line_iterator_put_line(&itLeftVar, variablesData.leftVar);
+		line_iterator_put_line(&itRightVar, variablesData.rightVar);
+		return 	investigate_word(line, &itLeftVar, table, dbg_list, flag, line_num, variablesData.leftVar,2) ||
+			investigate_word(line, &itRightVar, table, dbg_list, flag, line_num, variablesData.rightVar, 2);
+
+	case 3: /*groups 5, labe, left var and right var*/
+		line_iterator_put_line(&itLeftVar, variablesData.leftVar);
+		line_iterator_put_line(&itRightVar, variablesData.rightVar);
+		line_iterator_put_line(&itLabel, variablesData.label);
+
+		return 	investigate_word(line, &itLeftVar, table, dbg_list, flag, line_num, variablesData.leftVar,3) ||
+			investigate_word(line, &itRightVar, table, dbg_list, flag, line_num, variablesData.rightVar, 3) ||
+			investigate_word(line, &itLabel, table, dbg_list, flag, line_num, variablesData.label, 3);
+	default:
+		return;
+	}
+
+	
+}
+
+bool investigate_word(LineIterator* originalLine,LineIterator* wordIterator, SymbolTable* table, debugList* dbg_list, bool* flag, long line_num, char* wordToInvestigate,int amountOfVars) {
+	if (is_register_name_whole(wordIterator)) return FALSE;
+	line_iterator_backwards(wordIterator);
+	if ((line_iterator_peek(wordIterator) == HASH_CHAR)) return FALSE;
+	else {
+		if (symbol_table_search_symbol_bool(table, wordToInvestigate)) {
+			return TRUE;
+		}
+		else {
+			find_word_start_point(originalLine, wordToInvestigate, amountOfVars);
+			debug_list_register_node(dbg_list, debug_list_new_node(originalLine->start, originalLine->current, line_num, ERROR_CODE_LABEL_DOES_NOT_EXISTS));
+			(*flag) = TRUE;
+			return FALSE;
+		}
+	}
+}
+
+/*type 1 - one var, type*/
+void find_word_start_point(LineIterator* it, char* word, int amountOfVars) {
+	bool found = FALSE;
+	it->current = it->start;
+	line_iterator_jump_to(it, COLON_CHAR);
+	line_iterator_consume_blanks(it);
+	line_iterator_jump_to(it, SPACE_CHAR);
+
+	switch (amountOfVars)
+	{
+	case 1:
+		while(line_iterator_peek(it) != *word){
+			line_iterator_advance(it);
+		}
+		return;
+	case 2:
+		if(strcmp(line_iterator_next_word(it, ", "),word) == 0) {
+			line_iterator_unget_word(it, word);
+			line_iterator_consume_blanks(it);
+		}
+		else {
+			line_iterator_jump_to(it,COMMA_CHAR);
+		}
+		return;
+	case 3:
+		if (strcmp(line_iterator_next_word(it, "( "), word) == 0) {
+			line_iterator_unget_word(it, word);
+			line_iterator_consume_blanks(it);
+		}
+		else if(strcmp(line_iterator_next_word(it, ", "), word) == 0){
+			line_iterator_unget_word(it, word);
+			line_iterator_consume_blanks(it);
+		}
+		else {
+			line_iterator_jump_to(it, COMMA_CHAR);
+			line_iterator_advance(it);
+		}
+		return;
+	default:
+		return;
+	}
 }
 
 /**
@@ -295,7 +410,7 @@ void extract_directive_type(LineIterator* line, flags* flag) {
 * @param line
 * 
 * @return @c true if a directive exists @c false otherwise. The iterator is advanced past the directive's end
-*/
+
 bool directive_exists(LineIterator* line) {
 	return line_iterator_word_includes(line, ".string") ||
 		   line_iterator_word_includes(line, ".data") ||
@@ -319,18 +434,6 @@ void extern_exists(flags* flag) {
 */
 void entry_exists(flags* flag) {
 	flag->dot_entry_exists = TRUE;
-}
-
-/**
-* Handles errors that occur during parsing. This is a no - op for the parser but may be used to implement more complex error handling.
-* 
-* @param error
-* 
-* @return TRUE if there were errors in the list FALSE otherwise. In this case the parser should exit with an error
-*/
-bool handle_errors(debugList* error) {
-
-	return TRUE;
 }
 
 /**
