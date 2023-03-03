@@ -985,22 +985,9 @@ SyntaxGroups get_syntax_group(char* name)
     return SG_GROUP_INVALID;
 }
 
-/**
-* Check if a label exists in a line. This is used to detect if a label is in the middle of a word or not
-* 
-* @param line - Line to check for a label
-* @param table - Symbol table to look in. Must be sorted
-* 
-* @return TRUE if a label exists in the line FALSE if
-*/
-bool is_label_exists_in_line(LineIterator line, SymbolTable table) {
-    int i = 0;
-    SymbolTableNode* node = table.head;
-
-    while (node != NULL) {
-        if (line_iterator_word_includes(&line, node->sym.name)) return TRUE;
-        node = node->next;
-    }
-
-    return FALSE;
+bool directive_exists(LineIterator* line) {
+    return line_iterator_word_includes(line, ".string") ||
+        line_iterator_word_includes(line, ".data") ||
+        line_iterator_word_includes(line, ".extern") ||
+        line_iterator_word_includes(line, ".entry");
 }
