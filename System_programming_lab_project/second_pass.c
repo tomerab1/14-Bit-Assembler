@@ -13,7 +13,7 @@
 * 
 * @return TRUE if successful FALSE
 */
-bool initiate_second_pass(char* path, SymbolTable* table, memoryBuffer* memory)
+bool initiate_second_pass(char* path, SymbolTable* table, memoryBuffer* memory, debugList* dbg_list)
 {
 	FILE* in = open_file(path, MODE_READ);
 	programFinalStatus finalStatus = { NULL };
@@ -33,15 +33,9 @@ bool initiate_second_pass(char* path, SymbolTable* table, memoryBuffer* memory)
 			extract_directive_type(&curLine, &finalStatus.entryAndExternFlag);
 		}
 	}
-  
-	/*finished reading all lines in file*/
-	if (finalStatus.error_flag) {
-		/* Return false. */
-		return FALSE;
-	}
-	else {
-		create_files(memory, path, &finalStatus, table, &finalStatus.errors);
-	}
+	if (finalStatus.error_flag) return FALSE;
+
+	create_files(memory, path, &finalStatus, table);
 
 	fclose(in);
 	free(line);
@@ -122,7 +116,7 @@ int find_amount_of_lines_to_skip(LineIterator* it) {
 * 
 * @return true if successful false if there was an error ( in which case err is not modified ). Note that the file is written to a file named object
 */
-bool generate_object_file(memoryBuffer* memory, char* path, debugList* err)
+bool generate_object_file(memoryBuffer* memory, char* path)
 {
 	char* outfileName = NULL;
 	FILE* out = NULL;
@@ -162,7 +156,7 @@ bool generate_object_file(memoryBuffer* memory, char* path, debugList* err)
 * 
 * @return Pointer to the translated
 */
-TranslatedMachineData* translate_to_machine_data(memoryBuffer* memory, debugList* err)
+TranslatedMachineData* translate_to_machine_data(memoryBuffer* memory)
 {
 	int i, j;
 	MemoryWord* instImg = memory->instruction_image.memory;

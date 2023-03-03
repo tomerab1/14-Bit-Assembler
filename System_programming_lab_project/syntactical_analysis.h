@@ -142,4 +142,6 @@ bool find_if_instruction_exists(LineIterator* line);
 void skip_label_basic(LineIterator* line);
 
 bool is_register_name_whole(LineIterator* it);
+
+bool directive_exists(LineIterator* line);
 #endif
