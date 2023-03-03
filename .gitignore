@@ -363,8 +363,8 @@ MigrationBackup/
 FodyWeavers.xsd
 
 #Output files and txt
-.am
-.entry
-.external
-.object
-.txt
+*.am
+*.entry
+*.external
+*.object
+*.txt
