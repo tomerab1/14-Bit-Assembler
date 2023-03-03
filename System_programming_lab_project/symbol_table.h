@@ -40,5 +40,6 @@ bool symbol_table_is_empty(SymbolTable* table);
 void symbol_table_destroy(SymbolTable** table);
 /*updates and returns amount of symbols in table*/
 int update_amount_of_items(SymbolTable* table);
+bool check_symbol_existence(SymbolTable* sym_table, char* name, symbolType newSymType);
 
 #endif

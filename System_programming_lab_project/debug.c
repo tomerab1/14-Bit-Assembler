@@ -153,6 +153,10 @@ char* debug_map_token_to_err(errorCodes code)
 	case ERROR_CODE_EXTRA_COMMA: return "Extra comma";
     case ERROR_CODE_SYMBOL_REDEFINITION: return "Symbol redefinition";
 	case ERROR_CODE_LABEL_DOES_NOT_EXISTS: return "Could not find Label in symbol map.";
+	case ERROR_CODE_LABEL_ALREADY_EXISTS_AS_ENTRY: return "Label already defined as entry.";
+	case ERROR_CODE_LABEL_ALREADY_EXISTS_AS_EXTERN: return "Label already defined as extern.";
+	case ERROR_CODE_LABEL_CANNOT_BE_DEFINED_AS_OPCODE_OR_REGISTER: return "Label cannot be defined as Opcode or Register";
+
 	default:
 		return "UnknownError";
 	}

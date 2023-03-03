@@ -144,3 +144,19 @@ void symbol_table_destroy(SymbolTable** table)
 
     free(*table);
 }
+
+bool check_symbol_existence(SymbolTable* sym_table, char* name, symbolType newSymType) {
+    SymbolTableNode* sym = symbol_table_search_symbol(sym_table, name);
+
+    switch (newSymType)
+    {
+    case 2: /*entry*/
+        if (sym->sym.type == SYM_EXTERN) return TRUE;
+        return FALSE;
+    case 3: /*extern*/
+        if (sym->sym.type == SYM_ENTRY) return TRUE;
+        return FALSE;
+    default:
+        return FALSE;
+    }
+}

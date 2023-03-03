@@ -1,6 +1,5 @@
 /** @file
 */
-
 #include "encoding.h"
 
 void encode_dot_string(LineIterator* it, memoryBuffer* img)
@@ -340,7 +339,6 @@ void encode_syntax_group_7(LineIterator* it, Opcodes op, memoryBuffer* img)
 VarData extract_variables_group_1_and_2_and_7(LineIterator* it) {
 	VarData variablesData = { NULL };
 	variablesData.leftVar = line_iterator_next_word(it, ", ");
-
 	/* skip to command and consume it */
 	line_iterator_jump_to(it, COMMA_CHAR);
 
@@ -362,9 +360,9 @@ VarData extract_variables_group_5(LineIterator* it) {
 	VarData variablesData = { NULL };
 	if (line_iterator_word_includes(it, "(")) {
 		variablesData.label = line_iterator_next_word(it, "(");
-		line_iterator_advance(it);//skips left parenthesis
+		line_iterator_advance(it); /*skips left parenthesis*/
 		variablesData.leftVar = line_iterator_next_word(it, ", ");
-		line_iterator_advance(it);//skips comma
+		line_iterator_advance(it); /*skips comma*/
 		variablesData.rightVar = line_iterator_next_word(it, ")");
 		variablesData.total = 3;
 	}
@@ -377,7 +375,8 @@ VarData extract_variables_group_5(LineIterator* it) {
 	return variablesData;
 }
 
-/**/
+/*
+*/
 void encode_labels(VarData* variables, SyntaxGroups synGroup, SymbolTable* symTable, imageMemory* img)
 {
 	SymbolTableNode* nodePtr = NULL;
