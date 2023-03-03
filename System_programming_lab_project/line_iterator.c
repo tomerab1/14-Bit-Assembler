@@ -222,3 +222,8 @@ void line_iterator_replace(LineIterator* it, char* seps, char newSep)
 
     line_iterator_put_line(it, it->start);
 }
+
+void line_iterator_reset(LineIterator* it)
+{
+    it->current = it->start;
+}

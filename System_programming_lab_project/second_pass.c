@@ -4,6 +4,8 @@
 #include "second_pass.h"
 #include "constants.h"
 
+#include <ctype.h>
+
 /**
 * Executes second pass of program. It is used to create symbol table and memory buffer for execution. In this second pass the file is read from file and executed in instruction_image.
 * 
@@ -15,31 +17,32 @@
 */
 bool initiate_second_pass(char* path, SymbolTable* table, memoryBuffer* memory, debugList* dbg_list)
 {
-    FILE* in = open_file(path, MODE_READ);
-    programFinalStatus finalStatus = { NULL };
-    LineIterator curLine;
-    char* line = NULL;
+	FILE* in = open_file(path, MODE_READ);
+	programFinalStatus finalStatus = { NULL };
+	LineIterator curLine;
+	char* line = NULL;
 
-    memory->instruction_image.counter = 0; /*init IC counter*/
-    while ((line = get_line(in)) != NULL) {
-        bool labelFlag = FALSE; /*is current line first word is label*/
-        line_iterator_put_line(&curLine, line);
-        line_iterator_jump_to(&curLine, COLON_CHAR);
+	add_label_base_address(table);
+	memory->instruction_image.counter = 0; /*init IC counter*/
+	
+	while ((line = get_line(in)) != NULL) {
+		bool labelFlag = FALSE; /*is current line first word is label*/
+		line_iterator_put_line(&curLine, line);
+		line_iterator_jump_to(&curLine, COLON_CHAR);
 
-        if (!directive_exists(&curLine)) { /*checks if any kind of instruction exists (.something)*/
-            execute_line(&curLine, table, memory, dbg_list, &finalStatus.error_flag, memory->instruction_image.counter);
-        }
-        else {
-            extract_directive_type(&curLine, &finalStatus.entryAndExternFlag);
-        }
-    }
-    if (finalStatus.error_flag) return FALSE;
-
-    create_files(memory, path, &finalStatus, table);
-
-    fclose(in);
-    free(line);
-    return TRUE;
+		if (!directive_exists(&curLine)) { /*checks if any kind of instruction exists (.something)*/
+			execute_line(&curLine, table, memory, dbg_list, &finalStatus.error_flag, memory->instruction_image.counter);
+		}
+		else {
+			extract_directive_type(&curLine, &finalStatus.entryAndExternFlag);
+		}
+	}
+	if (finalStatus.error_flag) return FALSE;
+	create_files(memory, path, &finalStatus, table);
+  
+	fclose(in);
+	free(line);
+	return TRUE;
 }
 
 /**
@@ -50,14 +53,16 @@ bool initiate_second_pass(char* path, SymbolTable* table, memoryBuffer* memory, 
 * @param memory
 */
 void execute_line(LineIterator* it, SymbolTable* table, memoryBuffer* memory, debugList* dbg_list, bool* errorFlag, long line_num) {
-    /* Increment counter by one, as every command has a preceding word. */
-    memory->instruction_image.counter++;
-    if (is_label_exists_in_line(it, table, dbg_list, errorFlag, line_num)) {
-    update_symbol_address(*it, memory, table);
-        encode_label_start_process(it, memory, table, dbg_list);
+	/* Increment counter by one, as every command has a preceding word. */
+	memory->instruction_image.counter++;
+
+	if (is_label_exists_in_line(it, table, dbg_list, errorFlag, line_num)) {
+		update_symbol_address(*it, memory, table);
+		encode_label_start_process(it, memory, table, dbg_list);
    }
-    else 
-        skip_first_pass_mem(memory, it);
+	else {
+		skip_first_pass_mem(memory, it);
+	}
 }
 
 /**
@@ -79,31 +84,39 @@ void skip_first_pass_mem(memoryBuffer* memory, LineIterator* it) {
 * @return The amount of lines to skip or 0 if there is no code to skip in this case the iterator is positioned on the start of the code
 */
 int find_amount_of_lines_to_skip(LineIterator* it) {
-    char* op = NULL;
-    char* operand1 = NULL;
-    char* operand2 = NULL;
-    int total = 0;
+	char* op = NULL, *operand1 = NULL, *operand2 = NULL, *operand3 = NULL;
+	char* tempLine = (char*)xmalloc(sizeof(char) * (strlen(it->start) + 1));
+	LineIterator tempIt;
+	int total = 0;
 
-    line_iterator_consume_blanks(it);
-    op = line_iterator_next_word(it, " ");
+	strcpy(tempLine, it->start);
+	line_iterator_put_line(&tempIt, tempLine);
+	line_iterator_jump_to(&tempIt, COLON_CHAR);
+	line_iterator_replace(&tempIt, "(), ", SPACE_CHAR);
 
-    line_iterator_consume_blanks(it);
-    operand1 = line_iterator_next_word(it, " ");
+	op = line_iterator_next_word(&tempIt, " ");
+	operand1 = line_iterator_next_word(&tempIt, " ");
+	operand2 = line_iterator_next_word(&tempIt, " ");
+	operand3 = line_iterator_next_word(&tempIt, " ");
+	
+	/* 1 for the opcode and one for the shared memory word of 2 registers. */
+	if ((operand1 && operand2) && (*operand1 == REG_BEG_CHAR && *operand2 == REG_BEG_CHAR))
+		return isdigit(*(operand1 + 1)) && isdigit(*(operand2 + 1)) ? 1 : 2;
 
-    line_iterator_consume_blanks(it);
-    line_iterator_jump_to(it, COMMA_CHAR);
-    operand2 = line_iterator_next_word(it, " ");
-    
-    if ((operand1 && operand2) && (*operand1 == REG_BEG_CHAR && *operand2 == REG_BEG_CHAR))
-        return 1; /* 1 for the opcode and one for the shared memory word of 2 registers. */
+	/* 1 for the opcode and one for the shared memory word of 2 registers, and + 1 for the label name (this case is for parametrized labels) */
+	if ((operand2 && operand3) && (*operand2 == REG_BEG_CHAR && *operand3 == REG_BEG_CHAR))
+		return isdigit(*(operand1 + 1)) && isdigit(*(operand2 + 1)) ? 2 : 3;
 
-    total += (operand1) ? 1 : 0;
-    total += (operand2) ? 1 : 0;
+	total += (operand1) ? 1 : 0;
+	total += (operand2) ? 1 : 0;
+	total += (operand3) ? 1 : 0;
 
-    free(op);
-    free(operand1);
-    free(operand2);
-
+	free(op);
+	free(operand1);
+	free(operand2);
+	free(operand3);
+	free(tempLine);
+  
     return total; /* 1 for the opcode, 2 for each individual memory word */
 }
 
@@ -124,22 +137,17 @@ bool generate_object_file(memoryBuffer* memory, char* path)
     char placeholder[50] = { 0 };
     int i;
 
-    translatedMemory = translate_to_machine_data(memory);
+	translatedMemory = translate_to_machine_data(memory);
+	outfileName = get_outfile_name(path, ".object");
+	out = open_file(outfileName, MODE_WRITE);
 
-    for (i = 0; i < memory->instruction_image.counter; i++) {
-        puts(translatedMemory[i].translated);
-    }
+	sprintf(placeholder, "%9d\t%4d\n", memory->instruction_image.counter - 1, memory->data_image.counter);
+	fputs(placeholder, out);
 
-    outfileName = get_outfile_name(path, ".object");
-    out = open_file(outfileName, MODE_WRITE);
-
-    sprintf(placeholder, "%9d\t%4d\n", memory->data_image.counter, memory->instruction_image.counter);
-    fputs(placeholder, out);
-
-    for (i = 0; i < memory->instruction_image.counter; i++) {
-        sprintf(placeholder, "%04d\t%s\n", translatedMemory[i].address, translatedMemory[i].translated);
-        fputs(placeholder, out);
-    }
+	for (i = 0; i < memory->data_image.counter + memory->instruction_image.counter - 1; i++) {
+		sprintf(placeholder, "%04d\t%s\n", DECIMAL_ADDRESS_BASE + translatedMemory[i].address, translatedMemory[i].translated);
+		fputs(placeholder, out);
+	}
 
     free(translatedMemory);
     free(outfileName);
@@ -158,27 +166,37 @@ bool generate_object_file(memoryBuffer* memory, char* path)
 */
 TranslatedMachineData* translate_to_machine_data(memoryBuffer* memory)
 {
-    int i, j;
-    MemoryWord* instImg = memory->instruction_image.memory;
-    TranslatedMachineData* translatedMemory = (char*)xmalloc(memory->instruction_image.counter * sizeof(TranslatedMachineData));
+	int i = 0;
+	MemoryWord* instImg = memory->instruction_image.memory;
+	TranslatedMachineData* translatedMemory = (char*)xmalloc((memory->instruction_image.counter + memory->data_image.counter) * sizeof(TranslatedMachineData));
 
-    for (i = 0; i < memory->instruction_image.counter; i++) {
-        unsigned int bits = (instImg[i].mem[1] << 0x08) | (instImg[i].mem[0]);
-        translatedMemory[i].address = i;
-        memset(translatedMemory[i].translated, 0, sizeof(translatedMemory[i].translated));
+	decode_memory(translatedMemory, memory->instruction_image.memory, &i, memory->instruction_image.counter);
+	decode_memory(translatedMemory, memory->data_image.memory, &i, memory->data_image.counter + memory->instruction_image.counter);
 
-        for (j = 13; j >= 0; j--) {
-            unsigned int mask = 1 << j;
-            if ((bits & mask) != 0) {
-                translatedMemory[i].translated[13 - j] = OBJECT_PRINT_SLASH;
-            }
-            else {
-                translatedMemory[i].translated[13 - j] = OBJECT_PRINT_DOT;
-            }
-        }
-    }
+	return translatedMemory;
+}
 
-    return translatedMemory;
+void decode_memory(TranslatedMachineData* tmd, MemoryWord* inst, int* startPos, int endPos)
+{
+	int i, j, k = *startPos;
+	
+	for (i = 0; k < endPos; i++) {
+		unsigned int bits = (inst[i].mem[1] << 0x08) | (inst[i].mem[0]);
+		tmd[k].address = k;
+		memset(tmd[k].translated, 0, sizeof(tmd[k].translated));
+
+		for (j = 13; j >= 0; j--) {
+			unsigned int mask = 1 << j;
+			if ((bits & mask) != 0) {
+				tmd[k].translated[13 - j] = OBJECT_PRINT_SLASH;
+			}
+			else {
+				tmd[k].translated[13 - j] = OBJECT_PRINT_DOT;
+			}
+		}
+		k++;
+	}
+	*startPos = k - 1;
 }
 
 /**
@@ -190,26 +208,26 @@ TranslatedMachineData* translate_to_machine_data(memoryBuffer* memory)
 * @return TRUE if successful FALSE
 */
 bool generate_externals_file(SymbolTable* table, char* path) {
-    char* outfileName = NULL;
-    FILE* out = NULL;
-    SymbolTableNode* symTableHead = table->head;
-    char placeholder[20] = { 0 };
+	char* outfileName = NULL;
+	FILE* out = NULL;
+	SymbolTableNode* symTableHead = table->head;
+	char placeholder[20] = { 0 };
 
-    outfileName = get_outfile_name(path, ".external");
-    out = open_file(outfileName, MODE_WRITE);
+	outfileName = get_outfile_name(path, ".external");
+	out = open_file(outfileName, MODE_WRITE);
 
+	while (symTableHead != NULL) {
+		if (symTableHead->sym.type == SYM_EXTERN) {
+			sprintf(placeholder, "%s\t%d\n", symTableHead->sym.name, symTableHead->sym.counter);
+			fputs(placeholder, out);
+		}
+		symTableHead = symTableHead->next;
+	}
 
-    while (symTableHead != NULL) {
-        if (symTableHead->sym.type == SYM_EXTERN) {
-            sprintf(placeholder, "%s\t%d\n", symTableHead->sym.name, symTableHead->sym.counter+DECIMAL_ADDRESS_BASE);
-            fputs(placeholder, out);
-        }
-        symTableHead = symTableHead->next;
-    }
-
-    free(outfileName);
-    fclose(out);
-    return TRUE;
+	free(outfileName);
+	fclose(out);
+  
+	return TRUE;
 }
 
 /**
@@ -221,25 +239,26 @@ bool generate_externals_file(SymbolTable* table, char* path) {
 * @return TRUE on success FALSE on failure. Failure can occur if there are too many entries in the symbol table
 */
 bool generate_entries_file(SymbolTable* table, char* path) {
-    char* outfileName = NULL;
-    FILE* out = NULL;
-    SymbolTableNode* symTableHead = table->head;
-    char placeholder[20] = { 0 };
+	char* outfileName = NULL;
+	FILE* out = NULL;
+	SymbolTableNode* symTableHead = table->head;
+	char placeholder[20] = { 0 };
 
-    outfileName = get_outfile_name(path, ".entry");
-    out = open_file(outfileName, MODE_WRITE);
+	outfileName = get_outfile_name(path, ".entry");
+	out = open_file(outfileName, MODE_WRITE);
 
-    while (symTableHead != NULL) {
-        if (symTableHead->sym.type == SYM_ENTRY) {
-            sprintf(placeholder, "%s\t%d\n", symTableHead->sym.name, symTableHead->sym.counter+ DECIMAL_ADDRESS_BASE);
-            fputs(placeholder, out);
-        }
-        symTableHead = symTableHead->next;
-    }
+	while (symTableHead != NULL) {
+		if (symTableHead->sym.type == SYM_ENTRY) {
+			sprintf(placeholder, "%s\t%d\n", symTableHead->sym.name, symTableHead->sym.counter);
+			fputs(placeholder, out);
+		}
+		symTableHead = symTableHead->next;
+	}
 
-    free(outfileName);
-    fclose(out);
-    return TRUE;
+	free(outfileName);
+	fclose(out);
+  
+	return TRUE;
 }
 
 /**
@@ -338,21 +357,21 @@ bool is_label_exists_in_line(LineIterator* line, SymbolTable* table, debugList* 
     
 }
 
-bool investigate_word(LineIterator* originalLine,LineIterator* wordIterator, SymbolTable* table, debugList* dbg_list, bool* flag, long line_num, char* wordToInvestigate,int amountOfVars) {
-    if (is_register_name_whole(wordIterator)) return FALSE;
-    line_iterator_backwards(wordIterator);
-    if ((line_iterator_peek(wordIterator) == HASH_CHAR)) return FALSE;
-    else {
-        if (symbol_table_search_symbol_bool(table, wordToInvestigate)) {
-            return TRUE;
-        }
-        else {
-            find_word_start_point(originalLine, wordToInvestigate, amountOfVars);
-            debug_list_register_node(dbg_list, debug_list_new_node(originalLine->start, originalLine->current, line_num, ERROR_CODE_LABEL_DOES_NOT_EXISTS));
-            (*flag) = TRUE;
-            return FALSE;
-        }
-    }
+bool investigate_word(LineIterator* originalLine,LineIterator* wordIterator, SymbolTable* table, debugList* dbg_list, bool* flag, long line_num, char* wordToInvestigate, int amountOfVars) {
+	if (is_register_name_whole(wordIterator)) return FALSE;
+	line_iterator_backwards(wordIterator);
+	if ((line_iterator_peek(wordIterator) == HASH_CHAR)) return FALSE;
+	else {
+		if (symbol_table_search_symbol_bool(table, wordToInvestigate)) {
+			return TRUE;
+		}
+		else {
+			find_word_start_point(originalLine, wordToInvestigate, amountOfVars);
+			debug_list_register_node(dbg_list, debug_list_new_node(originalLine->start, originalLine->current, line_num, ERROR_CODE_LABEL_DOES_NOT_EXISTS));
+			(*flag) = TRUE;
+			return FALSE;
+		}
+	}
 }
 
 /*type 1 - one var, type*/
@@ -396,20 +415,6 @@ void find_word_start_point(LineIterator* it, char* word, int amountOfVars) {
     default:
         return;
     }
-}
-
-/**
-* Checks if a directive exists at the current position. This is used to detect if we are going to write a directive or not.
-* 
-* @param line
-* 
-* @return @c true if a directive exists @c false otherwise. The iterator is advanced past the directive's end
-
-bool directive_exists(LineIterator* line) {
-    return line_iterator_word_includes(line, ".string") ||
-           line_iterator_word_includes(line, ".data") ||
-           line_iterator_word_includes(line, ".extern") ||
-           line_iterator_word_includes(line, ".entry");
 }
 
 /**
@@ -458,36 +463,44 @@ void update_symbol_address(LineIterator it, memoryBuffer* memory, SymbolTable* t
 
 void update_symbol_offset(char* word, int offset, memoryBuffer* memory, SymbolTable* table)
 {
-    LineIterator tmp;
-    line_iterator_put_line(&tmp, word);
+	LineIterator tmp;
+	line_iterator_put_line(&tmp, word);
 
-    if (is_label_name(&tmp)) {
-        SymbolTableNode* head = table->head;
+	if (is_label_name(&tmp)) {
+		SymbolTableNode* head = table->head;
 
-        while (head) {
-            if (strcmp(head->sym.name, word) == 0 && head->sym.type == SYM_EXTERN) {
-                if (head->sym.counter == 0) {
-                    head->sym.counter = memory->instruction_image.counter + offset - 1;
-                }
-                else {
-                    symbol_table_insert_symbol(table, symbol_table_new_node(word, SYM_EXTERN, 100 + memory->instruction_image.counter + offset - 1));
-                    break;
-                }
-            }
-            else if (strcmp(head->sym.name, word) == 0 && head->sym.type == SYM_ENTRY) {
-                SymbolTableNode* defHead = table->head;
+		while (head) {
+			if (strcmp(head->sym.name, word) == 0 && head->sym.type == SYM_EXTERN) {
+				if (head->sym.counter == 0) {
+					head->sym.counter = DECIMAL_ADDRESS_BASE + memory->instruction_image.counter + offset - 1;
+				}
+				else {
+					symbol_table_insert_symbol(table, symbol_table_new_node(word, SYM_EXTERN, DECIMAL_ADDRESS_BASE + memory->instruction_image.counter + offset - 1));
+					break;
+				}
+			}
+			else if (strcmp(head->sym.name, word) == 0 && head->sym.type == SYM_ENTRY) {
+				SymbolTableNode* defHead = table->head;
 
-                while (defHead) {
-                    if (strcmp(defHead->sym.name, word) == 0 && (defHead->sym.type == SYM_CODE || defHead->sym.type == SYM_DATA)) {
-                        head->sym.counter = defHead->sym.counter;
-                        break;
-                    }
+				while (defHead) {
+					if (strcmp(defHead->sym.name, word) == 0 && (defHead->sym.type == SYM_CODE || defHead->sym.type == SYM_DATA)) {
+						head->sym.counter = defHead->sym.counter;
+						break;
+					}
 
-                    defHead = defHead->next;
-                }
-            }
+					defHead = defHead->next;
+				}
+			}
 
-            head = head->next;
-        }
-    }
+			head = head->next;
+		}
+	}
+}
+
+void add_label_base_address(SymbolTable* table)
+{
+	LIST_FOR_EACH(SymbolTableNode, table->head, head) {
+		if (head->sym.type == SYM_DATA || head->sym.type == SYM_CODE)
+			head->sym.counter += DECIMAL_ADDRESS_BASE;
+	}
 }

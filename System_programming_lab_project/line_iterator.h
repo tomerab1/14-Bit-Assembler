@@ -52,4 +52,6 @@ char* get_last_word(LineIterator* it);
 
 void line_iterator_replace(LineIterator* it, char* seps, char newSep);
 
+void line_iterator_reset(LineIterator* it);
+
 #endif
