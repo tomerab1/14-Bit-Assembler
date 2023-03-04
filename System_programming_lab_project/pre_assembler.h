@@ -78,26 +78,54 @@ MacroListNode* macro_list_new_node(char* name);
 */
 void expand_macro_to_file(FILE* out, MacroList* list, char* name);
 
-/* Inserts a new node to the macro list */
-/
+/**
+* @brief This function insert a node to the macro list.
+* @param list - The list.
+* @param node - The node to insert.
+*/
 void macro_list_insert_node(MacroList* list, MacroListNode* node);
 
-/* Inserts a line into '__list_node.macro_expension' member. */
+/**
+* @brief This function inserts a line into 'macro_list_node.macro_expension' member.
+* @param node - The node.
+* @param line - The line.
+*/
 void macro_list_node_insert_source(MacroListNode* node, char* line);
 
-/* Insert all of the data inside the macro specified in 'line' to the current node */
+/**
+* @brief This function insert all of the data inside the macro specified in 'line' to the current node.
+* @param tail - The lists tail.
+* @param node - The node.
+*/
 void macro_list_node_insert_macro(MacroListNode* tail, MacroListNode* node);
 
-/* Returns the node in which its name matches to entry*/
+/**
+* @brief Returns the node in which its name matches to entry
+* @param list - The list.
+* @param entry - The entry.
+* @return The MacroListNode that matches the entry, NULL otherwise.
+*/
 MacroListNode* macro_list_get_node(MacroList* list, char* entry);
 
-/* Creates an expanded source file inside 'out' */
+/**
+* @brief Creates an expanded source file inside 'out'.
+* @param in - The input file.
+* @param out - The output file.
+* @param list - The macros list.
+*/
 void create_pre_assembler_file(FILE* in, FILE* out, MacroList* list);
 
-/* Frees the 'macro_expension' member */
+/**
+* @brief This function frees the 'macro_expension' member
+* @param macro_expension - The macro to free.
+* @param size - The number of lines of the macro.
+*/
 void macro_free_expension(char*** macro_expension, int size);
 
-/* Frees a macro list */
+/**
+* @brief This function frees a macro list.
+* @param list - The list to free.
+*/
 void macro_list_free(MacroList** list);
 
 #endif
