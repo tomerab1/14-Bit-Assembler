@@ -83,36 +83,134 @@ Note that if the symbol is not found in the symbol table, the function will also
 */
 bool check_symbol_existence(SymbolTable* sym_table, char* name, symbolType newSymType);
 
+/**
+
+@brief Returns the name of a given symbol.
+@param sym The symbol to retrieve its name.
+@return The name of the symbol.
+*/
 char* symbol_get_name(Symbol* sym);
 
+/**
+
+@brief Returns the counter of a given symbol.
+@param sym The symbol to retrieve its counter.
+@return The counter of the symbol.
+*/
 int symbol_get_counter(Symbol* sym);
 
+/**
+
+@brief Sets the counter of a given symbol to a new value.
+@param sym The symbol to set its counter.
+@param num The new value of the counter.
+*/
 void symbol_set_counter(Symbol* sym, int num);
 
-symbolType symbol_get_type(Symbol* sym);
+/**
 
-Symbol* symbol_node_get_sym(SymbolTableNode* node);
+@brief Returns the type of a given symbol.
+@param sym The symbol to retrieve its type.
+@return The type of the symbol.
+*/
+symbolType symbol_get_type(Symbol * sym);
 
-SymbolTableNode* symbol_node_get_next(SymbolTableNode* node);
+/**
 
-SymbolTableNode* symbol_table_get_head(SymbolTable* table);
+@brief Returns the symbol of a given symbol table node.
+@param node The symbol table node to retrieve its symbol.
+@return The symbol of the node.
+*/
+Symbol * symbol_node_get_sym(SymbolTableNode * node);
 
-SymbolTableNode* symbol_table_get_tail(SymbolTable* table);
+/**
 
-int symbol_table_get_numOfSym(SymbolTable* table);
+@brief Returns the next symbol table node of a given symbol table node.
+@param node The symbol table node to retrieve its next node.
+@return The next node of the given node.
+*/
+SymbolTableNode * symbol_node_get_next(SymbolTableNode * node);
 
-void symbol_table_set_numOfSym(SymbolTable* table, int num);
+/**
 
-bool symbol_table_get_hasExternals(SymbolTable* table);
+@brief Returns the head symbol table node of a given symbol table.
+@param table The symbol table to retrieve its head node.
+@return The head node of the symbol table.
+*/
+SymbolTableNode * symbol_table_get_head(SymbolTable * table);
 
-void symbol_table_set_hasExternals(SymbolTable* table, bool hasExternals);
+/**
 
-bool symbol_table_get_hasEntries(SymbolTable* table);
+@brief Returns the tail symbol table node of a given symbol table.
+@param table The symbol table to retrieve its tail node.
+@return The tail node of the symbol table.
+*/
+SymbolTableNode * symbol_table_get_tail(SymbolTable * table);
 
-void symbol_table_set_hasEntries(SymbolTable* table, bool hasEntries);
+/**
 
-bool symbol_table_get_completed(SymbolTable* table);
+@brief Returns the amount of symbols in a given symbol table.
+@param table The symbol table to retrieve its amount of symbols.
+@return The amount of symbols in the table.
+*/
+int symbol_table_get_numOfSym(SymbolTable * table);
 
+/**
+
+@brief Sets the amount of symbols in a given symbol table to a new value.
+@param table The symbol table to set its amount of symbols.
+@param num The new value of the amount of symbols.
+*/
+void symbol_table_set_numOfSym(SymbolTable * table, int num);
+
+/**
+
+@brief Returns whether a given symbol table has external symbols or not.
+@param table The symbol table to check if it has external symbols.
+@return True if the table has external symbols, false otherwise.
+*/
+bool symbol_table_get_hasExternals(SymbolTable * table);
+
+/**
+
+@brief Sets whether a given symbol table has external symbols or not.
+@param table The symbol table to set whether it has external symbols or not.
+@param hasExternals The new value of whether the table has external symbols or not.
+*/
+void symbol_table_set_hasExternals(SymbolTable * table, bool hasExternals);
+
+/**
+
+@brief Returns whether a given symbol table has entry symbols or not.
+@param table The symbol table to check if it has entry symbols.
+@return True if the table has entry symbols, false otherwise.
+*/
+bool symbol_table_get_hasEntries(SymbolTable * table);
+
+
+/**
+ * @brief Sets whether the symbol table has entry symbols.
+ *
+ * @param table The symbol table to set.
+ * @param hasEntries True if the symbol table has entry symbols, false otherwise.
+ */
+void symbol_table_set_hasEntries(SymbolTable * table, bool hasEntries);
+
+
+/**
+ * @brief Checks if the symbol table is completed (i.e. all symbols are defined).
+ *
+ * @param table The symbol table to check.
+ * @return True if the symbol table is completed, false otherwise.
+ */
+bool symbol_table_get_completed(SymbolTable * table);
+
+/**
+ * @brief Sets whether the symbol table is completed (i.e. all symbols are defined).
+ *
+ * @param table The symbol table to set.
+ * @param isCompleted True if the symbol table is completed, false otherwise.
+ */
 void symbol_table_set_completed(SymbolTable* table, bool isCompleted);
 
 #endif

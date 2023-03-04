@@ -98,7 +98,7 @@ void debug_list_destroy(debugList** list)
 
 void debug_list_pretty_print(debugList* list)
 {
-	char err_buff[80] = { 0 };
+	char err_buff[DEBUG_LINE_MAX_LENGTH] = { 0 };
 
 	LIST_FOR_EACH(debugNode, list->head, head) {
 		switch (head->ctx.err_code) {

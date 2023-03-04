@@ -30,7 +30,7 @@ void encode_dot_string(LineIterator* it, memoryBuffer* img)
 		img->data_image.counter++;
 		line_iterator_advance(it);
 	}
-	set_image_memory(&img->data_image, '\0', FLAG_ERA | FLAG_SOURCE | FLAG_DEST | FLAG_OPCODE1);
+	set_image_memory(&img->data_image, BACKSLASH_ZERO, FLAG_ERA | FLAG_SOURCE | FLAG_DEST | FLAG_OPCODE1);
 	img->data_image.counter++;
 }
 
@@ -38,7 +38,7 @@ void encode_dot_data(LineIterator* it, memoryBuffer* img)
 {
 	char* word;
 
-	while ((word = line_iterator_next_word(it, ", "))) {
+	while ((word = line_iterator_next_word(it, COMMA_STRING))) {
 		unsigned int num = get_num(word);
 		encode_integer(&img->data_image, num);
 
@@ -60,7 +60,7 @@ void encode_label_start_process(LineIterator* it, memoryBuffer* img, SymbolTable
 	line_iterator_reset(it);
 	line_iterator_jump_to(it, COLON_CHAR);
 
-	opcode = line_iterator_next_word(it, " ");
+	opcode = line_iterator_next_word(it, SPACE_STRING);
 	op = get_opcode(opcode);
 	synGroup = get_syntax_group(opcode);
 
@@ -89,10 +89,10 @@ void encode_label_start_process(LineIterator* it, memoryBuffer* img, SymbolTable
 void encode_integer(imageMemory* img, unsigned int num)
 {
 	/* Copy first 8 bits */
-	set_image_memory(img, num & 0xff, FLAG_ERA | FLAG_SOURCE | FLAG_DEST | FLAG_OPCODE1);
+	set_image_memory(img, num & BYTE_MASK, FLAG_ERA | FLAG_SOURCE | FLAG_DEST | FLAG_OPCODE1);
 
 	/* Copy second 8 bits */
-	set_image_memory(img, (num & 0xff00) >> 0x08, FLAG_OPCODE2 | FLAG_PARAM1 | FLAG_PARAM2);
+	set_image_memory(img, (num & WORD_MASK) >> BITS_3_MASK, FLAG_OPCODE2 | FLAG_PARAM1 | FLAG_PARAM2);
 	img->counter++;
 }
 
@@ -156,7 +156,7 @@ void encode_preceding_word(imageMemory* img, Opcodes op, char* source, char* des
 
 void encode_opcode(LineIterator* it, memoryBuffer* img)
 {
-	char* opcode = line_iterator_next_word(it, " ");
+	char* opcode = line_iterator_next_word(it, SPACE_STRING);
 	Opcodes op = get_opcode(opcode);
 	SyntaxGroups group = get_syntax_group(opcode);
 
@@ -197,7 +197,7 @@ void encode_source_and_dest(imageMemory* img, char* source, char* dest)
 			case KIND_IMM:
 				num = get_num(operands[i] + 1); /* +1 to ignore the '#' */
 				set_image_memory(img, num << 2, FLAG_DEST | FLAG_SOURCE | FLAG_OPCODE1);
-				set_image_memory(img, num >> 0x08, FLAG_PARAM1 | FLAG_PARAM2 | FLAG_OPCODE2);
+				set_image_memory(img, num >> BITS_3_MASK, FLAG_PARAM1 | FLAG_PARAM2 | FLAG_OPCODE2);
 				break;
 			case KIND_REG:
 				/* Two different cases for source and dest. */
@@ -239,12 +239,12 @@ void encode_syntax_group_1(LineIterator* it, Opcodes op, memoryBuffer* img)
 	/* Dest operand can be register or label. */
 	char* source = NULL, * dest = NULL;
 
-	source = line_iterator_next_word(it, ", ");
+	source = line_iterator_next_word(it, COMMA_STRING);
 
 	line_iterator_consume_blanks(it);
 	line_iterator_advance(it);
 
-	dest = line_iterator_next_word(it, " ");
+	dest = line_iterator_next_word(it, SPACE_STRING);
 
 	/* Encode the first memory word. */
 	encode_preceding_word(&img->instruction_image, op, source, dest, FALSE);
@@ -262,12 +262,12 @@ void encode_syntax_group_2(LineIterator* it, Opcodes op, memoryBuffer* img)
 	/* Dest operand can be register or label. */
 	char* source = NULL, * dest = NULL;
 
-	source = line_iterator_next_word(it, ", ");
+	source = line_iterator_next_word(it, COMMA_STRING);
 
 	line_iterator_consume_blanks(it);
 	line_iterator_advance(it);
 
-	dest = line_iterator_next_word(it, " ");
+	dest = line_iterator_next_word(it, SPACE_STRING);
 
 	/* Encode the first memory word. */
 	encode_preceding_word(&img->instruction_image, op, source, dest, FALSE);
@@ -310,11 +310,11 @@ void encode_syntax_group_5(LineIterator* it, Opcodes op, memoryBuffer* img)
 	char* source = NULL, * dest = NULL;
 	line_iterator_jump_to(it, OPEN_PAREN_CHAR);
 
-	source = line_iterator_next_word(it, ",");
+	source = line_iterator_next_word(it, COMMA_STRING);
 
 	line_iterator_advance(it);
 
-	dest = line_iterator_next_word(it, ")");
+	dest = line_iterator_next_word(it, CLOSED_PAREN_STRING);
 
 	/* Encode the first memory word. */
 	if (source && dest) {
@@ -356,12 +356,12 @@ void encode_syntax_group_7(LineIterator* it, Opcodes op, memoryBuffer* img)
 	/* Dest operand can be register or label. */
 	char* source = NULL, * dest = NULL;
 
-	source = line_iterator_next_word(it, ", ");
+	source = line_iterator_next_word(it, COMMA_STRING);
 
 	line_iterator_consume_blanks(it);
 	line_iterator_advance(it);
 
-	dest = line_iterator_next_word(it, " ");
+	dest = line_iterator_next_word(it, SPACE_STRING);
 
 	/* Encode the first memory word. */
 	encode_preceding_word(&img->instruction_image, op, source, dest, FALSE);
@@ -377,13 +377,13 @@ void encode_syntax_group_7(LineIterator* it, Opcodes op, memoryBuffer* img)
 VarData* extract_variables_group_1_and_2_and_7(LineIterator* it) {
 	VarData* variablesData = varData_get_new();
 
-	variablesData->leftVar = line_iterator_next_word(it, ", ");
-	
+	variablesData->leftVar = line_iterator_next_word(it, COMMA_STRING);
+
 	/* skip to command and consume it */
 	line_iterator_jump_to(it, COMMA_CHAR);
 
-	variablesData->rightVar = line_iterator_next_word(it, " ");
-	variablesData->total = 2;
+	variablesData->rightVar = line_iterator_next_word(it, SPACE_STRING);
+	variablesData->total = TWO_VARIABLES;
 
 	return variablesData;
 }
@@ -391,8 +391,8 @@ VarData* extract_variables_group_1_and_2_and_7(LineIterator* it) {
 VarData* extract_variables_group_3_and_6(LineIterator* it) {
 	VarData* variablesData = varData_get_new();
 
-	variablesData->leftVar = line_iterator_next_word(it, " ");
-	variablesData->total = 1;
+	variablesData->leftVar = line_iterator_next_word(it, SPACE_STRING);
+	variablesData->total = ONE_VAR;
 
 	return variablesData;
 }
@@ -400,17 +400,17 @@ VarData* extract_variables_group_3_and_6(LineIterator* it) {
 VarData* extract_variables_group_5(LineIterator* it) {
 	VarData* variablesData = varData_get_new();
 
-	if (line_iterator_word_includes(it, "(")) {
-		variablesData->label = line_iterator_next_word(it, "(");
+	if (line_iterator_word_includes(it, OPEN_PAREN_STRING)) {
+		variablesData->label = line_iterator_next_word(it, OPEN_PAREN_STRING);
 		line_iterator_advance(it); /*skips left parenthesis*/
-		variablesData->leftVar = line_iterator_next_word(it, ", ");
+		variablesData->leftVar = line_iterator_next_word(it, COMMA_STRING);
 		line_iterator_advance(it); /*skips comma*/
-		variablesData->rightVar = line_iterator_next_word(it, ")");
-		variablesData->total = 3;
+		variablesData->rightVar = line_iterator_next_word(it, CLOSED_PAREN_STRING);
+		variablesData->total = TWO_VARS_ONE_LABEL;
 	}
 	else {
 		variablesData->label = get_last_word(it);
-		variablesData->total = 1;
+		variablesData->total = ONE_VAR;
 	}
 
 	return variablesData;

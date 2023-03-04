@@ -68,12 +68,12 @@ firstPassStates get_symbol_type(LineIterator* it, char* word)
 
 	/* An .entry definition. */
 	/* Returns FP_SYM_ENT or FP_SYM_EXT. entry. extern. data or. string.*/
-	if (strcmp(word, ".entry") == 0) {
+	if (strcmp(word, DOT_ENTRY_STRING) == 0) {
 		return FP_SYM_ENT;
 	}
 	/* An .extern definition. */
 	/* Returns FP_SYM_EXT or FP_SYM_DEF depending on the word.*/
-	else if (strcmp(word, ".extern") == 0) {
+	else if (strcmp(word, DOT_EXTERN_STRING) == 0) {
 		return FP_SYM_EXT;
 	}
 	/* Get the opcode of the word.*/
@@ -85,7 +85,7 @@ firstPassStates get_symbol_type(LineIterator* it, char* word)
 	/* Symbol definition, may follow, .data or .string*/
 	/* Check if the word is a valid label.*/
 	else if ((is_valid = is_valid_label(word)) == TRUE) {
-		char* next_word = line_iterator_next_word(it, " ");
+		char* next_word = line_iterator_next_word(it,SPACE_STRING);
 
 		/* Free the next word. */
 		if (!next_word) {
@@ -94,17 +94,17 @@ firstPassStates get_symbol_type(LineIterator* it, char* word)
 		}
 
 		/* Check if .data */
-		if (strcmp(next_word, ".data") == 0) {
+		if (strcmp(next_word, DOT_DATA_STRING) == 0) {
             free(next_word);
 			return FP_SYM_DATA;
 		}
 		/* Check if .string */
-		if (strcmp(next_word, ".string") == 0) {
+		if (strcmp(next_word, DOT_STRING__STRING) == 0) {
             free(next_word);
 			return FP_SYM_STR;
 		}
 		/* Ungets the next word from the line iterator. */
-		if (strcmp(next_word, "entry") == 0 || strcmp(next_word, "extern") == 0) {
+		if (strcmp(next_word, ENTRY_STRING) == 0 || strcmp(next_word, EXTERN_STRING) == 0) {
 			line_iterator_unget_word(it, next_word);
 			line_iterator_unget_word(it, word);
             free(next_word);
@@ -214,7 +214,7 @@ bool first_pass_process_sym_string(LineIterator* it, memoryBuffer* img, SymbolTa
 
 bool first_pass_process_sym_ent(LineIterator* it, memoryBuffer* img, SymbolTable* sym_table, debugList* dbg_list, char* name, long line, bool should_encode)
 {
-    char* word = line_iterator_next_word(it, " ");
+    char* word = line_iterator_next_word(it, SPACE_STRING);
 
 	line_iterator_unget_word(it, word);
 	/* register a new word in the list*/
@@ -267,7 +267,7 @@ bool first_pass_process_sym_ent(LineIterator* it, memoryBuffer* img, SymbolTable
 
 bool first_pass_process_sym_ext(LineIterator* it, memoryBuffer* img, SymbolTable* sym_table, debugList* dbg_list, char* name, long line, bool should_encode)
 {
-    char* word = line_iterator_next_word(it, " ");
+    char* word = line_iterator_next_word(it, SPACE_STRING);
 
 	line_iterator_unget_word(it, word);
 	/* register a new word in the list*/
@@ -290,7 +290,7 @@ bool first_pass_process_sym_ext(LineIterator* it, memoryBuffer* img, SymbolTable
 		debug_list_register_node(dbg_list, debug_list_new_node(it->start, it->current, line, ERROR_CODE_LABEL_CANNOT_BE_DEFINED_AS_OPCODE_OR_REGISTER));
 		return FALSE;
 	}
-	line_iterator_next_word(it, " ");
+	line_iterator_next_word(it, SPACE_STRING);
 
 	symbol_table_insert_symbol(sym_table, symbol_table_new_node(word, SYM_EXTERN, 0));
 
