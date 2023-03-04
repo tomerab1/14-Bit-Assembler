@@ -6,6 +6,33 @@
 
 #include <ctype.h>
 
+typedef struct lines_list_node
+{
+	int address;
+	char dataForObject[SINGLE_ORDER_SIZE]; /* 14 bits string strings. */
+} LinesListNode;
+
+
+typedef struct flags
+{
+	bool dot_entry_exists;
+	bool dot_extern_exists;
+} flags;
+
+typedef struct {
+	long address;
+	char translated[SINGLE_ORDER_SIZE + 1]; /* (+1) for '\0'. */
+} TranslatedMachineData;
+
+typedef struct programFinalStatus
+{
+	flags entryAndExternFlag;
+	bool createdObject;
+	bool createdExternals;
+	bool createdEntry;
+	bool error_flag;
+} programFinalStatus;
+
 bool initiate_second_pass(char* path, SymbolTable* table, memoryBuffer* memory, debugList* dbg_list)
 {
 	FILE* in = open_file(path, MODE_READ);
@@ -182,18 +209,18 @@ bool generate_externals_file(SymbolTable* table, char* path) {
 bool generate_entries_file(SymbolTable* table, char* path) {
 	char* outfileName = NULL;
 	FILE* out = NULL;
-	SymbolTableNode* symTableHead = table->head;
+	SymbolTableNode* symTableHead = symbol_table_get_head(table);
 	char placeholder[20] = { 0 };
 
 	outfileName = get_outfile_name(path, ".entry");
 	out = open_file(outfileName, MODE_WRITE);
 
 	while (symTableHead != NULL) {
-		if (symTableHead->sym.type == SYM_ENTRY) {
-			sprintf(placeholder, "%s\t%d\n", symTableHead->sym.name, symTableHead->sym.counter);
+		if (symbol_get_type(symbol_node_get_sym(symTableHead)) == SYM_ENTRY) {
+			sprintf(placeholder, "%s\t%d\n", symbol_get_name(symbol_node_get_sym(symTableHead)), symbol_get_counter(symbol_node_get_sym(symTableHead)));
 			fputs(placeholder, out);
 		}
-		symTableHead = symTableHead->next;
+		symTableHead = symbol_node_get_next(symTableHead);
 	}
 
 	free(outfileName);
@@ -205,8 +232,8 @@ bool generate_entries_file(SymbolTable* table, char* path) {
 void create_files(memoryBuffer* memory, char* path, programFinalStatus* finalStatus, SymbolTable* table)
 {
     finalStatus->createdObject = generate_object_file(memory, path);
-    table->hasExternals ? (finalStatus->createdExternals = generate_externals_file(table, path)) : NULL;
-    table->hasEntries ? (finalStatus->createdEntry = generate_entries_file(table, path)) : NULL;
+    symbol_table_get_hasExternals(table) ? (finalStatus->createdExternals = generate_externals_file(table, path)) : NULL;
+	symbol_table_get_hasEntries(table) ? (finalStatus->createdEntry = generate_entries_file(table, path)) : NULL;
 }
 
 void extract_directive_type(LineIterator* line, flags* flag) {
