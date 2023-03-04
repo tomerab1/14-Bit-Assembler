@@ -7,12 +7,12 @@
 #include "utils.h"
 
 /**
- * This struct is meant for making working with strings while parsing the assembly files.
+* @brief This struct is meant for making working with strings while parsing the assembly files.
 */
-typedef struct
+typedef struct LineIterator
 {
-	char* start; /* Pointer to the start of the line. */
-	char* current; /* Pointer to the current position in the line. */
+    char* start; /* Pointer to the start of the line. */
+    char* current; /* Pointer to the current position in the line. */
 } LineIterator;
 
 /**
