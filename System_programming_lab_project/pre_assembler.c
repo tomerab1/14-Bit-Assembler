@@ -134,7 +134,7 @@ char* get_macro_name(LineIterator* it)
     /* If blanks are encountered, consume them. */
     line_iterator_consume_blanks(it);
 
-    while (!line_iterator_is_end(it) && !isblank(line_iterator_peek(it))) {
+    while (!line_iterator_is_end(it) && !isspace(line_iterator_peek(it))) {
         if (log_sz + 1 >= phy_sz) {
             GROW_CAPACITY(phy_sz);
             name = GROW_ARRAY(char*, name, phy_sz, sizeof(char));

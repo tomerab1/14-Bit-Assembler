@@ -42,7 +42,8 @@ typedef unsigned short bool;
 
 /* Macro for iterating over each element of the list. */
 #define LIST_FOR_EACH(type, head, out) \
-for(type* (out) = (head); (out) != NULL; (out) = (out) ? (out)->next : NULL)
+type* (out);				\
+for((out) = (head); (out) != NULL; (out) = (out) ? (out)->next : NULL)
 
 
 

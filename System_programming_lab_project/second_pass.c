@@ -45,8 +45,6 @@ bool initiate_second_pass(char* path, SymbolTable* table, memoryBuffer* memory, 
 	memory->instruction_image.counter = 0; /*init IC counter*/
 
 	while ((line = get_line(in)) != NULL) {
-		bool labelFlag = FALSE; /*is current line first word is label*/
-
 		line_iterator_put_line(&curLine, line);
 		line_iterator_jump_to(&curLine, COLON_CHAR);
 
@@ -151,7 +149,7 @@ bool generate_object_file(memoryBuffer* memory, char* path)
 TranslatedMachineData* translate_to_machine_data(memoryBuffer* memory)
 {
 	int i = 0;
-	MemoryWord* instImg = memory->instruction_image.memory;
+
 	/* Allocate memory for the translated machine code */
 	TranslatedMachineData* translatedMemory = (TranslatedMachineData*)xmalloc((memory->instruction_image.counter + memory->data_image.counter) * sizeof(TranslatedMachineData));
 
@@ -266,7 +264,6 @@ void extract_directive_type(LineIterator* line, flags* flag) {
 VarData* extract_variables(LineIterator* it) {
 	VarData* variables = NULL;
 	char* opcode = line_iterator_next_word(it, " ");
-	Opcodes op = get_opcode(opcode);
 	SyntaxGroups synGroup = get_syntax_group(opcode);
 
 	/* Extract variables for group 1, 2, and 7 opcodes */
@@ -290,7 +287,6 @@ VarData* extract_variables(LineIterator* it) {
 bool is_label_exists_in_line(LineIterator* line, SymbolTable* table, debugList* dbg_list, bool* flag, long line_num) {
 	VarData* variablesData = NULL;
 	LineIterator itLeftVar, itRightVar, itLabel;
-	char* tempWord = 0;
 	variablesData = extract_variables(line);
 
 	if (!variablesData)
@@ -350,7 +346,6 @@ bool investigate_word(LineIterator* originalLine, LineIterator* wordIterator, Sy
 }
 
 void find_word_start_point(LineIterator* it, char* word, int amountOfVars) {
-	bool found = FALSE;
 	it->current = it->start;
 	line_iterator_jump_to(it, COLON_CHAR);
 	line_iterator_consume_blanks(it);
@@ -402,6 +397,7 @@ void entry_exists(flags* flag) {
 void update_symbol_address(LineIterator it, memoryBuffer* memory, SymbolTable* table)
 {
 	char* line = (char*)xcalloc(strlen(it.start) + 1, sizeof(char));
+	char* word = NULL;
 	LineIterator cpyIt;
 	int offset = 0;
 
@@ -410,7 +406,7 @@ void update_symbol_address(LineIterator it, memoryBuffer* memory, SymbolTable* t
 	line_iterator_replace(&cpyIt, "(), ", SPACE_CHAR);
 	line_iterator_jump_to(&cpyIt, COLON_CHAR);
 
-	for (char* word = line_iterator_next_word(&cpyIt, " "); word != NULL; word = line_iterator_next_word(&cpyIt, " "), offset++) {
+	for (word = line_iterator_next_word(&cpyIt, " "); word != NULL; word = line_iterator_next_word(&cpyIt, " "), offset++) {
 		update_symbol_offset(word, offset, memory, table);
 		free(word);
 	}
