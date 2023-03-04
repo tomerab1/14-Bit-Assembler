@@ -9,6 +9,11 @@
 #include "debug.h"
 #include "memory.h"
 
+
+typedef enum { REGISTER, LABEL, ASCII } VarType;
+typedef enum { KIND_IMM, KIND_LABEL, KIND_LABEL_PARAM, KIND_REG, KIND_NONE } OperandKind;
+typedef enum { ADDRESSING_IMM, ADDRESSING_DIR, ADDRESSING_PARAM, ADDRESSING_REG } AddressingType;
+
 /**
 * @brief A forward declaration of a structure that breakes an operation to 3 parts, leftVar, rightVar and label, declaration in the '.c' file.
 */

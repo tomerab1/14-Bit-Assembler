@@ -6,9 +6,6 @@
 #include "encoding.h"
 #include <string.h>
 
-/* typedef for the dispatch table. */
-typedef bool (*fpass_dispatch_table)(LineIterator* it, memoryBuffer* img, SymbolTable* sym_table, debugList* dbg_list, char* name, long line, bool did_err_occurred);
-
 bool do_first_pass(char* path, memoryBuffer* img, SymbolTable* sym_table, debugList* dbg_list)
 {
 	FILE* in = open_file(path, MODE_READ);

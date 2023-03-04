@@ -2,10 +2,6 @@
 */
 #include "encoding.h"
 
-typedef enum { REGISTER, LABEL, ASCII } VarType;
-typedef enum { KIND_IMM, KIND_LABEL, KIND_LABEL_PARAM, KIND_REG, KIND_NONE } OperandKind;
-typedef enum { ADDRESSING_IMM, ADDRESSING_DIR, ADDRESSING_PARAM, ADDRESSING_REG } AddressingType;
-
 typedef struct VarData
 {
 	char* leftVar; /* Pointer to the start of the line. */

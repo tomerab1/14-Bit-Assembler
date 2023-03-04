@@ -5,7 +5,6 @@
 #include <string.h>
 #include <ctype.h>
 
-typedef enum { READ_UNKNOWN, READ_COMMENT, READ_START_MACRO, READ_END_MACRO } ReadState;
 
 typedef struct macro_list_node
 {

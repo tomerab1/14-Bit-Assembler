@@ -10,6 +10,10 @@
 #include "memory.h"
 #include "debug.h"
 
+
+/* typedef for the dispatch table. */
+typedef bool (*fpass_dispatch_table)(LineIterator* it, memoryBuffer* img, SymbolTable* sym_table, debugList* dbg_list, char* name, long line, bool did_err_occurred);
+
 /**
 * @brief An enum for the different states of the first pass algorithm.
 */
