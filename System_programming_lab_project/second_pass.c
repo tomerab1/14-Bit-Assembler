@@ -152,6 +152,7 @@ TranslatedMachineData* translate_to_machine_data(memoryBuffer* memory)
 {
 	int i = 0;
 	MemoryWord* instImg = memory->instruction_image.memory;
+	/* Allocate memory for the translated machine code */
 	TranslatedMachineData* translatedMemory = (char*)xmalloc((memory->instruction_image.counter + memory->data_image.counter) * sizeof(TranslatedMachineData));
 
 	/* Decode the instruction and data memory buffers and store in the translated memory */
@@ -193,7 +194,6 @@ bool generate_externals_file(SymbolTable* table, char* path) {
 	SymbolTableNode* symTableHead = symbol_table_get_head(table);
 	char placeholder[20] = { 0 }; /* Placeholder string for writing data to the file */
 
-	/* Get the name of the output file */
 	outfileName = get_outfile_name(path, ".external");
 	/* Open the output file for writing */
 	out = open_file(outfileName, MODE_WRITE);
@@ -241,9 +241,9 @@ bool generate_entries_file(SymbolTable* table, char* path) {
 
 void create_files(memoryBuffer* memory, char* path, programFinalStatus* finalStatus, SymbolTable* table)
 {
-	finalStatus->createdObject = generate_object_file(memory, path);
-	symbol_table_get_hasExternals(table) ? (finalStatus->createdExternals = generate_externals_file(table, path)) : NULL;
-	symbol_table_get_hasEntries(table) ? (finalStatus->createdEntry = generate_entries_file(table, path)) : NULL;
+    finalStatus->createdObject = generate_object_file(memory, path);  /* Generate object file. */
+    table->hasExternals ? (finalStatus->createdExternals = generate_externals_file(table, path)) : NULL; /* Generate externals file. */
+    table->hasEntries ? (finalStatus->createdEntry = generate_entries_file(table, path)) : NULL; /* Generate entires file. */
 }
 
 void extract_directive_type(LineIterator* line, flags* flag) {
