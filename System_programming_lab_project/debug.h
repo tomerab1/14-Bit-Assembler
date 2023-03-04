@@ -24,29 +24,19 @@ typedef enum
 } errorCodes;
 
 /**
-* A struct that represents an error context, i.e the line number of the error and error code.
-* The 'start_pos' and 'end_pos' are used for formatting purposes.
-*/
-typedef struct
-{
-	char* start_pos;
-	char* err_pos;
-    ptrdiff_t err_len;
-	long line_num;
-	errorCodes err_code;
-} errorContext;
+ * @brief Represents a context for an error in the assembly code, the full declaration is in the appropriate '.c' file.
+ */
+typedef struct errorContext errorContext;
 
-typedef struct debug_node
-{
-	errorContext ctx;
-	struct debug_node* next;
-} debugNode;
+/**
+ * @brief Represents a node in a linked list of debugging information, the full declaration is in the appropriate '.c' file.
+ */
+typedef struct debugNode debugNode;
 
-typedef struct
-{
-	debugNode* head;
-	debugNode* tail;
-} debugList;
+/**
+ * @brief Represents a linked list of debugging information for the assembly code, the full declaration is in the appropriate '.c' file.
+ */
+typedef struct debugList debugList;
 
 /**
 * Registers a node at the end of the list.
