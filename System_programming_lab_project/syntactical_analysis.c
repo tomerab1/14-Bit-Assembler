@@ -985,6 +985,16 @@ SyntaxGroups get_syntax_group(char* name)
     return SG_GROUP_INVALID;
 }
 
+/**
+
+@brief Checks if a directive exists in the given line.
+@param line The line to check for a directive.
+@return Returns true if the line contains a directive, otherwise false.
+This function checks if a directive exists in the given line. The supported directives are ".string",
+".data", ".extern", and ".entry". It uses the line_iterator_word_includes function to determine if
+the line contains any of these directives.
+@note The line iterator passed to this function must have already been initialized.
+*/
 bool directive_exists(LineIterator* line) {
     return line_iterator_word_includes(line, ".string") ||
         line_iterator_word_includes(line, ".data") ||
