@@ -78,6 +78,17 @@ void encode_integer(imageMemory* img, unsigned int num)
 	img->counter++;
 }
 
+/**
+* Constans for the different offsets of the memory word fields.
+*/
+#define OFFSET_ERA     0x00
+#define OFFSET_DEST    0x02
+#define OFFSET_SOURCE  0x04
+#define OFFSET_OPCODE1 0x06
+#define OFFSET_OPCODE2 0x00
+#define OFFSET_PARAM1  0x02
+#define OFFSET_PARAM2  0x04
+
 void encode_preceding_word(imageMemory* img, Opcodes op, char* source, char* dest, bool is_jmp_label)
 {
 	set_image_memory(img, op << OFFSET_OPCODE1, FLAG_OPCODE1);

@@ -10,6 +10,9 @@
 
 #define SIZEOF_MEMORY_WORD 2 /* We only need 14 bits, so we will use an array of 2 chars. */
 
+/**
+* @brief Useful constants for using the 'set' functions.
+*/
 #define FLAG_ERA     0x01
 #define FLAG_SOURCE  0x02
 #define FLAG_DEST    0x04
@@ -18,24 +21,8 @@
 #define FLAG_PARAM1  0x20
 #define FLAG_PARAM2  0x40
 
-#define MASK_ERA     0x03
-#define MASK_DEST    0x0c
-#define MASK_SOURCE  0x30
-#define MASK_OPCODE1 0xc0
-#define MASK_OPCODE2 0x03
-#define MASK_PARAM1  0x0c
-#define MASK_PARAM2  0x30
-
-#define OFFSET_ERA     0x00
-#define OFFSET_DEST    0x02
-#define OFFSET_SOURCE  0x04
-#define OFFSET_OPCODE1 0x06
-#define OFFSET_OPCODE2 0x00
-#define OFFSET_PARAM1  0x02
-#define OFFSET_PARAM2  0x04
-
 /**
-	This enumeration is used to represent each encoding type with a specific numeric constant. 
+* @brief This enumeration is used to represent each encoding type with a specific numeric constant. 
 */
 typedef enum 
 {
@@ -44,7 +31,7 @@ typedef enum
 
 
 /** 
-	This enumeration is used to represent each register type with a specific numeric constant. 
+* @brief This enumeration is used to represent each register type with a specific numeric constant. 
 */
 typedef enum
 {
@@ -54,7 +41,7 @@ typedef enum
 } RegistersType;
 
 /**
-	@brief This sturct is used to represent a memory word as specified in the project's description.
+* @brief This sturct is used to represent a memory word as specified in the project's description.
 */
 typedef struct
 {
@@ -62,7 +49,7 @@ typedef struct
 } MemoryWord;
 
 /**
-	@brief This struct is used to represent 'instruction/data image' and the 'instruction/data counter'.
+* @brief This struct is used to represent 'instruction/data image' and the 'instruction/data counter'.
 */
 typedef struct
 {
@@ -70,13 +57,8 @@ typedef struct
 	MemoryWord memory[RAM_MEMORY_SZ];
 } imageMemory;
 
-typedef struct
-{
-	MemoryWord memory;
-}Register;
-
 /**
-	@brief This struct is used to represent all the memory buffers, the 'cpu' registers and the instruction/data image.
+* @brief This struct is used to represent all the memory buffers, the 'cpu' registers and the instruction/data image.
 */
 typedef struct
 {
@@ -85,69 +67,92 @@ typedef struct
 } memoryBuffer;
 
 /**
-	@brief This is a function for creating a new memory buffer object.
+* @brief This is a function for creating a new memory buffer object.
 */
 memoryBuffer memory_buffer_get_new();
 
-/** @brief This function sets bytes appropriately in a memoryWord
+/** 
+* @brief This function sets bytes appropriately in a memoryWord according to the specified flags.
+* @param mem - The imageMemory
+* @param bytes - The byte.
+* @param flags - The flags.
 */
-void set_image_memory(imageMemory* mem, unsigned char bytes, int flags);
-
+void set_image_memory(imageMemory* mem, unsigned char byte, int flags);
 
 /**
-	This is an internal function that creates a new image memory object. 
-	@return - A new image memory structure.
+* @breif This is an internal function that creates a new image memory object. 
+* @return A new image memory structure.
 */
 static imageMemory image_memory_get_new();
 
 /**
-	@brief This is an internal function used to zero all the image memory. 
+* @brief This is an internal function used to zero all the image memory.
+* @param mem - The image memory.
 */
 static void image_memory_init(imageMemory* mem);
 
-/** @brief This function is for setting the e.r.a flag */
+/**
+*  The memory word structure:
+*  Param2 | Param 1 | Opcode | Dest Operand | Source Operand | E.R.A
+* ---------------------------------------------------------------------
+* | 2 bits | 2 bits | 4 bits |     2 bits   |      2 bits    | 2 bits |
+* ---------------------------------------------------------------------
+* We divided the Opcode to 2 parts, Op1 and Op2 to align each section on 1 byte:
+* Param2 | Param 1  |   Op1  |   Op2  | Dest Operand | Source Operand | E.R.A
+* -----------------------------------------------------------------------------
+* | 2 bits | 2 bits | 2 bits | 2 bits |     2 bits   |      2 bits    | 2 bits |
+* ------------------------------------------------------------------------------
+* ---------second byte------- ------------------first byte --------------------
+* This way its easier to set the bits using our 'set' functions.
+*/
+
+/** 
+* @brief This function is for setting the e.r.a flag to the value of byte.
+* @param mem - The image memory.
+* @param byte - The byte.
+*/
 void set_era_bits(MemoryWord* mem, unsigned char byte);
 
-/** @brief This function is for setting the e.r.a flag */
+/**
+* @brief This function is for setting the source flag to the value of byte.
+* @param mem - The image memory.
+* @param byte - The byte.
+*/
 void set_source_bits(MemoryWord* mem, unsigned char byte);
 
-/** @brief This function is for setting the e.r.a flag */
+/**
+* @brief This function is for setting the dest flag to the value of byte.
+* @param mem - The image memory.
+* @param byte - The byte.
+*/
 void set_dest_bits(MemoryWord* mem,  unsigned char byte);
 
-/** @brief This function is for setting the e.r.a flag */
+/**
+* @brief This function is for setting the opcode_1 flag to the value of byte.
+* @param mem - The image memory.
+* @param byte - The byte.
+*/
 void set_opcode_cell_1_bits(MemoryWord* mem, unsigned char byte);
 
-/** @brief This function is for setting the e.r.a flag */
+/**
+* @brief This function is for setting the opcode_2 flag to the value of byte.
+* @param mem - The image memory.
+* @param byte - The byte.
+*/
 void set_opcode_cell_2_bits(MemoryWord* mem, unsigned char byte);
 
-/** @brief This function is for setting the e.r.a flag */
+/**
+* @brief This function is for setting the param_1 flag to the value of byte.
+* @param mem - The image memory.
+* @param byte - The byte.
+*/
 void set_param1_bits(MemoryWord* mem, unsigned char byte);
 
-/** @brief This function is for setting the e.r.a flag */
+/**
+* @brief This function is for setting the param_2 flag to the value of byte.
+* @param mem - The image memory.
+* @param byte - The byte.
+*/
 void set_param2_bits(MemoryWord* mem, unsigned char byte);
-
-
-/* This function is for getting the e.r.a flag */
-unsigned char get_era_bits(MemoryWord* mem);
-
-/* This function is for getting the e.r.a flag */
-unsigned char get_source_bits(MemoryWord* mem);
-
-/* This function is for getting the e.r.a flag */
-unsigned char get_dest_bits(MemoryWord* mem);
-
-/* This function is for getting the e.r.a flag */
-unsigned char get_opcode_cell_1_bits(MemoryWord* mem);
-
-/* This function is for getting the e.r.a flag */
-unsigned char get_opcode_cell_2_bits(MemoryWord* mem);
-
-/* This function is for getting the e.r.a flag */
-unsigned char get_param1_bits(MemoryWord* mem);
-
-/* This function is for getting the e.r.a flag */
-unsigned char get_param2_bits(MemoryWord* mem);
-
-void dump_memory(memoryBuffer* buf);
 
 #endif

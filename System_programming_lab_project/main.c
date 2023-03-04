@@ -1,8 +1,5 @@
 #include "driver.h"
 
-/** @file
-*/
-
 /*
 	TODO:
 	1. Write docs.
@@ -16,9 +13,9 @@
 * Entry point for the driver. This is the entry point for the driver to be executed.
 * 
 * @param argc - Number of command line arguments. If - 1 the program will use the standard argument parsing.
-* @param argv - Arguments passed to the program. These are assumed to be UTF - 8 encoded strings.
+* @param argv - Arguments passed to the program.
 * 
-* @return 0 on success non - zero on failure. In this case an error is returned
+* @return 0 on success non - zero on failure
 */
 int main(int argc, char** argv)
 {

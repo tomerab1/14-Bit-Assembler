@@ -5,11 +5,23 @@
 #include <string.h>
 #include <ctype.h>
 
-/**
-* @brief Fills macro list from file. The file must be open for reading.
-* @param in File to read from. Must be open for reading.
-* @param in_list
-*/
+typedef enum { READ_UNKNOWN, READ_COMMENT, READ_START_MACRO, READ_END_MACRO } ReadState;
+
+typedef struct macro_list_node
+{
+    int log_sz;
+    int phy_sz;
+    char* macro_name;
+    char** macro_expension; /* A dynamic array of strings. */
+    struct macro_list_node* next;
+} MacroListNode;
+
+typedef struct macro_list
+{
+    MacroListNode* head;
+    MacroListNode* tail;
+} MacroList;
+
 void macro_list_fill_list_from_file(FILE* in, MacroList* in_list)
 {
     char* line, * name;
@@ -61,10 +73,6 @@ void macro_list_fill_list_from_file(FILE* in, MacroList* in_list)
     }
 }
 
-/**
-* @brief Starts assembling pre - assembler. This involves opening the file and creating a pre - assembler file.
-* @param path
-*/
 void start_pre_assembler(char* path)
 {
     FILE* in = open_file(path, MODE_READ), * out = NULL;
@@ -72,10 +80,6 @@ void start_pre_assembler(char* path)
     char* out_name = NULL;
 
     macro_list_fill_list_from_file(in, list);
-
-#ifdef DEBUG
-    macro_list_dump(list);
-#endif
 
     /* Moves the file pointer back to the starting of the file. */
     rewind(in);
@@ -92,11 +96,6 @@ void start_pre_assembler(char* path)
     fclose(in);
 }
 
-/**
-* @brief Returns the state of the current reading. This is used to determine whether or not we are reading a macro or a comment.
-* @param it
-* @return ReadState indicating what kind of reading is happening at the current position of the line iterator. READ_UNKNOWN is returned if there is no reading
-*/
 ReadState get_current_reading_state(LineIterator* it)
 {
     int i;
@@ -128,11 +127,6 @@ ReadState get_current_reading_state(LineIterator* it)
     }
 }
 
-/**
-* @brief Get the name of the macro. This is used to determine the name of the macro that is to be used when calling macro_get_name ().
-* @param it Iterator to the macro's line. Must be positioned at the start of the macro name.
-* @return A pointer to the macro's name. It must be freed by the caller using xfree ()
-*/
 char* get_macro_name(LineIterator* it)
 {
     int phy_sz = INIT_PHY_SZ, log_sz = INIT_LOG_SZ;
@@ -158,10 +152,6 @@ char* get_macro_name(LineIterator* it)
     return name;
 }
 
-/**
-* @brief Create a new list. The list is empty after this call. You must free the list when you're done with it.
-* @return A pointer to the newly created list. This should be freed with macro_list_free () when no longer needed
-*/
 MacroList* macro_list_new_list()
 {
     MacroList* new_list = (MacroList*)xmalloc(sizeof(MacroList));
@@ -169,21 +159,11 @@ MacroList* macro_list_new_list()
     return new_list;
 }
 
-/**
-* @brief Check if a list is empty. This is true if the list has no elements in it and false otherwise
-* @param list
-* @return true if the list is empty false otherwise ( not empty or non - empty head or tail are present
-*/
 bool macro_list_is_empty(MacroList* list)
 {
     return !list->head && !list->tail;
 }
 
-/**
-* @brief Create a new node in the macro list. Allocates memory for the node and sets it up to be used by the macro_expansion function.
-* @param name
-* @return Pointer to the newly allocated node or NULL if there was insufficient memory to allocate the new node. Note that the pointer is valid until the next call to macro_list_next
-*/
 MacroListNode* macro_list_new_node(char* name)
 {
     MacroListNode* new_node = (MacroListNode*)xmalloc(sizeof(MacroListNode));
@@ -200,12 +180,6 @@ MacroListNode* macro_list_new_node(char* name)
     return new_node;
 }
 
-/**
-* @brief Expand a macro to a file.
-* @param out
-* @param list
-* @param name
-*/
 void expand_macro_to_file(FILE* out, MacroList* list, char* name)
 {
     int i;
@@ -222,11 +196,6 @@ void expand_macro_to_file(FILE* out, MacroList* list, char* name)
     }
 }
 
-/**
-* @brief Inserts a MacroListNode at the end of the list. This is useful for inserting an element into a macro list that is later used to create a macro list.
-* @param list
-* @param node
-*/
 void macro_list_insert_node(MacroList* list, MacroListNode* node)
 {
     if (macro_list_is_empty(list)) {
@@ -238,11 +207,6 @@ void macro_list_insert_node(MacroList* list, MacroListNode* node)
     }
 }
 
-/**
-* @brief Insert a macro source line into the macro list.
-* @param node
-* @param line
-*/
 void macro_list_node_insert_source(MacroListNode* node, char* line)
 {
     size_t text_length = strlen(line);
@@ -257,11 +221,6 @@ void macro_list_node_insert_source(MacroListNode* node, char* line)
     node->log_sz++;
 }
 
-/**
-* @brief Insert a macro into the macro list. This is used to insert macro expressions at the end of the macro list.
-* @param tail
-* @param node
-*/
 void macro_list_node_insert_macro(MacroListNode* tail, MacroListNode* node)
 {
     int i;
@@ -270,12 +229,6 @@ void macro_list_node_insert_macro(MacroListNode* tail, MacroListNode* node)
     }
 }
 
-/**
-* @brief Get the MacroListNode for a given macro name. This is used to determine if there is a macro with the given name in the macro list.
-* @param list
-* @param entry
-* @return pointer to the macro or NULL if not found ( not an error! ) Note : the pointer is valid until the next macro_list_insert
-*/
 MacroListNode* macro_list_get_node(MacroList* list, char* entry)
 {
     MacroListNode* head = list->head;
@@ -288,12 +241,6 @@ MacroListNode* macro_list_get_node(MacroList* list, char* entry)
     return NULL;
 }
 
-/**
-* @brief Creates a pre assembler file that is used to read the macros before assembly. This is a helper function for assemble_macros ().
-* @param in
-* @param out
-* @param list
-*/
 void create_pre_assembler_file(FILE* in, FILE* out, MacroList* list)
 {
     char* line, * name = NULL;
@@ -352,11 +299,6 @@ void create_pre_assembler_file(FILE* in, FILE* out, MacroList* list)
     }
 }
 
-/**
-* @brief Free memory occupied by macro expansion. This is useful for freeing memory that was allocated by macro_expension_alloc ()
-* @param macro_expension Pointer to the macro expansion
-* @param size Number of elements in
-*/
 void macro_free_expension(char*** macro_expension, int size)
 {
     char** ptr = *macro_expension;
@@ -369,33 +311,6 @@ void macro_free_expension(char*** macro_expension, int size)
     free(ptr);
 }
 
-#ifdef  DEBUG
-/**
-* @brief Dump the macro list to stdout. This is useful for debugging purposes. If you want to see the contents of the macro list use macro_list_dump_contents () instead.
-* @param list
-*/
-void macro_list_dump(MacroList* list)
-{
-    MacroListNode* head = list->head;
-    int i;
-
-    while (head) {
-        printf("MACRO: %s\n", head->macro_name);
-
-        for (i = 0; i < head->log_sz; i++) {
-            printf("%s\n", head->macro_expension[i]);
-        }
-
-        printf("\n");
-        head = head->next;
-    }
-}
-#endif
-
-/**
-* @brief Free a macro list and all it's contents. This is useful for debugging purposes. Note that the contents of the list are untouched and should not be used after this is called
-* @param list
-*/
 void macro_list_free(MacroList** list)
 {
     MacroListNode* next, * current = (*list)->head;

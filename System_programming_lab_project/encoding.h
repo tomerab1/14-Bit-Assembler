@@ -27,14 +27,14 @@ typedef enum { KIND_IMM, KIND_LABEL, KIND_LABEL_PARAM, KIND_REG, KIND_NONE } Ope
 typedef enum { ADDRESSING_IMM, ADDRESSING_DIR, ADDRESSING_PARAM, ADDRESSING_REG } AddressingType;
 
 /**
-* @brief Encode a dot string.
+* Encode a dot string.
 * @param it
 * @param img
 */
 void encode_dot_string(LineIterator* it, memoryBuffer* img);
 
 /**
-* @brief Encode the data section of a dot file.
+* Encode the data section of a dot file.
 * @param it
 * @param img
 */
@@ -42,7 +42,7 @@ void encode_dot_data(LineIterator* it, memoryBuffer* img);
 
 /*2 first digits are already encodede on first pass*/
 /**
-* @brief Encode the start of a label.
+* @Encode the start of a label.
 * @param it
 * @param img
 * @param symTable
@@ -51,7 +51,7 @@ void encode_dot_data(LineIterator* it, memoryBuffer* img);
 void encode_label_start_process(LineIterator* it, memoryBuffer* img, SymbolTable* symTable, debugList* dbg_list);
 
 /**
-* @brief Encode labels in an assembler image. This is a helper function.
+* Encode labels in an assembler image. This is a helper function.
 * @param variables the data of the variables to encode. Must be sorted by leftVar and rightVar
 * @param synGroup the syntax group for the assembler image.
 * @param symTable the symbol table for the assembler image.
