@@ -5,8 +5,9 @@ sub r1, r4
 bne END
 endmcr
 prn #-5
-bne LOOP(r4,r3)
-m1
+bne W(r4,r5)
+sub r1, r4
+bne L3
 L1: inc K
 bne LOOP(K,STR)
 END: stop

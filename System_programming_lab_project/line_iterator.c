@@ -207,6 +207,12 @@ char* get_last_word(LineIterator* it) {
     return line_iterator_next_word(it, " ");
 }
 
+/**
+* @brief Replace all occurences of a string with another. This is useful for changing the separator used to separate a line from the rest of the line.
+* @param it
+* @param seps Array of strings to look for. Each string must be a character in this array.
+* @param newSep New separator to use for replacement. If \ a seps is NULL no replacement is performed
+*/
 void line_iterator_replace(LineIterator* it, char* seps, char newSep)
 {
     int i;
@@ -223,6 +229,10 @@ void line_iterator_replace(LineIterator* it, char* seps, char newSep)
     line_iterator_put_line(it, it->start);
 }
 
+/**
+* @brief Reset the \ a it to the beginning of the line. This is useful when iterating over a file to re - initialize the iterator for another file.
+* @param it
+*/
 void line_iterator_reset(LineIterator* it)
 {
     it->current = it->start;
