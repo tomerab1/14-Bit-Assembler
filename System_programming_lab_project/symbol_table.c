@@ -4,13 +4,39 @@
 #include "symbol_table.h"
 #include <string.h>
 
+typedef struct Symbol
+{
+    char* name;
+    int counter;
+    symbolType type;
+} Symbol;
+
+typedef struct SymbolTableNode
+{
+    Symbol sym;
+    struct SymbolTableNode* next;
+} SymbolTableNode;
+
+typedef struct SymbolTable
+{
+    SymbolTableNode* head;
+    SymbolTableNode* tail;
+    int amountOfSymbols;
+    bool hasExternals;
+    bool hasEntries;
+    bool completed;
+} SymbolTable;
+
 SymbolTable* symbol_table_new_table()
 {
     SymbolTable* new_table = (SymbolTable*)xmalloc(sizeof(SymbolTable));
+
     new_table->head = new_table->tail = NULL;
+    new_table->amountOfSymbols = 0;
     new_table->completed = FALSE;
     new_table->hasEntries = FALSE;
     new_table->hasExternals = FALSE;
+
     return new_table;
 }
 
@@ -103,4 +129,84 @@ bool check_symbol_existence(SymbolTable* sym_table, char* name, symbolType newSy
     default:
         return FALSE;
     }
+}
+
+char* symbol_get_name(Symbol* sym)
+{
+    return sym->name;
+}
+
+int symbol_get_counter(Symbol* sym)
+{
+    return sym->counter;
+}
+
+void symbol_set_counter(Symbol* sym, int num)
+{
+    sym->counter = num;
+}
+
+symbolType symbol_get_type(Symbol* sym)
+{
+    return sym->type;
+}
+
+Symbol* symbol_node_get_sym(SymbolTableNode* node)
+{
+    return &node->sym;
+}
+
+SymbolTableNode* symbol_node_get_next(SymbolTableNode* node)
+{
+    return node->next;
+}
+
+SymbolTableNode* symbol_table_get_head(SymbolTable* table)
+{
+    return table->head;
+}
+
+SymbolTableNode* symbol_table_get_tail(SymbolTable* table)
+{
+    return table->tail;
+}
+
+int symbol_table_get_numOfSym(SymbolTable* table)
+{
+    return table->amountOfSymbols;
+}
+
+void symbol_table_set_numOfSym(SymbolTable* table, int num)
+{
+    table->amountOfSymbols = num;
+}
+
+bool symbol_table_get_hasExternals(SymbolTable* table)
+{
+    return table->hasExternals;
+}
+
+void symbol_table_set_hasExternals(SymbolTable* table, bool hasExternals)
+{
+    table->hasExternals = hasExternals;
+}
+
+bool symbol_table_get_hasEntries(SymbolTable* table)
+{
+    return table->hasEntries;
+}
+
+void symbol_table_set_hasEntries(SymbolTable* table, bool hasEntries)
+{
+    table->hasEntries = hasEntries;
+}
+
+bool symbol_table_get_completed(SymbolTable* table)
+{
+    return table->completed;
+}
+
+void symbol_table_set_completed(SymbolTable* table, bool isCompleted)
+{
+    table->completed = isCompleted;
 }

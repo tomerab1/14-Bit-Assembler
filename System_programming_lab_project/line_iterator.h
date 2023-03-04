@@ -7,12 +7,21 @@
 #include "utils.h"
 
 /**
- * This struct is meant for making working with strings while parsing the assembly files.
+* @brief This data sturcture is used to make it easier to parse text lines.
+* It's member should not be freed as they not own the memory only a view of it.
+*
+* The LineIterator data structure is a critical component of our assembler's parsing functionality. It allows us to iterate through each line of the input file and extract the relevant pieces of information necessary for assembling the code.
+* In order to use LineIterator effectively, we need to be able to pass it by value to different parts of our code.
+* While data hiding techniques such as using an opaque pointer would protect the internal implementation details of LineIterator, it would also make it difficult to pass the struct by value.
+* This is because an opaque pointer requires the user to access its members through accessor functions or by dereferencing the pointer, which can be cumbersome and error-prone.
+* Moreover, LineIterator is a simple data structure that only contains two pointers to characters. It does not have any complex internal state that would need to be protected.
+* For these reasons, we decided that the benefits of being able to pass LineIterator by value outweighed the benefits of data hiding in this particular case.
+* In conclusion, we believe that our decision not to use data hiding techniques for LineIterator was the most appropriate choice for our assembler's functionality and maintainability.
 */
-typedef struct
+typedef struct LineIterator
 {
-	char* start; /* Pointer to the start of the line. */
-	char* current; /* Pointer to the current position in the line. */
+    char* start; /* Pointer to the start of the line. */
+    char* current; /* Pointer to the current position in the line. */
 } LineIterator;
 
 /**

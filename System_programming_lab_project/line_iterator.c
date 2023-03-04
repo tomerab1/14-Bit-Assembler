@@ -6,7 +6,6 @@
 /** @file
 */
 
-
 void line_iterator_put_line(LineIterator* it, char* line)
 {
     it->current = it->start = line;
@@ -71,6 +70,7 @@ char* line_iterator_next_word(LineIterator* it, char* seps)
         word[log_sz++] = line_iterator_peek(it);
         line_iterator_advance(it);
     }
+
 
     /* No more words are available*/
     if (log_sz == 0) {

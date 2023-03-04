@@ -6,6 +6,33 @@
 
 #include <ctype.h>
 
+typedef struct lines_list_node
+{
+	int address;
+	char dataForObject[SINGLE_ORDER_SIZE]; /* 14 bits string strings. */
+} LinesListNode;
+
+
+typedef struct flags
+{
+	bool dot_entry_exists;
+	bool dot_extern_exists;
+} flags;
+
+typedef struct TranslatedMachineData {
+	long address;
+	char translated[SINGLE_ORDER_SIZE + 1]; /* (+1) for '\0'. */
+} TranslatedMachineData;
+
+typedef struct programFinalStatus
+{
+	flags entryAndExternFlag;
+	bool createdObject;
+	bool createdExternals;
+	bool createdEntry;
+	bool error_flag;
+} programFinalStatus;
+
 bool initiate_second_pass(char* path, SymbolTable* table, memoryBuffer* memory, debugList* dbg_list)
 {
 	FILE* in = open_file(path, MODE_READ);
@@ -16,10 +43,10 @@ bool initiate_second_pass(char* path, SymbolTable* table, memoryBuffer* memory, 
 
 	add_label_base_address(table);
 	memory->instruction_image.counter = 0; /*init IC counter*/
-	
+
 	while ((line = get_line(in)) != NULL) {
 		bool labelFlag = FALSE; /*is current line first word is label*/
-		
+
 		line_iterator_put_line(&curLine, line);
 		line_iterator_jump_to(&curLine, COLON_CHAR);
 
@@ -33,7 +60,7 @@ bool initiate_second_pass(char* path, SymbolTable* table, memoryBuffer* memory, 
 	}
 	if (finalStatus.error_flag) return FALSE;
 	create_files(memory, path, &finalStatus, table);
-  
+
 	fclose(in);
 	free(line);
 	return TRUE;
@@ -43,7 +70,7 @@ void execute_line(LineIterator* it, SymbolTable* table, memoryBuffer* memory, de
 	/* Increment counter by one, as every command has a preceding word. */
 	memory->instruction_image.counter++;
 
-	if (is_label_exists_in_line(it, table, dbg_list, errorFlag, line_num)) { /*checks if label exists and valid*/
+if (is_label_exists_in_line(it, table, dbg_list, errorFlag, line_num)) { /*checks if label exists and valid*/
 		update_symbol_address(*it, memory, table); /*updates the address of the symbol*/
 		encode_label_start_process(it, memory, table, dbg_list); /*encodes the mem cell according to the label*/
    }
@@ -53,12 +80,12 @@ void execute_line(LineIterator* it, SymbolTable* table, memoryBuffer* memory, de
 }
 
 void skip_first_pass_mem(memoryBuffer* memory, LineIterator* it) {
-    int memCellsToJump = find_amount_of_lines_to_skip(it);
-    memory->instruction_image.counter += memCellsToJump;
+	int memCellsToJump = find_amount_of_lines_to_skip(it);
+	memory->instruction_image.counter += memCellsToJump;
 }
 
 int find_amount_of_lines_to_skip(LineIterator* it) {
-	char* op = NULL, *operand1 = NULL, *operand2 = NULL, *operand3 = NULL;
+	char* op = NULL, * operand1 = NULL, * operand2 = NULL, * operand3 = NULL;
 	char* tempLine = (char*)xmalloc(sizeof(char) * (strlen(it->start) + 1));
 	LineIterator tempIt;
 	int total = 0;
@@ -72,7 +99,7 @@ int find_amount_of_lines_to_skip(LineIterator* it) {
 	operand1 = line_iterator_next_word(&tempIt, " ");
 	operand2 = line_iterator_next_word(&tempIt, " ");
 	operand3 = line_iterator_next_word(&tempIt, " ");
-	
+
 	/* 1 for the opcode and one for the shared memory word of 2 registers. */
 	if ((operand1 && operand2) && (*operand1 == REG_BEG_CHAR && *operand2 == REG_BEG_CHAR))
 		return isdigit(*(operand1 + 1)) && isdigit(*(operand2 + 1)) ? 1 : 2;
@@ -90,17 +117,17 @@ int find_amount_of_lines_to_skip(LineIterator* it) {
 	free(operand2);
 	free(operand3);
 	free(tempLine);
-  
-    return total; /* 1 for the opcode, 2 for each individual memory word */
+
+	return total; /* 1 for the opcode, 2 for each individual memory word */
 }
 
 bool generate_object_file(memoryBuffer* memory, char* path)
 {
-    char* outfileName = NULL;
-    FILE* out = NULL;
-    TranslatedMachineData* translatedMemory = NULL;
-    char placeholder[50] = { 0 };
-    int i;
+	char* outfileName = NULL;
+	FILE* out = NULL;
+	TranslatedMachineData* translatedMemory = NULL;
+	char placeholder[50] = { 0 };
+	int i;
 
 	translatedMemory = translate_to_machine_data(memory);
 	outfileName = get_outfile_name(path, ".object");
@@ -114,11 +141,11 @@ bool generate_object_file(memoryBuffer* memory, char* path)
 		fputs(placeholder, out);
 	}
 
-    free(translatedMemory);
-    free(outfileName);
-    fclose(out);
+	free(translatedMemory);
+	free(outfileName);
+	fclose(out);
 
-    return TRUE;
+	return TRUE;
 }
 
 TranslatedMachineData* translate_to_machine_data(memoryBuffer* memory)
@@ -139,7 +166,7 @@ TranslatedMachineData* translate_to_machine_data(memoryBuffer* memory)
 void decode_memory(TranslatedMachineData* tmd, MemoryWord* inst, int* startPos, int endPos)
 {
 	int i, j, k = *startPos;
-	
+
 	for (i = 0; k < endPos; i++) {
 		unsigned int bits = (inst[i].mem[1] << 0x08) | (inst[i].mem[0]);
 		tmd[k].address = k;
@@ -163,6 +190,7 @@ void decode_memory(TranslatedMachineData* tmd, MemoryWord* inst, int* startPos, 
 bool generate_externals_file(SymbolTable* table, char* path) {
 	char* outfileName = NULL;/* Pointer to the filename of the output file */
 	FILE* out = NULL;
+
 	SymbolTableNode* symTableHead = table->head;
 	char placeholder[20] = { 0 }; /* Placeholder string for writing data to the file */
 
@@ -173,11 +201,11 @@ bool generate_externals_file(SymbolTable* table, char* path) {
 
 	/* Iterate over the symbol table and write the names and addresses of external symbols to the file */
 	while (symTableHead != NULL) {
-		if (symTableHead->sym.type == SYM_EXTERN) {
-			sprintf(placeholder, "%s\t%d\n", symTableHead->sym.name, symTableHead->sym.counter);
+		if (symbol_get_type(symbol_node_get_sym(symTableHead)) == SYM_EXTERN) {
+			sprintf(placeholder, "%s\t%d\n", symbol_get_name(symbol_node_get_sym(symTableHead)), symbol_get_counter(symbol_node_get_sym(symTableHead)));
 			fputs(placeholder, out);
 		}
-		symTableHead = symTableHead->next;
+		symTableHead = symbol_node_get_next(symTableHead);
 	}
 
 	/* Free the filename memory and close the output file */
@@ -191,7 +219,7 @@ bool generate_externals_file(SymbolTable* table, char* path) {
 bool generate_entries_file(SymbolTable* table, char* path) {
 	char* outfileName = NULL;
 	FILE* out = NULL;
-	SymbolTableNode* symTableHead = table->head;
+	SymbolTableNode* symTableHead = symbol_table_get_head(table);
 	char placeholder[20] = { 0 };
 
 	outfileName = get_outfile_name(path, ".entry");
@@ -199,16 +227,16 @@ bool generate_entries_file(SymbolTable* table, char* path) {
 
 	/* iterate over symbol table and write the entries to file */
 	while (symTableHead != NULL) {
-		if (symTableHead->sym.type == SYM_ENTRY) {
-			sprintf(placeholder, "%s\t%d\n", symTableHead->sym.name, symTableHead->sym.counter);
+		if (symbol_get_type(symbol_node_get_sym(symTableHead)) == SYM_ENTRY) {
+			sprintf(placeholder, "%s\t%d\n", symbol_get_name(symbol_node_get_sym(symTableHead)), symbol_get_counter(symbol_node_get_sym(symTableHead)));
 			fputs(placeholder, out);
 		}
-		symTableHead = symTableHead->next;
+		symTableHead = symbol_node_get_next(symTableHead);
 	}
 
 	free(outfileName);
 	fclose(out);
-  
+
 	return TRUE;
 }
 
@@ -234,10 +262,10 @@ void extract_directive_type(LineIterator* line, flags* flag) {
 }
 
 VarData* extract_variables(LineIterator* it) {
-    VarData* variables = NULL;
-    char* opcode = line_iterator_next_word(it, " ");
-    Opcodes op = get_opcode(opcode);
-    SyntaxGroups synGroup = get_syntax_group(opcode);
+	VarData* variables = NULL;
+	char* opcode = line_iterator_next_word(it, " ");
+	Opcodes op = get_opcode(opcode);
+	SyntaxGroups synGroup = get_syntax_group(opcode);
 
 	/* Extract variables for group 1, 2, and 7 opcodes */
     if (synGroup == SG_GROUP_1 || synGroup == SG_GROUP_2 || synGroup == SG_GROUP_7) {
@@ -254,52 +282,52 @@ VarData* extract_variables(LineIterator* it) {
         variables = extract_variables_group_5(it);
     }
 
-    return variables;
+	return variables;
 }
 
 bool is_label_exists_in_line(LineIterator* line, SymbolTable* table, debugList* dbg_list, bool* flag, long line_num) {
-    VarData* variablesData = NULL;
-    LineIterator itLeftVar, itRightVar, itLabel;
-    char* tempWord = 0;
-    variablesData = extract_variables(line);
+	VarData* variablesData = NULL;
+	LineIterator itLeftVar, itRightVar, itLabel;
+	char* tempWord = 0;
+	variablesData = extract_variables(line);
 
 	if (!variablesData)
 		return TRUE;
-    
-    switch (varData_get_total(variablesData))
-    {
-    case 1: /*group 3 and 6, left var*/
-        if (varData_get_leftVar(variablesData) != NULL) {
-            line_iterator_put_line(&itLeftVar, varData_get_leftVar(variablesData));
-            return investigate_word(line, &itLeftVar, table, dbg_list, flag, line_num, varData_get_leftVar(variablesData), 1);
-        }
-        else {
-            line_iterator_put_line(&itLabel, varData_get_label(variablesData));
+
+	switch (varData_get_total(variablesData))
+	{
+	case 1: /*group 3 and 6, left var*/
+		if (varData_get_leftVar(variablesData) != NULL) {
+			line_iterator_put_line(&itLeftVar, varData_get_leftVar(variablesData));
+			return investigate_word(line, &itLeftVar, table, dbg_list, flag, line_num, varData_get_leftVar(variablesData), 1);
+		}
+		else {
+			line_iterator_put_line(&itLabel, varData_get_label(variablesData));
 			return investigate_word(line, &itLabel, table, dbg_list, flag, line_num, varData_get_label(variablesData), 1);
-        }
+		}
 
-    case 2: /*groups 1,2,7, left var and right var*/
-        
-        line_iterator_put_line(&itLeftVar, varData_get_leftVar(variablesData));
-        line_iterator_put_line(&itRightVar, varData_get_rightVar(variablesData));
-        return investigate_word(line, &itLeftVar, table, dbg_list, flag, line_num, varData_get_leftVar(variablesData),2) ||
-            investigate_word(line, &itRightVar, table, dbg_list, flag, line_num, varData_get_rightVar(variablesData), 2);
+	case 2: /*groups 1,2,7, left var and right var*/
 
-    case 3: /*groups 5, labe, left var and right var*/
-        line_iterator_put_line(&itLeftVar, varData_get_leftVar(variablesData));
-        line_iterator_put_line(&itRightVar, varData_get_rightVar(variablesData));
-        line_iterator_put_line(&itLabel, varData_get_label(variablesData));
+		line_iterator_put_line(&itLeftVar, varData_get_leftVar(variablesData));
+		line_iterator_put_line(&itRightVar, varData_get_rightVar(variablesData));
+		return investigate_word(line, &itLeftVar, table, dbg_list, flag, line_num, varData_get_leftVar(variablesData), 2) ||
+			investigate_word(line, &itRightVar, table, dbg_list, flag, line_num, varData_get_rightVar(variablesData), 2);
 
-        return investigate_word(line, &itLeftVar, table, dbg_list, flag, line_num, varData_get_leftVar(variablesData),3) ||
-            investigate_word(line, &itRightVar, table, dbg_list, flag, line_num, varData_get_rightVar(variablesData), 3) ||
-            investigate_word(line, &itLabel, table, dbg_list, flag, line_num, varData_get_label(variablesData), 3);
-    }
+	case 3: /*groups 5, labe, left var and right var*/
+		line_iterator_put_line(&itLeftVar, varData_get_leftVar(variablesData));
+		line_iterator_put_line(&itRightVar, varData_get_rightVar(variablesData));
+		line_iterator_put_line(&itLabel, varData_get_label(variablesData));
+
+		return investigate_word(line, &itLeftVar, table, dbg_list, flag, line_num, varData_get_leftVar(variablesData), 3) ||
+			investigate_word(line, &itRightVar, table, dbg_list, flag, line_num, varData_get_rightVar(variablesData), 3) ||
+			investigate_word(line, &itLabel, table, dbg_list, flag, line_num, varData_get_label(variablesData), 3);
+	}
 
 	return TRUE;
 }
 
 bool investigate_word(LineIterator* originalLine, LineIterator* wordIterator, SymbolTable* table, debugList* dbg_list, bool* flag, long line_num, char* wordToInvestigate, int amountOfVars) {
-	if (is_register_name_whole(wordIterator)) 
+	if (is_register_name_whole(wordIterator))
 		return FALSE;
 
 	line_iterator_backwards(wordIterator);
@@ -320,72 +348,72 @@ bool investigate_word(LineIterator* originalLine, LineIterator* wordIterator, Sy
 }
 
 void find_word_start_point(LineIterator* it, char* word, int amountOfVars) {
-    bool found = FALSE;
-    it->current = it->start;
-    line_iterator_jump_to(it, COLON_CHAR);
-    line_iterator_consume_blanks(it);
-    line_iterator_jump_to(it, SPACE_CHAR);
+	bool found = FALSE;
+	it->current = it->start;
+	line_iterator_jump_to(it, COLON_CHAR);
+	line_iterator_consume_blanks(it);
+	line_iterator_jump_to(it, SPACE_CHAR);
 
-    switch (amountOfVars)
-    {
-    case 1:
-        while(line_iterator_peek(it) != *word){
-            line_iterator_advance(it);
-        }
+	switch (amountOfVars)
+	{
+	case 1:
+		while (line_iterator_peek(it) != *word) {
+			line_iterator_advance(it);
+		}
 		break;
-    case 2:
-        if(strcmp(line_iterator_next_word(it, ", "),word) == 0) {
-            line_iterator_unget_word(it, word);
-            line_iterator_consume_blanks(it);
-        }
-        else {
-            line_iterator_jump_to(it,COMMA_CHAR);
-        }
+	case 2:
+		if (strcmp(line_iterator_next_word(it, ", "), word) == 0) {
+			line_iterator_unget_word(it, word);
+			line_iterator_consume_blanks(it);
+		}
+		else {
+			line_iterator_jump_to(it, COMMA_CHAR);
+		}
 		break;
-    case 3:
-        if (strcmp(line_iterator_next_word(it, "( "), word) == 0) {
-            line_iterator_unget_word(it, word);
-            line_iterator_consume_blanks(it);
-        }
-        else if(strcmp(line_iterator_next_word(it, ", "), word) == 0){
-            line_iterator_unget_word(it, word);
-            line_iterator_consume_blanks(it);
-        }
-        else {
-            line_iterator_jump_to(it, COMMA_CHAR);
-            line_iterator_advance(it);
-        }
+	case 3:
+		if (strcmp(line_iterator_next_word(it, "( "), word) == 0) {
+			line_iterator_unget_word(it, word);
+			line_iterator_consume_blanks(it);
+		}
+		else if (strcmp(line_iterator_next_word(it, ", "), word) == 0) {
+			line_iterator_unget_word(it, word);
+			line_iterator_consume_blanks(it);
+		}
+		else {
+			line_iterator_jump_to(it, COMMA_CHAR);
+			line_iterator_advance(it);
+		}
 		break;
-    default:
+	default:
 		break;
-    }
+	}
 }
 
 void extern_exists(flags* flag) {
-    flag->dot_extern_exists = TRUE;
+	flag->dot_extern_exists = TRUE;
 }
 
 void entry_exists(flags* flag) {
-    flag->dot_entry_exists = TRUE;
+	flag->dot_entry_exists = TRUE;
 }
 
 void update_symbol_address(LineIterator it, memoryBuffer* memory, SymbolTable* table)
 {
-    char* line = (char*)xcalloc(strlen(it.start) + 1, sizeof(char));
-    LineIterator cpyIt;
-    int offset = 0;
+	char* line = (char*)xcalloc(strlen(it.start) + 1, sizeof(char));
+	LineIterator cpyIt;
+	int offset = 0;
 
-    strcpy(line, it.start);
-    line_iterator_put_line(&cpyIt, line);
-    line_iterator_replace(&cpyIt, "(), ", SPACE_CHAR);
-    line_iterator_jump_to(&cpyIt, COLON_CHAR);
+	strcpy(line, it.start);
+	line_iterator_put_line(&cpyIt, line);
+	line_iterator_replace(&cpyIt, "(), ", SPACE_CHAR);
+	line_iterator_jump_to(&cpyIt, COLON_CHAR);
 
-    for (char* word = line_iterator_next_word(&cpyIt, " "); word != NULL; word = line_iterator_next_word(&cpyIt, " "), offset++) {
-        update_symbol_offset(word, offset, memory, table);
-        free(word);
-    }
+	for (char* word = line_iterator_next_word(&cpyIt, " "); word != NULL; word = line_iterator_next_word(&cpyIt, " "), offset++) {
+		update_symbol_offset(word, offset, memory, table);
+		free(word);
+	}
 
-    free(line);
+	free(line);
 }
 
 void update_symbol_offset(char* word, int offset, memoryBuffer* memory, SymbolTable* table)
@@ -394,40 +422,44 @@ void update_symbol_offset(char* word, int offset, memoryBuffer* memory, SymbolTa
 	line_iterator_put_line(&tmp, word);
 
 	if (is_label_name(&tmp)) {
-		SymbolTableNode* head = table->head;
+		SymbolTableNode* head = symbol_table_get_head(table);
 
 		while (head) {
-			if (strcmp(head->sym.name, word) == 0 && head->sym.type == SYM_EXTERN) {
-				if (head->sym.counter == 0) {
-					head->sym.counter = DECIMAL_ADDRESS_BASE + memory->instruction_image.counter + offset - 1;
+			if (strcmp(symbol_get_name(symbol_node_get_sym(head)), word) == 0 && symbol_get_type(symbol_node_get_sym(head)) == SYM_EXTERN) {
+				if (symbol_get_counter(symbol_node_get_sym(head)) == 0) {
+					symbol_set_counter(symbol_node_get_sym(head), DECIMAL_ADDRESS_BASE + memory->instruction_image.counter + offset - 1);
 				}
 				else {
 					symbol_table_insert_symbol(table, symbol_table_new_node(word, SYM_EXTERN, DECIMAL_ADDRESS_BASE + memory->instruction_image.counter + offset - 1));
 					break;
 				}
 			}
-			else if (strcmp(head->sym.name, word) == 0 && head->sym.type == SYM_ENTRY) {
-				SymbolTableNode* defHead = table->head;
+			else if (strcmp(symbol_get_name(symbol_node_get_sym(head)), word) == 0 && symbol_get_type(symbol_node_get_sym(head)) == SYM_ENTRY) {
+				SymbolTableNode* defHead = symbol_table_get_head(table);
 
 				while (defHead) {
-					if (strcmp(defHead->sym.name, word) == 0 && (defHead->sym.type == SYM_CODE || defHead->sym.type == SYM_DATA)) {
-						head->sym.counter = defHead->sym.counter;
+					if (strcmp(symbol_get_name(symbol_node_get_sym(defHead)), word) == 0 && (symbol_get_type(symbol_node_get_sym(defHead)) == SYM_CODE || symbol_get_type(symbol_node_get_sym(defHead)) == SYM_DATA)) {
+						symbol_set_counter(symbol_node_get_sym(head), symbol_get_counter(symbol_node_get_sym(defHead)));
 						break;
 					}
 
-					defHead = defHead->next;
+					defHead = symbol_node_get_next(defHead);
 				}
 			}
 
-			head = head->next;
+			head = symbol_node_get_next(head);
 		}
 	}
 }
 
 void add_label_base_address(SymbolTable* table)
 {
-	LIST_FOR_EACH(SymbolTableNode, table->head, head) {
-		if (head->sym.type == SYM_DATA || head->sym.type == SYM_CODE)
-			head->sym.counter += DECIMAL_ADDRESS_BASE;
+	SymbolTableNode* head = symbol_table_get_head(table);
+
+	while (head) {
+		if (symbol_get_type(symbol_node_get_sym(head)) == SYM_DATA || symbol_get_type(symbol_node_get_sym(head)) == SYM_CODE) {
+			symbol_set_counter(symbol_node_get_sym(head), symbol_get_counter(symbol_node_get_sym(head)) + DECIMAL_ADDRESS_BASE);
+		}
+		head = symbol_node_get_next(head);
 	}
 }

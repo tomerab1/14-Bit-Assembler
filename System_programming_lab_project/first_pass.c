@@ -57,7 +57,8 @@ bool do_first_pass(char* path, memoryBuffer* img, SymbolTable* sym_table, debugL
 	}
 
     fclose(in);
-	sym_table->completed = TRUE;
+	symbol_table_set_completed(sym_table, TRUE);
+	
 	return should_encode;
 }
 
@@ -130,6 +131,7 @@ bool first_pass_process_sym_def(LineIterator* it, memoryBuffer* img, SymbolTable
 	/* If it is not an extern/entry then register an error. */
 	SymbolTableNode* node = symbol_table_search_symbol(sym_table, name);
 
+
 	/* Register a symbol definition node.*/
 	if (node && (node->sym.type == SYM_DATA || node->sym.type == SYM_CODE)) {
 		debug_list_register_node(dbg_list, debug_list_new_node(it->start, it->current, line, ERROR_CODE_SYMBOL_REDEFINITION));
@@ -170,7 +172,7 @@ bool first_pass_process_sym_data(LineIterator* it, memoryBuffer* img, SymbolTabl
 	/* If it is not an extern/entry then register an error. */
 	SymbolTableNode* node = symbol_table_search_symbol(sym_table, name);
 
-	if (node && (node->sym.type == SYM_DATA || node->sym.type == SYM_CODE)) {
+	if (node && (symbol_get_type(symbol_node_get_sym(node)) == SYM_DATA || symbol_get_type(symbol_node_get_sym(node)) == SYM_CODE)) {
 		debug_list_register_node(dbg_list, debug_list_new_node(it->start, it->current, line, ERROR_CODE_SYMBOL_REDEFINITION));
 		return FALSE;
 	}
@@ -198,11 +200,12 @@ bool first_pass_process_sym_string(LineIterator* it, memoryBuffer* img, SymbolTa
 	symbol_table_insert_symbol(sym_table, symbol_table_new_node(name, SYM_DATA, img->data_image.counter));
 
 	/* Check the syntax, we want a copy of the iterator because if the syntax is correct we will encode the instructions to memory. */
-	/* Check if the syntax is valid.*/
+
+	/* Check if the syntax is valid.* /
 	if (!validate_syntax(*it, FP_SYM_STR, line, dbg_list)) {
 		return FALSE;
 	}
-	/* Encode the image as a dot string.*/
+	/* Encode the image as a dot string. */
 	if (should_encode) {
 		encode_dot_string(it, img);
 	}
@@ -240,6 +243,7 @@ bool first_pass_process_sym_ent(LineIterator* it, memoryBuffer* img, SymbolTable
 
 	/* Check wheter the symbol already exist as an entry/extern directive */
 	SymbolTableNode* node = symbol_table_search_symbol(sym_table, word);
+
 
 	/* Insert symbol in symbol table.*/
 	if (node && (node->sym.type != SYM_ENTRY && node->sym.type != SYM_EXTERN)) {

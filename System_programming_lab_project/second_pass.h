@@ -13,32 +13,13 @@
 #include "utils.h"
 #include "constants.h"
 
-typedef struct lines_list_node
-{
-	int address;
-	char dataForObject[SINGLE_ORDER_SIZE]; /* 14 bits string strings. */
-} LinesListNode;
+typedef struct lines_list_node LinesListNode;
 
+typedef struct flags flags;
 
-typedef struct flags
-{
-	bool dot_entry_exists;
-	bool dot_extern_exists;
-} flags;
+typedef struct TranslatedMachineData TranslatedMachineData;
 
-typedef struct {
-	long address;
-	char translated[SINGLE_ORDER_SIZE + 1]; /* (+1) for '\0'. */
-} TranslatedMachineData;
-
-typedef struct programFinalStatus
-{
-	flags entryAndExternFlag;
-	bool createdObject;
-	bool createdExternals;
-	bool createdEntry;
-	bool error_flag;
-} programFinalStatus;
+typedef struct programFinalStatus programFinalStatus;
 
 
 /**

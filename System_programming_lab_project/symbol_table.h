@@ -6,30 +6,13 @@
 
 #include "utils.h"
 
-typedef enum { SYM_DATA, SYM_CODE, SYM_ENTRY, SYM_EXTERN } symbolType;
+typedef enum symbolType { SYM_DATA, SYM_CODE, SYM_ENTRY, SYM_EXTERN } symbolType;
 
-typedef struct
-{
-	char* name;
-	long counter;
-	symbolType type;
-} Symbol;
+typedef struct Symbol Symbol;
 
-typedef struct __sym_table_node
-{
-	Symbol sym;
-	struct __sym_table_node* next;
-} SymbolTableNode;
+typedef struct SymbolTableNode SymbolTableNode;
 
-typedef struct
-{
-	SymbolTableNode* head;
-	SymbolTableNode* tail;
-	int amountOfSymbols;
-	bool hasExternals;
-	bool hasEntries;
-	bool completed;
-} SymbolTable;
+typedef struct SymbolTable SymbolTable;
 
 /**
 * @brief Create a new symbol table. The table is empty after this function returns. This can be used to create an uninitialized table without allocating it for the first time.
@@ -90,7 +73,6 @@ void symbol_table_destroy(SymbolTable** table);
 int update_amount_of_items(SymbolTable* table);
 
 /**
-
 @brief Check if a symbol with the given name exists in the symbol table and has a specific type.
 @param sym_table A pointer to the symbol table to search in.
 @param name A string containing the name of the symbol to search for.
@@ -100,5 +82,37 @@ This function searches the given symbol table for a symbol with the given name a
 Note that if the symbol is not found in the symbol table, the function will also return FALSE.
 */
 bool check_symbol_existence(SymbolTable* sym_table, char* name, symbolType newSymType);
+
+char* symbol_get_name(Symbol* sym);
+
+int symbol_get_counter(Symbol* sym);
+
+void symbol_set_counter(Symbol* sym, int num);
+
+symbolType symbol_get_type(Symbol* sym);
+
+Symbol* symbol_node_get_sym(SymbolTableNode* node);
+
+SymbolTableNode* symbol_node_get_next(SymbolTableNode* node);
+
+SymbolTableNode* symbol_table_get_head(SymbolTable* table);
+
+SymbolTableNode* symbol_table_get_tail(SymbolTable* table);
+
+int symbol_table_get_numOfSym(SymbolTable* table);
+
+void symbol_table_set_numOfSym(SymbolTable* table, int num);
+
+bool symbol_table_get_hasExternals(SymbolTable* table);
+
+void symbol_table_set_hasExternals(SymbolTable* table, bool hasExternals);
+
+bool symbol_table_get_hasEntries(SymbolTable* table);
+
+void symbol_table_set_hasEntries(SymbolTable* table, bool hasEntries);
+
+bool symbol_table_get_completed(SymbolTable* table);
+
+void symbol_table_set_completed(SymbolTable* table, bool isCompleted);
 
 #endif
