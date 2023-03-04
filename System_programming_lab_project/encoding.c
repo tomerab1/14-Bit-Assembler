@@ -468,8 +468,8 @@ void encode_labels(VarData* variables, SyntaxGroups synGroup, SymbolTable* symTa
 				set_image_memory(img, ENCODING_EXT, FLAG_ERA);
 			}
 			else {
-				set_image_memory(img, (symbol_get_counter(symbol_node_get_sym(nodePtr)) << 0x02, FLAG_OPCODE1 | FLAG_SOURCE | FLAG_DEST);
-				set_image_memory(img, (symbol_get_counter(symbol_node_get_sym(nodePtr)) >> 0x08, FLAG_OPCODE2 | FLAG_PARAM1 | FLAG_PARAM2);
+				set_image_memory(img, (symbol_get_counter(symbol_node_get_sym(nodePtr))) << 0x02, FLAG_OPCODE1 | FLAG_SOURCE | FLAG_DEST);
+				set_image_memory(img, (symbol_get_counter(symbol_node_get_sym(nodePtr))) >> 0x08, FLAG_OPCODE2 | FLAG_PARAM1 | FLAG_PARAM2);
 				set_image_memory(img, ENCODING_RELOC, FLAG_ERA);
 			}
 		}
@@ -488,8 +488,8 @@ void encode_labels(VarData* variables, SyntaxGroups synGroup, SymbolTable* symTa
 					set_image_memory(img, ENCODING_EXT, FLAG_ERA);
 				}
 				else {
-					set_image_memory(img, (symbol_get_counter(symbol_node_get_sym(nodePtr)) << 0x02, FLAG_OPCODE1 | FLAG_SOURCE | FLAG_DEST);
-					set_image_memory(img, (symbol_get_counter(symbol_node_get_sym(nodePtr)) >> 0x08, FLAG_OPCODE2 | FLAG_PARAM1 | FLAG_PARAM2);
+					set_image_memory(img, (symbol_get_counter(symbol_node_get_sym(nodePtr))) << 0x02, FLAG_OPCODE1 | FLAG_SOURCE | FLAG_DEST);
+					set_image_memory(img, (symbol_get_counter(symbol_node_get_sym(nodePtr))) >> 0x08, FLAG_OPCODE2 | FLAG_PARAM1 | FLAG_PARAM2);
 					set_image_memory(img, ENCODING_RELOC, FLAG_ERA);
 				}
 			}
@@ -503,8 +503,8 @@ void encode_labels(VarData* variables, SyntaxGroups synGroup, SymbolTable* symTa
 					set_image_memory(img, ENCODING_EXT, FLAG_ERA);
 				}
 				else {
-					set_image_memory(img, (symbol_get_counter(symbol_node_get_sym(nodePtr)) & 0xff) << 0x02, FLAG_OPCODE1 | FLAG_SOURCE | FLAG_DEST);
-					set_image_memory(img, (symbol_get_counter(symbol_node_get_sym(nodePtr)) << 0x02) >> 0x08, FLAG_OPCODE2 | FLAG_PARAM1 | FLAG_PARAM2);
+					set_image_memory(img, ((symbol_get_counter(symbol_node_get_sym(nodePtr))) & 0xff) << 0x02, FLAG_OPCODE1 | FLAG_SOURCE | FLAG_DEST);
+					set_image_memory(img, ((symbol_get_counter(symbol_node_get_sym(nodePtr))) << 0x02) >> 0x08, FLAG_OPCODE2 | FLAG_PARAM1 | FLAG_PARAM2);
 					set_image_memory(img, ENCODING_RELOC, FLAG_ERA);
 				}
 			}

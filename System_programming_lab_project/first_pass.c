@@ -132,7 +132,7 @@ bool first_pass_process_sym_def(LineIterator* it, memoryBuffer* img, SymbolTable
 	SymbolTableNode* node = symbol_table_search_symbol(sym_table, name);
 
 	// Register a symbol definition node.
-	if (node && (node->sym.type == SYM_DATA || node->sym.type == SYM_CODE)) {
+	if (node && (symbol_get_type(symbol_node_get_sym(node)) == SYM_DATA || symbol_get_type(symbol_node_get_sym(node)) == SYM_CODE)) {
 		debug_list_register_node(dbg_list, debug_list_new_node(it->start, it->current, line, ERROR_CODE_SYMBOL_REDEFINITION));
 		return FALSE;
 	}
@@ -171,7 +171,7 @@ bool first_pass_process_sym_data(LineIterator* it, memoryBuffer* img, SymbolTabl
 	/* If it is not an extern/entry then register an error. */
 	SymbolTableNode* node = symbol_table_search_symbol(sym_table, name);
 
-	if (node && (node->sym.type == SYM_DATA || node->sym.type == SYM_CODE)) {
+	if (node && (symbol_get_type(symbol_node_get_sym(node)) == SYM_DATA || symbol_get_type(symbol_node_get_sym(node)) == SYM_CODE)) {
 		debug_list_register_node(dbg_list, debug_list_new_node(it->start, it->current, line, ERROR_CODE_SYMBOL_REDEFINITION));
 		return FALSE;
 	}

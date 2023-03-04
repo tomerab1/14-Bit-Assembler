@@ -32,13 +32,15 @@ int update_amount_of_items(SymbolTable* table);
 
 bool check_symbol_existence(SymbolTable* sym_table, char* name, symbolType newSymType);
 
-char* symbol_get_name(Symbol sym);
+char* symbol_get_name(Symbol* sym);
 
-int symbol_get_counter(Symbol sym);
+int symbol_get_counter(Symbol* sym);
 
-symbolType symbol_get_type(Symbol sym);
+void symbol_set_counter(Symbol* sym, int num);
 
-Symbol symbol_node_get_sym(SymbolTableNode* node);
+symbolType symbol_get_type(Symbol* sym);
+
+Symbol* symbol_node_get_sym(SymbolTableNode* node);
 
 SymbolTableNode* symbol_node_get_next(SymbolTableNode* node);
 

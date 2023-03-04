@@ -141,24 +141,29 @@ bool check_symbol_existence(SymbolTable* sym_table, char* name, symbolType newSy
     }
 }
 
-char* symbol_get_name(Symbol sym)
+char* symbol_get_name(Symbol* sym)
 {
-    return sym.name;
+    return sym->name;
 }
 
-int symbol_get_counter(Symbol sym)
+int symbol_get_counter(Symbol* sym)
 {
-    return sym.counter;
+    return sym->counter;
 }
 
-symbolType symbol_get_type(Symbol sym)
+void symbol_set_counter(Symbol* sym, int num)
 {
-    return sym.type;
+    sym->counter = num;
 }
 
-Symbol symbol_node_get_sym(SymbolTableNode* node)
+symbolType symbol_get_type(Symbol* sym)
 {
-    return node->sym;
+    return sym->type;
+}
+
+Symbol* symbol_node_get_sym(SymbolTableNode* node)
+{
+    return &node->sym;
 }
 
 SymbolTableNode* symbol_node_get_next(SymbolTableNode* node)
