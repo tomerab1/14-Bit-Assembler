@@ -197,7 +197,6 @@ void encode_syntax_group_3(LineIterator* it, Opcodes op, memoryBuffer* img);
 */
 void encode_syntax_group_4(LineIterator* it, Opcodes op, memoryBuffer* img);
 
-/*TBD will be discussed 03/01*/
 /**
 * @brief Encode a syntax group 5 instruction.
 * @param it

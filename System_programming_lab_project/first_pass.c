@@ -26,7 +26,7 @@ bool do_first_pass(char* path, memoryBuffer* img, SymbolTable* sym_table, debugL
 		first_pass_process_opcode
 	};
 
-	// Read a new line from the input stream.
+	/* Read a new line from the input stream.*/
 	while ((curr_line = get_line(in)) != NULL) {
 		char* word = NULL;
 		
@@ -66,27 +66,27 @@ firstPassStates get_symbol_type(LineIterator* it, char* word)
 	bool is_valid = TRUE;
 
 	/* An .entry definition. */
-	// Returns FP_SYM_ENT or FP_SYM_EXT. entry. extern. data or. string.
+	/* Returns FP_SYM_ENT or FP_SYM_EXT. entry. extern. data or. string.*/
 	if (strcmp(word, ".entry") == 0) {
 		return FP_SYM_ENT;
 	}
 	/* An .extern definition. */
-	// Returns FP_SYM_EXT or FP_SYM_DEF depending on the word.
+	/* Returns FP_SYM_EXT or FP_SYM_DEF depending on the word.*/
 	else if (strcmp(word, ".extern") == 0) {
 		return FP_SYM_EXT;
 	}
-	// Get the opcode of the word.
+	/* Get the opcode of the word.*/
 	else if (get_opcode(word) != OP_UNKNOWN) {
 		/* Unget the opcode. */
 		line_iterator_unget_word(it, word);
 		return FP_OPCODE;
 	}
 	/* Symbol definition, may follow, .data or .string*/
-	// Check if the word is a valid label.
+	/* Check if the word is a valid label.*/
 	else if ((is_valid = is_valid_label(word)) == TRUE) {
 		char* next_word = line_iterator_next_word(it, " ");
 
-		// Free the next word.
+		/* Free the next word. */
 		if (!next_word) {
 			free(next_word);
 			return FP_NONE;
@@ -130,7 +130,7 @@ bool first_pass_process_sym_def(LineIterator* it, memoryBuffer* img, SymbolTable
 	/* If it is not an extern/entry then register an error. */
 	SymbolTableNode* node = symbol_table_search_symbol(sym_table, name);
 
-	// Register a symbol definition node.
+	/* Register a symbol definition node.*/
 	if (node && (node->sym.type == SYM_DATA || node->sym.type == SYM_CODE)) {
 		debug_list_register_node(dbg_list, debug_list_new_node(it->start, it->current, line, ERROR_CODE_SYMBOL_REDEFINITION));
 		return FALSE;
@@ -139,11 +139,11 @@ bool first_pass_process_sym_def(LineIterator* it, memoryBuffer* img, SymbolTable
 	symbol_table_insert_symbol(sym_table, symbol_table_new_node(name, SYM_CODE, img->instruction_image.counter));
 
 	/* Check the syntax, we want a copy of the iterator because if the syntax is correct we will encode the instructions to memory. */
-	// Check if the syntax is valid.
+	/* Check if the syntax is valid.*/
 	if (!validate_syntax(*it, FP_SYM_DEF, line, dbg_list)) {
 		return FALSE;
 	}
-	// Encode to the image.
+	/* Encode to the image.*/
 	if (should_encode) {
 		encode_opcode(it, img);
 	}
@@ -157,7 +157,7 @@ bool first_pass_process_opcode(LineIterator* it, memoryBuffer* img, SymbolTable*
 	if (!validate_syntax(*it, FP_OPCODE, line, dbg_list)) {
 		return FALSE;
 	}
-	// Encode to the image.
+	/* Encode to the image.*/
 	if (should_encode) {
 		encode_opcode(it,img);
 	}
@@ -181,7 +181,7 @@ bool first_pass_process_sym_data(LineIterator* it, memoryBuffer* img, SymbolTabl
 	if (!validate_syntax(*it, FP_SYM_DATA, line, dbg_list)) {
 		return FALSE;
 	}
-	// Encode the .data.
+	/* Encode the .data.*/
 	if (should_encode) {
 		encode_dot_data(it, img);
 	}
@@ -198,11 +198,11 @@ bool first_pass_process_sym_string(LineIterator* it, memoryBuffer* img, SymbolTa
 	symbol_table_insert_symbol(sym_table, symbol_table_new_node(name, SYM_DATA, img->data_image.counter));
 
 	/* Check the syntax, we want a copy of the iterator because if the syntax is correct we will encode the instructions to memory. */
-	// Check if the syntax is valid.
+	/* Check if the syntax is valid.*/
 	if (!validate_syntax(*it, FP_SYM_STR, line, dbg_list)) {
 		return FALSE;
 	}
-	// Encode the image as a dot string.
+	/* Encode the image as a dot string.*/
 	if (should_encode) {
 		encode_dot_string(it, img);
 	}
@@ -214,7 +214,7 @@ bool first_pass_process_sym_ent(LineIterator* it, memoryBuffer* img, SymbolTable
     char* word = line_iterator_next_word(it, " ");
 
 	line_iterator_unget_word(it, word);
-	// register a new word in the list
+	/* register a new word in the list*/
 	if (!word) {
 		debug_list_register_node(dbg_list, debug_list_new_node(it->start, it->current, line, ERROR_CODE_SYNTAX_ERROR));
 		free(word);
@@ -241,7 +241,7 @@ bool first_pass_process_sym_ent(LineIterator* it, memoryBuffer* img, SymbolTable
 	/* Check wheter the symbol already exist as an entry/extern directive */
 	SymbolTableNode* node = symbol_table_search_symbol(sym_table, word);
 
-	// Insert symbol in symbol table.
+	/* Insert symbol in symbol table.*/
 	if (node && (node->sym.type != SYM_ENTRY && node->sym.type != SYM_EXTERN)) {
 		symbol_table_insert_symbol(sym_table, symbol_table_new_node(word, SYM_ENTRY, node->sym.counter));
 	}
@@ -250,7 +250,7 @@ bool first_pass_process_sym_ent(LineIterator* it, memoryBuffer* img, SymbolTable
 	}
 
 	/* Check the syntax, we want a copy of the iterator because if the syntax is correct we will encode the instructions to memory. */
-	// Check if the syntax is valid.
+	/* Check if the syntax is valid.*/
 	if (!validate_syntax(*it, FP_SYM_ENT, line, dbg_list)) {
 		free(word);
 		return FALSE;
@@ -266,7 +266,7 @@ bool first_pass_process_sym_ext(LineIterator* it, memoryBuffer* img, SymbolTable
     char* word = line_iterator_next_word(it, " ");
 
 	line_iterator_unget_word(it, word);
-	// register a new word in the list
+	/* register a new word in the list*/
 	if (!word) {
 		debug_list_register_node(dbg_list, debug_list_new_node(it->start, it->current, line, ERROR_CODE_SYNTAX_ERROR));
 		free(word);
@@ -291,7 +291,7 @@ bool first_pass_process_sym_ext(LineIterator* it, memoryBuffer* img, SymbolTable
 	symbol_table_insert_symbol(sym_table, symbol_table_new_node(word, SYM_EXTERN, 0));
 
 	/* Check the syntax, we want a copy of the iterator because if the syntax is correct we will encode the instructions to memory. */
-	// Check if the syntax is valid.
+	/* Check if the syntax is valid.*/
 	if (!validate_syntax(*it, FP_SYM_ENT, line, dbg_list)) {
 		free(word);
 		return FALSE;
