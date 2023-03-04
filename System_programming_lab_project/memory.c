@@ -60,19 +60,19 @@ void set_image_memory(imageMemory* mem, unsigned char byte, int flags)
 {
     MemoryWord* curr_block = &mem->memory[mem->counter];
 
-    // Set the ERA bits to the current block.
+    /* Set the ERA bits to the current block.*/
     if (flags & FLAG_ERA)     set_era_bits(curr_block, byte);
-    // Set the source bits of the current block.
+    /* Set the source bits of the current block.*/
     if (flags & FLAG_SOURCE)  set_source_bits(curr_block, byte);
-    // Set the destination bits of the current block.
+    /* Set the destination bits of the current block.*/
     if (flags & FLAG_DEST)    set_dest_bits(curr_block, byte);
-    // Set the opcode cell 1 bits.
+    /* Set the opcode cell 1 bits.*/
     if (flags & FLAG_OPCODE1) set_opcode_cell_1_bits(curr_block, byte);
-    // Set the opcode cell 2 bits.
+    /* Set the opcode cell 2 bits.*/
     if (flags & FLAG_OPCODE2) set_opcode_cell_2_bits(curr_block, byte);
-    // Set the parameter 1 bit.
+    /* Set the parameter 1 bit.*/
     if (flags & FLAG_PARAM1)  set_param1_bits(curr_block, byte);
-    // Set the parameter 2 bits of the current block.
+    /* Set the parameter 2 bits of the current block.*/
     if (flags & FLAG_PARAM2)  set_param2_bits(curr_block, byte);
 }
 
@@ -240,18 +240,18 @@ void dump_memory(memoryBuffer* buf)
                 *data = buf->data_image.memory;
     int i, j;
 
-    // Prints the instructions in the instruction image.
+    /* Prints the instructions in the instruction image.*/
     for (i = 0; i < buf->instruction_image.counter; i++) {
         unsigned int bits = (inst[i].mem[1] << 0x08) | (inst[i].mem[0]);
 
-        // Prints the bits of the bit set.
+         /*  Prints the bits of the bit set.*/
         if (bits == 0) {
             printf("?");
         }
         else {
-            // Prints 1 or 0 if the bit is 1 or 0
+            /* Prints 1 or 0 if the bit is 1 or 0*/
             for (j = 13; j >= 0; j--) {
-                // Prints 1 if bit 0x01 is set to 1 if bit 0x01 is set to 1 if bit 0x01 is set to 0x01
+                /* Prints 1 if bit 0x01 is set to 1 if bit 0x01 is set to 1 if bit 0x01 is set to 0x01*/
                 if (bits & (0x01 << j)) printf("1");
                 else printf("0");
             }
@@ -260,13 +260,13 @@ void dump_memory(memoryBuffer* buf)
         printf("\n");
     }
 
-    // Prints the data image.
+    /* Prints the data image.*/
     for (i = 0; i < buf->data_image.counter; i++) {
         unsigned int bits = (data[i].mem[1] << 0x08) | (data[i].mem[0]);
 
-        // Prints 1 or 0 if the bit is 1 or 0
+         /* Prints 1 or 0 if the bit is 1 or 0*/
         for (j = 13; j >= 0; j--) {
-            // Prints 1 if bit 0x01 is set to 1 if bit 0x01 is set to 1 if bit 0x01 is set to 0x01
+             /* Prints 1 if bit 0x01 is set to 1 if bit 0x01 is set to 1 if bit 0x01 is set to 0x01*/
             if (bits & (0x01 << j)) printf("1");
             else printf("0");
         }

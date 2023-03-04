@@ -9,35 +9,48 @@
 */
 typedef struct driver Driver;
 
-/** Function for getting a new driver. 
- * @return A new pointer to a driver.
+/**
+* Create a new driver. This is called by libc's init_driver () to create a new driver.
+*
+*
+* @return Pointer to the new driver or NULL if there was an error allocating memory. The caller must free the returned pointer
 */
 Driver* driver_new_driver();
 
-/** Function for executing the driver.
- * @param The driver to execute.
- * @param The mains argc
- * @param The mains argv
- * @return An appropriate exit code.
+/**
+* Execute a driver. This is the entry point for drivers that wish to execute their command line interface.
+*
+* @param driver
+* @param argc - Number of arguments to pass to the driver.
+* @param argv - Arguments to pass to the driver. These are passed as - is to the driver's exec () function.
+*
+* @return 0 on success non - zero on failure. In this case the driver is uninitialized and must be set to NULL
 */
 int driver_exec(Driver* driver, int argc, char** argv);
 
-/** Internal function for the execute function implementation.
- * @param The driver to execute.
- * @param The mains argc
- * @param The mains argv
- * @return An appropriate exit code.
+
+/**
+* Executes the assembler. This is the entry point for the execution of the assembly. It will start the pre - assembler and do the first pass of initiating the second pass.
+*
+* @param driver - The driver to initialize.
+* @param argc - Number of arguments to the assembly
+* @param argv - Array of argv [ 0 ] to the assembly
+*
+* @return 0 on success non - zero on failure ( in which case we're exiting the assembly without error
 */
 static int exec_impl(Driver* driver, int argc, char** argv);
 
-
-/** Internal function for initializing the driver.
- * @param The driver to initialize.
+/**
+* Called when the driver is initialized. This is where we initialize the data structures that are used to store debug information.
+* 
+* @param driver - The driver to initialize.
 */
 static void on_initialization(Driver* driver);
 
-/** Internal function for releasing the driver's resources.
- * @param The driver to release.
+/**
+* Called when the module is unloaded. Destroys all memory allocated by the module. This is the last function called to clean up the module's data structures.
+*
+* @param driver - the driver to release
 */
 static void on_exit(Driver* driver);
 

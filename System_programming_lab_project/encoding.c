@@ -36,7 +36,6 @@ void encode_dot_data(LineIterator* it, memoryBuffer* img)
 	}
 }
 
-/*2 first digits already encodede on first pass*/
 void encode_label_start_process(LineIterator* it, memoryBuffer* img, SymbolTable* symTable, debugList* dbg_list) {
 	VarData variables = { 0 };
 	char* opcode = NULL;
@@ -265,7 +264,6 @@ void encode_syntax_group_4(LineIterator* it, Opcodes op, memoryBuffer* img)
 	encode_preceding_word(&img->instruction_image, op, NULL, NULL, FALSE);
 }
 
-/*TBD will be discussed 03/01*/
 void encode_syntax_group_5(LineIterator* it, Opcodes op, memoryBuffer* img)
 {
 	/* Source operand can be immediate, register or label. */
@@ -336,6 +334,7 @@ void encode_syntax_group_7(LineIterator* it, Opcodes op, memoryBuffer* img)
 	free(dest);
 }
 
+
 VarData extract_variables_group_1_and_2_and_7(LineIterator* it) {
 	VarData variablesData = { NULL };
 	variablesData.leftVar = line_iterator_next_word(it, ", ");
@@ -375,8 +374,6 @@ VarData extract_variables_group_5(LineIterator* it) {
 	return variablesData;
 }
 
-/*
-*/
 void encode_labels(VarData* variables, SyntaxGroups synGroup, SymbolTable* symTable, imageMemory* img)
 {
 	SymbolTableNode* nodePtr = NULL;
@@ -385,7 +382,6 @@ void encode_labels(VarData* variables, SyntaxGroups synGroup, SymbolTable* symTa
 	if (variables->label) {
 		nodePtr = symbol_table_search_symbol(symTable, variables->label);
 		if (nodePtr) {
-			printf("%d\t%s\n", img->counter, nodePtr->sym.name);
 			if (nodePtr->sym.type == SYM_EXTERN) {
 				set_image_memory(img, ENCODING_EXT, FLAG_ERA);
 			}
@@ -406,7 +402,6 @@ void encode_labels(VarData* variables, SyntaxGroups synGroup, SymbolTable* symTa
 		if (variables->leftVar) {
 			nodePtr = symbol_table_search_symbol(symTable, variables->leftVar);
 			if (nodePtr) {
-				printf("%d\t%s\n", img->counter, nodePtr->sym.name);
 				if (nodePtr->sym.type == SYM_EXTERN) {
 					set_image_memory(img, ENCODING_EXT, FLAG_ERA);
 				}
@@ -422,7 +417,6 @@ void encode_labels(VarData* variables, SyntaxGroups synGroup, SymbolTable* symTa
 		if (variables->rightVar) {
 			nodePtr = symbol_table_search_symbol(symTable, variables->rightVar);
 			if (nodePtr) {
-				printf("%d\t%s\n", img->counter, nodePtr->sym.name);
 				if (nodePtr->sym.type == SYM_EXTERN) {
 					set_image_memory(img, ENCODING_EXT, FLAG_ERA);
 				}

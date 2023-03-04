@@ -145,6 +145,16 @@ void symbol_table_destroy(SymbolTable** table)
     free(*table);
 }
 
+/**
+
+@brief Check if a symbol with the given name exists in the symbol table and has a specific type.
+@param sym_table A pointer to the symbol table to search in.
+@param name A string containing the name of the symbol to search for.
+@param newSymType An enumeration value representing the type of the symbol to check for (either SYM_ENTRY or SYM_EXTERN).
+@return A boolean value indicating whether a symbol with the given name and type was found in the symbol table or not.
+This function searches the given symbol table for a symbol with the given name and checks if it has the specified type (either SYM_ENTRY or SYM_EXTERN). If the symbol is found and has the correct type, the function returns TRUE. Otherwise, it returns FALSE.
+Note that if the symbol is not found in the symbol table, the function will also return FALSE.
+*/
 bool check_symbol_existence(SymbolTable* sym_table, char* name, symbolType newSymType) {
     SymbolTableNode* sym = symbol_table_search_symbol(sym_table, name);
 

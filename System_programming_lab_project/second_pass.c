@@ -21,21 +21,24 @@ bool initiate_second_pass(char* path, SymbolTable* table, memoryBuffer* memory, 
 	programFinalStatus finalStatus = { NULL };
 	LineIterator curLine;
 	char* line = NULL;
+	long lineNum = 1;
 
 	add_label_base_address(table);
 	memory->instruction_image.counter = 0; /*init IC counter*/
 	
 	while ((line = get_line(in)) != NULL) {
 		bool labelFlag = FALSE; /*is current line first word is label*/
+		
 		line_iterator_put_line(&curLine, line);
 		line_iterator_jump_to(&curLine, COLON_CHAR);
 
 		if (!directive_exists(&curLine)) { /*checks if any kind of instruction exists (.something)*/
-			execute_line(&curLine, table, memory, dbg_list, &finalStatus.error_flag, memory->instruction_image.counter);
+			execute_line(&curLine, table, memory, dbg_list, &finalStatus.error_flag, lineNum);
 		}
 		else {
 			extract_directive_type(&curLine, &finalStatus.entryAndExternFlag);
 		}
+		lineNum++;
 	}
 	if (finalStatus.error_flag) return FALSE;
 	create_files(memory, path, &finalStatus, table);
@@ -295,6 +298,11 @@ void extract_directive_type(LineIterator* line, flags* flag) {
     free(command);
 }
 
+/**
+* @brief Extract variables from the line. 
+* @param it Line iterator to get the information from
+* @return A VarData containing the variables
+*/
 VarData extract_variables(LineIterator* it) {
     VarData variables = { 0 };
 
@@ -317,6 +325,15 @@ VarData extract_variables(LineIterator* it) {
     return variables;
 }
 
+/**
+* @brief Check if a label exists in a line.
+* @param line
+* @param table
+* @param dbg_list The debugList that contains all the symbols that have been debugged so far.
+* @param flag
+* @param line_num The current line number. This is used for error reporting.
+* @return true if a label exists in the line and false otherwise
+*/
 bool is_label_exists_in_line(LineIterator* line, SymbolTable* table, debugList* dbg_list, bool* flag, long line_num) {
     VarData variablesData = { NULL };
     LineIterator itLeftVar, itRightVar, itLabel;
@@ -353,10 +370,20 @@ bool is_label_exists_in_line(LineIterator* line, SymbolTable* table, debugList* 
     default:
         return;
     }
-
-    
 }
 
+/**
+* @brief Investigate a word in the source. This is a function that looks for a label in the symbol table.
+* @param originalLine
+* @param wordIterator The iterator pointing to the word to investigate.
+* @param table The symbol table to search for the word.
+* @param dbg_list The debug list to add the debug information to.
+* @param flag A pointer to the variable that was found.
+* @param line_num The line number where the error occurred.
+* @param wordToInvestigate The word we are trying to investigate.
+* @param amountOfVars The amount of variables that were found.
+* @return TRUE if the word was found FALSE otherwise. In this case the flag is set to TRUE
+*/
 bool investigate_word(LineIterator* originalLine,LineIterator* wordIterator, SymbolTable* table, debugList* dbg_list, bool* flag, long line_num, char* wordToInvestigate, int amountOfVars) {
 	if (is_register_name_whole(wordIterator)) return FALSE;
 	line_iterator_backwards(wordIterator);
@@ -375,6 +402,12 @@ bool investigate_word(LineIterator* originalLine,LineIterator* wordIterator, Sym
 }
 
 /*type 1 - one var, type*/
+/**
+* @brief Finds the start point of a word.
+* @param it
+* @param word
+* @param amountOfVars Number of variables to look for. 1 means the word is searched as long as it does not start with a colon 2 means the word is
+*/
 void find_word_start_point(LineIterator* it, char* word, int amountOfVars) {
     bool found = FALSE;
     it->current = it->start;
@@ -461,6 +494,13 @@ void update_symbol_address(LineIterator it, memoryBuffer* memory, SymbolTable* t
     free(line);
 }
 
+/**
+* @brief Updates the symbol table to reflect the offset of the symbol in the word.
+* @param word
+* @param offset The offset of the symbol in the word.
+* @param memory The memory buffer that contains the symbol's data.
+* @param table The symbol table to update. It is assumed that the symbol table is indempotent
+*/
 void update_symbol_offset(char* word, int offset, memoryBuffer* memory, SymbolTable* table)
 {
 	LineIterator tmp;
@@ -497,6 +537,10 @@ void update_symbol_offset(char* word, int offset, memoryBuffer* memory, SymbolTa
 	}
 }
 
+/**
+* @brief Add a base address to all labels in the symbol table. This is used to determine where we are going to load the symbol table and when we have to look at the data or code in order to find the address of the label.
+* @param table
+*/
 void add_label_base_address(SymbolTable* table)
 {
 	LIST_FOR_EACH(SymbolTableNode, table->head, head) {
