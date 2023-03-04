@@ -6,20 +6,20 @@
 #include <ctype.h>
 
 
-typedef struct macro_list_node
+struct macro_list_node
 {
     int log_sz;
     int phy_sz;
     char* macro_name;
     char** macro_expension; /* A dynamic array of strings. */
     struct macro_list_node* next;
-} MacroListNode;
+};
 
-typedef struct macro_list
+struct macro_list
 {
     MacroListNode* head;
     MacroListNode* tail;
-} MacroList;
+};
 
 void macro_list_fill_list_from_file(FILE* in, MacroList* in_list)
 {

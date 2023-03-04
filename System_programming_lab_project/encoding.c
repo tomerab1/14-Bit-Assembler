@@ -2,7 +2,7 @@
 */
 #include "encoding.h"
 
-typedef struct VarData
+struct VarData
 {
 	char* leftVar; /* Pointer to the start of the line. */
 	EncodingTypes leftVarEncType;
@@ -11,7 +11,7 @@ typedef struct VarData
 	char* label;
 	EncodingTypes labelEncType;
 	int total;
-} VarData;
+};
 
 void encode_dot_string(LineIterator* it, memoryBuffer* img)
 {

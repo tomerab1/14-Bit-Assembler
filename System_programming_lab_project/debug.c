@@ -9,35 +9,35 @@
  * assembly code, including the start position, the position of the error, the length of
  * the error, the line number, and an error code indicating the type of error.
 */
-typedef struct errorContext
+struct errorContext
 {
 	char* start_pos;
 	char* err_pos;
 	ptrdiff_t err_len;
 	long line_num;
 	errorCodes err_code;
-} errorContext;
+};
 
 /**
  * The `debugNode` struct contains an `errorContext` struct representing debugging
  * information for the assembly code, as well as a pointer to the next node in the linked
  * list.
  */
-typedef struct debugNode
+struct debugNode
 {
 	errorContext ctx;
 	struct debugNode* next;
-} debugNode;
+};
 
 /**
  * The `debugList` struct contains pointers to the head and tail nodes of a linked list of
  * `debugNode` structs, which contain debugging information for the assembly code.
 */
-typedef struct debugList
+struct debugList
 {
 	debugNode* head;
 	debugNode* tail;
-} debugList;
+};
 
 void debug_list_register_node(debugList* list, debugNode* new_node)
 {

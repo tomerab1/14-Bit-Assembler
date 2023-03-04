@@ -4,20 +4,20 @@
 #include "symbol_table.h"
 #include <string.h>
 
-typedef struct Symbol
+struct Symbol
 {
     char* name;
     int counter;
     symbolType type;
-} Symbol;
+};
 
-typedef struct SymbolTableNode
+struct SymbolTableNode
 {
     Symbol sym;
     struct SymbolTableNode* next;
-} SymbolTableNode;
+};
 
-typedef struct SymbolTable
+struct SymbolTable
 {
     SymbolTableNode* head;
     SymbolTableNode* tail;
@@ -25,7 +25,7 @@ typedef struct SymbolTable
     bool hasExternals;
     bool hasEntries;
     bool completed;
-} SymbolTable;
+};
 
 SymbolTable* symbol_table_new_table()
 {

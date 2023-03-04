@@ -93,16 +93,19 @@ static void image_memory_init(imageMemory* mem);
 
 /**
 *  The memory word structure:
+
 *  Param2 | Param 1 | Opcode | Dest Operand | Source Operand | E.R.A
 * ---------------------------------------------------------------------
 * | 2 bits | 2 bits | 4 bits |     2 bits   |      2 bits    | 2 bits |
 * ---------------------------------------------------------------------
 * We divided the Opcode to 2 parts, Op1 and Op2 to align each section on 1 byte:
+
 * Param2 | Param 1  |   Op1  |   Op2  | Dest Operand | Source Operand | E.R.A
 * -----------------------------------------------------------------------------
 * | 2 bits | 2 bits | 2 bits | 2 bits |     2 bits   |      2 bits    | 2 bits |
 * ------------------------------------------------------------------------------
 * ---------second byte------- ------------------first byte --------------------
+
 * This way its easier to set the bits using our 'set' functions.
 */
 

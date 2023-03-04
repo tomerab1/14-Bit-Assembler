@@ -9,30 +9,25 @@
 #include "debug.h"
 #include "memory.h"
 
-
+/**
+* @brief An enum forward declarations of the different variable types.
+*/
 typedef enum { REGISTER, LABEL, ASCII } VarType;
+
+/**
+* @brief An enum forward declarations of the different operand kinds.
+*/
 typedef enum { KIND_IMM, KIND_LABEL, KIND_LABEL_PARAM, KIND_REG, KIND_NONE } OperandKind;
+
+/**
+* @brief An enum forward declarations of the different addressing types.
+*/
 typedef enum { ADDRESSING_IMM, ADDRESSING_DIR, ADDRESSING_PARAM, ADDRESSING_REG } AddressingType;
 
 /**
 * @brief A forward declaration of a structure that breakes an operation to 3 parts, leftVar, rightVar and label, declaration in the '.c' file.
 */
 typedef struct VarData VarData;
-
-/**
-* @brief An enum forward declarations of the different variable types.
-*/
-typedef enum VarType VarType;
-
-/**
-* @brief An enum forward declarations of the different operand kinds.
-*/
-typedef enum OperandKind OperandKind;
-
-/**
-* @brief An enum forward declarations of the different addressing types.
-*/
-typedef enum AddressingType AddressingType;
 
 /**
 * Encode a dot string.

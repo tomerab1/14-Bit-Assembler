@@ -8,12 +8,12 @@
 #include "first_pass.h"
 #include "second_pass.h"
 
-typedef struct driver {
+struct driver {
     SymbolTable* sym_table;
     debugList* dbg_list;
     memoryBuffer mem_buffer;
     int (*exec)(Driver* self, int argc, char** argv);
-} Driver;
+};
 
 #define FIRST_PASS_FAILED 1
 #define SECOND_PASS_FAILED 2
