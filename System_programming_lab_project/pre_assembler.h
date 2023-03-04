@@ -11,7 +11,7 @@
 /**
 * @brief Enum for the constans for the different reading states, it only used internally so it'll be declared inside the '.c' file.
 */
-typedef enum readState ReadState;
+typedef enum { READ_UNKNOWN, READ_COMMENT, READ_START_MACRO, READ_END_MACRO } ReadState;
 
 /**
 * @brief A forward declaration of the macro list node which hold the content of each macro, will be declared in the '.c' file.

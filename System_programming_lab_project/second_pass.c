@@ -153,7 +153,7 @@ TranslatedMachineData* translate_to_machine_data(memoryBuffer* memory)
 	int i = 0;
 	MemoryWord* instImg = memory->instruction_image.memory;
 	/* Allocate memory for the translated machine code */
-	TranslatedMachineData* translatedMemory = (char*)xmalloc((memory->instruction_image.counter + memory->data_image.counter) * sizeof(TranslatedMachineData));
+	TranslatedMachineData* translatedMemory = (TranslatedMachineData*)xmalloc((memory->instruction_image.counter + memory->data_image.counter) * sizeof(TranslatedMachineData));
 
 	/* Decode the instruction and data memory buffers and store in the translated memory */
 	decode_memory(translatedMemory, memory->instruction_image.memory, &i, memory->instruction_image.counter);
@@ -243,8 +243,10 @@ bool generate_entries_file(SymbolTable* table, char* path) {
 void create_files(memoryBuffer* memory, char* path, programFinalStatus* finalStatus, SymbolTable* table)
 {
 	finalStatus->createdObject = generate_object_file(memory, path);
-	symbol_table_get_hasExternals(table) ? (finalStatus->createdExternals = generate_externals_file(table, path)) : NULL;
-	symbol_table_get_hasEntries(table) ? (finalStatus->createdEntry = generate_entries_file(table, path)) : NULL;
+	if (symbol_table_get_hasExternals(table))
+		finalStatus->createdExternals = generate_externals_file(table, path);
+	if (symbol_table_get_hasEntries(table))
+		finalStatus->createdEntry = generate_entries_file(table, path);
 }
 
 void extract_directive_type(LineIterator* line, flags* flag) {

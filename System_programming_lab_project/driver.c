@@ -41,11 +41,12 @@ int exec_impl(Driver* driver, int argc, char** argv)
         pre_assembler_path = get_outfile_name(argv[i], ".am");
 
         if (i > 1) on_initialization(driver);
-        if (!do_first_pass(pre_assembler_path, &driver->mem_buffer, driver->sym_table, driver->dbg_list))
-            debug_list_pretty_print(driver->dbg_list);
+        /*If first pass failed returns false, otherwise returns true, goes as same for second pass*/
+        if (!do_first_pass(pre_assembler_path, &driver->mem_buffer, driver->sym_table, driver->dbg_list)) 
+            debug_list_pretty_print(driver->dbg_list); /*First pass errors Errors */
         else
             if (!initiate_second_pass(pre_assembler_path, driver->sym_table, &driver->mem_buffer, driver->dbg_list))
-                debug_list_pretty_print(driver->dbg_list); /*Second Errors */
+                debug_list_pretty_print(driver->dbg_list); /*Second pass Errors */
             else
                 printf("~~~\nProcess completed successfully\n~~~");
 

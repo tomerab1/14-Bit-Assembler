@@ -8,6 +8,9 @@
 #define LABEL_MAX_LENGTH 31
 #define DECIMAL_ADDRESS_BASE 100
 
+/*Debug.c*/
+#define DEBUG_LINE_MAX_LENGTH 80
+
 #define RAM_MEMORY_SZ 256
 #define RAM_INIT_VAL 0
 #define REG_INIT_VAL 0
@@ -55,4 +58,38 @@
 #define OBJECT_PRINT_SLASH '/'
 #define BACKSLASH_ZERO '\0'
 
+/*Encoding.c*/
+#define COMMA_STRING ", "
+#define SPACE_STRING " "
+#define OPEN_PAREN_STRING "("
+#define CLOSED_PAREN_STRING ") "
+#define OFFSET_LABELS 0x02
+#define BYTE_MASK 0xff
+#define WORD_MASK 0xff00
+#define BITS_3_MASK 0x08
+/**
+* Constans for the different offsets of the memory word fields.
+*/
+#define OFFSET_ERA     0x00
+#define OFFSET_DEST    0x02
+#define OFFSET_SOURCE  0x04
+#define OFFSET_OPCODE1 0x06
+#define OFFSET_OPCODE2 0x00
+#define OFFSET_PARAM1  0x02
+#define OFFSET_PARAM2  0x04
+
+#define ONE_VAR 1
+#define TWO_VARIABLES 2
+#define TWO_VARS_ONE_LABEL 3
+
+/*First Pass*/
+#define DOT_EXTERN_STRING ".extern"
+#define EXTERN_STRING "extern"
+#define DOT_ENTRY_STRING ".entry"
+#define ENTRY_STRING "entry"
+#define DOT_DATA_STRING ".data"
+#define DOT_STRING__STRING ".string"
+
+/*Pre assembler*/
+#define PRE_ASSEMBLER_FILE_EXTENSTION ".am"
 #endif

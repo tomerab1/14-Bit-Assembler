@@ -5,7 +5,6 @@
 #include <string.h>
 #include <ctype.h>
 
-typedef enum { READ_UNKNOWN, READ_COMMENT, READ_START_MACRO, READ_END_MACRO } ReadState;
 
 typedef struct macro_list_node
 {
@@ -84,7 +83,7 @@ void start_pre_assembler(char* path)
     /* Moves the file pointer back to the starting of the file. */
     rewind(in);
 
-    out_name = get_outfile_name(path, ".am");
+    out_name = get_outfile_name(path, PRE_ASSEMBLER_FILE_EXTENSTION);
     out = open_file(out_name, MODE_WRITE);
 
     create_pre_assembler_file(in, out, list);
