@@ -99,4 +99,6 @@ void add_label_base_address(SymbolTable* table);
 
 void decode_memory(TranslatedMachineData* tmd, MemoryWord* inst, int* startPos, int endPos);
 
+VarData* extract_variables(LineIterator* it);
+
 #endif

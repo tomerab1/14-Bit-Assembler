@@ -6,28 +6,9 @@
 #include "encoding.h"
 #include <string.h>
 
+/* typedef for the dispatch table. */
 typedef bool (*fpass_dispatch_table)(LineIterator* it, memoryBuffer* img, SymbolTable* sym_table, debugList* dbg_list, char* name, long line, bool did_err_occurred);
 
-/**
-* This function is called by fpass_decode. The file is read from path and each line of the file is examined for instructions that need to be encoded.
-* 
-* @param path
-* @param img
-* @param sym_table
-* @param dbg_list - The debug list to be used for decoding symbols.
-* 
-* @return TRUE if the encoding should be done FALSE otherwise. In this case the caller should allocate memory for the image
-*/
-/**
-* This function is called by fpass_decode. The file is read from the path and each line is processed to determine if it should be encoded.
-* 
-* @param path
-* @param img
-* @param sym_table
-* @param dbg_list - The debug list to be used for decoding the file.
-* 
-* @return TRUE if encoding should be done FALSE otherwise. In this case the caller should allocate memory for the image
-*/
 bool do_first_pass(char* path, memoryBuffer* img, SymbolTable* sym_table, debugList* dbg_list)
 {
 	FILE* in = open_file(path, MODE_READ);
@@ -80,14 +61,6 @@ bool do_first_pass(char* path, memoryBuffer* img, SymbolTable* sym_table, debugL
 	return should_encode;
 }
 
-/**
-* Get the type of a symbol. This is a bit tricky because we don't know what kind of symbol it is.
-* 
-* @param it
-* @param word
-* 
-* @return A firstPassStates value indicating the state of the parsing
-*/
 firstPassStates get_symbol_type(LineIterator* it, char* word)
 {
 	bool is_valid = TRUE;
@@ -151,19 +124,6 @@ firstPassStates get_symbol_type(LineIterator* it, char* word)
 	return FP_NONE;
 }
 
-/**
-* Process a symbol definition. This involves creating a node to represent the symbol and inserting it into the symbol table.
-* 
-* @param it
-* @param img
-* @param sym_table
-* @param dbg_list - Debug list to add the debug information to.
-* @param name - Name of the symbol to process. This must be a pointer to a null terminated string.
-* @param line - Line number where the symbol definition starts. This is used for error reporting.
-* @param should_encode - True if the symbol should be encoded.
-* 
-* @return TRUE if the symbol definition was processed successfully FALSE otherwise. In this case an error is reported to the user
-*/
 bool first_pass_process_sym_def(LineIterator* it, memoryBuffer* img, SymbolTable* sym_table, debugList* dbg_list, char* name, long line, bool should_encode)
 {
 	/* Get a handle to the node, if the type is entry/extern then update its counter to the img->instruction_image.counter. */
@@ -191,19 +151,6 @@ bool first_pass_process_sym_def(LineIterator* it, memoryBuffer* img, SymbolTable
 	return TRUE;
 }
 
-/**
-* Process an opcode and encode it if should_encode is true. This is the first pass of the machine learning algorithm.
-* 
-* @param it
-* @param img
-* @param sym_table
-* @param dbg_list - Debug list for the machine learning algorithm
-* @param name - Name of the machine learning algorithm ( used for error reporting )
-* @param line - Line number of the opcode. Can be - 1 if unknown
-* @param should_encode - Flag to indicate if the opcode should be encoded
-* 
-* @return TRUE if the iterator
-*/
 bool first_pass_process_opcode(LineIterator* it, memoryBuffer* img, SymbolTable* sym_table, debugList* dbg_list, char* name, long line, bool should_encode)
 {
 	/* Check the syntax, we want a copy of the iterator because if the syntax is correct we will encode the instructions to memory. */
@@ -217,20 +164,6 @@ bool first_pass_process_opcode(LineIterator* it, memoryBuffer* img, SymbolTable*
 	return TRUE;
 }
 
-
-/**
-* Process a symbol that is an entry in the symbol table. This involves creating a node to represent the symbol and inserting it into the symbol table.
-* 
-* @param it
-* @param img
-* @param sym_table
-* @param dbg_list - The debug list to add the debug info to
-* @param name - The name of the symbol to process ( used for error reporting )
-* @param line - The line number on which the symbol resides
-* @param should_encode - True if the symbol should be encoded
-* 
-* @return TRUE if the symbol was added FALSE if it was redefinted in which case an error has been
-*/
 bool first_pass_process_sym_data(LineIterator* it, memoryBuffer* img, SymbolTable* sym_table, debugList* dbg_list, char* name, long line, bool should_encode)
 {
 	/* Get a handle to the node, if the type is entry/extern then update its counter to the img->instruction_image.counter. */
@@ -256,19 +189,6 @@ bool first_pass_process_sym_data(LineIterator* it, memoryBuffer* img, SymbolTabl
 	return TRUE;
 }
 
-/**
-* Process a symbol string. This involves verifying the syntax and inserting the symbol into the symbol table
-* 
-* @param it
-* @param img
-* @param sym_table
-* @param dbg_list - Debug list for the current file
-* @param name
-* @param line - Line number of the symbol string we are looking for
-* @param should_encode - Whether or not we should encode the string
-* 
-* @return TRUE on success FALSE on error ( symbol already exists or syntax is wrong ) Note that this is a first pass process
-*/
 bool first_pass_process_sym_string(LineIterator* it, memoryBuffer* img, SymbolTable* sym_table, debugList* dbg_list, char* name, long line, bool should_encode)
 {
 	if (symbol_table_search_symbol_bool(sym_table, name)) {
@@ -289,19 +209,6 @@ bool first_pass_process_sym_string(LineIterator* it, memoryBuffer* img, SymbolTa
 	return TRUE;
 }
 
-/**
-* Process a symbol entry. This is the first pass of the debug_list_process_symtab function.
-* 
-* @param it
-* @param img
-* @param sym_table
-* @param dbg_list - Debug list to add nodes to.
-* @param name - Name of the symbol entry. Can be NULL in which case a name will be generated.
-* @param line - Line number in the file where the symbol entry resides.
-* @param should_encode - Flag indicating if the encoding should be done.
-* 
-* @return TRUE on success FALSE on failure ( and errno set ). If this is FALSE the iterator is positioned on an error
-*/
 bool first_pass_process_sym_ent(LineIterator* it, memoryBuffer* img, SymbolTable* sym_table, debugList* dbg_list, char* name, long line, bool should_encode)
 {
     char* word = line_iterator_next_word(it, " ");
@@ -354,19 +261,6 @@ bool first_pass_process_sym_ent(LineIterator* it, memoryBuffer* img, SymbolTable
 	return TRUE;
 }
 
-/**
-* Process a symbol that starts with " extern ". This is used to determine if we are going to encode or unencod the symbol.
-* 
-* @param it
-* @param img
-* @param sym_table
-* @param dbg_list - Debug list to add nodes to
-* @param name - Name of the symbol ( can be NULL )
-* @param line - Line number of the symbol ( 0 for unknown )
-* @param should_encode - Flag to indicate if the symbol should be encoded
-* 
-* @return TRUE on success FALSE on error ( in which case the iterator is left pointing at the error message )
-*/
 bool first_pass_process_sym_ext(LineIterator* it, memoryBuffer* img, SymbolTable* sym_table, debugList* dbg_list, char* name, long line, bool should_encode)
 {
     char* word = line_iterator_next_word(it, " ");
@@ -407,4 +301,3 @@ bool first_pass_process_sym_ext(LineIterator* it, memoryBuffer* img, SymbolTable
 
 	return TRUE;
 }
-

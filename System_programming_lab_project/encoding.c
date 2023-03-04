@@ -2,6 +2,21 @@
 */
 #include "encoding.h"
 
+typedef enum { REGISTER, LABEL, ASCII } VarType;
+typedef enum { KIND_IMM, KIND_LABEL, KIND_LABEL_PARAM, KIND_REG, KIND_NONE } OperandKind;
+typedef enum { ADDRESSING_IMM, ADDRESSING_DIR, ADDRESSING_PARAM, ADDRESSING_REG } AddressingType;
+
+typedef struct VarData
+{
+	char* leftVar; /* Pointer to the start of the line. */
+	EncodingTypes leftVarEncType;
+	char* rightVar; /* Pointer to the current position in the line. */
+	EncodingTypes rightVarEncType;
+	char* label;
+	EncodingTypes labelEncType;
+	int total;
+} VarData;
+
 void encode_dot_string(LineIterator* it, memoryBuffer* img)
 {
 	/* Eat all blanks */
@@ -37,7 +52,7 @@ void encode_dot_data(LineIterator* it, memoryBuffer* img)
 }
 
 void encode_label_start_process(LineIterator* it, memoryBuffer* img, SymbolTable* symTable, debugList* dbg_list) {
-	VarData variables = { 0 };
+	VarData* variables = NULL;
 	char* opcode = NULL;
 	Opcodes op;
 	SyntaxGroups synGroup;
@@ -60,12 +75,15 @@ void encode_label_start_process(LineIterator* it, memoryBuffer* img, SymbolTable
 		variables = extract_variables_group_5(it);
 	}
 
-	/*encode ARE missing*/
-	encode_labels(&variables, synGroup, symTable, &img->instruction_image, dbg_list, it);
+	if (!variables)
+		return;
 
-	free(variables.label);
-	free(variables.leftVar);
-	free(variables.rightVar);
+	/*encode ARE missing*/
+	encode_labels(variables, synGroup, symTable, &img->instruction_image);
+
+	free(varData_get_label(variables));
+	free(varData_get_leftVar(variables));
+	free(varData_get_rightVar(variables));
 }
 
 void encode_integer(imageMemory* img, unsigned int num)
@@ -194,6 +212,16 @@ void encode_source_and_dest(imageMemory* img, char* source, char* dest)
 			img->counter++;
 		}
 	}
+}
+
+VarData* varData_get_new()
+{
+	VarData* ptr = (VarData*)xmalloc(sizeof(VarData));
+
+	ptr->leftVar = ptr->rightVar = ptr->label = NULL;
+	ptr->total = 0;
+
+	return ptr;
 }
 
 OperandKind get_operand_kind(char* op)
@@ -346,49 +374,92 @@ void encode_syntax_group_7(LineIterator* it, Opcodes op, memoryBuffer* img)
 }
 
 
-VarData extract_variables_group_1_and_2_and_7(LineIterator* it) {
-	VarData variablesData = { NULL };
-	variablesData.leftVar = line_iterator_next_word(it, ", ");
+VarData* extract_variables_group_1_and_2_and_7(LineIterator* it) {
+	VarData* variablesData = varData_get_new();
+
+	variablesData->leftVar = line_iterator_next_word(it, ", ");
+	
 	/* skip to command and consume it */
 	line_iterator_jump_to(it, COMMA_CHAR);
 
-	variablesData.rightVar = line_iterator_next_word(it, " ");
-
-	variablesData.total = 2;
-	return variablesData;
-}
-
-VarData extract_variables_group_3_and_6(LineIterator* it) {
-	VarData variablesData = { NULL };
-	variablesData.leftVar = line_iterator_next_word(it, " ");
-	variablesData.total = 1;
+	variablesData->rightVar = line_iterator_next_word(it, " ");
+	variablesData->total = 2;
 
 	return variablesData;
 }
 
-VarData extract_variables_group_5(LineIterator* it) {
-	VarData variablesData = { NULL };
+VarData* extract_variables_group_3_and_6(LineIterator* it) {
+	VarData* variablesData = varData_get_new();
+
+	variablesData->leftVar = line_iterator_next_word(it, " ");
+	variablesData->total = 1;
+
+	return variablesData;
+}
+
+VarData* extract_variables_group_5(LineIterator* it) {
+	VarData* variablesData = varData_get_new();
+
 	if (line_iterator_word_includes(it, "(")) {
-		variablesData.label = line_iterator_next_word(it, "(");
+		variablesData->label = line_iterator_next_word(it, "(");
 		line_iterator_advance(it); /*skips left parenthesis*/
-		variablesData.leftVar = line_iterator_next_word(it, ", ");
+		variablesData->leftVar = line_iterator_next_word(it, ", ");
 		line_iterator_advance(it); /*skips comma*/
-		variablesData.rightVar = line_iterator_next_word(it, ")");
-		variablesData.total = 3;
+		variablesData->rightVar = line_iterator_next_word(it, ")");
+		variablesData->total = 3;
 	}
 	else {
-		variablesData.label = get_last_word(it);
-		variablesData.total = 1;
+		variablesData->label = get_last_word(it);
+		variablesData->total = 1;
 	}
 
-
 	return variablesData;
+}
+
+char* varData_get_leftVar(VarData* vd)
+{
+	return vd->leftVar;
+}
+
+char* varData_get_rightVar(VarData* vd)
+{
+	return vd->rightVar;
+}
+
+char* varData_get_label(VarData* vd)
+{
+	return vd->label;
+}
+
+EncodingTypes varData_get_leftEncType(VarData* vd)
+{
+	return vd->leftVarEncType;
+}
+
+EncodingTypes varData_get_rgithEncType(VarData* vd)
+{
+	return vd->rightVarEncType;
+}
+
+EncodingTypes varData_get_labelEncType(VarData* vd)
+{
+	return vd->labelEncType;
+}
+
+int varData_get_total(VarData* vd)
+{
+	return vd->total;
 }
 
 void encode_labels(VarData* variables, SyntaxGroups synGroup, SymbolTable* symTable, imageMemory* img)
 {
 	SymbolTableNode* nodePtr = NULL;
-	bool isDualRegister = (get_operand_kind(variables->leftVar) == KIND_REG && get_operand_kind(variables->rightVar) == KIND_REG);
+	bool isDualRegister = FALSE;
+
+	if (!variables)
+		return;
+
+	isDualRegister = (get_operand_kind(variables->leftVar) == KIND_REG && get_operand_kind(variables->rightVar) == KIND_REG);
 
 	if (variables->label) {
 		nodePtr = symbol_table_search_symbol(symTable, variables->label);

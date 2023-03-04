@@ -9,22 +9,25 @@
 #include "debug.h"
 #include "memory.h"
 
-typedef struct
-{ 
-	char* leftVar; /* Pointer to the start of the line. */
-	EncodingTypes leftVarEncType;
-	char* rightVar; /* Pointer to the current position in the line. */
-	EncodingTypes rightVarEncType;
-	char* label;
-	EncodingTypes labelEncType;
-	int total;
-} VarData;
+/**
+* @brief A forward declaration of a structure that breakes an operation to 3 parts, leftVar, rightVar and label, declaration in the '.c' file.
+*/
+typedef struct VarData VarData;
 
-typedef enum { REGISTER, LABEL, ASCII } VarType;
+/**
+* @brief An enum forward declarations of the different variable types.
+*/
+typedef enum VarType VarType;
 
-typedef enum { KIND_IMM, KIND_LABEL, KIND_LABEL_PARAM, KIND_REG, KIND_NONE } OperandKind;
+/**
+* @brief An enum forward declarations of the different operand kinds.
+*/
+typedef enum OperandKind OperandKind;
 
-typedef enum { ADDRESSING_IMM, ADDRESSING_DIR, ADDRESSING_PARAM, ADDRESSING_REG } AddressingType;
+/**
+* @brief An enum forward declarations of the different addressing types.
+*/
+typedef enum AddressingType AddressingType;
 
 /**
 * Encode a dot string.
@@ -92,13 +95,18 @@ void encode_preceding_word(imageMemory* img, Opcodes op, char* source, char* des
 void encode_source_and_dest(imageMemory* img, char* source, char* dest);
 
 /**
+* @brief This function allocates a new VarData object.
+* @return A new VarData object.
+*/
+VarData* varData_get_new();
+
+/**
 * @brief Extract variables from group 1 and 2 and 7 starting at the iterator.
 * @param it Line iterator pointing to the start of the group
 * @return A VarData structure with leftVar and rightVar set
-* @Note groups: mov, add,sub,cmp,lea | expected input is the char next to end of command (i.e mov
-																						   ^ 
+* @Note groups: mov, add,sub,cmp,lea | expected input is the char next to end of command (i.e mov																		   ^ 
 */
-VarData extract_variables_group_1_and_2_and_7(LineIterator* it);
+VarData* extract_variables_group_1_and_2_and_7(LineIterator* it);
 
 /**
 * @brief Extract the variables group 3 and 6 from the line pointed to by it.
@@ -106,14 +114,56 @@ VarData extract_variables_group_1_and_2_and_7(LineIterator* it);
 * @return a VarData structure with the leftVar and total
 * @Note groups: not, clr, inc, dec, red,prn | expected input is the char next to end of command (i.e mov			  
 */
-VarData extract_variables_group_3_and_6(LineIterator* it);
+VarData* extract_variables_group_3_and_6(LineIterator* it);
 
 /**
 * @brief Extract variables from GROUP 5 ( label =... ). This function assumes there is at least one token to be consumed.
 * @param it Line iterator pointing to the start of the VARIABLES
 * @return VarData with information about
 */
-VarData extract_variables_group_5(LineIterator* it);
+VarData* extract_variables_group_5(LineIterator* it);
+
+/**
+* @brief A getter function for VarData's leftVar member, the user should verify that 'vd' is in a valid state.
+* @param vd - The VarData object.
+*/
+char* varData_get_leftVar(VarData* vd);
+
+/**
+* @brief A getter function for VarData's rightVar member, the user should verify that 'vd' is in a valid state.
+* @param vd - The VarData object.
+*/
+char* varData_get_rightVar(VarData* vd);
+
+/**
+* @brief A getter function for VarData's label member, the user should verify that 'vd' is in a valid state.
+* @param vd - The VarData object.
+*/
+char* varData_get_label(VarData* vd);
+
+/**
+* @brief A getter function for VarData's leftVarEncType member, the user should verify that 'vd' is in a valid state.
+* @param vd - The VarData object.
+*/
+EncodingTypes varData_get_leftEncType(VarData* vd);
+
+/**
+* @brief A getter function for VarData's rightVarEncType member, the user should verify that 'vd' is in a valid state.
+* @param vd - The VarData object.
+*/
+EncodingTypes varData_get_rgithEncType(VarData* vd);
+
+/**
+* @brief A getter function for VarData's labelEncType member, the user should verify that 'vd' is in a valid state.
+* @param vd - The VarData object.
+*/
+EncodingTypes varData_get_labelEncType(VarData* vd);
+
+/**
+* @brief A getter function for VarData's total member, the user should verify that 'vd' is in a valid state.
+* @param vd - The VarData object.
+*/
+int varData_get_total(VarData* vd);
 
 /**
 * @brief Encode a syntax group 1 instruction. dependent syntax group that we use to encode source and destination operands.
@@ -178,4 +228,5 @@ void encode_syntax_group_7(LineIterator* it, Opcodes op, memoryBuffer* img);
 * @return KIND_NONE if op is NULL KIND_IMM if it is a hash_char KIND_REG if it is a
 */
 OperandKind get_operand_kind(char* op);
+
 #endif

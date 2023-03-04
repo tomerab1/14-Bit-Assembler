@@ -6,15 +6,6 @@
 
 #include <ctype.h>
 
-/**
-* Executes second pass of program. It is used to create symbol table and memory buffer for execution. In this second pass the file is read from file and executed in instruction_image.
-* 
-* @param path
-* @param table
-* @param memory
-* 
-* @return TRUE if successful FALSE
-*/
 bool initiate_second_pass(char* path, SymbolTable* table, memoryBuffer* memory, debugList* dbg_list)
 {
 	FILE* in = open_file(path, MODE_READ);
@@ -48,13 +39,6 @@ bool initiate_second_pass(char* path, SymbolTable* table, memoryBuffer* memory, 
 	return TRUE;
 }
 
-/**
-* Execute a line of code. This is the entry point for the instruction and its subroutines.
-* 
-* @param it
-* @param table
-* @param memory
-*/
 void execute_line(LineIterator* it, SymbolTable* table, memoryBuffer* memory, debugList* dbg_list, bool* errorFlag, long line_num) {
 	/* Increment counter by one, as every command has a preceding word. */
 	memory->instruction_image.counter++;
@@ -68,24 +52,11 @@ void execute_line(LineIterator* it, SymbolTable* table, memoryBuffer* memory, de
 	}
 }
 
-/**
-* Skips the first pass of the memory. This is used to determine how much memory we need to skip before starting a new pass.
-* 
-* @param memory
-* @param it - The LineIterator that points to the beginning of the data
-*/
 void skip_first_pass_mem(memoryBuffer* memory, LineIterator* it) {
     int memCellsToJump = find_amount_of_lines_to_skip(it);
     memory->instruction_image.counter += memCellsToJump;
 }
 
-/**
-* Find the amount of lines to skip. This is used to determine how many lines should be skipped in the code that does not have a register or memory operand.
-* 
-* @param it
-* 
-* @return The amount of lines to skip or 0 if there is no code to skip in this case the iterator is positioned on the start of the code
-*/
 int find_amount_of_lines_to_skip(LineIterator* it) {
 	char* op = NULL, *operand1 = NULL, *operand2 = NULL, *operand3 = NULL;
 	char* tempLine = (char*)xmalloc(sizeof(char) * (strlen(it->start) + 1));
@@ -123,15 +94,6 @@ int find_amount_of_lines_to_skip(LineIterator* it) {
     return total; /* 1 for the opcode, 2 for each individual memory word */
 }
 
-/**
-* Generate object file. This is the entry point for the object file generation. It takes a pointer to the memory buffer that we are going to generate the object file for and the path to the file that we want to write to
-* 
-* @param memory
-* @param path
-* @param err
-* 
-* @return true if successful false if there was an error ( in which case err is not modified ). Note that the file is written to a file named object
-*/
 bool generate_object_file(memoryBuffer* memory, char* path)
 {
     char* outfileName = NULL;
@@ -159,14 +121,6 @@ bool generate_object_file(memoryBuffer* memory, char* path)
     return TRUE;
 }
 
-/**
-* Translates a memory buffer containing an instruction image into a TranslatedMachineData. It is assumed that the image is valid and has at least 13 bytes of data to be translated
-* 
-* @param memory
-* @param err
-* 
-* @return Pointer to the translated
-*/
 TranslatedMachineData* translate_to_machine_data(memoryBuffer* memory)
 {
 	int i = 0;
@@ -202,14 +156,6 @@ void decode_memory(TranslatedMachineData* tmd, MemoryWord* inst, int* startPos, 
 	*startPos = k - 1;
 }
 
-/**
-* Generate a file that contains all externals. This is used to find the symbol table that has been loaded into the system and should be relocated to point to the new symbol table
-* 
-* @param table
-* @param path
-* 
-* @return TRUE if successful FALSE
-*/
 bool generate_externals_file(SymbolTable* table, char* path) {
 	char* outfileName = NULL;
 	FILE* out = NULL;
@@ -233,14 +179,6 @@ bool generate_externals_file(SymbolTable* table, char* path) {
 	return TRUE;
 }
 
-/**
-* Generate entries file from symbol table. This file is used to keep track of how many symbols have been used in a particular file.
-* 
-* @param table
-* @param path
-* 
-* @return TRUE on success FALSE on failure. Failure can occur if there are too many entries in the symbol table
-*/
 bool generate_entries_file(SymbolTable* table, char* path) {
 	char* outfileName = NULL;
 	FILE* out = NULL;
@@ -264,15 +202,6 @@ bool generate_entries_file(SymbolTable* table, char* path) {
 	return TRUE;
 }
 
-/**
-* Create files to be used. This is the entry point for the program. It calls generate_object_file to create the object file.
-* 
-* @param memory - The memory buffer to use for the generation
-* @param path - The path to the file to generate
-* @param finalStatus - The final status to report to the user
-* @param table - The symbol table to use for symbol lookup or NULL
-* @param err
-*/
 void create_files(memoryBuffer* memory, char* path, programFinalStatus* finalStatus, SymbolTable* table)
 {
     finalStatus->createdObject = generate_object_file(memory, path);
@@ -280,12 +209,6 @@ void create_files(memoryBuffer* memory, char* path, programFinalStatus* finalSta
     table->hasEntries ? (finalStatus->createdEntry = generate_entries_file(table, path)) : NULL;
 }
 
-/**
-* Extracts the type of a directive and stores it in the flags. This is used to determine if we are dealing with a function or a function header
-* 
-* @param line
-* @param flag
-*/
 void extract_directive_type(LineIterator* line, flags* flag) {
     char* command = line_iterator_next_word(line, " ");
     if (strcmp(command, DOT_EXTERN)) {
@@ -298,14 +221,8 @@ void extract_directive_type(LineIterator* line, flags* flag) {
     free(command);
 }
 
-/**
-* @brief Extract variables from the line. 
-* @param it Line iterator to get the information from
-* @return A VarData containing the variables
-*/
-VarData extract_variables(LineIterator* it) {
-    VarData variables = { 0 };
-
+VarData* extract_variables(LineIterator* it) {
+    VarData* variables = NULL;
     char* opcode = line_iterator_next_word(it, " ");
     Opcodes op = get_opcode(opcode);
     SyntaxGroups synGroup = get_syntax_group(opcode);
@@ -325,69 +242,55 @@ VarData extract_variables(LineIterator* it) {
     return variables;
 }
 
-/**
-* @brief Check if a label exists in a line.
-* @param line
-* @param table
-* @param dbg_list The debugList that contains all the symbols that have been debugged so far.
-* @param flag
-* @param line_num The current line number. This is used for error reporting.
-* @return true if a label exists in the line and false otherwise
-*/
 bool is_label_exists_in_line(LineIterator* line, SymbolTable* table, debugList* dbg_list, bool* flag, long line_num) {
-    VarData variablesData = { NULL };
+    VarData* variablesData = NULL;
     LineIterator itLeftVar, itRightVar, itLabel;
     char* tempWord = 0;
     variablesData = extract_variables(line);
+
+	if (!variablesData)
+		return TRUE;
     
-    switch (variablesData.total)
+    switch (varData_get_total(variablesData))
     {
     case 1: /*group 3 and 6, left var*/
-        if (variablesData.leftVar != NULL) {
-            line_iterator_put_line(&itLeftVar, variablesData.leftVar);
-            return investigate_word(line, &itLeftVar, table, dbg_list, flag, line_num, variablesData.leftVar, 1);
+        if (varData_get_leftVar(variablesData) != NULL) {
+            line_iterator_put_line(&itLeftVar, varData_get_leftVar(variablesData));
+            return investigate_word(line, &itLeftVar, table, dbg_list, flag, line_num, varData_get_leftVar(variablesData), 1);
         }
         else {
-            line_iterator_put_line(&itLabel, variablesData.label);
-            return investigate_word(line, &itLabel, table, dbg_list, flag, line_num, variablesData.label, 1);
+            line_iterator_put_line(&itLabel, varData_get_label(variablesData));
+			return investigate_word(line, &itLabel, table, dbg_list, flag, line_num, varData_get_label(variablesData), 1);
         }
 
     case 2: /*groups 1,2,7, left var and right var*/
         
-        line_iterator_put_line(&itLeftVar, variablesData.leftVar);
-        line_iterator_put_line(&itRightVar, variablesData.rightVar);
-        return 	investigate_word(line, &itLeftVar, table, dbg_list, flag, line_num, variablesData.leftVar,2) ||
-            investigate_word(line, &itRightVar, table, dbg_list, flag, line_num, variablesData.rightVar, 2);
+        line_iterator_put_line(&itLeftVar, varData_get_leftVar(variablesData));
+        line_iterator_put_line(&itRightVar, varData_get_rightVar(variablesData));
+        return investigate_word(line, &itLeftVar, table, dbg_list, flag, line_num, varData_get_leftVar(variablesData),2) ||
+            investigate_word(line, &itRightVar, table, dbg_list, flag, line_num, varData_get_rightVar(variablesData), 2);
 
     case 3: /*groups 5, labe, left var and right var*/
-        line_iterator_put_line(&itLeftVar, variablesData.leftVar);
-        line_iterator_put_line(&itRightVar, variablesData.rightVar);
-        line_iterator_put_line(&itLabel, variablesData.label);
+        line_iterator_put_line(&itLeftVar, varData_get_leftVar(variablesData));
+        line_iterator_put_line(&itRightVar, varData_get_rightVar(variablesData));
+        line_iterator_put_line(&itLabel, varData_get_label(variablesData));
 
-        return 	investigate_word(line, &itLeftVar, table, dbg_list, flag, line_num, variablesData.leftVar,3) ||
-            investigate_word(line, &itRightVar, table, dbg_list, flag, line_num, variablesData.rightVar, 3) ||
-            investigate_word(line, &itLabel, table, dbg_list, flag, line_num, variablesData.label, 3);
-    default:
-        return;
+        return investigate_word(line, &itLeftVar, table, dbg_list, flag, line_num, varData_get_leftVar(variablesData),3) ||
+            investigate_word(line, &itRightVar, table, dbg_list, flag, line_num, varData_get_rightVar(variablesData), 3) ||
+            investigate_word(line, &itLabel, table, dbg_list, flag, line_num, varData_get_label(variablesData), 3);
     }
+
+	return TRUE;
 }
 
-/**
-* @brief Investigate a word in the source. This is a function that looks for a label in the symbol table.
-* @param originalLine
-* @param wordIterator The iterator pointing to the word to investigate.
-* @param table The symbol table to search for the word.
-* @param dbg_list The debug list to add the debug information to.
-* @param flag A pointer to the variable that was found.
-* @param line_num The line number where the error occurred.
-* @param wordToInvestigate The word we are trying to investigate.
-* @param amountOfVars The amount of variables that were found.
-* @return TRUE if the word was found FALSE otherwise. In this case the flag is set to TRUE
-*/
-bool investigate_word(LineIterator* originalLine,LineIterator* wordIterator, SymbolTable* table, debugList* dbg_list, bool* flag, long line_num, char* wordToInvestigate, int amountOfVars) {
-	if (is_register_name_whole(wordIterator)) return FALSE;
+bool investigate_word(LineIterator* originalLine, LineIterator* wordIterator, SymbolTable* table, debugList* dbg_list, bool* flag, long line_num, char* wordToInvestigate, int amountOfVars) {
+	if (is_register_name_whole(wordIterator)) 
+		return FALSE;
+
 	line_iterator_backwards(wordIterator);
-	if ((line_iterator_peek(wordIterator) == HASH_CHAR)) return FALSE;
+
+	if ((line_iterator_peek(wordIterator) == HASH_CHAR))
+		return FALSE;
 	else {
 		if (symbol_table_search_symbol_bool(table, wordToInvestigate)) {
 			return TRUE;
@@ -401,13 +304,6 @@ bool investigate_word(LineIterator* originalLine,LineIterator* wordIterator, Sym
 	}
 }
 
-/*type 1 - one var, type*/
-/**
-* @brief Finds the start point of a word.
-* @param it
-* @param word
-* @param amountOfVars Number of variables to look for. 1 means the word is searched as long as it does not start with a colon 2 means the word is
-*/
 void find_word_start_point(LineIterator* it, char* word, int amountOfVars) {
     bool found = FALSE;
     it->current = it->start;
@@ -421,7 +317,7 @@ void find_word_start_point(LineIterator* it, char* word, int amountOfVars) {
         while(line_iterator_peek(it) != *word){
             line_iterator_advance(it);
         }
-        return;
+		break;
     case 2:
         if(strcmp(line_iterator_next_word(it, ", "),word) == 0) {
             line_iterator_unget_word(it, word);
@@ -430,7 +326,7 @@ void find_word_start_point(LineIterator* it, char* word, int amountOfVars) {
         else {
             line_iterator_jump_to(it,COMMA_CHAR);
         }
-        return;
+		break;
     case 3:
         if (strcmp(line_iterator_next_word(it, "( "), word) == 0) {
             line_iterator_unget_word(it, word);
@@ -444,37 +340,20 @@ void find_word_start_point(LineIterator* it, char* word, int amountOfVars) {
             line_iterator_jump_to(it, COMMA_CHAR);
             line_iterator_advance(it);
         }
-        return;
+		break;
     default:
-        return;
+		break;
     }
 }
 
-/**
-* Tell whether or not an externally defined function exists. This is used to determine whether a function is externally defined or not by examining the contents of a. EXE file.
-* 
-* @param flag - Pointer to struct containing information about the function to
-*/
 void extern_exists(flags* flag) {
     flag->dot_extern_exists = TRUE;
 }
 
-/**
-* Tell the flag that we are looking for an entry. This is used to determine if a dot - entry exists or not
-* 
-* @param flag - The flags struct to
-*/
 void entry_exists(flags* flag) {
     flag->dot_entry_exists = TRUE;
 }
 
-/**
-* Update the address of a symbol. This is done by looking for labels that are in the symbol table and if found we'll add them to the symbol table
-* 
-* @param it - Line iterator to the symbol
-* @param memory - Pointer to the memory buffer that holds the symbol
-* @param table - Pointer to the symbol table that is being updated
-*/
 void update_symbol_address(LineIterator it, memoryBuffer* memory, SymbolTable* table)
 {
     char* line = (char*)xcalloc(strlen(it.start) + 1, sizeof(char));
@@ -494,13 +373,6 @@ void update_symbol_address(LineIterator it, memoryBuffer* memory, SymbolTable* t
     free(line);
 }
 
-/**
-* @brief Updates the symbol table to reflect the offset of the symbol in the word.
-* @param word
-* @param offset The offset of the symbol in the word.
-* @param memory The memory buffer that contains the symbol's data.
-* @param table The symbol table to update. It is assumed that the symbol table is indempotent
-*/
 void update_symbol_offset(char* word, int offset, memoryBuffer* memory, SymbolTable* table)
 {
 	LineIterator tmp;
@@ -537,10 +409,6 @@ void update_symbol_offset(char* word, int offset, memoryBuffer* memory, SymbolTa
 	}
 }
 
-/**
-* @brief Add a base address to all labels in the symbol table. This is used to determine where we are going to load the symbol table and when we have to look at the data or code in order to find the address of the label.
-* @param table
-*/
 void add_label_base_address(SymbolTable* table)
 {
 	LIST_FOR_EACH(SymbolTableNode, table->head, head) {
