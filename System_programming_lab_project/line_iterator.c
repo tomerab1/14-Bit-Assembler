@@ -71,7 +71,8 @@ char* line_iterator_next_word(LineIterator* it, char* seps)
         line_iterator_advance(it);
     }
 
-    /* No more words are available */
+
+    /* No more words are available*/
     if (log_sz == 0) {
         free(word);
         return NULL;

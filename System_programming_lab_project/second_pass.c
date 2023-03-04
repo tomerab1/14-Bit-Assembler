@@ -70,12 +70,12 @@ void execute_line(LineIterator* it, SymbolTable* table, memoryBuffer* memory, de
 	/* Increment counter by one, as every command has a preceding word. */
 	memory->instruction_image.counter++;
 
-	if (is_label_exists_in_line(it, table, dbg_list, errorFlag, line_num)) {
-		update_symbol_address(*it, memory, table);
-		encode_label_start_process(it, memory, table, dbg_list);
-	}
+if (is_label_exists_in_line(it, table, dbg_list, errorFlag, line_num)) { /*checks if label exists and valid*/
+		update_symbol_address(*it, memory, table); /*updates the address of the symbol*/
+		encode_label_start_process(it, memory, table, dbg_list); /*encodes the mem cell according to the label*/
+   }
 	else {
-		skip_first_pass_mem(memory, it);
+		skip_first_pass_mem(memory, it); /*if no label exists, skip calculated amount of cells*/
 	}
 }
 
@@ -152,12 +152,15 @@ TranslatedMachineData* translate_to_machine_data(memoryBuffer* memory)
 {
 	int i = 0;
 	MemoryWord* instImg = memory->instruction_image.memory;
+	/* Allocate memory for the translated machine code */
 	TranslatedMachineData* translatedMemory = (char*)xmalloc((memory->instruction_image.counter + memory->data_image.counter) * sizeof(TranslatedMachineData));
 
+	/* Decode the instruction and data memory buffers and store in the translated memory */
 	decode_memory(translatedMemory, memory->instruction_image.memory, &i, memory->instruction_image.counter);
 	decode_memory(translatedMemory, memory->data_image.memory, &i, memory->data_image.counter + memory->instruction_image.counter);
 
 	return translatedMemory;
+
 }
 
 void decode_memory(TranslatedMachineData* tmd, MemoryWord* inst, int* startPos, int endPos)
@@ -169,6 +172,7 @@ void decode_memory(TranslatedMachineData* tmd, MemoryWord* inst, int* startPos, 
 		tmd[k].address = k;
 		memset(tmd[k].translated, 0, sizeof(tmd[k].translated));
 
+		 /*translated the memory from binary to slashes and dots*/
 		for (j = 13; j >= 0; j--) {
 			unsigned int mask = 1 << j;
 			if ((bits & mask) != 0) {
@@ -184,14 +188,18 @@ void decode_memory(TranslatedMachineData* tmd, MemoryWord* inst, int* startPos, 
 }
 
 bool generate_externals_file(SymbolTable* table, char* path) {
-	char* outfileName = NULL;
+	char* outfileName = NULL;/* Pointer to the filename of the output file */
 	FILE* out = NULL;
-	SymbolTableNode* symTableHead = symbol_table_get_head(table);
-	char placeholder[20] = { 0 };
 
+	SymbolTableNode* symTableHead = table->head;
+	char placeholder[20] = { 0 }; /* Placeholder string for writing data to the file */
+
+	/* Get the name of the output file */
 	outfileName = get_outfile_name(path, ".external");
+	/* Open the output file for writing */
 	out = open_file(outfileName, MODE_WRITE);
 
+	/* Iterate over the symbol table and write the names and addresses of external symbols to the file */
 	while (symTableHead != NULL) {
 		if (symbol_get_type(symbol_node_get_sym(symTableHead)) == SYM_EXTERN) {
 			sprintf(placeholder, "%s\t%d\n", symbol_get_name(symbol_node_get_sym(symTableHead)), symbol_get_counter(symbol_node_get_sym(symTableHead)));
@@ -200,10 +208,12 @@ bool generate_externals_file(SymbolTable* table, char* path) {
 		symTableHead = symbol_node_get_next(symTableHead);
 	}
 
+	/* Free the filename memory and close the output file */
 	free(outfileName);
 	fclose(out);
 
-	return TRUE;
+	return TRUE; /* Return true to indicate successful file generation */
+
 }
 
 bool generate_entries_file(SymbolTable* table, char* path) {
@@ -215,6 +225,7 @@ bool generate_entries_file(SymbolTable* table, char* path) {
 	outfileName = get_outfile_name(path, ".entry");
 	out = open_file(outfileName, MODE_WRITE);
 
+	/* iterate over symbol table and write the entries to file */
 	while (symTableHead != NULL) {
 		if (symbol_get_type(symbol_node_get_sym(symTableHead)) == SYM_ENTRY) {
 			sprintf(placeholder, "%s\t%d\n", symbol_get_name(symbol_node_get_sym(symTableHead)), symbol_get_counter(symbol_node_get_sym(symTableHead)));
@@ -231,21 +242,23 @@ bool generate_entries_file(SymbolTable* table, char* path) {
 
 void create_files(memoryBuffer* memory, char* path, programFinalStatus* finalStatus, SymbolTable* table)
 {
-	finalStatus->createdObject = generate_object_file(memory, path);
-	symbol_table_get_hasExternals(table) ? (finalStatus->createdExternals = generate_externals_file(table, path)) : NULL;
-	symbol_table_get_hasEntries(table) ? (finalStatus->createdEntry = generate_entries_file(table, path)) : NULL;
+    finalStatus->createdObject = generate_object_file(memory, path);  /* Generate object file. */
+    table->hasExternals ? (finalStatus->createdExternals = generate_externals_file(table, path)) : NULL; /* Generate externals file. */
+    table->hasEntries ? (finalStatus->createdEntry = generate_entries_file(table, path)) : NULL; /* Generate entires file. */
 }
 
 void extract_directive_type(LineIterator* line, flags* flag) {
-	char* command = line_iterator_next_word(line, " ");
-	if (strcmp(command, DOT_EXTERN)) {
-		extern_exists(flag);
-	}
-	else if (strcmp(command, DOT_ENTRY)) {
-		extern_exists(flag);
-	}
+    char* command = line_iterator_next_word(line, " ");
+	/* Checks if command is extern */
+    if (strcmp(command, DOT_EXTERN)) {
+        extern_exists(flag);
+    }
+	/* Checks if command is entry */
+    else if (strcmp(command, DOT_ENTRY)) {
+        extern_exists(flag);
+    }
 
-	free(command);
+    free(command);
 }
 
 VarData* extract_variables(LineIterator* it) {
@@ -254,17 +267,20 @@ VarData* extract_variables(LineIterator* it) {
 	Opcodes op = get_opcode(opcode);
 	SyntaxGroups synGroup = get_syntax_group(opcode);
 
-	if (synGroup == SG_GROUP_1 || synGroup == SG_GROUP_2 || synGroup == SG_GROUP_7) {
-		variables = extract_variables_group_1_and_2_and_7(it);
-	}
+	/* Extract variables for group 1, 2, and 7 opcodes */
+    if (synGroup == SG_GROUP_1 || synGroup == SG_GROUP_2 || synGroup == SG_GROUP_7) {
+        variables = extract_variables_group_1_and_2_and_7(it);
+    }
 
-	else if (synGroup == SG_GROUP_3 || synGroup == SG_GROUP_6) {
-		variables = extract_variables_group_3_and_6(it);
-	}
+	/* Extract variables for group 3 and 6 opcodes */
+    else if (synGroup == SG_GROUP_3 || synGroup == SG_GROUP_6) {
+        variables = extract_variables_group_3_and_6(it);
+    }
 
-	else if (synGroup == SG_GROUP_5) {
-		variables = extract_variables_group_5(it);
-	}
+	/* Extract variables for group 5 opcodes */
+    else if (synGroup == SG_GROUP_5) {
+        variables = extract_variables_group_5(it);
+    }
 
 	return variables;
 }
