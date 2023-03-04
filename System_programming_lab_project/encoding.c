@@ -386,7 +386,6 @@ void encode_labels(VarData* variables, SyntaxGroups synGroup, SymbolTable* symTa
 	if (variables->label) {
 		nodePtr = symbol_table_search_symbol(symTable, variables->label);
 		if (nodePtr) {
-			printf("%d\t%s\n", img->counter, nodePtr->sym.name);
 			if (nodePtr->sym.type == SYM_EXTERN) {
 				set_image_memory(img, ENCODING_EXT, FLAG_ERA);
 			}
@@ -407,7 +406,6 @@ void encode_labels(VarData* variables, SyntaxGroups synGroup, SymbolTable* symTa
 		if (variables->leftVar) {
 			nodePtr = symbol_table_search_symbol(symTable, variables->leftVar);
 			if (nodePtr) {
-				printf("%d\t%s\n", img->counter, nodePtr->sym.name);
 				if (nodePtr->sym.type == SYM_EXTERN) {
 					set_image_memory(img, ENCODING_EXT, FLAG_ERA);
 				}
@@ -423,7 +421,6 @@ void encode_labels(VarData* variables, SyntaxGroups synGroup, SymbolTable* symTa
 		if (variables->rightVar) {
 			nodePtr = symbol_table_search_symbol(symTable, variables->rightVar);
 			if (nodePtr) {
-				printf("%d\t%s\n", img->counter, nodePtr->sym.name);
 				if (nodePtr->sym.type == SYM_EXTERN) {
 					set_image_memory(img, ENCODING_EXT, FLAG_ERA);
 				}

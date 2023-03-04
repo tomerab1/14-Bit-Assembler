@@ -256,11 +256,13 @@ void create_pre_assembler_file(FILE* in, FILE* out, MacroList* list)
 
             /* Check wheter we encountered a valid macro name, and we did not started reading a macro. */
             if (macro_list_get_node(list, name) && !did_started_reading) {
-                /* Expand the macro.*/
-                expand_macro_to_file(out, list, name);
                 /* If the state is READ_START_MACRO, change the flag to reflect that we are inside a macro definition. */
                 if (current_state == READ_START_MACRO) {
                     did_started_reading = TRUE;
+                }
+                else {
+                    /* Expand the macro.*/
+                    expand_macro_to_file(out, list, name);
                 }
             }
             /* We reached an 'endmcr' thus the macro defintion has ended. Change the flag to reflect that. */
