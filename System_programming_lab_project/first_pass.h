@@ -4,7 +4,7 @@
 /** @file
 */
 
-#include "symbol_table.h"7
+#include "symbol_table.h"
 #include "line_iterator.h"
 #include "utils.h"
 #include "memory.h"

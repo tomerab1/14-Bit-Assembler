@@ -6,13 +6,6 @@
 #include <string.h>
 #include <ctype.h>
 
-/**
-* Check syntax of label. This is a helper function for get_label_from_string and get_label_from_string.
-* 
-* @param label
-* 
-* @return ERROR_CODE_INVALID_LABEL_DEF if label is syntactically
-*/
 errorCodes check_label_syntax(char* label)
 {
     char* colon_loc = strrchr(label, COLON_CHAR);
@@ -46,63 +39,30 @@ errorCodes check_label_syntax(char* label)
     return ERROR_CODE_OK;
 }
 
-/**
-* Checks if a label is valid. This is a wrapper for check_label_syntax that returns TRUE if the label is valid and FALSE otherwise.
-* 
-* @param label
-* 
-* @return TRUE if the label is valid FALSE otherwise. Note that this does not check if the label is valid
-*/
 bool is_valid_label(char* label)
 {
     return (check_label_syntax(label) == ERROR_CODE_OK) ? TRUE : FALSE;
 }
 
-/**
-* Check if the next word is a label. This is used to detect whether or not we are in a label context.
-* 
-* @param line
-* 
-* @return @c true if the next word is a label @c false otherwise
-*/
+
 bool isLabel(LineIterator* line) {
     return is_valid_label(line_iterator_next_word(line, " "));
 }
 
-/**
-* Verify the syntax of a command. This is a helper function for debug_command ().
-* 
-* @param it - LineIterator to use for verification. It is assumed that the parser has already advanced through the line that is being processed.
-* @param dbg_list - The debugList to which the command belongs.
-* 
-* @return TRUE if the syntax is correct FALSE otherwise. In this case the parser should be instructed to abort
-*/
 bool verify_command_syntax(LineIterator* it, debugList* dbg_list)
 {
     return FALSE;
 }
 
-/**
-* Trim the symbol name to make it easier to read. This is used to prevent accidental redefinitions of symbols that are in the middle of a function name.
-* 
-* @param sym
-*/
 void trim_symbol_name(char* sym)
 {
     /* The ':' must be coupled with the name*/
     sym[strlen(sym) - 1] = '\0';
 }
 
-/**
-* Compare register name to known ones. This is used to determine if we are interested in a register
-* 
-* @param str
-* 
-* @return TRUE if name is known else FALSE ( case insensitive
-*/
 bool cmp_register_name(char* str)
 {
-    
+
     if (strcmp(str, "r0") == 0) return TRUE;
     if (strcmp(str, "r1") == 0) return TRUE;
     if (strcmp(str, "r2") == 0) return TRUE;
@@ -114,13 +74,6 @@ bool cmp_register_name(char* str)
     return FALSE;
 }
 
-/**
-* Get opcode from string. This is used to parse opcodes that are passed to libc functions.
-* 
-* @param str
-* 
-* @return OpCode corresponding to str or 0 if str doesn't match any opcode
-*/
 Opcodes get_opcode(char* str)
 {
     if (!str)
@@ -146,16 +99,7 @@ Opcodes get_opcode(char* str)
     return OP_UNKNOWN;
 }
 
-/**
-* Validate the syntax at the current position. This is a wrapper around validate_syntax_opcode () validate_syntax_data () and validate_syntax_string () to allow custom code to be added to the debugList
-* 
-* @param it - Iterator over the line to be validated
-* @param state - The first pass state of the syntax
-* @param line - The line number at which the syntax is being validated
-* @param dbg_list - The list of debuggers to which warnings / errors are added
-* 
-* @return TRUE if the syntax is valid FALSE if it is
-*/
+
 bool validate_syntax(LineIterator it, firstPassStates state, long line, debugList* dbg_list)
 {
     switch (state) {
@@ -170,15 +114,7 @@ bool validate_syntax(LineIterator it, firstPassStates state, long line, debugLis
     return TRUE;
 }
 
-/**
-* Validates a syntax string. This is a helper function for debug_list_validate_syntax ().
-* 
-* @param it
-* @param line - Line number of the string being validated
-* @param dbg_list - Debug list to add nodes to
-* 
-* @return TRUE if the string is valid FALSE if it is
-*/
+
 bool validate_syntax_string(LineIterator* it, long line, debugList* dbg_list)
 {
     /* Consume all preceding blanks */
@@ -194,7 +130,7 @@ bool validate_syntax_string(LineIterator* it, long line, debugList* dbg_list)
     line_iterator_advance(it);
 
     while (!line_iterator_is_end(it) && line_iterator_peek(it) != QUOTE_CHAR)
-        line_iterator_advance(it); 
+        line_iterator_advance(it);
 
     /* Check closing quotes */
     if (line_iterator_peek(it) != QUOTE_CHAR) {
@@ -216,13 +152,6 @@ bool validate_syntax_string(LineIterator* it, long line, debugList* dbg_list)
     return TRUE;
 }
 
-/**
-* Extract the sentence type from the line. This is used to determine whether or not we are dealing with a sentence that does not start with a newline or is part of an instruction.
-* 
-* @param it
-* 
-* @return SENTENCE_TYPE or EMPTY_SENTENCE if there is no sentence
-*/
 int extract_sentence_type(LineIterator* it) {
     it->current = it->start;
     /*empty sentence*/
@@ -233,13 +162,6 @@ int extract_sentence_type(LineIterator* it) {
     if (directive_exists_basic(it)) return DIRECTIVE_SENTENCE; /*directive sentence*/
 }
 
-/**
-* Checks if a directive exists. This is a basic check that doesn't look for ". " and it's the only way to check for it.
-* 
-* @param line
-* 
-* @return TRUE if there is a directive FALSE otherwise. The iterator is advanced past the directive
-*/
 bool directive_exists_basic(LineIterator* line) {
     while (!line_iterator_is_end(line)) {
         if (line_iterator_peek(line) == DOT_COMMAND) {
@@ -251,17 +173,10 @@ bool directive_exists_basic(LineIterator* line) {
     line->current = line->start;
 }
 
-/**
-* Check if instruction at line is a label. This is used to detect if we are going to write an instruction to a local variable that is not 16 - bit.
-* 
-* @param line
-* 
-* @return TRUE if instruction exists FALSE
-*/
 bool find_if_instruction_exists(LineIterator* line) {
     if (isLabel(line)) {
         skip_label_basic(line);
-        int localOpcode= get_opcode(line_iterator_next_word(line, " "));
+        int localOpcode = get_opcode(line_iterator_next_word(line, " "));
 
         if (localOpcode != 16)
             return TRUE;
@@ -269,11 +184,6 @@ bool find_if_instruction_exists(LineIterator* line) {
     return FALSE;
 }
 
-/**
-* Skip a basic label. This is used to skip labels that start with a colon or are followed by blanks.
-* 
-* @param line
-*/
 void skip_label_basic(LineIterator* line) {
     line->current = line->start;
     while (!line_iterator_is_end(line) && line_iterator_peek(line) != COLON) {
@@ -289,7 +199,7 @@ bool validate_syntax_data(LineIterator* it, long line, debugList* dbg_list)
 
     /* Consume blanks */
     line_iterator_consume_blanks(it);
-    
+
     /* Routine to check digit list */
     while (!line_iterator_is_end(it) && is_valid) {
         line_iterator_consume_blanks(it);
@@ -315,15 +225,6 @@ bool validate_syntax_data(LineIterator* it, long line, debugList* dbg_list)
     return TRUE;
 }
 
-/**
-* Validates the syntax extern and entry. This is used to validate the syntax extern and entry in a macro expansion.
-* 
-* @param it
-* @param line - Line number of the comment
-* @param dbg_list
-* 
-* @return TRUE if there is at least one error FALSE if
-*/
 bool validate_syntax_extern_and_entry(LineIterator* it, long line, debugList* dbg_list)
 {
     line_iterator_consume_blanks(it);
@@ -336,15 +237,6 @@ bool validate_syntax_extern_and_entry(LineIterator* it, long line, debugList* db
     return TRUE;
 }
 
-/**
-* Validate a syntax opcode. This is a helper function for validate_opcode ().
-* 
-* @param it
-* @param line - Line number on which the parser was started.
-* @param dbg_list - Debug list to add warnings / errors to.
-* 
-* @return true if the opcode is valid false otherwise. Note that it is up to the caller to free it
-*/
 bool validate_syntax_opcode(LineIterator* it, long line, debugList* dbg_list)
 {
     char* word = NULL;
@@ -352,19 +244,19 @@ bool validate_syntax_opcode(LineIterator* it, long line, debugList* dbg_list)
     while ((word = line_iterator_next_word(it, " ")) != NULL) {
         /* check_for_invalid_comma(word); */
         switch (get_syntax_group(word)) {
-        case SG_GROUP_1: 
+        case SG_GROUP_1:
             free(word);
             return match_syntax_group_1(it, line, dbg_list);
-        case SG_GROUP_2: 
+        case SG_GROUP_2:
             free(word);
             return match_syntax_group_2(it, line, dbg_list);
-        case SG_GROUP_3: 
+        case SG_GROUP_3:
             free(word);
             return match_syntax_group_3(it, line, dbg_list);
-        case SG_GROUP_4: 
+        case SG_GROUP_4:
             free(word);
             return match_syntax_group_4(it, line, dbg_list);
-        case SG_GROUP_5: 
+        case SG_GROUP_5:
             free(word);
             return match_syntax_group_5(it, line, dbg_list);
         case SG_GROUP_6:
@@ -385,15 +277,7 @@ bool validate_syntax_opcode(LineIterator* it, long line, debugList* dbg_list)
     return TRUE;
 }
 
-/**
-* Matches a syntax group 1. This is the first part of the syntax group : it must be at the start of a variable or variable declaration.
-* 
-* @param it
-* @param line - The current line number being matched. Used for error reporting.
-* @param dbg_list - The debug list to add debug nodes to.
-* 
-* @return TRUE if a match was found FALSE otherwise. The match is terminated by a newline
-*/
+
 bool match_syntax_group_1(LineIterator* it, long line, debugList* dbg_list)
 {
     /************************* Match operand 1 ****************************/
@@ -446,15 +330,6 @@ bool match_syntax_group_1(LineIterator* it, long line, debugList* dbg_list)
     return TRUE;
 }
 
-/**
-* Matches a syntax group 2. This is the second part of the syntax group matching algorithm.
-* 
-* @param it
-* @param line - Line number of the source code. This is used for reporting errors.
-* @param dbg_list - Debug list to fill with debug nodes.
-* 
-* @return TRUE on success FALSE on failure. If FALSE is returned the iterator is not advanced
-*/
 bool match_syntax_group_2(LineIterator* it, long line, debugList* dbg_list)
 {
     /************************* Match operand 1 ****************************/
@@ -507,15 +382,6 @@ bool match_syntax_group_2(LineIterator* it, long line, debugList* dbg_list)
     return TRUE;
 }
 
-/**
-* Matches a syntax group 3. This is the third part of the syntax group matching algorithm.
-* 
-* @param it
-* @param line - Line number being matched. Used for error reporting.
-* @param dbg_list - Debug list for the matched nodes.
-* 
-* @return TRUE if a match was found FALSE otherwise. When false the iterator is left pointing at the character immediately following the end of the syntax group
-*/
 bool match_syntax_group_3(LineIterator* it, long line, debugList* dbg_list)
 {
     line_iterator_consume_blanks(it);
@@ -538,15 +404,6 @@ bool match_syntax_group_3(LineIterator* it, long line, debugList* dbg_list)
     return TRUE;
 }
 
-/**
-* Matches a syntax group 4. This is used to check if there is a'%'followed by an operand.
-* 
-* @param it
-* @param line - Line number where the token begins. This is used for reporting errors.
-* @param dbg_list - Debug list to add matched nodes to.
-* 
-* @return TRUE if a match was found FALSE otherwise. If FALSE is returned the iterator is not advanced
-*/
 bool match_syntax_group_4(LineIterator* it, long line, debugList* dbg_list)
 {
     /* Check that they dont get any operand. */
@@ -562,15 +419,6 @@ bool match_syntax_group_4(LineIterator* it, long line, debugList* dbg_list)
     return TRUE;
 }
 
-/**
-* Matches a syntax group 5 starting at the current position. This is used to implement the syntax group 5 ( and below ) as well as the syntax group 5 ( and below ).
-* 
-* @param it
-* @param line - Line number of the current position
-* @param dbg_list - Debug list for the matched nodes
-* 
-* @return TRUE if a match was found FALSE if not ( or an error occurred
-*/
 bool match_syntax_group_5(LineIterator* it, long line, debugList* dbg_list)
 {
     char* open_paren_loc = strchr(it->current, OPEN_PAREN_CHAR);
@@ -594,7 +442,7 @@ bool match_syntax_group_5(LineIterator* it, long line, debugList* dbg_list)
             debug_list_register_node(dbg_list, debug_list_new_node(it->start, it->current, line, ERROR_CODE_INVALID_LABEL_DEF));
             return FALSE;
         }
-        
+
         line_iterator_jump_to(it, '(');
 
         if (!match_operand(it, line, FLAG_PARAM_LABEL, dbg_list)) {
@@ -609,15 +457,6 @@ bool match_syntax_group_5(LineIterator* it, long line, debugList* dbg_list)
     return TRUE;
 }
 
-/**
-* Matches a syntax group 6 starting at the current position. This is used for variable and variable references.
-* 
-* @param it
-* @param line - Line in the source file being scanned
-* @param dbg_list - Debug list for the matches.
-* 
-* @return TRUE if a match was found FALSE otherwise ( an error has been reported
-*/
 bool match_syntax_group_6(LineIterator* it, long line, debugList* dbg_list)
 {
     line_iterator_consume_blanks(it);
@@ -645,15 +484,6 @@ bool match_syntax_group_6(LineIterator* it, long line, debugList* dbg_list)
     return TRUE;
 }
 
-/**
-* Matches a syntax group 7. In this case we are interested in the name of a register or a label.
-* 
-* @param it
-* @param line - Line number where the syntax group starts. Used for error reporting.
-* @param dbg_list - Debug list for all matches.
-* 
-* @return TRUE if a match was found FALSE otherwise. This function is called by match_syntax_group ()
-*/
 bool match_syntax_group_7(LineIterator* it, long line, debugList* dbg_list)
 {
     line_iterator_consume_blanks(it);
@@ -691,21 +521,10 @@ bool match_syntax_group_7(LineIterator* it, long line, debugList* dbg_list)
     return TRUE;
 }
 
-
-/**
-* Matches an operand and returns TRUE if it matches. This is a low - level function used by match_operand_p () and match_operand_p2 ().
-* 
-* @param it
-* @param line - Line number of the operand. This is used for error reporting.
-* @param flags - Flags to match the operand with. Flags can be FLAG_LABEL FLAG_NUMBER FLAG_REAL_REG and FLAG_REG_NEAREST
-* @param dbg_list - Debug list to fill with nodes.
-* 
-* @return TRUE if the operand matches FALSE otherwise. On failure the iterator is left pointing at the end of the operand
-*/
 bool match_operand(LineIterator* it, long line, int flags, debugList* dbg_list)
 {
     switch (flags) {
-    case FLAG_LABEL: 
+    case FLAG_LABEL:
         if (!is_label_name(it)) {
             debug_list_register_node(dbg_list, debug_list_new_node(it->start, it->current, line, ERROR_CODE_INVALID_NAME));
             return FALSE;
@@ -716,7 +535,7 @@ bool match_operand(LineIterator* it, long line, int flags, debugList* dbg_list)
         }
 
         break;
-    case FLAG_NUMBER: 
+    case FLAG_NUMBER:
         /* Consume the '#' */
         line_iterator_advance(it);
         if (!verify_int(it, line, ",", dbg_list)) {
@@ -748,15 +567,6 @@ bool match_operand(LineIterator* it, long line, int flags, debugList* dbg_list)
     return TRUE;
 }
 
-/**
-* Matches pamaetrized labels. This is a bit tricky because we don't know the number of arguments to a label.
-* 
-* @param it
-* @param line - Line number where the pattern was found. Used for error reporting.
-* @param dbg_list - Debug list to add warnings to.
-* 
-* @return TRUE if it succeeds FALSE otherwise. Note that it does not check for syntax errors
-*/
 bool match_pamaetrized_label(LineIterator* it, long line, debugList* dbg_list)
 {
     int comma_counter = 0, close_paren_counter = 0, args_count = 0;
@@ -838,13 +648,6 @@ bool match_pamaetrized_label(LineIterator* it, long line, debugList* dbg_list)
     return TRUE;
 }
 
-/**
-* Check if the next character is a label name. This is used to distinguish between labels that are separated by spaces and blank lines.
-* 
-* @param it
-* 
-* @return TRUE if the next character is a label name FALSE otherwise
-*/
 bool is_label_name(LineIterator* it)
 {
     line_iterator_consume_blanks(it);
@@ -863,26 +666,13 @@ bool is_label_name(LineIterator* it)
     return TRUE;
 }
 
-/**
-* Validate that the iterator is at the end of a label. This is used to determine whether or not we should stop at the end of an already - processed label or not.
-* 
-* @param it
-* 
-* @return true if \ a it is at the end of a label false otherwise
-*/
+
 bool validate_label_ending(LineIterator* it)
 {
     line_iterator_consume_blanks(it);
     return line_iterator_is_end(it);
 }
 
-/**
-* Check if we are looking for a heuristics to be used in register names.
-* 
-* @param it - Iterator on the line to check. Must be at the start of a register name.
-* 
-* @return true if it is false otherwise. This is a heuristic
-*/
 bool is_register_name_heuristic(LineIterator it)
 {
     int len = 0;
@@ -893,13 +683,6 @@ bool is_register_name_heuristic(LineIterator it)
     return len == 2;
 }
 
-/**
-* Check if the next character is a register name. This is used to distinguish between register names and the ones that are part of C / C ++ code.
-* 
-* @param it
-* 
-* @return True if the next character is a register name false otherwise
-*/
 bool is_register_name(LineIterator* it)
 {
     /* Skip the 'r' */
@@ -919,16 +702,7 @@ bool is_register_name_whole(LineIterator* it)
     return charFlag && numFlag;
 }
 
-/**
-* Verifies that the next character is a valid integer. This is done by examining the characters that begin with a digit followed by a comma or a comma and verifying that it is a valid integer.
-* 
-* @param it
-* @param line - Line in which the string was read. Used for error reporting.
-* @param seps - String of digits to be checked for validity.
-* @param dbg_list - Debug list to be populated with nodes.
-* 
-* @return TRUE if the integer is valid FALSE otherwise. On failure the iterator is left pointing at the character that failed
-*/
+
 bool verify_int(LineIterator* it, long line, char* seps, debugList* dbg_list)
 {
     if (line_iterator_peek(it) == NEG_SIGN_CHAR || line_iterator_peek(it) == POS_SIGN_CHAR) {
@@ -954,13 +728,7 @@ bool verify_int(LineIterator* it, long line, char* seps, debugList* dbg_list)
     return TRUE;
 }
 
-/**
-* Get the syntax group of a name. This is used to distinguish groups of syntaxes that are different from each other.
-* 
-* @param name
-* 
-* @return @c SG_GROUP_1 if the name is a syntax group @c SG_GROUP_2
-*/
+
 SyntaxGroups get_syntax_group(char* name)
 {
     if (!name)
@@ -985,16 +753,6 @@ SyntaxGroups get_syntax_group(char* name)
     return SG_GROUP_INVALID;
 }
 
-/**
-
-@brief Checks if a directive exists in the given line.
-@param line The line to check for a directive.
-@return Returns true if the line contains a directive, otherwise false.
-This function checks if a directive exists in the given line. The supported directives are ".string",
-".data", ".extern", and ".entry". It uses the line_iterator_word_includes function to determine if
-the line contains any of these directives.
-@note The line iterator passed to this function must have already been initialized.
-*/
 bool directive_exists(LineIterator* line) {
     return line_iterator_word_includes(line, ".string") ||
         line_iterator_word_includes(line, ".data") ||

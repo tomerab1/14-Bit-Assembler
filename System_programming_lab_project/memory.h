@@ -53,7 +53,7 @@ typedef struct
 */
 typedef struct
 {
-	long counter;
+	int counter;
 	MemoryWord memory[RAM_MEMORY_SZ];
 } imageMemory;
 

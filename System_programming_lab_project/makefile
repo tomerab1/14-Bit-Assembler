@@ -1,8 +1,8 @@
-assembler: main.o pre_assembler.o first_pass.o encoding.o utils.o syntactical_analysis.o second_pass.o driver.o line_iterator.o symbol_table.o memory.o
-	gcc -ansi -Wall -pedantic pre_assembler.o first_pass.o encoding.o utils.o syntactical_analysis.o second_pass.o driver.o line_iterator.o symbol_table.o memory.o -o assembler
+assembler: pre_assembler.o first_pass.o encoding.o utils.o syntactical_analysis.o second_pass.o driver.o line_iterator.o symbol_table.o memory.o main.o
+	gcc -ansi -Wall -pedantic pre_assembler.o first_pass.o encoding.o utils.o syntactical_analysis.o second_pass.o driver.o line_iterator.o symbol_table.o memory.o main.o -o assembler
 
 pre_assembler.o: pre_assembler.c pre_assembler.h line_iterator.h utils.h constants.h
-	gcc -c -ansi -pedantic -Wall line_iterator.c
+	gcc -c -ansi -pedantic -Wall pre_assembler.c
 
 first_pass.o: first_pass.c first_pass.h syntactical_analysis.h encoding.h symbol_table.h line_iterator.h utils.h memory.h debug.h
 	gcc -c -ansi -pedantic -Wall first_pass.c
