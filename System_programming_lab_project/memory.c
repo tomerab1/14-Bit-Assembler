@@ -2,22 +2,41 @@
 */
 
 #include "memory.h"
+#include "utils.h"
 #include <string.h>
 #include <stdio.h>
 
-memoryBuffer memory_buffer_get_new()
+struct MemoryWord
 {
-    memoryBuffer mem_buff;
+	unsigned char mem[SIZEOF_MEMORY_WORD];
+};
 
-    mem_buff.instruction_image = image_memory_get_new();
-    mem_buff.data_image = image_memory_get_new();
+struct imageMemory
+{
+	int counter;
+	MemoryWord memory[RAM_MEMORY_SZ];
+};
+
+struct memoryBuffer
+{
+	imageMemory* instruction_image;
+	imageMemory* data_image;
+};
+
+memoryBuffer* memory_buffer_get_new()
+{
+    memoryBuffer* mem_buff = (memoryBuffer*)xmalloc(sizeof(memoryBuffer));
+
+    mem_buff->instruction_image = image_memory_get_new();
+    mem_buff->data_image = image_memory_get_new();
+
     return mem_buff;
 }
 
-imageMemory image_memory_get_new()
+imageMemory* image_memory_get_new()
 {
-    imageMemory ram;
-    image_memory_init(&ram);
+    imageMemory* ram = (imageMemory*)xmalloc(sizeof(imageMemory));
+    image_memory_init(ram);
     return ram;
 }
 
@@ -27,9 +46,39 @@ void image_memory_init(imageMemory* mem)
     memset(mem->memory, RAM_INIT_VAL, sizeof(MemoryWord) * RAM_MEMORY_SZ);
 }
 
+imageMemory* memory_buffer_get_data_img(memoryBuffer* memBuff)
+{
+    return memBuff->instruction_image;
+}
+
+imageMemory* memory_buffer_get_inst_img(memoryBuffer* memBuff)
+{
+    return memBuff->instruction_image;
+}
+
+int img_memory_get_counter(imageMemory* im)
+{
+    return im->counter;
+}
+
+void img_memory_set_counter(imageMemory* im, int cnt)
+{
+    im->counter += cnt;
+}
+
+MemoryWord* img_memory_get_memory(imageMemory* im)
+{
+    return im->memory;
+}
+
+unsigned char* memory_word_get_memory(MemoryWord* mw)
+{
+    return mw->mem;
+}
+
 void set_image_memory(imageMemory* mem, unsigned char byte, int flags)
 {
-    MemoryWord* curr_block = &mem->memory[mem->counter];
+    MemoryWord* curr_block = memory_word_get_memory(img_memory_get_memory(mem));
 
     /* Set the ERA bits to the current block.*/
     if (flags & FLAG_ERA)     set_era_bits(curr_block, byte);

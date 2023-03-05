@@ -268,14 +268,6 @@ bool validate_syntax_data(LineIterator* it, long line, debugList* dbg_list);
 */
 bool validate_syntax_extern_and_entry(LineIterator* it, long line, debugList* dbg_list);
 
-/**
-* @brief Check if we are looking for a heuristics to be used in register names.
-*
-* @param it - Iterator on the line to check. Must be at the start of a register name.
-*
-* @return true if it is false otherwise. This is a heuristic
-*/
-bool is_register_name_heuristic(LineIterator it);
 
 /**
 * @brief Check if the next character is a register name.

@@ -217,6 +217,6 @@ of the instruction. It returns a pointer to the extracted variables as a VarData
 */
 VarData* extract_variables(LineIterator* it);
 
-static void nop();
+void nop();
 
 #endif
