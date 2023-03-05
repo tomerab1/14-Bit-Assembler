@@ -5,6 +5,23 @@
 #include <string.h>
 #include <stdio.h>
 
+struct MemoryWord
+{
+	unsigned char mem[SIZEOF_MEMORY_WORD];
+};
+
+struct imageMemory
+{
+	int counter;
+	MemoryWord memory[RAM_MEMORY_SZ];
+};
+
+struct memoryBuffer
+{
+	imageMemory instruction_image;
+	imageMemory data_image;
+};
+
 memoryBuffer memory_buffer_get_new()
 {
     memoryBuffer mem_buff;

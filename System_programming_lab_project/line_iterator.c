@@ -37,7 +37,7 @@ void line_iterator_unget_word(LineIterator* it, char* word)
 
 void line_iterator_consume_blanks(LineIterator* it)
 {
-    while (isblank(line_iterator_peek(it)))
+    while (isspace(line_iterator_peek(it)))
         line_iterator_advance(it);
 }
 
@@ -45,7 +45,6 @@ void line_iterator_jump_to(LineIterator* it, char sep)
 {
     char* loc = strchr(it->current, sep);
     if (loc == NULL)
-        return;
     it->current = loc + 1;
 }
 
@@ -109,7 +108,7 @@ bool line_iterator_is_start(LineIterator* it)
 
 bool line_iterator_word_includes(LineIterator* it, char* searchFor)
 {
-    return strstr(it->current, searchFor);
+    return (strstr(it->current, searchFor) != NULL) ? TRUE : FALSE;
 }
 
 char* get_last_word(LineIterator* it) {

@@ -55,7 +55,6 @@ bool debug_list_is_empty(debugList* list)
 	return !list->head && !list->tail;
 }
 
-
 debugList* debug_list_new_list()
 {
 	debugList* new_list = (debugList*)xmalloc(sizeof(debugList));
@@ -66,13 +65,15 @@ debugList* debug_list_new_list()
 debugNode* debug_list_new_node(char* start, char* err, long line, errorCodes err_code)
 {
 	debugNode* new_node = (debugNode*)xmalloc(sizeof(debugNode));
+
 	/* The node does not own the start and err pointers, we should not call 'free' on them ! */
 	new_node->ctx.start_pos = get_copy_string(start);
 	new_node->ctx.err_pos = get_copy_string(err);
-    new_node->ctx.err_len = (err - start);
+    	new_node->ctx.err_len = (err - start);
 	new_node->ctx.line_num = line;
 	new_node->ctx.err_code = err_code;
 	new_node->next = NULL;
+
 	return new_node;
 }
 
@@ -111,9 +112,11 @@ void debug_list_pretty_print(debugList* list)
 
 void debug_print_error(errorContext* err_ctx, char err_buff[])
 {
+	ptrdiff_t offset;
+
 	/* Calculate the spacing between the start of the line and the error pos. */
 	sprintf(err_buff, "Line %li:", err_ctx->line_num);
-	ptrdiff_t offset = (int) strlen(err_buff) + err_ctx->err_len + 1;
+	offset = (int) strlen(err_buff) + err_ctx->err_len + 1;
 
 	printf("%s %s\n", err_buff, err_ctx->start_pos);
 	while (offset > 0) {
