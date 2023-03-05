@@ -11,7 +11,7 @@
 struct driver {
     SymbolTable* sym_table;
     debugList* dbg_list;
-    memoryBuffer mem_buffer;
+    memoryBuffer* mem_buffer;
     int (*exec)(Driver* self, int argc, char** argv);
 };
 

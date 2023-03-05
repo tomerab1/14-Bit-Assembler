@@ -59,7 +59,7 @@ typedef struct memoryBuffer memoryBuffer;
 /**
 * @brief This is a function for creating a new memory buffer object.
 */
-memoryBuffer memory_buffer_get_new();
+memoryBuffer* memory_buffer_get_new();
 
 /** 
 * @brief This function sets bytes appropriately in a memoryWord according to the specified flags.
@@ -73,13 +73,25 @@ void set_image_memory(imageMemory* mem, unsigned char byte, int flags);
 * @breif This is an internal function that creates a new image memory object. 
 * @return A new image memory structure.
 */
-imageMemory image_memory_get_new();
+imageMemory* image_memory_get_new();
 
 /**
 * @brief This is an internal function used to zero all the image memory.
 * @param mem - The image memory.
 */
 void image_memory_init(imageMemory* mem);
+
+imageMemory* memory_buffer_get_data_img(memoryBuffer* memBuff);
+
+imageMemory* memory_buffer_get_inst_img(memoryBuffer* memBuff);
+
+int img_memory_get_counter(imageMemory* im);
+
+void img_memory_set_counter(imageMemory* im, int cnt);
+
+MemoryWord* img_memory_get_memory(imageMemory* im);
+
+unsigned char* memory_word_get_memory(MemoryWord* mw);
 
 /**
 *  The memory word structure:

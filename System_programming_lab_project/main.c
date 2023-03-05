@@ -20,7 +20,7 @@ int main(int argc, char** argv)
 	Driver* driver = driver_new_driver();
 	
 	ret_val = driver_exec(driver, argc, argv);
-	destroy_driver(&driver)
+	destroy_driver(&driver);
 
 	return ret_val;
 }

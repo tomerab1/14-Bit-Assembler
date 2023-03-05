@@ -36,13 +36,13 @@ struct programFinalStatus
 bool initiate_second_pass(char* path, SymbolTable* table, memoryBuffer* memory, debugList* dbg_list)
 {
 	FILE* in = open_file(path, MODE_READ);
-	programFinalStatus finalStatus = {0};
+	programFinalStatus finalStatus = { 0 };
 	LineIterator curLine;
 	char* line = NULL;
 	long lineNum = 1;
 
 	add_label_base_address(table);
-	memory->instruction_image.counter = 0; /*init IC counter*/
+	img_memory_set_counter(memory_buffer_get_inst_img(memory), 0);
 
 	while ((line = get_line(in)) != NULL) {
 		line_iterator_put_line(&curLine, line);
@@ -66,7 +66,7 @@ bool initiate_second_pass(char* path, SymbolTable* table, memoryBuffer* memory, 
 
 void execute_line(LineIterator* it, SymbolTable* table, memoryBuffer* memory, debugList* dbg_list, bool* errorFlag, long line_num) {
 	/* Increment counter by one, as every command has a preceding word. */
-	memory->instruction_image.counter++;
+	img_memory_set_counter(memory_buffer_get_inst_img(memory), img_memory_get_counter(memory_buffer_get_inst_img(memory)) + 1);
 
 if (is_label_exists_in_line(it, table, dbg_list, errorFlag, line_num)) { /*checks if label exists and valid*/
 		update_symbol_address(*it, memory, table); /*updates the address of the symbol*/
@@ -79,7 +79,7 @@ if (is_label_exists_in_line(it, table, dbg_list, errorFlag, line_num)) { /*check
 
 void skip_first_pass_mem(memoryBuffer* memory, LineIterator* it) {
 	int memCellsToJump = find_amount_of_lines_to_skip(it);
-	memory->instruction_image.counter += memCellsToJump;
+	img_memory_set_counter(memory_buffer_get_inst_img(memory), img_memory_get_counter(memory_buffer_get_inst_img(memory)) + memCellsToJump);
 }
 
 int find_amount_of_lines_to_skip(LineIterator* it) {
@@ -131,10 +131,10 @@ bool generate_object_file(memoryBuffer* memory, char* path)
 	outfileName = get_outfile_name(path, ".object");
 	out = open_file(outfileName, MODE_WRITE);
 
-	sprintf(placeholder, "%9d\t%4d\n", memory->instruction_image.counter - 1, memory->data_image.counter);
+	sprintf(placeholder, "%9d\t%4d\n", img_memory_get_counter(memory_buffer_get_inst_img(memory)) - 1, img_memory_get_counter(memory_buffer_get_data_img(memory)));
 	fputs(placeholder, out);
 
-	for (i = 0; i < memory->data_image.counter + memory->instruction_image.counter - 1; i++) {
+	for (i = 0; i < img_memory_get_counter(memory_buffer_get_inst_img(memory)) + img_memory_get_counter(memory_buffer_get_data_img(memory)) - 1; i++) {
 		sprintf(placeholder, "%04d\t%s\n", DECIMAL_ADDRESS_BASE + translatedMemory[i].address, translatedMemory[i].translated);
 		fputs(placeholder, out);
 	}
@@ -148,14 +148,16 @@ bool generate_object_file(memoryBuffer* memory, char* path)
 
 TranslatedMachineData* translate_to_machine_data(memoryBuffer* memory)
 {
-	int i = 0;
+	int i = 0, total = img_memory_get_counter(memory_buffer_get_data_img(memory)) + img_memory_get_counter(memory_buffer_get_inst_img(memory));
 
 	/* Allocate memory for the translated machine code */
-	TranslatedMachineData* translatedMemory = (TranslatedMachineData*)xmalloc((memory->instruction_image.counter + memory->data_image.counter) * sizeof(TranslatedMachineData));
+	TranslatedMachineData* translatedMemory = (TranslatedMachineData*)xmalloc(total * sizeof(TranslatedMachineData));
+
+	img_memory_get_counter(memory_buffer_get_data_img(memory));
 
 	/* Decode the instruction and data memory buffers and store in the translated memory */
-	decode_memory(translatedMemory, memory->instruction_image.memory, &i, memory->instruction_image.counter);
-	decode_memory(translatedMemory, memory->data_image.memory, &i, memory->data_image.counter + memory->instruction_image.counter);
+	decode_memory(translatedMemory, img_memory_get_memory(memory_buffer_get_inst_img(memory)), &i, img_memory_get_counter(memory_buffer_get_inst_img(memory)));
+	decode_memory(translatedMemory, img_memory_get_memory(memory_buffer_get_data_img(memory)), &i, total);
 
 	return translatedMemory;
 
@@ -166,7 +168,8 @@ void decode_memory(TranslatedMachineData* tmd, MemoryWord* inst, int* startPos, 
 	int i, j, k = *startPos;
 
 	for (i = 0; k < endPos; i++) {
-		unsigned int bits = (inst[i].mem[1] << 0x08) | (inst[i].mem[0]);
+		unsigned char* mem = memory_word_get_memory(inst);
+		unsigned int bits = (mem[1] << 0x08) | (mem[0]);
 		tmd[k].address = k;
 		memset(tmd[k].translated, 0, sizeof(tmd[k].translated));
 
@@ -434,10 +437,10 @@ void update_symbol_offset(char* word, int offset, memoryBuffer* memory, SymbolTa
 		while (head) {
 			if (strcmp(symbol_get_name(symbol_node_get_sym(head)), word) == 0 && symbol_get_type(symbol_node_get_sym(head)) == SYM_EXTERN) {
 				if (symbol_get_counter(symbol_node_get_sym(head)) == 0) {
-					symbol_set_counter(symbol_node_get_sym(head), DECIMAL_ADDRESS_BASE + memory->instruction_image.counter + offset - 1);
+					symbol_set_counter(symbol_node_get_sym(head), DECIMAL_ADDRESS_BASE + img_memory_get_counter(memory_buffer_get_inst_img(memory)) + offset - 1);
 				}
 				else {
-					symbol_table_insert_symbol(table, symbol_table_new_node(word, SYM_EXTERN, DECIMAL_ADDRESS_BASE + memory->instruction_image.counter + offset - 1));
+					symbol_table_insert_symbol(table, symbol_table_new_node(word, SYM_EXTERN, DECIMAL_ADDRESS_BASE + img_memory_get_counter(memory_buffer_get_inst_img(memory)) + offset - 1));
 					break;
 				}
 			}
