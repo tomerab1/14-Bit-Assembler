@@ -50,14 +50,12 @@ void encode_dot_data(LineIterator* it, memoryBuffer* img)
 void encode_label_start_process(LineIterator* it, memoryBuffer* img, SymbolTable* symTable, debugList* dbg_list) {
 	VarData* variables = NULL;
 	char* opcode = NULL;
-	Opcodes op;
 	SyntaxGroups synGroup;
 
 	line_iterator_reset(it);
 	line_iterator_jump_to(it, COLON_CHAR);
 
 	opcode = line_iterator_next_word(it, SPACE_STRING);
-	op = get_opcode(opcode);
 	synGroup = get_syntax_group(opcode);
 
 	if (synGroup == SG_GROUP_1 || synGroup == SG_GROUP_2 || synGroup == SG_GROUP_7) {
@@ -172,8 +170,11 @@ void encode_opcode(LineIterator* it, memoryBuffer* img)
 
 void encode_source_and_dest(imageMemory* img, char* source, char* dest)
 {
-	char* operands[] = { source, dest, NULL };
+	char* operands[3] = { NULL };
 	int i, num;
+
+	operands[0] = source;
+	operands[1] = dest;
 
 	if (get_operand_kind(source) == KIND_REG && get_operand_kind(dest) == KIND_REG) {
 		/* Bits 2 - 7 -> First register. Bits 8 - 13 -> Second register. */
@@ -185,7 +186,7 @@ void encode_source_and_dest(imageMemory* img, char* source, char* dest)
 
 	for (i = 0; i < 2; i++) {
 		OperandKind kind;
-		int address;
+
 		if (operands[i]) {
 			kind = get_operand_kind(operands[i]);
 
@@ -203,6 +204,8 @@ void encode_source_and_dest(imageMemory* img, char* source, char* dest)
 				else if (operands[i] == dest) {
 					set_image_memory(img, (*(dest + 1) - '0') << 2, FLAG_OPCODE1 | FLAG_DEST | FLAG_SOURCE);
 				}
+				break;
+			 default:
 				break;
 			}
 			img->counter++;

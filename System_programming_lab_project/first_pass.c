@@ -214,7 +214,8 @@ bool first_pass_process_sym_string(LineIterator* it, memoryBuffer* img, SymbolTa
 
 bool first_pass_process_sym_ent(LineIterator* it, memoryBuffer* img, SymbolTable* sym_table, debugList* dbg_list, char* name, long line, bool should_encode)
 {
-    char* word = line_iterator_next_word(it, SPACE_STRING);
+    	char* word = line_iterator_next_word(it, SPACE_STRING);
+	SymbolTableNode* node = NULL;
 
 	line_iterator_unget_word(it, word);
 	/* register a new word in the list*/
@@ -242,7 +243,7 @@ bool first_pass_process_sym_ent(LineIterator* it, memoryBuffer* img, SymbolTable
 	line_iterator_next_word(it, " ");
 
 	/* Check wheter the symbol already exist as an entry/extern directive */
-	SymbolTableNode* node = symbol_table_search_symbol(sym_table, word);
+	node = symbol_table_search_symbol(sym_table, word);
 
 
 	/* Insert symbol in symbol table.*/
@@ -267,7 +268,7 @@ bool first_pass_process_sym_ent(LineIterator* it, memoryBuffer* img, SymbolTable
 
 bool first_pass_process_sym_ext(LineIterator* it, memoryBuffer* img, SymbolTable* sym_table, debugList* dbg_list, char* name, long line, bool should_encode)
 {
-    char* word = line_iterator_next_word(it, SPACE_STRING);
+    	char* word = line_iterator_next_word(it, SPACE_STRING);
 
 	line_iterator_unget_word(it, word);
 	/* register a new word in the list*/

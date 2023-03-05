@@ -101,7 +101,7 @@ char* get_copy_string(char* str)
 unsigned int get_num(char* num)
 {
 	int n;
-	(void)sscanf(num, "%u", &n);
+	(void)sscanf(num, "%d", &n);
 	return n;
 }
 

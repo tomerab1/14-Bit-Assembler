@@ -20,7 +20,7 @@ struct flags
 };
 
 struct TranslatedMachineData {
-	long address;
+	int address;
 	char translated[SINGLE_ORDER_SIZE + 1]; /* (+1) for '\0'. */
 };
 
@@ -286,6 +286,7 @@ VarData* extract_variables(LineIterator* it) {
 
 bool is_label_exists_in_line(LineIterator* line, SymbolTable* table, debugList* dbg_list, bool* flag, long line_num) {
 	VarData* variablesData = NULL;
+	bool ret_val = TRUE;
 	LineIterator itLeftVar, itRightVar, itLabel;
 	variablesData = extract_variables(line);
 
@@ -297,31 +298,36 @@ bool is_label_exists_in_line(LineIterator* line, SymbolTable* table, debugList* 
 	case 1: /*group 3 and 6, left var*/
 		if (varData_get_leftVar(variablesData) != NULL) {
 			line_iterator_put_line(&itLeftVar, varData_get_leftVar(variablesData));
-			return investigate_word(line, &itLeftVar, table, dbg_list, flag, line_num, varData_get_leftVar(variablesData), 1);
+			ret_val = investigate_word(line, &itLeftVar, table, dbg_list, flag, line_num, varData_get_leftVar(variablesData), 1);
 		}
 		else {
 			line_iterator_put_line(&itLabel, varData_get_label(variablesData));
-			return investigate_word(line, &itLabel, table, dbg_list, flag, line_num, varData_get_label(variablesData), 1);
+			ret_val = investigate_word(line, &itLabel, table, dbg_list, flag, line_num, varData_get_label(variablesData), 1);
 		}
+		break;
 
 	case 2: /*groups 1,2,7, left var and right var*/
 
 		line_iterator_put_line(&itLeftVar, varData_get_leftVar(variablesData));
 		line_iterator_put_line(&itRightVar, varData_get_rightVar(variablesData));
-		return investigate_word(line, &itLeftVar, table, dbg_list, flag, line_num, varData_get_leftVar(variablesData), 2) ||
+		ret_val = investigate_word(line, &itLeftVar, table, dbg_list, flag, line_num, varData_get_leftVar(variablesData), 2) ||
 			investigate_word(line, &itRightVar, table, dbg_list, flag, line_num, varData_get_rightVar(variablesData), 2);
+		break;
 
 	case 3: /*groups 5, labe, left var and right var*/
 		line_iterator_put_line(&itLeftVar, varData_get_leftVar(variablesData));
 		line_iterator_put_line(&itRightVar, varData_get_rightVar(variablesData));
 		line_iterator_put_line(&itLabel, varData_get_label(variablesData));
 
-		return investigate_word(line, &itLeftVar, table, dbg_list, flag, line_num, varData_get_leftVar(variablesData), 3) ||
+		ret_val = investigate_word(line, &itLeftVar, table, dbg_list, flag, line_num, varData_get_leftVar(variablesData), 3) ||
 			investigate_word(line, &itRightVar, table, dbg_list, flag, line_num, varData_get_rightVar(variablesData), 3) ||
 			investigate_word(line, &itLabel, table, dbg_list, flag, line_num, varData_get_label(variablesData), 3);
+		break;
 	}
 
-	return TRUE;
+	free(variablesData);
+
+	return ret_val;
 }
 
 bool investigate_word(LineIterator* originalLine, LineIterator* wordIterator, SymbolTable* table, debugList* dbg_list, bool* flag, long line_num, char* wordToInvestigate, int amountOfVars) {

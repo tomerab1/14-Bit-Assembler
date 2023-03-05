@@ -43,28 +43,18 @@ typedef enum
 /**
 * @brief This sturct is used to represent a memory word as specified in the project's description.
 */
-typedef struct
-{
-	unsigned char mem[SIZEOF_MEMORY_WORD];
-} MemoryWord;
+typedef struct MemoryWord MemoryWord;
 
 /**
 * @brief This struct is used to represent 'instruction/data image' and the 'instruction/data counter'.
 */
-typedef struct
-{
-	int counter;
-	MemoryWord memory[RAM_MEMORY_SZ];
-} imageMemory;
+typedef struct imageMemory imageMemory;
+
 
 /**
 * @brief This struct is used to represent all the memory buffers, the 'cpu' registers and the instruction/data image.
 */
-typedef struct
-{
-	imageMemory instruction_image;
-	imageMemory data_image;
-} memoryBuffer;
+typedef struct memoryBuffer memoryBuffer;
 
 /**
 * @brief This is a function for creating a new memory buffer object.
@@ -83,13 +73,13 @@ void set_image_memory(imageMemory* mem, unsigned char byte, int flags);
 * @breif This is an internal function that creates a new image memory object. 
 * @return A new image memory structure.
 */
-static imageMemory image_memory_get_new();
+imageMemory image_memory_get_new();
 
 /**
 * @brief This is an internal function used to zero all the image memory.
 * @param mem - The image memory.
 */
-static void image_memory_init(imageMemory* mem);
+void image_memory_init(imageMemory* mem);
 
 /**
 *  The memory word structure:
