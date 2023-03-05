@@ -26,6 +26,8 @@ Driver* driver_new_driver();
 */
 int driver_exec(Driver* driver, int argc, char** argv);
 
+void destroy_driver(Driver** driver);
+
 
 /**
 * @brief Executes the assembler. 
@@ -37,20 +39,20 @@ int driver_exec(Driver* driver, int argc, char** argv);
 *
 * @return 0 on success non - zero on failure ( in which case we're exiting the assembly without error
 */
-static int exec_impl(Driver* driver, int argc, char** argv);
+int exec_impl(Driver* driver, int argc, char** argv);
 
 /**
 * @brief Called when the driver is initialized. 
 * This is where we initialize the data structures that are used to store debug information. 
 * @param driver - The driver to initialize.
 */
-static void on_initialization(Driver* driver);
+void on_initialization(Driver* driver);
 
 /**
 * @brief Called when the module is unloaded.
 * Destroys all memory allocated by the module. This is the last function called to clean up the module's data structures.
 * @param driver - the driver to release
 */
-static void on_exit(Driver* driver);
+void on_exit(Driver* driver);
 
 #endif

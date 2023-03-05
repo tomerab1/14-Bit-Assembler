@@ -80,8 +80,14 @@ void symbol_table_insert_symbol(SymbolTable* table, SymbolTableNode* symbol)
         table->tail->next = symbol;
         table->tail = table->tail->next;
     }
-    if (!table->hasEntries) symbol->sym.type == SYM_ENTRY ? table->hasEntries = TRUE : NULL;
-    if (!table->hasExternals) symbol->sym.type == SYM_EXTERN ? table->hasExternals = TRUE : NULL;
+
+    if (!table->hasEntries) 
+    	if (symbol->sym.type == SYM_ENTRY) 
+		table->hasEntries = TRUE;
+
+    if (!table->hasExternals) 
+	if (symbol->sym.type == SYM_EXTERN)
+		table->hasExternals = TRUE;
 }
 
 int update_amount_of_items(SymbolTable* table) {

@@ -137,7 +137,7 @@ bool first_pass_process_sym_def(LineIterator* it, memoryBuffer* img, SymbolTable
 		return FALSE;
 	}
 
-	symbol_table_insert_symbol(sym_table, symbol_table_new_node(name, SYM_CODE, img->instruction_image.counter));
+	symbol_table_insert_symbol(sym_table, symbol_table_new_node(name, SYM_CODE, img_memory_get_counter(memory_buffer_get_inst_img(img))));
 
 	/* Check the syntax, we want a copy of the iterator because if the syntax is correct we will encode the instructions to memory. */
 	/* Check if the syntax is valid.*/
@@ -176,7 +176,7 @@ bool first_pass_process_sym_data(LineIterator* it, memoryBuffer* img, SymbolTabl
 		return FALSE;
 	}
 
-	symbol_table_insert_symbol(sym_table, symbol_table_new_node(name, SYM_DATA, img->instruction_image.counter + img->data_image.counter));
+	symbol_table_insert_symbol(sym_table, symbol_table_new_node(name, SYM_DATA, img_memory_get_counter(memory_buffer_get_inst_img(img)) + img_memory_get_counter(memory_buffer_get_data_img(img))));
 
 	/* Check the syntax, we want a copy of the iterator because if the syntax is correct we will encode the instructions to memory. */
 	if (!validate_syntax(*it, FP_SYM_DATA, line, dbg_list)) {
@@ -196,7 +196,7 @@ bool first_pass_process_sym_string(LineIterator* it, memoryBuffer* img, SymbolTa
 		debug_list_register_node(dbg_list, debug_list_new_node(it->start, it->current, line, ERROR_CODE_SYMBOL_REDEFINITION));
 		return FALSE;
 	}
-	symbol_table_insert_symbol(sym_table, symbol_table_new_node(name, SYM_DATA, img->data_image.counter));
+	symbol_table_insert_symbol(sym_table, symbol_table_new_node(name, SYM_DATA, img_memory_get_counter(memory_buffer_get_data_img(img))));
 
 	/* Check the syntax, we want a copy of the iterator because if the syntax is correct we will encode the instructions to memory. */
 
@@ -214,7 +214,8 @@ bool first_pass_process_sym_string(LineIterator* it, memoryBuffer* img, SymbolTa
 
 bool first_pass_process_sym_ent(LineIterator* it, memoryBuffer* img, SymbolTable* sym_table, debugList* dbg_list, char* name, long line, bool should_encode)
 {
-    char* word = line_iterator_next_word(it, SPACE_STRING);
+    	char* word = line_iterator_next_word(it, SPACE_STRING);
+	SymbolTableNode* node = NULL;
 
 	line_iterator_unget_word(it, word);
 	/* register a new word in the list*/
@@ -242,7 +243,7 @@ bool first_pass_process_sym_ent(LineIterator* it, memoryBuffer* img, SymbolTable
 	line_iterator_next_word(it, " ");
 
 	/* Check wheter the symbol already exist as an entry/extern directive */
-	SymbolTableNode* node = symbol_table_search_symbol(sym_table, word);
+	node = symbol_table_search_symbol(sym_table, word);
 
 
 	/* Insert symbol in symbol table.*/
@@ -267,7 +268,7 @@ bool first_pass_process_sym_ent(LineIterator* it, memoryBuffer* img, SymbolTable
 
 bool first_pass_process_sym_ext(LineIterator* it, memoryBuffer* img, SymbolTable* sym_table, debugList* dbg_list, char* name, long line, bool should_encode)
 {
-    char* word = line_iterator_next_word(it, SPACE_STRING);
+    	char* word = line_iterator_next_word(it, SPACE_STRING);
 
 	line_iterator_unget_word(it, word);
 	/* register a new word in the list*/
