@@ -3,7 +3,14 @@
 /*
 	TODO:
 	1. Test memory leaks and build on Linux
-	2. Replace final success message with something prettier 
+	2. Replace final success message with something prettier
+	3. add constants to everythin except for loop vars.
+	4. finish add data abstraction to memory.h
+	5. fix all memory leaks.
+	6. run more tests.
+	7. add more comments.
+	8. free memoryBuffer.
+	9. add utils.h to memory.o
 */
 
 /**

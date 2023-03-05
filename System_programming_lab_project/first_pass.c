@@ -137,7 +137,7 @@ bool first_pass_process_sym_def(LineIterator* it, memoryBuffer* img, SymbolTable
 		return FALSE;
 	}
 
-	symbol_table_insert_symbol(sym_table, symbol_table_new_node(name, SYM_CODE, img->instruction_image.counter));
+	symbol_table_insert_symbol(sym_table, symbol_table_new_node(name, SYM_CODE, img_memory_get_counter(memory_buffer_get_inst_img(img))));
 
 	/* Check the syntax, we want a copy of the iterator because if the syntax is correct we will encode the instructions to memory. */
 	/* Check if the syntax is valid.*/
@@ -176,7 +176,7 @@ bool first_pass_process_sym_data(LineIterator* it, memoryBuffer* img, SymbolTabl
 		return FALSE;
 	}
 
-	symbol_table_insert_symbol(sym_table, symbol_table_new_node(name, SYM_DATA, img->instruction_image.counter + img->data_image.counter));
+	symbol_table_insert_symbol(sym_table, symbol_table_new_node(name, SYM_DATA, img_memory_get_counter(memory_buffer_get_inst_img(img)) + img_memory_get_counter(memory_buffer_get_data_img(img))));
 
 	/* Check the syntax, we want a copy of the iterator because if the syntax is correct we will encode the instructions to memory. */
 	if (!validate_syntax(*it, FP_SYM_DATA, line, dbg_list)) {
@@ -196,7 +196,7 @@ bool first_pass_process_sym_string(LineIterator* it, memoryBuffer* img, SymbolTa
 		debug_list_register_node(dbg_list, debug_list_new_node(it->start, it->current, line, ERROR_CODE_SYMBOL_REDEFINITION));
 		return FALSE;
 	}
-	symbol_table_insert_symbol(sym_table, symbol_table_new_node(name, SYM_DATA, img->data_image.counter));
+	symbol_table_insert_symbol(sym_table, symbol_table_new_node(name, SYM_DATA, img_memory_get_counter(memory_buffer_get_data_img(img))));
 
 	/* Check the syntax, we want a copy of the iterator because if the syntax is correct we will encode the instructions to memory. */
 

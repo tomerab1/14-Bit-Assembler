@@ -22,12 +22,12 @@ void encode_dot_string(LineIterator* it, memoryBuffer* img)
 	line_iterator_advance(it);
 
 	while (line_iterator_peek(it) != QUOTE_CHAR) {
-		set_image_memory(&img->data_image, line_iterator_peek(it), FLAG_ERA | FLAG_SOURCE | FLAG_DEST | FLAG_OPCODE1);
-		img->data_image.counter++;
+		set_image_memory(memory_buffer_get_data_img(img), line_iterator_peek(it), FLAG_ERA | FLAG_SOURCE | FLAG_DEST | FLAG_OPCODE1);
+		img_memory_set_counter(img_memory_get_counter(memory_buffer_get_data_img(img)), img_memory_get_counter(memory_buffer_get_data_img(img)) + 1);
 		line_iterator_advance(it);
 	}
-	set_image_memory(&img->data_image, BACKSLASH_ZERO, FLAG_ERA | FLAG_SOURCE | FLAG_DEST | FLAG_OPCODE1);
-	img->data_image.counter++;
+	set_image_memory(memory_buffer_get_data_img(img), BACKSLASH_ZERO, FLAG_ERA | FLAG_SOURCE | FLAG_DEST | FLAG_OPCODE1);
+	img_memory_set_counter(img_memory_get_counter(memory_buffer_get_data_img(img)), img_memory_get_counter(memory_buffer_get_data_img(img)) + 1);
 }
 
 void encode_dot_data(LineIterator* it, memoryBuffer* img)
@@ -36,7 +36,7 @@ void encode_dot_data(LineIterator* it, memoryBuffer* img)
 
 	while ((word = line_iterator_next_word(it, COMMA_STRING))) {
 		unsigned int num = get_num(word);
-		encode_integer(&img->data_image, num);
+		encode_integer(memory_buffer_get_data_img(img), num);
 
 		/* Consume blanks and comma */
 		line_iterator_consume_blanks(it);
@@ -73,7 +73,7 @@ void encode_label_start_process(LineIterator* it, memoryBuffer* img, SymbolTable
 		return;
 
 	/*encode ARE missing*/
-	encode_labels(variables, synGroup, symTable, &img->instruction_image);
+	encode_labels(variables, synGroup, symTable, memory_buffer_get_inst_img(img));
 
 	free(varData_get_label(variables));
 	free(varData_get_leftVar(variables));
@@ -87,7 +87,7 @@ void encode_integer(imageMemory* img, unsigned int num)
 
 	/* Copy second 8 bits */
 	set_image_memory(img, (num & WORD_MASK) >> BITS_3_MASK, FLAG_OPCODE2 | FLAG_PARAM1 | FLAG_PARAM2);
-	img->counter++;
+	img_memory_set_counter(img_memory_get_counter(img), img_memory_get_counter(img) + 1);
 }
 
 /**
@@ -145,7 +145,7 @@ void encode_preceding_word(imageMemory* img, Opcodes op, char* source, char* des
 				set_image_memory(img, ADDRESSING_DIR << OFFSET_DEST, FLAG_DEST);
 		}
 	}
-	img->counter++;
+	img_memory_set_counter(img, img_memory_get_counter(img) + 1);
 }
 
 void encode_opcode(LineIterator* it, memoryBuffer* img)
@@ -180,7 +180,7 @@ void encode_source_and_dest(imageMemory* img, char* source, char* dest)
 		/* Bits 2 - 7 -> First register. Bits 8 - 13 -> Second register. */
 		set_image_memory(img, (unsigned char)(*(source + 1) - '0'), FLAG_OPCODE2 | FLAG_PARAM1 | FLAG_PARAM2);
 		set_image_memory(img, (*(dest + 1) - '0') << 2, FLAG_OPCODE1 | FLAG_DEST | FLAG_SOURCE);
-		img->counter++;
+		img_memory_set_counter(img_memory_get_counter(img), img_memory_get_counter(img) + 1);
 		return;
 	}
 
@@ -208,7 +208,7 @@ void encode_source_and_dest(imageMemory* img, char* source, char* dest)
 			 default:
 				break;
 			}
-			img->counter++;
+			img_memory_set_counter(img, img_memory_get_counter(img) + 1);
 		}
 	}
 }
@@ -246,10 +246,10 @@ void encode_syntax_group_1(LineIterator* it, Opcodes op, memoryBuffer* img)
 	dest = line_iterator_next_word(it, SPACE_STRING);
 
 	/* Encode the first memory word. */
-	encode_preceding_word(&img->instruction_image, op, source, dest, FALSE);
+	encode_preceding_word(memory_buffer_get_inst_img(img), op, source, dest, FALSE);
 
 	/* Encode the source and dest. */
-	encode_source_and_dest(&img->instruction_image, source, dest);
+	encode_source_and_dest(memory_buffer_get_inst_img(img), source, dest);
 
 	free(source);
 	free(dest);
@@ -269,10 +269,10 @@ void encode_syntax_group_2(LineIterator* it, Opcodes op, memoryBuffer* img)
 	dest = line_iterator_next_word(it, SPACE_STRING);
 
 	/* Encode the first memory word. */
-	encode_preceding_word(&img->instruction_image, op, source, dest, FALSE);
+	encode_preceding_word(memory_buffer_get_inst_img(img), op, source, dest, FALSE);
 
 	/* Encode the source and dest. */
-	encode_source_and_dest(&img->instruction_image, source, dest);
+	encode_source_and_dest(memory_buffer_get_inst_img(img), source, dest);
 
 	free(source);
 	free(dest);
@@ -287,10 +287,10 @@ void encode_syntax_group_3(LineIterator* it, Opcodes op, memoryBuffer* img)
 	dest = get_last_word(it);
 
 	/* Encode the first memory word. */
-	encode_preceding_word(&img->instruction_image, op, NULL, dest, FALSE);
+	encode_preceding_word(memory_buffer_get_inst_img(img), op, NULL, dest, FALSE);
 
 	/* Encode the source and dest. */
-	encode_source_and_dest(&img->instruction_image, NULL, dest);
+	encode_source_and_dest(memory_buffer_get_inst_img(img), NULL, dest);
 
 	free(dest);
 }
@@ -299,7 +299,7 @@ void encode_syntax_group_4(LineIterator* it, Opcodes op, memoryBuffer* img)
 {
 	/* Encodes rts and stop */
 	/* Encode the first memory word. */
-	encode_preceding_word(&img->instruction_image, op, NULL, NULL, FALSE);
+	encode_preceding_word(memory_buffer_get_inst_img(img), op, NULL, NULL, FALSE);
 }
 
 void encode_syntax_group_5(LineIterator* it, Opcodes op, memoryBuffer* img)
@@ -317,15 +317,15 @@ void encode_syntax_group_5(LineIterator* it, Opcodes op, memoryBuffer* img)
 
 	/* Encode the first memory word. */
 	if (source && dest) {
-		encode_preceding_word(&img->instruction_image, op, source, dest, TRUE);
-		img->instruction_image.counter++;
+		encode_preceding_word(memory_buffer_get_inst_img(img), op, source, dest, TRUE);
+		img_memory_set_counter(img_memory_get_counter(memory_buffer_get_inst_img(img)), img_memory_get_counter(memory_buffer_get_inst_img(img)) + 1);
 
 		/* Encode the source and dest. */
-		encode_source_and_dest(&img->instruction_image, source, dest);
+		encode_source_and_dest(memory_buffer_get_inst_img(img), source, dest);
 	}
 	else {
-		encode_preceding_word(&img->instruction_image, op, dest, source, FALSE);
-		img->instruction_image.counter++;
+		encode_preceding_word(memory_buffer_get_inst_img(img), op, dest, source, FALSE);
+		img_memory_set_counter(img_memory_get_counter(memory_buffer_get_inst_img(img)), img_memory_get_counter(memory_buffer_get_inst_img(img)) + 1);
 	}
 
 	free(source);
@@ -341,10 +341,10 @@ void encode_syntax_group_6(LineIterator* it, Opcodes op, memoryBuffer* img)
 	dest = get_last_word(it);
 
 	/* Encode the first memory word. */
-	encode_preceding_word(&img->instruction_image, op, NULL, dest, FALSE);
+	encode_preceding_word(memory_buffer_get_inst_img(img), op, NULL, dest, FALSE);
 
 	/* Encode the source and dest. */
-	encode_source_and_dest(&img->instruction_image, NULL, dest);
+	encode_source_and_dest(memory_buffer_get_inst_img(img), NULL, dest);
 
 	free(dest);
 }
@@ -363,10 +363,10 @@ void encode_syntax_group_7(LineIterator* it, Opcodes op, memoryBuffer* img)
 	dest = line_iterator_next_word(it, SPACE_STRING);
 
 	/* Encode the first memory word. */
-	encode_preceding_word(&img->instruction_image, op, source, dest, FALSE);
+	encode_preceding_word(memory_buffer_get_inst_img(img), op, source, dest, FALSE);
 
 	/* Encode the source and dest. */
-	encode_source_and_dest(&img->instruction_image, source, dest);
+	encode_source_and_dest(memory_buffer_get_inst_img(img), source, dest);
 
 	free(source);
 	free(dest);
@@ -472,12 +472,13 @@ void encode_labels(VarData* variables, SyntaxGroups synGroup, SymbolTable* symTa
 				set_image_memory(img, ENCODING_RELOC, FLAG_ERA);
 			}
 		}
-		img->counter++;
+		img_memory_set_counter(img_memory_get_counter(memory_buffer_get_inst_img(img)), img_memory_get_counter(memory_buffer_get_inst_img(img)) + 1);
 	}
 
 	if (isDualRegister) {
 		/* Must be a label with two register params. */
-		img->counter++; /* 1 for the labels word, the other is a shared memory word for the 2 registers. */
+		/* 1 for the labels word, the other is a shared memory word for the 2 registers. */
+		img_memory_set_counter(img_memory_get_counter(memory_buffer_get_inst_img(img)), img_memory_get_counter(memory_buffer_get_inst_img(img)) + 1);
 	}
 	else {
 		if (variables->leftVar) {
@@ -492,7 +493,7 @@ void encode_labels(VarData* variables, SyntaxGroups synGroup, SymbolTable* symTa
 					set_image_memory(img, ENCODING_RELOC, FLAG_ERA);
 				}
 			}
-			img->counter++;
+			img_memory_set_counter(img_memory_get_counter(memory_buffer_get_inst_img(img)), img_memory_get_counter(memory_buffer_get_inst_img(img)) + 1);
 		}
 
 		if (variables->rightVar) {
@@ -507,7 +508,7 @@ void encode_labels(VarData* variables, SyntaxGroups synGroup, SymbolTable* symTa
 					set_image_memory(img, ENCODING_RELOC, FLAG_ERA);
 				}
 			}
-			img->counter++;
+			img_memory_set_counter(img_memory_get_counter(memory_buffer_get_inst_img(img)), img_memory_get_counter(memory_buffer_get_inst_img(img)) + 1);
 		}
 	}
 }

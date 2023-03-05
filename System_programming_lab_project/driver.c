@@ -42,10 +42,10 @@ int exec_impl(Driver* driver, int argc, char** argv)
 
         if (i > 1) on_initialization(driver);
         /*If first pass failed returns false, otherwise returns true, goes as same for second pass*/
-        if (!do_first_pass(pre_assembler_path, &driver->mem_buffer, driver->sym_table, driver->dbg_list)) 
+        if (!do_first_pass(pre_assembler_path, driver->mem_buffer, driver->sym_table, driver->dbg_list)) 
             debug_list_pretty_print(driver->dbg_list); /*First pass errors Errors */
         else
-            if (!initiate_second_pass(pre_assembler_path, driver->sym_table, &driver->mem_buffer, driver->dbg_list))
+            if (!initiate_second_pass(pre_assembler_path, driver->sym_table, driver->mem_buffer, driver->dbg_list))
                 debug_list_pretty_print(driver->dbg_list); /*Second pass Errors */
             else
                 printf("\n~~~\nProcess completed successfully\n~~~\n");
@@ -55,9 +55,6 @@ int exec_impl(Driver* driver, int argc, char** argv)
         on_exit(driver);
         free(pre_assembler_path);
     }
-
-    on_exit(driver);
-    
 
     return 0;
 }
@@ -77,7 +74,6 @@ void on_exit(Driver* driver)
 
 void destroy_driver(Driver** driver)
 {
-	on_exit(*driver);
-	free(driver);
+	free(*driver);
 }
 
