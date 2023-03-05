@@ -320,15 +320,6 @@ SyntaxGroups get_syntax_group(char* name);
 bool match_pamaetrized_label(LineIterator* it, long line, debugList* dbg_list);
 
 /**
-* @brief Extract the sentence type from the line. This is used to determine whether or not we are dealing with a sentence that does not start with a newline or is part of an instruction.
-*
-* @param it
-*
-* @return SENTENCE_TYPE or EMPTY_SENTENCE if there is no sentence
-*/
-int extract_sentence_type(LineIterator* it);
-
-/**
 * @brief Check if we are looking for a heuristics to be used in register names.
 *
 * @param it - Iterator on the line to check. Must be at the start of a register name.

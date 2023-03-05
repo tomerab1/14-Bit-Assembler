@@ -109,6 +109,7 @@ bool validate_syntax(LineIterator it, firstPassStates state, long line, debugLis
     case FP_SYM_STR: return validate_syntax_string(&it, line, dbg_list);
     case FP_SYM_ENT:
     case FP_SYM_EXT: return validate_syntax_extern_and_entry(&it, line, dbg_list);
+    default: break;
     }
 
     return TRUE;
@@ -152,16 +153,6 @@ bool validate_syntax_string(LineIterator* it, long line, debugList* dbg_list)
     return TRUE;
 }
 
-int extract_sentence_type(LineIterator* it) {
-    it->current = it->start;
-    /*empty sentence*/
-    if (line_iterator_is_end(it)) {
-        it->current = it->start;
-        return EMPTY_SENTENCE;
-    }
-    if (directive_exists_basic(it)) return DIRECTIVE_SENTENCE; /*directive sentence*/
-}
-
 bool directive_exists_basic(LineIterator* line) {
     while (!line_iterator_is_end(line)) {
         if (line_iterator_peek(line) == DOT_COMMAND) {
@@ -174,11 +165,12 @@ bool directive_exists_basic(LineIterator* line) {
 }
 
 bool find_if_instruction_exists(LineIterator* line) {
+    Opcodes localOpcode = OP_UNKNOWN;
     if (isLabel(line)) {
         skip_label_basic(line);
-        int localOpcode = get_opcode(line_iterator_next_word(line, " "));
+        get_opcode(line_iterator_next_word(line, " "));
 
-        if (localOpcode != 16)
+        if (localOpcode != OP_UNKNOWN)
             return TRUE;
     }
     return FALSE;
