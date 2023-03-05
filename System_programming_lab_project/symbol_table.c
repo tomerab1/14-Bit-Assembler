@@ -111,7 +111,6 @@ void symbol_table_destroy(SymbolTable** table)
         free(head);
         head = next;
     }
-
     free(*table);
 }
 

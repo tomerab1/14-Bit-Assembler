@@ -47,6 +47,7 @@ int exec_impl(Driver* driver, int argc, char** argv)
         else
             if (!initiate_second_pass(pre_assembler_path, driver->sym_table, &driver->mem_buffer, driver->dbg_list))
                 debug_list_pretty_print(driver->dbg_list); /*Second pass Errors */
+
             else
                 printf("~~~\nProcess completed successfully\n~~~");
 

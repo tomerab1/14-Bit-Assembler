@@ -79,7 +79,7 @@ if (is_label_exists_in_line(it, table, dbg_list, errorFlag, line_num)) { /*check
 
 void skip_first_pass_mem(memoryBuffer* memory, LineIterator* it) {
 	int memCellsToJump = find_amount_of_lines_to_skip(it);
-	memory->instruction_image.counter += memCellsToJump;
+	memory->instruction_image.counter += memCellsToJump;	
 }
 
 int find_amount_of_lines_to_skip(LineIterator* it) {
@@ -233,8 +233,8 @@ bool generate_entries_file(SymbolTable* table, char* path) {
 	}
 
 	free(outfileName);
+	free(symTableHead);
 	fclose(out);
-
 	return TRUE;
 }
 
@@ -321,6 +321,7 @@ bool is_label_exists_in_line(LineIterator* line, SymbolTable* table, debugList* 
 			investigate_word(line, &itLabel, table, dbg_list, flag, line_num, varData_get_label(variablesData), 3);
 	}
 
+	varData_free(variablesData);
 	return TRUE;
 }
 

@@ -508,3 +508,18 @@ void encode_labels(VarData* variables, SyntaxGroups synGroup, SymbolTable* symTa
 		}
 	}
 }
+
+void varData_free(VarData* varData) {
+	if (varData != NULL) {
+		if (varData->leftVar != NULL) {
+			free(varData->leftVar);
+		}
+		if (varData->rightVar != NULL) {
+			free(varData->rightVar);
+		}
+		if (varData->label != NULL) {
+			free(varData->label);
+		}
+		free(varData);
+	}
+}
