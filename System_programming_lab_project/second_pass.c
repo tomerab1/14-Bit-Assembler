@@ -233,7 +233,6 @@ bool generate_entries_file(SymbolTable* table, char* path) {
 	}
 
 	free(outfileName);
-	free(symTableHead);
 	fclose(out);
 	return TRUE;
 }
