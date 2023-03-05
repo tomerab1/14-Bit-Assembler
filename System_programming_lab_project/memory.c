@@ -78,7 +78,7 @@ unsigned char* memory_word_get_memory(MemoryWord* mw)
 
 void set_image_memory(imageMemory* mem, unsigned char byte, int flags)
 {
-    MemoryWord* curr_block = memory_word_get_memory(img_memory_get_memory(mem));
+    MemoryWord* curr_block = img_memory_get_memory(mem);
 
     /* Set the ERA bits to the current block.*/
     if (flags & FLAG_ERA)     set_era_bits(curr_block, byte);
