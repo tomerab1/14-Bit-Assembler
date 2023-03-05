@@ -68,10 +68,10 @@ void execute_line(LineIterator* it, SymbolTable* table, memoryBuffer* memory, de
 	/* Increment counter by one, as every command has a preceding word. */
 	img_memory_set_counter(memory_buffer_get_inst_img(memory), img_memory_get_counter(memory_buffer_get_inst_img(memory)) + 1);
 
-if (is_label_exists_in_line(it, table, dbg_list, errorFlag, line_num)) { /*checks if label exists and valid*/
+	if (is_label_exists_in_line(it, table, dbg_list, errorFlag, line_num)) { /*checks if label exists and valid*/
 		update_symbol_address(*it, memory, table); /*updates the address of the symbol*/
 		encode_label_start_process(it, memory, table, dbg_list); /*encodes the mem cell according to the label*/
-   }
+	}
 	else {
 		skip_first_pass_mem(memory, it); /*if no label exists, skip calculated amount of cells*/
 	}
@@ -156,20 +156,19 @@ TranslatedMachineData* translate_to_machine_data(memoryBuffer* memory)
 	img_memory_get_counter(memory_buffer_get_data_img(memory));
 
 	/* Decode the instruction and data memory buffers and store in the translated memory */
-	decode_memory(translatedMemory, img_memory_get_memory(memory_buffer_get_inst_img(memory)), &i, img_memory_get_counter(memory_buffer_get_inst_img(memory)));
-	decode_memory(translatedMemory, img_memory_get_memory(memory_buffer_get_data_img(memory)), &i, total);
+	decode_memory(translatedMemory, memory_buffer_get_inst_img(memory), &i, img_memory_get_counter(memory_buffer_get_inst_img(memory)));
+	decode_memory(translatedMemory, memory_buffer_get_data_img(memory), &i, total);
 
 	return translatedMemory;
 
 }
 
-void decode_memory(TranslatedMachineData* tmd, MemoryWord* inst, int* startPos, int endPos)
+void decode_memory(TranslatedMachineData* tmd, imageMemory* inst, int* startPos, int endPos)
 {
 	int i, j, k = *startPos;
 
 	for (i = 0; k < endPos; i++) {
-		unsigned char* mem = memory_word_get_memory(inst);
-		unsigned int bits = (mem[1] << 0x08) | (mem[0]);
+		unsigned int bits = (memory_word_get_memory(img_memory_get_memory_at(inst, i))[1] << 0x08) | memory_word_get_memory(img_memory_get_memory_at(inst, i))[0];
 		tmd[k].address = k;
 		memset(tmd[k].translated, 0, sizeof(tmd[k].translated));
 

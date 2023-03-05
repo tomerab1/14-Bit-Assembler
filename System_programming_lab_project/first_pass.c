@@ -28,7 +28,7 @@ bool do_first_pass(char* path, memoryBuffer* img, SymbolTable* sym_table, debugL
 	while ((curr_line = get_line(in)) != NULL) {
 		char* word = NULL;
 		firstPassStates state;
-		
+
 		/* Feed the iterator with a new line. */
 		line_iterator_put_line(&it, curr_line);
 		/* Trim white spaces. */
@@ -51,13 +51,13 @@ bool do_first_pass(char* path, memoryBuffer* img, SymbolTable* sym_table, debugL
 		}
 
 		free(word);
-        free(curr_line);
+		free(curr_line);
 		line++;
 	}
 
-    fclose(in);
+	fclose(in);
 	symbol_table_set_completed(sym_table, TRUE);
-	
+
 	return should_encode;
 }
 
@@ -84,7 +84,7 @@ firstPassStates get_symbol_type(LineIterator* it, char* word)
 	/* Symbol definition, may follow, .data or .string*/
 	/* Check if the word is a valid label.*/
 	else if ((is_valid = is_valid_label(word)) == TRUE) {
-		char* next_word = line_iterator_next_word(it,SPACE_STRING);
+		char* next_word = line_iterator_next_word(it, SPACE_STRING);
 
 		/* Free the next word. */
 		if (!next_word) {
@@ -94,25 +94,25 @@ firstPassStates get_symbol_type(LineIterator* it, char* word)
 
 		/* Check if .data */
 		if (strcmp(next_word, DOT_DATA_STRING) == 0) {
-            free(next_word);
+			free(next_word);
 			return FP_SYM_DATA;
 		}
 		/* Check if .string */
 		if (strcmp(next_word, DOT_STRING__STRING) == 0) {
-            free(next_word);
+			free(next_word);
 			return FP_SYM_STR;
 		}
 		/* Ungets the next word from the line iterator. */
 		if (strcmp(next_word, ENTRY_STRING) == 0 || strcmp(next_word, EXTERN_STRING) == 0) {
 			line_iterator_unget_word(it, next_word);
 			line_iterator_unget_word(it, word);
-            free(next_word);
+			free(next_word);
 			return FP_SYM_IGNORED;
 		}
 
 		/* Unget the word, and return FP_SYM_DEF */
 		line_iterator_unget_word(it, next_word);
-        free(next_word);
+		free(next_word);
 		return FP_SYM_DEF;
 	}
 
@@ -160,7 +160,7 @@ bool first_pass_process_opcode(LineIterator* it, memoryBuffer* img, SymbolTable*
 	}
 	/* Encode to the image.*/
 	if (should_encode) {
-		encode_opcode(it,img);
+		encode_opcode(it, img);
 	}
 	return TRUE;
 }
@@ -214,8 +214,7 @@ bool first_pass_process_sym_string(LineIterator* it, memoryBuffer* img, SymbolTa
 
 bool first_pass_process_sym_ent(LineIterator* it, memoryBuffer* img, SymbolTable* sym_table, debugList* dbg_list, char* name, long line, bool should_encode)
 {
-    	char* word = line_iterator_next_word(it, SPACE_STRING);
-	SymbolTableNode* node = NULL;
+	char* word = line_iterator_next_word(it, SPACE_STRING);
 
 	line_iterator_unget_word(it, word);
 	/* register a new word in the list*/
@@ -243,7 +242,7 @@ bool first_pass_process_sym_ent(LineIterator* it, memoryBuffer* img, SymbolTable
 	line_iterator_next_word(it, " ");
 
 	/* Check wheter the symbol already exist as an entry/extern directive */
-	node = symbol_table_search_symbol(sym_table, word);
+	SymbolTableNode* node = symbol_table_search_symbol(sym_table, word);
 
 
 	/* Insert symbol in symbol table.*/
@@ -268,7 +267,7 @@ bool first_pass_process_sym_ent(LineIterator* it, memoryBuffer* img, SymbolTable
 
 bool first_pass_process_sym_ext(LineIterator* it, memoryBuffer* img, SymbolTable* sym_table, debugList* dbg_list, char* name, long line, bool should_encode)
 {
-    	char* word = line_iterator_next_word(it, SPACE_STRING);
+	char* word = line_iterator_next_word(it, SPACE_STRING);
 
 	line_iterator_unget_word(it, word);
 	/* register a new word in the list*/
@@ -283,8 +282,8 @@ bool first_pass_process_sym_ext(LineIterator* it, memoryBuffer* img, SymbolTable
 		return FALSE;
 	}
 	if (symbol_table_search_symbol_bool(sym_table, word) && check_symbol_existence(sym_table, word, SYM_EXTERN)) {
-			debug_list_register_node(dbg_list, debug_list_new_node(it->start, it->current, line, ERROR_CODE_LABEL_ALREADY_EXISTS_AS_ENTRY));
-			return FALSE;
+		debug_list_register_node(dbg_list, debug_list_new_node(it->start, it->current, line, ERROR_CODE_LABEL_ALREADY_EXISTS_AS_ENTRY));
+		return FALSE;
 	}
 	line_iterator_unget_word(it, word);
 	if (get_opcode(word) != OP_UNKNOWN || is_register_name_whole(it)) {

@@ -22,7 +22,6 @@ Driver* driver_new_driver()
 {
     Driver* driver = (Driver*)xmalloc(sizeof(Driver));
     driver->exec = exec_impl;
-    on_initialization(driver);
     return driver;
 }
 
@@ -40,8 +39,9 @@ int exec_impl(Driver* driver, int argc, char** argv)
         start_pre_assembler(argv[i]);
         pre_assembler_path = get_outfile_name(argv[i], ".am");
 
-        if (i > 1) on_initialization(driver);
-        /*If first pass failed returns false, otherwise returns true, goes as same for second pass*/
+        on_initialization(driver);
+
+        /* If first pass failed returns false, otherwise returns true, goes as same for second pass */
         if (!do_first_pass(pre_assembler_path, driver->mem_buffer, driver->sym_table, driver->dbg_list)) 
             debug_list_pretty_print(driver->dbg_list); /*First pass errors Errors */
         else

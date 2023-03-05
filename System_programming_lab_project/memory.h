@@ -89,6 +89,8 @@ int img_memory_get_counter(imageMemory* im);
 
 void img_memory_set_counter(imageMemory* im, int cnt);
 
+MemoryWord* img_memory_get_memory_at(imageMemory* im, int offset);
+
 MemoryWord* img_memory_get_memory(imageMemory* im);
 
 unsigned char* memory_word_get_memory(MemoryWord* mw);

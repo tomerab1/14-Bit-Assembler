@@ -205,7 +205,7 @@ void add_label_base_address(SymbolTable* table);
 @param startPos starting position of the memory at the start of func
 @param endPos ending position of the memory counter during the end of func
 */
-void decode_memory(TranslatedMachineData* tmd, MemoryWord* inst, int* startPos, int endPos);
+void decode_memory(TranslatedMachineData* tmd, imageMemory* inst, int* startPos, int endPos);
 
 /**
 

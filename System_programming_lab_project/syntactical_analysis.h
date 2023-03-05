@@ -328,6 +328,14 @@ bool match_pamaetrized_label(LineIterator* it, long line, debugList* dbg_list);
 */
 int extract_sentence_type(LineIterator* it);
 
+/**
+* @brief Check if we are looking for a heuristics to be used in register names.
+*
+* @param it - Iterator on the line to check. Must be at the start of a register name.
+*
+* @return true if it is false otherwise. This is a heuristic
+*/
+bool is_register_name_heuristic(LineIterator it);
 
 /**
 * @brief Checks if a directive exists. This is a basic check that doesn't look for ". " and it's the only way to check for it.

@@ -9,21 +9,24 @@
 void* xrealloc(void* ptr, size_t alloc_sz)
 {
 	void* mem = realloc(ptr, alloc_sz);
-	if (!mem) printf("%s\n", "Error: memory allocation failed !");
+	if (!mem) 
+		printf("%s\n", "Error: memory allocation failed !");
 	return mem;
 }
 
 void* xcalloc(size_t count, size_t alloc_sz)
 {
 	void* mem = calloc(count, alloc_sz);
-	if (!mem) printf("%s\n", "Error: memory allocation failed !");
+	if (!mem) 
+		printf("%s\n", "Error: memory allocation failed !");
 	return mem;
 }
 
 void* xmalloc(size_t alloc_sz)
 {
 	void* mem = malloc(alloc_sz);
-	if (!mem) printf("%s\n", "Error: memory allocation failed !");
+	if (!mem) 
+		printf("%s\n", "Error: memory allocation failed !");
 	return mem;
 }
 

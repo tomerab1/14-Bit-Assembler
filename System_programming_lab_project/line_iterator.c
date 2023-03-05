@@ -45,6 +45,7 @@ void line_iterator_jump_to(LineIterator* it, char sep)
 {
     char* loc = strchr(it->current, sep);
     if (loc == NULL)
+        return;
     it->current = loc + 1;
 }
 
@@ -78,7 +79,7 @@ char* line_iterator_next_word(LineIterator* it, char* seps)
     }
 
     if (log_sz + 1 < phy_sz) {
-       word = GROW_ARRAY(char*, word, log_sz + 1, sizeof(char));
+        word = GROW_ARRAY(char*, word, log_sz + 1, sizeof(char));
     }
 
     word[log_sz] = '\0';
@@ -108,7 +109,7 @@ bool line_iterator_is_start(LineIterator* it)
 
 bool line_iterator_word_includes(LineIterator* it, char* searchFor)
 {
-    return (strstr(it->current, searchFor) != NULL) ? TRUE : FALSE;
+    return (strstr(it->current, searchFor) != NULL);
 }
 
 char* get_last_word(LineIterator* it) {

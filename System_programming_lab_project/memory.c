@@ -48,7 +48,7 @@ void image_memory_init(imageMemory* mem)
 
 imageMemory* memory_buffer_get_data_img(memoryBuffer* memBuff)
 {
-    return memBuff->instruction_image;
+    return memBuff->data_image;
 }
 
 imageMemory* memory_buffer_get_inst_img(memoryBuffer* memBuff)
@@ -63,13 +63,19 @@ int img_memory_get_counter(imageMemory* im)
 
 void img_memory_set_counter(imageMemory* im, int cnt)
 {
-    im->counter += cnt;
+    im->counter = cnt;
 }
 
 MemoryWord* img_memory_get_memory(imageMemory* im)
 {
     return im->memory;
 }
+
+MemoryWord* img_memory_get_memory_at(imageMemory* im, int offset)
+{
+    return &im->memory[offset];
+}
+
 
 unsigned char* memory_word_get_memory(MemoryWord* mw)
 {
@@ -78,7 +84,7 @@ unsigned char* memory_word_get_memory(MemoryWord* mw)
 
 void set_image_memory(imageMemory* mem, unsigned char byte, int flags)
 {
-    MemoryWord* curr_block = img_memory_get_memory(mem);
+    MemoryWord* curr_block = &img_memory_get_memory(mem)[img_memory_get_counter(mem)];
 
     /* Set the ERA bits to the current block.*/
     if (flags & FLAG_ERA)     set_era_bits(curr_block, byte);
