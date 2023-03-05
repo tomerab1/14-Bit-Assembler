@@ -296,7 +296,10 @@ bool is_label_exists_in_line(LineIterator* line, SymbolTable* table, debugList* 
 	if (!variablesData)
 		return TRUE;
 
-	switch (varData_get_total(variablesData))
+	switch (
+		
+		
+		_get_total(variablesData))
 	{
 	case 1: /*group 3 and 6, left var*/
 		if (varData_get_leftVar(variablesData) != NULL) {
