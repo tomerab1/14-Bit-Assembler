@@ -35,8 +35,8 @@ bool do_first_pass(char* path, memoryBuffer* img, SymbolTable* sym_table, debugL
 		/* Trim white spaces. */
 		line_iterator_consume_blanks(&it);
 
-		word = line_iterator_next_word(&it, " ");
-		state = get_symbol_type(&it, word);
+		word = line_iterator_next_word(&it, SPACE_STRING);
+		state = get_symbol_type(&it, word, &errCode);
 
 		if (state == FP_SYM_IGNORED) {
 			debug_list_register_node(dbg_list, debug_list_new_node(it.start, it.current, line, ERROR_CODE_SYMBOL_IGNORED_WARN));

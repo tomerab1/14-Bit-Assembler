@@ -24,7 +24,7 @@ errorCodes check_label_syntax(char* label)
         return ERROR_CODE_SPACE_BEFORE_COLON;
 
     if ((colon_loc - label) == 2 && *label == REG_BEG_CHAR) {
-        if (isdigit(*(label + 1)))
+        if (REG_MIN_NUM <= *(label + 1) && *(label + 1) <= REG_MAX_NUM)
             return ERROR_CODE_RESERVED_KEYWORD_DEF;
     }
 
