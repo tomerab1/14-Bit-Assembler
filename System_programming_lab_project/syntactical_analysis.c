@@ -158,30 +158,6 @@ bool validate_syntax_string(LineIterator* it, long line, debugList* dbg_list)
     return TRUE;
 }
 
-bool directive_exists_basic(LineIterator* line) {
-    while (!line_iterator_is_end(line)) {
-        if (line_iterator_peek(line) == DOT_COMMAND) { /*If dot exists, it is a directive (executed on second pass)*/
-            return TRUE;
-        }
-        line_iterator_advance(line);
-    }
-    return FALSE;
-    line->current = line->start;
-}
-
-bool find_if_instruction_exists(LineIterator* line) {
-    Opcodes localOpcode = OP_UNKNOWN;
-    if (isLabel(line)) {
-        
-        (line);
-        get_opcode(line_iterator_next_word(line, SPACE_STRING));
-
-        if (localOpcode != OP_UNKNOWN)
-            return TRUE;
-    }
-    return FALSE;
-}
-
 bool validate_syntax_data(LineIterator* it, long line, debugList* dbg_list)
 {
     bool is_valid = TRUE;

@@ -333,20 +333,7 @@ bool is_register_name_heuristic(LineIterator it);
 * @param line
 * @return TRUE if there is a directive FALSE otherwise. The iterator is advanced past the directive
 */
-bool directive_exists_basic(LineIterator* line);
 
-/**
-* @brief Check if instruction at line is a label. This is used to detect if we are going to write an instruction to a local variable that is not 16 - bit.
-* @param line
-* @return TRUE if instruction exists FALSE
-*/
-bool find_if_instruction_exists(LineIterator* line);
-
-/**
-* @brief Check if the next character is a register name. while also checking the first character.
-* @param it
-* @return True if the next character is a register name false otherwise
-*/
 bool is_register_name_whole(LineIterator* it);
 
 /**
