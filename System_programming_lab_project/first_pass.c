@@ -64,8 +64,6 @@ bool do_first_pass(char* path, memoryBuffer* img, SymbolTable* sym_table, debugL
 
 firstPassStates get_symbol_type(LineIterator* it, char* word, errorCodes* outErr)
 {
-	bool is_valid = TRUE;
-
 	/* An .entry definition. */
 	/* Returns FP_SYM_ENT or FP_SYM_EXT. entry. extern. data or. string.*/
 	if (strcmp(word, DOT_ENTRY_STRING) == 0) {
