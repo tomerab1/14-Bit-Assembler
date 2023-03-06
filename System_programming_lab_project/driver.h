@@ -26,7 +26,7 @@ Driver* driver_new_driver();
 */
 int driver_exec(Driver* driver, int argc, char** argv);
 
-void destroy_driver(Driver** driver);
+void driver_destroy(Driver** driver);
 
 
 /**
