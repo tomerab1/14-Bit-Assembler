@@ -343,12 +343,6 @@ bool directive_exists_basic(LineIterator* line);
 bool find_if_instruction_exists(LineIterator* line);
 
 /**
-* @brief Skip a basic label. This is used to skip labels that start with a colon or are followed by blanks.
-* @param line
-*/
-void skip_label_basic(LineIterator* line);
-
-/**
 * @brief Check if the next character is a register name. while also checking the first character.
 * @param it
 * @return True if the next character is a register name false otherwise

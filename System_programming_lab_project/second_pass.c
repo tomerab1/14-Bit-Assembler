@@ -423,11 +423,13 @@ void update_symbol_address(LineIterator it, memoryBuffer* memory, SymbolTable* t
 	LineIterator cpyIt;
 	int offset = 0;
 
+	/* Copies the line and replaces some characters to spaces to simplify parsing. */
 	strcpy(line, it.start);
 	line_iterator_put_line(&cpyIt, line);
 	line_iterator_replace(&cpyIt, "(), ", SPACE_CHAR);
 	line_iterator_jump_to(&cpyIt, COLON_CHAR);
 
+	/* Iterates through the words in the line, updating the offset of each symbol found. */
 	for (word = line_iterator_next_word(&cpyIt, SPACE_STRING); word != NULL; word = line_iterator_next_word(&cpyIt, SPACE_STRING), offset++) {
 		update_symbol_offset(word, offset, memory, table);
 		free(word);
@@ -441,20 +443,20 @@ void update_symbol_offset(char* word, int offset, memoryBuffer* memory, SymbolTa
 	LineIterator tmp;
 	line_iterator_put_line(&tmp, word);
 
-	if (is_label_name(&tmp)) {
+	if (is_label_name(&tmp)) { 	/* Searches for the symbol in the symbol table and updates its counter based on its type. */
 		SymbolTableNode* head = symbol_table_get_head(table);
 
 		while (head) {
-			if (strcmp(symbol_get_name(symbol_node_get_sym(head)), word) == 0 && symbol_get_type(symbol_node_get_sym(head)) == SYM_EXTERN) {
+			if (strcmp(symbol_get_name(symbol_node_get_sym(head)), word) == 0 && symbol_get_type(symbol_node_get_sym(head)) == SYM_EXTERN) { /*finds the symbols of type extern*/
 				if (symbol_get_counter(symbol_node_get_sym(head)) == 0) {
-					symbol_set_counter(symbol_node_get_sym(head), DECIMAL_ADDRESS_BASE + img_memory_get_counter(memory_buffer_get_inst_img(memory)) + offset - 1);
+					symbol_set_counter(symbol_node_get_sym(head), DECIMAL_ADDRESS_BASE + img_memory_get_counter(memory_buffer_get_inst_img(memory)) + offset - 1); /*updates offset*/
 				}
 				else {
-					symbol_table_insert_symbol(table, symbol_table_new_node(word, SYM_EXTERN, DECIMAL_ADDRESS_BASE + img_memory_get_counter(memory_buffer_get_inst_img(memory)) + offset - 1));
+					symbol_table_insert_symbol(table, symbol_table_new_node(word, SYM_EXTERN, DECIMAL_ADDRESS_BASE + img_memory_get_counter(memory_buffer_get_inst_img(memory)) + offset - 1));/*updates offset*/
 					break;
 				}
 			}
-			else if (strcmp(symbol_get_name(symbol_node_get_sym(head)), word) == 0 && symbol_get_type(symbol_node_get_sym(head)) == SYM_ENTRY) {
+			else if (strcmp(symbol_get_name(symbol_node_get_sym(head)), word) == 0 && symbol_get_type(symbol_node_get_sym(head)) == SYM_ENTRY) { /*finds the symbols of type entry*/
 				SymbolTableNode* defHead = symbol_table_get_head(table);
 
 				while (defHead) {
@@ -478,7 +480,7 @@ void add_label_base_address(SymbolTable* table)
 
 	while (head) {
 		if (symbol_get_type(symbol_node_get_sym(head)) == SYM_DATA || symbol_get_type(symbol_node_get_sym(head)) == SYM_CODE) {
-			symbol_set_counter(symbol_node_get_sym(head), symbol_get_counter(symbol_node_get_sym(head)) + DECIMAL_ADDRESS_BASE);
+			symbol_set_counter(symbol_node_get_sym(head), symbol_get_counter(symbol_node_get_sym(head)) + DECIMAL_ADDRESS_BASE); /*updates offset*/
 		}
 		head = symbol_node_get_next(head);
 	}
