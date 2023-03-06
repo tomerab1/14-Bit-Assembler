@@ -35,6 +35,11 @@ int exec_impl(Driver* driver, int argc, char** argv)
     int i;
     char* pre_assembler_path = NULL;
 
+    if (argc <= 1) {
+	printf("Usage: ./exe_name <files...>\n");
+	return 1;
+    }
+
     for (i = 1; i < argc; i++) {
         start_pre_assembler(argv[i]);
         pre_assembler_path = get_outfile_name(argv[i], ".am");
