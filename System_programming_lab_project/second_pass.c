@@ -293,8 +293,9 @@ bool is_label_exists_in_line(LineIterator* line, SymbolTable* table, debugList* 
 
 	variablesData = extract_variables(line);
 
-	if (!variablesData)
+	if (!variablesData) {
 		return TRUE;
+	}
 
 	switch (varData_get_total(variablesData))
 	{

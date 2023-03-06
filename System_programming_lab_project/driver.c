@@ -70,9 +70,10 @@ void on_exit(Driver* driver)
 {
     debug_list_destroy(&driver->dbg_list);
     symbol_table_destroy(&driver->sym_table);
+    memory_buffer_destroy(&driver->mem_buffer);
 }
 
-void destroy_driver(Driver** driver)
+void driver_destroy(Driver** driver)
 {
 	free(*driver);
 }

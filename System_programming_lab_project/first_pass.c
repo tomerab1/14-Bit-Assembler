@@ -242,7 +242,8 @@ bool first_pass_process_sym_ent(LineIterator* it, memoryBuffer* img, SymbolTable
 		return FALSE;
 	}
 
-	line_iterator_next_word(it, " ");
+	free(word);
+
 	/* Check wheter the symbol already exist as an entry/extern directive */
 	node = symbol_table_search_symbol(sym_table, word);
 
@@ -256,13 +257,10 @@ bool first_pass_process_sym_ent(LineIterator* it, memoryBuffer* img, SymbolTable
 	}
 
 	/* Check the syntax, we want a copy of the iterator because if the syntax is correct we will encode the instructions to memory. */
-	/* Check if the syntax is valid.*/
 	if (!validate_syntax(*it, FP_SYM_ENT, line, dbg_list)) {
-		free(word);
 		return FALSE;
 	}
 
-	free(word);
 	return TRUE;
 }
 
@@ -294,15 +292,13 @@ bool first_pass_process_sym_ext(LineIterator* it, memoryBuffer* img, SymbolTable
 		return FALSE;
 	}
 
-	line_iterator_next_word(it, SPACE_STRING);
 	symbol_table_insert_symbol(sym_table, symbol_table_new_node(word, SYM_EXTERN, 0));
+	free(word);
 
 	/* Check the syntax, we want a copy of the iterator because if the syntax is correct we will encode the instructions to memory. */
 	if (!validate_syntax(*it, FP_SYM_ENT, line, dbg_list)) {
-		free(word);
 		return FALSE;
 	}
 
-	free(word);
 	return TRUE;
 }

@@ -69,12 +69,15 @@ void encode_label_start_process(LineIterator* it, memoryBuffer* img, SymbolTable
 		variables = extract_variables_group_5(it);
 	}
 
-	if (!variables)
+	if (!variables) {
+		free(opcode);
 		return;
+	}
 
 	/*encode ARE missing*/
 	encode_labels(variables, synGroup, symTable, memory_buffer_get_inst_img(img));
 	varData_destroy(&variables);
+	free(opcode);
 }
 
 void encode_integer(imageMemory* img, unsigned int num)

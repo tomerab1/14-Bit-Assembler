@@ -82,6 +82,13 @@ unsigned char* memory_word_get_memory(MemoryWord* mw)
     return mw->mem;
 }
 
+void memory_buffer_destroy(memoryBuffer** ptr)
+{
+    free((*ptr)->instruction_image);
+    free((*ptr)->data_image);
+    free(*ptr);
+}
+
 void set_image_memory(imageMemory* mem, unsigned char byte, int flags)
 {
     MemoryWord* curr_block = &img_memory_get_memory(mem)[img_memory_get_counter(mem)];

@@ -95,6 +95,8 @@ MemoryWord* img_memory_get_memory(imageMemory* im);
 
 unsigned char* memory_word_get_memory(MemoryWord* mw);
 
+void memory_buffer_destroy(memoryBuffer** ptr);
+
 /**
 *  The memory word structure:
 

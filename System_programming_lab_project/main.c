@@ -27,7 +27,7 @@ int main(int argc, char** argv)
 	Driver* driver = driver_new_driver();
 	
 	ret_val = driver_exec(driver, argc, argv);
-	destroy_driver(&driver);
+	driver_destroy(&driver);
 
 	return ret_val;
 }
