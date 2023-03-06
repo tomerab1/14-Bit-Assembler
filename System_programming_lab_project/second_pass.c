@@ -100,10 +100,10 @@ int find_amount_of_lines_to_skip(LineIterator* it) {
 
 	/* 1 for the opcode and one for the shared memory word of 2 registers. */
 	if ((operand1 && operand2) && (*operand1 == REG_BEG_CHAR && *operand2 == REG_BEG_CHAR))
-		return isdigit(*(operand1 + 1)) && isdigit(*(operand2 + 1)) ? 1 : 2;
+		total = isdigit(*(operand1 + 1)) && isdigit(*(operand2 + 1)) ? 1 : 2;
 	/* 1 for the opcode and one for the shared memory word of 2 registers, and + 1 for the label name (this case is for parametrized labels) */
 	else if ((operand2 && operand3) && (*operand2 == REG_BEG_CHAR && *operand3 == REG_BEG_CHAR))
-		return isdigit(*(operand1 + 1)) && isdigit(*(operand2 + 1)) ? 2 : 3;
+		total = isdigit(*(operand1 + 1)) && isdigit(*(operand2 + 1)) ? 2 : 3;
 	else {
 		total += (operand1) ? 1 : 0;
 		total += (operand2) ? 1 : 0;
