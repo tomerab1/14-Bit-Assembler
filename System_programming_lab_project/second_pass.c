@@ -55,12 +55,15 @@ bool initiate_second_pass(char* path, SymbolTable* table, memoryBuffer* memory, 
 			extract_directive_type(&curLine, &finalStatus.entryAndExternFlag);
 		}
 		lineNum++;
+		free(line);
 	}
-	if (finalStatus.error_flag) return FALSE;
-	create_files(memory, path, &finalStatus, table);
 
+	if (finalStatus.error_flag) 
+		return FALSE;
+
+	create_files(memory, path, &finalStatus, table);
 	fclose(in);
-	free(line);
+
 	return TRUE;
 }
 
@@ -282,6 +285,8 @@ VarData* extract_variables(LineIterator* it) {
     else if (synGroup == SG_GROUP_5) {
         variables = extract_variables_group_5(it);
     }
+
+	free(opcode);
 
 	return variables;
 }
