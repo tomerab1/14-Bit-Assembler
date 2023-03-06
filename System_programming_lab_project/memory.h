@@ -81,20 +81,61 @@ imageMemory* image_memory_get_new();
 */
 void image_memory_init(imageMemory* mem);
 
+/**
+@brief Get a pointer to the data image of a memoryBuffer.
+@param memBuff The memoryBuffer to get the data image from.
+@return imageMemory* A pointer to the data image of the memoryBuffer.
+*/
 imageMemory* memory_buffer_get_data_img(memoryBuffer* memBuff);
 
+/**
+@brief Get a pointer to the instruction image of a memoryBuffer.
+@param memBuff The memoryBuffer to get the instruction image from.
+@return imageMemory* A pointer to the instruction image of the memoryBuffer.
+*/
 imageMemory* memory_buffer_get_inst_img(memoryBuffer* memBuff);
 
+/**
+@brief Get the counter of an imageMemory.
+@param im The imageMemory to get the counter from.
+@return int The counter of the imageMemory.
+*/
 int img_memory_get_counter(imageMemory* im);
 
+/**
+@brief Set the counter of an imageMemory.
+@param im The imageMemory to set the counter to.
+@param cnt The value to set the counter to.
+*/
 void img_memory_set_counter(imageMemory* im, int cnt);
 
+/**
+@brief Returns a pointer to a specific MemoryWord within an imageMemory structure.
+@param im The imageMemory structure to access.
+@param offset The offset of the desired MemoryWord.
+@return MemoryWord* A pointer to the desired MemoryWord.
+*/
 MemoryWord* img_memory_get_memory_at(imageMemory* im, int offset);
 
+
+/**
+@brief Returns a pointer to the first memory word in the given image memory.
+@param im The image memory to retrieve the memory from.
+@return A pointer to the first memory word in the given image memory.
+*/
 MemoryWord* img_memory_get_memory(imageMemory* im);
 
+/**
+@brief Returns a pointer to the memory of a MemoryWord structure.
+@param mw A pointer to the MemoryWord structure.
+@return unsigned char* A pointer to the memory of the MemoryWord structure.
+*/
 unsigned char* memory_word_get_memory(MemoryWord* mw);
 
+/**
+@brief Frees the memory allocated to a memoryBuffer structure and its associated imageMemory structures.
+@param ptr A pointer to a pointer to the memoryBuffer structure to be freed.
+*/
 void memory_buffer_destroy(memoryBuffer** ptr);
 
 /**

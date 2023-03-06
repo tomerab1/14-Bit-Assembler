@@ -228,6 +228,12 @@ void encode_syntax_group_7(LineIterator* it, Opcodes op, memoryBuffer* img);
 */
 OperandKind get_operand_kind(char* op);
 
+/**
+@brief Deallocates the memory used by a VarData struct and its fields.
+@param ptr A pointer to the VarData struct pointer to be destroyed.
+@note After calling this function, the pointer to the VarData struct pointer will be set to NULL.
+@see varData_get_new()
+*/
 void varData_destroy(VarData** ptr);
 
 #endif

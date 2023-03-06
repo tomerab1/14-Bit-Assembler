@@ -26,8 +26,15 @@ Driver* driver_new_driver();
 */
 int driver_exec(Driver* driver, int argc, char** argv);
 
-void driver_destroy(Driver** driver);
+/**
 
+@brief Frees the memory used by a Driver object.
+This function frees the memory used by a Driver object and sets the
+driver pointer to NULL.
+@param driver A pointer to the Driver pointer to be freed.
+@return Void.
+*/
+void driver_destroy(Driver** driver);
 
 /**
 * @brief Executes the assembler. 
