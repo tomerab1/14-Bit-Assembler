@@ -182,6 +182,7 @@ bool first_pass_process_sym_data(LineIterator* it, memoryBuffer* img, SymbolTabl
 	if (!validate_syntax(*it, FP_SYM_DATA, line, dbg_list)) {
 		return FALSE;
 	}
+
 	/* Encode the .data.*/
 	if (should_encode) {
 		encode_dot_data(it, img);
@@ -199,8 +200,6 @@ bool first_pass_process_sym_string(LineIterator* it, memoryBuffer* img, SymbolTa
 	symbol_table_insert_symbol(sym_table, symbol_table_new_node(name, SYM_DATA, img_memory_get_counter(memory_buffer_get_data_img(img))));
 
 	/* Check the syntax, we want a copy of the iterator because if the syntax is correct we will encode the instructions to memory. */
-
-	/* Check if the syntax is valid. */
 	if (!validate_syntax(*it, FP_SYM_STR, line, dbg_list)) {
 		return FALSE;
 	}
@@ -232,16 +231,18 @@ bool first_pass_process_sym_ent(LineIterator* it, memoryBuffer* img, SymbolTable
 
 	if (symbol_table_search_symbol_bool(sym_table, word) && check_symbol_existence(sym_table, word, SYM_ENTRY)) {
 		debug_list_register_node(dbg_list, debug_list_new_node(it->start, it->current, line, ERROR_CODE_LABEL_ALREADY_EXISTS_AS_EXTERN));
+		free(word);
 		return FALSE;
 	}
 
 	line_iterator_unget_word(it, word);
 	if (get_opcode(word) != OP_UNKNOWN || is_register_name_whole(it)) {
 		debug_list_register_node(dbg_list, debug_list_new_node(it->start, it->current, line, ERROR_CODE_LABEL_CANNOT_BE_DEFINED_AS_OPCODE_OR_REGISTER));
+		free(word);
 		return FALSE;
 	}
-	line_iterator_next_word(it, " ");
 
+	line_iterator_next_word(it, " ");
 	/* Check wheter the symbol already exist as an entry/extern directive */
 	node = symbol_table_search_symbol(sym_table, word);
 
@@ -262,7 +263,6 @@ bool first_pass_process_sym_ent(LineIterator* it, memoryBuffer* img, SymbolTable
 	}
 
 	free(word);
-
 	return TRUE;
 }
 
@@ -289,20 +289,19 @@ bool first_pass_process_sym_ext(LineIterator* it, memoryBuffer* img, SymbolTable
 	line_iterator_unget_word(it, word);
 	if (get_opcode(word) != OP_UNKNOWN || is_register_name_whole(it)) {
 		debug_list_register_node(dbg_list, debug_list_new_node(it->start, it->current, line, ERROR_CODE_LABEL_CANNOT_BE_DEFINED_AS_OPCODE_OR_REGISTER));
+		free(word);
 		return FALSE;
 	}
-	line_iterator_next_word(it, SPACE_STRING);
 
+	line_iterator_next_word(it, SPACE_STRING);
 	symbol_table_insert_symbol(sym_table, symbol_table_new_node(word, SYM_EXTERN, 0));
 
 	/* Check the syntax, we want a copy of the iterator because if the syntax is correct we will encode the instructions to memory. */
-	/* Check if the syntax is valid.*/
 	if (!validate_syntax(*it, FP_SYM_ENT, line, dbg_list)) {
 		free(word);
 		return FALSE;
 	}
 
 	free(word);
-
 	return TRUE;
 }

@@ -74,10 +74,7 @@ void encode_label_start_process(LineIterator* it, memoryBuffer* img, SymbolTable
 
 	/*encode ARE missing*/
 	encode_labels(variables, synGroup, symTable, memory_buffer_get_inst_img(img));
-
-	free(varData_get_label(variables));
-	free(varData_get_leftVar(variables));
-	free(varData_get_rightVar(variables));
+	varData_destroy(&variables);
 }
 
 void encode_integer(imageMemory* img, unsigned int num)
@@ -221,6 +218,14 @@ VarData* varData_get_new()
 	ptr->total = 0;
 
 	return ptr;
+}
+
+void varData_destroy(VarData** ptr)
+{
+	free((*ptr)->leftVar);
+	free((*ptr)->rightVar);
+	free((*ptr)->label);
+	free(*ptr);
 }
 
 OperandKind get_operand_kind(char* op)

@@ -101,14 +101,14 @@ int find_amount_of_lines_to_skip(LineIterator* it) {
 	/* 1 for the opcode and one for the shared memory word of 2 registers. */
 	if ((operand1 && operand2) && (*operand1 == REG_BEG_CHAR && *operand2 == REG_BEG_CHAR))
 		return isdigit(*(operand1 + 1)) && isdigit(*(operand2 + 1)) ? 1 : 2;
-
 	/* 1 for the opcode and one for the shared memory word of 2 registers, and + 1 for the label name (this case is for parametrized labels) */
-	if ((operand2 && operand3) && (*operand2 == REG_BEG_CHAR && *operand3 == REG_BEG_CHAR))
+	else if ((operand2 && operand3) && (*operand2 == REG_BEG_CHAR && *operand3 == REG_BEG_CHAR))
 		return isdigit(*(operand1 + 1)) && isdigit(*(operand2 + 1)) ? 2 : 3;
-
-	total += (operand1) ? 1 : 0;
-	total += (operand2) ? 1 : 0;
-	total += (operand3) ? 1 : 0;
+	else {
+		total += (operand1) ? 1 : 0;
+		total += (operand2) ? 1 : 0;
+		total += (operand3) ? 1 : 0;
+	}
 
 	free(op);
 	free(operand1);
@@ -290,6 +290,7 @@ bool is_label_exists_in_line(LineIterator* line, SymbolTable* table, debugList* 
 	VarData* variablesData = NULL;
 	bool ret_val = TRUE;
 	LineIterator itLeftVar, itRightVar, itLabel;
+
 	variablesData = extract_variables(line);
 
 	if (!variablesData)
@@ -313,7 +314,7 @@ bool is_label_exists_in_line(LineIterator* line, SymbolTable* table, debugList* 
 		line_iterator_put_line(&itLeftVar, varData_get_leftVar(variablesData));
 		line_iterator_put_line(&itRightVar, varData_get_rightVar(variablesData));
 		ret_val = investigate_word(line, &itLeftVar, table, dbg_list, flag, line_num, varData_get_leftVar(variablesData), 2) ||
-			investigate_word(line, &itRightVar, table, dbg_list, flag, line_num, varData_get_rightVar(variablesData), 2);
+				  investigate_word(line, &itRightVar, table, dbg_list, flag, line_num, varData_get_rightVar(variablesData), 2);
 		break;
 
 	case 3: /*groups 5, labe, left var and right var*/
@@ -322,12 +323,12 @@ bool is_label_exists_in_line(LineIterator* line, SymbolTable* table, debugList* 
 		line_iterator_put_line(&itLabel, varData_get_label(variablesData));
 
 		ret_val = investigate_word(line, &itLeftVar, table, dbg_list, flag, line_num, varData_get_leftVar(variablesData), 3) ||
-			investigate_word(line, &itRightVar, table, dbg_list, flag, line_num, varData_get_rightVar(variablesData), 3) ||
-			investigate_word(line, &itLabel, table, dbg_list, flag, line_num, varData_get_label(variablesData), 3);
+				  investigate_word(line, &itRightVar, table, dbg_list, flag, line_num, varData_get_rightVar(variablesData), 3) ||
+				  investigate_word(line, &itLabel, table, dbg_list, flag, line_num, varData_get_label(variablesData), 3);
 		break;
 	}
 
-	free(variablesData);
+	varData_destroy(&variablesData);
 
 	return ret_val;
 }

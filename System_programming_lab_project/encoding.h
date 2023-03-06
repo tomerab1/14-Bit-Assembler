@@ -228,4 +228,6 @@ void encode_syntax_group_7(LineIterator* it, Opcodes op, memoryBuffer* img);
 */
 OperandKind get_operand_kind(char* op);
 
+void varData_destroy(VarData** ptr);
+
 #endif
