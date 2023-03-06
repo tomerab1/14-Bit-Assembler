@@ -119,7 +119,7 @@ char* get_last_word(LineIterator* it) {
     line_iterator_backwards(it);
     it->current = tempItLocation;
 
-    return line_iterator_next_word(it, " ");
+    return line_iterator_next_word(it, SPACE_STRING);
 }
 
 void line_iterator_replace(LineIterator* it, char* seps, char newSep)

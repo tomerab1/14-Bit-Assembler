@@ -120,7 +120,7 @@ void debug_print_error(errorContext* err_ctx, char err_buff[])
 
 	printf("%s %s\n", err_buff, err_ctx->start_pos);
 	while (offset > 0) {
-		printf(" ");
+		printf(SPACE_STRING);
 		offset--;
 	}
 	printf("^\t\nError: %s\n\n", debug_map_token_to_err(err_ctx->err_code));
