@@ -243,7 +243,6 @@ bool first_pass_process_sym_ent(LineIterator* it, memoryBuffer* img, SymbolTable
 
 	/* Check wheter the symbol already exist as an entry/extern directive */
 	node = symbol_table_search_symbol(sym_table, word);
-	free(word);
 
 	/* Insert symbol in symbol table.*/
 	if (node && (symbol_get_type(symbol_node_get_sym(node)) != SYM_ENTRY && symbol_get_type(symbol_node_get_sym(node)) != SYM_EXTERN)) {
@@ -252,6 +251,8 @@ bool first_pass_process_sym_ent(LineIterator* it, memoryBuffer* img, SymbolTable
 	else {
 		symbol_table_insert_symbol(sym_table, symbol_table_new_node(word, SYM_ENTRY, 0));
 	}
+
+	free(word);
 
 	/* Check the syntax, we want a copy of the iterator because if the syntax is correct we will encode the instructions to memory. */
 	if (!validate_syntax(*it, FP_SYM_ENT, line, dbg_list)) {
