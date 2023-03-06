@@ -33,9 +33,12 @@ bool do_first_pass(char* path, memoryBuffer* img, SymbolTable* sym_table, debugL
  * @brief This function take in a string, and checks if it's a symbol, if so it returns it's type.
  * This function also checks if the symbol name is a valid symbol name.
  * @param it - A string to do the check upon.
+ * @param word - the stymbol type being searched
+ * @param outErr - error code to be edited in case of an error
  * @return A appropriate firstPassState.
 */
-firstPassStates get_symbol_type(LineIterator* it, char* word);
+firstPassStates get_symbol_type(LineIterator* it, char* word, errorCodes* outErr);
+
 
 /**
 * @brief This function is used to process lines with label definitions.
