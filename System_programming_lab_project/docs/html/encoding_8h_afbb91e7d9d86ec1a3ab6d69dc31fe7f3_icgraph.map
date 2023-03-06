@@ -1,0 +1,13 @@
+<map id="varData_get_new" name="varData_get_new">
+<area shape="rect" id="node1" title="This function allocates a new VarData object." alt="" coords="1235,77,1355,102"/>
+<area shape="rect" id="node2" href="$encoding_8c.html#afb63e3712d11d6f0c73766b06e9cc1da" title="Extract variables from group 1 and 2 and 7 starting at the iterator." alt="" coords="1021,5,1180,45"/>
+<area shape="rect" id="node10" href="$encoding_8c.html#a1640fb1a22686ff86dce421842acca6f" title="Extract the variables group 3 and 6 from the line pointed to by it." alt="" coords="1021,69,1180,109"/>
+<area shape="rect" id="node11" href="$encoding_8c.html#a6ca97468e0e0dc59dcb66791202ac14c" title="Extract variables from GROUP 5 ( label =... ). This function assumes there is at least one token to b..." alt="" coords="1015,134,1187,159"/>
+<area shape="rect" id="node3" href="$encoding_8c.html#ac462ef04efd6a452ec612a07a0e38070" title=" " alt="" coords="836,41,967,81"/>
+<area shape="rect" id="node8" href="$second__pass_8c.html#a41e82792e66da5f66e6e378e20a0a7cc" title="Extracts the variables from the current line of assembly code. This function extracts the variables f..." alt="" coords="842,106,961,131"/>
+<area shape="rect" id="node4" href="$second__pass_8c.html#a36c8038b17843fb6d82d261367f7650b" title="Executes the line, in case label exists finds if it is valid and then encodes it, otherwise prints er..." alt="" coords="493,78,588,103"/>
+<area shape="rect" id="node5" href="$second__pass_8c.html#aa33feb8d270721a8f28a90a7833937db" title="Initiates the second pass of the assembler. This function is responsible for executing the second pas..." alt="" coords="301,78,445,103"/>
+<area shape="rect" id="node6" href="$driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,78,253,103"/>
+<area shape="rect" id="node7" href="$driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,78,124,103"/>
+<area shape="rect" id="node9" href="$second__pass_8c.html#a6b999b1b1244fbcf34f5f866b4aa3153" title="Checks whether a label exists in a line and is defined in the symbol table." alt="" coords="636,103,788,129"/>
+</map>

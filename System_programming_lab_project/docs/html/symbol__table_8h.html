@@ -5,14 +5,10 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.5"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>C language 14 bit assembler: symbol_table.h File Reference</title>
+<title>14bit Assembler: symbol_table.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
-<link href="navtree.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="resize.js"></script>
-<script type="text/javascript" src="navtreedata.js"></script>
-<script type="text/javascript" src="navtree.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
@@ -25,7 +21,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">C language 14 bit assembler
+   <div id="projectname">14bit Assembler
    </div>
   </td>
  </tr>
@@ -50,23 +46,6 @@ $(function() {
 /* @license-end */
 </script>
 <div id="main-nav"></div>
-</div><!-- top -->
-<div id="side-nav" class="ui-resizable side-nav-resizable">
-  <div id="nav-tree">
-    <div id="nav-tree-contents">
-      <div id="nav-sync" class="sync"></div>
-    </div>
-  </div>
-  <div id="splitbar" style="-moz-user-select:none;" 
-       class="ui-resizable-handle">
-  </div>
-</div>
-<script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(document).ready(function(){initNavTree('symbol__table_8h.html',''); initResizable(); });
-/* @license-end */
-</script>
-<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -88,9 +67,9 @@ $(document).ready(function(){initNavTree('symbol__table_8h.html',''); initResiza
 </div>
 </div>
 
+</div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#nested-classes">Data Structures</a> &#124;
 <a href="#typedef-members">Typedefs</a> &#124;
 <a href="#enum-members">Enumerations</a> &#124;
 <a href="#func-members">Functions</a>  </div>
@@ -98,23 +77,36 @@ $(document).ready(function(){initNavTree('symbol__table_8h.html',''); initResiza
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><code>#include &quot;<a class="el" href="utils_8h_source.html">utils.h</a>&quot;</code><br />
+</div><div class="textblock"><div class="dynheader">
+Include dependency graph for symbol_table.h:</div>
+<div class="dyncontent">
+<div class="center"><img src="symbol__table_8h__incl.png" border="0" usemap="#asymbol__table_8h" alt=""/></div>
+<map name="asymbol__table_8h" id="asymbol__table_8h">
+<area shape="rect" title=" " alt="" coords="111,5,222,31"/>
+<area shape="rect" href="utils_8h.html" title=" " alt="" coords="138,79,195,104"/>
+<area shape="rect" title=" " alt="" coords="5,152,67,177"/>
+<area shape="rect" title=" " alt="" coords="91,152,155,177"/>
+<area shape="rect" title=" " alt="" coords="179,152,245,177"/>
+<area shape="rect" href="constants_8h.html" title=" " alt="" coords="269,152,360,177"/>
+</map>
+</div>
 </div>
 <p><a href="symbol__table_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
-Data Structures</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_symbol.html">Symbol</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct____sym__table__node.html">__sym_table_node</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_symbol_table.html">SymbolTable</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="typedef-members" name="typedef-members"></a>
 Typedefs</h2></td></tr>
-<tr class="memitem:a65cf8628325ff464de7ebdea94cff872"><td class="memItemLeft" align="right" valign="top"><a id="a65cf8628325ff464de7ebdea94cff872" name="a65cf8628325ff464de7ebdea94cff872"></a>
-typedef struct <a class="el" href="struct____sym__table__node.html">__sym_table_node</a>&#160;</td><td class="memItemRight" valign="bottom"><b>SymbolTableNode</b></td></tr>
-<tr class="separator:a65cf8628325ff464de7ebdea94cff872"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab1bc36a47f69a0a25292d191f931561f"><td class="memItemLeft" align="right" valign="top"><a id="ab1bc36a47f69a0a25292d191f931561f" name="ab1bc36a47f69a0a25292d191f931561f"></a>
+typedef enum symbolType&#160;</td><td class="memItemRight" valign="bottom"><b>symbolType</b></td></tr>
+<tr class="separator:ab1bc36a47f69a0a25292d191f931561f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac1b95cde05bdecd202e6f33298f78a17"><td class="memItemLeft" align="right" valign="top"><a id="ac1b95cde05bdecd202e6f33298f78a17" name="ac1b95cde05bdecd202e6f33298f78a17"></a>
+typedef struct <a class="el" href="struct_symbol.html">Symbol</a>&#160;</td><td class="memItemRight" valign="bottom"><b>Symbol</b></td></tr>
+<tr class="separator:ac1b95cde05bdecd202e6f33298f78a17"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3157cb88f70fca68ef1f7f23a05668a8"><td class="memItemLeft" align="right" valign="top"><a id="a3157cb88f70fca68ef1f7f23a05668a8" name="a3157cb88f70fca68ef1f7f23a05668a8"></a>
+typedef struct <a class="el" href="struct_symbol_table_node.html">SymbolTableNode</a>&#160;</td><td class="memItemRight" valign="bottom"><b>SymbolTableNode</b></td></tr>
+<tr class="separator:a3157cb88f70fca68ef1f7f23a05668a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0ef213c033eadd9c99ef43c1df3d9bd5"><td class="memItemLeft" align="right" valign="top"><a id="a0ef213c033eadd9c99ef43c1df3d9bd5" name="a0ef213c033eadd9c99ef43c1df3d9bd5"></a>
+typedef struct <a class="el" href="struct_symbol_table.html">SymbolTable</a>&#160;</td><td class="memItemRight" valign="bottom"><b>SymbolTable</b></td></tr>
+<tr class="separator:a0ef213c033eadd9c99ef43c1df3d9bd5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="enum-members" name="enum-members"></a>
 Enumerations</h2></td></tr>
@@ -127,36 +119,1179 @@ Enumerations</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a53ee66f1de6f20b68a130922a34221d6"><td class="memItemLeft" align="right" valign="top"><a id="a53ee66f1de6f20b68a130922a34221d6" name="a53ee66f1de6f20b68a130922a34221d6"></a>
-<a class="el" href="struct_symbol_table.html">SymbolTable</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>symbol_table_new_table</b> ()</td></tr>
+<tr class="memitem:a53ee66f1de6f20b68a130922a34221d6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_symbol_table.html">SymbolTable</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="symbol__table_8h.html#a53ee66f1de6f20b68a130922a34221d6">symbol_table_new_table</a> ()</td></tr>
+<tr class="memdesc:a53ee66f1de6f20b68a130922a34221d6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new symbol table. The table is empty after this function returns. This can be used to create an uninitialized table without allocating it for the first time.  <a href="symbol__table_8h.html#a53ee66f1de6f20b68a130922a34221d6">More...</a><br /></td></tr>
 <tr class="separator:a53ee66f1de6f20b68a130922a34221d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1b234901d5a9c5c2e7e9194faec22915"><td class="memItemLeft" align="right" valign="top"><a id="a1b234901d5a9c5c2e7e9194faec22915" name="a1b234901d5a9c5c2e7e9194faec22915"></a>
-<a class="el" href="struct____sym__table__node.html">SymbolTableNode</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>symbol_table_new_node</b> (char *name, symbolType type, long counter)</td></tr>
+<tr class="memitem:a1b234901d5a9c5c2e7e9194faec22915"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_symbol_table_node.html">SymbolTableNode</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="symbol__table_8h.html#a1b234901d5a9c5c2e7e9194faec22915">symbol_table_new_node</a> (char *name, symbolType type, long counter)</td></tr>
+<tr class="memdesc:a1b234901d5a9c5c2e7e9194faec22915"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new node in the symbol table. It is assumed that the name is unique and that the symbol table is not modified by the caller.  <a href="symbol__table_8h.html#a1b234901d5a9c5c2e7e9194faec22915">More...</a><br /></td></tr>
 <tr class="separator:a1b234901d5a9c5c2e7e9194faec22915"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aac7ab4a84f5dd5b8f88a9e5bd2d30b38"><td class="memItemLeft" align="right" valign="top"><a id="aac7ab4a84f5dd5b8f88a9e5bd2d30b38" name="aac7ab4a84f5dd5b8f88a9e5bd2d30b38"></a>
-<a class="el" href="struct____sym__table__node.html">SymbolTableNode</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>symbol_table_search_symbol</b> (<a class="el" href="struct_symbol_table.html">SymbolTable</a> *table, char *name)</td></tr>
+<tr class="memitem:aac7ab4a84f5dd5b8f88a9e5bd2d30b38"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_symbol_table_node.html">SymbolTableNode</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="symbol__table_8h.html#aac7ab4a84f5dd5b8f88a9e5bd2d30b38">symbol_table_search_symbol</a> (<a class="el" href="struct_symbol_table.html">SymbolTable</a> *table, char *name)</td></tr>
+<tr class="memdesc:aac7ab4a84f5dd5b8f88a9e5bd2d30b38"><td class="mdescLeft">&#160;</td><td class="mdescRight">Search a symbol table. This is used to find a symbol by name. If the symbol is found it is returned otherwise NULL is returned.  <a href="symbol__table_8h.html#aac7ab4a84f5dd5b8f88a9e5bd2d30b38">More...</a><br /></td></tr>
 <tr class="separator:aac7ab4a84f5dd5b8f88a9e5bd2d30b38"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a481f1684949bafc5d4487a12287a420f"><td class="memItemLeft" align="right" valign="top"><a id="a481f1684949bafc5d4487a12287a420f" name="a481f1684949bafc5d4487a12287a420f"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>symbol_table_search_symbol_bool</b> (<a class="el" href="struct_symbol_table.html">SymbolTable</a> *table, char *name)</td></tr>
+<tr class="memitem:a481f1684949bafc5d4487a12287a420f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="symbol__table_8h.html#a481f1684949bafc5d4487a12287a420f">symbol_table_search_symbol_bool</a> (<a class="el" href="struct_symbol_table.html">SymbolTable</a> *table, char *name)</td></tr>
+<tr class="memdesc:a481f1684949bafc5d4487a12287a420f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Search a symbol table for a symbol with a given name. This is used to determine if a symbol is defined in the symbol table but does not have to be loaded into memory.  <a href="symbol__table_8h.html#a481f1684949bafc5d4487a12287a420f">More...</a><br /></td></tr>
 <tr class="separator:a481f1684949bafc5d4487a12287a420f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af7ceb2c0ffe3e3ea80e925ba655c3710"><td class="memItemLeft" align="right" valign="top"><a id="af7ceb2c0ffe3e3ea80e925ba655c3710" name="af7ceb2c0ffe3e3ea80e925ba655c3710"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>symbol_table_insert_symbol</b> (<a class="el" href="struct_symbol_table.html">SymbolTable</a> *table, <a class="el" href="struct____sym__table__node.html">SymbolTableNode</a> *symbol)</td></tr>
+<tr class="memitem:af7ceb2c0ffe3e3ea80e925ba655c3710"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="symbol__table_8h.html#af7ceb2c0ffe3e3ea80e925ba655c3710">symbol_table_insert_symbol</a> (<a class="el" href="struct_symbol_table.html">SymbolTable</a> *table, <a class="el" href="struct_symbol_table_node.html">SymbolTableNode</a> *symbol)</td></tr>
+<tr class="memdesc:af7ceb2c0ffe3e3ea80e925ba655c3710"><td class="mdescLeft">&#160;</td><td class="mdescRight">Insert a symbol into the table. This is used to insert an entry into a symbol table. The table must be sorted by insertion time and sorted by number of entries.  <a href="symbol__table_8h.html#af7ceb2c0ffe3e3ea80e925ba655c3710">More...</a><br /></td></tr>
 <tr class="separator:af7ceb2c0ffe3e3ea80e925ba655c3710"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a89500f95e0d429616157b09668f1da29"><td class="memItemLeft" align="right" valign="top"><a id="a89500f95e0d429616157b09668f1da29" name="a89500f95e0d429616157b09668f1da29"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>symbol_table_is_empty</b> (<a class="el" href="struct_symbol_table.html">SymbolTable</a> *table)</td></tr>
+<tr class="memitem:a89500f95e0d429616157b09668f1da29"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="symbol__table_8h.html#a89500f95e0d429616157b09668f1da29">symbol_table_is_empty</a> (<a class="el" href="struct_symbol_table.html">SymbolTable</a> *table)</td></tr>
+<tr class="memdesc:a89500f95e0d429616157b09668f1da29"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if a symbol table is empty. This is used to detect circular references in the symbol table.  <a href="symbol__table_8h.html#a89500f95e0d429616157b09668f1da29">More...</a><br /></td></tr>
 <tr class="separator:a89500f95e0d429616157b09668f1da29"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a01109b630db52c46d594ea3062a3b8c8"><td class="memItemLeft" align="right" valign="top"><a id="a01109b630db52c46d594ea3062a3b8c8" name="a01109b630db52c46d594ea3062a3b8c8"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>symbol_table_destroy</b> (<a class="el" href="struct_symbol_table.html">SymbolTable</a> **table)</td></tr>
+<tr class="memitem:a01109b630db52c46d594ea3062a3b8c8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="symbol__table_8h.html#a01109b630db52c46d594ea3062a3b8c8">symbol_table_destroy</a> (<a class="el" href="struct_symbol_table.html">SymbolTable</a> **table)</td></tr>
+<tr class="memdesc:a01109b630db52c46d594ea3062a3b8c8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroy a symbol table. This frees all memory associated with the symbol table and the table itself.  <a href="symbol__table_8h.html#a01109b630db52c46d594ea3062a3b8c8">More...</a><br /></td></tr>
 <tr class="separator:a01109b630db52c46d594ea3062a3b8c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae0c6da9509e48a312d5c5d63efc22c9f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="symbol__table_8h.html#ae0c6da9509e48a312d5c5d63efc22c9f">update_amount_of_items</a> (<a class="el" href="struct_symbol_table.html">SymbolTable</a> *table)</td></tr>
+<tr class="memdesc:ae0c6da9509e48a312d5c5d63efc22c9f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the amount of items in the symbol table. This is done by taking the number of items in the symbol table and counting them.  <a href="symbol__table_8h.html#ae0c6da9509e48a312d5c5d63efc22c9f">More...</a><br /></td></tr>
+<tr class="separator:ae0c6da9509e48a312d5c5d63efc22c9f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa9e9364ffc547a159df48e179e960d22"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="symbol__table_8h.html#aa9e9364ffc547a159df48e179e960d22">check_symbol_existence</a> (<a class="el" href="struct_symbol_table.html">SymbolTable</a> *sym_table, char *name, symbolType newSymType)</td></tr>
+<tr class="memdesc:aa9e9364ffc547a159df48e179e960d22"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if a symbol with the given name exists in the symbol table and has a specific type.  <a href="symbol__table_8h.html#aa9e9364ffc547a159df48e179e960d22">More...</a><br /></td></tr>
+<tr class="separator:aa9e9364ffc547a159df48e179e960d22"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa399abdbcee97a193a8549b8498f3155"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="symbol__table_8h.html#aa399abdbcee97a193a8549b8498f3155">symbol_get_name</a> (<a class="el" href="struct_symbol.html">Symbol</a> *sym)</td></tr>
+<tr class="memdesc:aa399abdbcee97a193a8549b8498f3155"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the name of a given symbol.  <a href="symbol__table_8h.html#aa399abdbcee97a193a8549b8498f3155">More...</a><br /></td></tr>
+<tr class="separator:aa399abdbcee97a193a8549b8498f3155"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a37a20bf2385e0ac587c17e03fefbd85b"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="symbol__table_8h.html#a37a20bf2385e0ac587c17e03fefbd85b">symbol_get_counter</a> (<a class="el" href="struct_symbol.html">Symbol</a> *sym)</td></tr>
+<tr class="memdesc:a37a20bf2385e0ac587c17e03fefbd85b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the counter of a given symbol.  <a href="symbol__table_8h.html#a37a20bf2385e0ac587c17e03fefbd85b">More...</a><br /></td></tr>
+<tr class="separator:a37a20bf2385e0ac587c17e03fefbd85b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a65446ec1e574e9239c16bdda937bda48"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="symbol__table_8h.html#a65446ec1e574e9239c16bdda937bda48">symbol_set_counter</a> (<a class="el" href="struct_symbol.html">Symbol</a> *sym, int num)</td></tr>
+<tr class="memdesc:a65446ec1e574e9239c16bdda937bda48"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the counter of a given symbol to a new value.  <a href="symbol__table_8h.html#a65446ec1e574e9239c16bdda937bda48">More...</a><br /></td></tr>
+<tr class="separator:a65446ec1e574e9239c16bdda937bda48"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a138b11bfe95510adff947a175c253082"><td class="memItemLeft" align="right" valign="top">symbolType&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="symbol__table_8h.html#a138b11bfe95510adff947a175c253082">symbol_get_type</a> (<a class="el" href="struct_symbol.html">Symbol</a> *sym)</td></tr>
+<tr class="memdesc:a138b11bfe95510adff947a175c253082"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the type of a given symbol.  <a href="symbol__table_8h.html#a138b11bfe95510adff947a175c253082">More...</a><br /></td></tr>
+<tr class="separator:a138b11bfe95510adff947a175c253082"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2840400cc50c2f9529dc49c92cf47db9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_symbol.html">Symbol</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="symbol__table_8h.html#a2840400cc50c2f9529dc49c92cf47db9">symbol_node_get_sym</a> (<a class="el" href="struct_symbol_table_node.html">SymbolTableNode</a> *node)</td></tr>
+<tr class="memdesc:a2840400cc50c2f9529dc49c92cf47db9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the symbol of a given symbol table node.  <a href="symbol__table_8h.html#a2840400cc50c2f9529dc49c92cf47db9">More...</a><br /></td></tr>
+<tr class="separator:a2840400cc50c2f9529dc49c92cf47db9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6e873141116f3277fbe834c21b0e8055"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_symbol_table_node.html">SymbolTableNode</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="symbol__table_8h.html#a6e873141116f3277fbe834c21b0e8055">symbol_node_get_next</a> (<a class="el" href="struct_symbol_table_node.html">SymbolTableNode</a> *node)</td></tr>
+<tr class="memdesc:a6e873141116f3277fbe834c21b0e8055"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the next symbol table node of a given symbol table node.  <a href="symbol__table_8h.html#a6e873141116f3277fbe834c21b0e8055">More...</a><br /></td></tr>
+<tr class="separator:a6e873141116f3277fbe834c21b0e8055"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0523b2417b2ad80df56b3694f8d8cf3a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_symbol_table_node.html">SymbolTableNode</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="symbol__table_8h.html#a0523b2417b2ad80df56b3694f8d8cf3a">symbol_table_get_head</a> (<a class="el" href="struct_symbol_table.html">SymbolTable</a> *table)</td></tr>
+<tr class="memdesc:a0523b2417b2ad80df56b3694f8d8cf3a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the head symbol table node of a given symbol table.  <a href="symbol__table_8h.html#a0523b2417b2ad80df56b3694f8d8cf3a">More...</a><br /></td></tr>
+<tr class="separator:a0523b2417b2ad80df56b3694f8d8cf3a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a624ea37c6a5cf0b5fa02918e30a4ad86"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_symbol_table_node.html">SymbolTableNode</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="symbol__table_8h.html#a624ea37c6a5cf0b5fa02918e30a4ad86">symbol_table_get_tail</a> (<a class="el" href="struct_symbol_table.html">SymbolTable</a> *table)</td></tr>
+<tr class="memdesc:a624ea37c6a5cf0b5fa02918e30a4ad86"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the tail symbol table node of a given symbol table.  <a href="symbol__table_8h.html#a624ea37c6a5cf0b5fa02918e30a4ad86">More...</a><br /></td></tr>
+<tr class="separator:a624ea37c6a5cf0b5fa02918e30a4ad86"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8a96f77da581f5af4a4bbddc0bffc59b"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="symbol__table_8h.html#a8a96f77da581f5af4a4bbddc0bffc59b">symbol_table_get_numOfSym</a> (<a class="el" href="struct_symbol_table.html">SymbolTable</a> *table)</td></tr>
+<tr class="memdesc:a8a96f77da581f5af4a4bbddc0bffc59b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the amount of symbols in a given symbol table.  <a href="symbol__table_8h.html#a8a96f77da581f5af4a4bbddc0bffc59b">More...</a><br /></td></tr>
+<tr class="separator:a8a96f77da581f5af4a4bbddc0bffc59b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abdcd7fd5b1561cfbc7d34af565d99c41"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="symbol__table_8h.html#abdcd7fd5b1561cfbc7d34af565d99c41">symbol_table_set_numOfSym</a> (<a class="el" href="struct_symbol_table.html">SymbolTable</a> *table, int num)</td></tr>
+<tr class="memdesc:abdcd7fd5b1561cfbc7d34af565d99c41"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the amount of symbols in a given symbol table to a new value.  <a href="symbol__table_8h.html#abdcd7fd5b1561cfbc7d34af565d99c41">More...</a><br /></td></tr>
+<tr class="separator:abdcd7fd5b1561cfbc7d34af565d99c41"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a54fc25f44cb91c477370ab45723384cf"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="symbol__table_8h.html#a54fc25f44cb91c477370ab45723384cf">symbol_table_get_hasExternals</a> (<a class="el" href="struct_symbol_table.html">SymbolTable</a> *table)</td></tr>
+<tr class="memdesc:a54fc25f44cb91c477370ab45723384cf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns whether a given symbol table has external symbols or not.  <a href="symbol__table_8h.html#a54fc25f44cb91c477370ab45723384cf">More...</a><br /></td></tr>
+<tr class="separator:a54fc25f44cb91c477370ab45723384cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4eb3f39fcd6579db7bd799bf689e3a8d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="symbol__table_8h.html#a4eb3f39fcd6579db7bd799bf689e3a8d">symbol_table_set_hasExternals</a> (<a class="el" href="struct_symbol_table.html">SymbolTable</a> *table, bool hasExternals)</td></tr>
+<tr class="memdesc:a4eb3f39fcd6579db7bd799bf689e3a8d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets whether a given symbol table has external symbols or not.  <a href="symbol__table_8h.html#a4eb3f39fcd6579db7bd799bf689e3a8d">More...</a><br /></td></tr>
+<tr class="separator:a4eb3f39fcd6579db7bd799bf689e3a8d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac3bac8997acae526e27a0636744ddcf0"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="symbol__table_8h.html#ac3bac8997acae526e27a0636744ddcf0">symbol_table_get_hasEntries</a> (<a class="el" href="struct_symbol_table.html">SymbolTable</a> *table)</td></tr>
+<tr class="memdesc:ac3bac8997acae526e27a0636744ddcf0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns whether a given symbol table has entry symbols or not.  <a href="symbol__table_8h.html#ac3bac8997acae526e27a0636744ddcf0">More...</a><br /></td></tr>
+<tr class="separator:ac3bac8997acae526e27a0636744ddcf0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6e38e8a0b4e028922c9224a25cf38d91"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="symbol__table_8h.html#a6e38e8a0b4e028922c9224a25cf38d91">symbol_table_set_hasEntries</a> (<a class="el" href="struct_symbol_table.html">SymbolTable</a> *table, bool hasEntries)</td></tr>
+<tr class="memdesc:a6e38e8a0b4e028922c9224a25cf38d91"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets whether the symbol table has entry symbols.  <a href="symbol__table_8h.html#a6e38e8a0b4e028922c9224a25cf38d91">More...</a><br /></td></tr>
+<tr class="separator:a6e38e8a0b4e028922c9224a25cf38d91"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6205e294b3148c8038a09384458ecd6d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="symbol__table_8h.html#a6205e294b3148c8038a09384458ecd6d">symbol_table_get_completed</a> (<a class="el" href="struct_symbol_table.html">SymbolTable</a> *table)</td></tr>
+<tr class="memdesc:a6205e294b3148c8038a09384458ecd6d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the symbol table is completed (i.e. all symbols are defined).  <a href="symbol__table_8h.html#a6205e294b3148c8038a09384458ecd6d">More...</a><br /></td></tr>
+<tr class="separator:a6205e294b3148c8038a09384458ecd6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a90d7d34e3a0c0973d99d70819b42730a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="symbol__table_8h.html#a90d7d34e3a0c0973d99d70819b42730a">symbol_table_set_completed</a> (<a class="el" href="struct_symbol_table.html">SymbolTable</a> *table, bool isCompleted)</td></tr>
+<tr class="memdesc:a90d7d34e3a0c0973d99d70819b42730a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets whether the symbol table is completed (i.e. all symbols are defined).  <a href="symbol__table_8h.html#a90d7d34e3a0c0973d99d70819b42730a">More...</a><br /></td></tr>
+<tr class="separator:a90d7d34e3a0c0973d99d70819b42730a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-</div><!-- contents -->
-</div><!-- doc-content -->
-<!-- start footer part -->
-<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
-  <ul>
-    <li class="navelem"><a class="el" href="symbol__table_8h.html">symbol_table.h</a></li>
-    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5 </li>
-  </ul>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="aa9e9364ffc547a159df48e179e960d22" name="aa9e9364ffc547a159df48e179e960d22"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa9e9364ffc547a159df48e179e960d22">&#9670;&#160;</a></span>check_symbol_existence()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool check_symbol_existence </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_symbol_table.html">SymbolTable</a> *&#160;</td>
+          <td class="paramname"><em>sym_table</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">symbolType&#160;</td>
+          <td class="paramname"><em>newSymType</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Check if a symbol with the given name exists in the symbol table and has a specific type. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">sym_table</td><td>A pointer to the symbol table to search in. </td></tr>
+    <tr><td class="paramname">name</td><td>A string containing the name of the symbol to search for. </td></tr>
+    <tr><td class="paramname">newSymType</td><td>An enumeration value representing the type of the symbol to check for (either SYM_ENTRY or SYM_EXTERN). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A boolean value indicating whether a symbol with the given name and type was found in the symbol table or not. This function searches the given symbol table for a symbol with the given name and checks if it has the specified type (either SYM_ENTRY or SYM_EXTERN). If the symbol is found and has the correct type, the function returns TRUE. Otherwise, it returns FALSE. Note that if the symbol is not found in the symbol table, the function will also return FALSE. </dd></dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="symbol__table_8h_aa9e9364ffc547a159df48e179e960d22_icgraph.png" border="0" usemap="#asymbol__table_8h_aa9e9364ffc547a159df48e179e960d22_icgraph" alt=""/></div>
+<map name="asymbol__table_8h_aa9e9364ffc547a159df48e179e960d22_icgraph" id="asymbol__table_8h_aa9e9364ffc547a159df48e179e960d22_icgraph">
+<area shape="rect" title="Check if a symbol with the given name exists in the symbol table and has a specific type." alt="" coords="627,45,796,70"/>
+<area shape="rect" href="first__pass_8c.html#aa0a39d1f94314921231c97245e6eb551" title="This function is used to process .entry lines. It also encodes the memory if possible into the memory..." alt="" coords="448,5,579,45"/>
+<area shape="rect" href="first__pass_8c.html#accedad2dc6b0e81f160e2201f4f2b1d3" title="This function is used to process .extern lines. It also encodes the memory if possible into the memor..." alt="" coords="448,69,579,109"/>
+<area shape="rect" href="first__pass_8c.html#ae3d15ca0f34657e4715827c439839e1e" title="This function implements the first pass algorithm." alt="" coords="301,45,400,70"/>
+<area shape="rect" href="driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,45,253,70"/>
+<area shape="rect" href="driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,45,124,70"/>
+</map>
 </div>
+
+</div>
+</div>
+<a id="a37a20bf2385e0ac587c17e03fefbd85b" name="a37a20bf2385e0ac587c17e03fefbd85b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a37a20bf2385e0ac587c17e03fefbd85b">&#9670;&#160;</a></span>symbol_get_counter()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int symbol_get_counter </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_symbol.html">Symbol</a> *&#160;</td>
+          <td class="paramname"><em>sym</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Returns the counter of a given symbol. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">sym</td><td>The symbol to retrieve its counter. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The counter of the symbol. </dd></dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="symbol__table_8h_a37a20bf2385e0ac587c17e03fefbd85b_icgraph.png" border="0" usemap="#asymbol__table_8h_a37a20bf2385e0ac587c17e03fefbd85b_icgraph" alt=""/></div>
+<map name="asymbol__table_8h_a37a20bf2385e0ac587c17e03fefbd85b_icgraph" id="asymbol__table_8h_a37a20bf2385e0ac587c17e03fefbd85b_icgraph">
+<area shape="rect" title="Returns the counter of a given symbol." alt="" coords="1120,146,1259,171"/>
+<area shape="rect" href="second__pass_8c.html#a2765636e71a2da6c192eac0fa06581c1" title="Adds the decimal base address to all data and code symbols in a symbol table." alt="" coords="493,70,659,95"/>
+<area shape="rect" href="encoding_8c.html#a6f027af72fd18bdeb31711ada8e669aa" title=" " alt="" coords="942,269,1047,294"/>
+<area shape="rect" href="first__pass_8c.html#aa0a39d1f94314921231c97245e6eb551" title="This function is used to process .entry lines. It also encodes the memory if possible into the memory..." alt="" coords="929,5,1060,45"/>
+<area shape="rect" href="second__pass_8c.html#a2bd718eb223c109ac098038bd74150f1" title="Generates an entries file containing the entry symbols and their addresses The function generates an ..." alt="" coords="924,121,1065,146"/>
+<area shape="rect" href="second__pass_8c.html#af969b5aef11a97160dd29f2402b35d1e" title="Generates an externals file containing the names and addresses of external symbols." alt="" coords="917,170,1072,195"/>
+<area shape="rect" href="second__pass_8c.html#a1d991b81e3a4e0eca4a867bd08cf6ecc" title="Updates the symbol offset in memory." alt="" coords="921,219,1069,245"/>
+<area shape="rect" href="second__pass_8c.html#aa33feb8d270721a8f28a90a7833937db" title="Initiates the second pass of the assembler. This function is responsible for executing the second pas..." alt="" coords="301,95,445,121"/>
+<area shape="rect" href="driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,71,253,97"/>
+<area shape="rect" href="driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,71,124,97"/>
+<area shape="rect" href="encoding_8c.html#ac462ef04efd6a452ec612a07a0e38070" title=" " alt="" coords="723,261,853,301"/>
+<area shape="rect" href="second__pass_8c.html#a36c8038b17843fb6d82d261367f7650b" title="Executes the line, in case label exists finds if it is valid and then encodes it, otherwise prints er..." alt="" coords="529,211,623,237"/>
+<area shape="rect" href="first__pass_8c.html#ae3d15ca0f34657e4715827c439839e1e" title="This function implements the first pass algorithm." alt="" coords="324,31,423,57"/>
+<area shape="rect" href="second__pass_8c.html#a20c33f0cb96a55d4b805d746db5cc1cc" title="Creates output files based on the given memory buffer, path, final program status,..." alt="" coords="744,121,832,146"/>
+<area shape="rect" href="second__pass_8c.html#ab6728edfef56c073ce9792b67edd84f7" title=" " alt="" coords="707,211,869,237"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="aa399abdbcee97a193a8549b8498f3155" name="aa399abdbcee97a193a8549b8498f3155"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa399abdbcee97a193a8549b8498f3155">&#9670;&#160;</a></span>symbol_get_name()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char * symbol_get_name </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_symbol.html">Symbol</a> *&#160;</td>
+          <td class="paramname"><em>sym</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Returns the name of a given symbol. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">sym</td><td>The symbol to retrieve its name. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The name of the symbol. </dd></dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="symbol__table_8h_aa399abdbcee97a193a8549b8498f3155_icgraph.png" border="0" usemap="#asymbol__table_8h_aa399abdbcee97a193a8549b8498f3155_icgraph" alt=""/></div>
+<map name="asymbol__table_8h_aa399abdbcee97a193a8549b8498f3155_icgraph" id="asymbol__table_8h_aa399abdbcee97a193a8549b8498f3155_icgraph">
+<area shape="rect" title="Returns the name of a given symbol." alt="" coords="1049,55,1177,80"/>
+<area shape="rect" href="second__pass_8c.html#a2bd718eb223c109ac098038bd74150f1" title="Generates an entries file containing the entry symbols and their addresses The function generates an ..." alt="" coords="853,5,995,31"/>
+<area shape="rect" href="second__pass_8c.html#af969b5aef11a97160dd29f2402b35d1e" title="Generates an externals file containing the names and addresses of external symbols." alt="" coords="847,55,1001,80"/>
+<area shape="rect" href="second__pass_8c.html#a1d991b81e3a4e0eca4a867bd08cf6ecc" title="Updates the symbol offset in memory." alt="" coords="850,104,998,129"/>
+<area shape="rect" href="second__pass_8c.html#a20c33f0cb96a55d4b805d746db5cc1cc" title="Creates output files based on the given memory buffer, path, final program status,..." alt="" coords="673,53,761,79"/>
+<area shape="rect" href="second__pass_8c.html#aa33feb8d270721a8f28a90a7833937db" title="Initiates the second pass of the assembler. This function is responsible for executing the second pas..." alt="" coords="301,79,445,104"/>
+<area shape="rect" href="driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,79,253,104"/>
+<area shape="rect" href="driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,79,124,104"/>
+<area shape="rect" href="second__pass_8c.html#ab6728edfef56c073ce9792b67edd84f7" title=" " alt="" coords="636,104,799,129"/>
+<area shape="rect" href="second__pass_8c.html#a36c8038b17843fb6d82d261367f7650b" title="Executes the line, in case label exists finds if it is valid and then encodes it, otherwise prints er..." alt="" coords="493,104,588,129"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a138b11bfe95510adff947a175c253082" name="a138b11bfe95510adff947a175c253082"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a138b11bfe95510adff947a175c253082">&#9670;&#160;</a></span>symbol_get_type()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">symbolType symbol_get_type </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_symbol.html">Symbol</a> *&#160;</td>
+          <td class="paramname"><em>sym</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Returns the type of a given symbol. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">sym</td><td>The symbol to retrieve its type. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The type of the symbol. </dd></dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="symbol__table_8h_a138b11bfe95510adff947a175c253082_icgraph.png" border="0" usemap="#asymbol__table_8h_a138b11bfe95510adff947a175c253082_icgraph" alt=""/></div>
+<map name="asymbol__table_8h_a138b11bfe95510adff947a175c253082_icgraph" id="asymbol__table_8h_a138b11bfe95510adff947a175c253082_icgraph">
+<area shape="rect" title="Returns the type of a given symbol." alt="" coords="1120,223,1241,249"/>
+<area shape="rect" href="second__pass_8c.html#a2765636e71a2da6c192eac0fa06581c1" title="Adds the decimal base address to all data and code symbols in a symbol table." alt="" coords="493,198,659,223"/>
+<area shape="rect" href="encoding_8c.html#a6f027af72fd18bdeb31711ada8e669aa" title=" " alt="" coords="942,397,1047,422"/>
+<area shape="rect" href="first__pass_8c.html#a87a70eef7a9fd6d62eb27a5a2127739e" title="This function is used to process .data lines. It also encodes the memory if possible into the memoryB..." alt="" coords="929,133,1060,173"/>
+<area shape="rect" href="first__pass_8c.html#ac0da628ba463b754effc2e88e611d4dd" title="This function is used to process lines with label definitions. It also encodes the memory if possible..." alt="" coords="929,5,1060,45"/>
+<area shape="rect" href="first__pass_8c.html#aa0a39d1f94314921231c97245e6eb551" title="This function is used to process .entry lines. It also encodes the memory if possible into the memory..." alt="" coords="929,69,1060,109"/>
+<area shape="rect" href="second__pass_8c.html#a2bd718eb223c109ac098038bd74150f1" title="Generates an entries file containing the entry symbols and their addresses The function generates an ..." alt="" coords="924,249,1065,274"/>
+<area shape="rect" href="second__pass_8c.html#af969b5aef11a97160dd29f2402b35d1e" title="Generates an externals file containing the names and addresses of external symbols." alt="" coords="917,298,1072,323"/>
+<area shape="rect" href="second__pass_8c.html#a1d991b81e3a4e0eca4a867bd08cf6ecc" title="Updates the symbol offset in memory." alt="" coords="921,347,1069,373"/>
+<area shape="rect" href="second__pass_8c.html#aa33feb8d270721a8f28a90a7833937db" title="Initiates the second pass of the assembler. This function is responsible for executing the second pas..." alt="" coords="301,223,445,249"/>
+<area shape="rect" href="driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,198,253,223"/>
+<area shape="rect" href="driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,198,124,223"/>
+<area shape="rect" href="encoding_8c.html#ac462ef04efd6a452ec612a07a0e38070" title=" " alt="" coords="723,389,853,429"/>
+<area shape="rect" href="second__pass_8c.html#a36c8038b17843fb6d82d261367f7650b" title="Executes the line, in case label exists finds if it is valid and then encodes it, otherwise prints er..." alt="" coords="529,339,623,365"/>
+<area shape="rect" href="first__pass_8c.html#ae3d15ca0f34657e4715827c439839e1e" title="This function implements the first pass algorithm." alt="" coords="739,109,837,134"/>
+<area shape="rect" href="second__pass_8c.html#a20c33f0cb96a55d4b805d746db5cc1cc" title="Creates output files based on the given memory buffer, path, final program status,..." alt="" coords="744,249,832,274"/>
+<area shape="rect" href="second__pass_8c.html#ab6728edfef56c073ce9792b67edd84f7" title=" " alt="" coords="707,339,869,365"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a6e873141116f3277fbe834c21b0e8055" name="a6e873141116f3277fbe834c21b0e8055"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6e873141116f3277fbe834c21b0e8055">&#9670;&#160;</a></span>symbol_node_get_next()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_symbol_table_node.html">SymbolTableNode</a> * symbol_node_get_next </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_symbol_table_node.html">SymbolTableNode</a> *&#160;</td>
+          <td class="paramname"><em>node</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Returns the next symbol table node of a given symbol table node. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">node</td><td>The symbol table node to retrieve its next node. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The next node of the given node. </dd></dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="symbol__table_8h_a6e873141116f3277fbe834c21b0e8055_icgraph.png" border="0" usemap="#asymbol__table_8h_a6e873141116f3277fbe834c21b0e8055_icgraph" alt=""/></div>
+<map name="asymbol__table_8h_a6e873141116f3277fbe834c21b0e8055_icgraph" id="asymbol__table_8h_a6e873141116f3277fbe834c21b0e8055_icgraph">
+<area shape="rect" title="Returns the next symbol table node of a given symbol table node." alt="" coords="1120,79,1276,104"/>
+<area shape="rect" href="second__pass_8c.html#a2765636e71a2da6c192eac0fa06581c1" title="Adds the decimal base address to all data and code symbols in a symbol table." alt="" coords="493,5,659,31"/>
+<area shape="rect" href="second__pass_8c.html#a2bd718eb223c109ac098038bd74150f1" title="Generates an entries file containing the entry symbols and their addresses The function generates an ..." alt="" coords="924,53,1065,79"/>
+<area shape="rect" href="second__pass_8c.html#af969b5aef11a97160dd29f2402b35d1e" title="Generates an externals file containing the names and addresses of external symbols." alt="" coords="917,103,1072,128"/>
+<area shape="rect" href="second__pass_8c.html#a1d991b81e3a4e0eca4a867bd08cf6ecc" title="Updates the symbol offset in memory." alt="" coords="921,152,1069,177"/>
+<area shape="rect" href="second__pass_8c.html#aa33feb8d270721a8f28a90a7833937db" title="Initiates the second pass of the assembler. This function is responsible for executing the second pas..." alt="" coords="301,59,445,84"/>
+<area shape="rect" href="driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,59,253,84"/>
+<area shape="rect" href="driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,59,124,84"/>
+<area shape="rect" href="second__pass_8c.html#a20c33f0cb96a55d4b805d746db5cc1cc" title="Creates output files based on the given memory buffer, path, final program status,..." alt="" coords="744,59,832,84"/>
+<area shape="rect" href="second__pass_8c.html#ab6728edfef56c073ce9792b67edd84f7" title=" " alt="" coords="707,145,869,171"/>
+<area shape="rect" href="second__pass_8c.html#a36c8038b17843fb6d82d261367f7650b" title="Executes the line, in case label exists finds if it is valid and then encodes it, otherwise prints er..." alt="" coords="529,121,623,147"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a2840400cc50c2f9529dc49c92cf47db9" name="a2840400cc50c2f9529dc49c92cf47db9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2840400cc50c2f9529dc49c92cf47db9">&#9670;&#160;</a></span>symbol_node_get_sym()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_symbol.html">Symbol</a> * symbol_node_get_sym </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_symbol_table_node.html">SymbolTableNode</a> *&#160;</td>
+          <td class="paramname"><em>node</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Returns the symbol of a given symbol table node. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">node</td><td>The symbol table node to retrieve its symbol. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The symbol of the node. </dd></dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="symbol__table_8h_a2840400cc50c2f9529dc49c92cf47db9_icgraph.png" border="0" usemap="#asymbol__table_8h_a2840400cc50c2f9529dc49c92cf47db9_icgraph" alt=""/></div>
+<map name="asymbol__table_8h_a2840400cc50c2f9529dc49c92cf47db9_icgraph" id="asymbol__table_8h_a2840400cc50c2f9529dc49c92cf47db9_icgraph">
+<area shape="rect" title="Returns the symbol of a given symbol table node." alt="" coords="1120,223,1276,249"/>
+<area shape="rect" href="second__pass_8c.html#a2765636e71a2da6c192eac0fa06581c1" title="Adds the decimal base address to all data and code symbols in a symbol table." alt="" coords="493,198,659,223"/>
+<area shape="rect" href="encoding_8c.html#a6f027af72fd18bdeb31711ada8e669aa" title=" " alt="" coords="942,397,1047,422"/>
+<area shape="rect" href="first__pass_8c.html#a87a70eef7a9fd6d62eb27a5a2127739e" title="This function is used to process .data lines. It also encodes the memory if possible into the memoryB..." alt="" coords="929,133,1060,173"/>
+<area shape="rect" href="first__pass_8c.html#ac0da628ba463b754effc2e88e611d4dd" title="This function is used to process lines with label definitions. It also encodes the memory if possible..." alt="" coords="929,5,1060,45"/>
+<area shape="rect" href="first__pass_8c.html#aa0a39d1f94314921231c97245e6eb551" title="This function is used to process .entry lines. It also encodes the memory if possible into the memory..." alt="" coords="929,69,1060,109"/>
+<area shape="rect" href="second__pass_8c.html#a2bd718eb223c109ac098038bd74150f1" title="Generates an entries file containing the entry symbols and their addresses The function generates an ..." alt="" coords="924,249,1065,274"/>
+<area shape="rect" href="second__pass_8c.html#af969b5aef11a97160dd29f2402b35d1e" title="Generates an externals file containing the names and addresses of external symbols." alt="" coords="917,298,1072,323"/>
+<area shape="rect" href="second__pass_8c.html#a1d991b81e3a4e0eca4a867bd08cf6ecc" title="Updates the symbol offset in memory." alt="" coords="921,347,1069,373"/>
+<area shape="rect" href="second__pass_8c.html#aa33feb8d270721a8f28a90a7833937db" title="Initiates the second pass of the assembler. This function is responsible for executing the second pas..." alt="" coords="301,223,445,249"/>
+<area shape="rect" href="driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,198,253,223"/>
+<area shape="rect" href="driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,198,124,223"/>
+<area shape="rect" href="encoding_8c.html#ac462ef04efd6a452ec612a07a0e38070" title=" " alt="" coords="723,389,853,429"/>
+<area shape="rect" href="second__pass_8c.html#a36c8038b17843fb6d82d261367f7650b" title="Executes the line, in case label exists finds if it is valid and then encodes it, otherwise prints er..." alt="" coords="529,339,623,365"/>
+<area shape="rect" href="first__pass_8c.html#ae3d15ca0f34657e4715827c439839e1e" title="This function implements the first pass algorithm." alt="" coords="739,109,837,134"/>
+<area shape="rect" href="second__pass_8c.html#a20c33f0cb96a55d4b805d746db5cc1cc" title="Creates output files based on the given memory buffer, path, final program status,..." alt="" coords="744,249,832,274"/>
+<area shape="rect" href="second__pass_8c.html#ab6728edfef56c073ce9792b67edd84f7" title=" " alt="" coords="707,339,869,365"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a65446ec1e574e9239c16bdda937bda48" name="a65446ec1e574e9239c16bdda937bda48"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a65446ec1e574e9239c16bdda937bda48">&#9670;&#160;</a></span>symbol_set_counter()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void symbol_set_counter </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_symbol.html">Symbol</a> *&#160;</td>
+          <td class="paramname"><em>sym</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>num</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Sets the counter of a given symbol to a new value. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">sym</td><td>The symbol to set its counter. </td></tr>
+    <tr><td class="paramname">num</td><td>The new value of the counter. </td></tr>
+  </table>
+  </dd>
+</dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="symbol__table_8h_a65446ec1e574e9239c16bdda937bda48_icgraph.png" border="0" usemap="#asymbol__table_8h_a65446ec1e574e9239c16bdda937bda48_icgraph" alt=""/></div>
+<map name="asymbol__table_8h_a65446ec1e574e9239c16bdda937bda48_icgraph" id="asymbol__table_8h_a65446ec1e574e9239c16bdda937bda48_icgraph">
+<area shape="rect" title="Sets the counter of a given symbol to a new value." alt="" coords="1045,31,1184,56"/>
+<area shape="rect" href="second__pass_8c.html#a2765636e71a2da6c192eac0fa06581c1" title="Adds the decimal base address to all data and code symbols in a symbol table." alt="" coords="636,5,801,31"/>
+<area shape="rect" href="second__pass_8c.html#a1d991b81e3a4e0eca4a867bd08cf6ecc" title="Updates the symbol offset in memory." alt="" coords="849,56,997,81"/>
+<area shape="rect" href="second__pass_8c.html#aa33feb8d270721a8f28a90a7833937db" title="Initiates the second pass of the assembler. This function is responsible for executing the second pas..." alt="" coords="301,31,445,56"/>
+<area shape="rect" href="driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,31,253,56"/>
+<area shape="rect" href="driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,31,124,56"/>
+<area shape="rect" href="second__pass_8c.html#ab6728edfef56c073ce9792b67edd84f7" title=" " alt="" coords="637,56,800,81"/>
+<area shape="rect" href="second__pass_8c.html#a36c8038b17843fb6d82d261367f7650b" title="Executes the line, in case label exists finds if it is valid and then encodes it, otherwise prints er..." alt="" coords="493,56,588,81"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a01109b630db52c46d594ea3062a3b8c8" name="a01109b630db52c46d594ea3062a3b8c8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a01109b630db52c46d594ea3062a3b8c8">&#9670;&#160;</a></span>symbol_table_destroy()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void symbol_table_destroy </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_symbol_table.html">SymbolTable</a> **&#160;</td>
+          <td class="paramname"><em>table</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Destroy a symbol table. This frees all memory associated with the symbol table and the table itself. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">table</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="symbol__table_8h_a01109b630db52c46d594ea3062a3b8c8_icgraph.png" border="0" usemap="#asymbol__table_8h_a01109b630db52c46d594ea3062a3b8c8_icgraph" alt=""/></div>
+<map name="asymbol__table_8h_a01109b630db52c46d594ea3062a3b8c8_icgraph" id="asymbol__table_8h_a01109b630db52c46d594ea3062a3b8c8_icgraph">
+<area shape="rect" title="Destroy a symbol table. This frees all memory associated with the symbol table and the table itself." alt="" coords="413,5,563,31"/>
+<area shape="rect" href="driver_8c.html#af3e60266c17733333c492f296058f896" title="Called when the module is unloaded. Destroys all memory allocated by the module. This is the last fun..." alt="" coords="301,5,365,31"/>
+<area shape="rect" href="driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,5,253,31"/>
+<area shape="rect" href="driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,5,124,31"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a6205e294b3148c8038a09384458ecd6d" name="a6205e294b3148c8038a09384458ecd6d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6205e294b3148c8038a09384458ecd6d">&#9670;&#160;</a></span>symbol_table_get_completed()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool symbol_table_get_completed </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_symbol_table.html">SymbolTable</a> *&#160;</td>
+          <td class="paramname"><em>table</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Checks if the symbol table is completed (i.e. all symbols are defined). </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">table</td><td>The symbol table to check. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if the symbol table is completed, false otherwise. </dd></dl>
+
+</div>
+</div>
+<a id="ac3bac8997acae526e27a0636744ddcf0" name="ac3bac8997acae526e27a0636744ddcf0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac3bac8997acae526e27a0636744ddcf0">&#9670;&#160;</a></span>symbol_table_get_hasEntries()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool symbol_table_get_hasEntries </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_symbol_table.html">SymbolTable</a> *&#160;</td>
+          <td class="paramname"><em>table</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Returns whether a given symbol table has entry symbols or not. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">table</td><td>The symbol table to check if it has entry symbols. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if the table has entry symbols, false otherwise. </dd></dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="symbol__table_8h_ac3bac8997acae526e27a0636744ddcf0_icgraph.png" border="0" usemap="#asymbol__table_8h_ac3bac8997acae526e27a0636744ddcf0_icgraph" alt=""/></div>
+<map name="asymbol__table_8h_ac3bac8997acae526e27a0636744ddcf0_icgraph" id="asymbol__table_8h_ac3bac8997acae526e27a0636744ddcf0_icgraph">
+<area shape="rect" title="Returns whether a given symbol table has entry symbols or not." alt="" coords="629,5,823,31"/>
+<area shape="rect" href="second__pass_8c.html#a20c33f0cb96a55d4b805d746db5cc1cc" title="Creates output files based on the given memory buffer, path, final program status,..." alt="" coords="493,5,581,31"/>
+<area shape="rect" href="second__pass_8c.html#aa33feb8d270721a8f28a90a7833937db" title="Initiates the second pass of the assembler. This function is responsible for executing the second pas..." alt="" coords="301,5,445,31"/>
+<area shape="rect" href="driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,5,253,31"/>
+<area shape="rect" href="driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,5,124,31"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a54fc25f44cb91c477370ab45723384cf" name="a54fc25f44cb91c477370ab45723384cf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a54fc25f44cb91c477370ab45723384cf">&#9670;&#160;</a></span>symbol_table_get_hasExternals()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool symbol_table_get_hasExternals </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_symbol_table.html">SymbolTable</a> *&#160;</td>
+          <td class="paramname"><em>table</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Returns whether a given symbol table has external symbols or not. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">table</td><td>The symbol table to check if it has external symbols. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if the table has external symbols, false otherwise. </dd></dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="symbol__table_8h_a54fc25f44cb91c477370ab45723384cf_icgraph.png" border="0" usemap="#asymbol__table_8h_a54fc25f44cb91c477370ab45723384cf_icgraph" alt=""/></div>
+<map name="asymbol__table_8h_a54fc25f44cb91c477370ab45723384cf_icgraph" id="asymbol__table_8h_a54fc25f44cb91c477370ab45723384cf_icgraph">
+<area shape="rect" title="Returns whether a given symbol table has external symbols or not." alt="" coords="629,5,836,31"/>
+<area shape="rect" href="second__pass_8c.html#a20c33f0cb96a55d4b805d746db5cc1cc" title="Creates output files based on the given memory buffer, path, final program status,..." alt="" coords="493,5,581,31"/>
+<area shape="rect" href="second__pass_8c.html#aa33feb8d270721a8f28a90a7833937db" title="Initiates the second pass of the assembler. This function is responsible for executing the second pas..." alt="" coords="301,5,445,31"/>
+<area shape="rect" href="driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,5,253,31"/>
+<area shape="rect" href="driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,5,124,31"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a0523b2417b2ad80df56b3694f8d8cf3a" name="a0523b2417b2ad80df56b3694f8d8cf3a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0523b2417b2ad80df56b3694f8d8cf3a">&#9670;&#160;</a></span>symbol_table_get_head()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_symbol_table_node.html">SymbolTableNode</a> * symbol_table_get_head </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_symbol_table.html">SymbolTable</a> *&#160;</td>
+          <td class="paramname"><em>table</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Returns the head symbol table node of a given symbol table. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">table</td><td>The symbol table to retrieve its head node. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The head node of the symbol table. </dd></dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="symbol__table_8h_a0523b2417b2ad80df56b3694f8d8cf3a_icgraph.png" border="0" usemap="#asymbol__table_8h_a0523b2417b2ad80df56b3694f8d8cf3a_icgraph" alt=""/></div>
+<map name="asymbol__table_8h_a0523b2417b2ad80df56b3694f8d8cf3a_icgraph" id="asymbol__table_8h_a0523b2417b2ad80df56b3694f8d8cf3a_icgraph">
+<area shape="rect" title="Returns the head symbol table node of a given symbol table." alt="" coords="1120,79,1279,104"/>
+<area shape="rect" href="second__pass_8c.html#a2765636e71a2da6c192eac0fa06581c1" title="Adds the decimal base address to all data and code symbols in a symbol table." alt="" coords="493,5,659,31"/>
+<area shape="rect" href="second__pass_8c.html#a2bd718eb223c109ac098038bd74150f1" title="Generates an entries file containing the entry symbols and their addresses The function generates an ..." alt="" coords="924,53,1065,79"/>
+<area shape="rect" href="second__pass_8c.html#af969b5aef11a97160dd29f2402b35d1e" title="Generates an externals file containing the names and addresses of external symbols." alt="" coords="917,103,1072,128"/>
+<area shape="rect" href="second__pass_8c.html#a1d991b81e3a4e0eca4a867bd08cf6ecc" title="Updates the symbol offset in memory." alt="" coords="921,152,1069,177"/>
+<area shape="rect" href="second__pass_8c.html#aa33feb8d270721a8f28a90a7833937db" title="Initiates the second pass of the assembler. This function is responsible for executing the second pas..." alt="" coords="301,59,445,84"/>
+<area shape="rect" href="driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,59,253,84"/>
+<area shape="rect" href="driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,59,124,84"/>
+<area shape="rect" href="second__pass_8c.html#a20c33f0cb96a55d4b805d746db5cc1cc" title="Creates output files based on the given memory buffer, path, final program status,..." alt="" coords="744,59,832,84"/>
+<area shape="rect" href="second__pass_8c.html#ab6728edfef56c073ce9792b67edd84f7" title=" " alt="" coords="707,145,869,171"/>
+<area shape="rect" href="second__pass_8c.html#a36c8038b17843fb6d82d261367f7650b" title="Executes the line, in case label exists finds if it is valid and then encodes it, otherwise prints er..." alt="" coords="529,121,623,147"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a8a96f77da581f5af4a4bbddc0bffc59b" name="a8a96f77da581f5af4a4bbddc0bffc59b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8a96f77da581f5af4a4bbddc0bffc59b">&#9670;&#160;</a></span>symbol_table_get_numOfSym()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int symbol_table_get_numOfSym </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_symbol_table.html">SymbolTable</a> *&#160;</td>
+          <td class="paramname"><em>table</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Returns the amount of symbols in a given symbol table. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">table</td><td>The symbol table to retrieve its amount of symbols. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The amount of symbols in the table. </dd></dl>
+
+</div>
+</div>
+<a id="a624ea37c6a5cf0b5fa02918e30a4ad86" name="a624ea37c6a5cf0b5fa02918e30a4ad86"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a624ea37c6a5cf0b5fa02918e30a4ad86">&#9670;&#160;</a></span>symbol_table_get_tail()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_symbol_table_node.html">SymbolTableNode</a> * symbol_table_get_tail </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_symbol_table.html">SymbolTable</a> *&#160;</td>
+          <td class="paramname"><em>table</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Returns the tail symbol table node of a given symbol table. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">table</td><td>The symbol table to retrieve its tail node. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The tail node of the symbol table. </dd></dl>
+
+</div>
+</div>
+<a id="af7ceb2c0ffe3e3ea80e925ba655c3710" name="af7ceb2c0ffe3e3ea80e925ba655c3710"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af7ceb2c0ffe3e3ea80e925ba655c3710">&#9670;&#160;</a></span>symbol_table_insert_symbol()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void symbol_table_insert_symbol </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_symbol_table.html">SymbolTable</a> *&#160;</td>
+          <td class="paramname"><em>table</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_symbol_table_node.html">SymbolTableNode</a> *&#160;</td>
+          <td class="paramname"><em>symbol</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Insert a symbol into the table. This is used to insert an entry into a symbol table. The table must be sorted by insertion time and sorted by number of entries. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">table</td><td></td></tr>
+    <tr><td class="paramname">symbol</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="symbol__table_8h_af7ceb2c0ffe3e3ea80e925ba655c3710_icgraph.png" border="0" usemap="#asymbol__table_8h_af7ceb2c0ffe3e3ea80e925ba655c3710_icgraph" alt=""/></div>
+<map name="asymbol__table_8h_af7ceb2c0ffe3e3ea80e925ba655c3710_icgraph" id="asymbol__table_8h_af7ceb2c0ffe3e3ea80e925ba655c3710_icgraph">
+<area shape="rect" title="Insert a symbol into the table. This is used to insert an entry into a symbol table...." alt="" coords="1043,165,1181,205"/>
+<area shape="rect" href="first__pass_8c.html#a87a70eef7a9fd6d62eb27a5a2127739e" title="This function is used to process .data lines. It also encodes the memory if possible into the memoryB..." alt="" coords="855,5,986,45"/>
+<area shape="rect" href="first__pass_8c.html#ac0da628ba463b754effc2e88e611d4dd" title="This function is used to process lines with label definitions. It also encodes the memory if possible..." alt="" coords="855,69,986,109"/>
+<area shape="rect" href="first__pass_8c.html#aa0a39d1f94314921231c97245e6eb551" title="This function is used to process .entry lines. It also encodes the memory if possible into the memory..." alt="" coords="855,133,986,173"/>
+<area shape="rect" href="first__pass_8c.html#accedad2dc6b0e81f160e2201f4f2b1d3" title="This function is used to process .extern lines. It also encodes the memory if possible into the memor..." alt="" coords="855,197,986,237"/>
+<area shape="rect" href="first__pass_8c.html#a932fa602127543d4c7b4e5f4b64b9138" title="This function is used to process .string lines. It also encodes the memory if possible into the memor..." alt="" coords="855,261,986,301"/>
+<area shape="rect" href="second__pass_8c.html#a1d991b81e3a4e0eca4a867bd08cf6ecc" title="Updates the symbol offset in memory." alt="" coords="847,326,995,351"/>
+<area shape="rect" href="first__pass_8c.html#ae3d15ca0f34657e4715827c439839e1e" title="This function implements the first pass algorithm." alt="" coords="668,173,767,198"/>
+<area shape="rect" href="driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,211,253,237"/>
+<area shape="rect" href="driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,211,124,237"/>
+<area shape="rect" href="second__pass_8c.html#ab6728edfef56c073ce9792b67edd84f7" title=" " alt="" coords="636,289,799,314"/>
+<area shape="rect" href="second__pass_8c.html#a36c8038b17843fb6d82d261367f7650b" title="Executes the line, in case label exists finds if it is valid and then encodes it, otherwise prints er..." alt="" coords="493,254,588,279"/>
+<area shape="rect" href="second__pass_8c.html#aa33feb8d270721a8f28a90a7833937db" title="Initiates the second pass of the assembler. This function is responsible for executing the second pas..." alt="" coords="301,237,445,262"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a89500f95e0d429616157b09668f1da29" name="a89500f95e0d429616157b09668f1da29"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a89500f95e0d429616157b09668f1da29">&#9670;&#160;</a></span>symbol_table_is_empty()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool symbol_table_is_empty </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_symbol_table.html">SymbolTable</a> *&#160;</td>
+          <td class="paramname"><em>table</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Check if a symbol table is empty. This is used to detect circular references in the symbol table. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">table</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true if the symbol table is empty false otherwise. Note that the caller must have obtained the lock before calling this </dd></dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="symbol__table_8h_a89500f95e0d429616157b09668f1da29_icgraph.png" border="0" usemap="#asymbol__table_8h_a89500f95e0d429616157b09668f1da29_icgraph" alt=""/></div>
+<map name="asymbol__table_8h_a89500f95e0d429616157b09668f1da29_icgraph" id="asymbol__table_8h_a89500f95e0d429616157b09668f1da29_icgraph">
+<area shape="rect" title="Check if a symbol table is empty. This is used to detect circular references in the symbol table." alt="" coords="1229,173,1388,198"/>
+<area shape="rect" href="symbol__table_8c.html#af7ceb2c0ffe3e3ea80e925ba655c3710" title="Insert a symbol into the table. This is used to insert an entry into a symbol table...." alt="" coords="1043,165,1181,205"/>
+<area shape="rect" href="first__pass_8c.html#a87a70eef7a9fd6d62eb27a5a2127739e" title="This function is used to process .data lines. It also encodes the memory if possible into the memoryB..." alt="" coords="855,5,986,45"/>
+<area shape="rect" href="first__pass_8c.html#ac0da628ba463b754effc2e88e611d4dd" title="This function is used to process lines with label definitions. It also encodes the memory if possible..." alt="" coords="855,69,986,109"/>
+<area shape="rect" href="first__pass_8c.html#aa0a39d1f94314921231c97245e6eb551" title="This function is used to process .entry lines. It also encodes the memory if possible into the memory..." alt="" coords="855,133,986,173"/>
+<area shape="rect" href="first__pass_8c.html#accedad2dc6b0e81f160e2201f4f2b1d3" title="This function is used to process .extern lines. It also encodes the memory if possible into the memor..." alt="" coords="855,197,986,237"/>
+<area shape="rect" href="first__pass_8c.html#a932fa602127543d4c7b4e5f4b64b9138" title="This function is used to process .string lines. It also encodes the memory if possible into the memor..." alt="" coords="855,261,986,301"/>
+<area shape="rect" href="second__pass_8c.html#a1d991b81e3a4e0eca4a867bd08cf6ecc" title="Updates the symbol offset in memory." alt="" coords="847,326,995,351"/>
+<area shape="rect" href="first__pass_8c.html#ae3d15ca0f34657e4715827c439839e1e" title="This function implements the first pass algorithm." alt="" coords="668,173,767,198"/>
+<area shape="rect" href="driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,211,253,237"/>
+<area shape="rect" href="driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,211,124,237"/>
+<area shape="rect" href="second__pass_8c.html#ab6728edfef56c073ce9792b67edd84f7" title=" " alt="" coords="636,289,799,314"/>
+<area shape="rect" href="second__pass_8c.html#a36c8038b17843fb6d82d261367f7650b" title="Executes the line, in case label exists finds if it is valid and then encodes it, otherwise prints er..." alt="" coords="493,254,588,279"/>
+<area shape="rect" href="second__pass_8c.html#aa33feb8d270721a8f28a90a7833937db" title="Initiates the second pass of the assembler. This function is responsible for executing the second pas..." alt="" coords="301,237,445,262"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a1b234901d5a9c5c2e7e9194faec22915" name="a1b234901d5a9c5c2e7e9194faec22915"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1b234901d5a9c5c2e7e9194faec22915">&#9670;&#160;</a></span>symbol_table_new_node()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_symbol_table_node.html">SymbolTableNode</a> * symbol_table_new_node </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">symbolType&#160;</td>
+          <td class="paramname"><em>type</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">long&#160;</td>
+          <td class="paramname"><em>counter</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Create a new node in the symbol table. It is assumed that the name is unique and that the symbol table is not modified by the caller. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">name</td><td></td></tr>
+    <tr><td class="paramname">type</td><td>- the type of the symbol ( symbolType. c... ) </td></tr>
+    <tr><td class="paramname">counter</td><td>- the counter of the symbol ( 0 for global ) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>pointer to the new node or NULL if there was an error allocating memory ( in which case a message is printed </dd></dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="symbol__table_8h_a1b234901d5a9c5c2e7e9194faec22915_icgraph.png" border="0" usemap="#asymbol__table_8h_a1b234901d5a9c5c2e7e9194faec22915_icgraph" alt=""/></div>
+<map name="asymbol__table_8h_a1b234901d5a9c5c2e7e9194faec22915_icgraph" id="asymbol__table_8h_a1b234901d5a9c5c2e7e9194faec22915_icgraph">
+<area shape="rect" title="Create a new node in the symbol table. It is assumed that the name is unique and that the symbol tabl..." alt="" coords="1043,173,1207,198"/>
+<area shape="rect" href="first__pass_8c.html#a87a70eef7a9fd6d62eb27a5a2127739e" title="This function is used to process .data lines. It also encodes the memory if possible into the memoryB..." alt="" coords="855,5,986,45"/>
+<area shape="rect" href="first__pass_8c.html#ac0da628ba463b754effc2e88e611d4dd" title="This function is used to process lines with label definitions. It also encodes the memory if possible..." alt="" coords="855,69,986,109"/>
+<area shape="rect" href="first__pass_8c.html#aa0a39d1f94314921231c97245e6eb551" title="This function is used to process .entry lines. It also encodes the memory if possible into the memory..." alt="" coords="855,133,986,173"/>
+<area shape="rect" href="first__pass_8c.html#accedad2dc6b0e81f160e2201f4f2b1d3" title="This function is used to process .extern lines. It also encodes the memory if possible into the memor..." alt="" coords="855,197,986,237"/>
+<area shape="rect" href="first__pass_8c.html#a932fa602127543d4c7b4e5f4b64b9138" title="This function is used to process .string lines. It also encodes the memory if possible into the memor..." alt="" coords="855,261,986,301"/>
+<area shape="rect" href="second__pass_8c.html#a1d991b81e3a4e0eca4a867bd08cf6ecc" title="Updates the symbol offset in memory." alt="" coords="847,326,995,351"/>
+<area shape="rect" href="first__pass_8c.html#ae3d15ca0f34657e4715827c439839e1e" title="This function implements the first pass algorithm." alt="" coords="668,173,767,198"/>
+<area shape="rect" href="driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,211,253,237"/>
+<area shape="rect" href="driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,211,124,237"/>
+<area shape="rect" href="second__pass_8c.html#ab6728edfef56c073ce9792b67edd84f7" title=" " alt="" coords="636,289,799,314"/>
+<area shape="rect" href="second__pass_8c.html#a36c8038b17843fb6d82d261367f7650b" title="Executes the line, in case label exists finds if it is valid and then encodes it, otherwise prints er..." alt="" coords="493,254,588,279"/>
+<area shape="rect" href="second__pass_8c.html#aa33feb8d270721a8f28a90a7833937db" title="Initiates the second pass of the assembler. This function is responsible for executing the second pas..." alt="" coords="301,237,445,262"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a53ee66f1de6f20b68a130922a34221d6" name="a53ee66f1de6f20b68a130922a34221d6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a53ee66f1de6f20b68a130922a34221d6">&#9670;&#160;</a></span>symbol_table_new_table()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_symbol_table.html">SymbolTable</a> * symbol_table_new_table </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Create a new symbol table. The table is empty after this function returns. This can be used to create an uninitialized table without allocating it for the first time. </p>
+<dl class="section return"><dt>Returns</dt><dd>A pointer to the newly allocated symbol table. NULL on memory exhaustion or if there is insufficient memory </dd></dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="symbol__table_8h_a53ee66f1de6f20b68a130922a34221d6_icgraph.png" border="0" usemap="#asymbol__table_8h_a53ee66f1de6f20b68a130922a34221d6_icgraph" alt=""/></div>
+<map name="asymbol__table_8h_a53ee66f1de6f20b68a130922a34221d6_icgraph" id="asymbol__table_8h_a53ee66f1de6f20b68a130922a34221d6_icgraph">
+<area shape="rect" title="Create a new symbol table. The table is empty after this function returns. This can be used to create..." alt="" coords="460,5,624,31"/>
+<area shape="rect" href="driver_8c.html#ae0747e80fcf537740f8c16df476df560" title="Called when the driver is initialized. This is where we initialize the data structures that are used ..." alt="" coords="301,5,412,31"/>
+<area shape="rect" href="driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,5,253,31"/>
+<area shape="rect" href="driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,5,124,31"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="aac7ab4a84f5dd5b8f88a9e5bd2d30b38" name="aac7ab4a84f5dd5b8f88a9e5bd2d30b38"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aac7ab4a84f5dd5b8f88a9e5bd2d30b38">&#9670;&#160;</a></span>symbol_table_search_symbol()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_symbol_table_node.html">SymbolTableNode</a> * symbol_table_search_symbol </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_symbol_table.html">SymbolTable</a> *&#160;</td>
+          <td class="paramname"><em>table</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>name</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Search a symbol table. This is used to find a symbol by name. If the symbol is found it is returned otherwise NULL is returned. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">table</td><td></td></tr>
+    <tr><td class="paramname">name</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>pointer to the symbol table node that matches the name or NULL if not found. Note that the caller must free the node </dd></dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="symbol__table_8h_aac7ab4a84f5dd5b8f88a9e5bd2d30b38_icgraph.png" border="0" usemap="#asymbol__table_8h_aac7ab4a84f5dd5b8f88a9e5bd2d30b38_icgraph" alt=""/></div>
+<map name="asymbol__table_8h_aac7ab4a84f5dd5b8f88a9e5bd2d30b38_icgraph" id="asymbol__table_8h_aac7ab4a84f5dd5b8f88a9e5bd2d30b38_icgraph">
+<area shape="rect" title="Search a symbol table. This is used to find a symbol by name. If the symbol is found it is returned o..." alt="" coords="1036,123,1181,163"/>
+<area shape="rect" href="symbol__table_8c.html#aa9e9364ffc547a159df48e179e960d22" title="Check if a symbol with the given name exists in the symbol table and has a specific type." alt="" coords="819,130,988,155"/>
+<area shape="rect" href="first__pass_8c.html#aa0a39d1f94314921231c97245e6eb551" title="This function is used to process .entry lines. It also encodes the memory if possible into the memory..." alt="" coords="640,60,771,100"/>
+<area shape="rect" href="encoding_8c.html#a6f027af72fd18bdeb31711ada8e669aa" title=" " alt="" coords="851,251,956,277"/>
+<area shape="rect" href="first__pass_8c.html#a87a70eef7a9fd6d62eb27a5a2127739e" title="This function is used to process .data lines. It also encodes the memory if possible into the memoryB..." alt="" coords="640,188,771,228"/>
+<area shape="rect" href="first__pass_8c.html#ac0da628ba463b754effc2e88e611d4dd" title="This function is used to process lines with label definitions. It also encodes the memory if possible..." alt="" coords="838,5,969,45"/>
+<area shape="rect" href="first__pass_8c.html#accedad2dc6b0e81f160e2201f4f2b1d3" title="This function is used to process .extern lines. It also encodes the memory if possible into the memor..." alt="" coords="640,124,771,164"/>
+<area shape="rect" href="first__pass_8c.html#ae3d15ca0f34657e4715827c439839e1e" title="This function implements the first pass algorithm." alt="" coords="493,131,592,157"/>
+<area shape="rect" href="driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,185,253,210"/>
+<area shape="rect" href="driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,185,124,210"/>
+<area shape="rect" href="encoding_8c.html#ac462ef04efd6a452ec612a07a0e38070" title=" " alt="" coords="640,252,771,292"/>
+<area shape="rect" href="second__pass_8c.html#a36c8038b17843fb6d82d261367f7650b" title="Executes the line, in case label exists finds if it is valid and then encodes it, otherwise prints er..." alt="" coords="495,249,590,274"/>
+<area shape="rect" href="second__pass_8c.html#aa33feb8d270721a8f28a90a7833937db" title="Initiates the second pass of the assembler. This function is responsible for executing the second pas..." alt="" coords="301,210,445,235"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a481f1684949bafc5d4487a12287a420f" name="a481f1684949bafc5d4487a12287a420f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a481f1684949bafc5d4487a12287a420f">&#9670;&#160;</a></span>symbol_table_search_symbol_bool()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool symbol_table_search_symbol_bool </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_symbol_table.html">SymbolTable</a> *&#160;</td>
+          <td class="paramname"><em>table</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>name</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Search a symbol table for a symbol with a given name. This is used to determine if a symbol is defined in the symbol table but does not have to be loaded into memory. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">table</td><td></td></tr>
+    <tr><td class="paramname">name</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>TRUE if the symbol is defined in the symbol table FALSE otherwise. Note that the return value is undefined if the symbol is not defined </dd></dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="symbol__table_8h_a481f1684949bafc5d4487a12287a420f_icgraph.png" border="0" usemap="#asymbol__table_8h_a481f1684949bafc5d4487a12287a420f_icgraph" alt=""/></div>
+<map name="asymbol__table_8h_a481f1684949bafc5d4487a12287a420f_icgraph" id="asymbol__table_8h_a481f1684949bafc5d4487a12287a420f_icgraph">
+<area shape="rect" title="Search a symbol table for a symbol with a given name. This is used to determine if a symbol is define..." alt="" coords="1015,101,1160,141"/>
+<area shape="rect" href="first__pass_8c.html#aa0a39d1f94314921231c97245e6eb551" title="This function is used to process .entry lines. It also encodes the memory if possible into the memory..." alt="" coords="836,5,967,45"/>
+<area shape="rect" href="first__pass_8c.html#accedad2dc6b0e81f160e2201f4f2b1d3" title="This function is used to process .extern lines. It also encodes the memory if possible into the memor..." alt="" coords="836,69,967,109"/>
+<area shape="rect" href="first__pass_8c.html#a932fa602127543d4c7b4e5f4b64b9138" title="This function is used to process .string lines. It also encodes the memory if possible into the memor..." alt="" coords="836,133,967,173"/>
+<area shape="rect" href="second__pass_8c.html#ab6fec0fc93173020c37fc75727222d6a" title="Check if a label exists in the given line and update debug information accordingly." alt="" coords="843,198,960,223"/>
+<area shape="rect" href="first__pass_8c.html#ae3d15ca0f34657e4715827c439839e1e" title="This function implements the first pass algorithm." alt="" coords="663,109,761,134"/>
+<area shape="rect" href="driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,151,253,177"/>
+<area shape="rect" href="driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,151,124,177"/>
+<area shape="rect" href="second__pass_8c.html#a6b999b1b1244fbcf34f5f866b4aa3153" title="Checks whether a label exists in a line and is defined in the symbol table." alt="" coords="636,181,788,206"/>
+<area shape="rect" href="second__pass_8c.html#a36c8038b17843fb6d82d261367f7650b" title="Executes the line, in case label exists finds if it is valid and then encodes it, otherwise prints er..." alt="" coords="493,178,588,203"/>
+<area shape="rect" href="second__pass_8c.html#aa33feb8d270721a8f28a90a7833937db" title="Initiates the second pass of the assembler. This function is responsible for executing the second pas..." alt="" coords="301,177,445,202"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a90d7d34e3a0c0973d99d70819b42730a" name="a90d7d34e3a0c0973d99d70819b42730a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a90d7d34e3a0c0973d99d70819b42730a">&#9670;&#160;</a></span>symbol_table_set_completed()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void symbol_table_set_completed </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_symbol_table.html">SymbolTable</a> *&#160;</td>
+          <td class="paramname"><em>table</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>isCompleted</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Sets whether the symbol table is completed (i.e. all symbols are defined). </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">table</td><td>The symbol table to set. </td></tr>
+    <tr><td class="paramname">isCompleted</td><td>True if the symbol table is completed, false otherwise. </td></tr>
+  </table>
+  </dd>
+</dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="symbol__table_8h_a90d7d34e3a0c0973d99d70819b42730a_icgraph.png" border="0" usemap="#asymbol__table_8h_a90d7d34e3a0c0973d99d70819b42730a_icgraph" alt=""/></div>
+<map name="asymbol__table_8h_a90d7d34e3a0c0973d99d70819b42730a_icgraph" id="asymbol__table_8h_a90d7d34e3a0c0973d99d70819b42730a_icgraph">
+<area shape="rect" title="Sets whether the symbol table is completed (i.e. all symbols are defined)." alt="" coords="448,5,639,31"/>
+<area shape="rect" href="first__pass_8c.html#ae3d15ca0f34657e4715827c439839e1e" title="This function implements the first pass algorithm." alt="" coords="301,5,400,31"/>
+<area shape="rect" href="driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,5,253,31"/>
+<area shape="rect" href="driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,5,124,31"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a6e38e8a0b4e028922c9224a25cf38d91" name="a6e38e8a0b4e028922c9224a25cf38d91"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6e38e8a0b4e028922c9224a25cf38d91">&#9670;&#160;</a></span>symbol_table_set_hasEntries()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void symbol_table_set_hasEntries </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_symbol_table.html">SymbolTable</a> *&#160;</td>
+          <td class="paramname"><em>table</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>hasEntries</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Sets whether the symbol table has entry symbols. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">table</td><td>The symbol table to set. </td></tr>
+    <tr><td class="paramname">hasEntries</td><td>True if the symbol table has entry symbols, false otherwise. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a4eb3f39fcd6579db7bd799bf689e3a8d" name="a4eb3f39fcd6579db7bd799bf689e3a8d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4eb3f39fcd6579db7bd799bf689e3a8d">&#9670;&#160;</a></span>symbol_table_set_hasExternals()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void symbol_table_set_hasExternals </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_symbol_table.html">SymbolTable</a> *&#160;</td>
+          <td class="paramname"><em>table</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>hasExternals</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Sets whether a given symbol table has external symbols or not. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">table</td><td>The symbol table to set whether it has external symbols or not. </td></tr>
+    <tr><td class="paramname">hasExternals</td><td>The new value of whether the table has external symbols or not. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="abdcd7fd5b1561cfbc7d34af565d99c41" name="abdcd7fd5b1561cfbc7d34af565d99c41"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abdcd7fd5b1561cfbc7d34af565d99c41">&#9670;&#160;</a></span>symbol_table_set_numOfSym()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void symbol_table_set_numOfSym </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_symbol_table.html">SymbolTable</a> *&#160;</td>
+          <td class="paramname"><em>table</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>num</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Sets the amount of symbols in a given symbol table to a new value. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">table</td><td>The symbol table to set its amount of symbols. </td></tr>
+    <tr><td class="paramname">num</td><td>The new value of the amount of symbols. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ae0c6da9509e48a312d5c5d63efc22c9f" name="ae0c6da9509e48a312d5c5d63efc22c9f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae0c6da9509e48a312d5c5d63efc22c9f">&#9670;&#160;</a></span>update_amount_of_items()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int update_amount_of_items </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_symbol_table.html">SymbolTable</a> *&#160;</td>
+          <td class="paramname"><em>table</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Updates the amount of items in the symbol table. This is done by taking the number of items in the symbol table and counting them. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">table</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>1 if the table is larger than the amount of items 0 if it is equal to the amount of </dd></dl>
+
+</div>
+</div>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+</small></address>
 </body>
 </html>

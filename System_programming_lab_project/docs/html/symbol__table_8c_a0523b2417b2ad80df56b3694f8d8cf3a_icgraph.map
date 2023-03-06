@@ -1,0 +1,13 @@
+<map id="symbol_table_get_head" name="symbol_table_get_head">
+<area shape="rect" id="node1" title="Returns the head symbol table node of a given symbol table." alt="" coords="1120,79,1279,104"/>
+<area shape="rect" id="node2" href="$second__pass_8c.html#a2765636e71a2da6c192eac0fa06581c1" title="Adds the decimal base address to all data and code symbols in a symbol table." alt="" coords="493,5,659,31"/>
+<area shape="rect" id="node6" href="$second__pass_8c.html#a2bd718eb223c109ac098038bd74150f1" title="Generates an entries file containing the entry symbols and their addresses The function generates an ..." alt="" coords="924,53,1065,79"/>
+<area shape="rect" id="node8" href="$second__pass_8c.html#af969b5aef11a97160dd29f2402b35d1e" title="Generates an externals file containing the names and addresses of external symbols." alt="" coords="917,103,1072,128"/>
+<area shape="rect" id="node9" href="$second__pass_8c.html#a1d991b81e3a4e0eca4a867bd08cf6ecc" title="Updates the symbol offset in memory." alt="" coords="921,152,1069,177"/>
+<area shape="rect" id="node3" href="$second__pass_8c.html#aa33feb8d270721a8f28a90a7833937db" title="Initiates the second pass of the assembler. This function is responsible for executing the second pas..." alt="" coords="301,59,445,84"/>
+<area shape="rect" id="node4" href="$driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,59,253,84"/>
+<area shape="rect" id="node5" href="$driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,59,124,84"/>
+<area shape="rect" id="node7" href="$second__pass_8c.html#a20c33f0cb96a55d4b805d746db5cc1cc" title="Creates output files based on the given memory buffer, path, final program status,..." alt="" coords="744,59,832,84"/>
+<area shape="rect" id="node10" href="$second__pass_8c.html#ab6728edfef56c073ce9792b67edd84f7" title=" " alt="" coords="707,145,869,171"/>
+<area shape="rect" id="node11" href="$second__pass_8c.html#a36c8038b17843fb6d82d261367f7650b" title="Executes the line, in case label exists finds if it is valid and then encodes it, otherwise prints er..." alt="" coords="529,121,623,147"/>
+</map>

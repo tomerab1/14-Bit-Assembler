@@ -1,0 +1,12 @@
+<map id="open_file" name="open_file">
+<area shape="rect" id="node1" title="Opens a file for reading. If there is an error the program exits with EXIT_FAILURE...." alt="" coords="843,111,916,137"/>
+<area shape="rect" id="node2" href="$first__pass_8c.html#ae3d15ca0f34657e4715827c439839e1e" title="This function implements the first pass algorithm." alt="" coords="493,25,592,50"/>
+<area shape="rect" id="node5" href="$second__pass_8c.html#a2bd718eb223c109ac098038bd74150f1" title="Generates an entries file containing the entry symbols and their addresses The function generates an ..." alt="" coords="647,37,788,62"/>
+<area shape="rect" id="node7" href="$second__pass_8c.html#aa33feb8d270721a8f28a90a7833937db" title="Initiates the second pass of the assembler. This function is responsible for executing the second pas..." alt="" coords="301,149,445,174"/>
+<area shape="rect" id="node8" href="$second__pass_8c.html#af969b5aef11a97160dd29f2402b35d1e" title="Generates an externals file containing the names and addresses of external symbols." alt="" coords="640,86,795,111"/>
+<area shape="rect" id="node9" href="$second__pass_8c.html#a6e1b71ceed1623c7e01e75caf66005db" title="Generates an object file from the data in a memory buffer." alt="" coords="649,135,786,161"/>
+<area shape="rect" id="node10" href="$pre__assembler_8c.html#abab57bfbc7706d8811056386ff9a4cd6" title="This function starts the pre&#45;assembler phase of expanding the macros." alt="" coords="303,198,443,223"/>
+<area shape="rect" id="node3" href="$driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,149,253,174"/>
+<area shape="rect" id="node4" href="$driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,149,124,174"/>
+<area shape="rect" id="node6" href="$second__pass_8c.html#a20c33f0cb96a55d4b805d746db5cc1cc" title="Creates output files based on the given memory buffer, path, final program status,..." alt="" coords="499,111,587,137"/>
+</map>

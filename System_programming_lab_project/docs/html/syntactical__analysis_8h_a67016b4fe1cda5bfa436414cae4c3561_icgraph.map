@@ -1,0 +1,12 @@
+<map id="validate_syntax" name="validate_syntax">
+<area shape="rect" id="node1" title="Validate the syntax at the current position. This is a wrapper around validate_syntax_opcode () valid..." alt="" coords="627,173,737,198"/>
+<area shape="rect" id="node2" href="$first__pass_8c.html#a40eeac60c34220893b004549546acb2d" title="This function is used to process lines with opcodes and no label definitions. It also encodes the mem..." alt="" coords="448,5,579,45"/>
+<area shape="rect" id="node6" href="$first__pass_8c.html#a87a70eef7a9fd6d62eb27a5a2127739e" title="This function is used to process .data lines. It also encodes the memory if possible into the memoryB..." alt="" coords="448,69,579,109"/>
+<area shape="rect" id="node7" href="$first__pass_8c.html#ac0da628ba463b754effc2e88e611d4dd" title="This function is used to process lines with label definitions. It also encodes the memory if possible..." alt="" coords="448,133,579,173"/>
+<area shape="rect" id="node8" href="$first__pass_8c.html#aa0a39d1f94314921231c97245e6eb551" title="This function is used to process .entry lines. It also encodes the memory if possible into the memory..." alt="" coords="448,197,579,237"/>
+<area shape="rect" id="node9" href="$first__pass_8c.html#accedad2dc6b0e81f160e2201f4f2b1d3" title="This function is used to process .extern lines. It also encodes the memory if possible into the memor..." alt="" coords="448,261,579,301"/>
+<area shape="rect" id="node10" href="$first__pass_8c.html#a932fa602127543d4c7b4e5f4b64b9138" title="This function is used to process .string lines. It also encodes the memory if possible into the memor..." alt="" coords="448,325,579,365"/>
+<area shape="rect" id="node3" href="$first__pass_8c.html#ae3d15ca0f34657e4715827c439839e1e" title="This function implements the first pass algorithm." alt="" coords="301,173,400,198"/>
+<area shape="rect" id="node4" href="$driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,173,253,198"/>
+<area shape="rect" id="node5" href="$driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,173,124,198"/>
+</map>

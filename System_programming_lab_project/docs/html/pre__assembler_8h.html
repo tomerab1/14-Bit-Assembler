@@ -5,14 +5,10 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.5"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>C language 14 bit assembler: pre_assembler.h File Reference</title>
+<title>14bit Assembler: pre_assembler.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
-<link href="navtree.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="resize.js"></script>
-<script type="text/javascript" src="navtreedata.js"></script>
-<script type="text/javascript" src="navtree.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
@@ -25,7 +21,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">C language 14 bit assembler
+   <div id="projectname">14bit Assembler
    </div>
   </td>
  </tr>
@@ -50,23 +46,6 @@ $(function() {
 /* @license-end */
 </script>
 <div id="main-nav"></div>
-</div><!-- top -->
-<div id="side-nav" class="ui-resizable side-nav-resizable">
-  <div id="nav-tree">
-    <div id="nav-tree-contents">
-      <div id="nav-sync" class="sync"></div>
-    </div>
-  </div>
-  <div id="splitbar" style="-moz-user-select:none;" 
-       class="ui-resizable-handle">
-  </div>
-</div>
-<script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(document).ready(function(){initNavTree('pre__assembler_8h.html',''); initResizable(); });
-/* @license-end */
-</script>
-<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -88,9 +67,9 @@ $(document).ready(function(){initNavTree('pre__assembler_8h.html',''); initResiz
 </div>
 </div>
 
+</div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#nested-classes">Data Structures</a> &#124;
 <a href="#typedef-members">Typedefs</a> &#124;
 <a href="#enum-members">Enumerations</a> &#124;
 <a href="#func-members">Functions</a>  </div>
@@ -100,87 +79,766 @@ $(document).ready(function(){initNavTree('pre__assembler_8h.html',''); initResiz
 <div class="textblock"><code>#include &quot;<a class="el" href="line__iterator_8h_source.html">line_iterator.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="constants_8h_source.html">constants.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="utils_8h_source.html">utils.h</a>&quot;</code><br />
+</div><div class="textblock"><div class="dynheader">
+Include dependency graph for pre_assembler.h:</div>
+<div class="dyncontent">
+<div class="center"><img src="pre__assembler_8h__incl.png" border="0" usemap="#apre__assembler_8h" alt=""/></div>
+<map name="apre__assembler_8h" id="apre__assembler_8h">
+<area shape="rect" title=" " alt="" coords="205,5,323,31"/>
+<area shape="rect" href="line__iterator_8h.html" title=" " alt="" coords="126,79,226,104"/>
+<area shape="rect" href="utils_8h.html" title=" " alt="" coords="165,152,222,177"/>
+<area shape="rect" href="constants_8h.html" title=" " alt="" coords="269,225,360,251"/>
+<area shape="rect" title=" " alt="" coords="5,225,67,251"/>
+<area shape="rect" title=" " alt="" coords="91,225,155,251"/>
+<area shape="rect" title=" " alt="" coords="179,225,245,251"/>
+</map>
+</div>
 </div>
 <p><a href="pre__assembler_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
-Data Structures</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct____list__node.html">__list_node</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_macro_list.html">MacroList</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="typedef-members" name="typedef-members"></a>
 Typedefs</h2></td></tr>
-<tr class="memitem:a0cc7f809c1f3e9380489fcf1617cbc86"><td class="memItemLeft" align="right" valign="top"><a id="a0cc7f809c1f3e9380489fcf1617cbc86" name="a0cc7f809c1f3e9380489fcf1617cbc86"></a>
-typedef struct <a class="el" href="struct____list__node.html">__list_node</a>&#160;</td><td class="memItemRight" valign="bottom"><b>MacroListNode</b></td></tr>
-<tr class="separator:a0cc7f809c1f3e9380489fcf1617cbc86"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abaf919ea50fe45e4ab80f6782be55366"><td class="memItemLeft" align="right" valign="top"><a id="abaf919ea50fe45e4ab80f6782be55366" name="abaf919ea50fe45e4ab80f6782be55366"></a>
+typedef struct <a class="el" href="structmacro__list__node.html">macro_list_node</a>&#160;</td><td class="memItemRight" valign="bottom"><b>MacroListNode</b></td></tr>
+<tr class="memdesc:abaf919ea50fe45e4ab80f6782be55366"><td class="mdescLeft">&#160;</td><td class="mdescRight">A forward declaration of the macro list node which hold the content of each macro, will be declared in the '.c' file. <br /></td></tr>
+<tr class="separator:abaf919ea50fe45e4ab80f6782be55366"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abaf8c2d2e39f3d55447d48c7e68ceb24"><td class="memItemLeft" align="right" valign="top"><a id="abaf8c2d2e39f3d55447d48c7e68ceb24" name="abaf8c2d2e39f3d55447d48c7e68ceb24"></a>
+typedef struct <a class="el" href="structmacro__list.html">macro_list</a>&#160;</td><td class="memItemRight" valign="bottom"><b>MacroList</b></td></tr>
+<tr class="memdesc:abaf8c2d2e39f3d55447d48c7e68ceb24"><td class="mdescLeft">&#160;</td><td class="mdescRight">A forward declaration of the macro list node which stores all the macros in the file, will be declared in the '.c' file. <br /></td></tr>
+<tr class="separator:abaf8c2d2e39f3d55447d48c7e68ceb24"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="enum-members" name="enum-members"></a>
 Enumerations</h2></td></tr>
-<tr class="memitem:a05517d1215fb6c503efe6db94374bd0e"><td class="memItemLeft" align="right" valign="top"><a id="a05517d1215fb6c503efe6db94374bd0e" name="a05517d1215fb6c503efe6db94374bd0e"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><b>ReadState</b> { <b>READ_UNKNOWN</b>
+<tr class="memitem:a05517d1215fb6c503efe6db94374bd0e"><td class="memItemLeft" align="right" valign="top"><a id="a05517d1215fb6c503efe6db94374bd0e" name="a05517d1215fb6c503efe6db94374bd0e"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="pre__assembler_8h.html#a05517d1215fb6c503efe6db94374bd0e">ReadState</a> { <b>READ_UNKNOWN</b>
 , <b>READ_COMMENT</b>
 , <b>READ_START_MACRO</b>
 , <b>READ_END_MACRO</b>
  }</td></tr>
+<tr class="memdesc:a05517d1215fb6c503efe6db94374bd0e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enum for the constans for the different reading states, it only used internally so it'll be declared inside the '.c' file. <br /></td></tr>
 <tr class="separator:a05517d1215fb6c503efe6db94374bd0e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:abab57bfbc7706d8811056386ff9a4cd6"><td class="memItemLeft" align="right" valign="top"><a id="abab57bfbc7706d8811056386ff9a4cd6" name="abab57bfbc7706d8811056386ff9a4cd6"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>start_pre_assembler</b> (char *path)</td></tr>
+<tr class="memitem:abab57bfbc7706d8811056386ff9a4cd6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="pre__assembler_8h.html#abab57bfbc7706d8811056386ff9a4cd6">start_pre_assembler</a> (char *path)</td></tr>
+<tr class="memdesc:abab57bfbc7706d8811056386ff9a4cd6"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function starts the pre-assembler phase of expanding the macros.  <a href="pre__assembler_8h.html#abab57bfbc7706d8811056386ff9a4cd6">More...</a><br /></td></tr>
 <tr class="separator:abab57bfbc7706d8811056386ff9a4cd6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa3dd08d1da450711d97010d5592530f3"><td class="memItemLeft" align="right" valign="top"><a id="aa3dd08d1da450711d97010d5592530f3" name="aa3dd08d1da450711d97010d5592530f3"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>macro_list_fill_list_from_file</b> (FILE *in, <a class="el" href="struct_macro_list.html">MacroList</a> *in_list)</td></tr>
+<tr class="memitem:aa3dd08d1da450711d97010d5592530f3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="pre__assembler_8h.html#aa3dd08d1da450711d97010d5592530f3">macro_list_fill_list_from_file</a> (FILE *in, <a class="el" href="pre__assembler_8h.html#abaf8c2d2e39f3d55447d48c7e68ceb24">MacroList</a> *in_list)</td></tr>
+<tr class="memdesc:aa3dd08d1da450711d97010d5592530f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function creates the macro list from a given file.  <a href="pre__assembler_8h.html#aa3dd08d1da450711d97010d5592530f3">More...</a><br /></td></tr>
 <tr class="separator:aa3dd08d1da450711d97010d5592530f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a57ad16adc9ba799fcd44a24df0832ad4"><td class="memItemLeft" align="right" valign="top"><a id="a57ad16adc9ba799fcd44a24df0832ad4" name="a57ad16adc9ba799fcd44a24df0832ad4"></a>
-ReadState&#160;</td><td class="memItemRight" valign="bottom"><b>get_current_reading_state</b> (<a class="el" href="struct_line_iterator.html">LineIterator</a> *it)</td></tr>
+<tr class="memitem:a57ad16adc9ba799fcd44a24df0832ad4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pre__assembler_8h.html#a05517d1215fb6c503efe6db94374bd0e">ReadState</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="pre__assembler_8h.html#a57ad16adc9ba799fcd44a24df0832ad4">get_current_reading_state</a> (<a class="el" href="struct_line_iterator.html">LineIterator</a> *it)</td></tr>
+<tr class="memdesc:a57ad16adc9ba799fcd44a24df0832ad4"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function returns the current reading state.  <a href="pre__assembler_8h.html#a57ad16adc9ba799fcd44a24df0832ad4">More...</a><br /></td></tr>
 <tr class="separator:a57ad16adc9ba799fcd44a24df0832ad4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae5234ad1742b3b6e7da2ce8c6398e8b1"><td class="memItemLeft" align="right" valign="top"><a id="ae5234ad1742b3b6e7da2ce8c6398e8b1" name="ae5234ad1742b3b6e7da2ce8c6398e8b1"></a>
-char *&#160;</td><td class="memItemRight" valign="bottom"><b>get_macro_name</b> (<a class="el" href="struct_line_iterator.html">LineIterator</a> *it)</td></tr>
+<tr class="memitem:ae5234ad1742b3b6e7da2ce8c6398e8b1"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="pre__assembler_8h.html#ae5234ad1742b3b6e7da2ce8c6398e8b1">get_macro_name</a> (<a class="el" href="struct_line_iterator.html">LineIterator</a> *it)</td></tr>
+<tr class="memdesc:ae5234ad1742b3b6e7da2ce8c6398e8b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function return the name of a macro.  <a href="pre__assembler_8h.html#ae5234ad1742b3b6e7da2ce8c6398e8b1">More...</a><br /></td></tr>
 <tr class="separator:ae5234ad1742b3b6e7da2ce8c6398e8b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac95fd5fbaaf7deaf4ec49a412552c675"><td class="memItemLeft" align="right" valign="top"><a id="ac95fd5fbaaf7deaf4ec49a412552c675" name="ac95fd5fbaaf7deaf4ec49a412552c675"></a>
-<a class="el" href="struct_macro_list.html">MacroList</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>macro_list_new_list</b> ()</td></tr>
+<tr class="memitem:ac95fd5fbaaf7deaf4ec49a412552c675"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pre__assembler_8h.html#abaf8c2d2e39f3d55447d48c7e68ceb24">MacroList</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="pre__assembler_8h.html#ac95fd5fbaaf7deaf4ec49a412552c675">macro_list_new_list</a> ()</td></tr>
+<tr class="memdesc:ac95fd5fbaaf7deaf4ec49a412552c675"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function creates a new empty macro list.  <a href="pre__assembler_8h.html#ac95fd5fbaaf7deaf4ec49a412552c675">More...</a><br /></td></tr>
 <tr class="separator:ac95fd5fbaaf7deaf4ec49a412552c675"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad5330f5abb1829be846e69480994781a"><td class="memItemLeft" align="right" valign="top"><a id="ad5330f5abb1829be846e69480994781a" name="ad5330f5abb1829be846e69480994781a"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>macro_list_is_empty</b> (<a class="el" href="struct_macro_list.html">MacroList</a> *list)</td></tr>
+<tr class="memitem:ad5330f5abb1829be846e69480994781a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="pre__assembler_8h.html#ad5330f5abb1829be846e69480994781a">macro_list_is_empty</a> (<a class="el" href="pre__assembler_8h.html#abaf8c2d2e39f3d55447d48c7e68ceb24">MacroList</a> *list)</td></tr>
+<tr class="memdesc:ad5330f5abb1829be846e69480994781a"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function check if the list passed to it is empty.  <a href="pre__assembler_8h.html#ad5330f5abb1829be846e69480994781a">More...</a><br /></td></tr>
 <tr class="separator:ad5330f5abb1829be846e69480994781a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaf180ebdab242fd58cd1fad84cb4054f"><td class="memItemLeft" align="right" valign="top"><a id="aaf180ebdab242fd58cd1fad84cb4054f" name="aaf180ebdab242fd58cd1fad84cb4054f"></a>
-<a class="el" href="struct____list__node.html">MacroListNode</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>macro_list_new_node</b> (char *name)</td></tr>
+<tr class="memitem:aaf180ebdab242fd58cd1fad84cb4054f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pre__assembler_8h.html#abaf919ea50fe45e4ab80f6782be55366">MacroListNode</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="pre__assembler_8h.html#aaf180ebdab242fd58cd1fad84cb4054f">macro_list_new_node</a> (char *name)</td></tr>
+<tr class="memdesc:aaf180ebdab242fd58cd1fad84cb4054f"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function create a new MacroListNode.  <a href="pre__assembler_8h.html#aaf180ebdab242fd58cd1fad84cb4054f">More...</a><br /></td></tr>
 <tr class="separator:aaf180ebdab242fd58cd1fad84cb4054f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aba92169e5bd5232177a7c0a5dfc205bb"><td class="memItemLeft" align="right" valign="top"><a id="aba92169e5bd5232177a7c0a5dfc205bb" name="aba92169e5bd5232177a7c0a5dfc205bb"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>expand_macro_to_file</b> (FILE *out, <a class="el" href="struct_macro_list.html">MacroList</a> *list, char *name)</td></tr>
+<tr class="memitem:aba92169e5bd5232177a7c0a5dfc205bb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="pre__assembler_8h.html#aba92169e5bd5232177a7c0a5dfc205bb">expand_macro_to_file</a> (FILE *out, <a class="el" href="pre__assembler_8h.html#abaf8c2d2e39f3d55447d48c7e68ceb24">MacroList</a> *list, char *name)</td></tr>
+<tr class="memdesc:aba92169e5bd5232177a7c0a5dfc205bb"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function expands a macro to the output file.  <a href="pre__assembler_8h.html#aba92169e5bd5232177a7c0a5dfc205bb">More...</a><br /></td></tr>
 <tr class="separator:aba92169e5bd5232177a7c0a5dfc205bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a15e30e32d691d42583122f362cbac6fe"><td class="memItemLeft" align="right" valign="top"><a id="a15e30e32d691d42583122f362cbac6fe" name="a15e30e32d691d42583122f362cbac6fe"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>macro_list_insert_node</b> (<a class="el" href="struct_macro_list.html">MacroList</a> *list, <a class="el" href="struct____list__node.html">MacroListNode</a> *node)</td></tr>
+<tr class="memitem:a15e30e32d691d42583122f362cbac6fe"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="pre__assembler_8h.html#a15e30e32d691d42583122f362cbac6fe">macro_list_insert_node</a> (<a class="el" href="pre__assembler_8h.html#abaf8c2d2e39f3d55447d48c7e68ceb24">MacroList</a> *list, <a class="el" href="pre__assembler_8h.html#abaf919ea50fe45e4ab80f6782be55366">MacroListNode</a> *node)</td></tr>
+<tr class="memdesc:a15e30e32d691d42583122f362cbac6fe"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function insert a node to the macro list.  <a href="pre__assembler_8h.html#a15e30e32d691d42583122f362cbac6fe">More...</a><br /></td></tr>
 <tr class="separator:a15e30e32d691d42583122f362cbac6fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a127f71e094c0546db6fbd427531365d5"><td class="memItemLeft" align="right" valign="top"><a id="a127f71e094c0546db6fbd427531365d5" name="a127f71e094c0546db6fbd427531365d5"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>macro_list_node_insert_source</b> (<a class="el" href="struct____list__node.html">MacroListNode</a> *node, char *line)</td></tr>
+<tr class="memitem:a127f71e094c0546db6fbd427531365d5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="pre__assembler_8h.html#a127f71e094c0546db6fbd427531365d5">macro_list_node_insert_source</a> (<a class="el" href="pre__assembler_8h.html#abaf919ea50fe45e4ab80f6782be55366">MacroListNode</a> *node, char *line)</td></tr>
+<tr class="memdesc:a127f71e094c0546db6fbd427531365d5"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function inserts a line into 'macro_list_node.macro_expension' member.  <a href="pre__assembler_8h.html#a127f71e094c0546db6fbd427531365d5">More...</a><br /></td></tr>
 <tr class="separator:a127f71e094c0546db6fbd427531365d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5d7c586dd36e7589b6785934c158262f"><td class="memItemLeft" align="right" valign="top"><a id="a5d7c586dd36e7589b6785934c158262f" name="a5d7c586dd36e7589b6785934c158262f"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>macro_list_node_insert_macro</b> (<a class="el" href="struct____list__node.html">MacroListNode</a> *tail, <a class="el" href="struct____list__node.html">MacroListNode</a> *node)</td></tr>
+<tr class="memitem:a5d7c586dd36e7589b6785934c158262f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="pre__assembler_8h.html#a5d7c586dd36e7589b6785934c158262f">macro_list_node_insert_macro</a> (<a class="el" href="pre__assembler_8h.html#abaf919ea50fe45e4ab80f6782be55366">MacroListNode</a> *tail, <a class="el" href="pre__assembler_8h.html#abaf919ea50fe45e4ab80f6782be55366">MacroListNode</a> *node)</td></tr>
+<tr class="memdesc:a5d7c586dd36e7589b6785934c158262f"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function insert all of the data inside the macro specified in 'line' to the current node.  <a href="pre__assembler_8h.html#a5d7c586dd36e7589b6785934c158262f">More...</a><br /></td></tr>
 <tr class="separator:a5d7c586dd36e7589b6785934c158262f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ace010d81f60ffa6bed8fa4cfebc1d144"><td class="memItemLeft" align="right" valign="top"><a id="ace010d81f60ffa6bed8fa4cfebc1d144" name="ace010d81f60ffa6bed8fa4cfebc1d144"></a>
-<a class="el" href="struct____list__node.html">MacroListNode</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>macro_list_get_node</b> (<a class="el" href="struct_macro_list.html">MacroList</a> *list, char *entry)</td></tr>
+<tr class="memitem:ace010d81f60ffa6bed8fa4cfebc1d144"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pre__assembler_8h.html#abaf919ea50fe45e4ab80f6782be55366">MacroListNode</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="pre__assembler_8h.html#ace010d81f60ffa6bed8fa4cfebc1d144">macro_list_get_node</a> (<a class="el" href="pre__assembler_8h.html#abaf8c2d2e39f3d55447d48c7e68ceb24">MacroList</a> *list, char *entry)</td></tr>
+<tr class="memdesc:ace010d81f60ffa6bed8fa4cfebc1d144"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the node in which its name matches to entry.  <a href="pre__assembler_8h.html#ace010d81f60ffa6bed8fa4cfebc1d144">More...</a><br /></td></tr>
 <tr class="separator:ace010d81f60ffa6bed8fa4cfebc1d144"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a67b4665103af08bb0694fe8c1f5aa4d6"><td class="memItemLeft" align="right" valign="top"><a id="a67b4665103af08bb0694fe8c1f5aa4d6" name="a67b4665103af08bb0694fe8c1f5aa4d6"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>create_pre_assembler_file</b> (FILE *in, FILE *out, <a class="el" href="struct_macro_list.html">MacroList</a> *list)</td></tr>
+<tr class="memitem:a67b4665103af08bb0694fe8c1f5aa4d6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="pre__assembler_8h.html#a67b4665103af08bb0694fe8c1f5aa4d6">create_pre_assembler_file</a> (FILE *in, FILE *out, <a class="el" href="pre__assembler_8h.html#abaf8c2d2e39f3d55447d48c7e68ceb24">MacroList</a> *list)</td></tr>
+<tr class="memdesc:a67b4665103af08bb0694fe8c1f5aa4d6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates an expanded source file inside 'out'.  <a href="pre__assembler_8h.html#a67b4665103af08bb0694fe8c1f5aa4d6">More...</a><br /></td></tr>
 <tr class="separator:a67b4665103af08bb0694fe8c1f5aa4d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a809c0463f152201c455404a7f7aaeecd"><td class="memItemLeft" align="right" valign="top"><a id="a809c0463f152201c455404a7f7aaeecd" name="a809c0463f152201c455404a7f7aaeecd"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>macro_free_expension</b> (char ***macro_expension, int size)</td></tr>
+<tr class="memitem:a809c0463f152201c455404a7f7aaeecd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="pre__assembler_8h.html#a809c0463f152201c455404a7f7aaeecd">macro_free_expension</a> (char ***macro_expension, int size)</td></tr>
+<tr class="memdesc:a809c0463f152201c455404a7f7aaeecd"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function frees the 'macro_expension' member.  <a href="pre__assembler_8h.html#a809c0463f152201c455404a7f7aaeecd">More...</a><br /></td></tr>
 <tr class="separator:a809c0463f152201c455404a7f7aaeecd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a896dd55ebb10c66a39cfd8de1d094652"><td class="memItemLeft" align="right" valign="top"><a id="a896dd55ebb10c66a39cfd8de1d094652" name="a896dd55ebb10c66a39cfd8de1d094652"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>macro_list_free</b> (<a class="el" href="struct_macro_list.html">MacroList</a> **list)</td></tr>
+<tr class="memitem:a896dd55ebb10c66a39cfd8de1d094652"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="pre__assembler_8h.html#a896dd55ebb10c66a39cfd8de1d094652">macro_list_free</a> (<a class="el" href="pre__assembler_8h.html#abaf8c2d2e39f3d55447d48c7e68ceb24">MacroList</a> **list)</td></tr>
+<tr class="memdesc:a896dd55ebb10c66a39cfd8de1d094652"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function frees a macro list.  <a href="pre__assembler_8h.html#a896dd55ebb10c66a39cfd8de1d094652">More...</a><br /></td></tr>
 <tr class="separator:a896dd55ebb10c66a39cfd8de1d094652"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-</div><!-- contents -->
-</div><!-- doc-content -->
-<!-- start footer part -->
-<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
-  <ul>
-    <li class="navelem"><a class="el" href="pre__assembler_8h.html">pre_assembler.h</a></li>
-    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5 </li>
-  </ul>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="a67b4665103af08bb0694fe8c1f5aa4d6" name="a67b4665103af08bb0694fe8c1f5aa4d6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a67b4665103af08bb0694fe8c1f5aa4d6">&#9670;&#160;</a></span>create_pre_assembler_file()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void create_pre_assembler_file </td>
+          <td>(</td>
+          <td class="paramtype">FILE *&#160;</td>
+          <td class="paramname"><em>in</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">FILE *&#160;</td>
+          <td class="paramname"><em>out</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="pre__assembler_8h.html#abaf8c2d2e39f3d55447d48c7e68ceb24">MacroList</a> *&#160;</td>
+          <td class="paramname"><em>list</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Creates an expanded source file inside 'out'. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">in</td><td>- The input file. </td></tr>
+    <tr><td class="paramname">out</td><td>- The output file. </td></tr>
+    <tr><td class="paramname">list</td><td>- The macros list. </td></tr>
+  </table>
+  </dd>
+</dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="pre__assembler_8h_a67b4665103af08bb0694fe8c1f5aa4d6_icgraph.png" border="0" usemap="#apre__assembler_8h_a67b4665103af08bb0694fe8c1f5aa4d6_icgraph" alt=""/></div>
+<map name="apre__assembler_8h_a67b4665103af08bb0694fe8c1f5aa4d6_icgraph" id="apre__assembler_8h_a67b4665103af08bb0694fe8c1f5aa4d6_icgraph">
+<area shape="rect" title="Creates an expanded source file inside &#39;out&#39;." alt="" coords="489,5,663,31"/>
+<area shape="rect" href="pre__assembler_8c.html#abab57bfbc7706d8811056386ff9a4cd6" title="This function starts the pre&#45;assembler phase of expanding the macros." alt="" coords="301,5,441,31"/>
+<area shape="rect" href="driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,5,253,31"/>
+<area shape="rect" href="driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,5,124,31"/>
+</map>
 </div>
+
+</div>
+</div>
+<a id="aba92169e5bd5232177a7c0a5dfc205bb" name="aba92169e5bd5232177a7c0a5dfc205bb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aba92169e5bd5232177a7c0a5dfc205bb">&#9670;&#160;</a></span>expand_macro_to_file()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void expand_macro_to_file </td>
+          <td>(</td>
+          <td class="paramtype">FILE *&#160;</td>
+          <td class="paramname"><em>out</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="pre__assembler_8h.html#abaf8c2d2e39f3d55447d48c7e68ceb24">MacroList</a> *&#160;</td>
+          <td class="paramname"><em>list</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>name</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This function expands a macro to the output file. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">out</td><td>- The output file. </td></tr>
+    <tr><td class="paramname">list</td><td>- The macros list. </td></tr>
+    <tr><td class="paramname">name</td><td>- The macros name. </td></tr>
+  </table>
+  </dd>
+</dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="pre__assembler_8h_aba92169e5bd5232177a7c0a5dfc205bb_icgraph.png" border="0" usemap="#apre__assembler_8h_aba92169e5bd5232177a7c0a5dfc205bb_icgraph" alt=""/></div>
+<map name="apre__assembler_8h_aba92169e5bd5232177a7c0a5dfc205bb_icgraph" id="apre__assembler_8h_aba92169e5bd5232177a7c0a5dfc205bb_icgraph">
+<area shape="rect" title="This function expands a macro to the output file." alt="" coords="711,5,859,31"/>
+<area shape="rect" href="pre__assembler_8c.html#a67b4665103af08bb0694fe8c1f5aa4d6" title="Creates an expanded source file inside &#39;out&#39;." alt="" coords="489,5,663,31"/>
+<area shape="rect" href="pre__assembler_8c.html#abab57bfbc7706d8811056386ff9a4cd6" title="This function starts the pre&#45;assembler phase of expanding the macros." alt="" coords="301,5,441,31"/>
+<area shape="rect" href="driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,5,253,31"/>
+<area shape="rect" href="driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,5,124,31"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a57ad16adc9ba799fcd44a24df0832ad4" name="a57ad16adc9ba799fcd44a24df0832ad4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a57ad16adc9ba799fcd44a24df0832ad4">&#9670;&#160;</a></span>get_current_reading_state()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="pre__assembler_8h.html#a05517d1215fb6c503efe6db94374bd0e">ReadState</a> get_current_reading_state </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_line_iterator.html">LineIterator</a> *&#160;</td>
+          <td class="paramname"><em>it</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This function returns the current reading state. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">it</td><td>- The line iterator. </td></tr>
+  </table>
+  </dd>
+</dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="pre__assembler_8h_a57ad16adc9ba799fcd44a24df0832ad4_icgraph.png" border="0" usemap="#apre__assembler_8h_a57ad16adc9ba799fcd44a24df0832ad4_icgraph" alt=""/></div>
+<map name="apre__assembler_8h_a57ad16adc9ba799fcd44a24df0832ad4_icgraph" id="apre__assembler_8h_a57ad16adc9ba799fcd44a24df0832ad4_icgraph">
+<area shape="rect" title="This function returns the current reading state." alt="" coords="711,27,847,67"/>
+<area shape="rect" href="pre__assembler_8c.html#a67b4665103af08bb0694fe8c1f5aa4d6" title="Creates an expanded source file inside &#39;out&#39;." alt="" coords="489,5,663,31"/>
+<area shape="rect" href="pre__assembler_8c.html#aa3dd08d1da450711d97010d5592530f3" title="This function creates the macro list from a given file." alt="" coords="513,55,639,95"/>
+<area shape="rect" href="pre__assembler_8c.html#abab57bfbc7706d8811056386ff9a4cd6" title="This function starts the pre&#45;assembler phase of expanding the macros." alt="" coords="301,35,441,60"/>
+<area shape="rect" href="driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,35,253,60"/>
+<area shape="rect" href="driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,35,124,60"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="ae5234ad1742b3b6e7da2ce8c6398e8b1" name="ae5234ad1742b3b6e7da2ce8c6398e8b1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae5234ad1742b3b6e7da2ce8c6398e8b1">&#9670;&#160;</a></span>get_macro_name()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char * get_macro_name </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_line_iterator.html">LineIterator</a> *&#160;</td>
+          <td class="paramname"><em>it</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This function return the name of a macro. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">it</td><td>- The line iterator. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The macros name if there is one, false otherwise. </dd></dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="pre__assembler_8h_ae5234ad1742b3b6e7da2ce8c6398e8b1_icgraph.png" border="0" usemap="#apre__assembler_8h_ae5234ad1742b3b6e7da2ce8c6398e8b1_icgraph" alt=""/></div>
+<map name="apre__assembler_8h_ae5234ad1742b3b6e7da2ce8c6398e8b1_icgraph" id="apre__assembler_8h_ae5234ad1742b3b6e7da2ce8c6398e8b1_icgraph">
+<area shape="rect" title="This function return the name of a macro." alt="" coords="711,35,833,60"/>
+<area shape="rect" href="pre__assembler_8c.html#a67b4665103af08bb0694fe8c1f5aa4d6" title="Creates an expanded source file inside &#39;out&#39;." alt="" coords="489,5,663,31"/>
+<area shape="rect" href="pre__assembler_8c.html#aa3dd08d1da450711d97010d5592530f3" title="This function creates the macro list from a given file." alt="" coords="513,55,639,95"/>
+<area shape="rect" href="pre__assembler_8c.html#abab57bfbc7706d8811056386ff9a4cd6" title="This function starts the pre&#45;assembler phase of expanding the macros." alt="" coords="301,35,441,60"/>
+<area shape="rect" href="driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,35,253,60"/>
+<area shape="rect" href="driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,35,124,60"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a809c0463f152201c455404a7f7aaeecd" name="a809c0463f152201c455404a7f7aaeecd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a809c0463f152201c455404a7f7aaeecd">&#9670;&#160;</a></span>macro_free_expension()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void macro_free_expension </td>
+          <td>(</td>
+          <td class="paramtype">char ***&#160;</td>
+          <td class="paramname"><em>macro_expension</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>size</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This function frees the 'macro_expension' member. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">macro_expension</td><td>- The macro to free. </td></tr>
+    <tr><td class="paramname">size</td><td>- The number of lines of the macro. </td></tr>
+  </table>
+  </dd>
+</dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="pre__assembler_8h_a809c0463f152201c455404a7f7aaeecd_icgraph.png" border="0" usemap="#apre__assembler_8h_a809c0463f152201c455404a7f7aaeecd_icgraph" alt=""/></div>
+<map name="apre__assembler_8h_a809c0463f152201c455404a7f7aaeecd_icgraph" id="apre__assembler_8h_a809c0463f152201c455404a7f7aaeecd_icgraph">
+<area shape="rect" title="This function frees the &#39;macro_expension&#39; member." alt="" coords="648,5,800,31"/>
+<area shape="rect" href="pre__assembler_8c.html#a896dd55ebb10c66a39cfd8de1d094652" title="This function frees a macro list." alt="" coords="489,5,600,31"/>
+<area shape="rect" href="pre__assembler_8c.html#abab57bfbc7706d8811056386ff9a4cd6" title="This function starts the pre&#45;assembler phase of expanding the macros." alt="" coords="301,5,441,31"/>
+<area shape="rect" href="driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,5,253,31"/>
+<area shape="rect" href="driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,5,124,31"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="aa3dd08d1da450711d97010d5592530f3" name="aa3dd08d1da450711d97010d5592530f3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa3dd08d1da450711d97010d5592530f3">&#9670;&#160;</a></span>macro_list_fill_list_from_file()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void macro_list_fill_list_from_file </td>
+          <td>(</td>
+          <td class="paramtype">FILE *&#160;</td>
+          <td class="paramname"><em>in</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="pre__assembler_8h.html#abaf8c2d2e39f3d55447d48c7e68ceb24">MacroList</a> *&#160;</td>
+          <td class="paramname"><em>in_list</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This function creates the macro list from a given file. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">in</td><td>- The input file. </td></tr>
+    <tr><td class="paramname">in_list</td><td>- The list. </td></tr>
+  </table>
+  </dd>
+</dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="pre__assembler_8h_aa3dd08d1da450711d97010d5592530f3_icgraph.png" border="0" usemap="#apre__assembler_8h_aa3dd08d1da450711d97010d5592530f3_icgraph" alt=""/></div>
+<map name="apre__assembler_8h_aa3dd08d1da450711d97010d5592530f3_icgraph" id="apre__assembler_8h_aa3dd08d1da450711d97010d5592530f3_icgraph">
+<area shape="rect" title="This function creates the macro list from a given file." alt="" coords="489,5,615,45"/>
+<area shape="rect" href="pre__assembler_8c.html#abab57bfbc7706d8811056386ff9a4cd6" title="This function starts the pre&#45;assembler phase of expanding the macros." alt="" coords="301,13,441,38"/>
+<area shape="rect" href="driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,13,253,38"/>
+<area shape="rect" href="driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,13,124,38"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a896dd55ebb10c66a39cfd8de1d094652" name="a896dd55ebb10c66a39cfd8de1d094652"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a896dd55ebb10c66a39cfd8de1d094652">&#9670;&#160;</a></span>macro_list_free()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void macro_list_free </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="pre__assembler_8h.html#abaf8c2d2e39f3d55447d48c7e68ceb24">MacroList</a> **&#160;</td>
+          <td class="paramname"><em>list</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This function frees a macro list. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">list</td><td>- The list to free. </td></tr>
+  </table>
+  </dd>
+</dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="pre__assembler_8h_a896dd55ebb10c66a39cfd8de1d094652_icgraph.png" border="0" usemap="#apre__assembler_8h_a896dd55ebb10c66a39cfd8de1d094652_icgraph" alt=""/></div>
+<map name="apre__assembler_8h_a896dd55ebb10c66a39cfd8de1d094652_icgraph" id="apre__assembler_8h_a896dd55ebb10c66a39cfd8de1d094652_icgraph">
+<area shape="rect" title="This function frees a macro list." alt="" coords="489,5,600,31"/>
+<area shape="rect" href="pre__assembler_8c.html#abab57bfbc7706d8811056386ff9a4cd6" title="This function starts the pre&#45;assembler phase of expanding the macros." alt="" coords="301,5,441,31"/>
+<area shape="rect" href="driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,5,253,31"/>
+<area shape="rect" href="driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,5,124,31"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="ace010d81f60ffa6bed8fa4cfebc1d144" name="ace010d81f60ffa6bed8fa4cfebc1d144"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ace010d81f60ffa6bed8fa4cfebc1d144">&#9670;&#160;</a></span>macro_list_get_node()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="pre__assembler_8h.html#abaf919ea50fe45e4ab80f6782be55366">MacroListNode</a> * macro_list_get_node </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="pre__assembler_8h.html#abaf8c2d2e39f3d55447d48c7e68ceb24">MacroList</a> *&#160;</td>
+          <td class="paramname"><em>list</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>entry</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Returns the node in which its name matches to entry. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">list</td><td>- The list. </td></tr>
+    <tr><td class="paramname">entry</td><td>- The entry. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The MacroListNode that matches the entry, NULL otherwise. </dd></dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="pre__assembler_8h_ace010d81f60ffa6bed8fa4cfebc1d144_icgraph.png" border="0" usemap="#apre__assembler_8h_ace010d81f60ffa6bed8fa4cfebc1d144_icgraph" alt=""/></div>
+<map name="apre__assembler_8h_ace010d81f60ffa6bed8fa4cfebc1d144_icgraph" id="apre__assembler_8h_ace010d81f60ffa6bed8fa4cfebc1d144_icgraph">
+<area shape="rect" title="Returns the node in which its name matches to entry." alt="" coords="711,35,853,60"/>
+<area shape="rect" href="pre__assembler_8c.html#a67b4665103af08bb0694fe8c1f5aa4d6" title="Creates an expanded source file inside &#39;out&#39;." alt="" coords="489,5,663,31"/>
+<area shape="rect" href="pre__assembler_8c.html#aa3dd08d1da450711d97010d5592530f3" title="This function creates the macro list from a given file." alt="" coords="513,55,639,95"/>
+<area shape="rect" href="pre__assembler_8c.html#abab57bfbc7706d8811056386ff9a4cd6" title="This function starts the pre&#45;assembler phase of expanding the macros." alt="" coords="301,35,441,60"/>
+<area shape="rect" href="driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,35,253,60"/>
+<area shape="rect" href="driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,35,124,60"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a15e30e32d691d42583122f362cbac6fe" name="a15e30e32d691d42583122f362cbac6fe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a15e30e32d691d42583122f362cbac6fe">&#9670;&#160;</a></span>macro_list_insert_node()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void macro_list_insert_node </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="pre__assembler_8h.html#abaf8c2d2e39f3d55447d48c7e68ceb24">MacroList</a> *&#160;</td>
+          <td class="paramname"><em>list</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="pre__assembler_8h.html#abaf919ea50fe45e4ab80f6782be55366">MacroListNode</a> *&#160;</td>
+          <td class="paramname"><em>node</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This function insert a node to the macro list. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">list</td><td>- The list. </td></tr>
+    <tr><td class="paramname">node</td><td>- The node to insert. </td></tr>
+  </table>
+  </dd>
+</dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="pre__assembler_8h_a15e30e32d691d42583122f362cbac6fe_icgraph.png" border="0" usemap="#apre__assembler_8h_a15e30e32d691d42583122f362cbac6fe_icgraph" alt=""/></div>
+<map name="apre__assembler_8h_a15e30e32d691d42583122f362cbac6fe_icgraph" id="apre__assembler_8h_a15e30e32d691d42583122f362cbac6fe_icgraph">
+<area shape="rect" title="This function insert a node to the macro list." alt="" coords="663,13,819,38"/>
+<area shape="rect" href="pre__assembler_8c.html#aa3dd08d1da450711d97010d5592530f3" title="This function creates the macro list from a given file." alt="" coords="489,5,615,45"/>
+<area shape="rect" href="pre__assembler_8c.html#abab57bfbc7706d8811056386ff9a4cd6" title="This function starts the pre&#45;assembler phase of expanding the macros." alt="" coords="301,13,441,38"/>
+<area shape="rect" href="driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,13,253,38"/>
+<area shape="rect" href="driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,13,124,38"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="ad5330f5abb1829be846e69480994781a" name="ad5330f5abb1829be846e69480994781a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad5330f5abb1829be846e69480994781a">&#9670;&#160;</a></span>macro_list_is_empty()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool macro_list_is_empty </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="pre__assembler_8h.html#abaf8c2d2e39f3d55447d48c7e68ceb24">MacroList</a> *&#160;</td>
+          <td class="paramname"><em>list</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This function check if the list passed to it is empty. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">list</td><td>- The list. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if empty, False otherwise. </dd></dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="pre__assembler_8h_ad5330f5abb1829be846e69480994781a_icgraph.png" border="0" usemap="#apre__assembler_8h_ad5330f5abb1829be846e69480994781a_icgraph" alt=""/></div>
+<map name="apre__assembler_8h_ad5330f5abb1829be846e69480994781a_icgraph" id="apre__assembler_8h_ad5330f5abb1829be846e69480994781a_icgraph">
+<area shape="rect" title="This function check if the list passed to it is empty." alt="" coords="867,13,1009,38"/>
+<area shape="rect" href="pre__assembler_8c.html#a15e30e32d691d42583122f362cbac6fe" title="This function insert a node to the macro list." alt="" coords="663,13,819,38"/>
+<area shape="rect" href="pre__assembler_8c.html#aa3dd08d1da450711d97010d5592530f3" title="This function creates the macro list from a given file." alt="" coords="489,5,615,45"/>
+<area shape="rect" href="pre__assembler_8c.html#abab57bfbc7706d8811056386ff9a4cd6" title="This function starts the pre&#45;assembler phase of expanding the macros." alt="" coords="301,13,441,38"/>
+<area shape="rect" href="driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,13,253,38"/>
+<area shape="rect" href="driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,13,124,38"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="ac95fd5fbaaf7deaf4ec49a412552c675" name="ac95fd5fbaaf7deaf4ec49a412552c675"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac95fd5fbaaf7deaf4ec49a412552c675">&#9670;&#160;</a></span>macro_list_new_list()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="pre__assembler_8h.html#abaf8c2d2e39f3d55447d48c7e68ceb24">MacroList</a> * macro_list_new_list </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This function creates a new empty macro list. </p>
+<dl class="section return"><dt>Returns</dt><dd>An empty macro list. </dd></dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="pre__assembler_8h_ac95fd5fbaaf7deaf4ec49a412552c675_icgraph.png" border="0" usemap="#apre__assembler_8h_ac95fd5fbaaf7deaf4ec49a412552c675_icgraph" alt=""/></div>
+<map name="apre__assembler_8h_ac95fd5fbaaf7deaf4ec49a412552c675_icgraph" id="apre__assembler_8h_ac95fd5fbaaf7deaf4ec49a412552c675_icgraph">
+<area shape="rect" title="This function creates a new empty macro list." alt="" coords="489,5,625,31"/>
+<area shape="rect" href="pre__assembler_8c.html#abab57bfbc7706d8811056386ff9a4cd6" title="This function starts the pre&#45;assembler phase of expanding the macros." alt="" coords="301,5,441,31"/>
+<area shape="rect" href="driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,5,253,31"/>
+<area shape="rect" href="driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,5,124,31"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="aaf180ebdab242fd58cd1fad84cb4054f" name="aaf180ebdab242fd58cd1fad84cb4054f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaf180ebdab242fd58cd1fad84cb4054f">&#9670;&#160;</a></span>macro_list_new_node()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="pre__assembler_8h.html#abaf919ea50fe45e4ab80f6782be55366">MacroListNode</a> * macro_list_new_node </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>name</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This function create a new MacroListNode. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">name</td><td>- The macros name. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A new MacroListNode. </dd></dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="pre__assembler_8h_aaf180ebdab242fd58cd1fad84cb4054f_icgraph.png" border="0" usemap="#apre__assembler_8h_aaf180ebdab242fd58cd1fad84cb4054f_icgraph" alt=""/></div>
+<map name="apre__assembler_8h_aaf180ebdab242fd58cd1fad84cb4054f_icgraph" id="apre__assembler_8h_aaf180ebdab242fd58cd1fad84cb4054f_icgraph">
+<area shape="rect" title="This function create a new MacroListNode." alt="" coords="663,13,809,38"/>
+<area shape="rect" href="pre__assembler_8c.html#aa3dd08d1da450711d97010d5592530f3" title="This function creates the macro list from a given file." alt="" coords="489,5,615,45"/>
+<area shape="rect" href="pre__assembler_8c.html#abab57bfbc7706d8811056386ff9a4cd6" title="This function starts the pre&#45;assembler phase of expanding the macros." alt="" coords="301,13,441,38"/>
+<area shape="rect" href="driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,13,253,38"/>
+<area shape="rect" href="driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,13,124,38"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a5d7c586dd36e7589b6785934c158262f" name="a5d7c586dd36e7589b6785934c158262f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5d7c586dd36e7589b6785934c158262f">&#9670;&#160;</a></span>macro_list_node_insert_macro()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void macro_list_node_insert_macro </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="pre__assembler_8h.html#abaf919ea50fe45e4ab80f6782be55366">MacroListNode</a> *&#160;</td>
+          <td class="paramname"><em>tail</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="pre__assembler_8h.html#abaf919ea50fe45e4ab80f6782be55366">MacroListNode</a> *&#160;</td>
+          <td class="paramname"><em>node</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This function insert all of the data inside the macro specified in 'line' to the current node. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">tail</td><td>- The lists tail. </td></tr>
+    <tr><td class="paramname">node</td><td>- The node. </td></tr>
+  </table>
+  </dd>
+</dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="pre__assembler_8h_a5d7c586dd36e7589b6785934c158262f_icgraph.png" border="0" usemap="#apre__assembler_8h_a5d7c586dd36e7589b6785934c158262f_icgraph" alt=""/></div>
+<map name="apre__assembler_8h_a5d7c586dd36e7589b6785934c158262f_icgraph" id="apre__assembler_8h_a5d7c586dd36e7589b6785934c158262f_icgraph">
+<area shape="rect" title="This function insert all of the data inside the macro specified in &#39;line&#39; to the current node." alt="" coords="663,5,819,45"/>
+<area shape="rect" href="pre__assembler_8c.html#aa3dd08d1da450711d97010d5592530f3" title="This function creates the macro list from a given file." alt="" coords="489,5,615,45"/>
+<area shape="rect" href="pre__assembler_8c.html#abab57bfbc7706d8811056386ff9a4cd6" title="This function starts the pre&#45;assembler phase of expanding the macros." alt="" coords="301,13,441,38"/>
+<area shape="rect" href="driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,13,253,38"/>
+<area shape="rect" href="driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,13,124,38"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a127f71e094c0546db6fbd427531365d5" name="a127f71e094c0546db6fbd427531365d5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a127f71e094c0546db6fbd427531365d5">&#9670;&#160;</a></span>macro_list_node_insert_source()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void macro_list_node_insert_source </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="pre__assembler_8h.html#abaf919ea50fe45e4ab80f6782be55366">MacroListNode</a> *&#160;</td>
+          <td class="paramname"><em>node</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>line</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This function inserts a line into 'macro_list_node.macro_expension' member. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">node</td><td>- The node. </td></tr>
+    <tr><td class="paramname">line</td><td>- The line. </td></tr>
+  </table>
+  </dd>
+</dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="pre__assembler_8h_a127f71e094c0546db6fbd427531365d5_icgraph.png" border="0" usemap="#apre__assembler_8h_a127f71e094c0546db6fbd427531365d5_icgraph" alt=""/></div>
+<map name="apre__assembler_8h_a127f71e094c0546db6fbd427531365d5_icgraph" id="apre__assembler_8h_a127f71e094c0546db6fbd427531365d5_icgraph">
+<area shape="rect" title="This function inserts a line into &#39;macro_list_node.macro_expension&#39; member." alt="" coords="867,5,1023,45"/>
+<area shape="rect" href="pre__assembler_8c.html#aa3dd08d1da450711d97010d5592530f3" title="This function creates the macro list from a given file." alt="" coords="489,5,615,45"/>
+<area shape="rect" href="pre__assembler_8c.html#a5d7c586dd36e7589b6785934c158262f" title="This function insert all of the data inside the macro specified in &#39;line&#39; to the current node." alt="" coords="663,33,819,73"/>
+<area shape="rect" href="pre__assembler_8c.html#abab57bfbc7706d8811056386ff9a4cd6" title="This function starts the pre&#45;assembler phase of expanding the macros." alt="" coords="301,13,441,38"/>
+<area shape="rect" href="driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,13,253,38"/>
+<area shape="rect" href="driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,13,124,38"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="abab57bfbc7706d8811056386ff9a4cd6" name="abab57bfbc7706d8811056386ff9a4cd6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abab57bfbc7706d8811056386ff9a4cd6">&#9670;&#160;</a></span>start_pre_assembler()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void start_pre_assembler </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>path</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This function starts the pre-assembler phase of expanding the macros. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">path</td><td>- The path of the source file. </td></tr>
+  </table>
+  </dd>
+</dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="pre__assembler_8h_abab57bfbc7706d8811056386ff9a4cd6_icgraph.png" border="0" usemap="#apre__assembler_8h_abab57bfbc7706d8811056386ff9a4cd6_icgraph" alt=""/></div>
+<map name="apre__assembler_8h_abab57bfbc7706d8811056386ff9a4cd6_icgraph" id="apre__assembler_8h_abab57bfbc7706d8811056386ff9a4cd6_icgraph">
+<area shape="rect" title="This function starts the pre&#45;assembler phase of expanding the macros." alt="" coords="301,5,441,31"/>
+<area shape="rect" href="driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,5,253,31"/>
+<area shape="rect" href="driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,5,124,31"/>
+</map>
+</div>
+
+</div>
+</div>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+</small></address>
 </body>
 </html>

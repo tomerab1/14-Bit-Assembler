@@ -1,0 +1,13 @@
+<map id="get_opcode" name="get_opcode">
+<area shape="rect" id="node1" title="Get opcode from string. This is used to parse opcodes that are passed to libc functions." alt="" coords="805,134,895,159"/>
+<area shape="rect" id="node2" href="$encoding_8c.html#a5e11ca7717b5440fb6baebdf0da9cfda" title="Encode a single opcode. This is the entry point for the encoding routines." alt="" coords="635,13,749,38"/>
+<area shape="rect" id="node8" href="$syntactical__analysis_8c.html#ab26f0bb418b6c3c1d540410e3a74a446" title="Check if instruction at line is a label. This is used to detect if we are going to write an instructi..." alt="" coords="631,63,753,103"/>
+<area shape="rect" id="node9" href="$first__pass_8c.html#aa0a39d1f94314921231c97245e6eb551" title="This function is used to process .entry lines. It also encodes the memory if possible into the memory..." alt="" coords="627,127,757,167"/>
+<area shape="rect" id="node10" href="$first__pass_8c.html#accedad2dc6b0e81f160e2201f4f2b1d3" title="This function is used to process .extern lines. It also encodes the memory if possible into the memor..." alt="" coords="448,184,579,224"/>
+<area shape="rect" id="node11" href="$first__pass_8c.html#a870efe109722af3eb5c21a42810f29f6" title="This function take in a string, and checks if it&#39;s a symbol, if so it returns it&#39;s type...." alt="" coords="453,249,574,274"/>
+<area shape="rect" id="node3" href="$first__pass_8c.html#a40eeac60c34220893b004549546acb2d" title="This function is used to process lines with opcodes and no label definitions. It also encodes the mem..." alt="" coords="448,5,579,45"/>
+<area shape="rect" id="node7" href="$first__pass_8c.html#ac0da628ba463b754effc2e88e611d4dd" title="This function is used to process lines with label definitions. It also encodes the memory if possible..." alt="" coords="448,69,579,109"/>
+<area shape="rect" id="node4" href="$first__pass_8c.html#ae3d15ca0f34657e4715827c439839e1e" title="This function implements the first pass algorithm." alt="" coords="301,134,400,159"/>
+<area shape="rect" id="node5" href="$driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,134,253,159"/>
+<area shape="rect" id="node6" href="$driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,134,124,159"/>
+</map>

@@ -5,14 +5,10 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.5"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>C language 14 bit assembler: syntactical_analysis.h File Reference</title>
+<title>14bit Assembler: syntactical_analysis.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
-<link href="navtree.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="resize.js"></script>
-<script type="text/javascript" src="navtreedata.js"></script>
-<script type="text/javascript" src="navtree.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
@@ -25,7 +21,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">C language 14 bit assembler
+   <div id="projectname">14bit Assembler
    </div>
   </td>
  </tr>
@@ -50,23 +46,6 @@ $(function() {
 /* @license-end */
 </script>
 <div id="main-nav"></div>
-</div><!-- top -->
-<div id="side-nav" class="ui-resizable side-nav-resizable">
-  <div id="nav-tree">
-    <div id="nav-tree-contents">
-      <div id="nav-sync" class="sync"></div>
-    </div>
-  </div>
-  <div id="splitbar" style="-moz-user-select:none;" 
-       class="ui-resizable-handle">
-  </div>
-</div>
-<script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(document).ready(function(){initNavTree('syntactical__analysis_8h.html',''); initResizable(); });
-/* @license-end */
-</script>
-<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -88,6 +67,7 @@ $(document).ready(function(){initNavTree('syntactical__analysis_8h.html',''); in
 </div>
 </div>
 
+</div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#define-members">Macros</a> &#124;
@@ -96,10 +76,29 @@ $(document).ready(function(){initNavTree('syntactical__analysis_8h.html',''); in
   <div class="headertitle"><div class="title">syntactical_analysis.h File Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &quot;<a class="el" href="first__pass_8h_source.html">first_pass.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="line__iterator_8h_source.html">line_iterator.h</a>&quot;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="line__iterator_8h_source.html">line_iterator.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="first__pass_8h_source.html">first_pass.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="debug_8h_source.html">debug.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="utils_8h_source.html">utils.h</a>&quot;</code><br />
+</div><div class="textblock"><div class="dynheader">
+Include dependency graph for syntactical_analysis.h:</div>
+<div class="dyncontent">
+<div class="center"><img src="syntactical__analysis_8h__incl.png" border="0" usemap="#asyntactical__analysis_8h" alt=""/></div>
+<map name="asyntactical__analysis_8h" id="asyntactical__analysis_8h">
+<area shape="rect" title=" " alt="" coords="49,5,200,31"/>
+<area shape="rect" href="line__iterator_8h.html" title=" " alt="" coords="28,152,128,177"/>
+<area shape="rect" href="utils_8h.html" title=" " alt="" coords="137,225,194,251"/>
+<area shape="rect" href="first__pass_8h.html" title=" " alt="" coords="165,79,254,104"/>
+<area shape="rect" href="debug_8h.html" title=" " alt="" coords="390,152,458,177"/>
+<area shape="rect" title=" " alt="" coords="30,299,91,324"/>
+<area shape="rect" title=" " alt="" coords="115,299,179,324"/>
+<area shape="rect" title=" " alt="" coords="204,299,269,324"/>
+<area shape="rect" href="constants_8h.html" title=" " alt="" coords="294,299,384,324"/>
+<area shape="rect" href="symbol__table_8h.html" title=" " alt="" coords="204,152,314,177"/>
+<area shape="rect" href="memory_8h.html" title=" " alt="" coords="299,225,379,251"/>
+<area shape="rect" title=" " alt="" coords="404,225,472,251"/>
+</map>
+</div>
 </div>
 <p><a href="syntactical__analysis_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
@@ -185,93 +184,102 @@ Enumerations</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a30984f09ff89091dd74a21dcae15e4c4"><td class="memItemLeft" align="right" valign="top"><a id="a30984f09ff89091dd74a21dcae15e4c4" name="a30984f09ff89091dd74a21dcae15e4c4"></a>
-Opcodes&#160;</td><td class="memItemRight" valign="bottom"><b>get_opcode</b> (char *str)</td></tr>
+<tr class="memitem:a30984f09ff89091dd74a21dcae15e4c4"><td class="memItemLeft" align="right" valign="top">Opcodes&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="syntactical__analysis_8h.html#a30984f09ff89091dd74a21dcae15e4c4">get_opcode</a> (char *str)</td></tr>
+<tr class="memdesc:a30984f09ff89091dd74a21dcae15e4c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get opcode from string. This is used to parse opcodes that are passed to libc functions.  <a href="syntactical__analysis_8h.html#a30984f09ff89091dd74a21dcae15e4c4">More...</a><br /></td></tr>
 <tr class="separator:a30984f09ff89091dd74a21dcae15e4c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab026e29379dc2aca95b5ae14a4045010"><td class="memItemLeft" align="right" valign="top">errorCodes&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="syntactical__analysis_8h.html#ab026e29379dc2aca95b5ae14a4045010">check_label_syntax</a> (char *label)</td></tr>
+<tr class="memitem:ab026e29379dc2aca95b5ae14a4045010"><td class="memItemLeft" align="right" valign="top"><a class="el" href="debug_8h.html#a88edd67ec29d18293fae821840fef3ac">errorCodes</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="syntactical__analysis_8h.html#ab026e29379dc2aca95b5ae14a4045010">check_label_syntax</a> (char *label)</td></tr>
+<tr class="memdesc:ab026e29379dc2aca95b5ae14a4045010"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function checks the lable syntax.  <a href="syntactical__analysis_8h.html#ab026e29379dc2aca95b5ae14a4045010">More...</a><br /></td></tr>
 <tr class="separator:ab026e29379dc2aca95b5ae14a4045010"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a855c8939951fd3d960b071b143af6df5"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="syntactical__analysis_8h.html#a855c8939951fd3d960b071b143af6df5">is_valid_label</a> (char *label)</td></tr>
+<tr class="memdesc:a855c8939951fd3d960b071b143af6df5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the label syntax is valid.  <a href="syntactical__analysis_8h.html#a855c8939951fd3d960b071b143af6df5">More...</a><br /></td></tr>
 <tr class="separator:a855c8939951fd3d960b071b143af6df5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a19430e4a830b52423fd6c01235dc10af"><td class="memItemLeft" align="right" valign="top"><a id="a19430e4a830b52423fd6c01235dc10af" name="a19430e4a830b52423fd6c01235dc10af"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>isLabel</b> (<a class="el" href="struct_line_iterator.html">LineIterator</a> *line)</td></tr>
+<tr class="memitem:a19430e4a830b52423fd6c01235dc10af"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="syntactical__analysis_8h.html#a19430e4a830b52423fd6c01235dc10af">isLabel</a> (<a class="el" href="struct_line_iterator.html">LineIterator</a> *line)</td></tr>
+<tr class="memdesc:a19430e4a830b52423fd6c01235dc10af"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if the next word is a label. This is used to detect whether or not we are in a label context.  <a href="syntactical__analysis_8h.html#a19430e4a830b52423fd6c01235dc10af">More...</a><br /></td></tr>
 <tr class="separator:a19430e4a830b52423fd6c01235dc10af"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a625e1c4d3afa677d75e4a04f1d6989bd"><td class="memItemLeft" align="right" valign="top"><a id="a625e1c4d3afa677d75e4a04f1d6989bd" name="a625e1c4d3afa677d75e4a04f1d6989bd"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>verify_command_syntax</b> (<a class="el" href="struct_line_iterator.html">LineIterator</a> *it, <a class="el" href="structdebug_list.html">debugList</a> *dbg_list)</td></tr>
+<tr class="memitem:a625e1c4d3afa677d75e4a04f1d6989bd"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="syntactical__analysis_8h.html#a625e1c4d3afa677d75e4a04f1d6989bd">verify_command_syntax</a> (<a class="el" href="struct_line_iterator.html">LineIterator</a> *it, <a class="el" href="structdebug_list.html">debugList</a> *dbg_list)</td></tr>
+<tr class="memdesc:a625e1c4d3afa677d75e4a04f1d6989bd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Verify the syntax of a command. This is a helper function for debug_command ().  <a href="syntactical__analysis_8h.html#a625e1c4d3afa677d75e4a04f1d6989bd">More...</a><br /></td></tr>
 <tr class="separator:a625e1c4d3afa677d75e4a04f1d6989bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a42eff397b553a32135043fe5d99839d7"><td class="memItemLeft" align="right" valign="top"><a id="a42eff397b553a32135043fe5d99839d7" name="a42eff397b553a32135043fe5d99839d7"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>cmp_register_name</b> (char *str)</td></tr>
+<tr class="memitem:a42eff397b553a32135043fe5d99839d7"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="syntactical__analysis_8h.html#a42eff397b553a32135043fe5d99839d7">cmp_register_name</a> (char *str)</td></tr>
+<tr class="memdesc:a42eff397b553a32135043fe5d99839d7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compare register name to known ones. This is used to determine if we are interested in a register.  <a href="syntactical__analysis_8h.html#a42eff397b553a32135043fe5d99839d7">More...</a><br /></td></tr>
 <tr class="separator:a42eff397b553a32135043fe5d99839d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6b4c7eb08fbefdb1bad8755c52666824"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="syntactical__analysis_8h.html#a6b4c7eb08fbefdb1bad8755c52666824">trim_symbol_name</a> (char *sym)</td></tr>
-<tr class="separator:a6b4c7eb08fbefdb1bad8755c52666824"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a67016b4fe1cda5bfa436414cae4c3561"><td class="memItemLeft" align="right" valign="top"><a id="a67016b4fe1cda5bfa436414cae4c3561" name="a67016b4fe1cda5bfa436414cae4c3561"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>validate_syntax</b> (<a class="el" href="struct_line_iterator.html">LineIterator</a> it, firstPassStates state, long line, <a class="el" href="structdebug_list.html">debugList</a> *dbg_list)</td></tr>
-<tr class="separator:a67016b4fe1cda5bfa436414cae4c3561"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6393e6140d0121d6d8c81b36cbed42e7"><td class="memItemLeft" align="right" valign="top"><a id="a6393e6140d0121d6d8c81b36cbed42e7" name="a6393e6140d0121d6d8c81b36cbed42e7"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>validate_syntax_opcode</b> (<a class="el" href="struct_line_iterator.html">LineIterator</a> *it, long line, <a class="el" href="structdebug_list.html">debugList</a> *dbg_list)</td></tr>
-<tr class="separator:a6393e6140d0121d6d8c81b36cbed42e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a048ed699cd7cbc580722534d81db9ce1"><td class="memItemLeft" align="right" valign="top"><a id="a048ed699cd7cbc580722534d81db9ce1" name="a048ed699cd7cbc580722534d81db9ce1"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>verify_int</b> (<a class="el" href="struct_line_iterator.html">LineIterator</a> *it, long line, char *seps, <a class="el" href="structdebug_list.html">debugList</a> *dbg_list)</td></tr>
-<tr class="separator:a048ed699cd7cbc580722534d81db9ce1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2749c50f152de3c380145d95a2d05262"><td class="memItemLeft" align="right" valign="top"><a id="a2749c50f152de3c380145d95a2d05262" name="a2749c50f152de3c380145d95a2d05262"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>match_syntax_group_1</b> (<a class="el" href="struct_line_iterator.html">LineIterator</a> *it, long line, <a class="el" href="structdebug_list.html">debugList</a> *dbg_list)</td></tr>
-<tr class="separator:a2749c50f152de3c380145d95a2d05262"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae6a335691cd87b3ba20493300d250b0b"><td class="memItemLeft" align="right" valign="top"><a id="ae6a335691cd87b3ba20493300d250b0b" name="ae6a335691cd87b3ba20493300d250b0b"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>match_syntax_group_2</b> (<a class="el" href="struct_line_iterator.html">LineIterator</a> *it, long line, <a class="el" href="structdebug_list.html">debugList</a> *dbg_list)</td></tr>
-<tr class="separator:ae6a335691cd87b3ba20493300d250b0b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5f99c4d3e555f02fbe4925924058090b"><td class="memItemLeft" align="right" valign="top"><a id="a5f99c4d3e555f02fbe4925924058090b" name="a5f99c4d3e555f02fbe4925924058090b"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>match_syntax_group_3</b> (<a class="el" href="struct_line_iterator.html">LineIterator</a> *it, long line, <a class="el" href="structdebug_list.html">debugList</a> *dbg_list)</td></tr>
-<tr class="separator:a5f99c4d3e555f02fbe4925924058090b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a552075d73f1458ff9facc99ab2bc5702"><td class="memItemLeft" align="right" valign="top"><a id="a552075d73f1458ff9facc99ab2bc5702" name="a552075d73f1458ff9facc99ab2bc5702"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>match_syntax_group_4</b> (<a class="el" href="struct_line_iterator.html">LineIterator</a> *it, long line, <a class="el" href="structdebug_list.html">debugList</a> *dbg_list)</td></tr>
-<tr class="separator:a552075d73f1458ff9facc99ab2bc5702"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a942f35e02bcadf7b1fe58d918dc5a531"><td class="memItemLeft" align="right" valign="top"><a id="a942f35e02bcadf7b1fe58d918dc5a531" name="a942f35e02bcadf7b1fe58d918dc5a531"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>match_syntax_group_5</b> (<a class="el" href="struct_line_iterator.html">LineIterator</a> *it, long line, <a class="el" href="structdebug_list.html">debugList</a> *dbg_list)</td></tr>
-<tr class="separator:a942f35e02bcadf7b1fe58d918dc5a531"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aeed608a4c974282c8b9764a73c8c8d69"><td class="memItemLeft" align="right" valign="top"><a id="aeed608a4c974282c8b9764a73c8c8d69" name="aeed608a4c974282c8b9764a73c8c8d69"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>match_syntax_group_6</b> (<a class="el" href="struct_line_iterator.html">LineIterator</a> *it, long line, <a class="el" href="structdebug_list.html">debugList</a> *dbg_list)</td></tr>
-<tr class="separator:aeed608a4c974282c8b9764a73c8c8d69"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af96503d0f4370ed18672141247730073"><td class="memItemLeft" align="right" valign="top"><a id="af96503d0f4370ed18672141247730073" name="af96503d0f4370ed18672141247730073"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>match_syntax_group_7</b> (<a class="el" href="struct_line_iterator.html">LineIterator</a> *it, long line, <a class="el" href="structdebug_list.html">debugList</a> *dbg_list)</td></tr>
-<tr class="separator:af96503d0f4370ed18672141247730073"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af10b351dc7df0a2b9a1f1a37bd498f68"><td class="memItemLeft" align="right" valign="top"><a id="af10b351dc7df0a2b9a1f1a37bd498f68" name="af10b351dc7df0a2b9a1f1a37bd498f68"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>validate_syntax_string</b> (<a class="el" href="struct_line_iterator.html">LineIterator</a> *it, long line, <a class="el" href="structdebug_list.html">debugList</a> *dbg_list)</td></tr>
-<tr class="separator:af10b351dc7df0a2b9a1f1a37bd498f68"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae39eef4bd1f921befdc8fc687ac6925d"><td class="memItemLeft" align="right" valign="top"><a id="ae39eef4bd1f921befdc8fc687ac6925d" name="ae39eef4bd1f921befdc8fc687ac6925d"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>validate_syntax_data</b> (<a class="el" href="struct_line_iterator.html">LineIterator</a> *it, long line, <a class="el" href="structdebug_list.html">debugList</a> *dbg_list)</td></tr>
-<tr class="separator:ae39eef4bd1f921befdc8fc687ac6925d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab79b4aad9db258a105d397a38f3c177f"><td class="memItemLeft" align="right" valign="top"><a id="ab79b4aad9db258a105d397a38f3c177f" name="ab79b4aad9db258a105d397a38f3c177f"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>validate_syntax_extern_and_entry</b> (<a class="el" href="struct_line_iterator.html">LineIterator</a> *it, long line, <a class="el" href="structdebug_list.html">debugList</a> *dbg_list)</td></tr>
-<tr class="separator:ab79b4aad9db258a105d397a38f3c177f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a638b5ef066fdf42bc98c180a4d5f55ce"><td class="memItemLeft" align="right" valign="top"><a id="a638b5ef066fdf42bc98c180a4d5f55ce" name="a638b5ef066fdf42bc98c180a4d5f55ce"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_register_name_heuristic</b> (<a class="el" href="struct_line_iterator.html">LineIterator</a> it)</td></tr>
-<tr class="separator:a638b5ef066fdf42bc98c180a4d5f55ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af4efc5b0016633e04baf672fdb9118c9"><td class="memItemLeft" align="right" valign="top"><a id="af4efc5b0016633e04baf672fdb9118c9" name="af4efc5b0016633e04baf672fdb9118c9"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_register_name</b> (<a class="el" href="struct_line_iterator.html">LineIterator</a> *it)</td></tr>
-<tr class="separator:af4efc5b0016633e04baf672fdb9118c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7223ccb577ce3a94fb768bda5c65203c"><td class="memItemLeft" align="right" valign="top"><a id="a7223ccb577ce3a94fb768bda5c65203c" name="a7223ccb577ce3a94fb768bda5c65203c"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_label_name</b> (<a class="el" href="struct_line_iterator.html">LineIterator</a> *it)</td></tr>
+<tr class="memitem:a7223ccb577ce3a94fb768bda5c65203c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="syntactical__analysis_8h.html#a7223ccb577ce3a94fb768bda5c65203c">is_label_name</a> (<a class="el" href="struct_line_iterator.html">LineIterator</a> *it)</td></tr>
+<tr class="memdesc:a7223ccb577ce3a94fb768bda5c65203c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if the next character is a label name. This is used to distinguish between labels that are separated by spaces and blank lines.  <a href="syntactical__analysis_8h.html#a7223ccb577ce3a94fb768bda5c65203c">More...</a><br /></td></tr>
 <tr class="separator:a7223ccb577ce3a94fb768bda5c65203c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1c81b8f22e1b58261c580dc786012ddb"><td class="memItemLeft" align="right" valign="top"><a id="a1c81b8f22e1b58261c580dc786012ddb" name="a1c81b8f22e1b58261c580dc786012ddb"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>match_operand</b> (<a class="el" href="struct_line_iterator.html">LineIterator</a> *it, long line, int <a class="el" href="structflags.html">flags</a>, <a class="el" href="structdebug_list.html">debugList</a> *dbg_list)</td></tr>
+<tr class="memitem:a6b4c7eb08fbefdb1bad8755c52666824"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="syntactical__analysis_8h.html#a6b4c7eb08fbefdb1bad8755c52666824">trim_symbol_name</a> (char *sym)</td></tr>
+<tr class="memdesc:a6b4c7eb08fbefdb1bad8755c52666824"><td class="mdescLeft">&#160;</td><td class="mdescRight">Trim the symbol name to make it easier to read. This is used to prevent accidental redefinitions of symbols that are in the middle of a function name.  <a href="syntactical__analysis_8h.html#a6b4c7eb08fbefdb1bad8755c52666824">More...</a><br /></td></tr>
+<tr class="separator:a6b4c7eb08fbefdb1bad8755c52666824"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a67016b4fe1cda5bfa436414cae4c3561"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="syntactical__analysis_8h.html#a67016b4fe1cda5bfa436414cae4c3561">validate_syntax</a> (<a class="el" href="struct_line_iterator.html">LineIterator</a> it, <a class="el" href="first__pass_8h.html#a851f3b709b20ebd9c41ee7f658292d09">firstPassStates</a> state, long line, <a class="el" href="structdebug_list.html">debugList</a> *dbg_list)</td></tr>
+<tr class="memdesc:a67016b4fe1cda5bfa436414cae4c3561"><td class="mdescLeft">&#160;</td><td class="mdescRight">Validate the syntax at the current position. This is a wrapper around validate_syntax_opcode () validate_syntax_data () and validate_syntax_string () to allow custom code to be added to the <a class="el" href="structdebug_list.html">debugList</a>.  <a href="syntactical__analysis_8h.html#a67016b4fe1cda5bfa436414cae4c3561">More...</a><br /></td></tr>
+<tr class="separator:a67016b4fe1cda5bfa436414cae4c3561"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6393e6140d0121d6d8c81b36cbed42e7"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="syntactical__analysis_8h.html#a6393e6140d0121d6d8c81b36cbed42e7">validate_syntax_opcode</a> (<a class="el" href="struct_line_iterator.html">LineIterator</a> *it, long line, <a class="el" href="structdebug_list.html">debugList</a> *dbg_list)</td></tr>
+<tr class="memdesc:a6393e6140d0121d6d8c81b36cbed42e7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Validate a syntax opcode. This is a helper function for validate_opcode ().  <a href="syntactical__analysis_8h.html#a6393e6140d0121d6d8c81b36cbed42e7">More...</a><br /></td></tr>
+<tr class="separator:a6393e6140d0121d6d8c81b36cbed42e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a048ed699cd7cbc580722534d81db9ce1"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="syntactical__analysis_8h.html#a048ed699cd7cbc580722534d81db9ce1">verify_int</a> (<a class="el" href="struct_line_iterator.html">LineIterator</a> *it, long line, char *seps, <a class="el" href="structdebug_list.html">debugList</a> *dbg_list)</td></tr>
+<tr class="memdesc:a048ed699cd7cbc580722534d81db9ce1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Verifies that the next character is a valid integer. This is done by examining the characters that begin with a digit followed by a comma or a comma and verifying that it is a valid integer.  <a href="syntactical__analysis_8h.html#a048ed699cd7cbc580722534d81db9ce1">More...</a><br /></td></tr>
+<tr class="separator:a048ed699cd7cbc580722534d81db9ce1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2749c50f152de3c380145d95a2d05262"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="syntactical__analysis_8h.html#a2749c50f152de3c380145d95a2d05262">match_syntax_group_1</a> (<a class="el" href="struct_line_iterator.html">LineIterator</a> *it, long line, <a class="el" href="structdebug_list.html">debugList</a> *dbg_list)</td></tr>
+<tr class="memdesc:a2749c50f152de3c380145d95a2d05262"><td class="mdescLeft">&#160;</td><td class="mdescRight">Matches a syntax group 1. This is the first part of the syntax group : it must be at the start of a variable or variable declaration.  <a href="syntactical__analysis_8h.html#a2749c50f152de3c380145d95a2d05262">More...</a><br /></td></tr>
+<tr class="separator:a2749c50f152de3c380145d95a2d05262"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae6a335691cd87b3ba20493300d250b0b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="syntactical__analysis_8h.html#ae6a335691cd87b3ba20493300d250b0b">match_syntax_group_2</a> (<a class="el" href="struct_line_iterator.html">LineIterator</a> *it, long line, <a class="el" href="structdebug_list.html">debugList</a> *dbg_list)</td></tr>
+<tr class="memdesc:ae6a335691cd87b3ba20493300d250b0b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Matches a syntax group 2. This is the second part of the syntax group matching algorithm.  <a href="syntactical__analysis_8h.html#ae6a335691cd87b3ba20493300d250b0b">More...</a><br /></td></tr>
+<tr class="separator:ae6a335691cd87b3ba20493300d250b0b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5f99c4d3e555f02fbe4925924058090b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="syntactical__analysis_8h.html#a5f99c4d3e555f02fbe4925924058090b">match_syntax_group_3</a> (<a class="el" href="struct_line_iterator.html">LineIterator</a> *it, long line, <a class="el" href="structdebug_list.html">debugList</a> *dbg_list)</td></tr>
+<tr class="memdesc:a5f99c4d3e555f02fbe4925924058090b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Matches a syntax group 3. This is the third part of the syntax group matching algorithm.  <a href="syntactical__analysis_8h.html#a5f99c4d3e555f02fbe4925924058090b">More...</a><br /></td></tr>
+<tr class="separator:a5f99c4d3e555f02fbe4925924058090b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a552075d73f1458ff9facc99ab2bc5702"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="syntactical__analysis_8h.html#a552075d73f1458ff9facc99ab2bc5702">match_syntax_group_4</a> (<a class="el" href="struct_line_iterator.html">LineIterator</a> *it, long line, <a class="el" href="structdebug_list.html">debugList</a> *dbg_list)</td></tr>
+<tr class="memdesc:a552075d73f1458ff9facc99ab2bc5702"><td class="mdescLeft">&#160;</td><td class="mdescRight">Matches a syntax group 4. This is used to check if there is a''followed by an operand.  <a href="syntactical__analysis_8h.html#a552075d73f1458ff9facc99ab2bc5702">More...</a><br /></td></tr>
+<tr class="separator:a552075d73f1458ff9facc99ab2bc5702"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a942f35e02bcadf7b1fe58d918dc5a531"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="syntactical__analysis_8h.html#a942f35e02bcadf7b1fe58d918dc5a531">match_syntax_group_5</a> (<a class="el" href="struct_line_iterator.html">LineIterator</a> *it, long line, <a class="el" href="structdebug_list.html">debugList</a> *dbg_list)</td></tr>
+<tr class="memdesc:a942f35e02bcadf7b1fe58d918dc5a531"><td class="mdescLeft">&#160;</td><td class="mdescRight">Matches a syntax group 5 starting at the current position. This is used to implement the syntax group 5 ( and below ) as well as the syntax group 5 ( and below ).  <a href="syntactical__analysis_8h.html#a942f35e02bcadf7b1fe58d918dc5a531">More...</a><br /></td></tr>
+<tr class="separator:a942f35e02bcadf7b1fe58d918dc5a531"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeed608a4c974282c8b9764a73c8c8d69"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="syntactical__analysis_8h.html#aeed608a4c974282c8b9764a73c8c8d69">match_syntax_group_6</a> (<a class="el" href="struct_line_iterator.html">LineIterator</a> *it, long line, <a class="el" href="structdebug_list.html">debugList</a> *dbg_list)</td></tr>
+<tr class="memdesc:aeed608a4c974282c8b9764a73c8c8d69"><td class="mdescLeft">&#160;</td><td class="mdescRight">Matches a syntax group 6 starting at the current position. This is used for variable and variable references.  <a href="syntactical__analysis_8h.html#aeed608a4c974282c8b9764a73c8c8d69">More...</a><br /></td></tr>
+<tr class="separator:aeed608a4c974282c8b9764a73c8c8d69"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af96503d0f4370ed18672141247730073"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="syntactical__analysis_8h.html#af96503d0f4370ed18672141247730073">match_syntax_group_7</a> (<a class="el" href="struct_line_iterator.html">LineIterator</a> *it, long line, <a class="el" href="structdebug_list.html">debugList</a> *dbg_list)</td></tr>
+<tr class="memdesc:af96503d0f4370ed18672141247730073"><td class="mdescLeft">&#160;</td><td class="mdescRight">Matches a syntax group 7. In this case we are interested in the name of a register or a label.  <a href="syntactical__analysis_8h.html#af96503d0f4370ed18672141247730073">More...</a><br /></td></tr>
+<tr class="separator:af96503d0f4370ed18672141247730073"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af10b351dc7df0a2b9a1f1a37bd498f68"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="syntactical__analysis_8h.html#af10b351dc7df0a2b9a1f1a37bd498f68">validate_syntax_string</a> (<a class="el" href="struct_line_iterator.html">LineIterator</a> *it, long line, <a class="el" href="structdebug_list.html">debugList</a> *dbg_list)</td></tr>
+<tr class="memdesc:af10b351dc7df0a2b9a1f1a37bd498f68"><td class="mdescLeft">&#160;</td><td class="mdescRight">Validates a syntax string.  <a href="syntactical__analysis_8h.html#af10b351dc7df0a2b9a1f1a37bd498f68">More...</a><br /></td></tr>
+<tr class="separator:af10b351dc7df0a2b9a1f1a37bd498f68"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae39eef4bd1f921befdc8fc687ac6925d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="syntactical__analysis_8h.html#ae39eef4bd1f921befdc8fc687ac6925d">validate_syntax_data</a> (<a class="el" href="struct_line_iterator.html">LineIterator</a> *it, long line, <a class="el" href="structdebug_list.html">debugList</a> *dbg_list)</td></tr>
+<tr class="memdesc:ae39eef4bd1f921befdc8fc687ac6925d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Validates a syntax data.  <a href="syntactical__analysis_8h.html#ae39eef4bd1f921befdc8fc687ac6925d">More...</a><br /></td></tr>
+<tr class="separator:ae39eef4bd1f921befdc8fc687ac6925d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab79b4aad9db258a105d397a38f3c177f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="syntactical__analysis_8h.html#ab79b4aad9db258a105d397a38f3c177f">validate_syntax_extern_and_entry</a> (<a class="el" href="struct_line_iterator.html">LineIterator</a> *it, long line, <a class="el" href="structdebug_list.html">debugList</a> *dbg_list)</td></tr>
+<tr class="memdesc:ab79b4aad9db258a105d397a38f3c177f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Validates the syntax extern and entry. This is used to validate the syntax extern and entry in a macro expansion.  <a href="syntactical__analysis_8h.html#ab79b4aad9db258a105d397a38f3c177f">More...</a><br /></td></tr>
+<tr class="separator:ab79b4aad9db258a105d397a38f3c177f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af4efc5b0016633e04baf672fdb9118c9"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="syntactical__analysis_8h.html#af4efc5b0016633e04baf672fdb9118c9">is_register_name</a> (<a class="el" href="struct_line_iterator.html">LineIterator</a> *it)</td></tr>
+<tr class="memdesc:af4efc5b0016633e04baf672fdb9118c9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if the next character is a register name.  <a href="syntactical__analysis_8h.html#af4efc5b0016633e04baf672fdb9118c9">More...</a><br /></td></tr>
+<tr class="separator:af4efc5b0016633e04baf672fdb9118c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6e08d23c864040adad1fd85d198143cc"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="syntactical__analysis_8h.html#a6e08d23c864040adad1fd85d198143cc">validate_label_ending</a> (<a class="el" href="struct_line_iterator.html">LineIterator</a> *it)</td></tr>
+<tr class="memdesc:a6e08d23c864040adad1fd85d198143cc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Validate that the iterator is at the end of a label. This is used to determine whether or not we should stop at the end of an already - processed label or not.  <a href="syntactical__analysis_8h.html#a6e08d23c864040adad1fd85d198143cc">More...</a><br /></td></tr>
+<tr class="separator:a6e08d23c864040adad1fd85d198143cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1c81b8f22e1b58261c580dc786012ddb"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="syntactical__analysis_8h.html#a1c81b8f22e1b58261c580dc786012ddb">match_operand</a> (<a class="el" href="struct_line_iterator.html">LineIterator</a> *it, long line, int <a class="el" href="structflags.html">flags</a>, <a class="el" href="structdebug_list.html">debugList</a> *dbg_list)</td></tr>
+<tr class="memdesc:a1c81b8f22e1b58261c580dc786012ddb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Matches an operand and returns TRUE if it matches. This is a low - level function used by match_operand_p () and match_operand_p2 ().  <a href="syntactical__analysis_8h.html#a1c81b8f22e1b58261c580dc786012ddb">More...</a><br /></td></tr>
 <tr class="separator:a1c81b8f22e1b58261c580dc786012ddb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a97d0de41184fb5f42ad42d38dba096c7"><td class="memItemLeft" align="right" valign="top"><a id="a97d0de41184fb5f42ad42d38dba096c7" name="a97d0de41184fb5f42ad42d38dba096c7"></a>
-SyntaxGroups&#160;</td><td class="memItemRight" valign="bottom"><b>get_syntax_group</b> (char *name)</td></tr>
+<tr class="memitem:a97d0de41184fb5f42ad42d38dba096c7"><td class="memItemLeft" align="right" valign="top">SyntaxGroups&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="syntactical__analysis_8h.html#a97d0de41184fb5f42ad42d38dba096c7">get_syntax_group</a> (char *name)</td></tr>
+<tr class="memdesc:a97d0de41184fb5f42ad42d38dba096c7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the syntax group of a name. This is used to distinguish groups of syntaxes that are different from each other.  <a href="syntactical__analysis_8h.html#a97d0de41184fb5f42ad42d38dba096c7">More...</a><br /></td></tr>
 <tr class="separator:a97d0de41184fb5f42ad42d38dba096c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5a9c4f6232642235f8097d073d1db698"><td class="memItemLeft" align="right" valign="top"><a id="a5a9c4f6232642235f8097d073d1db698" name="a5a9c4f6232642235f8097d073d1db698"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>recursive_match_pamaetrized_label</b> (<a class="el" href="struct_line_iterator.html">LineIterator</a> *it, long line, <a class="el" href="structdebug_list.html">debugList</a> *dbg_list)</td></tr>
-<tr class="separator:a5a9c4f6232642235f8097d073d1db698"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3aab5ebb625739be14df47889cff7a32"><td class="memItemLeft" align="right" valign="top"><a id="a3aab5ebb625739be14df47889cff7a32" name="a3aab5ebb625739be14df47889cff7a32"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>extract_sentence_type</b> (<a class="el" href="struct_line_iterator.html">LineIterator</a> *it)</td></tr>
-<tr class="separator:a3aab5ebb625739be14df47889cff7a32"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a652a415141a3ca9be4968762234dd9a1"><td class="memItemLeft" align="right" valign="top"><a id="a652a415141a3ca9be4968762234dd9a1" name="a652a415141a3ca9be4968762234dd9a1"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>directive_exists_basic</b> (<a class="el" href="struct_line_iterator.html">LineIterator</a> *line)</td></tr>
+<tr class="memitem:a07296539973fce1b07e9fed70ab86519"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="syntactical__analysis_8h.html#a07296539973fce1b07e9fed70ab86519">match_pamaetrized_label</a> (<a class="el" href="struct_line_iterator.html">LineIterator</a> *it, long line, <a class="el" href="structdebug_list.html">debugList</a> *dbg_list)</td></tr>
+<tr class="memdesc:a07296539973fce1b07e9fed70ab86519"><td class="mdescLeft">&#160;</td><td class="mdescRight">Matches pamaetrized labels. This is a bit tricky because we don't know the number of arguments to a label.  <a href="syntactical__analysis_8h.html#a07296539973fce1b07e9fed70ab86519">More...</a><br /></td></tr>
+<tr class="separator:a07296539973fce1b07e9fed70ab86519"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a638b5ef066fdf42bc98c180a4d5f55ce"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="syntactical__analysis_8h.html#a638b5ef066fdf42bc98c180a4d5f55ce">is_register_name_heuristic</a> (<a class="el" href="struct_line_iterator.html">LineIterator</a> it)</td></tr>
+<tr class="memdesc:a638b5ef066fdf42bc98c180a4d5f55ce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if we are looking for a heuristics to be used in register names.  <a href="syntactical__analysis_8h.html#a638b5ef066fdf42bc98c180a4d5f55ce">More...</a><br /></td></tr>
+<tr class="separator:a638b5ef066fdf42bc98c180a4d5f55ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a652a415141a3ca9be4968762234dd9a1"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="syntactical__analysis_8h.html#a652a415141a3ca9be4968762234dd9a1">directive_exists_basic</a> (<a class="el" href="struct_line_iterator.html">LineIterator</a> *line)</td></tr>
+<tr class="memdesc:a652a415141a3ca9be4968762234dd9a1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if a directive exists. This is a basic check that doesn't look for ". " and it's the only way to check for it.  <a href="syntactical__analysis_8h.html#a652a415141a3ca9be4968762234dd9a1">More...</a><br /></td></tr>
 <tr class="separator:a652a415141a3ca9be4968762234dd9a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab26f0bb418b6c3c1d540410e3a74a446"><td class="memItemLeft" align="right" valign="top"><a id="ab26f0bb418b6c3c1d540410e3a74a446" name="ab26f0bb418b6c3c1d540410e3a74a446"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>find_if_instruction_exists</b> (<a class="el" href="struct_line_iterator.html">LineIterator</a> *line)</td></tr>
+<tr class="memitem:ab26f0bb418b6c3c1d540410e3a74a446"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="syntactical__analysis_8h.html#ab26f0bb418b6c3c1d540410e3a74a446">find_if_instruction_exists</a> (<a class="el" href="struct_line_iterator.html">LineIterator</a> *line)</td></tr>
+<tr class="memdesc:ab26f0bb418b6c3c1d540410e3a74a446"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if instruction at line is a label. This is used to detect if we are going to write an instruction to a local variable that is not 16 - bit.  <a href="syntactical__analysis_8h.html#ab26f0bb418b6c3c1d540410e3a74a446">More...</a><br /></td></tr>
 <tr class="separator:ab26f0bb418b6c3c1d540410e3a74a446"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5fb834eeef9fbec0b842cdd2dd0bf01f"><td class="memItemLeft" align="right" valign="top"><a id="a5fb834eeef9fbec0b842cdd2dd0bf01f" name="a5fb834eeef9fbec0b842cdd2dd0bf01f"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>skip_label_basic</b> (<a class="el" href="struct_line_iterator.html">LineIterator</a> *line)</td></tr>
+<tr class="memitem:a5fb834eeef9fbec0b842cdd2dd0bf01f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="syntactical__analysis_8h.html#a5fb834eeef9fbec0b842cdd2dd0bf01f">skip_label_basic</a> (<a class="el" href="struct_line_iterator.html">LineIterator</a> *line)</td></tr>
+<tr class="memdesc:a5fb834eeef9fbec0b842cdd2dd0bf01f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Skip a basic label. This is used to skip labels that start with a colon or are followed by blanks.  <a href="syntactical__analysis_8h.html#a5fb834eeef9fbec0b842cdd2dd0bf01f">More...</a><br /></td></tr>
 <tr class="separator:a5fb834eeef9fbec0b842cdd2dd0bf01f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a31555cb9d1250fb7b12ccb741f23764e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="syntactical__analysis_8h.html#a31555cb9d1250fb7b12ccb741f23764e">is_register_name_whole</a> (<a class="el" href="struct_line_iterator.html">LineIterator</a> *it)</td></tr>
+<tr class="memdesc:a31555cb9d1250fb7b12ccb741f23764e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if the next character is a register name. while also checking the first character.  <a href="syntactical__analysis_8h.html#a31555cb9d1250fb7b12ccb741f23764e">More...</a><br /></td></tr>
+<tr class="separator:a31555cb9d1250fb7b12ccb741f23764e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae7738981401d4c8c01a35e5b3c19c254"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="syntactical__analysis_8h.html#ae7738981401d4c8c01a35e5b3c19c254">directive_exists</a> (<a class="el" href="struct_line_iterator.html">LineIterator</a> *line)</td></tr>
+<tr class="memdesc:ae7738981401d4c8c01a35e5b3c19c254"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if a directive exists in the given line.  <a href="syntactical__analysis_8h.html#ae7738981401d4c8c01a35e5b3c19c254">More...</a><br /></td></tr>
+<tr class="separator:ae7738981401d4c8c01a35e5b3c19c254"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
 <a id="ab026e29379dc2aca95b5ae14a4045010" name="ab026e29379dc2aca95b5ae14a4045010"></a>
@@ -281,7 +289,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>skip_label_basic</b> 
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">errorCodes check_label_syntax </td>
+          <td class="memname"><a class="el" href="debug_8h.html#a88edd67ec29d18293fae821840fef3ac">errorCodes</a> check_label_syntax </td>
           <td>(</td>
           <td class="paramtype">char *&#160;</td>
           <td class="paramname"><em>label</em></td><td>)</td>
@@ -289,7 +297,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>skip_label_basic</b> 
         </tr>
       </table>
 </div><div class="memdoc">
-<p >This function checks the lable syntax. </p><dl class="params"><dt>Parameters</dt><dd>
+
+<p>This function checks the lable syntax. </p>
+<dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">-</td><td>The label to do the syntax check upon. <br  />
  </td></tr>
@@ -297,6 +307,475 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>skip_label_basic</b> 
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>- An appropriate error code, if no errors found, returns ERROR_CODE_OK. </dd></dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="syntactical__analysis_8h_ab026e29379dc2aca95b5ae14a4045010_icgraph.png" border="0" usemap="#asyntactical__analysis_8h_ab026e29379dc2aca95b5ae14a4045010_icgraph" alt=""/></div>
+<map name="asyntactical__analysis_8h_ab026e29379dc2aca95b5ae14a4045010_icgraph" id="asyntactical__analysis_8h_ab026e29379dc2aca95b5ae14a4045010_icgraph">
+<area shape="rect" title="This function checks the lable syntax." alt="" coords="659,35,796,60"/>
+<area shape="rect" href="first__pass_8c.html#a870efe109722af3eb5c21a42810f29f6" title="This function take in a string, and checks if it&#39;s a symbol, if so it returns it&#39;s type...." alt="" coords="489,9,611,35"/>
+<area shape="rect" href="syntactical__analysis_8c.html#a855c8939951fd3d960b071b143af6df5" title="Checks if the label syntax is valid." alt="" coords="501,59,599,84"/>
+<area shape="rect" href="first__pass_8c.html#ae3d15ca0f34657e4715827c439839e1e" title="This function implements the first pass algorithm." alt="" coords="343,8,441,33"/>
+<area shape="rect" href="driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="193,5,274,31"/>
+<area shape="rect" href="driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,5,124,31"/>
+<area shape="rect" href="syntactical__analysis_8c.html#a19430e4a830b52423fd6c01235dc10af" title="Check if the next word is a label. This is used to detect whether or not we are in a label context." alt="" coords="361,59,423,84"/>
+<area shape="rect" href="syntactical__analysis_8c.html#ab26f0bb418b6c3c1d540410e3a74a446" title="Check if instruction at line is a label. This is used to detect if we are going to write an instructi..." alt="" coords="172,55,295,95"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a42eff397b553a32135043fe5d99839d7" name="a42eff397b553a32135043fe5d99839d7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a42eff397b553a32135043fe5d99839d7">&#9670;&#160;</a></span>cmp_register_name()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool cmp_register_name </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>str</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Compare register name to known ones. This is used to determine if we are interested in a register. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">str</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>TRUE if name is known else FALSE ( case insensitive </dd></dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="syntactical__analysis_8h_a42eff397b553a32135043fe5d99839d7_icgraph.png" border="0" usemap="#asyntactical__analysis_8h_a42eff397b553a32135043fe5d99839d7_icgraph" alt=""/></div>
+<map name="asyntactical__analysis_8h_a42eff397b553a32135043fe5d99839d7_icgraph" id="asyntactical__analysis_8h_a42eff397b553a32135043fe5d99839d7_icgraph">
+<area shape="rect" title="Compare register name to known ones. This is used to determine if we are interested in a register." alt="" coords="1435,179,1571,204"/>
+<area shape="rect" href="encoding_8c.html#a1f68c041de50a450af52718fe19495b3" title="Encode a word preceding a label." alt="" coords="1049,153,1210,179"/>
+<area shape="rect" href="encoding_8c.html#a6f106ab0328c50ee0e147f2eb95cdc29" title="Get the kind of operand." alt="" coords="1263,204,1387,229"/>
+<area shape="rect" href="encoding_8c.html#a8b9bc71f73ddbdfc2b4e936ea008f9bc" title="Encode a syntax group 1 instruction. dependent syntax group that we use to encode source and destinat..." alt="" coords="833,55,996,80"/>
+<area shape="rect" href="encoding_8c.html#aad295aeb1fd1a079ff337843c4dca909" title="Encode a syntax group 2 instruction. This is the second part of the machine &#45; dependent syntax group ..." alt="" coords="833,104,996,129"/>
+<area shape="rect" href="encoding_8c.html#a5f29114a13525dc324c78b7b31879c88" title="Encode a syntax group 3 instruction." alt="" coords="833,153,996,179"/>
+<area shape="rect" href="encoding_8c.html#acf82941e19eb39762290b8e98a7bf39d" title="Encode a syntax group 4. Encodes RTS and stop. This is used to encode the first memory word and the s..." alt="" coords="833,5,996,31"/>
+<area shape="rect" href="encoding_8c.html#a97919c7b730d4080230b6d6c1e499cdb" title="Encode a syntax group 5 instruction." alt="" coords="833,203,996,228"/>
+<area shape="rect" href="encoding_8c.html#a1bf869e59e47c1eab36adb3b1f7a4339" title="Encode a syntax group 6 instruction." alt="" coords="833,252,996,277"/>
+<area shape="rect" href="encoding_8c.html#a689f60c1be32c59d1c650cc1232d4ee1" title="Encode a syntax group 7 instruction." alt="" coords="833,301,996,327"/>
+<area shape="rect" href="encoding_8c.html#a5e11ca7717b5440fb6baebdf0da9cfda" title="Encode a single opcode. This is the entry point for the encoding routines." alt="" coords="672,179,785,204"/>
+<area shape="rect" href="first__pass_8c.html#a40eeac60c34220893b004549546acb2d" title="This function is used to process lines with opcodes and no label definitions. It also encodes the mem..." alt="" coords="493,171,624,211"/>
+<area shape="rect" href="first__pass_8c.html#ac0da628ba463b754effc2e88e611d4dd" title="This function is used to process lines with label definitions. It also encodes the memory if possible..." alt="" coords="493,235,624,275"/>
+<area shape="rect" href="first__pass_8c.html#ae3d15ca0f34657e4715827c439839e1e" title="This function implements the first pass algorithm." alt="" coords="324,243,423,268"/>
+<area shape="rect" href="driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,272,253,297"/>
+<area shape="rect" href="driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,272,124,297"/>
+<area shape="rect" href="encoding_8c.html#a6f027af72fd18bdeb31711ada8e669aa" title=" " alt="" coords="1077,305,1182,331"/>
+<area shape="rect" href="encoding_8c.html#a3017052dc8d455d662f5234da3f59fc8" title="Encode source and destination registers. This is used to encode a pair of register or immediates." alt="" coords="1044,203,1215,228"/>
+<area shape="rect" href="encoding_8c.html#ac462ef04efd6a452ec612a07a0e38070" title=" " alt="" coords="849,351,980,391"/>
+<area shape="rect" href="second__pass_8c.html#a36c8038b17843fb6d82d261367f7650b" title="Executes the line, in case label exists finds if it is valid and then encodes it, otherwise prints er..." alt="" coords="681,325,776,351"/>
+<area shape="rect" href="second__pass_8c.html#aa33feb8d270721a8f28a90a7833937db" title="Initiates the second pass of the assembler. This function is responsible for executing the second pas..." alt="" coords="301,296,445,321"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="ae7738981401d4c8c01a35e5b3c19c254" name="ae7738981401d4c8c01a35e5b3c19c254"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae7738981401d4c8c01a35e5b3c19c254">&#9670;&#160;</a></span>directive_exists()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool directive_exists </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_line_iterator.html">LineIterator</a> *&#160;</td>
+          <td class="paramname"><em>line</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Checks if a directive exists in the given line. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">line</td><td>The line to check for a directive. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Returns true if the line contains a directive, otherwise false. This function checks if a directive exists in the given line. The supported directives are ".string", ".data", ".extern", and ".entry". It uses the line_iterator_word_includes function to determine if the line contains any of these directives. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>The line iterator passed to this function must have already been initialized. </dd></dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="syntactical__analysis_8h_ae7738981401d4c8c01a35e5b3c19c254_icgraph.png" border="0" usemap="#asyntactical__analysis_8h_ae7738981401d4c8c01a35e5b3c19c254_icgraph" alt=""/></div>
+<map name="asyntactical__analysis_8h_ae7738981401d4c8c01a35e5b3c19c254_icgraph" id="asyntactical__analysis_8h_ae7738981401d4c8c01a35e5b3c19c254_icgraph">
+<area shape="rect" title="Checks if a directive exists in the given line." alt="" coords="493,5,604,31"/>
+<area shape="rect" href="second__pass_8c.html#aa33feb8d270721a8f28a90a7833937db" title="Initiates the second pass of the assembler. This function is responsible for executing the second pas..." alt="" coords="301,5,445,31"/>
+<area shape="rect" href="driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,5,253,31"/>
+<area shape="rect" href="driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,5,124,31"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a652a415141a3ca9be4968762234dd9a1" name="a652a415141a3ca9be4968762234dd9a1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a652a415141a3ca9be4968762234dd9a1">&#9670;&#160;</a></span>directive_exists_basic()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool directive_exists_basic </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_line_iterator.html">LineIterator</a> *&#160;</td>
+          <td class="paramname"><em>line</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Checks if a directive exists. This is a basic check that doesn't look for ". " and it's the only way to check for it. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">line</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>TRUE if there is a directive FALSE otherwise. The iterator is advanced past the directive </dd></dl>
+
+</div>
+</div>
+<a id="ab26f0bb418b6c3c1d540410e3a74a446" name="ab26f0bb418b6c3c1d540410e3a74a446"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab26f0bb418b6c3c1d540410e3a74a446">&#9670;&#160;</a></span>find_if_instruction_exists()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool find_if_instruction_exists </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_line_iterator.html">LineIterator</a> *&#160;</td>
+          <td class="paramname"><em>line</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Check if instruction at line is a label. This is used to detect if we are going to write an instruction to a local variable that is not 16 - bit. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">line</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>TRUE if instruction exists FALSE </dd></dl>
+
+</div>
+</div>
+<a id="a30984f09ff89091dd74a21dcae15e4c4" name="a30984f09ff89091dd74a21dcae15e4c4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a30984f09ff89091dd74a21dcae15e4c4">&#9670;&#160;</a></span>get_opcode()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Opcodes get_opcode </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>str</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get opcode from string. This is used to parse opcodes that are passed to libc functions. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">str</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>OpCode corresponding to str or 0 if str doesn't match any opcode </dd></dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="syntactical__analysis_8h_a30984f09ff89091dd74a21dcae15e4c4_icgraph.png" border="0" usemap="#asyntactical__analysis_8h_a30984f09ff89091dd74a21dcae15e4c4_icgraph" alt=""/></div>
+<map name="asyntactical__analysis_8h_a30984f09ff89091dd74a21dcae15e4c4_icgraph" id="asyntactical__analysis_8h_a30984f09ff89091dd74a21dcae15e4c4_icgraph">
+<area shape="rect" title="Get opcode from string. This is used to parse opcodes that are passed to libc functions." alt="" coords="805,134,895,159"/>
+<area shape="rect" href="encoding_8c.html#a5e11ca7717b5440fb6baebdf0da9cfda" title="Encode a single opcode. This is the entry point for the encoding routines." alt="" coords="635,13,749,38"/>
+<area shape="rect" href="syntactical__analysis_8c.html#ab26f0bb418b6c3c1d540410e3a74a446" title="Check if instruction at line is a label. This is used to detect if we are going to write an instructi..." alt="" coords="631,63,753,103"/>
+<area shape="rect" href="first__pass_8c.html#aa0a39d1f94314921231c97245e6eb551" title="This function is used to process .entry lines. It also encodes the memory if possible into the memory..." alt="" coords="627,127,757,167"/>
+<area shape="rect" href="first__pass_8c.html#accedad2dc6b0e81f160e2201f4f2b1d3" title="This function is used to process .extern lines. It also encodes the memory if possible into the memor..." alt="" coords="448,184,579,224"/>
+<area shape="rect" href="first__pass_8c.html#a870efe109722af3eb5c21a42810f29f6" title="This function take in a string, and checks if it&#39;s a symbol, if so it returns it&#39;s type...." alt="" coords="453,249,574,274"/>
+<area shape="rect" href="first__pass_8c.html#a40eeac60c34220893b004549546acb2d" title="This function is used to process lines with opcodes and no label definitions. It also encodes the mem..." alt="" coords="448,5,579,45"/>
+<area shape="rect" href="first__pass_8c.html#ac0da628ba463b754effc2e88e611d4dd" title="This function is used to process lines with label definitions. It also encodes the memory if possible..." alt="" coords="448,69,579,109"/>
+<area shape="rect" href="first__pass_8c.html#ae3d15ca0f34657e4715827c439839e1e" title="This function implements the first pass algorithm." alt="" coords="301,134,400,159"/>
+<area shape="rect" href="driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,134,253,159"/>
+<area shape="rect" href="driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,134,124,159"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a97d0de41184fb5f42ad42d38dba096c7" name="a97d0de41184fb5f42ad42d38dba096c7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a97d0de41184fb5f42ad42d38dba096c7">&#9670;&#160;</a></span>get_syntax_group()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">SyntaxGroups get_syntax_group </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>name</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get the syntax group of a name. This is used to distinguish groups of syntaxes that are different from each other. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">name</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><code>SG_GROUP_1</code> if the name is a syntax group <code>SG_GROUP_2</code> </dd></dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="syntactical__analysis_8h_a97d0de41184fb5f42ad42d38dba096c7_icgraph.png" border="0" usemap="#asyntactical__analysis_8h_a97d0de41184fb5f42ad42d38dba096c7_icgraph" alt=""/></div>
+<map name="asyntactical__analysis_8h_a97d0de41184fb5f42ad42d38dba096c7_icgraph" id="asyntactical__analysis_8h_a97d0de41184fb5f42ad42d38dba096c7_icgraph">
+<area shape="rect" title="Get the syntax group of a name. This is used to distinguish groups of syntaxes that are different fro..." alt="" coords="1080,95,1205,121"/>
+<area shape="rect" href="encoding_8c.html#ac462ef04efd6a452ec612a07a0e38070" title=" " alt="" coords="887,5,1017,45"/>
+<area shape="rect" href="encoding_8c.html#a5e11ca7717b5440fb6baebdf0da9cfda" title="Encode a single opcode. This is the entry point for the encoding routines." alt="" coords="691,121,805,146"/>
+<area shape="rect" href="second__pass_8c.html#a41e82792e66da5f66e6e378e20a0a7cc" title="Extracts the variables from the current line of assembly code. This function extracts the variables f..." alt="" coords="893,70,1011,95"/>
+<area shape="rect" href="syntactical__analysis_8c.html#a6393e6140d0121d6d8c81b36cbed42e7" title="Validate a syntax opcode. This is a helper function for validate_opcode ()." alt="" coords="872,185,1032,210"/>
+<area shape="rect" href="second__pass_8c.html#a36c8038b17843fb6d82d261367f7650b" title="Executes the line, in case label exists finds if it is valid and then encodes it, otherwise prints er..." alt="" coords="511,13,606,38"/>
+<area shape="rect" href="second__pass_8c.html#aa33feb8d270721a8f28a90a7833937db" title="Initiates the second pass of the assembler. This function is responsible for executing the second pas..." alt="" coords="301,81,445,106"/>
+<area shape="rect" href="driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,174,253,199"/>
+<area shape="rect" href="driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,174,124,199"/>
+<area shape="rect" href="first__pass_8c.html#a40eeac60c34220893b004549546acb2d" title="This function is used to process lines with opcodes and no label definitions. It also encodes the mem..." alt="" coords="493,127,624,167"/>
+<area shape="rect" href="first__pass_8c.html#ac0da628ba463b754effc2e88e611d4dd" title="This function is used to process lines with label definitions. It also encodes the memory if possible..." alt="" coords="493,63,624,103"/>
+<area shape="rect" href="first__pass_8c.html#ae3d15ca0f34657e4715827c439839e1e" title="This function implements the first pass algorithm." alt="" coords="324,198,423,223"/>
+<area shape="rect" href="second__pass_8c.html#a6b999b1b1244fbcf34f5f866b4aa3153" title="Checks whether a label exists in a line and is defined in the symbol table." alt="" coords="672,67,824,93"/>
+<area shape="rect" href="syntactical__analysis_8c.html#a67016b4fe1cda5bfa436414cae4c3561" title="Validate the syntax at the current position. This is a wrapper around validate_syntax_opcode () valid..." alt="" coords="693,198,803,223"/>
+<area shape="rect" href="first__pass_8c.html#a87a70eef7a9fd6d62eb27a5a2127739e" title="This function is used to process .data lines. It also encodes the memory if possible into the memoryB..." alt="" coords="493,191,624,231"/>
+<area shape="rect" href="first__pass_8c.html#aa0a39d1f94314921231c97245e6eb551" title="This function is used to process .entry lines. It also encodes the memory if possible into the memory..." alt="" coords="493,255,624,295"/>
+<area shape="rect" href="first__pass_8c.html#accedad2dc6b0e81f160e2201f4f2b1d3" title="This function is used to process .extern lines. It also encodes the memory if possible into the memor..." alt="" coords="493,319,624,359"/>
+<area shape="rect" href="first__pass_8c.html#a932fa602127543d4c7b4e5f4b64b9138" title="This function is used to process .string lines. It also encodes the memory if possible into the memor..." alt="" coords="493,383,624,423"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a7223ccb577ce3a94fb768bda5c65203c" name="a7223ccb577ce3a94fb768bda5c65203c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7223ccb577ce3a94fb768bda5c65203c">&#9670;&#160;</a></span>is_label_name()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool is_label_name </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_line_iterator.html">LineIterator</a> *&#160;</td>
+          <td class="paramname"><em>it</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Check if the next character is a label name. This is used to distinguish between labels that are separated by spaces and blank lines. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">it</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>TRUE if the next character is a label name FALSE otherwise </dd></dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="syntactical__analysis_8h_a7223ccb577ce3a94fb768bda5c65203c_icgraph.png" border="0" usemap="#asyntactical__analysis_8h_a7223ccb577ce3a94fb768bda5c65203c_icgraph" alt=""/></div>
+<map name="asyntactical__analysis_8h_a7223ccb577ce3a94fb768bda5c65203c_icgraph" id="asyntactical__analysis_8h_a7223ccb577ce3a94fb768bda5c65203c_icgraph">
+<area shape="rect" title="Check if the next character is a label name. This is used to distinguish between labels that are sepa..." alt="" coords="1661,265,1767,290"/>
+<area shape="rect" href="first__pass_8c.html#aa0a39d1f94314921231c97245e6eb551" title="This function is used to process .entry lines. It also encodes the memory if possible into the memory..." alt="" coords="448,7,579,47"/>
+<area shape="rect" href="first__pass_8c.html#accedad2dc6b0e81f160e2201f4f2b1d3" title="This function is used to process .extern lines. It also encodes the memory if possible into the memor..." alt="" coords="448,327,579,367"/>
+<area shape="rect" href="syntactical__analysis_8c.html#a1c81b8f22e1b58261c580dc786012ddb" title="Matches an operand and returns TRUE if it matches. This is a low &#45; level function used by match_opera..." alt="" coords="1258,190,1369,215"/>
+<area shape="rect" href="syntactical__analysis_8c.html#a942f35e02bcadf7b1fe58d918dc5a531" title="Matches a syntax group 5 starting at the current position. This is used to implement the syntax group..." alt="" coords="1027,290,1184,315"/>
+<area shape="rect" href="syntactical__analysis_8c.html#a07296539973fce1b07e9fed70ab86519" title="Matches pamaetrized labels. This is a bit tricky because we don&#39;t know the number of arguments to a l..." alt="" coords="1443,239,1613,265"/>
+<area shape="rect" href="second__pass_8c.html#a1d991b81e3a4e0eca4a867bd08cf6ecc" title="Updates the symbol offset in memory." alt="" coords="1454,391,1602,417"/>
+<area shape="rect" href="first__pass_8c.html#ae3d15ca0f34657e4715827c439839e1e" title="This function implements the first pass algorithm." alt="" coords="301,206,400,231"/>
+<area shape="rect" href="driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,299,253,325"/>
+<area shape="rect" href="driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,299,124,325"/>
+<area shape="rect" href="syntactical__analysis_8c.html#a2749c50f152de3c380145d95a2d05262" title="Matches a syntax group 1. This is the first part of the syntax group : it must be at the start of a v..." alt="" coords="1027,241,1184,266"/>
+<area shape="rect" href="syntactical__analysis_8c.html#ae6a335691cd87b3ba20493300d250b0b" title="Matches a syntax group 2. This is the second part of the syntax group matching algorithm." alt="" coords="1027,43,1184,69"/>
+<area shape="rect" href="syntactical__analysis_8c.html#a5f99c4d3e555f02fbe4925924058090b" title="Matches a syntax group 3. This is the third part of the syntax group matching algorithm." alt="" coords="1027,93,1184,118"/>
+<area shape="rect" href="syntactical__analysis_8c.html#aeed608a4c974282c8b9764a73c8c8d69" title="Matches a syntax group 6 starting at the current position. This is used for variable and variable ref..." alt="" coords="1027,142,1184,167"/>
+<area shape="rect" href="syntactical__analysis_8c.html#af96503d0f4370ed18672141247730073" title="Matches a syntax group 7. In this case we are interested in the name of a register or a label." alt="" coords="1027,191,1184,217"/>
+<area shape="rect" href="syntactical__analysis_8c.html#a6393e6140d0121d6d8c81b36cbed42e7" title="Validate a syntax opcode. This is a helper function for validate_opcode ()." alt="" coords="819,167,979,193"/>
+<area shape="rect" href="syntactical__analysis_8c.html#a67016b4fe1cda5bfa436414cae4c3561" title="Validate the syntax at the current position. This is a wrapper around validate_syntax_opcode () valid..." alt="" coords="643,167,754,193"/>
+<area shape="rect" href="first__pass_8c.html#a40eeac60c34220893b004549546acb2d" title="This function is used to process lines with opcodes and no label definitions. It also encodes the mem..." alt="" coords="448,263,579,303"/>
+<area shape="rect" href="first__pass_8c.html#a87a70eef7a9fd6d62eb27a5a2127739e" title="This function is used to process .data lines. It also encodes the memory if possible into the memoryB..." alt="" coords="448,71,579,111"/>
+<area shape="rect" href="first__pass_8c.html#ac0da628ba463b754effc2e88e611d4dd" title="This function is used to process lines with label definitions. It also encodes the memory if possible..." alt="" coords="448,135,579,175"/>
+<area shape="rect" href="first__pass_8c.html#a932fa602127543d4c7b4e5f4b64b9138" title="This function is used to process .string lines. It also encodes the memory if possible into the memor..." alt="" coords="448,199,579,239"/>
+<area shape="rect" href="second__pass_8c.html#ab6728edfef56c073ce9792b67edd84f7" title=" " alt="" coords="1232,391,1395,417"/>
+<area shape="rect" href="second__pass_8c.html#a36c8038b17843fb6d82d261367f7650b" title="Executes the line, in case label exists finds if it is valid and then encodes it, otherwise prints er..." alt="" coords="1058,391,1153,417"/>
+<area shape="rect" href="second__pass_8c.html#aa33feb8d270721a8f28a90a7833937db" title="Initiates the second pass of the assembler. This function is responsible for executing the second pas..." alt="" coords="627,391,771,417"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="af4efc5b0016633e04baf672fdb9118c9" name="af4efc5b0016633e04baf672fdb9118c9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af4efc5b0016633e04baf672fdb9118c9">&#9670;&#160;</a></span>is_register_name()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool is_register_name </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_line_iterator.html">LineIterator</a> *&#160;</td>
+          <td class="paramname"><em>it</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Check if the next character is a register name. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">it</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if the next character is a register name false otherwise </dd></dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="syntactical__analysis_8h_af4efc5b0016633e04baf672fdb9118c9_icgraph.png" border="0" usemap="#asyntactical__analysis_8h_af4efc5b0016633e04baf672fdb9118c9_icgraph" alt=""/></div>
+<map name="asyntactical__analysis_8h_af4efc5b0016633e04baf672fdb9118c9_icgraph" id="asyntactical__analysis_8h_af4efc5b0016633e04baf672fdb9118c9_icgraph">
+<area shape="rect" title="Check if the next character is a register name." alt="" coords="1576,245,1697,270"/>
+<area shape="rect" href="syntactical__analysis_8c.html#a1c81b8f22e1b58261c580dc786012ddb" title="Matches an operand and returns TRUE if it matches. This is a low &#45; level function used by match_opera..." alt="" coords="1199,195,1309,221"/>
+<area shape="rect" href="syntactical__analysis_8c.html#a942f35e02bcadf7b1fe58d918dc5a531" title="Matches a syntax group 5 starting at the current position. This is used to implement the syntax group..." alt="" coords="993,295,1151,321"/>
+<area shape="rect" href="syntactical__analysis_8c.html#a07296539973fce1b07e9fed70ab86519" title="Matches pamaetrized labels. This is a bit tricky because we don&#39;t know the number of arguments to a l..." alt="" coords="1357,245,1528,270"/>
+<area shape="rect" href="syntactical__analysis_8c.html#a2749c50f152de3c380145d95a2d05262" title="Matches a syntax group 1. This is the first part of the syntax group : it must be at the start of a v..." alt="" coords="993,49,1151,74"/>
+<area shape="rect" href="syntactical__analysis_8c.html#ae6a335691cd87b3ba20493300d250b0b" title="Matches a syntax group 2. This is the second part of the syntax group matching algorithm." alt="" coords="993,98,1151,123"/>
+<area shape="rect" href="syntactical__analysis_8c.html#a5f99c4d3e555f02fbe4925924058090b" title="Matches a syntax group 3. This is the third part of the syntax group matching algorithm." alt="" coords="993,147,1151,173"/>
+<area shape="rect" href="syntactical__analysis_8c.html#aeed608a4c974282c8b9764a73c8c8d69" title="Matches a syntax group 6 starting at the current position. This is used for variable and variable ref..." alt="" coords="993,197,1151,222"/>
+<area shape="rect" href="syntactical__analysis_8c.html#af96503d0f4370ed18672141247730073" title="Matches a syntax group 7. In this case we are interested in the name of a register or a label." alt="" coords="993,246,1151,271"/>
+<area shape="rect" href="syntactical__analysis_8c.html#a6393e6140d0121d6d8c81b36cbed42e7" title="Validate a syntax opcode. This is a helper function for validate_opcode ()." alt="" coords="785,173,945,198"/>
+<area shape="rect" href="syntactical__analysis_8c.html#a67016b4fe1cda5bfa436414cae4c3561" title="Validate the syntax at the current position. This is a wrapper around validate_syntax_opcode () valid..." alt="" coords="627,173,737,198"/>
+<area shape="rect" href="first__pass_8c.html#a40eeac60c34220893b004549546acb2d" title="This function is used to process lines with opcodes and no label definitions. It also encodes the mem..." alt="" coords="448,5,579,45"/>
+<area shape="rect" href="first__pass_8c.html#a87a70eef7a9fd6d62eb27a5a2127739e" title="This function is used to process .data lines. It also encodes the memory if possible into the memoryB..." alt="" coords="448,69,579,109"/>
+<area shape="rect" href="first__pass_8c.html#ac0da628ba463b754effc2e88e611d4dd" title="This function is used to process lines with label definitions. It also encodes the memory if possible..." alt="" coords="448,133,579,173"/>
+<area shape="rect" href="first__pass_8c.html#aa0a39d1f94314921231c97245e6eb551" title="This function is used to process .entry lines. It also encodes the memory if possible into the memory..." alt="" coords="448,197,579,237"/>
+<area shape="rect" href="first__pass_8c.html#accedad2dc6b0e81f160e2201f4f2b1d3" title="This function is used to process .extern lines. It also encodes the memory if possible into the memor..." alt="" coords="448,261,579,301"/>
+<area shape="rect" href="first__pass_8c.html#a932fa602127543d4c7b4e5f4b64b9138" title="This function is used to process .string lines. It also encodes the memory if possible into the memor..." alt="" coords="448,325,579,365"/>
+<area shape="rect" href="first__pass_8c.html#ae3d15ca0f34657e4715827c439839e1e" title="This function implements the first pass algorithm." alt="" coords="301,173,400,198"/>
+<area shape="rect" href="driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,173,253,198"/>
+<area shape="rect" href="driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,173,124,198"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a638b5ef066fdf42bc98c180a4d5f55ce" name="a638b5ef066fdf42bc98c180a4d5f55ce"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a638b5ef066fdf42bc98c180a4d5f55ce">&#9670;&#160;</a></span>is_register_name_heuristic()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool is_register_name_heuristic </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_line_iterator.html">LineIterator</a>&#160;</td>
+          <td class="paramname"><em>it</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Check if we are looking for a heuristics to be used in register names. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">it</td><td>- Iterator on the line to check. Must be at the start of a register name.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true if it is false otherwise. This is a heuristic </dd></dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="syntactical__analysis_8h_a638b5ef066fdf42bc98c180a4d5f55ce_icgraph.png" border="0" usemap="#asyntactical__analysis_8h_a638b5ef066fdf42bc98c180a4d5f55ce_icgraph" alt=""/></div>
+<map name="asyntactical__analysis_8h_a638b5ef066fdf42bc98c180a4d5f55ce_icgraph" id="asyntactical__analysis_8h_a638b5ef066fdf42bc98c180a4d5f55ce_icgraph">
+<area shape="rect" title="Check if we are looking for a heuristics to be used in register names." alt="" coords="1357,173,1535,198"/>
+<area shape="rect" href="syntactical__analysis_8c.html#a1c81b8f22e1b58261c580dc786012ddb" title="Matches an operand and returns TRUE if it matches. This is a low &#45; level function used by match_opera..." alt="" coords="1199,173,1309,198"/>
+<area shape="rect" href="syntactical__analysis_8c.html#a2749c50f152de3c380145d95a2d05262" title="Matches a syntax group 1. This is the first part of the syntax group : it must be at the start of a v..." alt="" coords="993,49,1151,74"/>
+<area shape="rect" href="syntactical__analysis_8c.html#ae6a335691cd87b3ba20493300d250b0b" title="Matches a syntax group 2. This is the second part of the syntax group matching algorithm." alt="" coords="993,98,1151,123"/>
+<area shape="rect" href="syntactical__analysis_8c.html#a5f99c4d3e555f02fbe4925924058090b" title="Matches a syntax group 3. This is the third part of the syntax group matching algorithm." alt="" coords="993,147,1151,173"/>
+<area shape="rect" href="syntactical__analysis_8c.html#a942f35e02bcadf7b1fe58d918dc5a531" title="Matches a syntax group 5 starting at the current position. This is used to implement the syntax group..." alt="" coords="993,197,1151,222"/>
+<area shape="rect" href="syntactical__analysis_8c.html#aeed608a4c974282c8b9764a73c8c8d69" title="Matches a syntax group 6 starting at the current position. This is used for variable and variable ref..." alt="" coords="993,246,1151,271"/>
+<area shape="rect" href="syntactical__analysis_8c.html#af96503d0f4370ed18672141247730073" title="Matches a syntax group 7. In this case we are interested in the name of a register or a label." alt="" coords="993,295,1151,321"/>
+<area shape="rect" href="syntactical__analysis_8c.html#a6393e6140d0121d6d8c81b36cbed42e7" title="Validate a syntax opcode. This is a helper function for validate_opcode ()." alt="" coords="785,173,945,198"/>
+<area shape="rect" href="syntactical__analysis_8c.html#a67016b4fe1cda5bfa436414cae4c3561" title="Validate the syntax at the current position. This is a wrapper around validate_syntax_opcode () valid..." alt="" coords="627,173,737,198"/>
+<area shape="rect" href="first__pass_8c.html#a40eeac60c34220893b004549546acb2d" title="This function is used to process lines with opcodes and no label definitions. It also encodes the mem..." alt="" coords="448,5,579,45"/>
+<area shape="rect" href="first__pass_8c.html#a87a70eef7a9fd6d62eb27a5a2127739e" title="This function is used to process .data lines. It also encodes the memory if possible into the memoryB..." alt="" coords="448,69,579,109"/>
+<area shape="rect" href="first__pass_8c.html#ac0da628ba463b754effc2e88e611d4dd" title="This function is used to process lines with label definitions. It also encodes the memory if possible..." alt="" coords="448,133,579,173"/>
+<area shape="rect" href="first__pass_8c.html#aa0a39d1f94314921231c97245e6eb551" title="This function is used to process .entry lines. It also encodes the memory if possible into the memory..." alt="" coords="448,197,579,237"/>
+<area shape="rect" href="first__pass_8c.html#accedad2dc6b0e81f160e2201f4f2b1d3" title="This function is used to process .extern lines. It also encodes the memory if possible into the memor..." alt="" coords="448,261,579,301"/>
+<area shape="rect" href="first__pass_8c.html#a932fa602127543d4c7b4e5f4b64b9138" title="This function is used to process .string lines. It also encodes the memory if possible into the memor..." alt="" coords="448,325,579,365"/>
+<area shape="rect" href="first__pass_8c.html#ae3d15ca0f34657e4715827c439839e1e" title="This function implements the first pass algorithm." alt="" coords="301,173,400,198"/>
+<area shape="rect" href="driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,173,253,198"/>
+<area shape="rect" href="driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,173,124,198"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a31555cb9d1250fb7b12ccb741f23764e" name="a31555cb9d1250fb7b12ccb741f23764e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a31555cb9d1250fb7b12ccb741f23764e">&#9670;&#160;</a></span>is_register_name_whole()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool is_register_name_whole </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_line_iterator.html">LineIterator</a> *&#160;</td>
+          <td class="paramname"><em>it</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Check if the next character is a register name. while also checking the first character. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">it</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if the next character is a register name false otherwise </dd></dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="syntactical__analysis_8h_a31555cb9d1250fb7b12ccb741f23764e_icgraph.png" border="0" usemap="#asyntactical__analysis_8h_a31555cb9d1250fb7b12ccb741f23764e_icgraph" alt=""/></div>
+<map name="asyntactical__analysis_8h_a31555cb9d1250fb7b12ccb741f23764e_icgraph" id="asyntactical__analysis_8h_a31555cb9d1250fb7b12ccb741f23764e_icgraph">
+<area shape="rect" title="Check if the next character is a register name. while also checking the first character." alt="" coords="1015,77,1176,102"/>
+<area shape="rect" href="first__pass_8c.html#aa0a39d1f94314921231c97245e6eb551" title="This function is used to process .entry lines. It also encodes the memory if possible into the memory..." alt="" coords="836,5,967,45"/>
+<area shape="rect" href="first__pass_8c.html#accedad2dc6b0e81f160e2201f4f2b1d3" title="This function is used to process .extern lines. It also encodes the memory if possible into the memor..." alt="" coords="836,69,967,109"/>
+<area shape="rect" href="second__pass_8c.html#ab6fec0fc93173020c37fc75727222d6a" title="Check if a label exists in the given line and update debug information accordingly." alt="" coords="843,134,960,159"/>
+<area shape="rect" href="first__pass_8c.html#ae3d15ca0f34657e4715827c439839e1e" title="This function implements the first pass algorithm." alt="" coords="663,77,761,102"/>
+<area shape="rect" href="driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,103,253,129"/>
+<area shape="rect" href="driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,103,124,129"/>
+<area shape="rect" href="second__pass_8c.html#a6b999b1b1244fbcf34f5f866b4aa3153" title="Checks whether a label exists in a line and is defined in the symbol table." alt="" coords="636,133,788,158"/>
+<area shape="rect" href="second__pass_8c.html#a36c8038b17843fb6d82d261367f7650b" title="Executes the line, in case label exists finds if it is valid and then encodes it, otherwise prints er..." alt="" coords="493,130,588,155"/>
+<area shape="rect" href="second__pass_8c.html#aa33feb8d270721a8f28a90a7833937db" title="Initiates the second pass of the assembler. This function is responsible for executing the second pas..." alt="" coords="301,129,445,154"/>
+</map>
+</div>
 
 </div>
 </div>
@@ -315,13 +794,693 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>skip_label_basic</b> 
         </tr>
       </table>
 </div><div class="memdoc">
-<p >Checks if the label syntax is valid. </p><dl class="params"><dt>Parameters</dt><dd>
+
+<p>Checks if the label syntax is valid. </p>
+<dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">-</td><td>The label string. </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>- TRUE if valid, FALSE otherwise. </dd></dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="syntactical__analysis_8h_a855c8939951fd3d960b071b143af6df5_icgraph.png" border="0" usemap="#asyntactical__analysis_8h_a855c8939951fd3d960b071b143af6df5_icgraph" alt=""/></div>
+<map name="asyntactical__analysis_8h_a855c8939951fd3d960b071b143af6df5_icgraph" id="asyntactical__analysis_8h_a855c8939951fd3d960b071b143af6df5_icgraph">
+<area shape="rect" title="Checks if the label syntax is valid." alt="" coords="287,13,385,38"/>
+<area shape="rect" href="syntactical__analysis_8c.html#a19430e4a830b52423fd6c01235dc10af" title="Check if the next word is a label. This is used to detect whether or not we are in a label context." alt="" coords="176,13,239,38"/>
+<area shape="rect" href="syntactical__analysis_8c.html#ab26f0bb418b6c3c1d540410e3a74a446" title="Check if instruction at line is a label. This is used to detect if we are going to write an instructi..." alt="" coords="5,5,128,45"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a19430e4a830b52423fd6c01235dc10af" name="a19430e4a830b52423fd6c01235dc10af"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a19430e4a830b52423fd6c01235dc10af">&#9670;&#160;</a></span>isLabel()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool isLabel </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_line_iterator.html">LineIterator</a> *&#160;</td>
+          <td class="paramname"><em>line</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Check if the next word is a label. This is used to detect whether or not we are in a label context. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">line</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><code>true</code> if the next word is a label <code>false</code> otherwise </dd></dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="syntactical__analysis_8h_a19430e4a830b52423fd6c01235dc10af_icgraph.png" border="0" usemap="#asyntactical__analysis_8h_a19430e4a830b52423fd6c01235dc10af_icgraph" alt=""/></div>
+<map name="asyntactical__analysis_8h_a19430e4a830b52423fd6c01235dc10af_icgraph" id="asyntactical__analysis_8h_a19430e4a830b52423fd6c01235dc10af_icgraph">
+<area shape="rect" title="Check if the next word is a label. This is used to detect whether or not we are in a label context." alt="" coords="176,13,239,38"/>
+<area shape="rect" href="syntactical__analysis_8c.html#ab26f0bb418b6c3c1d540410e3a74a446" title="Check if instruction at line is a label. This is used to detect if we are going to write an instructi..." alt="" coords="5,5,128,45"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a1c81b8f22e1b58261c580dc786012ddb" name="a1c81b8f22e1b58261c580dc786012ddb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1c81b8f22e1b58261c580dc786012ddb">&#9670;&#160;</a></span>match_operand()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool match_operand </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_line_iterator.html">LineIterator</a> *&#160;</td>
+          <td class="paramname"><em>it</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">long&#160;</td>
+          <td class="paramname"><em>line</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>flags</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structdebug_list.html">debugList</a> *&#160;</td>
+          <td class="paramname"><em>dbg_list</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Matches an operand and returns TRUE if it matches. This is a low - level function used by match_operand_p () and match_operand_p2 (). </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">it</td><td></td></tr>
+    <tr><td class="paramname">line</td><td>- Line number of the operand. This is used for error reporting. </td></tr>
+    <tr><td class="paramname">flags</td><td>- Flags to match the operand with. Flags can be FLAG_LABEL FLAG_NUMBER FLAG_REAL_REG and FLAG_REG_NEAREST </td></tr>
+    <tr><td class="paramname">dbg_list</td><td>- Debug list to fill with nodes.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>TRUE if the operand matches FALSE otherwise. On failure the iterator is left pointing at the end of the operand </dd></dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="syntactical__analysis_8h_a1c81b8f22e1b58261c580dc786012ddb_icgraph.png" border="0" usemap="#asyntactical__analysis_8h_a1c81b8f22e1b58261c580dc786012ddb_icgraph" alt=""/></div>
+<map name="asyntactical__analysis_8h_a1c81b8f22e1b58261c580dc786012ddb_icgraph" id="asyntactical__analysis_8h_a1c81b8f22e1b58261c580dc786012ddb_icgraph">
+<area shape="rect" title="Matches an operand and returns TRUE if it matches. This is a low &#45; level function used by match_opera..." alt="" coords="1199,173,1309,198"/>
+<area shape="rect" href="syntactical__analysis_8c.html#a2749c50f152de3c380145d95a2d05262" title="Matches a syntax group 1. This is the first part of the syntax group : it must be at the start of a v..." alt="" coords="993,49,1151,74"/>
+<area shape="rect" href="syntactical__analysis_8c.html#ae6a335691cd87b3ba20493300d250b0b" title="Matches a syntax group 2. This is the second part of the syntax group matching algorithm." alt="" coords="993,98,1151,123"/>
+<area shape="rect" href="syntactical__analysis_8c.html#a5f99c4d3e555f02fbe4925924058090b" title="Matches a syntax group 3. This is the third part of the syntax group matching algorithm." alt="" coords="993,147,1151,173"/>
+<area shape="rect" href="syntactical__analysis_8c.html#a942f35e02bcadf7b1fe58d918dc5a531" title="Matches a syntax group 5 starting at the current position. This is used to implement the syntax group..." alt="" coords="993,197,1151,222"/>
+<area shape="rect" href="syntactical__analysis_8c.html#aeed608a4c974282c8b9764a73c8c8d69" title="Matches a syntax group 6 starting at the current position. This is used for variable and variable ref..." alt="" coords="993,246,1151,271"/>
+<area shape="rect" href="syntactical__analysis_8c.html#af96503d0f4370ed18672141247730073" title="Matches a syntax group 7. In this case we are interested in the name of a register or a label." alt="" coords="993,295,1151,321"/>
+<area shape="rect" href="syntactical__analysis_8c.html#a6393e6140d0121d6d8c81b36cbed42e7" title="Validate a syntax opcode. This is a helper function for validate_opcode ()." alt="" coords="785,173,945,198"/>
+<area shape="rect" href="syntactical__analysis_8c.html#a67016b4fe1cda5bfa436414cae4c3561" title="Validate the syntax at the current position. This is a wrapper around validate_syntax_opcode () valid..." alt="" coords="627,173,737,198"/>
+<area shape="rect" href="first__pass_8c.html#a40eeac60c34220893b004549546acb2d" title="This function is used to process lines with opcodes and no label definitions. It also encodes the mem..." alt="" coords="448,5,579,45"/>
+<area shape="rect" href="first__pass_8c.html#a87a70eef7a9fd6d62eb27a5a2127739e" title="This function is used to process .data lines. It also encodes the memory if possible into the memoryB..." alt="" coords="448,69,579,109"/>
+<area shape="rect" href="first__pass_8c.html#ac0da628ba463b754effc2e88e611d4dd" title="This function is used to process lines with label definitions. It also encodes the memory if possible..." alt="" coords="448,133,579,173"/>
+<area shape="rect" href="first__pass_8c.html#aa0a39d1f94314921231c97245e6eb551" title="This function is used to process .entry lines. It also encodes the memory if possible into the memory..." alt="" coords="448,197,579,237"/>
+<area shape="rect" href="first__pass_8c.html#accedad2dc6b0e81f160e2201f4f2b1d3" title="This function is used to process .extern lines. It also encodes the memory if possible into the memor..." alt="" coords="448,261,579,301"/>
+<area shape="rect" href="first__pass_8c.html#a932fa602127543d4c7b4e5f4b64b9138" title="This function is used to process .string lines. It also encodes the memory if possible into the memor..." alt="" coords="448,325,579,365"/>
+<area shape="rect" href="first__pass_8c.html#ae3d15ca0f34657e4715827c439839e1e" title="This function implements the first pass algorithm." alt="" coords="301,173,400,198"/>
+<area shape="rect" href="driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,173,253,198"/>
+<area shape="rect" href="driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,173,124,198"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a07296539973fce1b07e9fed70ab86519" name="a07296539973fce1b07e9fed70ab86519"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a07296539973fce1b07e9fed70ab86519">&#9670;&#160;</a></span>match_pamaetrized_label()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool match_pamaetrized_label </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_line_iterator.html">LineIterator</a> *&#160;</td>
+          <td class="paramname"><em>it</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">long&#160;</td>
+          <td class="paramname"><em>line</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structdebug_list.html">debugList</a> *&#160;</td>
+          <td class="paramname"><em>dbg_list</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Matches pamaetrized labels. This is a bit tricky because we don't know the number of arguments to a label. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">it</td><td></td></tr>
+    <tr><td class="paramname">line</td><td>- Line number where the pattern was found. Used for error reporting. </td></tr>
+    <tr><td class="paramname">dbg_list</td><td>- Debug list to add warnings to.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>TRUE if it succeeds FALSE otherwise. Note that it does not check for syntax errors </dd></dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="syntactical__analysis_8h_a07296539973fce1b07e9fed70ab86519_icgraph.png" border="0" usemap="#asyntactical__analysis_8h_a07296539973fce1b07e9fed70ab86519_icgraph" alt=""/></div>
+<map name="asyntactical__analysis_8h_a07296539973fce1b07e9fed70ab86519_icgraph" id="asyntactical__analysis_8h_a07296539973fce1b07e9fed70ab86519_icgraph">
+<area shape="rect" title="Matches pamaetrized labels. This is a bit tricky because we don&#39;t know the number of arguments to a l..." alt="" coords="1357,173,1528,198"/>
+<area shape="rect" href="syntactical__analysis_8c.html#a1c81b8f22e1b58261c580dc786012ddb" title="Matches an operand and returns TRUE if it matches. This is a low &#45; level function used by match_opera..." alt="" coords="1199,173,1309,198"/>
+<area shape="rect" href="syntactical__analysis_8c.html#a2749c50f152de3c380145d95a2d05262" title="Matches a syntax group 1. This is the first part of the syntax group : it must be at the start of a v..." alt="" coords="993,49,1151,74"/>
+<area shape="rect" href="syntactical__analysis_8c.html#ae6a335691cd87b3ba20493300d250b0b" title="Matches a syntax group 2. This is the second part of the syntax group matching algorithm." alt="" coords="993,98,1151,123"/>
+<area shape="rect" href="syntactical__analysis_8c.html#a5f99c4d3e555f02fbe4925924058090b" title="Matches a syntax group 3. This is the third part of the syntax group matching algorithm." alt="" coords="993,147,1151,173"/>
+<area shape="rect" href="syntactical__analysis_8c.html#a942f35e02bcadf7b1fe58d918dc5a531" title="Matches a syntax group 5 starting at the current position. This is used to implement the syntax group..." alt="" coords="993,197,1151,222"/>
+<area shape="rect" href="syntactical__analysis_8c.html#aeed608a4c974282c8b9764a73c8c8d69" title="Matches a syntax group 6 starting at the current position. This is used for variable and variable ref..." alt="" coords="993,246,1151,271"/>
+<area shape="rect" href="syntactical__analysis_8c.html#af96503d0f4370ed18672141247730073" title="Matches a syntax group 7. In this case we are interested in the name of a register or a label." alt="" coords="993,295,1151,321"/>
+<area shape="rect" href="syntactical__analysis_8c.html#a6393e6140d0121d6d8c81b36cbed42e7" title="Validate a syntax opcode. This is a helper function for validate_opcode ()." alt="" coords="785,173,945,198"/>
+<area shape="rect" href="syntactical__analysis_8c.html#a67016b4fe1cda5bfa436414cae4c3561" title="Validate the syntax at the current position. This is a wrapper around validate_syntax_opcode () valid..." alt="" coords="627,173,737,198"/>
+<area shape="rect" href="first__pass_8c.html#a40eeac60c34220893b004549546acb2d" title="This function is used to process lines with opcodes and no label definitions. It also encodes the mem..." alt="" coords="448,5,579,45"/>
+<area shape="rect" href="first__pass_8c.html#a87a70eef7a9fd6d62eb27a5a2127739e" title="This function is used to process .data lines. It also encodes the memory if possible into the memoryB..." alt="" coords="448,69,579,109"/>
+<area shape="rect" href="first__pass_8c.html#ac0da628ba463b754effc2e88e611d4dd" title="This function is used to process lines with label definitions. It also encodes the memory if possible..." alt="" coords="448,133,579,173"/>
+<area shape="rect" href="first__pass_8c.html#aa0a39d1f94314921231c97245e6eb551" title="This function is used to process .entry lines. It also encodes the memory if possible into the memory..." alt="" coords="448,197,579,237"/>
+<area shape="rect" href="first__pass_8c.html#accedad2dc6b0e81f160e2201f4f2b1d3" title="This function is used to process .extern lines. It also encodes the memory if possible into the memor..." alt="" coords="448,261,579,301"/>
+<area shape="rect" href="first__pass_8c.html#a932fa602127543d4c7b4e5f4b64b9138" title="This function is used to process .string lines. It also encodes the memory if possible into the memor..." alt="" coords="448,325,579,365"/>
+<area shape="rect" href="first__pass_8c.html#ae3d15ca0f34657e4715827c439839e1e" title="This function implements the first pass algorithm." alt="" coords="301,173,400,198"/>
+<area shape="rect" href="driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,173,253,198"/>
+<area shape="rect" href="driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,173,124,198"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a2749c50f152de3c380145d95a2d05262" name="a2749c50f152de3c380145d95a2d05262"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2749c50f152de3c380145d95a2d05262">&#9670;&#160;</a></span>match_syntax_group_1()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool match_syntax_group_1 </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_line_iterator.html">LineIterator</a> *&#160;</td>
+          <td class="paramname"><em>it</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">long&#160;</td>
+          <td class="paramname"><em>line</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structdebug_list.html">debugList</a> *&#160;</td>
+          <td class="paramname"><em>dbg_list</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Matches a syntax group 1. This is the first part of the syntax group : it must be at the start of a variable or variable declaration. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">it</td><td></td></tr>
+    <tr><td class="paramname">line</td><td>- The current line number being matched. Used for error reporting. </td></tr>
+    <tr><td class="paramname">dbg_list</td><td>- The debug list to add debug nodes to.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>TRUE if a match was found FALSE otherwise. The match is terminated by a newline </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>groups: mov, add,sub </dd></dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="syntactical__analysis_8h_a2749c50f152de3c380145d95a2d05262_icgraph.png" border="0" usemap="#asyntactical__analysis_8h_a2749c50f152de3c380145d95a2d05262_icgraph" alt=""/></div>
+<map name="asyntactical__analysis_8h_a2749c50f152de3c380145d95a2d05262_icgraph" id="asyntactical__analysis_8h_a2749c50f152de3c380145d95a2d05262_icgraph">
+<area shape="rect" title="Matches a syntax group 1. This is the first part of the syntax group : it must be at the start of a v..." alt="" coords="993,173,1151,198"/>
+<area shape="rect" href="syntactical__analysis_8c.html#a6393e6140d0121d6d8c81b36cbed42e7" title="Validate a syntax opcode. This is a helper function for validate_opcode ()." alt="" coords="785,173,945,198"/>
+<area shape="rect" href="syntactical__analysis_8c.html#a67016b4fe1cda5bfa436414cae4c3561" title="Validate the syntax at the current position. This is a wrapper around validate_syntax_opcode () valid..." alt="" coords="627,173,737,198"/>
+<area shape="rect" href="first__pass_8c.html#a40eeac60c34220893b004549546acb2d" title="This function is used to process lines with opcodes and no label definitions. It also encodes the mem..." alt="" coords="448,5,579,45"/>
+<area shape="rect" href="first__pass_8c.html#a87a70eef7a9fd6d62eb27a5a2127739e" title="This function is used to process .data lines. It also encodes the memory if possible into the memoryB..." alt="" coords="448,69,579,109"/>
+<area shape="rect" href="first__pass_8c.html#ac0da628ba463b754effc2e88e611d4dd" title="This function is used to process lines with label definitions. It also encodes the memory if possible..." alt="" coords="448,133,579,173"/>
+<area shape="rect" href="first__pass_8c.html#aa0a39d1f94314921231c97245e6eb551" title="This function is used to process .entry lines. It also encodes the memory if possible into the memory..." alt="" coords="448,197,579,237"/>
+<area shape="rect" href="first__pass_8c.html#accedad2dc6b0e81f160e2201f4f2b1d3" title="This function is used to process .extern lines. It also encodes the memory if possible into the memor..." alt="" coords="448,261,579,301"/>
+<area shape="rect" href="first__pass_8c.html#a932fa602127543d4c7b4e5f4b64b9138" title="This function is used to process .string lines. It also encodes the memory if possible into the memor..." alt="" coords="448,325,579,365"/>
+<area shape="rect" href="first__pass_8c.html#ae3d15ca0f34657e4715827c439839e1e" title="This function implements the first pass algorithm." alt="" coords="301,173,400,198"/>
+<area shape="rect" href="driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,173,253,198"/>
+<area shape="rect" href="driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,173,124,198"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="ae6a335691cd87b3ba20493300d250b0b" name="ae6a335691cd87b3ba20493300d250b0b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae6a335691cd87b3ba20493300d250b0b">&#9670;&#160;</a></span>match_syntax_group_2()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool match_syntax_group_2 </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_line_iterator.html">LineIterator</a> *&#160;</td>
+          <td class="paramname"><em>it</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">long&#160;</td>
+          <td class="paramname"><em>line</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structdebug_list.html">debugList</a> *&#160;</td>
+          <td class="paramname"><em>dbg_list</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Matches a syntax group 2. This is the second part of the syntax group matching algorithm. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">it</td><td></td></tr>
+    <tr><td class="paramname">line</td><td>- Line number of the source code. This is used for reporting errors. </td></tr>
+    <tr><td class="paramname">dbg_list</td><td>- Debug list to fill with debug nodes.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>TRUE on success FALSE on failure. If FALSE is returned the iterator is not advanced </dd></dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="syntactical__analysis_8h_ae6a335691cd87b3ba20493300d250b0b_icgraph.png" border="0" usemap="#asyntactical__analysis_8h_ae6a335691cd87b3ba20493300d250b0b_icgraph" alt=""/></div>
+<map name="asyntactical__analysis_8h_ae6a335691cd87b3ba20493300d250b0b_icgraph" id="asyntactical__analysis_8h_ae6a335691cd87b3ba20493300d250b0b_icgraph">
+<area shape="rect" title="Matches a syntax group 2. This is the second part of the syntax group matching algorithm." alt="" coords="993,173,1151,198"/>
+<area shape="rect" href="syntactical__analysis_8c.html#a6393e6140d0121d6d8c81b36cbed42e7" title="Validate a syntax opcode. This is a helper function for validate_opcode ()." alt="" coords="785,173,945,198"/>
+<area shape="rect" href="syntactical__analysis_8c.html#a67016b4fe1cda5bfa436414cae4c3561" title="Validate the syntax at the current position. This is a wrapper around validate_syntax_opcode () valid..." alt="" coords="627,173,737,198"/>
+<area shape="rect" href="first__pass_8c.html#a40eeac60c34220893b004549546acb2d" title="This function is used to process lines with opcodes and no label definitions. It also encodes the mem..." alt="" coords="448,5,579,45"/>
+<area shape="rect" href="first__pass_8c.html#a87a70eef7a9fd6d62eb27a5a2127739e" title="This function is used to process .data lines. It also encodes the memory if possible into the memoryB..." alt="" coords="448,69,579,109"/>
+<area shape="rect" href="first__pass_8c.html#ac0da628ba463b754effc2e88e611d4dd" title="This function is used to process lines with label definitions. It also encodes the memory if possible..." alt="" coords="448,133,579,173"/>
+<area shape="rect" href="first__pass_8c.html#aa0a39d1f94314921231c97245e6eb551" title="This function is used to process .entry lines. It also encodes the memory if possible into the memory..." alt="" coords="448,197,579,237"/>
+<area shape="rect" href="first__pass_8c.html#accedad2dc6b0e81f160e2201f4f2b1d3" title="This function is used to process .extern lines. It also encodes the memory if possible into the memor..." alt="" coords="448,261,579,301"/>
+<area shape="rect" href="first__pass_8c.html#a932fa602127543d4c7b4e5f4b64b9138" title="This function is used to process .string lines. It also encodes the memory if possible into the memor..." alt="" coords="448,325,579,365"/>
+<area shape="rect" href="first__pass_8c.html#ae3d15ca0f34657e4715827c439839e1e" title="This function implements the first pass algorithm." alt="" coords="301,173,400,198"/>
+<area shape="rect" href="driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,173,253,198"/>
+<area shape="rect" href="driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,173,124,198"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a5f99c4d3e555f02fbe4925924058090b" name="a5f99c4d3e555f02fbe4925924058090b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5f99c4d3e555f02fbe4925924058090b">&#9670;&#160;</a></span>match_syntax_group_3()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool match_syntax_group_3 </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_line_iterator.html">LineIterator</a> *&#160;</td>
+          <td class="paramname"><em>it</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">long&#160;</td>
+          <td class="paramname"><em>line</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structdebug_list.html">debugList</a> *&#160;</td>
+          <td class="paramname"><em>dbg_list</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Matches a syntax group 3. This is the third part of the syntax group matching algorithm. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">it</td><td></td></tr>
+    <tr><td class="paramname">line</td><td>- Line number being matched. Used for error reporting. </td></tr>
+    <tr><td class="paramname">dbg_list</td><td>- Debug list for the matched nodes.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>TRUE if a match was found FALSE otherwise. When false the iterator is left pointing at the character immediately following the end of the syntax group </dd></dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="syntactical__analysis_8h_a5f99c4d3e555f02fbe4925924058090b_icgraph.png" border="0" usemap="#asyntactical__analysis_8h_a5f99c4d3e555f02fbe4925924058090b_icgraph" alt=""/></div>
+<map name="asyntactical__analysis_8h_a5f99c4d3e555f02fbe4925924058090b_icgraph" id="asyntactical__analysis_8h_a5f99c4d3e555f02fbe4925924058090b_icgraph">
+<area shape="rect" title="Matches a syntax group 3. This is the third part of the syntax group matching algorithm." alt="" coords="993,173,1151,198"/>
+<area shape="rect" href="syntactical__analysis_8c.html#a6393e6140d0121d6d8c81b36cbed42e7" title="Validate a syntax opcode. This is a helper function for validate_opcode ()." alt="" coords="785,173,945,198"/>
+<area shape="rect" href="syntactical__analysis_8c.html#a67016b4fe1cda5bfa436414cae4c3561" title="Validate the syntax at the current position. This is a wrapper around validate_syntax_opcode () valid..." alt="" coords="627,173,737,198"/>
+<area shape="rect" href="first__pass_8c.html#a40eeac60c34220893b004549546acb2d" title="This function is used to process lines with opcodes and no label definitions. It also encodes the mem..." alt="" coords="448,5,579,45"/>
+<area shape="rect" href="first__pass_8c.html#a87a70eef7a9fd6d62eb27a5a2127739e" title="This function is used to process .data lines. It also encodes the memory if possible into the memoryB..." alt="" coords="448,69,579,109"/>
+<area shape="rect" href="first__pass_8c.html#ac0da628ba463b754effc2e88e611d4dd" title="This function is used to process lines with label definitions. It also encodes the memory if possible..." alt="" coords="448,133,579,173"/>
+<area shape="rect" href="first__pass_8c.html#aa0a39d1f94314921231c97245e6eb551" title="This function is used to process .entry lines. It also encodes the memory if possible into the memory..." alt="" coords="448,197,579,237"/>
+<area shape="rect" href="first__pass_8c.html#accedad2dc6b0e81f160e2201f4f2b1d3" title="This function is used to process .extern lines. It also encodes the memory if possible into the memor..." alt="" coords="448,261,579,301"/>
+<area shape="rect" href="first__pass_8c.html#a932fa602127543d4c7b4e5f4b64b9138" title="This function is used to process .string lines. It also encodes the memory if possible into the memor..." alt="" coords="448,325,579,365"/>
+<area shape="rect" href="first__pass_8c.html#ae3d15ca0f34657e4715827c439839e1e" title="This function implements the first pass algorithm." alt="" coords="301,173,400,198"/>
+<area shape="rect" href="driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,173,253,198"/>
+<area shape="rect" href="driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,173,124,198"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a552075d73f1458ff9facc99ab2bc5702" name="a552075d73f1458ff9facc99ab2bc5702"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a552075d73f1458ff9facc99ab2bc5702">&#9670;&#160;</a></span>match_syntax_group_4()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool match_syntax_group_4 </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_line_iterator.html">LineIterator</a> *&#160;</td>
+          <td class="paramname"><em>it</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">long&#160;</td>
+          <td class="paramname"><em>line</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structdebug_list.html">debugList</a> *&#160;</td>
+          <td class="paramname"><em>dbg_list</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Matches a syntax group 4. This is used to check if there is a''followed by an operand. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">it</td><td></td></tr>
+    <tr><td class="paramname">line</td><td>- Line number where the token begins. This is used for reporting errors. </td></tr>
+    <tr><td class="paramname">dbg_list</td><td>- Debug list to add matched nodes to.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>TRUE if a match was found FALSE otherwise. If FALSE is returned the iterator is not advanced </dd></dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="syntactical__analysis_8h_a552075d73f1458ff9facc99ab2bc5702_icgraph.png" border="0" usemap="#asyntactical__analysis_8h_a552075d73f1458ff9facc99ab2bc5702_icgraph" alt=""/></div>
+<map name="asyntactical__analysis_8h_a552075d73f1458ff9facc99ab2bc5702_icgraph" id="asyntactical__analysis_8h_a552075d73f1458ff9facc99ab2bc5702_icgraph">
+<area shape="rect" title="Matches a syntax group 4. This is used to check if there is a&#39;&#39;followed by an operand." alt="" coords="993,173,1151,198"/>
+<area shape="rect" href="syntactical__analysis_8c.html#a6393e6140d0121d6d8c81b36cbed42e7" title="Validate a syntax opcode. This is a helper function for validate_opcode ()." alt="" coords="785,173,945,198"/>
+<area shape="rect" href="syntactical__analysis_8c.html#a67016b4fe1cda5bfa436414cae4c3561" title="Validate the syntax at the current position. This is a wrapper around validate_syntax_opcode () valid..." alt="" coords="627,173,737,198"/>
+<area shape="rect" href="first__pass_8c.html#a40eeac60c34220893b004549546acb2d" title="This function is used to process lines with opcodes and no label definitions. It also encodes the mem..." alt="" coords="448,5,579,45"/>
+<area shape="rect" href="first__pass_8c.html#a87a70eef7a9fd6d62eb27a5a2127739e" title="This function is used to process .data lines. It also encodes the memory if possible into the memoryB..." alt="" coords="448,69,579,109"/>
+<area shape="rect" href="first__pass_8c.html#ac0da628ba463b754effc2e88e611d4dd" title="This function is used to process lines with label definitions. It also encodes the memory if possible..." alt="" coords="448,133,579,173"/>
+<area shape="rect" href="first__pass_8c.html#aa0a39d1f94314921231c97245e6eb551" title="This function is used to process .entry lines. It also encodes the memory if possible into the memory..." alt="" coords="448,197,579,237"/>
+<area shape="rect" href="first__pass_8c.html#accedad2dc6b0e81f160e2201f4f2b1d3" title="This function is used to process .extern lines. It also encodes the memory if possible into the memor..." alt="" coords="448,261,579,301"/>
+<area shape="rect" href="first__pass_8c.html#a932fa602127543d4c7b4e5f4b64b9138" title="This function is used to process .string lines. It also encodes the memory if possible into the memor..." alt="" coords="448,325,579,365"/>
+<area shape="rect" href="first__pass_8c.html#ae3d15ca0f34657e4715827c439839e1e" title="This function implements the first pass algorithm." alt="" coords="301,173,400,198"/>
+<area shape="rect" href="driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,173,253,198"/>
+<area shape="rect" href="driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,173,124,198"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a942f35e02bcadf7b1fe58d918dc5a531" name="a942f35e02bcadf7b1fe58d918dc5a531"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a942f35e02bcadf7b1fe58d918dc5a531">&#9670;&#160;</a></span>match_syntax_group_5()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool match_syntax_group_5 </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_line_iterator.html">LineIterator</a> *&#160;</td>
+          <td class="paramname"><em>it</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">long&#160;</td>
+          <td class="paramname"><em>line</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structdebug_list.html">debugList</a> *&#160;</td>
+          <td class="paramname"><em>dbg_list</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Matches a syntax group 5 starting at the current position. This is used to implement the syntax group 5 ( and below ) as well as the syntax group 5 ( and below ). </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">it</td><td></td></tr>
+    <tr><td class="paramname">line</td><td>- Line number of the current position </td></tr>
+    <tr><td class="paramname">dbg_list</td><td>- Debug list for the matched nodes</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>TRUE if a match was found FALSE if not ( or an error occurred </dd></dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="syntactical__analysis_8h_a942f35e02bcadf7b1fe58d918dc5a531_icgraph.png" border="0" usemap="#asyntactical__analysis_8h_a942f35e02bcadf7b1fe58d918dc5a531_icgraph" alt=""/></div>
+<map name="asyntactical__analysis_8h_a942f35e02bcadf7b1fe58d918dc5a531_icgraph" id="asyntactical__analysis_8h_a942f35e02bcadf7b1fe58d918dc5a531_icgraph">
+<area shape="rect" title="Matches a syntax group 5 starting at the current position. This is used to implement the syntax group..." alt="" coords="993,173,1151,198"/>
+<area shape="rect" href="syntactical__analysis_8c.html#a6393e6140d0121d6d8c81b36cbed42e7" title="Validate a syntax opcode. This is a helper function for validate_opcode ()." alt="" coords="785,173,945,198"/>
+<area shape="rect" href="syntactical__analysis_8c.html#a67016b4fe1cda5bfa436414cae4c3561" title="Validate the syntax at the current position. This is a wrapper around validate_syntax_opcode () valid..." alt="" coords="627,173,737,198"/>
+<area shape="rect" href="first__pass_8c.html#a40eeac60c34220893b004549546acb2d" title="This function is used to process lines with opcodes and no label definitions. It also encodes the mem..." alt="" coords="448,5,579,45"/>
+<area shape="rect" href="first__pass_8c.html#a87a70eef7a9fd6d62eb27a5a2127739e" title="This function is used to process .data lines. It also encodes the memory if possible into the memoryB..." alt="" coords="448,69,579,109"/>
+<area shape="rect" href="first__pass_8c.html#ac0da628ba463b754effc2e88e611d4dd" title="This function is used to process lines with label definitions. It also encodes the memory if possible..." alt="" coords="448,133,579,173"/>
+<area shape="rect" href="first__pass_8c.html#aa0a39d1f94314921231c97245e6eb551" title="This function is used to process .entry lines. It also encodes the memory if possible into the memory..." alt="" coords="448,197,579,237"/>
+<area shape="rect" href="first__pass_8c.html#accedad2dc6b0e81f160e2201f4f2b1d3" title="This function is used to process .extern lines. It also encodes the memory if possible into the memor..." alt="" coords="448,261,579,301"/>
+<area shape="rect" href="first__pass_8c.html#a932fa602127543d4c7b4e5f4b64b9138" title="This function is used to process .string lines. It also encodes the memory if possible into the memor..." alt="" coords="448,325,579,365"/>
+<area shape="rect" href="first__pass_8c.html#ae3d15ca0f34657e4715827c439839e1e" title="This function implements the first pass algorithm." alt="" coords="301,173,400,198"/>
+<area shape="rect" href="driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,173,253,198"/>
+<area shape="rect" href="driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,173,124,198"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="aeed608a4c974282c8b9764a73c8c8d69" name="aeed608a4c974282c8b9764a73c8c8d69"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeed608a4c974282c8b9764a73c8c8d69">&#9670;&#160;</a></span>match_syntax_group_6()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool match_syntax_group_6 </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_line_iterator.html">LineIterator</a> *&#160;</td>
+          <td class="paramname"><em>it</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">long&#160;</td>
+          <td class="paramname"><em>line</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structdebug_list.html">debugList</a> *&#160;</td>
+          <td class="paramname"><em>dbg_list</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Matches a syntax group 6 starting at the current position. This is used for variable and variable references. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">it</td><td></td></tr>
+    <tr><td class="paramname">line</td><td>- Line in the source file being scanned </td></tr>
+    <tr><td class="paramname">dbg_list</td><td>- Debug list for the matches.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>TRUE if a match was found FALSE otherwise ( an error has been reported </dd></dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="syntactical__analysis_8h_aeed608a4c974282c8b9764a73c8c8d69_icgraph.png" border="0" usemap="#asyntactical__analysis_8h_aeed608a4c974282c8b9764a73c8c8d69_icgraph" alt=""/></div>
+<map name="asyntactical__analysis_8h_aeed608a4c974282c8b9764a73c8c8d69_icgraph" id="asyntactical__analysis_8h_aeed608a4c974282c8b9764a73c8c8d69_icgraph">
+<area shape="rect" title="Matches a syntax group 6 starting at the current position. This is used for variable and variable ref..." alt="" coords="993,173,1151,198"/>
+<area shape="rect" href="syntactical__analysis_8c.html#a6393e6140d0121d6d8c81b36cbed42e7" title="Validate a syntax opcode. This is a helper function for validate_opcode ()." alt="" coords="785,173,945,198"/>
+<area shape="rect" href="syntactical__analysis_8c.html#a67016b4fe1cda5bfa436414cae4c3561" title="Validate the syntax at the current position. This is a wrapper around validate_syntax_opcode () valid..." alt="" coords="627,173,737,198"/>
+<area shape="rect" href="first__pass_8c.html#a40eeac60c34220893b004549546acb2d" title="This function is used to process lines with opcodes and no label definitions. It also encodes the mem..." alt="" coords="448,5,579,45"/>
+<area shape="rect" href="first__pass_8c.html#a87a70eef7a9fd6d62eb27a5a2127739e" title="This function is used to process .data lines. It also encodes the memory if possible into the memoryB..." alt="" coords="448,69,579,109"/>
+<area shape="rect" href="first__pass_8c.html#ac0da628ba463b754effc2e88e611d4dd" title="This function is used to process lines with label definitions. It also encodes the memory if possible..." alt="" coords="448,133,579,173"/>
+<area shape="rect" href="first__pass_8c.html#aa0a39d1f94314921231c97245e6eb551" title="This function is used to process .entry lines. It also encodes the memory if possible into the memory..." alt="" coords="448,197,579,237"/>
+<area shape="rect" href="first__pass_8c.html#accedad2dc6b0e81f160e2201f4f2b1d3" title="This function is used to process .extern lines. It also encodes the memory if possible into the memor..." alt="" coords="448,261,579,301"/>
+<area shape="rect" href="first__pass_8c.html#a932fa602127543d4c7b4e5f4b64b9138" title="This function is used to process .string lines. It also encodes the memory if possible into the memor..." alt="" coords="448,325,579,365"/>
+<area shape="rect" href="first__pass_8c.html#ae3d15ca0f34657e4715827c439839e1e" title="This function implements the first pass algorithm." alt="" coords="301,173,400,198"/>
+<area shape="rect" href="driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,173,253,198"/>
+<area shape="rect" href="driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,173,124,198"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="af96503d0f4370ed18672141247730073" name="af96503d0f4370ed18672141247730073"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af96503d0f4370ed18672141247730073">&#9670;&#160;</a></span>match_syntax_group_7()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool match_syntax_group_7 </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_line_iterator.html">LineIterator</a> *&#160;</td>
+          <td class="paramname"><em>it</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">long&#160;</td>
+          <td class="paramname"><em>line</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structdebug_list.html">debugList</a> *&#160;</td>
+          <td class="paramname"><em>dbg_list</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Matches a syntax group 7. In this case we are interested in the name of a register or a label. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">it</td><td></td></tr>
+    <tr><td class="paramname">line</td><td>- Line number where the syntax group starts. Used for error reporting. </td></tr>
+    <tr><td class="paramname">dbg_list</td><td>- Debug list for all matches.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>TRUE if a match was found FALSE otherwise. This function is called by match_syntax_group () </dd></dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="syntactical__analysis_8h_af96503d0f4370ed18672141247730073_icgraph.png" border="0" usemap="#asyntactical__analysis_8h_af96503d0f4370ed18672141247730073_icgraph" alt=""/></div>
+<map name="asyntactical__analysis_8h_af96503d0f4370ed18672141247730073_icgraph" id="asyntactical__analysis_8h_af96503d0f4370ed18672141247730073_icgraph">
+<area shape="rect" title="Matches a syntax group 7. In this case we are interested in the name of a register or a label." alt="" coords="993,173,1151,198"/>
+<area shape="rect" href="syntactical__analysis_8c.html#a6393e6140d0121d6d8c81b36cbed42e7" title="Validate a syntax opcode. This is a helper function for validate_opcode ()." alt="" coords="785,173,945,198"/>
+<area shape="rect" href="syntactical__analysis_8c.html#a67016b4fe1cda5bfa436414cae4c3561" title="Validate the syntax at the current position. This is a wrapper around validate_syntax_opcode () valid..." alt="" coords="627,173,737,198"/>
+<area shape="rect" href="first__pass_8c.html#a40eeac60c34220893b004549546acb2d" title="This function is used to process lines with opcodes and no label definitions. It also encodes the mem..." alt="" coords="448,5,579,45"/>
+<area shape="rect" href="first__pass_8c.html#a87a70eef7a9fd6d62eb27a5a2127739e" title="This function is used to process .data lines. It also encodes the memory if possible into the memoryB..." alt="" coords="448,69,579,109"/>
+<area shape="rect" href="first__pass_8c.html#ac0da628ba463b754effc2e88e611d4dd" title="This function is used to process lines with label definitions. It also encodes the memory if possible..." alt="" coords="448,133,579,173"/>
+<area shape="rect" href="first__pass_8c.html#aa0a39d1f94314921231c97245e6eb551" title="This function is used to process .entry lines. It also encodes the memory if possible into the memory..." alt="" coords="448,197,579,237"/>
+<area shape="rect" href="first__pass_8c.html#accedad2dc6b0e81f160e2201f4f2b1d3" title="This function is used to process .extern lines. It also encodes the memory if possible into the memor..." alt="" coords="448,261,579,301"/>
+<area shape="rect" href="first__pass_8c.html#a932fa602127543d4c7b4e5f4b64b9138" title="This function is used to process .string lines. It also encodes the memory if possible into the memor..." alt="" coords="448,325,579,365"/>
+<area shape="rect" href="first__pass_8c.html#ae3d15ca0f34657e4715827c439839e1e" title="This function implements the first pass algorithm." alt="" coords="301,173,400,198"/>
+<area shape="rect" href="driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,173,253,198"/>
+<area shape="rect" href="driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,173,124,198"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a5fb834eeef9fbec0b842cdd2dd0bf01f" name="a5fb834eeef9fbec0b842cdd2dd0bf01f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5fb834eeef9fbec0b842cdd2dd0bf01f">&#9670;&#160;</a></span>skip_label_basic()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void skip_label_basic </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_line_iterator.html">LineIterator</a> *&#160;</td>
+          <td class="paramname"><em>line</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Skip a basic label. This is used to skip labels that start with a colon or are followed by blanks. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">line</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="syntactical__analysis_8h_a5fb834eeef9fbec0b842cdd2dd0bf01f_icgraph.png" border="0" usemap="#asyntactical__analysis_8h_a5fb834eeef9fbec0b842cdd2dd0bf01f_icgraph" alt=""/></div>
+<map name="asyntactical__analysis_8h_a5fb834eeef9fbec0b842cdd2dd0bf01f_icgraph" id="asyntactical__analysis_8h_a5fb834eeef9fbec0b842cdd2dd0bf01f_icgraph">
+<area shape="rect" title="Skip a basic label. This is used to skip labels that start with a colon or are followed by blanks." alt="" coords="176,13,295,38"/>
+<area shape="rect" href="syntactical__analysis_8c.html#ab26f0bb418b6c3c1d540410e3a74a446" title="Check if instruction at line is a label. This is used to detect if we are going to write an instructi..." alt="" coords="5,5,128,45"/>
+</map>
+</div>
 
 </div>
 </div>
@@ -340,23 +1499,529 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>skip_label_basic</b> 
         </tr>
       </table>
 </div><div class="memdoc">
-<p >This function trims the symbol name, i.e. trims the ':' </p><dl class="params"><dt>Parameters</dt><dd>
+
+<p>Trim the symbol name to make it easier to read. This is used to prevent accidental redefinitions of symbols that are in the middle of a function name. </p>
+<dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">-</td><td>The symbol to fix. </td></tr>
+    <tr><td class="paramname">sym</td><td></td></tr>
   </table>
   </dd>
 </dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="syntactical__analysis_8h_a6b4c7eb08fbefdb1bad8755c52666824_icgraph.png" border="0" usemap="#asyntactical__analysis_8h_a6b4c7eb08fbefdb1bad8755c52666824_icgraph" alt=""/></div>
+<map name="asyntactical__analysis_8h_a6b4c7eb08fbefdb1bad8755c52666824_icgraph" id="asyntactical__analysis_8h_a6b4c7eb08fbefdb1bad8755c52666824_icgraph">
+<area shape="rect" title="Trim the symbol name to make it easier to read. This is used to prevent accidental redefinitions of s..." alt="" coords="844,35,976,60"/>
+<area shape="rect" href="syntactical__analysis_8c.html#ab026e29379dc2aca95b5ae14a4045010" title="This function checks the lable syntax." alt="" coords="659,35,796,60"/>
+<area shape="rect" href="first__pass_8c.html#a870efe109722af3eb5c21a42810f29f6" title="This function take in a string, and checks if it&#39;s a symbol, if so it returns it&#39;s type...." alt="" coords="489,9,611,35"/>
+<area shape="rect" href="syntactical__analysis_8c.html#a855c8939951fd3d960b071b143af6df5" title="Checks if the label syntax is valid." alt="" coords="501,59,599,84"/>
+<area shape="rect" href="first__pass_8c.html#ae3d15ca0f34657e4715827c439839e1e" title="This function implements the first pass algorithm." alt="" coords="343,8,441,33"/>
+<area shape="rect" href="driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="193,5,274,31"/>
+<area shape="rect" href="driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,5,124,31"/>
+<area shape="rect" href="syntactical__analysis_8c.html#a19430e4a830b52423fd6c01235dc10af" title="Check if the next word is a label. This is used to detect whether or not we are in a label context." alt="" coords="361,59,423,84"/>
+<area shape="rect" href="syntactical__analysis_8c.html#ab26f0bb418b6c3c1d540410e3a74a446" title="Check if instruction at line is a label. This is used to detect if we are going to write an instructi..." alt="" coords="172,55,295,95"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a6e08d23c864040adad1fd85d198143cc" name="a6e08d23c864040adad1fd85d198143cc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6e08d23c864040adad1fd85d198143cc">&#9670;&#160;</a></span>validate_label_ending()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool validate_label_ending </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_line_iterator.html">LineIterator</a> *&#160;</td>
+          <td class="paramname"><em>it</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Validate that the iterator is at the end of a label. This is used to determine whether or not we should stop at the end of an already - processed label or not. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">it</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true if \ a it is at the end of a label false otherwise </dd></dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="syntactical__analysis_8h_a6e08d23c864040adad1fd85d198143cc_icgraph.png" border="0" usemap="#asyntactical__analysis_8h_a6e08d23c864040adad1fd85d198143cc_icgraph" alt=""/></div>
+<map name="asyntactical__analysis_8h_a6e08d23c864040adad1fd85d198143cc_icgraph" id="asyntactical__analysis_8h_a6e08d23c864040adad1fd85d198143cc_icgraph">
+<area shape="rect" title="Validate that the iterator is at the end of a label. This is used to determine whether or not we shou..." alt="" coords="1357,173,1501,198"/>
+<area shape="rect" href="syntactical__analysis_8c.html#a1c81b8f22e1b58261c580dc786012ddb" title="Matches an operand and returns TRUE if it matches. This is a low &#45; level function used by match_opera..." alt="" coords="1199,173,1309,198"/>
+<area shape="rect" href="syntactical__analysis_8c.html#a2749c50f152de3c380145d95a2d05262" title="Matches a syntax group 1. This is the first part of the syntax group : it must be at the start of a v..." alt="" coords="993,49,1151,74"/>
+<area shape="rect" href="syntactical__analysis_8c.html#ae6a335691cd87b3ba20493300d250b0b" title="Matches a syntax group 2. This is the second part of the syntax group matching algorithm." alt="" coords="993,98,1151,123"/>
+<area shape="rect" href="syntactical__analysis_8c.html#a5f99c4d3e555f02fbe4925924058090b" title="Matches a syntax group 3. This is the third part of the syntax group matching algorithm." alt="" coords="993,147,1151,173"/>
+<area shape="rect" href="syntactical__analysis_8c.html#a942f35e02bcadf7b1fe58d918dc5a531" title="Matches a syntax group 5 starting at the current position. This is used to implement the syntax group..." alt="" coords="993,197,1151,222"/>
+<area shape="rect" href="syntactical__analysis_8c.html#aeed608a4c974282c8b9764a73c8c8d69" title="Matches a syntax group 6 starting at the current position. This is used for variable and variable ref..." alt="" coords="993,246,1151,271"/>
+<area shape="rect" href="syntactical__analysis_8c.html#af96503d0f4370ed18672141247730073" title="Matches a syntax group 7. In this case we are interested in the name of a register or a label." alt="" coords="993,295,1151,321"/>
+<area shape="rect" href="syntactical__analysis_8c.html#a6393e6140d0121d6d8c81b36cbed42e7" title="Validate a syntax opcode. This is a helper function for validate_opcode ()." alt="" coords="785,173,945,198"/>
+<area shape="rect" href="syntactical__analysis_8c.html#a67016b4fe1cda5bfa436414cae4c3561" title="Validate the syntax at the current position. This is a wrapper around validate_syntax_opcode () valid..." alt="" coords="627,173,737,198"/>
+<area shape="rect" href="first__pass_8c.html#a40eeac60c34220893b004549546acb2d" title="This function is used to process lines with opcodes and no label definitions. It also encodes the mem..." alt="" coords="448,5,579,45"/>
+<area shape="rect" href="first__pass_8c.html#a87a70eef7a9fd6d62eb27a5a2127739e" title="This function is used to process .data lines. It also encodes the memory if possible into the memoryB..." alt="" coords="448,69,579,109"/>
+<area shape="rect" href="first__pass_8c.html#ac0da628ba463b754effc2e88e611d4dd" title="This function is used to process lines with label definitions. It also encodes the memory if possible..." alt="" coords="448,133,579,173"/>
+<area shape="rect" href="first__pass_8c.html#aa0a39d1f94314921231c97245e6eb551" title="This function is used to process .entry lines. It also encodes the memory if possible into the memory..." alt="" coords="448,197,579,237"/>
+<area shape="rect" href="first__pass_8c.html#accedad2dc6b0e81f160e2201f4f2b1d3" title="This function is used to process .extern lines. It also encodes the memory if possible into the memor..." alt="" coords="448,261,579,301"/>
+<area shape="rect" href="first__pass_8c.html#a932fa602127543d4c7b4e5f4b64b9138" title="This function is used to process .string lines. It also encodes the memory if possible into the memor..." alt="" coords="448,325,579,365"/>
+<area shape="rect" href="first__pass_8c.html#ae3d15ca0f34657e4715827c439839e1e" title="This function implements the first pass algorithm." alt="" coords="301,173,400,198"/>
+<area shape="rect" href="driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,173,253,198"/>
+<area shape="rect" href="driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,173,124,198"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a67016b4fe1cda5bfa436414cae4c3561" name="a67016b4fe1cda5bfa436414cae4c3561"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a67016b4fe1cda5bfa436414cae4c3561">&#9670;&#160;</a></span>validate_syntax()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool validate_syntax </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_line_iterator.html">LineIterator</a>&#160;</td>
+          <td class="paramname"><em>it</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="first__pass_8h.html#a851f3b709b20ebd9c41ee7f658292d09">firstPassStates</a>&#160;</td>
+          <td class="paramname"><em>state</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">long&#160;</td>
+          <td class="paramname"><em>line</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structdebug_list.html">debugList</a> *&#160;</td>
+          <td class="paramname"><em>dbg_list</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Validate the syntax at the current position. This is a wrapper around validate_syntax_opcode () validate_syntax_data () and validate_syntax_string () to allow custom code to be added to the <a class="el" href="structdebug_list.html">debugList</a>. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">it</td><td>- Iterator over the line to be validated </td></tr>
+    <tr><td class="paramname">state</td><td>- The first pass state of the syntax </td></tr>
+    <tr><td class="paramname">line</td><td>- The line number at which the syntax is being validated </td></tr>
+    <tr><td class="paramname">dbg_list</td><td>- The list of debuggers to which warnings / errors are added</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>TRUE if the syntax is valid FALSE if it is </dd></dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="syntactical__analysis_8h_a67016b4fe1cda5bfa436414cae4c3561_icgraph.png" border="0" usemap="#asyntactical__analysis_8h_a67016b4fe1cda5bfa436414cae4c3561_icgraph" alt=""/></div>
+<map name="asyntactical__analysis_8h_a67016b4fe1cda5bfa436414cae4c3561_icgraph" id="asyntactical__analysis_8h_a67016b4fe1cda5bfa436414cae4c3561_icgraph">
+<area shape="rect" title="Validate the syntax at the current position. This is a wrapper around validate_syntax_opcode () valid..." alt="" coords="627,173,737,198"/>
+<area shape="rect" href="first__pass_8c.html#a40eeac60c34220893b004549546acb2d" title="This function is used to process lines with opcodes and no label definitions. It also encodes the mem..." alt="" coords="448,5,579,45"/>
+<area shape="rect" href="first__pass_8c.html#a87a70eef7a9fd6d62eb27a5a2127739e" title="This function is used to process .data lines. It also encodes the memory if possible into the memoryB..." alt="" coords="448,69,579,109"/>
+<area shape="rect" href="first__pass_8c.html#ac0da628ba463b754effc2e88e611d4dd" title="This function is used to process lines with label definitions. It also encodes the memory if possible..." alt="" coords="448,133,579,173"/>
+<area shape="rect" href="first__pass_8c.html#aa0a39d1f94314921231c97245e6eb551" title="This function is used to process .entry lines. It also encodes the memory if possible into the memory..." alt="" coords="448,197,579,237"/>
+<area shape="rect" href="first__pass_8c.html#accedad2dc6b0e81f160e2201f4f2b1d3" title="This function is used to process .extern lines. It also encodes the memory if possible into the memor..." alt="" coords="448,261,579,301"/>
+<area shape="rect" href="first__pass_8c.html#a932fa602127543d4c7b4e5f4b64b9138" title="This function is used to process .string lines. It also encodes the memory if possible into the memor..." alt="" coords="448,325,579,365"/>
+<area shape="rect" href="first__pass_8c.html#ae3d15ca0f34657e4715827c439839e1e" title="This function implements the first pass algorithm." alt="" coords="301,173,400,198"/>
+<area shape="rect" href="driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,173,253,198"/>
+<area shape="rect" href="driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,173,124,198"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="ae39eef4bd1f921befdc8fc687ac6925d" name="ae39eef4bd1f921befdc8fc687ac6925d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae39eef4bd1f921befdc8fc687ac6925d">&#9670;&#160;</a></span>validate_syntax_data()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool validate_syntax_data </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_line_iterator.html">LineIterator</a> *&#160;</td>
+          <td class="paramname"><em>it</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">long&#160;</td>
+          <td class="paramname"><em>line</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structdebug_list.html">debugList</a> *&#160;</td>
+          <td class="paramname"><em>dbg_list</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Validates a syntax data. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">it</td><td></td></tr>
+    <tr><td class="paramname">line</td><td>- Line number of the string being validated </td></tr>
+    <tr><td class="paramname">dbg_list</td><td>- Debug list to add nodes to</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>TRUE if the data is valid FALSE if it isn't </dd></dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="syntactical__analysis_8h_ae39eef4bd1f921befdc8fc687ac6925d_icgraph.png" border="0" usemap="#asyntactical__analysis_8h_ae39eef4bd1f921befdc8fc687ac6925d_icgraph" alt=""/></div>
+<map name="asyntactical__analysis_8h_ae39eef4bd1f921befdc8fc687ac6925d_icgraph" id="asyntactical__analysis_8h_ae39eef4bd1f921befdc8fc687ac6925d_icgraph">
+<area shape="rect" title="Validates a syntax data." alt="" coords="785,173,928,198"/>
+<area shape="rect" href="syntactical__analysis_8c.html#a67016b4fe1cda5bfa436414cae4c3561" title="Validate the syntax at the current position. This is a wrapper around validate_syntax_opcode () valid..." alt="" coords="627,173,737,198"/>
+<area shape="rect" href="first__pass_8c.html#a40eeac60c34220893b004549546acb2d" title="This function is used to process lines with opcodes and no label definitions. It also encodes the mem..." alt="" coords="448,5,579,45"/>
+<area shape="rect" href="first__pass_8c.html#a87a70eef7a9fd6d62eb27a5a2127739e" title="This function is used to process .data lines. It also encodes the memory if possible into the memoryB..." alt="" coords="448,69,579,109"/>
+<area shape="rect" href="first__pass_8c.html#ac0da628ba463b754effc2e88e611d4dd" title="This function is used to process lines with label definitions. It also encodes the memory if possible..." alt="" coords="448,133,579,173"/>
+<area shape="rect" href="first__pass_8c.html#aa0a39d1f94314921231c97245e6eb551" title="This function is used to process .entry lines. It also encodes the memory if possible into the memory..." alt="" coords="448,197,579,237"/>
+<area shape="rect" href="first__pass_8c.html#accedad2dc6b0e81f160e2201f4f2b1d3" title="This function is used to process .extern lines. It also encodes the memory if possible into the memor..." alt="" coords="448,261,579,301"/>
+<area shape="rect" href="first__pass_8c.html#a932fa602127543d4c7b4e5f4b64b9138" title="This function is used to process .string lines. It also encodes the memory if possible into the memor..." alt="" coords="448,325,579,365"/>
+<area shape="rect" href="first__pass_8c.html#ae3d15ca0f34657e4715827c439839e1e" title="This function implements the first pass algorithm." alt="" coords="301,173,400,198"/>
+<area shape="rect" href="driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,173,253,198"/>
+<area shape="rect" href="driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,173,124,198"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="ab79b4aad9db258a105d397a38f3c177f" name="ab79b4aad9db258a105d397a38f3c177f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab79b4aad9db258a105d397a38f3c177f">&#9670;&#160;</a></span>validate_syntax_extern_and_entry()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool validate_syntax_extern_and_entry </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_line_iterator.html">LineIterator</a> *&#160;</td>
+          <td class="paramname"><em>it</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">long&#160;</td>
+          <td class="paramname"><em>line</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structdebug_list.html">debugList</a> *&#160;</td>
+          <td class="paramname"><em>dbg_list</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Validates the syntax extern and entry. This is used to validate the syntax extern and entry in a macro expansion. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">it</td><td></td></tr>
+    <tr><td class="paramname">line</td><td>- Line number of the comment </td></tr>
+    <tr><td class="paramname">dbg_list</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>TRUE if there is at least one error FALSE if isn't </dd></dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="syntactical__analysis_8h_ab79b4aad9db258a105d397a38f3c177f_icgraph.png" border="0" usemap="#asyntactical__analysis_8h_ab79b4aad9db258a105d397a38f3c177f_icgraph" alt=""/></div>
+<map name="asyntactical__analysis_8h_ab79b4aad9db258a105d397a38f3c177f_icgraph" id="asyntactical__analysis_8h_ab79b4aad9db258a105d397a38f3c177f_icgraph">
+<area shape="rect" title="Validates the syntax extern and entry. This is used to validate the syntax extern and entry in a macr..." alt="" coords="785,165,940,205"/>
+<area shape="rect" href="syntactical__analysis_8c.html#a67016b4fe1cda5bfa436414cae4c3561" title="Validate the syntax at the current position. This is a wrapper around validate_syntax_opcode () valid..." alt="" coords="627,173,737,198"/>
+<area shape="rect" href="first__pass_8c.html#a40eeac60c34220893b004549546acb2d" title="This function is used to process lines with opcodes and no label definitions. It also encodes the mem..." alt="" coords="448,5,579,45"/>
+<area shape="rect" href="first__pass_8c.html#a87a70eef7a9fd6d62eb27a5a2127739e" title="This function is used to process .data lines. It also encodes the memory if possible into the memoryB..." alt="" coords="448,69,579,109"/>
+<area shape="rect" href="first__pass_8c.html#ac0da628ba463b754effc2e88e611d4dd" title="This function is used to process lines with label definitions. It also encodes the memory if possible..." alt="" coords="448,133,579,173"/>
+<area shape="rect" href="first__pass_8c.html#aa0a39d1f94314921231c97245e6eb551" title="This function is used to process .entry lines. It also encodes the memory if possible into the memory..." alt="" coords="448,197,579,237"/>
+<area shape="rect" href="first__pass_8c.html#accedad2dc6b0e81f160e2201f4f2b1d3" title="This function is used to process .extern lines. It also encodes the memory if possible into the memor..." alt="" coords="448,261,579,301"/>
+<area shape="rect" href="first__pass_8c.html#a932fa602127543d4c7b4e5f4b64b9138" title="This function is used to process .string lines. It also encodes the memory if possible into the memor..." alt="" coords="448,325,579,365"/>
+<area shape="rect" href="first__pass_8c.html#ae3d15ca0f34657e4715827c439839e1e" title="This function implements the first pass algorithm." alt="" coords="301,173,400,198"/>
+<area shape="rect" href="driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,173,253,198"/>
+<area shape="rect" href="driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,173,124,198"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a6393e6140d0121d6d8c81b36cbed42e7" name="a6393e6140d0121d6d8c81b36cbed42e7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6393e6140d0121d6d8c81b36cbed42e7">&#9670;&#160;</a></span>validate_syntax_opcode()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool validate_syntax_opcode </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_line_iterator.html">LineIterator</a> *&#160;</td>
+          <td class="paramname"><em>it</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">long&#160;</td>
+          <td class="paramname"><em>line</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structdebug_list.html">debugList</a> *&#160;</td>
+          <td class="paramname"><em>dbg_list</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Validate a syntax opcode. This is a helper function for validate_opcode (). </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">it</td><td></td></tr>
+    <tr><td class="paramname">line</td><td>- Line number on which the parser was started. </td></tr>
+    <tr><td class="paramname">dbg_list</td><td>- Debug list to add warnings / errors to.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true if the opcode is valid false otherwise. Note that it is up to the caller to free it </dd></dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="syntactical__analysis_8h_a6393e6140d0121d6d8c81b36cbed42e7_icgraph.png" border="0" usemap="#asyntactical__analysis_8h_a6393e6140d0121d6d8c81b36cbed42e7_icgraph" alt=""/></div>
+<map name="asyntactical__analysis_8h_a6393e6140d0121d6d8c81b36cbed42e7_icgraph" id="asyntactical__analysis_8h_a6393e6140d0121d6d8c81b36cbed42e7_icgraph">
+<area shape="rect" title="Validate a syntax opcode. This is a helper function for validate_opcode ()." alt="" coords="785,173,945,198"/>
+<area shape="rect" href="syntactical__analysis_8c.html#a67016b4fe1cda5bfa436414cae4c3561" title="Validate the syntax at the current position. This is a wrapper around validate_syntax_opcode () valid..." alt="" coords="627,173,737,198"/>
+<area shape="rect" href="first__pass_8c.html#a40eeac60c34220893b004549546acb2d" title="This function is used to process lines with opcodes and no label definitions. It also encodes the mem..." alt="" coords="448,5,579,45"/>
+<area shape="rect" href="first__pass_8c.html#a87a70eef7a9fd6d62eb27a5a2127739e" title="This function is used to process .data lines. It also encodes the memory if possible into the memoryB..." alt="" coords="448,69,579,109"/>
+<area shape="rect" href="first__pass_8c.html#ac0da628ba463b754effc2e88e611d4dd" title="This function is used to process lines with label definitions. It also encodes the memory if possible..." alt="" coords="448,133,579,173"/>
+<area shape="rect" href="first__pass_8c.html#aa0a39d1f94314921231c97245e6eb551" title="This function is used to process .entry lines. It also encodes the memory if possible into the memory..." alt="" coords="448,197,579,237"/>
+<area shape="rect" href="first__pass_8c.html#accedad2dc6b0e81f160e2201f4f2b1d3" title="This function is used to process .extern lines. It also encodes the memory if possible into the memor..." alt="" coords="448,261,579,301"/>
+<area shape="rect" href="first__pass_8c.html#a932fa602127543d4c7b4e5f4b64b9138" title="This function is used to process .string lines. It also encodes the memory if possible into the memor..." alt="" coords="448,325,579,365"/>
+<area shape="rect" href="first__pass_8c.html#ae3d15ca0f34657e4715827c439839e1e" title="This function implements the first pass algorithm." alt="" coords="301,173,400,198"/>
+<area shape="rect" href="driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,173,253,198"/>
+<area shape="rect" href="driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,173,124,198"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="af10b351dc7df0a2b9a1f1a37bd498f68" name="af10b351dc7df0a2b9a1f1a37bd498f68"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af10b351dc7df0a2b9a1f1a37bd498f68">&#9670;&#160;</a></span>validate_syntax_string()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool validate_syntax_string </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_line_iterator.html">LineIterator</a> *&#160;</td>
+          <td class="paramname"><em>it</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">long&#160;</td>
+          <td class="paramname"><em>line</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structdebug_list.html">debugList</a> *&#160;</td>
+          <td class="paramname"><em>dbg_list</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Validates a syntax string. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">it</td><td></td></tr>
+    <tr><td class="paramname">line</td><td>- Line number of the string being validated </td></tr>
+    <tr><td class="paramname">dbg_list</td><td>- Debug list to add nodes to</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>TRUE if the string is valid FALSE if it is isn't </dd></dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="syntactical__analysis_8h_af10b351dc7df0a2b9a1f1a37bd498f68_icgraph.png" border="0" usemap="#asyntactical__analysis_8h_af10b351dc7df0a2b9a1f1a37bd498f68_icgraph" alt=""/></div>
+<map name="asyntactical__analysis_8h_af10b351dc7df0a2b9a1f1a37bd498f68_icgraph" id="asyntactical__analysis_8h_af10b351dc7df0a2b9a1f1a37bd498f68_icgraph">
+<area shape="rect" title="Validates a syntax string." alt="" coords="785,173,936,198"/>
+<area shape="rect" href="syntactical__analysis_8c.html#a67016b4fe1cda5bfa436414cae4c3561" title="Validate the syntax at the current position. This is a wrapper around validate_syntax_opcode () valid..." alt="" coords="627,173,737,198"/>
+<area shape="rect" href="first__pass_8c.html#a40eeac60c34220893b004549546acb2d" title="This function is used to process lines with opcodes and no label definitions. It also encodes the mem..." alt="" coords="448,5,579,45"/>
+<area shape="rect" href="first__pass_8c.html#a87a70eef7a9fd6d62eb27a5a2127739e" title="This function is used to process .data lines. It also encodes the memory if possible into the memoryB..." alt="" coords="448,69,579,109"/>
+<area shape="rect" href="first__pass_8c.html#ac0da628ba463b754effc2e88e611d4dd" title="This function is used to process lines with label definitions. It also encodes the memory if possible..." alt="" coords="448,133,579,173"/>
+<area shape="rect" href="first__pass_8c.html#aa0a39d1f94314921231c97245e6eb551" title="This function is used to process .entry lines. It also encodes the memory if possible into the memory..." alt="" coords="448,197,579,237"/>
+<area shape="rect" href="first__pass_8c.html#accedad2dc6b0e81f160e2201f4f2b1d3" title="This function is used to process .extern lines. It also encodes the memory if possible into the memor..." alt="" coords="448,261,579,301"/>
+<area shape="rect" href="first__pass_8c.html#a932fa602127543d4c7b4e5f4b64b9138" title="This function is used to process .string lines. It also encodes the memory if possible into the memor..." alt="" coords="448,325,579,365"/>
+<area shape="rect" href="first__pass_8c.html#ae3d15ca0f34657e4715827c439839e1e" title="This function implements the first pass algorithm." alt="" coords="301,173,400,198"/>
+<area shape="rect" href="driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,173,253,198"/>
+<area shape="rect" href="driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,173,124,198"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a625e1c4d3afa677d75e4a04f1d6989bd" name="a625e1c4d3afa677d75e4a04f1d6989bd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a625e1c4d3afa677d75e4a04f1d6989bd">&#9670;&#160;</a></span>verify_command_syntax()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool verify_command_syntax </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_line_iterator.html">LineIterator</a> *&#160;</td>
+          <td class="paramname"><em>it</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structdebug_list.html">debugList</a> *&#160;</td>
+          <td class="paramname"><em>dbg_list</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Verify the syntax of a command. This is a helper function for debug_command (). </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">it</td><td>- <a class="el" href="struct_line_iterator.html" title="This data sturcture is used to make it easier to parse text lines. It&#39;s member should not be freed as...">LineIterator</a> to use for verification. It is assumed that the parser has already advanced through the line that is being processed. </td></tr>
+    <tr><td class="paramname">dbg_list</td><td>- The <a class="el" href="structdebug_list.html">debugList</a> to which the command belongs.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>TRUE if the syntax is correct FALSE otherwise. In this case the parser should be instructed to abort </dd></dl>
+
+</div>
+</div>
+<a id="a048ed699cd7cbc580722534d81db9ce1" name="a048ed699cd7cbc580722534d81db9ce1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a048ed699cd7cbc580722534d81db9ce1">&#9670;&#160;</a></span>verify_int()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool verify_int </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_line_iterator.html">LineIterator</a> *&#160;</td>
+          <td class="paramname"><em>it</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">long&#160;</td>
+          <td class="paramname"><em>line</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>seps</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structdebug_list.html">debugList</a> *&#160;</td>
+          <td class="paramname"><em>dbg_list</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Verifies that the next character is a valid integer. This is done by examining the characters that begin with a digit followed by a comma or a comma and verifying that it is a valid integer. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">it</td><td></td></tr>
+    <tr><td class="paramname">line</td><td>- Line in which the string was read. Used for error reporting. </td></tr>
+    <tr><td class="paramname">seps</td><td>- String of digits to be checked for validity. </td></tr>
+    <tr><td class="paramname">dbg_list</td><td>- Debug list to be populated with nodes.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>TRUE if the integer is valid FALSE otherwise. On failure the iterator is left pointing at the character that failed </dd></dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="syntactical__analysis_8h_a048ed699cd7cbc580722534d81db9ce1_icgraph.png" border="0" usemap="#asyntactical__analysis_8h_a048ed699cd7cbc580722534d81db9ce1_icgraph" alt=""/></div>
+<map name="asyntactical__analysis_8h_a048ed699cd7cbc580722534d81db9ce1_icgraph" id="asyntactical__analysis_8h_a048ed699cd7cbc580722534d81db9ce1_icgraph">
+<area shape="rect" title="Verifies that the next character is a valid integer. This is done by examining the characters that be..." alt="" coords="1608,204,1680,229"/>
+<area shape="rect" href="syntactical__analysis_8c.html#a1c81b8f22e1b58261c580dc786012ddb" title="Matches an operand and returns TRUE if it matches. This is a low &#45; level function used by match_opera..." alt="" coords="1215,153,1325,179"/>
+<area shape="rect" href="syntactical__analysis_8c.html#a07296539973fce1b07e9fed70ab86519" title="Matches pamaetrized labels. This is a bit tricky because we don&#39;t know the number of arguments to a l..." alt="" coords="1389,204,1560,229"/>
+<area shape="rect" href="syntactical__analysis_8c.html#ae39eef4bd1f921befdc8fc687ac6925d" title="Validates a syntax data." alt="" coords="1199,291,1341,316"/>
+<area shape="rect" href="syntactical__analysis_8c.html#a2749c50f152de3c380145d95a2d05262" title="Matches a syntax group 1. This is the first part of the syntax group : it must be at the start of a v..." alt="" coords="993,5,1151,31"/>
+<area shape="rect" href="syntactical__analysis_8c.html#ae6a335691cd87b3ba20493300d250b0b" title="Matches a syntax group 2. This is the second part of the syntax group matching algorithm." alt="" coords="993,55,1151,80"/>
+<area shape="rect" href="syntactical__analysis_8c.html#a5f99c4d3e555f02fbe4925924058090b" title="Matches a syntax group 3. This is the third part of the syntax group matching algorithm." alt="" coords="993,104,1151,129"/>
+<area shape="rect" href="syntactical__analysis_8c.html#a942f35e02bcadf7b1fe58d918dc5a531" title="Matches a syntax group 5 starting at the current position. This is used to implement the syntax group..." alt="" coords="993,153,1151,179"/>
+<area shape="rect" href="syntactical__analysis_8c.html#aeed608a4c974282c8b9764a73c8c8d69" title="Matches a syntax group 6 starting at the current position. This is used for variable and variable ref..." alt="" coords="993,203,1151,228"/>
+<area shape="rect" href="syntactical__analysis_8c.html#af96503d0f4370ed18672141247730073" title="Matches a syntax group 7. In this case we are interested in the name of a register or a label." alt="" coords="993,252,1151,277"/>
+<area shape="rect" href="syntactical__analysis_8c.html#a6393e6140d0121d6d8c81b36cbed42e7" title="Validate a syntax opcode. This is a helper function for validate_opcode ()." alt="" coords="785,153,945,179"/>
+<area shape="rect" href="syntactical__analysis_8c.html#a67016b4fe1cda5bfa436414cae4c3561" title="Validate the syntax at the current position. This is a wrapper around validate_syntax_opcode () valid..." alt="" coords="627,228,737,253"/>
+<area shape="rect" href="first__pass_8c.html#a40eeac60c34220893b004549546acb2d" title="This function is used to process lines with opcodes and no label definitions. It also encodes the mem..." alt="" coords="448,61,579,101"/>
+<area shape="rect" href="first__pass_8c.html#a87a70eef7a9fd6d62eb27a5a2127739e" title="This function is used to process .data lines. It also encodes the memory if possible into the memoryB..." alt="" coords="448,125,579,165"/>
+<area shape="rect" href="first__pass_8c.html#ac0da628ba463b754effc2e88e611d4dd" title="This function is used to process lines with label definitions. It also encodes the memory if possible..." alt="" coords="448,189,579,229"/>
+<area shape="rect" href="first__pass_8c.html#aa0a39d1f94314921231c97245e6eb551" title="This function is used to process .entry lines. It also encodes the memory if possible into the memory..." alt="" coords="448,253,579,293"/>
+<area shape="rect" href="first__pass_8c.html#accedad2dc6b0e81f160e2201f4f2b1d3" title="This function is used to process .extern lines. It also encodes the memory if possible into the memor..." alt="" coords="448,317,579,357"/>
+<area shape="rect" href="first__pass_8c.html#a932fa602127543d4c7b4e5f4b64b9138" title="This function is used to process .string lines. It also encodes the memory if possible into the memor..." alt="" coords="448,381,579,421"/>
+<area shape="rect" href="first__pass_8c.html#ae3d15ca0f34657e4715827c439839e1e" title="This function implements the first pass algorithm." alt="" coords="301,228,400,253"/>
+<area shape="rect" href="driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,228,253,253"/>
+<area shape="rect" href="driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,228,124,253"/>
+</map>
+</div>
 
 </div>
 </div>
 </div><!-- contents -->
-</div><!-- doc-content -->
 <!-- start footer part -->
-<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
-  <ul>
-    <li class="navelem"><a class="el" href="syntactical__analysis_8h.html">syntactical_analysis.h</a></li>
-    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5 </li>
-  </ul>
-</div>
+<hr class="footer"/><address class="footer"><small>
+Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+</small></address>
 </body>
 </html>

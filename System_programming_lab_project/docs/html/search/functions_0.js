@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['check_5flabel_5fsyntax_0',['check_label_syntax',['../syntactical__analysis_8c.html#ab026e29379dc2aca95b5ae14a4045010',1,'check_label_syntax(char *label):&#160;syntactical_analysis.c'],['../syntactical__analysis_8h.html#ab026e29379dc2aca95b5ae14a4045010',1,'check_label_syntax(char *label):&#160;syntactical_analysis.c']]]
+  ['add_5flabel_5fbase_5faddress_0',['add_label_base_address',['../second__pass_8c.html#a2765636e71a2da6c192eac0fa06581c1',1,'add_label_base_address(SymbolTable *table):&#160;second_pass.c'],['../second__pass_8h.html#a2765636e71a2da6c192eac0fa06581c1',1,'add_label_base_address(SymbolTable *table):&#160;second_pass.c']]]
 ];

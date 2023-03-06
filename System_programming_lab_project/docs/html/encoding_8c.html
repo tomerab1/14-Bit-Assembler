@@ -5,14 +5,10 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.5"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>C language 14 bit assembler: encoding.c File Reference</title>
+<title>14bit Assembler: encoding.c File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
-<link href="navtree.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="resize.js"></script>
-<script type="text/javascript" src="navtreedata.js"></script>
-<script type="text/javascript" src="navtree.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
@@ -25,7 +21,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">C language 14 bit assembler
+   <div id="projectname">14bit Assembler
    </div>
   </td>
  </tr>
@@ -50,23 +46,6 @@ $(function() {
 /* @license-end */
 </script>
 <div id="main-nav"></div>
-</div><!-- top -->
-<div id="side-nav" class="ui-resizable side-nav-resizable">
-  <div id="nav-tree">
-    <div id="nav-tree-contents">
-      <div id="nav-sync" class="sync"></div>
-    </div>
-  </div>
-  <div id="splitbar" style="-moz-user-select:none;" 
-       class="ui-resizable-handle">
-  </div>
-</div>
-<script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(document).ready(function(){initNavTree('encoding_8c.html',''); initResizable(); });
-/* @license-end */
-</script>
-<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -88,76 +67,1529 @@ $(document).ready(function(){initNavTree('encoding_8c.html',''); initResizable()
 </div>
 </div>
 
+</div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#nested-classes">Data Structures</a> &#124;
+<a href="#define-members">Macros</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle"><div class="title">encoding.c File Reference</div></div>
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><code>#include &quot;<a class="el" href="encoding_8h_source.html">encoding.h</a>&quot;</code><br />
+</div><div class="textblock"><div class="dynheader">
+Include dependency graph for encoding.c:</div>
+<div class="dyncontent">
+<div class="center"><img src="encoding_8c__incl.png" border="0" usemap="#aencoding_8c" alt=""/></div>
+<map name="aencoding_8c" id="aencoding_8c">
+<area shape="rect" title=" " alt="" coords="258,5,343,31"/>
+<area shape="rect" href="encoding_8h.html" title=" " alt="" coords="258,79,343,104"/>
+<area shape="rect" href="syntactical__analysis_8h.html" title=" " alt="" coords="159,152,309,177"/>
+<area shape="rect" href="line__iterator_8h.html" title=" " alt="" coords="23,299,123,324"/>
+<area shape="rect" href="memory_8h.html" title=" " alt="" coords="426,299,506,324"/>
+<area shape="rect" href="debug_8h.html" title=" " alt="" coords="333,299,401,324"/>
+<area shape="rect" href="utils_8h.html" title=" " alt="" coords="177,372,235,397"/>
+<area shape="rect" href="first__pass_8h.html" title=" " alt="" coords="189,225,279,251"/>
+<area shape="rect" title=" " alt="" coords="175,445,237,471"/>
+<area shape="rect" title=" " alt="" coords="261,445,325,471"/>
+<area shape="rect" title=" " alt="" coords="85,445,151,471"/>
+<area shape="rect" href="constants_8h.html" title=" " alt="" coords="378,445,469,471"/>
+<area shape="rect" href="symbol__table_8h.html" title=" " alt="" coords="199,299,309,324"/>
+<area shape="rect" title=" " alt="" coords="333,372,401,397"/>
+</map>
+</div>
 </div><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Data Structures</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_var_data.html">VarData</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
+Macros</h2></td></tr>
+<tr class="memitem:ad2aa7595484e90485074ba66a981f09d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="encoding_8c.html#ad2aa7595484e90485074ba66a981f09d">OFFSET_ERA</a>&#160;&#160;&#160;0x00</td></tr>
+<tr class="separator:ad2aa7595484e90485074ba66a981f09d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac5f58500d29c49630163e3f8b33182a0"><td class="memItemLeft" align="right" valign="top"><a id="ac5f58500d29c49630163e3f8b33182a0" name="ac5f58500d29c49630163e3f8b33182a0"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>OFFSET_DEST</b>&#160;&#160;&#160;0x02</td></tr>
+<tr class="separator:ac5f58500d29c49630163e3f8b33182a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa1a9e49a5573bd31e0e10414b8cb2098"><td class="memItemLeft" align="right" valign="top"><a id="aa1a9e49a5573bd31e0e10414b8cb2098" name="aa1a9e49a5573bd31e0e10414b8cb2098"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>OFFSET_SOURCE</b>&#160;&#160;&#160;0x04</td></tr>
+<tr class="separator:aa1a9e49a5573bd31e0e10414b8cb2098"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af3285070f7425498ee38cfe644586d67"><td class="memItemLeft" align="right" valign="top"><a id="af3285070f7425498ee38cfe644586d67" name="af3285070f7425498ee38cfe644586d67"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>OFFSET_OPCODE1</b>&#160;&#160;&#160;0x06</td></tr>
+<tr class="separator:af3285070f7425498ee38cfe644586d67"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a386610882fb056469b9f1530d743a6c9"><td class="memItemLeft" align="right" valign="top"><a id="a386610882fb056469b9f1530d743a6c9" name="a386610882fb056469b9f1530d743a6c9"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>OFFSET_OPCODE2</b>&#160;&#160;&#160;0x00</td></tr>
+<tr class="separator:a386610882fb056469b9f1530d743a6c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a94e1047ce6b42a51a671cb9c257b539f"><td class="memItemLeft" align="right" valign="top"><a id="a94e1047ce6b42a51a671cb9c257b539f" name="a94e1047ce6b42a51a671cb9c257b539f"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>OFFSET_PARAM1</b>&#160;&#160;&#160;0x02</td></tr>
+<tr class="separator:a94e1047ce6b42a51a671cb9c257b539f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac55214882b93c225bd72bd7417f77a6d"><td class="memItemLeft" align="right" valign="top"><a id="ac55214882b93c225bd72bd7417f77a6d" name="ac55214882b93c225bd72bd7417f77a6d"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>OFFSET_PARAM2</b>&#160;&#160;&#160;0x04</td></tr>
+<tr class="separator:ac55214882b93c225bd72bd7417f77a6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a2a4658203d0c32a628b8d1c0ff669f86"><td class="memItemLeft" align="right" valign="top"><a id="a2a4658203d0c32a628b8d1c0ff669f86" name="a2a4658203d0c32a628b8d1c0ff669f86"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>encode_dot_string</b> (<a class="el" href="struct_line_iterator.html">LineIterator</a> *it, <a class="el" href="structmemory_buffer.html">memoryBuffer</a> *img)</td></tr>
+<tr class="memitem:a2a4658203d0c32a628b8d1c0ff669f86"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="encoding_8c.html#a2a4658203d0c32a628b8d1c0ff669f86">encode_dot_string</a> (<a class="el" href="struct_line_iterator.html">LineIterator</a> *it, <a class="el" href="structmemory_buffer.html">memoryBuffer</a> *img)</td></tr>
 <tr class="separator:a2a4658203d0c32a628b8d1c0ff669f86"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a587b5ede677177c9262b6bf40511d60a"><td class="memItemLeft" align="right" valign="top"><a id="a587b5ede677177c9262b6bf40511d60a" name="a587b5ede677177c9262b6bf40511d60a"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>encode_dot_data</b> (<a class="el" href="struct_line_iterator.html">LineIterator</a> *it, <a class="el" href="structmemory_buffer.html">memoryBuffer</a> *img)</td></tr>
+<tr class="memitem:a587b5ede677177c9262b6bf40511d60a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="encoding_8c.html#a587b5ede677177c9262b6bf40511d60a">encode_dot_data</a> (<a class="el" href="struct_line_iterator.html">LineIterator</a> *it, <a class="el" href="structmemory_buffer.html">memoryBuffer</a> *img)</td></tr>
 <tr class="separator:a587b5ede677177c9262b6bf40511d60a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abf24d88c1e9f3955d3446299cb09781f"><td class="memItemLeft" align="right" valign="top"><a id="abf24d88c1e9f3955d3446299cb09781f" name="abf24d88c1e9f3955d3446299cb09781f"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>encode_integer</b> (<a class="el" href="structimage_memory.html">imageMemory</a> *img, unsigned int num)</td></tr>
+<tr class="memitem:ac462ef04efd6a452ec612a07a0e38070"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="encoding_8c.html#ac462ef04efd6a452ec612a07a0e38070">encode_label_start_process</a> (<a class="el" href="struct_line_iterator.html">LineIterator</a> *it, <a class="el" href="structmemory_buffer.html">memoryBuffer</a> *img, <a class="el" href="struct_symbol_table.html">SymbolTable</a> *symTable, <a class="el" href="structdebug_list.html">debugList</a> *dbg_list)</td></tr>
+<tr class="separator:ac462ef04efd6a452ec612a07a0e38070"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abf24d88c1e9f3955d3446299cb09781f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="encoding_8c.html#abf24d88c1e9f3955d3446299cb09781f">encode_integer</a> (<a class="el" href="structimage_memory.html">imageMemory</a> *img, unsigned int num)</td></tr>
+<tr class="memdesc:abf24d88c1e9f3955d3446299cb09781f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Encode an integer in image memory. This is used to encode a variable - length integer ( 8 bits )  <a href="encoding_8c.html#abf24d88c1e9f3955d3446299cb09781f">More...</a><br /></td></tr>
 <tr class="separator:abf24d88c1e9f3955d3446299cb09781f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1f68c041de50a450af52718fe19495b3"><td class="memItemLeft" align="right" valign="top"><a id="a1f68c041de50a450af52718fe19495b3" name="a1f68c041de50a450af52718fe19495b3"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>encode_preceding_word</b> (<a class="el" href="structimage_memory.html">imageMemory</a> *img, Opcodes op, char *source, char *dest, bool is_jmp_label)</td></tr>
+<tr class="memitem:a1f68c041de50a450af52718fe19495b3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="encoding_8c.html#a1f68c041de50a450af52718fe19495b3">encode_preceding_word</a> (<a class="el" href="structimage_memory.html">imageMemory</a> *img, Opcodes op, char *source, char *dest, bool is_jmp_label)</td></tr>
+<tr class="memdesc:a1f68c041de50a450af52718fe19495b3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Encode a word preceding a label.  <a href="encoding_8c.html#a1f68c041de50a450af52718fe19495b3">More...</a><br /></td></tr>
 <tr class="separator:a1f68c041de50a450af52718fe19495b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5e11ca7717b5440fb6baebdf0da9cfda"><td class="memItemLeft" align="right" valign="top"><a id="a5e11ca7717b5440fb6baebdf0da9cfda" name="a5e11ca7717b5440fb6baebdf0da9cfda"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>encode_opcode</b> (<a class="el" href="struct_line_iterator.html">LineIterator</a> *it, <a class="el" href="structmemory_buffer.html">memoryBuffer</a> *img)</td></tr>
+<tr class="memitem:a5e11ca7717b5440fb6baebdf0da9cfda"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="encoding_8c.html#a5e11ca7717b5440fb6baebdf0da9cfda">encode_opcode</a> (<a class="el" href="struct_line_iterator.html">LineIterator</a> *it, <a class="el" href="structmemory_buffer.html">memoryBuffer</a> *img)</td></tr>
+<tr class="memdesc:a5e11ca7717b5440fb6baebdf0da9cfda"><td class="mdescLeft">&#160;</td><td class="mdescRight">Encode a single opcode. This is the entry point for the encoding routines.  <a href="encoding_8c.html#a5e11ca7717b5440fb6baebdf0da9cfda">More...</a><br /></td></tr>
 <tr class="separator:a5e11ca7717b5440fb6baebdf0da9cfda"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3017052dc8d455d662f5234da3f59fc8"><td class="memItemLeft" align="right" valign="top"><a id="a3017052dc8d455d662f5234da3f59fc8" name="a3017052dc8d455d662f5234da3f59fc8"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>encode_source_and_dest</b> (<a class="el" href="structimage_memory.html">imageMemory</a> *img, char *source, char *dest)</td></tr>
+<tr class="memitem:a3017052dc8d455d662f5234da3f59fc8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="encoding_8c.html#a3017052dc8d455d662f5234da3f59fc8">encode_source_and_dest</a> (<a class="el" href="structimage_memory.html">imageMemory</a> *img, char *source, char *dest)</td></tr>
+<tr class="memdesc:a3017052dc8d455d662f5234da3f59fc8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Encode source and destination registers. This is used to encode a pair of register or immediates.  <a href="encoding_8c.html#a3017052dc8d455d662f5234da3f59fc8">More...</a><br /></td></tr>
 <tr class="separator:a3017052dc8d455d662f5234da3f59fc8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6f106ab0328c50ee0e147f2eb95cdc29"><td class="memItemLeft" align="right" valign="top"><a id="a6f106ab0328c50ee0e147f2eb95cdc29" name="a6f106ab0328c50ee0e147f2eb95cdc29"></a>
-OperandKind&#160;</td><td class="memItemRight" valign="bottom"><b>get_operand_kind</b> (char *op)</td></tr>
+<tr class="memitem:afbb91e7d9d86ec1a3ab6d69dc31fe7f3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_var_data.html">VarData</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="encoding_8c.html#afbb91e7d9d86ec1a3ab6d69dc31fe7f3">varData_get_new</a> ()</td></tr>
+<tr class="memdesc:afbb91e7d9d86ec1a3ab6d69dc31fe7f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function allocates a new <a class="el" href="struct_var_data.html">VarData</a> object.  <a href="encoding_8c.html#afbb91e7d9d86ec1a3ab6d69dc31fe7f3">More...</a><br /></td></tr>
+<tr class="separator:afbb91e7d9d86ec1a3ab6d69dc31fe7f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aab1278c55f9abd4024870171ff9e2f8a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="encoding_8c.html#aab1278c55f9abd4024870171ff9e2f8a">varData_destroy</a> (<a class="el" href="struct_var_data.html">VarData</a> **ptr)</td></tr>
+<tr class="memdesc:aab1278c55f9abd4024870171ff9e2f8a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deallocates the memory used by a <a class="el" href="struct_var_data.html">VarData</a> struct and its fields.  <a href="encoding_8c.html#aab1278c55f9abd4024870171ff9e2f8a">More...</a><br /></td></tr>
+<tr class="separator:aab1278c55f9abd4024870171ff9e2f8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6f106ab0328c50ee0e147f2eb95cdc29"><td class="memItemLeft" align="right" valign="top"><a class="el" href="encoding_8h.html#a30a5800c306d3690ae310b2e00b51c90">OperandKind</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="encoding_8c.html#a6f106ab0328c50ee0e147f2eb95cdc29">get_operand_kind</a> (char *op)</td></tr>
+<tr class="memdesc:a6f106ab0328c50ee0e147f2eb95cdc29"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the kind of operand.  <a href="encoding_8c.html#a6f106ab0328c50ee0e147f2eb95cdc29">More...</a><br /></td></tr>
 <tr class="separator:a6f106ab0328c50ee0e147f2eb95cdc29"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8b9bc71f73ddbdfc2b4e936ea008f9bc"><td class="memItemLeft" align="right" valign="top"><a id="a8b9bc71f73ddbdfc2b4e936ea008f9bc" name="a8b9bc71f73ddbdfc2b4e936ea008f9bc"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>encode_syntax_group_1</b> (<a class="el" href="struct_line_iterator.html">LineIterator</a> *it, Opcodes op, <a class="el" href="structmemory_buffer.html">memoryBuffer</a> *img)</td></tr>
+<tr class="memitem:a8b9bc71f73ddbdfc2b4e936ea008f9bc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="encoding_8c.html#a8b9bc71f73ddbdfc2b4e936ea008f9bc">encode_syntax_group_1</a> (<a class="el" href="struct_line_iterator.html">LineIterator</a> *it, Opcodes op, <a class="el" href="structmemory_buffer.html">memoryBuffer</a> *img)</td></tr>
+<tr class="memdesc:a8b9bc71f73ddbdfc2b4e936ea008f9bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Encode a syntax group 1 instruction. dependent syntax group that we use to encode source and destination operands.  <a href="encoding_8c.html#a8b9bc71f73ddbdfc2b4e936ea008f9bc">More...</a><br /></td></tr>
 <tr class="separator:a8b9bc71f73ddbdfc2b4e936ea008f9bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aad295aeb1fd1a079ff337843c4dca909"><td class="memItemLeft" align="right" valign="top"><a id="aad295aeb1fd1a079ff337843c4dca909" name="aad295aeb1fd1a079ff337843c4dca909"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>encode_syntax_group_2</b> (<a class="el" href="struct_line_iterator.html">LineIterator</a> *it, Opcodes op, <a class="el" href="structmemory_buffer.html">memoryBuffer</a> *img)</td></tr>
+<tr class="memitem:aad295aeb1fd1a079ff337843c4dca909"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="encoding_8c.html#aad295aeb1fd1a079ff337843c4dca909">encode_syntax_group_2</a> (<a class="el" href="struct_line_iterator.html">LineIterator</a> *it, Opcodes op, <a class="el" href="structmemory_buffer.html">memoryBuffer</a> *img)</td></tr>
+<tr class="memdesc:aad295aeb1fd1a079ff337843c4dca909"><td class="mdescLeft">&#160;</td><td class="mdescRight">Encode a syntax group 2 instruction. This is the second part of the machine - dependent syntax group encoding.  <a href="encoding_8c.html#aad295aeb1fd1a079ff337843c4dca909">More...</a><br /></td></tr>
 <tr class="separator:aad295aeb1fd1a079ff337843c4dca909"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5f29114a13525dc324c78b7b31879c88"><td class="memItemLeft" align="right" valign="top"><a id="a5f29114a13525dc324c78b7b31879c88" name="a5f29114a13525dc324c78b7b31879c88"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>encode_syntax_group_3</b> (<a class="el" href="struct_line_iterator.html">LineIterator</a> *it, Opcodes op, <a class="el" href="structmemory_buffer.html">memoryBuffer</a> *img)</td></tr>
+<tr class="memitem:a5f29114a13525dc324c78b7b31879c88"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="encoding_8c.html#a5f29114a13525dc324c78b7b31879c88">encode_syntax_group_3</a> (<a class="el" href="struct_line_iterator.html">LineIterator</a> *it, Opcodes op, <a class="el" href="structmemory_buffer.html">memoryBuffer</a> *img)</td></tr>
+<tr class="memdesc:a5f29114a13525dc324c78b7b31879c88"><td class="mdescLeft">&#160;</td><td class="mdescRight">Encode a syntax group 3 instruction.  <a href="encoding_8c.html#a5f29114a13525dc324c78b7b31879c88">More...</a><br /></td></tr>
 <tr class="separator:a5f29114a13525dc324c78b7b31879c88"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acf82941e19eb39762290b8e98a7bf39d"><td class="memItemLeft" align="right" valign="top"><a id="acf82941e19eb39762290b8e98a7bf39d" name="acf82941e19eb39762290b8e98a7bf39d"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>encode_syntax_group_4</b> (<a class="el" href="struct_line_iterator.html">LineIterator</a> *it, Opcodes op, <a class="el" href="structmemory_buffer.html">memoryBuffer</a> *img)</td></tr>
+<tr class="memitem:acf82941e19eb39762290b8e98a7bf39d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="encoding_8c.html#acf82941e19eb39762290b8e98a7bf39d">encode_syntax_group_4</a> (<a class="el" href="struct_line_iterator.html">LineIterator</a> *it, Opcodes op, <a class="el" href="structmemory_buffer.html">memoryBuffer</a> *img)</td></tr>
+<tr class="memdesc:acf82941e19eb39762290b8e98a7bf39d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Encode a syntax group 4. Encodes RTS and stop. This is used to encode the first memory word and the second and subsequent memory words.  <a href="encoding_8c.html#acf82941e19eb39762290b8e98a7bf39d">More...</a><br /></td></tr>
 <tr class="separator:acf82941e19eb39762290b8e98a7bf39d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a97919c7b730d4080230b6d6c1e499cdb"><td class="memItemLeft" align="right" valign="top"><a id="a97919c7b730d4080230b6d6c1e499cdb" name="a97919c7b730d4080230b6d6c1e499cdb"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>encode_syntax_group_5</b> (<a class="el" href="struct_line_iterator.html">LineIterator</a> *it, Opcodes op, <a class="el" href="structmemory_buffer.html">memoryBuffer</a> *img)</td></tr>
+<tr class="memitem:a97919c7b730d4080230b6d6c1e499cdb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="encoding_8c.html#a97919c7b730d4080230b6d6c1e499cdb">encode_syntax_group_5</a> (<a class="el" href="struct_line_iterator.html">LineIterator</a> *it, Opcodes op, <a class="el" href="structmemory_buffer.html">memoryBuffer</a> *img)</td></tr>
+<tr class="memdesc:a97919c7b730d4080230b6d6c1e499cdb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Encode a syntax group 5 instruction.  <a href="encoding_8c.html#a97919c7b730d4080230b6d6c1e499cdb">More...</a><br /></td></tr>
 <tr class="separator:a97919c7b730d4080230b6d6c1e499cdb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1bf869e59e47c1eab36adb3b1f7a4339"><td class="memItemLeft" align="right" valign="top"><a id="a1bf869e59e47c1eab36adb3b1f7a4339" name="a1bf869e59e47c1eab36adb3b1f7a4339"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>encode_syntax_group_6</b> (<a class="el" href="struct_line_iterator.html">LineIterator</a> *it, Opcodes op, <a class="el" href="structmemory_buffer.html">memoryBuffer</a> *img)</td></tr>
+<tr class="memitem:a1bf869e59e47c1eab36adb3b1f7a4339"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="encoding_8c.html#a1bf869e59e47c1eab36adb3b1f7a4339">encode_syntax_group_6</a> (<a class="el" href="struct_line_iterator.html">LineIterator</a> *it, Opcodes op, <a class="el" href="structmemory_buffer.html">memoryBuffer</a> *img)</td></tr>
+<tr class="memdesc:a1bf869e59e47c1eab36adb3b1f7a4339"><td class="mdescLeft">&#160;</td><td class="mdescRight">Encode a syntax group 6 instruction.  <a href="encoding_8c.html#a1bf869e59e47c1eab36adb3b1f7a4339">More...</a><br /></td></tr>
 <tr class="separator:a1bf869e59e47c1eab36adb3b1f7a4339"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a689f60c1be32c59d1c650cc1232d4ee1"><td class="memItemLeft" align="right" valign="top"><a id="a689f60c1be32c59d1c650cc1232d4ee1" name="a689f60c1be32c59d1c650cc1232d4ee1"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>encode_syntax_group_7</b> (<a class="el" href="struct_line_iterator.html">LineIterator</a> *it, Opcodes op, <a class="el" href="structmemory_buffer.html">memoryBuffer</a> *img)</td></tr>
+<tr class="memitem:a689f60c1be32c59d1c650cc1232d4ee1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="encoding_8c.html#a689f60c1be32c59d1c650cc1232d4ee1">encode_syntax_group_7</a> (<a class="el" href="struct_line_iterator.html">LineIterator</a> *it, Opcodes op, <a class="el" href="structmemory_buffer.html">memoryBuffer</a> *img)</td></tr>
+<tr class="memdesc:a689f60c1be32c59d1c650cc1232d4ee1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Encode a syntax group 7 instruction.  <a href="encoding_8c.html#a689f60c1be32c59d1c650cc1232d4ee1">More...</a><br /></td></tr>
 <tr class="separator:a689f60c1be32c59d1c650cc1232d4ee1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab2f32af3c56923a62fbab97c48e52afe"><td class="memItemLeft" align="right" valign="top"><a id="ab2f32af3c56923a62fbab97c48e52afe" name="ab2f32af3c56923a62fbab97c48e52afe"></a>
-<a class="el" href="structvar_data.html">varData</a>&#160;</td><td class="memItemRight" valign="bottom"><b>extract_variables_group_1_and_2_and_7</b> (<a class="el" href="struct_line_iterator.html">LineIterator</a> *it, <a class="el" href="structdebug_list.html">debugList</a> *dbg_list)</td></tr>
-<tr class="separator:ab2f32af3c56923a62fbab97c48e52afe"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2effd106dff4d46afea7ce7bdf85ba84"><td class="memItemLeft" align="right" valign="top"><a id="a2effd106dff4d46afea7ce7bdf85ba84" name="a2effd106dff4d46afea7ce7bdf85ba84"></a>
-<a class="el" href="structvar_data.html">varData</a>&#160;</td><td class="memItemRight" valign="bottom"><b>extract_variables_group_3_and_6</b> (<a class="el" href="struct_line_iterator.html">LineIterator</a> *it, Opcodes command, <a class="el" href="structdebug_list.html">debugList</a> *dbg_list)</td></tr>
-<tr class="separator:a2effd106dff4d46afea7ce7bdf85ba84"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa0bb15efbfbe10f0097483212f6a73c1"><td class="memItemLeft" align="right" valign="top"><a id="aa0bb15efbfbe10f0097483212f6a73c1" name="aa0bb15efbfbe10f0097483212f6a73c1"></a>
-<a class="el" href="structvar_data.html">varData</a>&#160;</td><td class="memItemRight" valign="bottom"><b>extract_variables_group_5</b> (<a class="el" href="struct_line_iterator.html">LineIterator</a> *it, Opcodes command, <a class="el" href="structdebug_list.html">debugList</a> *dbg_list)</td></tr>
-<tr class="separator:aa0bb15efbfbe10f0097483212f6a73c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afb63e3712d11d6f0c73766b06e9cc1da"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_var_data.html">VarData</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="encoding_8c.html#afb63e3712d11d6f0c73766b06e9cc1da">extract_variables_group_1_and_2_and_7</a> (<a class="el" href="struct_line_iterator.html">LineIterator</a> *it)</td></tr>
+<tr class="memdesc:afb63e3712d11d6f0c73766b06e9cc1da"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extract variables from group 1 and 2 and 7 starting at the iterator.  <a href="encoding_8c.html#afb63e3712d11d6f0c73766b06e9cc1da">More...</a><br /></td></tr>
+<tr class="separator:afb63e3712d11d6f0c73766b06e9cc1da"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1640fb1a22686ff86dce421842acca6f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_var_data.html">VarData</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="encoding_8c.html#a1640fb1a22686ff86dce421842acca6f">extract_variables_group_3_and_6</a> (<a class="el" href="struct_line_iterator.html">LineIterator</a> *it)</td></tr>
+<tr class="memdesc:a1640fb1a22686ff86dce421842acca6f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extract the variables group 3 and 6 from the line pointed to by it.  <a href="encoding_8c.html#a1640fb1a22686ff86dce421842acca6f">More...</a><br /></td></tr>
+<tr class="separator:a1640fb1a22686ff86dce421842acca6f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6ca97468e0e0dc59dcb66791202ac14c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_var_data.html">VarData</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="encoding_8c.html#a6ca97468e0e0dc59dcb66791202ac14c">extract_variables_group_5</a> (<a class="el" href="struct_line_iterator.html">LineIterator</a> *it)</td></tr>
+<tr class="memdesc:a6ca97468e0e0dc59dcb66791202ac14c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extract variables from GROUP 5 ( label =... ). This function assumes there is at least one token to be consumed.  <a href="encoding_8c.html#a6ca97468e0e0dc59dcb66791202ac14c">More...</a><br /></td></tr>
+<tr class="separator:a6ca97468e0e0dc59dcb66791202ac14c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeceddfb5e0ce3b2d64e972d121609678"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="encoding_8c.html#aeceddfb5e0ce3b2d64e972d121609678">varData_get_leftVar</a> (<a class="el" href="struct_var_data.html">VarData</a> *vd)</td></tr>
+<tr class="memdesc:aeceddfb5e0ce3b2d64e972d121609678"><td class="mdescLeft">&#160;</td><td class="mdescRight">A getter function for <a class="el" href="struct_var_data.html">VarData</a>'s leftVar member, the user should verify that 'vd' is in a valid state.  <a href="encoding_8c.html#aeceddfb5e0ce3b2d64e972d121609678">More...</a><br /></td></tr>
+<tr class="separator:aeceddfb5e0ce3b2d64e972d121609678"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aca6c4a13a61965ad8586c0df369fb3d5"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="encoding_8c.html#aca6c4a13a61965ad8586c0df369fb3d5">varData_get_rightVar</a> (<a class="el" href="struct_var_data.html">VarData</a> *vd)</td></tr>
+<tr class="memdesc:aca6c4a13a61965ad8586c0df369fb3d5"><td class="mdescLeft">&#160;</td><td class="mdescRight">A getter function for <a class="el" href="struct_var_data.html">VarData</a>'s rightVar member, the user should verify that 'vd' is in a valid state.  <a href="encoding_8c.html#aca6c4a13a61965ad8586c0df369fb3d5">More...</a><br /></td></tr>
+<tr class="separator:aca6c4a13a61965ad8586c0df369fb3d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a59a65ffad44dfe76ccaef835c46120df"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="encoding_8c.html#a59a65ffad44dfe76ccaef835c46120df">varData_get_label</a> (<a class="el" href="struct_var_data.html">VarData</a> *vd)</td></tr>
+<tr class="memdesc:a59a65ffad44dfe76ccaef835c46120df"><td class="mdescLeft">&#160;</td><td class="mdescRight">A getter function for <a class="el" href="struct_var_data.html">VarData</a>'s label member, the user should verify that 'vd' is in a valid state.  <a href="encoding_8c.html#a59a65ffad44dfe76ccaef835c46120df">More...</a><br /></td></tr>
+<tr class="separator:a59a65ffad44dfe76ccaef835c46120df"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a503db88595b8ed92bf4c1525a25bba60"><td class="memItemLeft" align="right" valign="top"><a class="el" href="memory_8h.html#a0b9039f87c8a2980c4a6ab14b511760a">EncodingTypes</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="encoding_8c.html#a503db88595b8ed92bf4c1525a25bba60">varData_get_leftEncType</a> (<a class="el" href="struct_var_data.html">VarData</a> *vd)</td></tr>
+<tr class="memdesc:a503db88595b8ed92bf4c1525a25bba60"><td class="mdescLeft">&#160;</td><td class="mdescRight">A getter function for <a class="el" href="struct_var_data.html">VarData</a>'s leftVarEncType member, the user should verify that 'vd' is in a valid state.  <a href="encoding_8c.html#a503db88595b8ed92bf4c1525a25bba60">More...</a><br /></td></tr>
+<tr class="separator:a503db88595b8ed92bf4c1525a25bba60"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a195a85fb4d9eece7fd100b82aa5e8d61"><td class="memItemLeft" align="right" valign="top"><a class="el" href="memory_8h.html#a0b9039f87c8a2980c4a6ab14b511760a">EncodingTypes</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="encoding_8c.html#a195a85fb4d9eece7fd100b82aa5e8d61">varData_get_rgithEncType</a> (<a class="el" href="struct_var_data.html">VarData</a> *vd)</td></tr>
+<tr class="memdesc:a195a85fb4d9eece7fd100b82aa5e8d61"><td class="mdescLeft">&#160;</td><td class="mdescRight">A getter function for <a class="el" href="struct_var_data.html">VarData</a>'s rightVarEncType member, the user should verify that 'vd' is in a valid state.  <a href="encoding_8c.html#a195a85fb4d9eece7fd100b82aa5e8d61">More...</a><br /></td></tr>
+<tr class="separator:a195a85fb4d9eece7fd100b82aa5e8d61"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad89082025ad0ec16570ae55c40a0e65e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="memory_8h.html#a0b9039f87c8a2980c4a6ab14b511760a">EncodingTypes</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="encoding_8c.html#ad89082025ad0ec16570ae55c40a0e65e">varData_get_labelEncType</a> (<a class="el" href="struct_var_data.html">VarData</a> *vd)</td></tr>
+<tr class="memdesc:ad89082025ad0ec16570ae55c40a0e65e"><td class="mdescLeft">&#160;</td><td class="mdescRight">A getter function for <a class="el" href="struct_var_data.html">VarData</a>'s labelEncType member, the user should verify that 'vd' is in a valid state.  <a href="encoding_8c.html#ad89082025ad0ec16570ae55c40a0e65e">More...</a><br /></td></tr>
+<tr class="separator:ad89082025ad0ec16570ae55c40a0e65e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a474210d12249706fc98270f406a24af5"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="encoding_8c.html#a474210d12249706fc98270f406a24af5">varData_get_total</a> (<a class="el" href="struct_var_data.html">VarData</a> *vd)</td></tr>
+<tr class="memdesc:a474210d12249706fc98270f406a24af5"><td class="mdescLeft">&#160;</td><td class="mdescRight">A getter function for <a class="el" href="struct_var_data.html">VarData</a>'s total member, the user should verify that 'vd' is in a valid state.  <a href="encoding_8c.html#a474210d12249706fc98270f406a24af5">More...</a><br /></td></tr>
+<tr class="separator:a474210d12249706fc98270f406a24af5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6f027af72fd18bdeb31711ada8e669aa"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="encoding_8c.html#a6f027af72fd18bdeb31711ada8e669aa">encode_labels</a> (<a class="el" href="struct_var_data.html">VarData</a> *variables, SyntaxGroups synGroup, <a class="el" href="struct_symbol_table.html">SymbolTable</a> *symTable, <a class="el" href="structimage_memory.html">imageMemory</a> *img)</td></tr>
+<tr class="separator:a6f027af72fd18bdeb31711ada8e669aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-</div><!-- contents -->
-</div><!-- doc-content -->
-<!-- start footer part -->
-<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
-  <ul>
-    <li class="navelem"><a class="el" href="encoding_8c.html">encoding.c</a></li>
-    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5 </li>
-  </ul>
+<h2 class="groupheader">Macro Definition Documentation</h2>
+<a id="ad2aa7595484e90485074ba66a981f09d" name="ad2aa7595484e90485074ba66a981f09d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad2aa7595484e90485074ba66a981f09d">&#9670;&#160;</a></span>OFFSET_ERA</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define OFFSET_ERA&#160;&#160;&#160;0x00</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p >Constans for the different offsets of the memory word fields. </p>
+
 </div>
+</div>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="a587b5ede677177c9262b6bf40511d60a" name="a587b5ede677177c9262b6bf40511d60a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a587b5ede677177c9262b6bf40511d60a">&#9670;&#160;</a></span>encode_dot_data()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void encode_dot_data </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_line_iterator.html">LineIterator</a> *&#160;</td>
+          <td class="paramname"><em>it</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structmemory_buffer.html">memoryBuffer</a> *&#160;</td>
+          <td class="paramname"><em>img</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p >Encode the data section of a dot file. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">it</td><td></td></tr>
+    <tr><td class="paramname">img</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="encoding_8c_a587b5ede677177c9262b6bf40511d60a_icgraph.png" border="0" usemap="#aencoding_8c_a587b5ede677177c9262b6bf40511d60a_icgraph" alt=""/></div>
+<map name="aencoding_8c_a587b5ede677177c9262b6bf40511d60a_icgraph" id="aencoding_8c_a587b5ede677177c9262b6bf40511d60a_icgraph">
+<area shape="rect" title=" " alt="" coords="627,13,748,38"/>
+<area shape="rect" href="first__pass_8c.html#a87a70eef7a9fd6d62eb27a5a2127739e" title="This function is used to process .data lines. It also encodes the memory if possible into the memoryB..." alt="" coords="448,5,579,45"/>
+<area shape="rect" href="first__pass_8c.html#ae3d15ca0f34657e4715827c439839e1e" title="This function implements the first pass algorithm." alt="" coords="301,13,400,38"/>
+<area shape="rect" href="driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,13,253,38"/>
+<area shape="rect" href="driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,13,124,38"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a2a4658203d0c32a628b8d1c0ff669f86" name="a2a4658203d0c32a628b8d1c0ff669f86"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2a4658203d0c32a628b8d1c0ff669f86">&#9670;&#160;</a></span>encode_dot_string()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void encode_dot_string </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_line_iterator.html">LineIterator</a> *&#160;</td>
+          <td class="paramname"><em>it</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structmemory_buffer.html">memoryBuffer</a> *&#160;</td>
+          <td class="paramname"><em>img</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p >Encode a dot string. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">it</td><td></td></tr>
+    <tr><td class="paramname">img</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="encoding_8c_a2a4658203d0c32a628b8d1c0ff669f86_icgraph.png" border="0" usemap="#aencoding_8c_a2a4658203d0c32a628b8d1c0ff669f86_icgraph" alt=""/></div>
+<map name="aencoding_8c_a2a4658203d0c32a628b8d1c0ff669f86_icgraph" id="aencoding_8c_a2a4658203d0c32a628b8d1c0ff669f86_icgraph">
+<area shape="rect" title=" " alt="" coords="627,13,755,38"/>
+<area shape="rect" href="first__pass_8c.html#a932fa602127543d4c7b4e5f4b64b9138" title="This function is used to process .string lines. It also encodes the memory if possible into the memor..." alt="" coords="448,5,579,45"/>
+<area shape="rect" href="first__pass_8c.html#ae3d15ca0f34657e4715827c439839e1e" title="This function implements the first pass algorithm." alt="" coords="301,13,400,38"/>
+<area shape="rect" href="driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,13,253,38"/>
+<area shape="rect" href="driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,13,124,38"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="abf24d88c1e9f3955d3446299cb09781f" name="abf24d88c1e9f3955d3446299cb09781f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abf24d88c1e9f3955d3446299cb09781f">&#9670;&#160;</a></span>encode_integer()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void encode_integer </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structimage_memory.html">imageMemory</a> *&#160;</td>
+          <td class="paramname"><em>img</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned int&#160;</td>
+          <td class="paramname"><em>num</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Encode an integer in image memory. This is used to encode a variable - length integer ( 8 bits ) </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">img</td><td></td></tr>
+    <tr><td class="paramname">num</td><td>the integer to be encoded in the image memory </td></tr>
+  </table>
+  </dd>
+</dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="encoding_8c_abf24d88c1e9f3955d3446299cb09781f_icgraph.png" border="0" usemap="#aencoding_8c_abf24d88c1e9f3955d3446299cb09781f_icgraph" alt=""/></div>
+<map name="aencoding_8c_abf24d88c1e9f3955d3446299cb09781f_icgraph" id="aencoding_8c_abf24d88c1e9f3955d3446299cb09781f_icgraph">
+<area shape="rect" title="Encode an integer in image memory. This is used to encode a variable &#45; length integer ( 8 bits )" alt="" coords="796,13,907,38"/>
+<area shape="rect" href="encoding_8c.html#a587b5ede677177c9262b6bf40511d60a" title=" " alt="" coords="627,13,748,38"/>
+<area shape="rect" href="first__pass_8c.html#a87a70eef7a9fd6d62eb27a5a2127739e" title="This function is used to process .data lines. It also encodes the memory if possible into the memoryB..." alt="" coords="448,5,579,45"/>
+<area shape="rect" href="first__pass_8c.html#ae3d15ca0f34657e4715827c439839e1e" title="This function implements the first pass algorithm." alt="" coords="301,13,400,38"/>
+<area shape="rect" href="driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,13,253,38"/>
+<area shape="rect" href="driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,13,124,38"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="ac462ef04efd6a452ec612a07a0e38070" name="ac462ef04efd6a452ec612a07a0e38070"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac462ef04efd6a452ec612a07a0e38070">&#9670;&#160;</a></span>encode_label_start_process()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void encode_label_start_process </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_line_iterator.html">LineIterator</a> *&#160;</td>
+          <td class="paramname"><em>it</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structmemory_buffer.html">memoryBuffer</a> *&#160;</td>
+          <td class="paramname"><em>img</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_symbol_table.html">SymbolTable</a> *&#160;</td>
+          <td class="paramname"><em>symTable</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structdebug_list.html">debugList</a> *&#160;</td>
+          <td class="paramname"><em>dbg_list</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p >@Encode the start of a label. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">it</td><td></td></tr>
+    <tr><td class="paramname">img</td><td></td></tr>
+    <tr><td class="paramname">symTable</td><td></td></tr>
+    <tr><td class="paramname">dbg_list</td><td>Debug list to add debug info </td></tr>
+  </table>
+  </dd>
+</dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="encoding_8c_ac462ef04efd6a452ec612a07a0e38070_icgraph.png" border="0" usemap="#aencoding_8c_ac462ef04efd6a452ec612a07a0e38070_icgraph" alt=""/></div>
+<map name="aencoding_8c_ac462ef04efd6a452ec612a07a0e38070_icgraph" id="aencoding_8c_ac462ef04efd6a452ec612a07a0e38070_icgraph">
+<area shape="rect" title=" " alt="" coords="636,5,767,45"/>
+<area shape="rect" href="second__pass_8c.html#a36c8038b17843fb6d82d261367f7650b" title="Executes the line, in case label exists finds if it is valid and then encodes it, otherwise prints er..." alt="" coords="493,13,588,38"/>
+<area shape="rect" href="second__pass_8c.html#aa33feb8d270721a8f28a90a7833937db" title="Initiates the second pass of the assembler. This function is responsible for executing the second pas..." alt="" coords="301,13,445,38"/>
+<area shape="rect" href="driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,13,253,38"/>
+<area shape="rect" href="driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,13,124,38"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a6f027af72fd18bdeb31711ada8e669aa" name="a6f027af72fd18bdeb31711ada8e669aa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6f027af72fd18bdeb31711ada8e669aa">&#9670;&#160;</a></span>encode_labels()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void encode_labels </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_var_data.html">VarData</a> *&#160;</td>
+          <td class="paramname"><em>variables</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">SyntaxGroups&#160;</td>
+          <td class="paramname"><em>synGroup</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_symbol_table.html">SymbolTable</a> *&#160;</td>
+          <td class="paramname"><em>symTable</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structimage_memory.html">imageMemory</a> *&#160;</td>
+          <td class="paramname"><em>img</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p >Encode labels in an assembler image. This is a helper function. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">variables</td><td>the data of the variables to encode. Must be sorted by leftVar and rightVar </td></tr>
+    <tr><td class="paramname">synGroup</td><td>the syntax group for the assembler image. </td></tr>
+    <tr><td class="paramname">symTable</td><td>the symbol table for the assembler image. </td></tr>
+    <tr><td class="paramname">img</td><td>the assembler image to encode the labels into </td></tr>
+  </table>
+  </dd>
+</dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="encoding_8c_a6f027af72fd18bdeb31711ada8e669aa_icgraph.png" border="0" usemap="#aencoding_8c_a6f027af72fd18bdeb31711ada8e669aa_icgraph" alt=""/></div>
+<map name="aencoding_8c_a6f027af72fd18bdeb31711ada8e669aa_icgraph" id="aencoding_8c_a6f027af72fd18bdeb31711ada8e669aa_icgraph">
+<area shape="rect" title=" " alt="" coords="815,13,920,38"/>
+<area shape="rect" href="encoding_8c.html#ac462ef04efd6a452ec612a07a0e38070" title=" " alt="" coords="636,5,767,45"/>
+<area shape="rect" href="second__pass_8c.html#a36c8038b17843fb6d82d261367f7650b" title="Executes the line, in case label exists finds if it is valid and then encodes it, otherwise prints er..." alt="" coords="493,13,588,38"/>
+<area shape="rect" href="second__pass_8c.html#aa33feb8d270721a8f28a90a7833937db" title="Initiates the second pass of the assembler. This function is responsible for executing the second pas..." alt="" coords="301,13,445,38"/>
+<area shape="rect" href="driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,13,253,38"/>
+<area shape="rect" href="driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,13,124,38"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a5e11ca7717b5440fb6baebdf0da9cfda" name="a5e11ca7717b5440fb6baebdf0da9cfda"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5e11ca7717b5440fb6baebdf0da9cfda">&#9670;&#160;</a></span>encode_opcode()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void encode_opcode </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_line_iterator.html">LineIterator</a> *&#160;</td>
+          <td class="paramname"><em>it</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structmemory_buffer.html">memoryBuffer</a> *&#160;</td>
+          <td class="paramname"><em>img</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Encode a single opcode. This is the entry point for the encoding routines. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">it</td><td></td></tr>
+    <tr><td class="paramname">img</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="encoding_8c_a5e11ca7717b5440fb6baebdf0da9cfda_icgraph.png" border="0" usemap="#aencoding_8c_a5e11ca7717b5440fb6baebdf0da9cfda_icgraph" alt=""/></div>
+<map name="aencoding_8c_a5e11ca7717b5440fb6baebdf0da9cfda_icgraph" id="aencoding_8c_a5e11ca7717b5440fb6baebdf0da9cfda_icgraph">
+<area shape="rect" title="Encode a single opcode. This is the entry point for the encoding routines." alt="" coords="627,45,740,70"/>
+<area shape="rect" href="first__pass_8c.html#a40eeac60c34220893b004549546acb2d" title="This function is used to process lines with opcodes and no label definitions. It also encodes the mem..." alt="" coords="448,5,579,45"/>
+<area shape="rect" href="first__pass_8c.html#ac0da628ba463b754effc2e88e611d4dd" title="This function is used to process lines with label definitions. It also encodes the memory if possible..." alt="" coords="448,69,579,109"/>
+<area shape="rect" href="first__pass_8c.html#ae3d15ca0f34657e4715827c439839e1e" title="This function implements the first pass algorithm." alt="" coords="301,45,400,70"/>
+<area shape="rect" href="driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,45,253,70"/>
+<area shape="rect" href="driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,45,124,70"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a1f68c041de50a450af52718fe19495b3" name="a1f68c041de50a450af52718fe19495b3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1f68c041de50a450af52718fe19495b3">&#9670;&#160;</a></span>encode_preceding_word()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void encode_preceding_word </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structimage_memory.html">imageMemory</a> *&#160;</td>
+          <td class="paramname"><em>img</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Opcodes&#160;</td>
+          <td class="paramname"><em>op</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>source</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>dest</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>is_jmp_label</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Encode a word preceding a label. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">img</td><td></td></tr>
+    <tr><td class="paramname">op</td><td>The opcode of the instruction. Must be OP_PRECEDING or OP_JUMP_LABEL. </td></tr>
+    <tr><td class="paramname">source</td><td>The source of the instruction or NULL if there is no source. </td></tr>
+    <tr><td class="paramname">dest</td><td>The destination of the instruction or NULL if there is no destination. </td></tr>
+    <tr><td class="paramname">is_jmp_label</td><td>Flag indicating whether or not this is a jump </td></tr>
+  </table>
+  </dd>
+</dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="encoding_8c_a1f68c041de50a450af52718fe19495b3_icgraph.png" border="0" usemap="#aencoding_8c_a1f68c041de50a450af52718fe19495b3_icgraph" alt=""/></div>
+<map name="aencoding_8c_a1f68c041de50a450af52718fe19495b3_icgraph" id="aencoding_8c_a1f68c041de50a450af52718fe19495b3_icgraph">
+<area shape="rect" title="Encode a word preceding a label." alt="" coords="999,153,1160,179"/>
+<area shape="rect" href="encoding_8c.html#a8b9bc71f73ddbdfc2b4e936ea008f9bc" title="Encode a syntax group 1 instruction. dependent syntax group that we use to encode source and destinat..." alt="" coords="788,5,951,31"/>
+<area shape="rect" href="encoding_8c.html#aad295aeb1fd1a079ff337843c4dca909" title="Encode a syntax group 2 instruction. This is the second part of the machine &#45; dependent syntax group ..." alt="" coords="788,55,951,80"/>
+<area shape="rect" href="encoding_8c.html#a5f29114a13525dc324c78b7b31879c88" title="Encode a syntax group 3 instruction." alt="" coords="788,104,951,129"/>
+<area shape="rect" href="encoding_8c.html#acf82941e19eb39762290b8e98a7bf39d" title="Encode a syntax group 4. Encodes RTS and stop. This is used to encode the first memory word and the s..." alt="" coords="788,153,951,179"/>
+<area shape="rect" href="encoding_8c.html#a97919c7b730d4080230b6d6c1e499cdb" title="Encode a syntax group 5 instruction." alt="" coords="788,203,951,228"/>
+<area shape="rect" href="encoding_8c.html#a1bf869e59e47c1eab36adb3b1f7a4339" title="Encode a syntax group 6 instruction." alt="" coords="788,252,951,277"/>
+<area shape="rect" href="encoding_8c.html#a689f60c1be32c59d1c650cc1232d4ee1" title="Encode a syntax group 7 instruction." alt="" coords="788,301,951,327"/>
+<area shape="rect" href="encoding_8c.html#a5e11ca7717b5440fb6baebdf0da9cfda" title="Encode a single opcode. This is the entry point for the encoding routines." alt="" coords="627,153,740,179"/>
+<area shape="rect" href="first__pass_8c.html#a40eeac60c34220893b004549546acb2d" title="This function is used to process lines with opcodes and no label definitions. It also encodes the mem..." alt="" coords="448,114,579,154"/>
+<area shape="rect" href="first__pass_8c.html#ac0da628ba463b754effc2e88e611d4dd" title="This function is used to process lines with label definitions. It also encodes the memory if possible..." alt="" coords="448,178,579,218"/>
+<area shape="rect" href="first__pass_8c.html#ae3d15ca0f34657e4715827c439839e1e" title="This function implements the first pass algorithm." alt="" coords="301,153,400,179"/>
+<area shape="rect" href="driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,153,253,179"/>
+<area shape="rect" href="driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,153,124,179"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a3017052dc8d455d662f5234da3f59fc8" name="a3017052dc8d455d662f5234da3f59fc8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3017052dc8d455d662f5234da3f59fc8">&#9670;&#160;</a></span>encode_source_and_dest()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void encode_source_and_dest </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structimage_memory.html">imageMemory</a> *&#160;</td>
+          <td class="paramname"><em>img</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>source</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>dest</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Encode source and destination registers. This is used to encode a pair of register or immediates. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">img</td><td></td></tr>
+    <tr><td class="paramname">source</td><td></td></tr>
+    <tr><td class="paramname">dest</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="encoding_8c_a3017052dc8d455d662f5234da3f59fc8_icgraph.png" border="0" usemap="#aencoding_8c_a3017052dc8d455d662f5234da3f59fc8_icgraph" alt=""/></div>
+<map name="aencoding_8c_a3017052dc8d455d662f5234da3f59fc8_icgraph" id="aencoding_8c_a3017052dc8d455d662f5234da3f59fc8_icgraph">
+<area shape="rect" title="Encode source and destination registers. This is used to encode a pair of register or immediates." alt="" coords="999,129,1169,155"/>
+<area shape="rect" href="encoding_8c.html#a8b9bc71f73ddbdfc2b4e936ea008f9bc" title="Encode a syntax group 1 instruction. dependent syntax group that we use to encode source and destinat..." alt="" coords="788,5,951,31"/>
+<area shape="rect" href="encoding_8c.html#aad295aeb1fd1a079ff337843c4dca909" title="Encode a syntax group 2 instruction. This is the second part of the machine &#45; dependent syntax group ..." alt="" coords="788,55,951,80"/>
+<area shape="rect" href="encoding_8c.html#a5f29114a13525dc324c78b7b31879c88" title="Encode a syntax group 3 instruction." alt="" coords="788,104,951,129"/>
+<area shape="rect" href="encoding_8c.html#a97919c7b730d4080230b6d6c1e499cdb" title="Encode a syntax group 5 instruction." alt="" coords="788,153,951,179"/>
+<area shape="rect" href="encoding_8c.html#a1bf869e59e47c1eab36adb3b1f7a4339" title="Encode a syntax group 6 instruction." alt="" coords="788,203,951,228"/>
+<area shape="rect" href="encoding_8c.html#a689f60c1be32c59d1c650cc1232d4ee1" title="Encode a syntax group 7 instruction." alt="" coords="788,252,951,277"/>
+<area shape="rect" href="encoding_8c.html#a5e11ca7717b5440fb6baebdf0da9cfda" title="Encode a single opcode. This is the entry point for the encoding routines." alt="" coords="627,129,740,155"/>
+<area shape="rect" href="first__pass_8c.html#a40eeac60c34220893b004549546acb2d" title="This function is used to process lines with opcodes and no label definitions. It also encodes the mem..." alt="" coords="448,90,579,130"/>
+<area shape="rect" href="first__pass_8c.html#ac0da628ba463b754effc2e88e611d4dd" title="This function is used to process lines with label definitions. It also encodes the memory if possible..." alt="" coords="448,154,579,194"/>
+<area shape="rect" href="first__pass_8c.html#ae3d15ca0f34657e4715827c439839e1e" title="This function implements the first pass algorithm." alt="" coords="301,129,400,155"/>
+<area shape="rect" href="driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,129,253,155"/>
+<area shape="rect" href="driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,129,124,155"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a8b9bc71f73ddbdfc2b4e936ea008f9bc" name="a8b9bc71f73ddbdfc2b4e936ea008f9bc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8b9bc71f73ddbdfc2b4e936ea008f9bc">&#9670;&#160;</a></span>encode_syntax_group_1()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void encode_syntax_group_1 </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_line_iterator.html">LineIterator</a> *&#160;</td>
+          <td class="paramname"><em>it</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Opcodes&#160;</td>
+          <td class="paramname"><em>op</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structmemory_buffer.html">memoryBuffer</a> *&#160;</td>
+          <td class="paramname"><em>img</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Encode a syntax group 1 instruction. dependent syntax group that we use to encode source and destination operands. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">it</td><td>Line iterator pointing to the start of the syntax group </td></tr>
+    <tr><td class="paramname">op</td><td>Operand type to be encoded </td></tr>
+    <tr><td class="paramname">img</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="encoding_8c_a8b9bc71f73ddbdfc2b4e936ea008f9bc_icgraph.png" border="0" usemap="#aencoding_8c_a8b9bc71f73ddbdfc2b4e936ea008f9bc_icgraph" alt=""/></div>
+<map name="aencoding_8c_a8b9bc71f73ddbdfc2b4e936ea008f9bc_icgraph" id="aencoding_8c_a8b9bc71f73ddbdfc2b4e936ea008f9bc_icgraph">
+<area shape="rect" title="Encode a syntax group 1 instruction. dependent syntax group that we use to encode source and destinat..." alt="" coords="788,45,951,70"/>
+<area shape="rect" href="encoding_8c.html#a5e11ca7717b5440fb6baebdf0da9cfda" title="Encode a single opcode. This is the entry point for the encoding routines." alt="" coords="627,45,740,70"/>
+<area shape="rect" href="first__pass_8c.html#a40eeac60c34220893b004549546acb2d" title="This function is used to process lines with opcodes and no label definitions. It also encodes the mem..." alt="" coords="448,5,579,45"/>
+<area shape="rect" href="first__pass_8c.html#ac0da628ba463b754effc2e88e611d4dd" title="This function is used to process lines with label definitions. It also encodes the memory if possible..." alt="" coords="448,69,579,109"/>
+<area shape="rect" href="first__pass_8c.html#ae3d15ca0f34657e4715827c439839e1e" title="This function implements the first pass algorithm." alt="" coords="301,45,400,70"/>
+<area shape="rect" href="driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,45,253,70"/>
+<area shape="rect" href="driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,45,124,70"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="aad295aeb1fd1a079ff337843c4dca909" name="aad295aeb1fd1a079ff337843c4dca909"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aad295aeb1fd1a079ff337843c4dca909">&#9670;&#160;</a></span>encode_syntax_group_2()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void encode_syntax_group_2 </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_line_iterator.html">LineIterator</a> *&#160;</td>
+          <td class="paramname"><em>it</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Opcodes&#160;</td>
+          <td class="paramname"><em>op</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structmemory_buffer.html">memoryBuffer</a> *&#160;</td>
+          <td class="paramname"><em>img</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Encode a syntax group 2 instruction. This is the second part of the machine - dependent syntax group encoding. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">it</td><td>Line iterator pointing to the start of the syntax group </td></tr>
+    <tr><td class="paramname">op</td><td>Operand type to be used </td></tr>
+    <tr><td class="paramname">img</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="encoding_8c_aad295aeb1fd1a079ff337843c4dca909_icgraph.png" border="0" usemap="#aencoding_8c_aad295aeb1fd1a079ff337843c4dca909_icgraph" alt=""/></div>
+<map name="aencoding_8c_aad295aeb1fd1a079ff337843c4dca909_icgraph" id="aencoding_8c_aad295aeb1fd1a079ff337843c4dca909_icgraph">
+<area shape="rect" title="Encode a syntax group 2 instruction. This is the second part of the machine &#45; dependent syntax group ..." alt="" coords="788,45,951,70"/>
+<area shape="rect" href="encoding_8c.html#a5e11ca7717b5440fb6baebdf0da9cfda" title="Encode a single opcode. This is the entry point for the encoding routines." alt="" coords="627,45,740,70"/>
+<area shape="rect" href="first__pass_8c.html#a40eeac60c34220893b004549546acb2d" title="This function is used to process lines with opcodes and no label definitions. It also encodes the mem..." alt="" coords="448,5,579,45"/>
+<area shape="rect" href="first__pass_8c.html#ac0da628ba463b754effc2e88e611d4dd" title="This function is used to process lines with label definitions. It also encodes the memory if possible..." alt="" coords="448,69,579,109"/>
+<area shape="rect" href="first__pass_8c.html#ae3d15ca0f34657e4715827c439839e1e" title="This function implements the first pass algorithm." alt="" coords="301,45,400,70"/>
+<area shape="rect" href="driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,45,253,70"/>
+<area shape="rect" href="driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,45,124,70"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a5f29114a13525dc324c78b7b31879c88" name="a5f29114a13525dc324c78b7b31879c88"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5f29114a13525dc324c78b7b31879c88">&#9670;&#160;</a></span>encode_syntax_group_3()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void encode_syntax_group_3 </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_line_iterator.html">LineIterator</a> *&#160;</td>
+          <td class="paramname"><em>it</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Opcodes&#160;</td>
+          <td class="paramname"><em>op</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structmemory_buffer.html">memoryBuffer</a> *&#160;</td>
+          <td class="paramname"><em>img</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Encode a syntax group 3 instruction. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">it</td><td>Line iterator pointing to the start of the instruction to encode. </td></tr>
+    <tr><td class="paramname">op</td><td>The opcode of the instruction to encode. This is used to determine the source and destination word and to encode the source and destination respectively. </td></tr>
+    <tr><td class="paramname">img</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="encoding_8c_a5f29114a13525dc324c78b7b31879c88_icgraph.png" border="0" usemap="#aencoding_8c_a5f29114a13525dc324c78b7b31879c88_icgraph" alt=""/></div>
+<map name="aencoding_8c_a5f29114a13525dc324c78b7b31879c88_icgraph" id="aencoding_8c_a5f29114a13525dc324c78b7b31879c88_icgraph">
+<area shape="rect" title="Encode a syntax group 3 instruction." alt="" coords="788,45,951,70"/>
+<area shape="rect" href="encoding_8c.html#a5e11ca7717b5440fb6baebdf0da9cfda" title="Encode a single opcode. This is the entry point for the encoding routines." alt="" coords="627,45,740,70"/>
+<area shape="rect" href="first__pass_8c.html#a40eeac60c34220893b004549546acb2d" title="This function is used to process lines with opcodes and no label definitions. It also encodes the mem..." alt="" coords="448,5,579,45"/>
+<area shape="rect" href="first__pass_8c.html#ac0da628ba463b754effc2e88e611d4dd" title="This function is used to process lines with label definitions. It also encodes the memory if possible..." alt="" coords="448,69,579,109"/>
+<area shape="rect" href="first__pass_8c.html#ae3d15ca0f34657e4715827c439839e1e" title="This function implements the first pass algorithm." alt="" coords="301,45,400,70"/>
+<area shape="rect" href="driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,45,253,70"/>
+<area shape="rect" href="driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,45,124,70"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="acf82941e19eb39762290b8e98a7bf39d" name="acf82941e19eb39762290b8e98a7bf39d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acf82941e19eb39762290b8e98a7bf39d">&#9670;&#160;</a></span>encode_syntax_group_4()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void encode_syntax_group_4 </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_line_iterator.html">LineIterator</a> *&#160;</td>
+          <td class="paramname"><em>it</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Opcodes&#160;</td>
+          <td class="paramname"><em>op</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structmemory_buffer.html">memoryBuffer</a> *&#160;</td>
+          <td class="paramname"><em>img</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Encode a syntax group 4. Encodes RTS and stop. This is used to encode the first memory word and the second and subsequent memory words. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">it</td><td>Line iterator pointing to the start of the line to be encoded. </td></tr>
+    <tr><td class="paramname">op</td><td>The opcode of the encoding operation. This is always OP_SyntaxGroup4. </td></tr>
+    <tr><td class="paramname">img</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="encoding_8c_acf82941e19eb39762290b8e98a7bf39d_icgraph.png" border="0" usemap="#aencoding_8c_acf82941e19eb39762290b8e98a7bf39d_icgraph" alt=""/></div>
+<map name="aencoding_8c_acf82941e19eb39762290b8e98a7bf39d_icgraph" id="aencoding_8c_acf82941e19eb39762290b8e98a7bf39d_icgraph">
+<area shape="rect" title="Encode a syntax group 4. Encodes RTS and stop. This is used to encode the first memory word and the s..." alt="" coords="788,45,951,70"/>
+<area shape="rect" href="encoding_8c.html#a5e11ca7717b5440fb6baebdf0da9cfda" title="Encode a single opcode. This is the entry point for the encoding routines." alt="" coords="627,45,740,70"/>
+<area shape="rect" href="first__pass_8c.html#a40eeac60c34220893b004549546acb2d" title="This function is used to process lines with opcodes and no label definitions. It also encodes the mem..." alt="" coords="448,5,579,45"/>
+<area shape="rect" href="first__pass_8c.html#ac0da628ba463b754effc2e88e611d4dd" title="This function is used to process lines with label definitions. It also encodes the memory if possible..." alt="" coords="448,69,579,109"/>
+<area shape="rect" href="first__pass_8c.html#ae3d15ca0f34657e4715827c439839e1e" title="This function implements the first pass algorithm." alt="" coords="301,45,400,70"/>
+<area shape="rect" href="driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,45,253,70"/>
+<area shape="rect" href="driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,45,124,70"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a97919c7b730d4080230b6d6c1e499cdb" name="a97919c7b730d4080230b6d6c1e499cdb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a97919c7b730d4080230b6d6c1e499cdb">&#9670;&#160;</a></span>encode_syntax_group_5()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void encode_syntax_group_5 </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_line_iterator.html">LineIterator</a> *&#160;</td>
+          <td class="paramname"><em>it</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Opcodes&#160;</td>
+          <td class="paramname"><em>op</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structmemory_buffer.html">memoryBuffer</a> *&#160;</td>
+          <td class="paramname"><em>img</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Encode a syntax group 5 instruction. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">it</td><td></td></tr>
+    <tr><td class="paramname">op</td><td>The opcode of the encoding </td></tr>
+    <tr><td class="paramname">img</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="encoding_8c_a97919c7b730d4080230b6d6c1e499cdb_icgraph.png" border="0" usemap="#aencoding_8c_a97919c7b730d4080230b6d6c1e499cdb_icgraph" alt=""/></div>
+<map name="aencoding_8c_a97919c7b730d4080230b6d6c1e499cdb_icgraph" id="aencoding_8c_a97919c7b730d4080230b6d6c1e499cdb_icgraph">
+<area shape="rect" title="Encode a syntax group 5 instruction." alt="" coords="788,45,951,70"/>
+<area shape="rect" href="encoding_8c.html#a5e11ca7717b5440fb6baebdf0da9cfda" title="Encode a single opcode. This is the entry point for the encoding routines." alt="" coords="627,45,740,70"/>
+<area shape="rect" href="first__pass_8c.html#a40eeac60c34220893b004549546acb2d" title="This function is used to process lines with opcodes and no label definitions. It also encodes the mem..." alt="" coords="448,5,579,45"/>
+<area shape="rect" href="first__pass_8c.html#ac0da628ba463b754effc2e88e611d4dd" title="This function is used to process lines with label definitions. It also encodes the memory if possible..." alt="" coords="448,69,579,109"/>
+<area shape="rect" href="first__pass_8c.html#ae3d15ca0f34657e4715827c439839e1e" title="This function implements the first pass algorithm." alt="" coords="301,45,400,70"/>
+<area shape="rect" href="driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,45,253,70"/>
+<area shape="rect" href="driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,45,124,70"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a1bf869e59e47c1eab36adb3b1f7a4339" name="a1bf869e59e47c1eab36adb3b1f7a4339"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1bf869e59e47c1eab36adb3b1f7a4339">&#9670;&#160;</a></span>encode_syntax_group_6()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void encode_syntax_group_6 </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_line_iterator.html">LineIterator</a> *&#160;</td>
+          <td class="paramname"><em>it</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Opcodes&#160;</td>
+          <td class="paramname"><em>op</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structmemory_buffer.html">memoryBuffer</a> *&#160;</td>
+          <td class="paramname"><em>img</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Encode a syntax group 6 instruction. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">it</td><td>Line iterator pointing to the start of the line to be encoded. </td></tr>
+    <tr><td class="paramname">op</td><td>Operand type to be used for encoding. </td></tr>
+    <tr><td class="paramname">img</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="encoding_8c_a1bf869e59e47c1eab36adb3b1f7a4339_icgraph.png" border="0" usemap="#aencoding_8c_a1bf869e59e47c1eab36adb3b1f7a4339_icgraph" alt=""/></div>
+<map name="aencoding_8c_a1bf869e59e47c1eab36adb3b1f7a4339_icgraph" id="aencoding_8c_a1bf869e59e47c1eab36adb3b1f7a4339_icgraph">
+<area shape="rect" title="Encode a syntax group 6 instruction." alt="" coords="788,45,951,70"/>
+<area shape="rect" href="encoding_8c.html#a5e11ca7717b5440fb6baebdf0da9cfda" title="Encode a single opcode. This is the entry point for the encoding routines." alt="" coords="627,45,740,70"/>
+<area shape="rect" href="first__pass_8c.html#a40eeac60c34220893b004549546acb2d" title="This function is used to process lines with opcodes and no label definitions. It also encodes the mem..." alt="" coords="448,5,579,45"/>
+<area shape="rect" href="first__pass_8c.html#ac0da628ba463b754effc2e88e611d4dd" title="This function is used to process lines with label definitions. It also encodes the memory if possible..." alt="" coords="448,69,579,109"/>
+<area shape="rect" href="first__pass_8c.html#ae3d15ca0f34657e4715827c439839e1e" title="This function implements the first pass algorithm." alt="" coords="301,45,400,70"/>
+<area shape="rect" href="driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,45,253,70"/>
+<area shape="rect" href="driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,45,124,70"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a689f60c1be32c59d1c650cc1232d4ee1" name="a689f60c1be32c59d1c650cc1232d4ee1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a689f60c1be32c59d1c650cc1232d4ee1">&#9670;&#160;</a></span>encode_syntax_group_7()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void encode_syntax_group_7 </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_line_iterator.html">LineIterator</a> *&#160;</td>
+          <td class="paramname"><em>it</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Opcodes&#160;</td>
+          <td class="paramname"><em>op</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structmemory_buffer.html">memoryBuffer</a> *&#160;</td>
+          <td class="paramname"><em>img</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Encode a syntax group 7 instruction. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">it</td><td>Line iterator pointing to the start of the instruction </td></tr>
+    <tr><td class="paramname">op</td><td>Operand type to be used for encoding </td></tr>
+    <tr><td class="paramname">img</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="encoding_8c_a689f60c1be32c59d1c650cc1232d4ee1_icgraph.png" border="0" usemap="#aencoding_8c_a689f60c1be32c59d1c650cc1232d4ee1_icgraph" alt=""/></div>
+<map name="aencoding_8c_a689f60c1be32c59d1c650cc1232d4ee1_icgraph" id="aencoding_8c_a689f60c1be32c59d1c650cc1232d4ee1_icgraph">
+<area shape="rect" title="Encode a syntax group 7 instruction." alt="" coords="788,45,951,70"/>
+<area shape="rect" href="encoding_8c.html#a5e11ca7717b5440fb6baebdf0da9cfda" title="Encode a single opcode. This is the entry point for the encoding routines." alt="" coords="627,45,740,70"/>
+<area shape="rect" href="first__pass_8c.html#a40eeac60c34220893b004549546acb2d" title="This function is used to process lines with opcodes and no label definitions. It also encodes the mem..." alt="" coords="448,5,579,45"/>
+<area shape="rect" href="first__pass_8c.html#ac0da628ba463b754effc2e88e611d4dd" title="This function is used to process lines with label definitions. It also encodes the memory if possible..." alt="" coords="448,69,579,109"/>
+<area shape="rect" href="first__pass_8c.html#ae3d15ca0f34657e4715827c439839e1e" title="This function implements the first pass algorithm." alt="" coords="301,45,400,70"/>
+<area shape="rect" href="driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,45,253,70"/>
+<area shape="rect" href="driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,45,124,70"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="afb63e3712d11d6f0c73766b06e9cc1da" name="afb63e3712d11d6f0c73766b06e9cc1da"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afb63e3712d11d6f0c73766b06e9cc1da">&#9670;&#160;</a></span>extract_variables_group_1_and_2_and_7()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_var_data.html">VarData</a> * extract_variables_group_1_and_2_and_7 </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_line_iterator.html">LineIterator</a> *&#160;</td>
+          <td class="paramname"><em>it</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Extract variables from group 1 and 2 and 7 starting at the iterator. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">it</td><td>Line iterator pointing to the start of the group </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A <a class="el" href="struct_var_data.html">VarData</a> structure with leftVar and rightVar set @Note groups: mov, add,sub,cmp,lea | expected input is the char next to end of command (i.e mov ^ </dd></dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="encoding_8c_afb63e3712d11d6f0c73766b06e9cc1da_icgraph.png" border="0" usemap="#aencoding_8c_afb63e3712d11d6f0c73766b06e9cc1da_icgraph" alt=""/></div>
+<map name="aencoding_8c_afb63e3712d11d6f0c73766b06e9cc1da_icgraph" id="aencoding_8c_afb63e3712d11d6f0c73766b06e9cc1da_icgraph">
+<area shape="rect" title="Extract variables from group 1 and 2 and 7 starting at the iterator." alt="" coords="1003,35,1161,75"/>
+<area shape="rect" href="encoding_8c.html#ac462ef04efd6a452ec612a07a0e38070" title=" " alt="" coords="647,5,777,45"/>
+<area shape="rect" href="second__pass_8c.html#a41e82792e66da5f66e6e378e20a0a7cc" title="Extracts the variables from the current line of assembly code. This function extracts the variables f..." alt="" coords="836,67,955,93"/>
+<area shape="rect" href="second__pass_8c.html#a36c8038b17843fb6d82d261367f7650b" title="Executes the line, in case label exists finds if it is valid and then encodes it, otherwise prints er..." alt="" coords="493,42,588,67"/>
+<area shape="rect" href="second__pass_8c.html#aa33feb8d270721a8f28a90a7833937db" title="Initiates the second pass of the assembler. This function is responsible for executing the second pas..." alt="" coords="301,42,445,67"/>
+<area shape="rect" href="driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,42,253,67"/>
+<area shape="rect" href="driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,42,124,67"/>
+<area shape="rect" href="second__pass_8c.html#a6b999b1b1244fbcf34f5f866b4aa3153" title="Checks whether a label exists in a line and is defined in the symbol table." alt="" coords="636,70,788,95"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a1640fb1a22686ff86dce421842acca6f" name="a1640fb1a22686ff86dce421842acca6f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1640fb1a22686ff86dce421842acca6f">&#9670;&#160;</a></span>extract_variables_group_3_and_6()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_var_data.html">VarData</a> * extract_variables_group_3_and_6 </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_line_iterator.html">LineIterator</a> *&#160;</td>
+          <td class="paramname"><em>it</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Extract the variables group 3 and 6 from the line pointed to by it. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">it</td><td>Line iterator pointing to the first word of the group </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>a <a class="el" href="struct_var_data.html">VarData</a> structure with the leftVar and total @Note groups: not, clr, inc, dec, red,prn | expected input is the char next to end of command (i.e mov <br  />
+ </dd></dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="encoding_8c_a1640fb1a22686ff86dce421842acca6f_icgraph.png" border="0" usemap="#aencoding_8c_a1640fb1a22686ff86dce421842acca6f_icgraph" alt=""/></div>
+<map name="aencoding_8c_a1640fb1a22686ff86dce421842acca6f_icgraph" id="aencoding_8c_a1640fb1a22686ff86dce421842acca6f_icgraph">
+<area shape="rect" title="Extract the variables group 3 and 6 from the line pointed to by it." alt="" coords="1003,35,1161,75"/>
+<area shape="rect" href="encoding_8c.html#ac462ef04efd6a452ec612a07a0e38070" title=" " alt="" coords="647,5,777,45"/>
+<area shape="rect" href="second__pass_8c.html#a41e82792e66da5f66e6e378e20a0a7cc" title="Extracts the variables from the current line of assembly code. This function extracts the variables f..." alt="" coords="836,67,955,93"/>
+<area shape="rect" href="second__pass_8c.html#a36c8038b17843fb6d82d261367f7650b" title="Executes the line, in case label exists finds if it is valid and then encodes it, otherwise prints er..." alt="" coords="493,42,588,67"/>
+<area shape="rect" href="second__pass_8c.html#aa33feb8d270721a8f28a90a7833937db" title="Initiates the second pass of the assembler. This function is responsible for executing the second pas..." alt="" coords="301,42,445,67"/>
+<area shape="rect" href="driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,42,253,67"/>
+<area shape="rect" href="driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,42,124,67"/>
+<area shape="rect" href="second__pass_8c.html#a6b999b1b1244fbcf34f5f866b4aa3153" title="Checks whether a label exists in a line and is defined in the symbol table." alt="" coords="636,70,788,95"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a6ca97468e0e0dc59dcb66791202ac14c" name="a6ca97468e0e0dc59dcb66791202ac14c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6ca97468e0e0dc59dcb66791202ac14c">&#9670;&#160;</a></span>extract_variables_group_5()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_var_data.html">VarData</a> * extract_variables_group_5 </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_line_iterator.html">LineIterator</a> *&#160;</td>
+          <td class="paramname"><em>it</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Extract variables from GROUP 5 ( label =... ). This function assumes there is at least one token to be consumed. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">it</td><td>Line iterator pointing to the start of the VARIABLES </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="struct_var_data.html">VarData</a> with information about </dd></dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="encoding_8c_a6ca97468e0e0dc59dcb66791202ac14c_icgraph.png" border="0" usemap="#aencoding_8c_a6ca97468e0e0dc59dcb66791202ac14c_icgraph" alt=""/></div>
+<map name="aencoding_8c_a6ca97468e0e0dc59dcb66791202ac14c_icgraph" id="aencoding_8c_a6ca97468e0e0dc59dcb66791202ac14c_icgraph">
+<area shape="rect" title="Extract variables from GROUP 5 ( label =... ). This function assumes there is at least one token to b..." alt="" coords="1003,42,1175,67"/>
+<area shape="rect" href="encoding_8c.html#ac462ef04efd6a452ec612a07a0e38070" title=" " alt="" coords="647,5,777,45"/>
+<area shape="rect" href="second__pass_8c.html#a41e82792e66da5f66e6e378e20a0a7cc" title="Extracts the variables from the current line of assembly code. This function extracts the variables f..." alt="" coords="836,67,955,93"/>
+<area shape="rect" href="second__pass_8c.html#a36c8038b17843fb6d82d261367f7650b" title="Executes the line, in case label exists finds if it is valid and then encodes it, otherwise prints er..." alt="" coords="493,42,588,67"/>
+<area shape="rect" href="second__pass_8c.html#aa33feb8d270721a8f28a90a7833937db" title="Initiates the second pass of the assembler. This function is responsible for executing the second pas..." alt="" coords="301,42,445,67"/>
+<area shape="rect" href="driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,42,253,67"/>
+<area shape="rect" href="driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,42,124,67"/>
+<area shape="rect" href="second__pass_8c.html#a6b999b1b1244fbcf34f5f866b4aa3153" title="Checks whether a label exists in a line and is defined in the symbol table." alt="" coords="636,70,788,95"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a6f106ab0328c50ee0e147f2eb95cdc29" name="a6f106ab0328c50ee0e147f2eb95cdc29"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6f106ab0328c50ee0e147f2eb95cdc29">&#9670;&#160;</a></span>get_operand_kind()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="encoding_8h.html#a30a5800c306d3690ae310b2e00b51c90">OperandKind</a> get_operand_kind </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>op</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get the kind of operand. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">op</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>KIND_NONE if op is NULL KIND_IMM if it is a hash_char KIND_REG if it is a </dd></dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="encoding_8c_a6f106ab0328c50ee0e147f2eb95cdc29_icgraph.png" border="0" usemap="#aencoding_8c_a6f106ab0328c50ee0e147f2eb95cdc29_icgraph" alt=""/></div>
+<map name="aencoding_8c_a6f106ab0328c50ee0e147f2eb95cdc29_icgraph" id="aencoding_8c_a6f106ab0328c50ee0e147f2eb95cdc29_icgraph">
+<area shape="rect" title="Get the kind of operand." alt="" coords="1263,145,1387,170"/>
+<area shape="rect" href="encoding_8c.html#a6f027af72fd18bdeb31711ada8e669aa" title=" " alt="" coords="1077,66,1182,91"/>
+<area shape="rect" href="encoding_8c.html#a3017052dc8d455d662f5234da3f59fc8" title="Encode source and destination registers. This is used to encode a pair of register or immediates." alt="" coords="1044,169,1215,194"/>
+<area shape="rect" href="encoding_8c.html#ac462ef04efd6a452ec612a07a0e38070" title=" " alt="" coords="849,5,980,45"/>
+<area shape="rect" href="second__pass_8c.html#a36c8038b17843fb6d82d261367f7650b" title="Executes the line, in case label exists finds if it is valid and then encodes it, otherwise prints er..." alt="" coords="681,22,776,47"/>
+<area shape="rect" href="second__pass_8c.html#aa33feb8d270721a8f28a90a7833937db" title="Initiates the second pass of the assembler. This function is responsible for executing the second pas..." alt="" coords="301,51,445,77"/>
+<area shape="rect" href="driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,81,253,106"/>
+<area shape="rect" href="driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,81,124,106"/>
+<area shape="rect" href="encoding_8c.html#a8b9bc71f73ddbdfc2b4e936ea008f9bc" title="Encode a syntax group 1 instruction. dependent syntax group that we use to encode source and destinat..." alt="" coords="833,70,996,95"/>
+<area shape="rect" href="encoding_8c.html#aad295aeb1fd1a079ff337843c4dca909" title="Encode a syntax group 2 instruction. This is the second part of the machine &#45; dependent syntax group ..." alt="" coords="833,119,996,145"/>
+<area shape="rect" href="encoding_8c.html#a5f29114a13525dc324c78b7b31879c88" title="Encode a syntax group 3 instruction." alt="" coords="833,169,996,194"/>
+<area shape="rect" href="encoding_8c.html#a97919c7b730d4080230b6d6c1e499cdb" title="Encode a syntax group 5 instruction." alt="" coords="833,218,996,243"/>
+<area shape="rect" href="encoding_8c.html#a1bf869e59e47c1eab36adb3b1f7a4339" title="Encode a syntax group 6 instruction." alt="" coords="833,267,996,293"/>
+<area shape="rect" href="encoding_8c.html#a689f60c1be32c59d1c650cc1232d4ee1" title="Encode a syntax group 7 instruction." alt="" coords="833,317,996,342"/>
+<area shape="rect" href="encoding_8c.html#a5e11ca7717b5440fb6baebdf0da9cfda" title="Encode a single opcode. This is the entry point for the encoding routines." alt="" coords="672,169,785,194"/>
+<area shape="rect" href="first__pass_8c.html#a40eeac60c34220893b004549546acb2d" title="This function is used to process lines with opcodes and no label definitions. It also encodes the mem..." alt="" coords="493,97,624,137"/>
+<area shape="rect" href="first__pass_8c.html#ac0da628ba463b754effc2e88e611d4dd" title="This function is used to process lines with label definitions. It also encodes the memory if possible..." alt="" coords="493,161,624,201"/>
+<area shape="rect" href="first__pass_8c.html#ae3d15ca0f34657e4715827c439839e1e" title="This function implements the first pass algorithm." alt="" coords="324,105,423,130"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="aab1278c55f9abd4024870171ff9e2f8a" name="aab1278c55f9abd4024870171ff9e2f8a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aab1278c55f9abd4024870171ff9e2f8a">&#9670;&#160;</a></span>varData_destroy()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void varData_destroy </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_var_data.html">VarData</a> **&#160;</td>
+          <td class="paramname"><em>ptr</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Deallocates the memory used by a <a class="el" href="struct_var_data.html">VarData</a> struct and its fields. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ptr</td><td>A pointer to the <a class="el" href="struct_var_data.html">VarData</a> struct pointer to be destroyed. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>Note</dt><dd>After calling this function, the pointer to the <a class="el" href="struct_var_data.html">VarData</a> struct pointer will be set to NULL. </dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="encoding_8h.html#afbb91e7d9d86ec1a3ab6d69dc31fe7f3" title="This function allocates a new VarData object.">varData_get_new()</a> </dd></dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="encoding_8c_aab1278c55f9abd4024870171ff9e2f8a_icgraph.png" border="0" usemap="#aencoding_8c_aab1278c55f9abd4024870171ff9e2f8a_icgraph" alt=""/></div>
+<map name="aencoding_8c_aab1278c55f9abd4024870171ff9e2f8a_icgraph" id="aencoding_8c_aab1278c55f9abd4024870171ff9e2f8a_icgraph">
+<area shape="rect" title="Deallocates the memory used by a VarData struct and its fields." alt="" coords="836,42,951,67"/>
+<area shape="rect" href="encoding_8c.html#ac462ef04efd6a452ec612a07a0e38070" title=" " alt="" coords="647,5,777,45"/>
+<area shape="rect" href="second__pass_8c.html#a6b999b1b1244fbcf34f5f866b4aa3153" title="Checks whether a label exists in a line and is defined in the symbol table." alt="" coords="636,70,788,95"/>
+<area shape="rect" href="second__pass_8c.html#a36c8038b17843fb6d82d261367f7650b" title="Executes the line, in case label exists finds if it is valid and then encodes it, otherwise prints er..." alt="" coords="493,42,588,67"/>
+<area shape="rect" href="second__pass_8c.html#aa33feb8d270721a8f28a90a7833937db" title="Initiates the second pass of the assembler. This function is responsible for executing the second pas..." alt="" coords="301,42,445,67"/>
+<area shape="rect" href="driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,42,253,67"/>
+<area shape="rect" href="driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,42,124,67"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a59a65ffad44dfe76ccaef835c46120df" name="a59a65ffad44dfe76ccaef835c46120df"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a59a65ffad44dfe76ccaef835c46120df">&#9670;&#160;</a></span>varData_get_label()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char * varData_get_label </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_var_data.html">VarData</a> *&#160;</td>
+          <td class="paramname"><em>vd</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>A getter function for <a class="el" href="struct_var_data.html">VarData</a>'s label member, the user should verify that 'vd' is in a valid state. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">vd</td><td>- The <a class="el" href="struct_var_data.html">VarData</a> object. </td></tr>
+  </table>
+  </dd>
+</dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="encoding_8c_a59a65ffad44dfe76ccaef835c46120df_icgraph.png" border="0" usemap="#aencoding_8c_a59a65ffad44dfe76ccaef835c46120df_icgraph" alt=""/></div>
+<map name="aencoding_8c_a59a65ffad44dfe76ccaef835c46120df_icgraph" id="aencoding_8c_a59a65ffad44dfe76ccaef835c46120df_icgraph">
+<area shape="rect" title="A getter function for VarData&#39;s label member, the user should verify that &#39;vd&#39; is in a valid state." alt="" coords="836,5,960,31"/>
+<area shape="rect" href="second__pass_8c.html#a6b999b1b1244fbcf34f5f866b4aa3153" title="Checks whether a label exists in a line and is defined in the symbol table." alt="" coords="636,5,788,31"/>
+<area shape="rect" href="second__pass_8c.html#a36c8038b17843fb6d82d261367f7650b" title="Executes the line, in case label exists finds if it is valid and then encodes it, otherwise prints er..." alt="" coords="493,5,588,31"/>
+<area shape="rect" href="second__pass_8c.html#aa33feb8d270721a8f28a90a7833937db" title="Initiates the second pass of the assembler. This function is responsible for executing the second pas..." alt="" coords="301,5,445,31"/>
+<area shape="rect" href="driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,5,253,31"/>
+<area shape="rect" href="driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,5,124,31"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="ad89082025ad0ec16570ae55c40a0e65e" name="ad89082025ad0ec16570ae55c40a0e65e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad89082025ad0ec16570ae55c40a0e65e">&#9670;&#160;</a></span>varData_get_labelEncType()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="memory_8h.html#a0b9039f87c8a2980c4a6ab14b511760a">EncodingTypes</a> varData_get_labelEncType </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_var_data.html">VarData</a> *&#160;</td>
+          <td class="paramname"><em>vd</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>A getter function for <a class="el" href="struct_var_data.html">VarData</a>'s labelEncType member, the user should verify that 'vd' is in a valid state. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">vd</td><td>- The <a class="el" href="struct_var_data.html">VarData</a> object. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a503db88595b8ed92bf4c1525a25bba60" name="a503db88595b8ed92bf4c1525a25bba60"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a503db88595b8ed92bf4c1525a25bba60">&#9670;&#160;</a></span>varData_get_leftEncType()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="memory_8h.html#a0b9039f87c8a2980c4a6ab14b511760a">EncodingTypes</a> varData_get_leftEncType </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_var_data.html">VarData</a> *&#160;</td>
+          <td class="paramname"><em>vd</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>A getter function for <a class="el" href="struct_var_data.html">VarData</a>'s leftVarEncType member, the user should verify that 'vd' is in a valid state. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">vd</td><td>- The <a class="el" href="struct_var_data.html">VarData</a> object. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="aeceddfb5e0ce3b2d64e972d121609678" name="aeceddfb5e0ce3b2d64e972d121609678"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeceddfb5e0ce3b2d64e972d121609678">&#9670;&#160;</a></span>varData_get_leftVar()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char * varData_get_leftVar </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_var_data.html">VarData</a> *&#160;</td>
+          <td class="paramname"><em>vd</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>A getter function for <a class="el" href="struct_var_data.html">VarData</a>'s leftVar member, the user should verify that 'vd' is in a valid state. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">vd</td><td>- The <a class="el" href="struct_var_data.html">VarData</a> object. </td></tr>
+  </table>
+  </dd>
+</dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="encoding_8c_aeceddfb5e0ce3b2d64e972d121609678_icgraph.png" border="0" usemap="#aencoding_8c_aeceddfb5e0ce3b2d64e972d121609678_icgraph" alt=""/></div>
+<map name="aencoding_8c_aeceddfb5e0ce3b2d64e972d121609678_icgraph" id="aencoding_8c_aeceddfb5e0ce3b2d64e972d121609678_icgraph">
+<area shape="rect" title="A getter function for VarData&#39;s leftVar member, the user should verify that &#39;vd&#39; is in a valid state." alt="" coords="836,5,971,31"/>
+<area shape="rect" href="second__pass_8c.html#a6b999b1b1244fbcf34f5f866b4aa3153" title="Checks whether a label exists in a line and is defined in the symbol table." alt="" coords="636,5,788,31"/>
+<area shape="rect" href="second__pass_8c.html#a36c8038b17843fb6d82d261367f7650b" title="Executes the line, in case label exists finds if it is valid and then encodes it, otherwise prints er..." alt="" coords="493,5,588,31"/>
+<area shape="rect" href="second__pass_8c.html#aa33feb8d270721a8f28a90a7833937db" title="Initiates the second pass of the assembler. This function is responsible for executing the second pas..." alt="" coords="301,5,445,31"/>
+<area shape="rect" href="driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,5,253,31"/>
+<area shape="rect" href="driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,5,124,31"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="afbb91e7d9d86ec1a3ab6d69dc31fe7f3" name="afbb91e7d9d86ec1a3ab6d69dc31fe7f3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afbb91e7d9d86ec1a3ab6d69dc31fe7f3">&#9670;&#160;</a></span>varData_get_new()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_var_data.html">VarData</a> * varData_get_new </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This function allocates a new <a class="el" href="struct_var_data.html">VarData</a> object. </p>
+<dl class="section return"><dt>Returns</dt><dd>A new <a class="el" href="struct_var_data.html">VarData</a> object. </dd></dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="encoding_8c_afbb91e7d9d86ec1a3ab6d69dc31fe7f3_icgraph.png" border="0" usemap="#aencoding_8c_afbb91e7d9d86ec1a3ab6d69dc31fe7f3_icgraph" alt=""/></div>
+<map name="aencoding_8c_afbb91e7d9d86ec1a3ab6d69dc31fe7f3_icgraph" id="aencoding_8c_afbb91e7d9d86ec1a3ab6d69dc31fe7f3_icgraph">
+<area shape="rect" title="This function allocates a new VarData object." alt="" coords="1235,77,1355,102"/>
+<area shape="rect" href="encoding_8c.html#afb63e3712d11d6f0c73766b06e9cc1da" title="Extract variables from group 1 and 2 and 7 starting at the iterator." alt="" coords="1021,5,1180,45"/>
+<area shape="rect" href="encoding_8c.html#a1640fb1a22686ff86dce421842acca6f" title="Extract the variables group 3 and 6 from the line pointed to by it." alt="" coords="1021,69,1180,109"/>
+<area shape="rect" href="encoding_8c.html#a6ca97468e0e0dc59dcb66791202ac14c" title="Extract variables from GROUP 5 ( label =... ). This function assumes there is at least one token to b..." alt="" coords="1015,134,1187,159"/>
+<area shape="rect" href="encoding_8c.html#ac462ef04efd6a452ec612a07a0e38070" title=" " alt="" coords="836,41,967,81"/>
+<area shape="rect" href="second__pass_8c.html#a41e82792e66da5f66e6e378e20a0a7cc" title="Extracts the variables from the current line of assembly code. This function extracts the variables f..." alt="" coords="842,106,961,131"/>
+<area shape="rect" href="second__pass_8c.html#a36c8038b17843fb6d82d261367f7650b" title="Executes the line, in case label exists finds if it is valid and then encodes it, otherwise prints er..." alt="" coords="493,78,588,103"/>
+<area shape="rect" href="second__pass_8c.html#aa33feb8d270721a8f28a90a7833937db" title="Initiates the second pass of the assembler. This function is responsible for executing the second pas..." alt="" coords="301,78,445,103"/>
+<area shape="rect" href="driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,78,253,103"/>
+<area shape="rect" href="driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,78,124,103"/>
+<area shape="rect" href="second__pass_8c.html#a6b999b1b1244fbcf34f5f866b4aa3153" title="Checks whether a label exists in a line and is defined in the symbol table." alt="" coords="636,103,788,129"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a195a85fb4d9eece7fd100b82aa5e8d61" name="a195a85fb4d9eece7fd100b82aa5e8d61"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a195a85fb4d9eece7fd100b82aa5e8d61">&#9670;&#160;</a></span>varData_get_rgithEncType()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="memory_8h.html#a0b9039f87c8a2980c4a6ab14b511760a">EncodingTypes</a> varData_get_rgithEncType </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_var_data.html">VarData</a> *&#160;</td>
+          <td class="paramname"><em>vd</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>A getter function for <a class="el" href="struct_var_data.html">VarData</a>'s rightVarEncType member, the user should verify that 'vd' is in a valid state. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">vd</td><td>- The <a class="el" href="struct_var_data.html">VarData</a> object. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="aca6c4a13a61965ad8586c0df369fb3d5" name="aca6c4a13a61965ad8586c0df369fb3d5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aca6c4a13a61965ad8586c0df369fb3d5">&#9670;&#160;</a></span>varData_get_rightVar()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char * varData_get_rightVar </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_var_data.html">VarData</a> *&#160;</td>
+          <td class="paramname"><em>vd</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>A getter function for <a class="el" href="struct_var_data.html">VarData</a>'s rightVar member, the user should verify that 'vd' is in a valid state. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">vd</td><td>- The <a class="el" href="struct_var_data.html">VarData</a> object. </td></tr>
+  </table>
+  </dd>
+</dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="encoding_8c_aca6c4a13a61965ad8586c0df369fb3d5_icgraph.png" border="0" usemap="#aencoding_8c_aca6c4a13a61965ad8586c0df369fb3d5_icgraph" alt=""/></div>
+<map name="aencoding_8c_aca6c4a13a61965ad8586c0df369fb3d5_icgraph" id="aencoding_8c_aca6c4a13a61965ad8586c0df369fb3d5_icgraph">
+<area shape="rect" title="A getter function for VarData&#39;s rightVar member, the user should verify that &#39;vd&#39; is in a valid state..." alt="" coords="836,5,979,31"/>
+<area shape="rect" href="second__pass_8c.html#a6b999b1b1244fbcf34f5f866b4aa3153" title="Checks whether a label exists in a line and is defined in the symbol table." alt="" coords="636,5,788,31"/>
+<area shape="rect" href="second__pass_8c.html#a36c8038b17843fb6d82d261367f7650b" title="Executes the line, in case label exists finds if it is valid and then encodes it, otherwise prints er..." alt="" coords="493,5,588,31"/>
+<area shape="rect" href="second__pass_8c.html#aa33feb8d270721a8f28a90a7833937db" title="Initiates the second pass of the assembler. This function is responsible for executing the second pas..." alt="" coords="301,5,445,31"/>
+<area shape="rect" href="driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,5,253,31"/>
+<area shape="rect" href="driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,5,124,31"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a474210d12249706fc98270f406a24af5" name="a474210d12249706fc98270f406a24af5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a474210d12249706fc98270f406a24af5">&#9670;&#160;</a></span>varData_get_total()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int varData_get_total </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_var_data.html">VarData</a> *&#160;</td>
+          <td class="paramname"><em>vd</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>A getter function for <a class="el" href="struct_var_data.html">VarData</a>'s total member, the user should verify that 'vd' is in a valid state. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">vd</td><td>- The <a class="el" href="struct_var_data.html">VarData</a> object. </td></tr>
+  </table>
+  </dd>
+</dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="encoding_8c_a474210d12249706fc98270f406a24af5_icgraph.png" border="0" usemap="#aencoding_8c_a474210d12249706fc98270f406a24af5_icgraph" alt=""/></div>
+<map name="aencoding_8c_a474210d12249706fc98270f406a24af5_icgraph" id="aencoding_8c_a474210d12249706fc98270f406a24af5_icgraph">
+<area shape="rect" title="A getter function for VarData&#39;s total member, the user should verify that &#39;vd&#39; is in a valid state." alt="" coords="836,5,959,31"/>
+<area shape="rect" href="second__pass_8c.html#a6b999b1b1244fbcf34f5f866b4aa3153" title="Checks whether a label exists in a line and is defined in the symbol table." alt="" coords="636,5,788,31"/>
+<area shape="rect" href="second__pass_8c.html#a36c8038b17843fb6d82d261367f7650b" title="Executes the line, in case label exists finds if it is valid and then encodes it, otherwise prints er..." alt="" coords="493,5,588,31"/>
+<area shape="rect" href="second__pass_8c.html#aa33feb8d270721a8f28a90a7833937db" title="Initiates the second pass of the assembler. This function is responsible for executing the second pas..." alt="" coords="301,5,445,31"/>
+<area shape="rect" href="driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,5,253,31"/>
+<area shape="rect" href="driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,5,124,31"/>
+</map>
+</div>
+
+</div>
+</div>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+</small></address>
 </body>
 </html>

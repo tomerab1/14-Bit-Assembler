@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['symbol_0',['Symbol',['../struct_symbol.html',1,'']]],
-  ['symboltable_1',['SymbolTable',['../struct_symbol_table.html',1,'']]]
+  ['translatedmachinedata_0',['TranslatedMachineData',['../struct_translated_machine_data.html',1,'']]]
 ];

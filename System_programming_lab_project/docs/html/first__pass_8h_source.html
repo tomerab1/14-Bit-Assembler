@@ -5,14 +5,10 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.5"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>C language 14 bit assembler: first_pass.h Source File</title>
+<title>14bit Assembler: first_pass.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
-<link href="navtree.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="resize.js"></script>
-<script type="text/javascript" src="navtreedata.js"></script>
-<script type="text/javascript" src="navtree.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
@@ -25,7 +21,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">C language 14 bit assembler
+   <div id="projectname">14bit Assembler
    </div>
   </td>
  </tr>
@@ -51,22 +47,6 @@ $(function() {
 </script>
 <div id="main-nav"></div>
 </div><!-- top -->
-<div id="side-nav" class="ui-resizable side-nav-resizable">
-  <div id="nav-tree">
-    <div id="nav-tree-contents">
-      <div id="nav-sync" class="sync"></div>
-    </div>
-  </div>
-  <div id="splitbar" style="-moz-user-select:none;" 
-       class="ui-resizable-handle">
-  </div>
-</div>
-<script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(document).ready(function(){initNavTree('first__pass_8h_source.html',''); initResizable(); });
-/* @license-end */
-</script>
-<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -101,48 +81,52 @@ $(document).ready(function(){initNavTree('first__pass_8h_source.html',''); initR
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &quot;<a class="code" href="memory_8h.html">memory.h</a>&quot;</span></div>
 <div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &quot;<a class="code" href="debug_8h.html">debug.h</a>&quot;</span></div>
 <div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="keyword">typedef</span> <span class="keyword">enum</span> { FP_SYM_DEF, FP_SYM_DATA, FP_SYM_STR, FP_SYM_EXT, FP_SYM_ENT, FP_OPCODE, FP_TOTAL, FP_NONE, FP_SYM_IGNORED } firstPassStates;</div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="keywordtype">bool</span> <a class="code hl_function" href="first__pass_8h.html#ae3d15ca0f34657e4715827c439839e1e">do_first_pass</a>(<span class="keywordtype">char</span>* path, <a class="code hl_struct" href="structmemory_buffer.html">memoryBuffer</a>* img, <a class="code hl_struct" href="struct_symbol_table.html">SymbolTable</a>* sym_table, <a class="code hl_struct" href="structdebug_list.html">debugList</a>* dbg_list);</div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span> </div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>firstPassStates <a class="code hl_function" href="first__pass_8h.html#ae1188ec2abf0484be50c8b2f96ade70a">get_symbol_type</a>(<a class="code hl_struct" href="struct_line_iterator.html">LineIterator</a>* it, <span class="keywordtype">char</span>* word);</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="comment">/* typedef for the dispatch table. */</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="keyword">typedef</span> bool (*fpass_dispatch_table)(<a class="code hl_struct" href="struct_line_iterator.html">LineIterator</a>* it, <a class="code hl_struct" href="structmemory_buffer.html">memoryBuffer</a>* img, <a class="code hl_struct" href="struct_symbol_table.html">SymbolTable</a>* sym_table, <a class="code hl_struct" href="structdebug_list.html">debugList</a>* dbg_list, <span class="keywordtype">char</span>* name, <span class="keywordtype">long</span> line, <span class="keywordtype">bool</span> did_err_occurred);</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno"><a class="line" href="first__pass_8h.html#a851f3b709b20ebd9c41ee7f658292d09">   20</a></span><span class="keyword">typedef</span> <span class="keyword">enum</span> { FP_SYM_DEF, FP_SYM_DATA, FP_SYM_STR, FP_SYM_EXT, FP_SYM_ENT, FP_OPCODE, FP_TOTAL, FP_NONE, FP_SYM_IGNORED } <a class="code hl_enumeration" href="first__pass_8h.html#a851f3b709b20ebd9c41ee7f658292d09">firstPassStates</a>;</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="keywordtype">bool</span> <a class="code hl_function" href="first__pass_8h.html#ae3d15ca0f34657e4715827c439839e1e">do_first_pass</a>(<span class="keywordtype">char</span>* path, <a class="code hl_struct" href="structmemory_buffer.html">memoryBuffer</a>* img, <a class="code hl_struct" href="struct_symbol_table.html">SymbolTable</a>* sym_table, <a class="code hl_struct" href="structdebug_list.html">debugList</a>* dbg_list);</div>
 <div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span> </div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="comment">/* This function calls to function that process and encode the instructions.</span></div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="comment">*/</span></div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span> </div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="keywordtype">bool</span> first_pass_process_sym_def(<a class="code hl_struct" href="struct_line_iterator.html">LineIterator</a>* it, <a class="code hl_struct" href="structmemory_buffer.html">memoryBuffer</a>* img, <a class="code hl_struct" href="struct_symbol_table.html">SymbolTable</a>* sym_table, <a class="code hl_struct" href="structdebug_list.html">debugList</a>* dbg_list, <span class="keywordtype">char</span>* name, <span class="keywordtype">long</span> line, <span class="keywordtype">bool</span> should_encode);</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="keywordtype">bool</span> first_pass_process_sym_ent(<a class="code hl_struct" href="struct_line_iterator.html">LineIterator</a>* it, <a class="code hl_struct" href="structmemory_buffer.html">memoryBuffer</a>* img, <a class="code hl_struct" href="struct_symbol_table.html">SymbolTable</a>* sym_table, <a class="code hl_struct" href="structdebug_list.html">debugList</a>* dbg_list, <span class="keywordtype">char</span>* name, <span class="keywordtype">long</span> line, <span class="keywordtype">bool</span> should_encode);</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="keywordtype">bool</span> first_pass_process_sym_string(<a class="code hl_struct" href="struct_line_iterator.html">LineIterator</a>* it, <a class="code hl_struct" href="structmemory_buffer.html">memoryBuffer</a>* img, <a class="code hl_struct" href="struct_symbol_table.html">SymbolTable</a>* sym_table, <a class="code hl_struct" href="structdebug_list.html">debugList</a>* dbg_list, <span class="keywordtype">char</span>* name, <span class="keywordtype">long</span> line, <span class="keywordtype">bool</span> should_encode);</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span> </div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="keywordtype">bool</span> first_pass_process_sym_data(<a class="code hl_struct" href="struct_line_iterator.html">LineIterator</a>* it, <a class="code hl_struct" href="structmemory_buffer.html">memoryBuffer</a>* img, <a class="code hl_struct" href="struct_symbol_table.html">SymbolTable</a>* sym_table, <a class="code hl_struct" href="structdebug_list.html">debugList</a>* dbg_list, <span class="keywordtype">char</span>* name, <span class="keywordtype">long</span> line, <span class="keywordtype">bool</span> should_encode);</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span> </div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="keywordtype">bool</span> first_pass_process_sym_ext(<a class="code hl_struct" href="struct_line_iterator.html">LineIterator</a>* it, <a class="code hl_struct" href="structmemory_buffer.html">memoryBuffer</a>* img, <a class="code hl_struct" href="struct_symbol_table.html">SymbolTable</a>* sym_table, <a class="code hl_struct" href="structdebug_list.html">debugList</a>* dbg_list, <span class="keywordtype">char</span>* name, <span class="keywordtype">long</span> line, <span class="keywordtype">bool</span> should_encode);</div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span> </div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="keywordtype">bool</span> first_pass_process_opcode(<a class="code hl_struct" href="struct_line_iterator.html">LineIterator</a>* it, <a class="code hl_struct" href="structmemory_buffer.html">memoryBuffer</a>* img, <a class="code hl_struct" href="struct_symbol_table.html">SymbolTable</a>* sym_table, <a class="code hl_struct" href="structdebug_list.html">debugList</a>* dbg_list, <span class="keywordtype">char</span>* name, <span class="keywordtype">long</span> line, <span class="keywordtype">bool</span> should_encode);</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span> </div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><a class="code hl_enumeration" href="first__pass_8h.html#a851f3b709b20ebd9c41ee7f658292d09">firstPassStates</a> <a class="code hl_function" href="first__pass_8h.html#a870efe109722af3eb5c21a42810f29f6">get_symbol_type</a>(<a class="code hl_struct" href="struct_line_iterator.html">LineIterator</a>* it, <span class="keywordtype">char</span>* word, <a class="code hl_enumeration" href="debug_8h.html#a88edd67ec29d18293fae821840fef3ac">errorCodes</a>* outErr);</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span> </div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span><span class="keywordtype">bool</span> <a class="code hl_function" href="first__pass_8h.html#ac0da628ba463b754effc2e88e611d4dd">first_pass_process_sym_def</a>(<a class="code hl_struct" href="struct_line_iterator.html">LineIterator</a>* it, <a class="code hl_struct" href="structmemory_buffer.html">memoryBuffer</a>* img, <a class="code hl_struct" href="struct_symbol_table.html">SymbolTable</a>* sym_table, <a class="code hl_struct" href="structdebug_list.html">debugList</a>* dbg_list, <span class="keywordtype">char</span>* name, <span class="keywordtype">long</span> line, <span class="keywordtype">bool</span> should_encode);</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span> </div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span><span class="keywordtype">bool</span> <a class="code hl_function" href="first__pass_8h.html#aa0a39d1f94314921231c97245e6eb551">first_pass_process_sym_ent</a>(<a class="code hl_struct" href="struct_line_iterator.html">LineIterator</a>* it, <a class="code hl_struct" href="structmemory_buffer.html">memoryBuffer</a>* img, <a class="code hl_struct" href="struct_symbol_table.html">SymbolTable</a>* sym_table, <a class="code hl_struct" href="structdebug_list.html">debugList</a>* dbg_list, <span class="keywordtype">char</span>* name, <span class="keywordtype">long</span> line, <span class="keywordtype">bool</span> should_encode);</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span> </div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span><span class="keywordtype">bool</span> <a class="code hl_function" href="first__pass_8h.html#a932fa602127543d4c7b4e5f4b64b9138">first_pass_process_sym_string</a>(<a class="code hl_struct" href="struct_line_iterator.html">LineIterator</a>* it, <a class="code hl_struct" href="structmemory_buffer.html">memoryBuffer</a>* img, <a class="code hl_struct" href="struct_symbol_table.html">SymbolTable</a>* sym_table, <a class="code hl_struct" href="structdebug_list.html">debugList</a>* dbg_list, <span class="keywordtype">char</span>* name, <span class="keywordtype">long</span> line, <span class="keywordtype">bool</span> should_encode);</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span> </div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span><span class="keywordtype">bool</span> <a class="code hl_function" href="first__pass_8h.html#a87a70eef7a9fd6d62eb27a5a2127739e">first_pass_process_sym_data</a>(<a class="code hl_struct" href="struct_line_iterator.html">LineIterator</a>* it, <a class="code hl_struct" href="structmemory_buffer.html">memoryBuffer</a>* img, <a class="code hl_struct" href="struct_symbol_table.html">SymbolTable</a>* sym_table, <a class="code hl_struct" href="structdebug_list.html">debugList</a>* dbg_list, <span class="keywordtype">char</span>* name, <span class="keywordtype">long</span> line, <span class="keywordtype">bool</span> should_encode);</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span> </div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span><span class="keywordtype">bool</span> <a class="code hl_function" href="first__pass_8h.html#accedad2dc6b0e81f160e2201f4f2b1d3">first_pass_process_sym_ext</a>(<a class="code hl_struct" href="struct_line_iterator.html">LineIterator</a>* it, <a class="code hl_struct" href="structmemory_buffer.html">memoryBuffer</a>* img, <a class="code hl_struct" href="struct_symbol_table.html">SymbolTable</a>* sym_table, <a class="code hl_struct" href="structdebug_list.html">debugList</a>* dbg_list, <span class="keywordtype">char</span>* name, <span class="keywordtype">long</span> line, <span class="keywordtype">bool</span> should_encode);</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span> </div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span><span class="keywordtype">bool</span> <a class="code hl_function" href="first__pass_8h.html#a40eeac60c34220893b004549546acb2d">first_pass_process_opcode</a>(<a class="code hl_struct" href="struct_line_iterator.html">LineIterator</a>* it, <a class="code hl_struct" href="structmemory_buffer.html">memoryBuffer</a>* img, <a class="code hl_struct" href="struct_symbol_table.html">SymbolTable</a>* sym_table, <a class="code hl_struct" href="structdebug_list.html">debugList</a>* dbg_list, <span class="keywordtype">char</span>* name, <span class="keywordtype">long</span> line, <span class="keywordtype">bool</span> should_encode);</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span> </div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span><span class="preprocessor">#endif</span></div>
 <div class="ttc" id="adebug_8h_html"><div class="ttname"><a href="debug_8h.html">debug.h</a></div></div>
-<div class="ttc" id="afirst__pass_8h_html_ae1188ec2abf0484be50c8b2f96ade70a"><div class="ttname"><a href="first__pass_8h.html#ae1188ec2abf0484be50c8b2f96ade70a">get_symbol_type</a></div><div class="ttdeci">firstPassStates get_symbol_type(LineIterator *it, char *word)</div><div class="ttdef"><b>Definition:</b> first_pass.c:63</div></div>
-<div class="ttc" id="afirst__pass_8h_html_ae3d15ca0f34657e4715827c439839e1e"><div class="ttname"><a href="first__pass_8h.html#ae3d15ca0f34657e4715827c439839e1e">do_first_pass</a></div><div class="ttdeci">bool do_first_pass(char *path, memoryBuffer *img, SymbolTable *sym_table, debugList *dbg_list)</div><div class="ttdef"><b>Definition:</b> first_pass.c:12</div></div>
+<div class="ttc" id="adebug_8h_html_a88edd67ec29d18293fae821840fef3ac"><div class="ttname"><a href="debug_8h.html#a88edd67ec29d18293fae821840fef3ac">errorCodes</a></div><div class="ttdeci">errorCodes</div><div class="ttdoc">Error codes used in debug_map_token_to_err()</div><div class="ttdef"><b>Definition:</b> debug.h:14</div></div>
+<div class="ttc" id="afirst__pass_8h_html_a40eeac60c34220893b004549546acb2d"><div class="ttname"><a href="first__pass_8h.html#a40eeac60c34220893b004549546acb2d">first_pass_process_opcode</a></div><div class="ttdeci">bool first_pass_process_opcode(LineIterator *it, memoryBuffer *img, SymbolTable *sym_table, debugList *dbg_list, char *name, long line, bool should_encode)</div><div class="ttdoc">This function is used to process lines with opcodes and no label definitions. It also encodes the mem...</div><div class="ttdef"><b>Definition:</b> first_pass.c:151</div></div>
+<div class="ttc" id="afirst__pass_8h_html_a851f3b709b20ebd9c41ee7f658292d09"><div class="ttname"><a href="first__pass_8h.html#a851f3b709b20ebd9c41ee7f658292d09">firstPassStates</a></div><div class="ttdeci">firstPassStates</div><div class="ttdoc">An enum for the different states of the first pass algorithm.</div><div class="ttdef"><b>Definition:</b> first_pass.h:20</div></div>
+<div class="ttc" id="afirst__pass_8h_html_a870efe109722af3eb5c21a42810f29f6"><div class="ttname"><a href="first__pass_8h.html#a870efe109722af3eb5c21a42810f29f6">get_symbol_type</a></div><div class="ttdeci">firstPassStates get_symbol_type(LineIterator *it, char *word, errorCodes *outErr)</div><div class="ttdoc">This function take in a string, and checks if it's a symbol, if so it returns it's type....</div><div class="ttdef"><b>Definition:</b> first_pass.c:65</div></div>
+<div class="ttc" id="afirst__pass_8h_html_a87a70eef7a9fd6d62eb27a5a2127739e"><div class="ttname"><a href="first__pass_8h.html#a87a70eef7a9fd6d62eb27a5a2127739e">first_pass_process_sym_data</a></div><div class="ttdeci">bool first_pass_process_sym_data(LineIterator *it, memoryBuffer *img, SymbolTable *sym_table, debugList *dbg_list, char *name, long line, bool should_encode)</div><div class="ttdoc">This function is used to process .data lines. It also encodes the memory if possible into the memoryB...</div><div class="ttdef"><b>Definition:</b> first_pass.c:164</div></div>
+<div class="ttc" id="afirst__pass_8h_html_a932fa602127543d4c7b4e5f4b64b9138"><div class="ttname"><a href="first__pass_8h.html#a932fa602127543d4c7b4e5f4b64b9138">first_pass_process_sym_string</a></div><div class="ttdeci">bool first_pass_process_sym_string(LineIterator *it, memoryBuffer *img, SymbolTable *sym_table, debugList *dbg_list, char *name, long line, bool should_encode)</div><div class="ttdoc">This function is used to process .string lines. It also encodes the memory if possible into the memor...</div><div class="ttdef"><b>Definition:</b> first_pass.c:190</div></div>
+<div class="ttc" id="afirst__pass_8h_html_aa0a39d1f94314921231c97245e6eb551"><div class="ttname"><a href="first__pass_8h.html#aa0a39d1f94314921231c97245e6eb551">first_pass_process_sym_ent</a></div><div class="ttdeci">bool first_pass_process_sym_ent(LineIterator *it, memoryBuffer *img, SymbolTable *sym_table, debugList *dbg_list, char *name, long line, bool should_encode)</div><div class="ttdoc">This function is used to process .entry lines. It also encodes the memory if possible into the memory...</div><div class="ttdef"><b>Definition:</b> first_pass.c:210</div></div>
+<div class="ttc" id="afirst__pass_8h_html_ac0da628ba463b754effc2e88e611d4dd"><div class="ttname"><a href="first__pass_8h.html#ac0da628ba463b754effc2e88e611d4dd">first_pass_process_sym_def</a></div><div class="ttdeci">bool first_pass_process_sym_def(LineIterator *it, memoryBuffer *img, SymbolTable *sym_table, debugList *dbg_list, char *name, long line, bool should_encode)</div><div class="ttdoc">This function is used to process lines with label definitions. It also encodes the memory if possible...</div><div class="ttdef"><b>Definition:</b> first_pass.c:123</div></div>
+<div class="ttc" id="afirst__pass_8h_html_accedad2dc6b0e81f160e2201f4f2b1d3"><div class="ttname"><a href="first__pass_8h.html#accedad2dc6b0e81f160e2201f4f2b1d3">first_pass_process_sym_ext</a></div><div class="ttdeci">bool first_pass_process_sym_ext(LineIterator *it, memoryBuffer *img, SymbolTable *sym_table, debugList *dbg_list, char *name, long line, bool should_encode)</div><div class="ttdoc">This function is used to process .extern lines. It also encodes the memory if possible into the memor...</div><div class="ttdef"><b>Definition:</b> first_pass.c:261</div></div>
+<div class="ttc" id="afirst__pass_8h_html_ae3d15ca0f34657e4715827c439839e1e"><div class="ttname"><a href="first__pass_8h.html#ae3d15ca0f34657e4715827c439839e1e">do_first_pass</a></div><div class="ttdeci">bool do_first_pass(char *path, memoryBuffer *img, SymbolTable *sym_table, debugList *dbg_list)</div><div class="ttdoc">This function implements the first pass algorithm.</div><div class="ttdef"><b>Definition:</b> first_pass.c:9</div></div>
 <div class="ttc" id="aline__iterator_8h_html"><div class="ttname"><a href="line__iterator_8h.html">line_iterator.h</a></div></div>
 <div class="ttc" id="amemory_8h_html"><div class="ttname"><a href="memory_8h.html">memory.h</a></div></div>
-<div class="ttc" id="astruct_line_iterator_html"><div class="ttname"><a href="struct_line_iterator.html">LineIterator</a></div><div class="ttdef"><b>Definition:</b> line_iterator.h:10</div></div>
-<div class="ttc" id="astruct_symbol_table_html"><div class="ttname"><a href="struct_symbol_table.html">SymbolTable</a></div><div class="ttdef"><b>Definition:</b> symbol_table.h:25</div></div>
-<div class="ttc" id="astructdebug_list_html"><div class="ttname"><a href="structdebug_list.html">debugList</a></div><div class="ttdef"><b>Definition:</b> debug.h:42</div></div>
-<div class="ttc" id="astructmemory_buffer_html"><div class="ttname"><a href="structmemory_buffer.html">memoryBuffer</a></div><div class="ttdoc">This struct is used to represent all the memory buffers, the 'cpu' registers and the instruction/data...</div><div class="ttdef"><b>Definition:</b> memory.h:78</div></div>
+<div class="ttc" id="astruct_line_iterator_html"><div class="ttname"><a href="struct_line_iterator.html">LineIterator</a></div><div class="ttdoc">This data sturcture is used to make it easier to parse text lines. It's member should not be freed as...</div><div class="ttdef"><b>Definition:</b> line_iterator.h:22</div></div>
+<div class="ttc" id="astruct_symbol_table_html"><div class="ttname"><a href="struct_symbol_table.html">SymbolTable</a></div><div class="ttdef"><b>Definition:</b> symbol_table.c:21</div></div>
+<div class="ttc" id="astructdebug_list_html"><div class="ttname"><a href="structdebug_list.html">debugList</a></div><div class="ttdef"><b>Definition:</b> debug.c:37</div></div>
+<div class="ttc" id="astructmemory_buffer_html"><div class="ttname"><a href="structmemory_buffer.html">memoryBuffer</a></div><div class="ttdef"><b>Definition:</b> memory.c:21</div></div>
 <div class="ttc" id="asymbol__table_8h_html"><div class="ttname"><a href="symbol__table_8h.html">symbol_table.h</a></div></div>
 <div class="ttc" id="autils_8h_html"><div class="ttname"><a href="utils_8h.html">utils.h</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
-</div><!-- doc-content -->
 <!-- start footer part -->
-<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
-  <ul>
-    <li class="navelem"><a class="el" href="first__pass_8h.html">first_pass.h</a></li>
-    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5 </li>
-  </ul>
-</div>
+<hr class="footer"/><address class="footer"><small>
+Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+</small></address>
 </body>
 </html>

@@ -1,0 +1,6 @@
+<map id="symbol_table_new_table" name="symbol_table_new_table">
+<area shape="rect" id="node1" title="Create a new symbol table. The table is empty after this function returns. This can be used to create..." alt="" coords="460,5,624,31"/>
+<area shape="rect" id="node2" href="$driver_8c.html#ae0747e80fcf537740f8c16df476df560" title="Called when the driver is initialized. This is where we initialize the data structures that are used ..." alt="" coords="301,5,412,31"/>
+<area shape="rect" id="node3" href="$driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,5,253,31"/>
+<area shape="rect" id="node4" href="$driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,5,124,31"/>
+</map>

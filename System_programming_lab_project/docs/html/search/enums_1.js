@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['registerstype_0',['RegistersType',['../memory_8h.html#a3e3ad86bd10ce04fea0bc583130474b6',1,'memory.h']]]
+  ['encodingtypes_0',['EncodingTypes',['../memory_8h.html#a0b9039f87c8a2980c4a6ab14b511760a',1,'memory.h']]],
+  ['errorcodes_1',['errorCodes',['../debug_8h.html#a88edd67ec29d18293fae821840fef3ac',1,'debug.h']]]
 ];

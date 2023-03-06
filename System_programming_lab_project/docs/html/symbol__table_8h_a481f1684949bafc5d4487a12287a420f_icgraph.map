@@ -1,0 +1,13 @@
+<map id="symbol_table_search_symbol_bool" name="symbol_table_search_symbol_bool">
+<area shape="rect" id="node1" title="Search a symbol table for a symbol with a given name. This is used to determine if a symbol is define..." alt="" coords="1015,101,1160,141"/>
+<area shape="rect" id="node2" href="$first__pass_8c.html#aa0a39d1f94314921231c97245e6eb551" title="This function is used to process .entry lines. It also encodes the memory if possible into the memory..." alt="" coords="836,5,967,45"/>
+<area shape="rect" id="node6" href="$first__pass_8c.html#accedad2dc6b0e81f160e2201f4f2b1d3" title="This function is used to process .extern lines. It also encodes the memory if possible into the memor..." alt="" coords="836,69,967,109"/>
+<area shape="rect" id="node7" href="$first__pass_8c.html#a932fa602127543d4c7b4e5f4b64b9138" title="This function is used to process .string lines. It also encodes the memory if possible into the memor..." alt="" coords="836,133,967,173"/>
+<area shape="rect" id="node8" href="$second__pass_8c.html#ab6fec0fc93173020c37fc75727222d6a" title="Check if a label exists in the given line and update debug information accordingly." alt="" coords="843,198,960,223"/>
+<area shape="rect" id="node3" href="$first__pass_8c.html#ae3d15ca0f34657e4715827c439839e1e" title="This function implements the first pass algorithm." alt="" coords="663,109,761,134"/>
+<area shape="rect" id="node4" href="$driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,151,253,177"/>
+<area shape="rect" id="node5" href="$driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,151,124,177"/>
+<area shape="rect" id="node9" href="$second__pass_8c.html#a6b999b1b1244fbcf34f5f866b4aa3153" title="Checks whether a label exists in a line and is defined in the symbol table." alt="" coords="636,181,788,206"/>
+<area shape="rect" id="node10" href="$second__pass_8c.html#a36c8038b17843fb6d82d261367f7650b" title="Executes the line, in case label exists finds if it is valid and then encodes it, otherwise prints er..." alt="" coords="493,178,588,203"/>
+<area shape="rect" id="node11" href="$second__pass_8c.html#aa33feb8d270721a8f28a90a7833937db" title="Initiates the second pass of the assembler. This function is responsible for executing the second pas..." alt="" coords="301,177,445,202"/>
+</map>

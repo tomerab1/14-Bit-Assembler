@@ -1,0 +1,8 @@
+<map id="get_current_reading_state" name="get_current_reading_state">
+<area shape="rect" id="node1" title="This function returns the current reading state." alt="" coords="711,27,847,67"/>
+<area shape="rect" id="node2" href="$pre__assembler_8c.html#a67b4665103af08bb0694fe8c1f5aa4d6" title="Creates an expanded source file inside &#39;out&#39;." alt="" coords="489,5,663,31"/>
+<area shape="rect" id="node6" href="$pre__assembler_8c.html#aa3dd08d1da450711d97010d5592530f3" title="This function creates the macro list from a given file." alt="" coords="513,55,639,95"/>
+<area shape="rect" id="node3" href="$pre__assembler_8c.html#abab57bfbc7706d8811056386ff9a4cd6" title="This function starts the pre&#45;assembler phase of expanding the macros." alt="" coords="301,35,441,60"/>
+<area shape="rect" id="node4" href="$driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,35,253,60"/>
+<area shape="rect" id="node5" href="$driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,35,124,60"/>
+</map>

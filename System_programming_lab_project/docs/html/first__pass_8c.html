@@ -5,14 +5,10 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.5"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>C language 14 bit assembler: first_pass.c File Reference</title>
+<title>14bit Assembler: first_pass.c File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
-<link href="navtree.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="resize.js"></script>
-<script type="text/javascript" src="navtreedata.js"></script>
-<script type="text/javascript" src="navtree.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
@@ -25,7 +21,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">C language 14 bit assembler
+   <div id="projectname">14bit Assembler
    </div>
   </td>
  </tr>
@@ -50,23 +46,6 @@ $(function() {
 /* @license-end */
 </script>
 <div id="main-nav"></div>
-</div><!-- top -->
-<div id="side-nav" class="ui-resizable side-nav-resizable">
-  <div id="nav-tree">
-    <div id="nav-tree-contents">
-      <div id="nav-sync" class="sync"></div>
-    </div>
-  </div>
-  <div id="splitbar" style="-moz-user-select:none;" 
-       class="ui-resizable-handle">
-  </div>
-</div>
-<script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(document).ready(function(){initNavTree('first__pass_8c.html',''); initResizable(); });
-/* @license-end */
-</script>
-<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -88,9 +67,9 @@ $(document).ready(function(){initNavTree('first__pass_8c.html',''); initResizabl
 </div>
 </div>
 
+</div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#typedef-members">Typedefs</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle"><div class="title">first_pass.c File Reference</div></div>
 </div><!--header-->
@@ -99,36 +78,53 @@ $(document).ready(function(){initNavTree('first__pass_8c.html',''); initResizabl
 <code>#include &quot;<a class="el" href="syntactical__analysis_8h_source.html">syntactical_analysis.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="encoding_8h_source.html">encoding.h</a>&quot;</code><br />
 <code>#include &lt;string.h&gt;</code><br />
+</div><div class="textblock"><div class="dynheader">
+Include dependency graph for first_pass.c:</div>
+<div class="dyncontent">
+<div class="center"><img src="first__pass_8c__incl.png" border="0" usemap="#afirst__pass_8c" alt=""/></div>
+<map name="afirst__pass_8c" id="afirst__pass_8c">
+<area shape="rect" title=" " alt="" coords="223,5,313,31"/>
+<area shape="rect" href="first__pass_8h.html" title=" " alt="" coords="230,225,319,251"/>
+<area shape="rect" title=" " alt="" coords="21,445,86,471"/>
+<area shape="rect" href="syntactical__analysis_8h.html" title=" " alt="" coords="281,152,431,177"/>
+<area shape="rect" href="encoding_8h.html" title=" " alt="" coords="331,79,416,104"/>
+<area shape="rect" href="symbol__table_8h.html" title=" " alt="" coords="219,299,330,324"/>
+<area shape="rect" href="utils_8h.html" title=" " alt="" coords="246,372,303,397"/>
+<area shape="rect" href="line__iterator_8h.html" title=" " alt="" coords="43,299,143,324"/>
+<area shape="rect" href="memory_8h.html" title=" " alt="" coords="499,299,579,324"/>
+<area shape="rect" href="debug_8h.html" title=" " alt="" coords="406,299,474,324"/>
+<area shape="rect" title=" " alt="" coords="201,445,263,471"/>
+<area shape="rect" title=" " alt="" coords="287,445,351,471"/>
+<area shape="rect" href="constants_8h.html" title=" " alt="" coords="428,445,519,471"/>
+<area shape="rect" title=" " alt="" coords="406,372,474,397"/>
+</map>
+</div>
 </div><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="typedef-members" name="typedef-members"></a>
-Typedefs</h2></td></tr>
-<tr class="memitem:a469fc6a260ad4f00febc44da21c9f473"><td class="memItemLeft" align="right" valign="top"><a id="a469fc6a260ad4f00febc44da21c9f473" name="a469fc6a260ad4f00febc44da21c9f473"></a>
-typedef bool(*&#160;</td><td class="memItemRight" valign="bottom"><b>fpass_dispatch_table</b>) (<a class="el" href="struct_line_iterator.html">LineIterator</a> *it, <a class="el" href="structmemory_buffer.html">memoryBuffer</a> *img, <a class="el" href="struct_symbol_table.html">SymbolTable</a> *sym_table, <a class="el" href="structdebug_list.html">debugList</a> *dbg_list, char *name, long line, bool did_err_occurred)</td></tr>
-<tr class="separator:a469fc6a260ad4f00febc44da21c9f473"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:ae3d15ca0f34657e4715827c439839e1e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="first__pass_8c.html#ae3d15ca0f34657e4715827c439839e1e">do_first_pass</a> (char *path, <a class="el" href="structmemory_buffer.html">memoryBuffer</a> *img, <a class="el" href="struct_symbol_table.html">SymbolTable</a> *sym_table, <a class="el" href="structdebug_list.html">debugList</a> *dbg_list)</td></tr>
+<tr class="memdesc:ae3d15ca0f34657e4715827c439839e1e"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function implements the first pass algorithm.  <a href="first__pass_8c.html#ae3d15ca0f34657e4715827c439839e1e">More...</a><br /></td></tr>
 <tr class="separator:ae3d15ca0f34657e4715827c439839e1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae1188ec2abf0484be50c8b2f96ade70a"><td class="memItemLeft" align="right" valign="top">firstPassStates&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="first__pass_8c.html#ae1188ec2abf0484be50c8b2f96ade70a">get_symbol_type</a> (<a class="el" href="struct_line_iterator.html">LineIterator</a> *it, char *word)</td></tr>
-<tr class="separator:ae1188ec2abf0484be50c8b2f96ade70a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac0da628ba463b754effc2e88e611d4dd"><td class="memItemLeft" align="right" valign="top"><a id="ac0da628ba463b754effc2e88e611d4dd" name="ac0da628ba463b754effc2e88e611d4dd"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>first_pass_process_sym_def</b> (<a class="el" href="struct_line_iterator.html">LineIterator</a> *it, <a class="el" href="structmemory_buffer.html">memoryBuffer</a> *img, <a class="el" href="struct_symbol_table.html">SymbolTable</a> *sym_table, <a class="el" href="structdebug_list.html">debugList</a> *dbg_list, char *name, long line, bool should_encode)</td></tr>
+<tr class="memitem:a870efe109722af3eb5c21a42810f29f6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="first__pass_8h.html#a851f3b709b20ebd9c41ee7f658292d09">firstPassStates</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="first__pass_8c.html#a870efe109722af3eb5c21a42810f29f6">get_symbol_type</a> (<a class="el" href="struct_line_iterator.html">LineIterator</a> *it, char *word, <a class="el" href="debug_8h.html#a88edd67ec29d18293fae821840fef3ac">errorCodes</a> *outErr)</td></tr>
+<tr class="memdesc:a870efe109722af3eb5c21a42810f29f6"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function take in a string, and checks if it's a symbol, if so it returns it's type. This function also checks if the symbol name is a valid symbol name.  <a href="first__pass_8c.html#a870efe109722af3eb5c21a42810f29f6">More...</a><br /></td></tr>
+<tr class="separator:a870efe109722af3eb5c21a42810f29f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac0da628ba463b754effc2e88e611d4dd"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="first__pass_8c.html#ac0da628ba463b754effc2e88e611d4dd">first_pass_process_sym_def</a> (<a class="el" href="struct_line_iterator.html">LineIterator</a> *it, <a class="el" href="structmemory_buffer.html">memoryBuffer</a> *img, <a class="el" href="struct_symbol_table.html">SymbolTable</a> *sym_table, <a class="el" href="structdebug_list.html">debugList</a> *dbg_list, char *name, long line, bool should_encode)</td></tr>
+<tr class="memdesc:ac0da628ba463b754effc2e88e611d4dd"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function is used to process lines with label definitions. It also encodes the memory if possible into the <a class="el" href="structmemory_buffer.html">memoryBuffer</a> and updates the symbol table if necessary.  <a href="first__pass_8c.html#ac0da628ba463b754effc2e88e611d4dd">More...</a><br /></td></tr>
 <tr class="separator:ac0da628ba463b754effc2e88e611d4dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a40eeac60c34220893b004549546acb2d"><td class="memItemLeft" align="right" valign="top"><a id="a40eeac60c34220893b004549546acb2d" name="a40eeac60c34220893b004549546acb2d"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>first_pass_process_opcode</b> (<a class="el" href="struct_line_iterator.html">LineIterator</a> *it, <a class="el" href="structmemory_buffer.html">memoryBuffer</a> *img, <a class="el" href="struct_symbol_table.html">SymbolTable</a> *sym_table, <a class="el" href="structdebug_list.html">debugList</a> *dbg_list, char *name, long line, bool should_encode)</td></tr>
+<tr class="memitem:a40eeac60c34220893b004549546acb2d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="first__pass_8c.html#a40eeac60c34220893b004549546acb2d">first_pass_process_opcode</a> (<a class="el" href="struct_line_iterator.html">LineIterator</a> *it, <a class="el" href="structmemory_buffer.html">memoryBuffer</a> *img, <a class="el" href="struct_symbol_table.html">SymbolTable</a> *sym_table, <a class="el" href="structdebug_list.html">debugList</a> *dbg_list, char *name, long line, bool should_encode)</td></tr>
+<tr class="memdesc:a40eeac60c34220893b004549546acb2d"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function is used to process lines with opcodes and no label definitions. It also encodes the memory if possible into the <a class="el" href="structmemory_buffer.html">memoryBuffer</a> and updates the symbol table if necessary.  <a href="first__pass_8c.html#a40eeac60c34220893b004549546acb2d">More...</a><br /></td></tr>
 <tr class="separator:a40eeac60c34220893b004549546acb2d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a87a70eef7a9fd6d62eb27a5a2127739e"><td class="memItemLeft" align="right" valign="top"><a id="a87a70eef7a9fd6d62eb27a5a2127739e" name="a87a70eef7a9fd6d62eb27a5a2127739e"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>first_pass_process_sym_data</b> (<a class="el" href="struct_line_iterator.html">LineIterator</a> *it, <a class="el" href="structmemory_buffer.html">memoryBuffer</a> *img, <a class="el" href="struct_symbol_table.html">SymbolTable</a> *sym_table, <a class="el" href="structdebug_list.html">debugList</a> *dbg_list, char *name, long line, bool should_encode)</td></tr>
+<tr class="memitem:a87a70eef7a9fd6d62eb27a5a2127739e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="first__pass_8c.html#a87a70eef7a9fd6d62eb27a5a2127739e">first_pass_process_sym_data</a> (<a class="el" href="struct_line_iterator.html">LineIterator</a> *it, <a class="el" href="structmemory_buffer.html">memoryBuffer</a> *img, <a class="el" href="struct_symbol_table.html">SymbolTable</a> *sym_table, <a class="el" href="structdebug_list.html">debugList</a> *dbg_list, char *name, long line, bool should_encode)</td></tr>
+<tr class="memdesc:a87a70eef7a9fd6d62eb27a5a2127739e"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function is used to process .data lines. It also encodes the memory if possible into the <a class="el" href="structmemory_buffer.html">memoryBuffer</a> and updates the symbol table if necessary.  <a href="first__pass_8c.html#a87a70eef7a9fd6d62eb27a5a2127739e">More...</a><br /></td></tr>
 <tr class="separator:a87a70eef7a9fd6d62eb27a5a2127739e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a932fa602127543d4c7b4e5f4b64b9138"><td class="memItemLeft" align="right" valign="top"><a id="a932fa602127543d4c7b4e5f4b64b9138" name="a932fa602127543d4c7b4e5f4b64b9138"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>first_pass_process_sym_string</b> (<a class="el" href="struct_line_iterator.html">LineIterator</a> *it, <a class="el" href="structmemory_buffer.html">memoryBuffer</a> *img, <a class="el" href="struct_symbol_table.html">SymbolTable</a> *sym_table, <a class="el" href="structdebug_list.html">debugList</a> *dbg_list, char *name, long line, bool should_encode)</td></tr>
+<tr class="memitem:a932fa602127543d4c7b4e5f4b64b9138"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="first__pass_8c.html#a932fa602127543d4c7b4e5f4b64b9138">first_pass_process_sym_string</a> (<a class="el" href="struct_line_iterator.html">LineIterator</a> *it, <a class="el" href="structmemory_buffer.html">memoryBuffer</a> *img, <a class="el" href="struct_symbol_table.html">SymbolTable</a> *sym_table, <a class="el" href="structdebug_list.html">debugList</a> *dbg_list, char *name, long line, bool should_encode)</td></tr>
+<tr class="memdesc:a932fa602127543d4c7b4e5f4b64b9138"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function is used to process .string lines. It also encodes the memory if possible into the <a class="el" href="structmemory_buffer.html">memoryBuffer</a> and updates the symbol table if necessary.  <a href="first__pass_8c.html#a932fa602127543d4c7b4e5f4b64b9138">More...</a><br /></td></tr>
 <tr class="separator:a932fa602127543d4c7b4e5f4b64b9138"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa0a39d1f94314921231c97245e6eb551"><td class="memItemLeft" align="right" valign="top"><a id="aa0a39d1f94314921231c97245e6eb551" name="aa0a39d1f94314921231c97245e6eb551"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>first_pass_process_sym_ent</b> (<a class="el" href="struct_line_iterator.html">LineIterator</a> *it, <a class="el" href="structmemory_buffer.html">memoryBuffer</a> *img, <a class="el" href="struct_symbol_table.html">SymbolTable</a> *sym_table, <a class="el" href="structdebug_list.html">debugList</a> *dbg_list, char *name, long line, bool should_encode)</td></tr>
+<tr class="memitem:aa0a39d1f94314921231c97245e6eb551"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="first__pass_8c.html#aa0a39d1f94314921231c97245e6eb551">first_pass_process_sym_ent</a> (<a class="el" href="struct_line_iterator.html">LineIterator</a> *it, <a class="el" href="structmemory_buffer.html">memoryBuffer</a> *img, <a class="el" href="struct_symbol_table.html">SymbolTable</a> *sym_table, <a class="el" href="structdebug_list.html">debugList</a> *dbg_list, char *name, long line, bool should_encode)</td></tr>
+<tr class="memdesc:aa0a39d1f94314921231c97245e6eb551"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function is used to process .entry lines. It also encodes the memory if possible into the <a class="el" href="structmemory_buffer.html">memoryBuffer</a> and updates the symbol table if necessary.  <a href="first__pass_8c.html#aa0a39d1f94314921231c97245e6eb551">More...</a><br /></td></tr>
 <tr class="separator:aa0a39d1f94314921231c97245e6eb551"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:accedad2dc6b0e81f160e2201f4f2b1d3"><td class="memItemLeft" align="right" valign="top"><a id="accedad2dc6b0e81f160e2201f4f2b1d3" name="accedad2dc6b0e81f160e2201f4f2b1d3"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>first_pass_process_sym_ext</b> (<a class="el" href="struct_line_iterator.html">LineIterator</a> *it, <a class="el" href="structmemory_buffer.html">memoryBuffer</a> *img, <a class="el" href="struct_symbol_table.html">SymbolTable</a> *sym_table, <a class="el" href="structdebug_list.html">debugList</a> *dbg_list, char *name, long line, bool should_encode)</td></tr>
+<tr class="memitem:accedad2dc6b0e81f160e2201f4f2b1d3"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="first__pass_8c.html#accedad2dc6b0e81f160e2201f4f2b1d3">first_pass_process_sym_ext</a> (<a class="el" href="struct_line_iterator.html">LineIterator</a> *it, <a class="el" href="structmemory_buffer.html">memoryBuffer</a> *img, <a class="el" href="struct_symbol_table.html">SymbolTable</a> *sym_table, <a class="el" href="structdebug_list.html">debugList</a> *dbg_list, char *name, long line, bool should_encode)</td></tr>
+<tr class="memdesc:accedad2dc6b0e81f160e2201f4f2b1d3"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function is used to process .extern lines. It also encodes the memory if possible into the <a class="el" href="structmemory_buffer.html">memoryBuffer</a> and updates the symbol table if necessary.  <a href="first__pass_8c.html#accedad2dc6b0e81f160e2201f4f2b1d3">More...</a><br /></td></tr>
 <tr class="separator:accedad2dc6b0e81f160e2201f4f2b1d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
@@ -169,27 +165,39 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>first_pass_process_sy
         </tr>
       </table>
 </div><div class="memdoc">
-<p >This function implements the first pass algorithm. </p><dl class="params"><dt>Parameters</dt><dd>
+
+<p>This function implements the first pass algorithm. </p>
+<dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">-</td><td>The path to the pre-assembled file. </td></tr>
-    <tr><td class="paramname">-</td><td>A pointer to the memory buffer, contains the data/instruction img and the registers. </td></tr>
-    <tr><td class="paramname">-</td><td>A pointer to the symbol table. </td></tr>
-    <tr><td class="paramname">-</td><td>A pointer to the debug list, used to register errors. </td></tr>
+    <tr><td class="paramname">path</td><td>- The path to the pre-assembled file. </td></tr>
+    <tr><td class="paramname">img</td><td>- A pointer to the memory buffer, contains the data/instruction img and the registers. </td></tr>
+    <tr><td class="paramname">sym_table</td><td>- A pointer to the symbol table. </td></tr>
+    <tr><td class="paramname">dbg_list</td><td>- A pointer to the debug list, used to register errors. </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>- TRUE if no errors occurred, FALSE otherwise. </dd></dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="first__pass_8c_ae3d15ca0f34657e4715827c439839e1e_icgraph.png" border="0" usemap="#afirst__pass_8c_ae3d15ca0f34657e4715827c439839e1e_icgraph" alt=""/></div>
+<map name="afirst__pass_8c_ae3d15ca0f34657e4715827c439839e1e_icgraph" id="afirst__pass_8c_ae3d15ca0f34657e4715827c439839e1e_icgraph">
+<area shape="rect" title="This function implements the first pass algorithm." alt="" coords="301,5,400,31"/>
+<area shape="rect" href="driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,5,253,31"/>
+<area shape="rect" href="driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,5,124,31"/>
+</map>
+</div>
 
 </div>
 </div>
-<a id="ae1188ec2abf0484be50c8b2f96ade70a" name="ae1188ec2abf0484be50c8b2f96ade70a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae1188ec2abf0484be50c8b2f96ade70a">&#9670;&#160;</a></span>get_symbol_type()</h2>
+<a id="a40eeac60c34220893b004549546acb2d" name="a40eeac60c34220893b004549546acb2d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a40eeac60c34220893b004549546acb2d">&#9670;&#160;</a></span>first_pass_process_opcode()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">firstPassStates get_symbol_type </td>
+          <td class="memname">bool first_pass_process_opcode </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="struct_line_iterator.html">LineIterator</a> *&#160;</td>
           <td class="paramname"><em>it</em>, </td>
@@ -197,8 +205,38 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>first_pass_process_sy
         <tr>
           <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype"><a class="el" href="structmemory_buffer.html">memoryBuffer</a> *&#160;</td>
+          <td class="paramname"><em>img</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_symbol_table.html">SymbolTable</a> *&#160;</td>
+          <td class="paramname"><em>sym_table</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structdebug_list.html">debugList</a> *&#160;</td>
+          <td class="paramname"><em>dbg_list</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype">char *&#160;</td>
-          <td class="paramname"><em>word</em>&#160;</td>
+          <td class="paramname"><em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">long&#160;</td>
+          <td class="paramname"><em>line</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>should_encode</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -207,24 +245,507 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>first_pass_process_sy
         </tr>
       </table>
 </div><div class="memdoc">
-<p >This function take in a string, and checks if it's a symbol, if so it returns it's type. This function also checks if the symbol name is a valid symbol name. </p><dl class="params"><dt>Parameters</dt><dd>
+
+<p>This function is used to process lines with opcodes and no label definitions. It also encodes the memory if possible into the <a class="el" href="structmemory_buffer.html">memoryBuffer</a> and updates the symbol table if necessary. </p>
+<dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">-</td><td>A string to do the check upon. </td></tr>
+    <tr><td class="paramname">it</td><td>- The line interator. </td></tr>
+    <tr><td class="paramname">img</td><td>- The memory buffer. </td></tr>
+    <tr><td class="paramname">sym_table</td><td>- The symbol table. </td></tr>
+    <tr><td class="paramname">dbg_list</td><td>- The debug list. </td></tr>
+    <tr><td class="paramname">name</td><td>- The name of a label. </td></tr>
+    <tr><td class="paramname">line</td><td>- The current line. param should_encode - If there is an error we can skip the encoding phase. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>- A appropriate firstPassState. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>True if there are no errors, false otherwise. </dd></dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="first__pass_8c_a40eeac60c34220893b004549546acb2d_icgraph.png" border="0" usemap="#afirst__pass_8c_a40eeac60c34220893b004549546acb2d_icgraph" alt=""/></div>
+<map name="afirst__pass_8c_a40eeac60c34220893b004549546acb2d_icgraph" id="afirst__pass_8c_a40eeac60c34220893b004549546acb2d_icgraph">
+<area shape="rect" title="This function is used to process lines with opcodes and no label definitions. It also encodes the mem..." alt="" coords="448,5,579,45"/>
+<area shape="rect" href="first__pass_8c.html#ae3d15ca0f34657e4715827c439839e1e" title="This function implements the first pass algorithm." alt="" coords="301,13,400,38"/>
+<area shape="rect" href="driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,13,253,38"/>
+<area shape="rect" href="driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,13,124,38"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a87a70eef7a9fd6d62eb27a5a2127739e" name="a87a70eef7a9fd6d62eb27a5a2127739e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a87a70eef7a9fd6d62eb27a5a2127739e">&#9670;&#160;</a></span>first_pass_process_sym_data()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool first_pass_process_sym_data </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_line_iterator.html">LineIterator</a> *&#160;</td>
+          <td class="paramname"><em>it</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structmemory_buffer.html">memoryBuffer</a> *&#160;</td>
+          <td class="paramname"><em>img</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_symbol_table.html">SymbolTable</a> *&#160;</td>
+          <td class="paramname"><em>sym_table</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structdebug_list.html">debugList</a> *&#160;</td>
+          <td class="paramname"><em>dbg_list</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">long&#160;</td>
+          <td class="paramname"><em>line</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>should_encode</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This function is used to process .data lines. It also encodes the memory if possible into the <a class="el" href="structmemory_buffer.html">memoryBuffer</a> and updates the symbol table if necessary. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">it</td><td>- The line interator. </td></tr>
+    <tr><td class="paramname">img</td><td>- The memory buffer. </td></tr>
+    <tr><td class="paramname">sym_table</td><td>- The symbol table. </td></tr>
+    <tr><td class="paramname">dbg_list</td><td>- The debug list. </td></tr>
+    <tr><td class="paramname">name</td><td>- The name of a label. </td></tr>
+    <tr><td class="paramname">line</td><td>- The current line. param should_encode - If there is an error we can skip the encoding phase. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if there are no errors, false otherwise. </dd></dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="first__pass_8c_a87a70eef7a9fd6d62eb27a5a2127739e_icgraph.png" border="0" usemap="#afirst__pass_8c_a87a70eef7a9fd6d62eb27a5a2127739e_icgraph" alt=""/></div>
+<map name="afirst__pass_8c_a87a70eef7a9fd6d62eb27a5a2127739e_icgraph" id="afirst__pass_8c_a87a70eef7a9fd6d62eb27a5a2127739e_icgraph">
+<area shape="rect" title="This function is used to process .data lines. It also encodes the memory if possible into the memoryB..." alt="" coords="448,5,579,45"/>
+<area shape="rect" href="first__pass_8c.html#ae3d15ca0f34657e4715827c439839e1e" title="This function implements the first pass algorithm." alt="" coords="301,13,400,38"/>
+<area shape="rect" href="driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,13,253,38"/>
+<area shape="rect" href="driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,13,124,38"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="ac0da628ba463b754effc2e88e611d4dd" name="ac0da628ba463b754effc2e88e611d4dd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac0da628ba463b754effc2e88e611d4dd">&#9670;&#160;</a></span>first_pass_process_sym_def()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool first_pass_process_sym_def </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_line_iterator.html">LineIterator</a> *&#160;</td>
+          <td class="paramname"><em>it</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structmemory_buffer.html">memoryBuffer</a> *&#160;</td>
+          <td class="paramname"><em>img</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_symbol_table.html">SymbolTable</a> *&#160;</td>
+          <td class="paramname"><em>sym_table</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structdebug_list.html">debugList</a> *&#160;</td>
+          <td class="paramname"><em>dbg_list</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">long&#160;</td>
+          <td class="paramname"><em>line</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>should_encode</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This function is used to process lines with label definitions. It also encodes the memory if possible into the <a class="el" href="structmemory_buffer.html">memoryBuffer</a> and updates the symbol table if necessary. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">it</td><td>- The line interator. </td></tr>
+    <tr><td class="paramname">img</td><td>- The memory buffer. </td></tr>
+    <tr><td class="paramname">sym_table</td><td>- The symbol table. </td></tr>
+    <tr><td class="paramname">dbg_list</td><td>- The debug list. </td></tr>
+    <tr><td class="paramname">name</td><td>- The name of a label. </td></tr>
+    <tr><td class="paramname">line</td><td>- The current line. param should_encode - If there is an error we can skip the encoding phase. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if there are no errors, false otherwise. </dd></dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="first__pass_8c_ac0da628ba463b754effc2e88e611d4dd_icgraph.png" border="0" usemap="#afirst__pass_8c_ac0da628ba463b754effc2e88e611d4dd_icgraph" alt=""/></div>
+<map name="afirst__pass_8c_ac0da628ba463b754effc2e88e611d4dd_icgraph" id="afirst__pass_8c_ac0da628ba463b754effc2e88e611d4dd_icgraph">
+<area shape="rect" title="This function is used to process lines with label definitions. It also encodes the memory if possible..." alt="" coords="448,5,579,45"/>
+<area shape="rect" href="first__pass_8c.html#ae3d15ca0f34657e4715827c439839e1e" title="This function implements the first pass algorithm." alt="" coords="301,13,400,38"/>
+<area shape="rect" href="driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,13,253,38"/>
+<area shape="rect" href="driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,13,124,38"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="aa0a39d1f94314921231c97245e6eb551" name="aa0a39d1f94314921231c97245e6eb551"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa0a39d1f94314921231c97245e6eb551">&#9670;&#160;</a></span>first_pass_process_sym_ent()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool first_pass_process_sym_ent </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_line_iterator.html">LineIterator</a> *&#160;</td>
+          <td class="paramname"><em>it</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structmemory_buffer.html">memoryBuffer</a> *&#160;</td>
+          <td class="paramname"><em>img</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_symbol_table.html">SymbolTable</a> *&#160;</td>
+          <td class="paramname"><em>sym_table</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structdebug_list.html">debugList</a> *&#160;</td>
+          <td class="paramname"><em>dbg_list</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">long&#160;</td>
+          <td class="paramname"><em>line</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>should_encode</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This function is used to process .entry lines. It also encodes the memory if possible into the <a class="el" href="structmemory_buffer.html">memoryBuffer</a> and updates the symbol table if necessary. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">it</td><td>- The line interator. </td></tr>
+    <tr><td class="paramname">img</td><td>- The memory buffer. </td></tr>
+    <tr><td class="paramname">sym_table</td><td>- The symbol table. </td></tr>
+    <tr><td class="paramname">dbg_list</td><td>- The debug list. </td></tr>
+    <tr><td class="paramname">name</td><td>- The name of a label. </td></tr>
+    <tr><td class="paramname">line</td><td>- The current line. param should_encode - If there is an error we can skip the encoding phase. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if there are no errors, false otherwise. </dd></dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="first__pass_8c_aa0a39d1f94314921231c97245e6eb551_icgraph.png" border="0" usemap="#afirst__pass_8c_aa0a39d1f94314921231c97245e6eb551_icgraph" alt=""/></div>
+<map name="afirst__pass_8c_aa0a39d1f94314921231c97245e6eb551_icgraph" id="afirst__pass_8c_aa0a39d1f94314921231c97245e6eb551_icgraph">
+<area shape="rect" title="This function is used to process .entry lines. It also encodes the memory if possible into the memory..." alt="" coords="448,5,579,45"/>
+<area shape="rect" href="first__pass_8c.html#ae3d15ca0f34657e4715827c439839e1e" title="This function implements the first pass algorithm." alt="" coords="301,13,400,38"/>
+<area shape="rect" href="driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,13,253,38"/>
+<area shape="rect" href="driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,13,124,38"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="accedad2dc6b0e81f160e2201f4f2b1d3" name="accedad2dc6b0e81f160e2201f4f2b1d3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#accedad2dc6b0e81f160e2201f4f2b1d3">&#9670;&#160;</a></span>first_pass_process_sym_ext()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool first_pass_process_sym_ext </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_line_iterator.html">LineIterator</a> *&#160;</td>
+          <td class="paramname"><em>it</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structmemory_buffer.html">memoryBuffer</a> *&#160;</td>
+          <td class="paramname"><em>img</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_symbol_table.html">SymbolTable</a> *&#160;</td>
+          <td class="paramname"><em>sym_table</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structdebug_list.html">debugList</a> *&#160;</td>
+          <td class="paramname"><em>dbg_list</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">long&#160;</td>
+          <td class="paramname"><em>line</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>should_encode</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This function is used to process .extern lines. It also encodes the memory if possible into the <a class="el" href="structmemory_buffer.html">memoryBuffer</a> and updates the symbol table if necessary. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">it</td><td>- The line interator. </td></tr>
+    <tr><td class="paramname">img</td><td>- The memory buffer. </td></tr>
+    <tr><td class="paramname">sym_table</td><td>- The symbol table. </td></tr>
+    <tr><td class="paramname">dbg_list</td><td>- The debug list. </td></tr>
+    <tr><td class="paramname">name</td><td>- The name of a label. </td></tr>
+    <tr><td class="paramname">line</td><td>- The current line. param should_encode - If there is an error we can skip the encoding phase. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if there are no errors, false otherwise. </dd></dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="first__pass_8c_accedad2dc6b0e81f160e2201f4f2b1d3_icgraph.png" border="0" usemap="#afirst__pass_8c_accedad2dc6b0e81f160e2201f4f2b1d3_icgraph" alt=""/></div>
+<map name="afirst__pass_8c_accedad2dc6b0e81f160e2201f4f2b1d3_icgraph" id="afirst__pass_8c_accedad2dc6b0e81f160e2201f4f2b1d3_icgraph">
+<area shape="rect" title="This function is used to process .extern lines. It also encodes the memory if possible into the memor..." alt="" coords="448,5,579,45"/>
+<area shape="rect" href="first__pass_8c.html#ae3d15ca0f34657e4715827c439839e1e" title="This function implements the first pass algorithm." alt="" coords="301,13,400,38"/>
+<area shape="rect" href="driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,13,253,38"/>
+<area shape="rect" href="driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,13,124,38"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a932fa602127543d4c7b4e5f4b64b9138" name="a932fa602127543d4c7b4e5f4b64b9138"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a932fa602127543d4c7b4e5f4b64b9138">&#9670;&#160;</a></span>first_pass_process_sym_string()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool first_pass_process_sym_string </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_line_iterator.html">LineIterator</a> *&#160;</td>
+          <td class="paramname"><em>it</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structmemory_buffer.html">memoryBuffer</a> *&#160;</td>
+          <td class="paramname"><em>img</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_symbol_table.html">SymbolTable</a> *&#160;</td>
+          <td class="paramname"><em>sym_table</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structdebug_list.html">debugList</a> *&#160;</td>
+          <td class="paramname"><em>dbg_list</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">long&#160;</td>
+          <td class="paramname"><em>line</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>should_encode</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This function is used to process .string lines. It also encodes the memory if possible into the <a class="el" href="structmemory_buffer.html">memoryBuffer</a> and updates the symbol table if necessary. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">it</td><td>- The line interator. </td></tr>
+    <tr><td class="paramname">img</td><td>- The memory buffer. </td></tr>
+    <tr><td class="paramname">sym_table</td><td>- The symbol table. </td></tr>
+    <tr><td class="paramname">dbg_list</td><td>- The debug list. </td></tr>
+    <tr><td class="paramname">name</td><td>- The name of a label. </td></tr>
+    <tr><td class="paramname">line</td><td>- The current line. param should_encode - If there is an error we can skip the encoding phase. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if there are no errors, false otherwise. </dd></dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="first__pass_8c_a932fa602127543d4c7b4e5f4b64b9138_icgraph.png" border="0" usemap="#afirst__pass_8c_a932fa602127543d4c7b4e5f4b64b9138_icgraph" alt=""/></div>
+<map name="afirst__pass_8c_a932fa602127543d4c7b4e5f4b64b9138_icgraph" id="afirst__pass_8c_a932fa602127543d4c7b4e5f4b64b9138_icgraph">
+<area shape="rect" title="This function is used to process .string lines. It also encodes the memory if possible into the memor..." alt="" coords="448,5,579,45"/>
+<area shape="rect" href="first__pass_8c.html#ae3d15ca0f34657e4715827c439839e1e" title="This function implements the first pass algorithm." alt="" coords="301,13,400,38"/>
+<area shape="rect" href="driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,13,253,38"/>
+<area shape="rect" href="driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,13,124,38"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a870efe109722af3eb5c21a42810f29f6" name="a870efe109722af3eb5c21a42810f29f6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a870efe109722af3eb5c21a42810f29f6">&#9670;&#160;</a></span>get_symbol_type()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="first__pass_8h.html#a851f3b709b20ebd9c41ee7f658292d09">firstPassStates</a> get_symbol_type </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_line_iterator.html">LineIterator</a> *&#160;</td>
+          <td class="paramname"><em>it</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>word</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="debug_8h.html#a88edd67ec29d18293fae821840fef3ac">errorCodes</a> *&#160;</td>
+          <td class="paramname"><em>outErr</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This function take in a string, and checks if it's a symbol, if so it returns it's type. This function also checks if the symbol name is a valid symbol name. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">it</td><td>- A string to do the check upon. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A appropriate firstPassState. </dd></dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="first__pass_8c_a870efe109722af3eb5c21a42810f29f6_icgraph.png" border="0" usemap="#afirst__pass_8c_a870efe109722af3eb5c21a42810f29f6_icgraph" alt=""/></div>
+<map name="afirst__pass_8c_a870efe109722af3eb5c21a42810f29f6_icgraph" id="afirst__pass_8c_a870efe109722af3eb5c21a42810f29f6_icgraph">
+<area shape="rect" title="This function take in a string, and checks if it&#39;s a symbol, if so it returns it&#39;s type...." alt="" coords="448,5,569,31"/>
+<area shape="rect" href="first__pass_8c.html#ae3d15ca0f34657e4715827c439839e1e" title="This function implements the first pass algorithm." alt="" coords="301,5,400,31"/>
+<area shape="rect" href="driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,5,253,31"/>
+<area shape="rect" href="driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,5,124,31"/>
+</map>
+</div>
 
 </div>
 </div>
 </div><!-- contents -->
-</div><!-- doc-content -->
 <!-- start footer part -->
-<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
-  <ul>
-    <li class="navelem"><a class="el" href="first__pass_8c.html">first_pass.c</a></li>
-    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5 </li>
-  </ul>
-</div>
+<hr class="footer"/><address class="footer"><small>
+Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+</small></address>
 </body>
 </html>

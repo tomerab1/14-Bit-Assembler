@@ -1,0 +1,18 @@
+<map id="get_num" name="get_num">
+<area shape="rect" id="node1" title="Get number from string. This is used to parse numbers that are stored in the DB. The format is &quot; %u &quot;..." alt="" coords="1235,130,1307,155"/>
+<area shape="rect" id="node2" href="$encoding_8c.html#a587b5ede677177c9262b6bf40511d60a" title=" " alt="" coords="1041,55,1162,81"/>
+<area shape="rect" id="node7" href="$encoding_8c.html#a3017052dc8d455d662f5234da3f59fc8" title="Encode source and destination registers. This is used to encode a pair of register or immediates." alt="" coords="1016,154,1187,179"/>
+<area shape="rect" id="node3" href="$first__pass_8c.html#a87a70eef7a9fd6d62eb27a5a2127739e" title="This function is used to process .data lines. It also encodes the memory if possible into the memoryB..." alt="" coords="627,5,757,45"/>
+<area shape="rect" id="node4" href="$first__pass_8c.html#ae3d15ca0f34657e4715827c439839e1e" title="This function implements the first pass algorithm." alt="" coords="301,90,400,115"/>
+<area shape="rect" id="node5" href="$driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,90,253,115"/>
+<area shape="rect" id="node6" href="$driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,90,124,115"/>
+<area shape="rect" id="node8" href="$encoding_8c.html#a8b9bc71f73ddbdfc2b4e936ea008f9bc" title="Encode a syntax group 1 instruction. dependent syntax group that we use to encode source and destinat..." alt="" coords="805,55,968,81"/>
+<area shape="rect" id="node12" href="$encoding_8c.html#aad295aeb1fd1a079ff337843c4dca909" title="Encode a syntax group 2 instruction. This is the second part of the machine &#45; dependent syntax group ..." alt="" coords="805,105,968,130"/>
+<area shape="rect" id="node13" href="$encoding_8c.html#a5f29114a13525dc324c78b7b31879c88" title="Encode a syntax group 3 instruction." alt="" coords="805,154,968,179"/>
+<area shape="rect" id="node14" href="$encoding_8c.html#a97919c7b730d4080230b6d6c1e499cdb" title="Encode a syntax group 5 instruction." alt="" coords="805,203,968,229"/>
+<area shape="rect" id="node15" href="$encoding_8c.html#a1bf869e59e47c1eab36adb3b1f7a4339" title="Encode a syntax group 6 instruction." alt="" coords="805,253,968,278"/>
+<area shape="rect" id="node16" href="$encoding_8c.html#a689f60c1be32c59d1c650cc1232d4ee1" title="Encode a syntax group 7 instruction." alt="" coords="805,302,968,327"/>
+<area shape="rect" id="node9" href="$encoding_8c.html#a5e11ca7717b5440fb6baebdf0da9cfda" title="Encode a single opcode. This is the entry point for the encoding routines." alt="" coords="635,154,749,179"/>
+<area shape="rect" id="node10" href="$first__pass_8c.html#a40eeac60c34220893b004549546acb2d" title="This function is used to process lines with opcodes and no label definitions. It also encodes the mem..." alt="" coords="448,83,579,123"/>
+<area shape="rect" id="node11" href="$first__pass_8c.html#ac0da628ba463b754effc2e88e611d4dd" title="This function is used to process lines with label definitions. It also encodes the memory if possible..." alt="" coords="448,147,579,187"/>
+</map>

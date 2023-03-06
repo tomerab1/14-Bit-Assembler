@@ -1,0 +1,10 @@
+<map id="symbol_set_counter" name="symbol_set_counter">
+<area shape="rect" id="node1" title="Sets the counter of a given symbol to a new value." alt="" coords="1045,31,1184,56"/>
+<area shape="rect" id="node2" href="$second__pass_8c.html#a2765636e71a2da6c192eac0fa06581c1" title="Adds the decimal base address to all data and code symbols in a symbol table." alt="" coords="636,5,801,31"/>
+<area shape="rect" id="node6" href="$second__pass_8c.html#a1d991b81e3a4e0eca4a867bd08cf6ecc" title="Updates the symbol offset in memory." alt="" coords="849,56,997,81"/>
+<area shape="rect" id="node3" href="$second__pass_8c.html#aa33feb8d270721a8f28a90a7833937db" title="Initiates the second pass of the assembler. This function is responsible for executing the second pas..." alt="" coords="301,31,445,56"/>
+<area shape="rect" id="node4" href="$driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,31,253,56"/>
+<area shape="rect" id="node5" href="$driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,31,124,56"/>
+<area shape="rect" id="node7" href="$second__pass_8c.html#ab6728edfef56c073ce9792b67edd84f7" title=" " alt="" coords="637,56,800,81"/>
+<area shape="rect" id="node8" href="$second__pass_8c.html#a36c8038b17843fb6d82d261367f7650b" title="Executes the line, in case label exists finds if it is valid and then encodes it, otherwise prints er..." alt="" coords="493,56,588,81"/>
+</map>

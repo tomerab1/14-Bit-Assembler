@@ -1,0 +1,11 @@
+<map id="trim_symbol_name" name="trim_symbol_name">
+<area shape="rect" id="node1" title="Trim the symbol name to make it easier to read. This is used to prevent accidental redefinitions of s..." alt="" coords="844,35,976,60"/>
+<area shape="rect" id="node2" href="$syntactical__analysis_8c.html#ab026e29379dc2aca95b5ae14a4045010" title="This function checks the lable syntax." alt="" coords="659,35,796,60"/>
+<area shape="rect" id="node3" href="$first__pass_8c.html#a870efe109722af3eb5c21a42810f29f6" title="This function take in a string, and checks if it&#39;s a symbol, if so it returns it&#39;s type...." alt="" coords="489,9,611,35"/>
+<area shape="rect" id="node7" href="$syntactical__analysis_8c.html#a855c8939951fd3d960b071b143af6df5" title="Checks if the label syntax is valid." alt="" coords="501,59,599,84"/>
+<area shape="rect" id="node4" href="$first__pass_8c.html#ae3d15ca0f34657e4715827c439839e1e" title="This function implements the first pass algorithm." alt="" coords="343,8,441,33"/>
+<area shape="rect" id="node5" href="$driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="193,5,274,31"/>
+<area shape="rect" id="node6" href="$driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,5,124,31"/>
+<area shape="rect" id="node8" href="$syntactical__analysis_8c.html#a19430e4a830b52423fd6c01235dc10af" title="Check if the next word is a label. This is used to detect whether or not we are in a label context." alt="" coords="361,59,423,84"/>
+<area shape="rect" id="node9" href="$syntactical__analysis_8c.html#ab26f0bb418b6c3c1d540410e3a74a446" title="Check if instruction at line is a label. This is used to detect if we are going to write an instructi..." alt="" coords="172,55,295,95"/>
+</map>
