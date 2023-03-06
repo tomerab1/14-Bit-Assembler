@@ -24,6 +24,8 @@ errorCodes check_label_syntax(char* label)
         return ERROR_CODE_SPACE_BEFORE_COLON;
 
     if ((colon_loc - label) == 2 && *label == REG_BEG_CHAR) {
+        if (isdigit(*(label + 1)))
+            return ERROR_CODE_RESERVED_KEYWORD_DEF;
     }
 
     while (label < colon_loc) {
@@ -32,10 +34,8 @@ errorCodes check_label_syntax(char* label)
         label++;
     }
 
+    /* Removes the colon char */
     trim_symbol_name(label);
-    if (cmp_register_name(label))
-        return ERROR_CODE_RESERVED_KEYWORD_DEF;
-
     return ERROR_CODE_OK;
 }
 

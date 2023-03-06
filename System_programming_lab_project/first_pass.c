@@ -27,6 +27,7 @@ bool do_first_pass(char* path, memoryBuffer* img, SymbolTable* sym_table, debugL
 	/* Read a new line from the input stream.*/
 	while ((curr_line = get_line(in)) != NULL) {
 		char* word = NULL;
+		errorCodes errCode = ERROR_CODE_UNKNOWN;
 		firstPassStates state;
 
 		/* Feed the iterator with a new line. */
@@ -35,7 +36,7 @@ bool do_first_pass(char* path, memoryBuffer* img, SymbolTable* sym_table, debugL
 		line_iterator_consume_blanks(&it);
 
 		word = line_iterator_next_word(&it, " ");
-		state = get_symbol_type(&it, word);
+		state = get_symbol_type(&it, word, &errCode);
 
 		if (state == FP_SYM_IGNORED) {
 			debug_list_register_node(dbg_list, debug_list_new_node(it.start, it.current, line, ERROR_CODE_SYMBOL_IGNORED_WARN));
@@ -43,7 +44,7 @@ bool do_first_pass(char* path, memoryBuffer* img, SymbolTable* sym_table, debugL
 		/* none of the above, must be an error. */
 		/* if state FP_NONE register the node in the list and register it as a new node. */
 		else if (state == FP_NONE) {
-			debug_list_register_node(dbg_list, debug_list_new_node(it.start, it.current, line, ERROR_CODE_SYNTAX_ERROR));
+			debug_list_register_node(dbg_list, debug_list_new_node(it.start, it.current, line, errCode));
 			should_encode = FALSE;
 		}
 		else {
@@ -61,7 +62,7 @@ bool do_first_pass(char* path, memoryBuffer* img, SymbolTable* sym_table, debugL
 	return should_encode;
 }
 
-firstPassStates get_symbol_type(LineIterator* it, char* word)
+firstPassStates get_symbol_type(LineIterator* it, char* word, errorCodes* outErr)
 {
 	bool is_valid = TRUE;
 
@@ -72,18 +73,18 @@ firstPassStates get_symbol_type(LineIterator* it, char* word)
 	}
 	/* An .extern definition. */
 	/* Returns FP_SYM_EXT or FP_SYM_DEF depending on the word.*/
-	else if (strcmp(word, DOT_EXTERN_STRING) == 0) {
+	if (strcmp(word, DOT_EXTERN_STRING) == 0) {
 		return FP_SYM_EXT;
 	}
 	/* Get the opcode of the word.*/
-	else if (get_opcode(word) != OP_UNKNOWN) {
+	if (get_opcode(word) != OP_UNKNOWN) {
 		/* Unget the opcode. */
 		line_iterator_unget_word(it, word);
 		return FP_OPCODE;
 	}
 	/* Symbol definition, may follow, .data or .string*/
 	/* Check if the word is a valid label.*/
-	else if ((is_valid = is_valid_label(word)) == TRUE) {
+	if ((*outErr = check_label_syntax(word)) == ERROR_CODE_OK) {
 		char* next_word = line_iterator_next_word(it, SPACE_STRING);
 
 		/* Free the next word. */
@@ -114,11 +115,6 @@ firstPassStates get_symbol_type(LineIterator* it, char* word)
 		line_iterator_unget_word(it, next_word);
 		free(next_word);
 		return FP_SYM_DEF;
-	}
-
-	/* Returns FP_NONE if the field is not valid. */
-	if (!is_valid) {
-		return FP_NONE;
 	}
 
 	return FP_NONE;

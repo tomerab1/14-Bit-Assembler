@@ -35,7 +35,7 @@ bool do_first_pass(char* path, memoryBuffer* img, SymbolTable* sym_table, debugL
  * @param it - A string to do the check upon.
  * @return A appropriate firstPassState.
 */
-firstPassStates get_symbol_type(LineIterator* it, char* word);
+firstPassStates get_symbol_type(LineIterator* it, char* word, errorCodes* outErr);
 
 /**
 * @brief This function is used to process lines with label definitions.
