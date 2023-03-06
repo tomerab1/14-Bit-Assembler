@@ -34,7 +34,7 @@ bool do_first_pass(char* path, memoryBuffer* img, SymbolTable* sym_table, debugL
 		/* Trim white spaces. */
 		line_iterator_consume_blanks(&it);
 
-		word = line_iterator_next_word(&it, " ");
+		word = line_iterator_next_word(&it, SPACE_STRING);
 		state = get_symbol_type(&it, word);
 
 		if (state == FP_SYM_IGNORED) {
