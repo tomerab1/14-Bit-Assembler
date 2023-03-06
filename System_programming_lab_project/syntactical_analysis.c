@@ -46,7 +46,7 @@ bool is_valid_label(char* label)
 
 
 bool isLabel(LineIterator* line) {
-    return is_valid_label(line_iterator_next_word(line, " "));
+    return is_valid_label(line_iterator_next_word(line, SPACE_STRING));
 }
 
 bool verify_command_syntax(LineIterator* it, debugList* dbg_list)
@@ -168,7 +168,7 @@ bool find_if_instruction_exists(LineIterator* line) {
     Opcodes localOpcode = OP_UNKNOWN;
     if (isLabel(line)) {
         skip_label_basic(line);
-        get_opcode(line_iterator_next_word(line, " "));
+        get_opcode(line_iterator_next_word(line, SPACE_STRING));
 
         if (localOpcode != OP_UNKNOWN)
             return TRUE;
@@ -195,7 +195,7 @@ bool validate_syntax_data(LineIterator* it, long line, debugList* dbg_list)
     /* Routine to check digit list */
     while (!line_iterator_is_end(it) && is_valid) {
         line_iterator_consume_blanks(it);
-        is_valid = verify_int(it, line, ", ", dbg_list);
+        is_valid = verify_int(it, line, COMMA_STRING, dbg_list);
         line_iterator_advance(it);
     }
 
@@ -204,7 +204,7 @@ bool validate_syntax_data(LineIterator* it, long line, debugList* dbg_list)
     }
 
     /* Go backwards */
-    while (isspace(line_iterator_peek(it)) || line_iterator_peek(it) == '\0') {
+    while (isspace(line_iterator_peek(it)) || line_iterator_peek(it) == BACKSLASH_ZERO) {
         line_iterator_backwards(it);
     }
 
@@ -233,7 +233,7 @@ bool validate_syntax_opcode(LineIterator* it, long line, debugList* dbg_list)
 {
     char* word = NULL;
 
-    while ((word = line_iterator_next_word(it, " ")) != NULL) {
+    while ((word = line_iterator_next_word(it, SPACE_STRING)) != NULL) {
         /* check_for_invalid_comma(word); */
         switch (get_syntax_group(word)) {
         case SG_GROUP_1:
@@ -399,7 +399,7 @@ bool match_syntax_group_3(LineIterator* it, long line, debugList* dbg_list)
 bool match_syntax_group_4(LineIterator* it, long line, debugList* dbg_list)
 {
     /* Check that they dont get any operand. */
-    char* op = line_iterator_next_word(it, " ");
+    char* op = line_iterator_next_word(it, SPACE_STRING);
 
     if (op != NULL) {
         free(op);

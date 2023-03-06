@@ -62,6 +62,7 @@
 #define COMMA_STRING ", "
 #define SPACE_STRING " "
 #define OPEN_PAREN_STRING "("
+#define OPEN_PAREN_STRING_W_SPACE "( "
 #define CLOSED_PAREN_STRING ") "
 #define OFFSET_LABELS 0x02
 #define BYTE_MASK 0xff

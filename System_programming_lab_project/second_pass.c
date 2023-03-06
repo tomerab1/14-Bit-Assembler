@@ -36,29 +36,29 @@ struct programFinalStatus
 bool initiate_second_pass(char* path, SymbolTable* table, memoryBuffer* memory, debugList* dbg_list)
 {
 	FILE* in = open_file(path, MODE_READ);
-	programFinalStatus finalStatus = { 0 };
+	programFinalStatus finalStatus = { 0 }; /*state manager*/
 	LineIterator curLine;
 	char* line = NULL;
 	long lineNum = 1;
 
-	add_label_base_address(table);
-	img_memory_set_counter(memory_buffer_get_inst_img(memory), 0);
+	add_label_base_address(table); /*adds +100 to each label address*/
+	img_memory_set_counter(memory_buffer_get_inst_img(memory), 0); /*inits counter*/
 
-	while ((line = get_line(in)) != NULL) {
+	while ((line = get_line(in)) != NULL) { /*Goes over each line*/
 		line_iterator_put_line(&curLine, line);
-		line_iterator_jump_to(&curLine, COLON_CHAR);
+		line_iterator_jump_to(&curLine, COLON_CHAR); /*skips label*/
 
 		if (!directive_exists(&curLine)) { /*checks if any kind of instruction exists (.something)*/
-			execute_line(&curLine, table, memory, dbg_list, &finalStatus.error_flag, lineNum);
+			execute_line(&curLine, table, memory, dbg_list, &finalStatus.error_flag, lineNum); /*exeutes line by verification -> enocding/error throw*/
 		}
 		else {
-			extract_directive_type(&curLine, &finalStatus.entryAndExternFlag);
+			extract_directive_type(&curLine, &finalStatus.entryAndExternFlag); /*in case line is a directive*/
 		}
 		lineNum++;
 		free(line);
 	}
 
-	if (finalStatus.error_flag) 
+	if (finalStatus.error_flag) /*check if any error occured, if so, do not generate new files*/
 		return FALSE;
 
 	create_files(memory, path, &finalStatus, table);
@@ -96,10 +96,10 @@ int find_amount_of_lines_to_skip(LineIterator* it) {
 	line_iterator_jump_to(&tempIt, COLON_CHAR);
 	line_iterator_replace(&tempIt, "(), ", SPACE_CHAR);
 
-	op = line_iterator_next_word(&tempIt, " ");
-	operand1 = line_iterator_next_word(&tempIt, " ");
-	operand2 = line_iterator_next_word(&tempIt, " ");
-	operand3 = line_iterator_next_word(&tempIt, " ");
+	op = line_iterator_next_word(&tempIt, SPACE_STRING);
+	operand1 = line_iterator_next_word(&tempIt, SPACE_STRING);
+	operand2 = line_iterator_next_word(&tempIt, SPACE_STRING);
+	operand3 = line_iterator_next_word(&tempIt, SPACE_STRING);
 
 	/* 1 for the opcode and one for the shared memory word of 2 registers. */
 	if ((operand1 && operand2) && (*operand1 == REG_BEG_CHAR && *operand2 == REG_BEG_CHAR))
@@ -134,9 +134,11 @@ bool generate_object_file(memoryBuffer* memory, char* path)
 	outfileName = get_outfile_name(path, ".object");
 	out = open_file(outfileName, MODE_WRITE);
 
+	/* Write the instruction and data image counters to the output file */
 	sprintf(placeholder, "%9d\t%4d\n", img_memory_get_counter(memory_buffer_get_inst_img(memory)) - 1, img_memory_get_counter(memory_buffer_get_data_img(memory)));
 	fputs(placeholder, out);
 
+	/* Iterate over the translated memory and write it to the output file */
 	for (i = 0; i < img_memory_get_counter(memory_buffer_get_inst_img(memory)) + img_memory_get_counter(memory_buffer_get_data_img(memory)) - 1; i++) {
 		sprintf(placeholder, "%04d\t%s\n", DECIMAL_ADDRESS_BASE + translatedMemory[i].address, translatedMemory[i].translated);
 		fputs(placeholder, out);
@@ -171,6 +173,7 @@ void decode_memory(TranslatedMachineData* tmd, imageMemory* inst, int* startPos,
 	int i, j, k = *startPos;
 
 	for (i = 0; k < endPos; i++) {
+		/* Get the current memory word and set the address of the translated machine data */
 		unsigned int bits = (memory_word_get_memory(img_memory_get_memory_at(inst, i))[1] << 0x08) | memory_word_get_memory(img_memory_get_memory_at(inst, i))[0];
 		tmd[k].address = k;
 		memset(tmd[k].translated, 0, sizeof(tmd[k].translated));
@@ -245,15 +248,18 @@ bool generate_entries_file(SymbolTable* table, char* path) {
 
 void create_files(memoryBuffer* memory, char* path, programFinalStatus* finalStatus, SymbolTable* table)
 {
+	/*Generate object file and update finalStatus accordingly*/
 	finalStatus->createdObject = generate_object_file(memory, path);
+	/*If the symbol table has externals, generate external file and update finalStatus accordingly*/
 	if (symbol_table_get_hasExternals(table))
 		finalStatus->createdExternals = generate_externals_file(table, path);
+	/*If the symbol table has entries, generate entry file and update finalStatus accordingly*/
 	if (symbol_table_get_hasEntries(table))
 		finalStatus->createdEntry = generate_entries_file(table, path);
 }
 
 void extract_directive_type(LineIterator* line, flags* flag) {
-    char* command = line_iterator_next_word(line, " ");
+    char* command = line_iterator_next_word(line, SPACE_STRING);
 	/* Checks if command is extern */
     if (strcmp(command, DOT_EXTERN)) {
         extern_exists(flag);
@@ -268,7 +274,7 @@ void extract_directive_type(LineIterator* line, flags* flag) {
 
 VarData* extract_variables(LineIterator* it) {
 	VarData* variables = NULL;
-	char* opcode = line_iterator_next_word(it, " ");
+	char* opcode = line_iterator_next_word(it, SPACE_STRING);
 	SyntaxGroups synGroup = get_syntax_group(opcode);
 
 	/* Extract variables for group 1, 2, and 7 opcodes */
@@ -302,6 +308,7 @@ bool is_label_exists_in_line(LineIterator* line, SymbolTable* table, debugList* 
 		return TRUE;
 	}
 
+	/*Cases based on amount of variables*/
 	switch (varData_get_total(variablesData))
 	{
 	case 1: /*group 3 and 6, left var*/
@@ -340,7 +347,7 @@ bool is_label_exists_in_line(LineIterator* line, SymbolTable* table, debugList* 
 }
 
 bool investigate_word(LineIterator* originalLine, LineIterator* wordIterator, SymbolTable* table, debugList* dbg_list, bool* flag, long line_num, char* wordToInvestigate, int amountOfVars) {
-	if (is_register_name_whole(wordIterator))
+	if (is_register_name_whole(wordIterator)) /*If the word is a register name, return FALSE*/
 		return FALSE;
 
 	line_iterator_backwards(wordIterator);
@@ -348,13 +355,13 @@ bool investigate_word(LineIterator* originalLine, LineIterator* wordIterator, Sy
 	if ((line_iterator_peek(wordIterator) == HASH_CHAR))
 		return FALSE;
 	else {
-		if (symbol_table_search_symbol_bool(table, wordToInvestigate)) {
+		if (symbol_table_search_symbol_bool(table, wordToInvestigate)) { /*If the word exists in the symbol table, return TRUE*/
 			return TRUE;
 		}
-		else {
+		else { /*If the word doesn't exist in the symbol table*/
 			find_word_start_point(originalLine, wordToInvestigate, amountOfVars);
 			debug_list_register_node(dbg_list, debug_list_new_node(originalLine->start, originalLine->current, line_num, ERROR_CODE_LABEL_DOES_NOT_EXISTS));
-			(*flag) = TRUE;
+			(*flag) = TRUE; /*sets errors flag to true*/
 			return FALSE;
 		}
 	}
@@ -374,7 +381,7 @@ void find_word_start_point(LineIterator* it, char* word, int amountOfVars) {
 		}
 		break;
 	case 2:
-		if (strcmp(line_iterator_next_word(it, ", "), word) == 0) {
+		if (strcmp(line_iterator_next_word(it, COMMA_STRING), word) == 0) {
 			line_iterator_unget_word(it, word);
 			line_iterator_consume_blanks(it);
 		}
@@ -383,11 +390,11 @@ void find_word_start_point(LineIterator* it, char* word, int amountOfVars) {
 		}
 		break;
 	case 3:
-		if (strcmp(line_iterator_next_word(it, "( "), word) == 0) {
+		if (strcmp(line_iterator_next_word(it,OPEN_PAREN_STRING_W_SPACE), word) == 0) {
 			line_iterator_unget_word(it, word);
 			line_iterator_consume_blanks(it);
 		}
-		else if (strcmp(line_iterator_next_word(it, ", "), word) == 0) {
+		else if (strcmp(line_iterator_next_word(it, COMMA_STRING), word) == 0) {
 			line_iterator_unget_word(it, word);
 			line_iterator_consume_blanks(it);
 		}
@@ -421,7 +428,7 @@ void update_symbol_address(LineIterator it, memoryBuffer* memory, SymbolTable* t
 	line_iterator_replace(&cpyIt, "(), ", SPACE_CHAR);
 	line_iterator_jump_to(&cpyIt, COLON_CHAR);
 
-	for (word = line_iterator_next_word(&cpyIt, " "); word != NULL; word = line_iterator_next_word(&cpyIt, " "), offset++) {
+	for (word = line_iterator_next_word(&cpyIt, SPACE_STRING); word != NULL; word = line_iterator_next_word(&cpyIt, SPACE_STRING), offset++) {
 		update_symbol_offset(word, offset, memory, table);
 		free(word);
 	}
