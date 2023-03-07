@@ -6,7 +6,6 @@
 
 #include "symbol_table.h"
 #include "line_iterator.h"
-#include "utils.h"
 #include "memory.h"
 #include "debug.h"
 

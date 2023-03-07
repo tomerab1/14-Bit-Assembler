@@ -76,27 +76,24 @@ $(function() {
   <div class="headertitle"><div class="title">syntactical_analysis.h File Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &quot;<a class="el" href="line__iterator_8h_source.html">line_iterator.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="first__pass_8h_source.html">first_pass.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="debug_8h_source.html">debug.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="utils_8h_source.html">utils.h</a>&quot;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="first__pass_8h_source.html">first_pass.h</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for syntactical_analysis.h:</div>
 <div class="dyncontent">
 <div class="center"><img src="syntactical__analysis_8h__incl.png" border="0" usemap="#asyntactical__analysis_8h" alt=""/></div>
 <map name="asyntactical__analysis_8h" id="asyntactical__analysis_8h">
-<area shape="rect" title=" " alt="" coords="49,5,200,31"/>
-<area shape="rect" href="line__iterator_8h.html" title=" " alt="" coords="28,152,128,177"/>
-<area shape="rect" href="utils_8h.html" title=" " alt="" coords="137,225,194,251"/>
-<area shape="rect" href="first__pass_8h.html" title=" " alt="" coords="165,79,254,104"/>
-<area shape="rect" href="debug_8h.html" title=" " alt="" coords="390,152,458,177"/>
-<area shape="rect" title=" " alt="" coords="30,299,91,324"/>
-<area shape="rect" title=" " alt="" coords="115,299,179,324"/>
-<area shape="rect" title=" " alt="" coords="204,299,269,324"/>
-<area shape="rect" href="constants_8h.html" title=" " alt="" coords="294,299,384,324"/>
-<area shape="rect" href="symbol__table_8h.html" title=" " alt="" coords="204,152,314,177"/>
-<area shape="rect" href="memory_8h.html" title=" " alt="" coords="299,225,379,251"/>
-<area shape="rect" title=" " alt="" coords="404,225,472,251"/>
+<area shape="rect" title=" " alt="" coords="168,5,319,31"/>
+<area shape="rect" href="first__pass_8h.html" title=" " alt="" coords="199,79,288,104"/>
+<area shape="rect" href="symbol__table_8h.html" title=" " alt="" coords="5,152,116,177"/>
+<area shape="rect" href="line__iterator_8h.html" title=" " alt="" coords="140,152,240,177"/>
+<area shape="rect" href="memory_8h.html" title=" " alt="" coords="337,225,417,251"/>
+<area shape="rect" href="debug_8h.html" title=" " alt="" coords="264,152,332,177"/>
+<area shape="rect" href="utils_8h.html" title=" " alt="" coords="161,225,219,251"/>
+<area shape="rect" title=" " alt="" coords="246,299,307,324"/>
+<area shape="rect" title=" " alt="" coords="67,299,131,324"/>
+<area shape="rect" title=" " alt="" coords="156,299,221,324"/>
+<area shape="rect" href="constants_8h.html" title=" " alt="" coords="331,299,422,324"/>
+<area shape="rect" title=" " alt="" coords="244,225,312,251"/>
 </map>
 </div>
 </div>
@@ -196,7 +193,7 @@ Functions</h2></td></tr>
 <tr class="memitem:a19430e4a830b52423fd6c01235dc10af"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="syntactical__analysis_8h.html#a19430e4a830b52423fd6c01235dc10af">isLabel</a> (<a class="el" href="struct_line_iterator.html">LineIterator</a> *line)</td></tr>
 <tr class="memdesc:a19430e4a830b52423fd6c01235dc10af"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if the next word is a label. This is used to detect whether or not we are in a label context.  <a href="syntactical__analysis_8h.html#a19430e4a830b52423fd6c01235dc10af">More...</a><br /></td></tr>
 <tr class="separator:a19430e4a830b52423fd6c01235dc10af"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a625e1c4d3afa677d75e4a04f1d6989bd"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="syntactical__analysis_8h.html#a625e1c4d3afa677d75e4a04f1d6989bd">verify_command_syntax</a> (<a class="el" href="struct_line_iterator.html">LineIterator</a> *it, <a class="el" href="debug_8h.html#afc3b4552ab1b8deb9d886f2af70a3dd2">debugList</a> *dbg_list)</td></tr>
+<tr class="memitem:a625e1c4d3afa677d75e4a04f1d6989bd"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="syntactical__analysis_8h.html#a625e1c4d3afa677d75e4a04f1d6989bd">verify_command_syntax</a> (<a class="el" href="struct_line_iterator.html">LineIterator</a> *it, <a class="el" href="structdebug_list.html">debugList</a> *dbg_list)</td></tr>
 <tr class="memdesc:a625e1c4d3afa677d75e4a04f1d6989bd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Verify the syntax of a command. This is a helper function for debug_command ().  <a href="syntactical__analysis_8h.html#a625e1c4d3afa677d75e4a04f1d6989bd">More...</a><br /></td></tr>
 <tr class="separator:a625e1c4d3afa677d75e4a04f1d6989bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a42eff397b553a32135043fe5d99839d7"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="syntactical__analysis_8h.html#a42eff397b553a32135043fe5d99839d7">cmp_register_name</a> (char *str)</td></tr>
@@ -208,43 +205,43 @@ Functions</h2></td></tr>
 <tr class="memitem:a6b4c7eb08fbefdb1bad8755c52666824"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="syntactical__analysis_8h.html#a6b4c7eb08fbefdb1bad8755c52666824">trim_symbol_name</a> (char *sym)</td></tr>
 <tr class="memdesc:a6b4c7eb08fbefdb1bad8755c52666824"><td class="mdescLeft">&#160;</td><td class="mdescRight">Trim the symbol name to make it easier to read. This is used to prevent accidental redefinitions of symbols that are in the middle of a function name.  <a href="syntactical__analysis_8h.html#a6b4c7eb08fbefdb1bad8755c52666824">More...</a><br /></td></tr>
 <tr class="separator:a6b4c7eb08fbefdb1bad8755c52666824"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a67016b4fe1cda5bfa436414cae4c3561"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="syntactical__analysis_8h.html#a67016b4fe1cda5bfa436414cae4c3561">validate_syntax</a> (<a class="el" href="struct_line_iterator.html">LineIterator</a> it, <a class="el" href="first__pass_8h.html#a851f3b709b20ebd9c41ee7f658292d09">firstPassStates</a> state, long line, <a class="el" href="debug_8h.html#afc3b4552ab1b8deb9d886f2af70a3dd2">debugList</a> *dbg_list)</td></tr>
-<tr class="memdesc:a67016b4fe1cda5bfa436414cae4c3561"><td class="mdescLeft">&#160;</td><td class="mdescRight">Validate the syntax at the current position. This is a wrapper around validate_syntax_opcode () validate_syntax_data () and validate_syntax_string () to allow custom code to be added to the debugList.  <a href="syntactical__analysis_8h.html#a67016b4fe1cda5bfa436414cae4c3561">More...</a><br /></td></tr>
+<tr class="memitem:a67016b4fe1cda5bfa436414cae4c3561"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="syntactical__analysis_8h.html#a67016b4fe1cda5bfa436414cae4c3561">validate_syntax</a> (<a class="el" href="struct_line_iterator.html">LineIterator</a> it, <a class="el" href="first__pass_8h.html#a851f3b709b20ebd9c41ee7f658292d09">firstPassStates</a> state, long line, <a class="el" href="structdebug_list.html">debugList</a> *dbg_list)</td></tr>
+<tr class="memdesc:a67016b4fe1cda5bfa436414cae4c3561"><td class="mdescLeft">&#160;</td><td class="mdescRight">Validate the syntax at the current position. This is a wrapper around validate_syntax_opcode () validate_syntax_data () and validate_syntax_string () to allow custom code to be added to the <a class="el" href="structdebug_list.html">debugList</a>.  <a href="syntactical__analysis_8h.html#a67016b4fe1cda5bfa436414cae4c3561">More...</a><br /></td></tr>
 <tr class="separator:a67016b4fe1cda5bfa436414cae4c3561"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6393e6140d0121d6d8c81b36cbed42e7"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="syntactical__analysis_8h.html#a6393e6140d0121d6d8c81b36cbed42e7">validate_syntax_opcode</a> (<a class="el" href="struct_line_iterator.html">LineIterator</a> *it, long line, <a class="el" href="debug_8h.html#afc3b4552ab1b8deb9d886f2af70a3dd2">debugList</a> *dbg_list)</td></tr>
+<tr class="memitem:a6393e6140d0121d6d8c81b36cbed42e7"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="syntactical__analysis_8h.html#a6393e6140d0121d6d8c81b36cbed42e7">validate_syntax_opcode</a> (<a class="el" href="struct_line_iterator.html">LineIterator</a> *it, long line, <a class="el" href="structdebug_list.html">debugList</a> *dbg_list)</td></tr>
 <tr class="memdesc:a6393e6140d0121d6d8c81b36cbed42e7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Validate a syntax opcode. This is a helper function for validate_opcode ().  <a href="syntactical__analysis_8h.html#a6393e6140d0121d6d8c81b36cbed42e7">More...</a><br /></td></tr>
 <tr class="separator:a6393e6140d0121d6d8c81b36cbed42e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a048ed699cd7cbc580722534d81db9ce1"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="syntactical__analysis_8h.html#a048ed699cd7cbc580722534d81db9ce1">verify_int</a> (<a class="el" href="struct_line_iterator.html">LineIterator</a> *it, long line, char *seps, <a class="el" href="debug_8h.html#afc3b4552ab1b8deb9d886f2af70a3dd2">debugList</a> *dbg_list)</td></tr>
+<tr class="memitem:a048ed699cd7cbc580722534d81db9ce1"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="syntactical__analysis_8h.html#a048ed699cd7cbc580722534d81db9ce1">verify_int</a> (<a class="el" href="struct_line_iterator.html">LineIterator</a> *it, long line, char *seps, <a class="el" href="structdebug_list.html">debugList</a> *dbg_list)</td></tr>
 <tr class="memdesc:a048ed699cd7cbc580722534d81db9ce1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Verifies that the next character is a valid integer. This is done by examining the characters that begin with a digit followed by a comma or a comma and verifying that it is a valid integer.  <a href="syntactical__analysis_8h.html#a048ed699cd7cbc580722534d81db9ce1">More...</a><br /></td></tr>
 <tr class="separator:a048ed699cd7cbc580722534d81db9ce1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2749c50f152de3c380145d95a2d05262"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="syntactical__analysis_8h.html#a2749c50f152de3c380145d95a2d05262">match_syntax_group_1</a> (<a class="el" href="struct_line_iterator.html">LineIterator</a> *it, long line, <a class="el" href="debug_8h.html#afc3b4552ab1b8deb9d886f2af70a3dd2">debugList</a> *dbg_list)</td></tr>
+<tr class="memitem:a2749c50f152de3c380145d95a2d05262"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="syntactical__analysis_8h.html#a2749c50f152de3c380145d95a2d05262">match_syntax_group_1</a> (<a class="el" href="struct_line_iterator.html">LineIterator</a> *it, long line, <a class="el" href="structdebug_list.html">debugList</a> *dbg_list)</td></tr>
 <tr class="memdesc:a2749c50f152de3c380145d95a2d05262"><td class="mdescLeft">&#160;</td><td class="mdescRight">Matches a syntax group 1. This is the first part of the syntax group : it must be at the start of a variable or variable declaration.  <a href="syntactical__analysis_8h.html#a2749c50f152de3c380145d95a2d05262">More...</a><br /></td></tr>
 <tr class="separator:a2749c50f152de3c380145d95a2d05262"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae6a335691cd87b3ba20493300d250b0b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="syntactical__analysis_8h.html#ae6a335691cd87b3ba20493300d250b0b">match_syntax_group_2</a> (<a class="el" href="struct_line_iterator.html">LineIterator</a> *it, long line, <a class="el" href="debug_8h.html#afc3b4552ab1b8deb9d886f2af70a3dd2">debugList</a> *dbg_list)</td></tr>
+<tr class="memitem:ae6a335691cd87b3ba20493300d250b0b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="syntactical__analysis_8h.html#ae6a335691cd87b3ba20493300d250b0b">match_syntax_group_2</a> (<a class="el" href="struct_line_iterator.html">LineIterator</a> *it, long line, <a class="el" href="structdebug_list.html">debugList</a> *dbg_list)</td></tr>
 <tr class="memdesc:ae6a335691cd87b3ba20493300d250b0b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Matches a syntax group 2. This is the second part of the syntax group matching algorithm.  <a href="syntactical__analysis_8h.html#ae6a335691cd87b3ba20493300d250b0b">More...</a><br /></td></tr>
 <tr class="separator:ae6a335691cd87b3ba20493300d250b0b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5f99c4d3e555f02fbe4925924058090b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="syntactical__analysis_8h.html#a5f99c4d3e555f02fbe4925924058090b">match_syntax_group_3</a> (<a class="el" href="struct_line_iterator.html">LineIterator</a> *it, long line, <a class="el" href="debug_8h.html#afc3b4552ab1b8deb9d886f2af70a3dd2">debugList</a> *dbg_list)</td></tr>
+<tr class="memitem:a5f99c4d3e555f02fbe4925924058090b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="syntactical__analysis_8h.html#a5f99c4d3e555f02fbe4925924058090b">match_syntax_group_3</a> (<a class="el" href="struct_line_iterator.html">LineIterator</a> *it, long line, <a class="el" href="structdebug_list.html">debugList</a> *dbg_list)</td></tr>
 <tr class="memdesc:a5f99c4d3e555f02fbe4925924058090b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Matches a syntax group 3. This is the third part of the syntax group matching algorithm.  <a href="syntactical__analysis_8h.html#a5f99c4d3e555f02fbe4925924058090b">More...</a><br /></td></tr>
 <tr class="separator:a5f99c4d3e555f02fbe4925924058090b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a552075d73f1458ff9facc99ab2bc5702"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="syntactical__analysis_8h.html#a552075d73f1458ff9facc99ab2bc5702">match_syntax_group_4</a> (<a class="el" href="struct_line_iterator.html">LineIterator</a> *it, long line, <a class="el" href="debug_8h.html#afc3b4552ab1b8deb9d886f2af70a3dd2">debugList</a> *dbg_list)</td></tr>
+<tr class="memitem:a552075d73f1458ff9facc99ab2bc5702"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="syntactical__analysis_8h.html#a552075d73f1458ff9facc99ab2bc5702">match_syntax_group_4</a> (<a class="el" href="struct_line_iterator.html">LineIterator</a> *it, long line, <a class="el" href="structdebug_list.html">debugList</a> *dbg_list)</td></tr>
 <tr class="memdesc:a552075d73f1458ff9facc99ab2bc5702"><td class="mdescLeft">&#160;</td><td class="mdescRight">Matches a syntax group 4. This is used to check if there is a''followed by an operand.  <a href="syntactical__analysis_8h.html#a552075d73f1458ff9facc99ab2bc5702">More...</a><br /></td></tr>
 <tr class="separator:a552075d73f1458ff9facc99ab2bc5702"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a942f35e02bcadf7b1fe58d918dc5a531"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="syntactical__analysis_8h.html#a942f35e02bcadf7b1fe58d918dc5a531">match_syntax_group_5</a> (<a class="el" href="struct_line_iterator.html">LineIterator</a> *it, long line, <a class="el" href="debug_8h.html#afc3b4552ab1b8deb9d886f2af70a3dd2">debugList</a> *dbg_list)</td></tr>
+<tr class="memitem:a942f35e02bcadf7b1fe58d918dc5a531"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="syntactical__analysis_8h.html#a942f35e02bcadf7b1fe58d918dc5a531">match_syntax_group_5</a> (<a class="el" href="struct_line_iterator.html">LineIterator</a> *it, long line, <a class="el" href="structdebug_list.html">debugList</a> *dbg_list)</td></tr>
 <tr class="memdesc:a942f35e02bcadf7b1fe58d918dc5a531"><td class="mdescLeft">&#160;</td><td class="mdescRight">Matches a syntax group 5 starting at the current position. This is used to implement the syntax group 5 ( and below ) as well as the syntax group 5 ( and below ).  <a href="syntactical__analysis_8h.html#a942f35e02bcadf7b1fe58d918dc5a531">More...</a><br /></td></tr>
 <tr class="separator:a942f35e02bcadf7b1fe58d918dc5a531"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aeed608a4c974282c8b9764a73c8c8d69"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="syntactical__analysis_8h.html#aeed608a4c974282c8b9764a73c8c8d69">match_syntax_group_6</a> (<a class="el" href="struct_line_iterator.html">LineIterator</a> *it, long line, <a class="el" href="debug_8h.html#afc3b4552ab1b8deb9d886f2af70a3dd2">debugList</a> *dbg_list)</td></tr>
+<tr class="memitem:aeed608a4c974282c8b9764a73c8c8d69"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="syntactical__analysis_8h.html#aeed608a4c974282c8b9764a73c8c8d69">match_syntax_group_6</a> (<a class="el" href="struct_line_iterator.html">LineIterator</a> *it, long line, <a class="el" href="structdebug_list.html">debugList</a> *dbg_list)</td></tr>
 <tr class="memdesc:aeed608a4c974282c8b9764a73c8c8d69"><td class="mdescLeft">&#160;</td><td class="mdescRight">Matches a syntax group 6 starting at the current position. This is used for variable and variable references.  <a href="syntactical__analysis_8h.html#aeed608a4c974282c8b9764a73c8c8d69">More...</a><br /></td></tr>
 <tr class="separator:aeed608a4c974282c8b9764a73c8c8d69"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af96503d0f4370ed18672141247730073"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="syntactical__analysis_8h.html#af96503d0f4370ed18672141247730073">match_syntax_group_7</a> (<a class="el" href="struct_line_iterator.html">LineIterator</a> *it, long line, <a class="el" href="debug_8h.html#afc3b4552ab1b8deb9d886f2af70a3dd2">debugList</a> *dbg_list)</td></tr>
+<tr class="memitem:af96503d0f4370ed18672141247730073"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="syntactical__analysis_8h.html#af96503d0f4370ed18672141247730073">match_syntax_group_7</a> (<a class="el" href="struct_line_iterator.html">LineIterator</a> *it, long line, <a class="el" href="structdebug_list.html">debugList</a> *dbg_list)</td></tr>
 <tr class="memdesc:af96503d0f4370ed18672141247730073"><td class="mdescLeft">&#160;</td><td class="mdescRight">Matches a syntax group 7. In this case we are interested in the name of a register or a label.  <a href="syntactical__analysis_8h.html#af96503d0f4370ed18672141247730073">More...</a><br /></td></tr>
 <tr class="separator:af96503d0f4370ed18672141247730073"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af10b351dc7df0a2b9a1f1a37bd498f68"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="syntactical__analysis_8h.html#af10b351dc7df0a2b9a1f1a37bd498f68">validate_syntax_string</a> (<a class="el" href="struct_line_iterator.html">LineIterator</a> *it, long line, <a class="el" href="debug_8h.html#afc3b4552ab1b8deb9d886f2af70a3dd2">debugList</a> *dbg_list)</td></tr>
+<tr class="memitem:af10b351dc7df0a2b9a1f1a37bd498f68"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="syntactical__analysis_8h.html#af10b351dc7df0a2b9a1f1a37bd498f68">validate_syntax_string</a> (<a class="el" href="struct_line_iterator.html">LineIterator</a> *it, long line, <a class="el" href="structdebug_list.html">debugList</a> *dbg_list)</td></tr>
 <tr class="memdesc:af10b351dc7df0a2b9a1f1a37bd498f68"><td class="mdescLeft">&#160;</td><td class="mdescRight">Validates a syntax string.  <a href="syntactical__analysis_8h.html#af10b351dc7df0a2b9a1f1a37bd498f68">More...</a><br /></td></tr>
 <tr class="separator:af10b351dc7df0a2b9a1f1a37bd498f68"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae39eef4bd1f921befdc8fc687ac6925d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="syntactical__analysis_8h.html#ae39eef4bd1f921befdc8fc687ac6925d">validate_syntax_data</a> (<a class="el" href="struct_line_iterator.html">LineIterator</a> *it, long line, <a class="el" href="debug_8h.html#afc3b4552ab1b8deb9d886f2af70a3dd2">debugList</a> *dbg_list)</td></tr>
+<tr class="memitem:ae39eef4bd1f921befdc8fc687ac6925d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="syntactical__analysis_8h.html#ae39eef4bd1f921befdc8fc687ac6925d">validate_syntax_data</a> (<a class="el" href="struct_line_iterator.html">LineIterator</a> *it, long line, <a class="el" href="structdebug_list.html">debugList</a> *dbg_list)</td></tr>
 <tr class="memdesc:ae39eef4bd1f921befdc8fc687ac6925d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Validates a syntax data.  <a href="syntactical__analysis_8h.html#ae39eef4bd1f921befdc8fc687ac6925d">More...</a><br /></td></tr>
 <tr class="separator:ae39eef4bd1f921befdc8fc687ac6925d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab79b4aad9db258a105d397a38f3c177f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="syntactical__analysis_8h.html#ab79b4aad9db258a105d397a38f3c177f">validate_syntax_extern_and_entry</a> (<a class="el" href="struct_line_iterator.html">LineIterator</a> *it, long line, <a class="el" href="debug_8h.html#afc3b4552ab1b8deb9d886f2af70a3dd2">debugList</a> *dbg_list)</td></tr>
+<tr class="memitem:ab79b4aad9db258a105d397a38f3c177f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="syntactical__analysis_8h.html#ab79b4aad9db258a105d397a38f3c177f">validate_syntax_extern_and_entry</a> (<a class="el" href="struct_line_iterator.html">LineIterator</a> *it, long line, <a class="el" href="structdebug_list.html">debugList</a> *dbg_list)</td></tr>
 <tr class="memdesc:ab79b4aad9db258a105d397a38f3c177f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Validates the syntax extern and entry. This is used to validate the syntax extern and entry in a macro expansion.  <a href="syntactical__analysis_8h.html#ab79b4aad9db258a105d397a38f3c177f">More...</a><br /></td></tr>
 <tr class="separator:ab79b4aad9db258a105d397a38f3c177f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af4efc5b0016633e04baf672fdb9118c9"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="syntactical__analysis_8h.html#af4efc5b0016633e04baf672fdb9118c9">is_register_name</a> (<a class="el" href="struct_line_iterator.html">LineIterator</a> *it)</td></tr>
@@ -253,13 +250,13 @@ Functions</h2></td></tr>
 <tr class="memitem:a6e08d23c864040adad1fd85d198143cc"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="syntactical__analysis_8h.html#a6e08d23c864040adad1fd85d198143cc">validate_label_ending</a> (<a class="el" href="struct_line_iterator.html">LineIterator</a> *it)</td></tr>
 <tr class="memdesc:a6e08d23c864040adad1fd85d198143cc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Validate that the iterator is at the end of a label. This is used to determine whether or not we should stop at the end of an already - processed label or not.  <a href="syntactical__analysis_8h.html#a6e08d23c864040adad1fd85d198143cc">More...</a><br /></td></tr>
 <tr class="separator:a6e08d23c864040adad1fd85d198143cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1c81b8f22e1b58261c580dc786012ddb"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="syntactical__analysis_8h.html#a1c81b8f22e1b58261c580dc786012ddb">match_operand</a> (<a class="el" href="struct_line_iterator.html">LineIterator</a> *it, long line, int <a class="el" href="structflags.html">flags</a>, <a class="el" href="debug_8h.html#afc3b4552ab1b8deb9d886f2af70a3dd2">debugList</a> *dbg_list)</td></tr>
+<tr class="memitem:a1c81b8f22e1b58261c580dc786012ddb"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="syntactical__analysis_8h.html#a1c81b8f22e1b58261c580dc786012ddb">match_operand</a> (<a class="el" href="struct_line_iterator.html">LineIterator</a> *it, long line, int <a class="el" href="structflags.html">flags</a>, <a class="el" href="structdebug_list.html">debugList</a> *dbg_list)</td></tr>
 <tr class="memdesc:a1c81b8f22e1b58261c580dc786012ddb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Matches an operand and returns TRUE if it matches. This is a low - level function used by match_operand_p () and match_operand_p2 ().  <a href="syntactical__analysis_8h.html#a1c81b8f22e1b58261c580dc786012ddb">More...</a><br /></td></tr>
 <tr class="separator:a1c81b8f22e1b58261c580dc786012ddb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a97d0de41184fb5f42ad42d38dba096c7"><td class="memItemLeft" align="right" valign="top">SyntaxGroups&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="syntactical__analysis_8h.html#a97d0de41184fb5f42ad42d38dba096c7">get_syntax_group</a> (char *name)</td></tr>
 <tr class="memdesc:a97d0de41184fb5f42ad42d38dba096c7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the syntax group of a name. This is used to distinguish groups of syntaxes that are different from each other.  <a href="syntactical__analysis_8h.html#a97d0de41184fb5f42ad42d38dba096c7">More...</a><br /></td></tr>
 <tr class="separator:a97d0de41184fb5f42ad42d38dba096c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a07296539973fce1b07e9fed70ab86519"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="syntactical__analysis_8h.html#a07296539973fce1b07e9fed70ab86519">match_pamaetrized_label</a> (<a class="el" href="struct_line_iterator.html">LineIterator</a> *it, long line, <a class="el" href="debug_8h.html#afc3b4552ab1b8deb9d886f2af70a3dd2">debugList</a> *dbg_list)</td></tr>
+<tr class="memitem:a07296539973fce1b07e9fed70ab86519"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="syntactical__analysis_8h.html#a07296539973fce1b07e9fed70ab86519">match_pamaetrized_label</a> (<a class="el" href="struct_line_iterator.html">LineIterator</a> *it, long line, <a class="el" href="structdebug_list.html">debugList</a> *dbg_list)</td></tr>
 <tr class="memdesc:a07296539973fce1b07e9fed70ab86519"><td class="mdescLeft">&#160;</td><td class="mdescRight">Matches pamaetrized labels. This is a bit tricky because we don't know the number of arguments to a label.  <a href="syntactical__analysis_8h.html#a07296539973fce1b07e9fed70ab86519">More...</a><br /></td></tr>
 <tr class="separator:a07296539973fce1b07e9fed70ab86519"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a638b5ef066fdf42bc98c180a4d5f55ce"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="syntactical__analysis_8h.html#a638b5ef066fdf42bc98c180a4d5f55ce">is_register_name_heuristic</a> (<a class="el" href="struct_line_iterator.html">LineIterator</a> it)</td></tr>
@@ -598,7 +595,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="debug_8h.html#afc3b4552ab1b8deb9d886f2af70a3dd2">debugList</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="structdebug_list.html">debugList</a> *&#160;</td>
           <td class="paramname"><em>dbg_list</em>&#160;</td>
         </tr>
         <tr>
@@ -644,7 +641,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="debug_8h.html#afc3b4552ab1b8deb9d886f2af70a3dd2">debugList</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="structdebug_list.html">debugList</a> *&#160;</td>
           <td class="paramname"><em>dbg_list</em>&#160;</td>
         </tr>
         <tr>
@@ -689,7 +686,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="debug_8h.html#afc3b4552ab1b8deb9d886f2af70a3dd2">debugList</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="structdebug_list.html">debugList</a> *&#160;</td>
           <td class="paramname"><em>dbg_list</em>&#160;</td>
         </tr>
         <tr>
@@ -734,7 +731,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="debug_8h.html#afc3b4552ab1b8deb9d886f2af70a3dd2">debugList</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="structdebug_list.html">debugList</a> *&#160;</td>
           <td class="paramname"><em>dbg_list</em>&#160;</td>
         </tr>
         <tr>
@@ -779,7 +776,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="debug_8h.html#afc3b4552ab1b8deb9d886f2af70a3dd2">debugList</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="structdebug_list.html">debugList</a> *&#160;</td>
           <td class="paramname"><em>dbg_list</em>&#160;</td>
         </tr>
         <tr>
@@ -824,7 +821,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="debug_8h.html#afc3b4552ab1b8deb9d886f2af70a3dd2">debugList</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="structdebug_list.html">debugList</a> *&#160;</td>
           <td class="paramname"><em>dbg_list</em>&#160;</td>
         </tr>
         <tr>
@@ -869,7 +866,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="debug_8h.html#afc3b4552ab1b8deb9d886f2af70a3dd2">debugList</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="structdebug_list.html">debugList</a> *&#160;</td>
           <td class="paramname"><em>dbg_list</em>&#160;</td>
         </tr>
         <tr>
@@ -914,7 +911,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="debug_8h.html#afc3b4552ab1b8deb9d886f2af70a3dd2">debugList</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="structdebug_list.html">debugList</a> *&#160;</td>
           <td class="paramname"><em>dbg_list</em>&#160;</td>
         </tr>
         <tr>
@@ -959,7 +956,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="debug_8h.html#afc3b4552ab1b8deb9d886f2af70a3dd2">debugList</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="structdebug_list.html">debugList</a> *&#160;</td>
           <td class="paramname"><em>dbg_list</em>&#160;</td>
         </tr>
         <tr>
@@ -1063,7 +1060,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="debug_8h.html#afc3b4552ab1b8deb9d886f2af70a3dd2">debugList</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="structdebug_list.html">debugList</a> *&#160;</td>
           <td class="paramname"><em>dbg_list</em>&#160;</td>
         </tr>
         <tr>
@@ -1074,7 +1071,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Validate the syntax at the current position. This is a wrapper around validate_syntax_opcode () validate_syntax_data () and validate_syntax_string () to allow custom code to be added to the debugList. </p>
+<p>Validate the syntax at the current position. This is a wrapper around validate_syntax_opcode () validate_syntax_data () and validate_syntax_string () to allow custom code to be added to the <a class="el" href="structdebug_list.html">debugList</a>. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">it</td><td>- Iterator over the line to be validated </td></tr>
@@ -1109,7 +1106,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="debug_8h.html#afc3b4552ab1b8deb9d886f2af70a3dd2">debugList</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="structdebug_list.html">debugList</a> *&#160;</td>
           <td class="paramname"><em>dbg_list</em>&#160;</td>
         </tr>
         <tr>
@@ -1154,7 +1151,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="debug_8h.html#afc3b4552ab1b8deb9d886f2af70a3dd2">debugList</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="structdebug_list.html">debugList</a> *&#160;</td>
           <td class="paramname"><em>dbg_list</em>&#160;</td>
         </tr>
         <tr>
@@ -1199,7 +1196,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="debug_8h.html#afc3b4552ab1b8deb9d886f2af70a3dd2">debugList</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="structdebug_list.html">debugList</a> *&#160;</td>
           <td class="paramname"><em>dbg_list</em>&#160;</td>
         </tr>
         <tr>
@@ -1244,7 +1241,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="debug_8h.html#afc3b4552ab1b8deb9d886f2af70a3dd2">debugList</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="structdebug_list.html">debugList</a> *&#160;</td>
           <td class="paramname"><em>dbg_list</em>&#160;</td>
         </tr>
         <tr>
@@ -1283,7 +1280,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="debug_8h.html#afc3b4552ab1b8deb9d886f2af70a3dd2">debugList</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="structdebug_list.html">debugList</a> *&#160;</td>
           <td class="paramname"><em>dbg_list</em>&#160;</td>
         </tr>
         <tr>
@@ -1298,7 +1295,7 @@ Functions</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">it</td><td>- <a class="el" href="struct_line_iterator.html" title="This data sturcture is used to make it easier to parse text lines. It&#39;s member should not be freed as...">LineIterator</a> to use for verification. It is assumed that the parser has already advanced through the line that is being processed. </td></tr>
-    <tr><td class="paramname">dbg_list</td><td>- The debugList to which the command belongs.</td></tr>
+    <tr><td class="paramname">dbg_list</td><td>- The <a class="el" href="structdebug_list.html">debugList</a> to which the command belongs.</td></tr>
   </table>
   </dd>
 </dl>
@@ -1333,7 +1330,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="debug_8h.html#afc3b4552ab1b8deb9d886f2af70a3dd2">debugList</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="structdebug_list.html">debugList</a> *&#160;</td>
           <td class="paramname"><em>dbg_list</em>&#160;</td>
         </tr>
         <tr>

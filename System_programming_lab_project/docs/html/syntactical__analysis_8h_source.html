@@ -75,123 +75,118 @@ $(function() {
 <a href="syntactical__analysis_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef SYNTACTICAL_ANALYSIS_H</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define SYNTACTICAL_ANALYSIS_H</span></div>
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &quot;<a class="code" href="line__iterator_8h.html">line_iterator.h</a>&quot;</span></div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &quot;<a class="code" href="first__pass_8h.html">first_pass.h</a>&quot;</span></div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &quot;<a class="code" href="debug_8h.html">debug.h</a>&quot;</span></div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &quot;<a class="code" href="utils_8h.html">utils.h</a>&quot;</span></div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="comment">/*</span></div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="comment">    This enumeration is used to represent each opcode with a specific numeric constant.</span></div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="comment">*/</span></div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="keyword">typedef</span> <span class="keyword">enum</span></div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>{</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    OP_MOV = 0, OP_CMP, OP_ADD, OP_SUB,</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    OP_NOT, OP_CLR, OP_LEA, OP_INC,</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    OP_DEC, OP_JMP, OP_BNE, OP_RED,</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    OP_PRN, OP_JSR, OP_RTS, OP_STOP, OP_UNKNOWN</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>} Opcodes;</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="keyword">typedef</span> <span class="keyword">enum</span></div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>{</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    DOT_DATA_CODE = 1,</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    DOT_STRING_CODE,</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    DOT_ENTRY_CODE,</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    DOT_EXTERN_CODE</div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>} ENUM_1;</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="keyword">typedef</span> <span class="keyword">enum</span></div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>{</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    EMPTY_SENTENCE = 1,</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    COMMENT_SENTENCE,</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    DIRECTIVE_SENTENCE,</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    INSTRUCTION_SENTENCE</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>} ENUM_2;</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="keyword">typedef</span> <span class="keyword">enum</span></div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>{</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    OP_TYPE_OPCDE, OP_TYPE_LABEL, OP_TYPE_DATA, OP_TYPE_STRING,</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    OP_TYPE_EXTERN, OP_TYPE_ENTRY, OP_TYPE_UNKNOWN</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>} OperationTypes;</div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span> </div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="comment">/* Division of operands to groups with the same syntax. */</span></div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="keyword">typedef</span> <span class="keyword">enum</span></div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>{</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    SG_GROUP_1, SG_GROUP_2, SG_GROUP_3, SG_GROUP_4, SG_GROUP_5,</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    SG_GROUP_6, SG_GROUP_7, SG_GROUP_INVALID</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>} SyntaxGroups;</div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span> </div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span><span class="preprocessor">#define FLAG_NUMBER      1</span></div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span><span class="preprocessor">#define FLAG_LABEL       2</span></div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span><span class="preprocessor">#define FLAG_REGISTER    4</span></div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span><span class="preprocessor">#define FLAG_PARAM_LABEL 8</span></div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span> </div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>Opcodes <a class="code hl_function" href="syntactical__analysis_8h.html#a30984f09ff89091dd74a21dcae15e4c4">get_opcode</a>(<span class="keywordtype">char</span>* str);</div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span> </div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span><a class="code hl_enumeration" href="debug_8h.html#a88edd67ec29d18293fae821840fef3ac">errorCodes</a> <a class="code hl_function" href="syntactical__analysis_8h.html#ab026e29379dc2aca95b5ae14a4045010">check_label_syntax</a>(<span class="keywordtype">char</span>* label);</div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span> </div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span><span class="keywordtype">bool</span> <a class="code hl_function" href="syntactical__analysis_8h.html#a855c8939951fd3d960b071b143af6df5">is_valid_label</a>(<span class="keywordtype">char</span>* label);</div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span> </div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span><span class="keywordtype">bool</span> <a class="code hl_function" href="syntactical__analysis_8h.html#a19430e4a830b52423fd6c01235dc10af">isLabel</a>(<a class="code hl_struct" href="struct_line_iterator.html">LineIterator</a>* line);</div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span> </div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span><span class="keywordtype">bool</span> <a class="code hl_function" href="syntactical__analysis_8h.html#a625e1c4d3afa677d75e4a04f1d6989bd">verify_command_syntax</a>(<a class="code hl_struct" href="struct_line_iterator.html">LineIterator</a>* it, <a class="code hl_typedef" href="debug_8h.html#afc3b4552ab1b8deb9d886f2af70a3dd2">debugList</a>* dbg_list);</div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span> </div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span> </div>
-<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span><span class="keywordtype">bool</span> <a class="code hl_function" href="syntactical__analysis_8h.html#a42eff397b553a32135043fe5d99839d7">cmp_register_name</a>(<span class="keywordtype">char</span>* str);</div>
-<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span> </div>
-<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span><span class="keywordtype">bool</span> <a class="code hl_function" href="syntactical__analysis_8h.html#a7223ccb577ce3a94fb768bda5c65203c">is_label_name</a>(<a class="code hl_struct" href="struct_line_iterator.html">LineIterator</a>* it);</div>
-<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span> </div>
-<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span><span class="keywordtype">void</span> <a class="code hl_function" href="syntactical__analysis_8h.html#a6b4c7eb08fbefdb1bad8755c52666824">trim_symbol_name</a>(<span class="keywordtype">char</span>* sym);</div>
-<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span> </div>
-<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span><span class="keywordtype">bool</span> <a class="code hl_function" href="syntactical__analysis_8h.html#a67016b4fe1cda5bfa436414cae4c3561">validate_syntax</a>(<a class="code hl_struct" href="struct_line_iterator.html">LineIterator</a> it, <a class="code hl_enumeration" href="first__pass_8h.html#a851f3b709b20ebd9c41ee7f658292d09">firstPassStates</a> state, <span class="keywordtype">long</span> line, <a class="code hl_typedef" href="debug_8h.html#afc3b4552ab1b8deb9d886f2af70a3dd2">debugList</a>* dbg_list);</div>
-<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span> </div>
-<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span><span class="keywordtype">bool</span> <a class="code hl_function" href="syntactical__analysis_8h.html#a6393e6140d0121d6d8c81b36cbed42e7">validate_syntax_opcode</a>(<a class="code hl_struct" href="struct_line_iterator.html">LineIterator</a>* it, <span class="keywordtype">long</span> line, <a class="code hl_typedef" href="debug_8h.html#afc3b4552ab1b8deb9d886f2af70a3dd2">debugList</a>* dbg_list);</div>
-<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span> </div>
-<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span><span class="keywordtype">bool</span> <a class="code hl_function" href="syntactical__analysis_8h.html#a048ed699cd7cbc580722534d81db9ce1">verify_int</a>(<a class="code hl_struct" href="struct_line_iterator.html">LineIterator</a>* it, <span class="keywordtype">long</span> line, <span class="keywordtype">char</span>* seps, <a class="code hl_typedef" href="debug_8h.html#afc3b4552ab1b8deb9d886f2af70a3dd2">debugList</a>* dbg_list);</div>
-<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span> </div>
-<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span><span class="keywordtype">bool</span> <a class="code hl_function" href="syntactical__analysis_8h.html#a2749c50f152de3c380145d95a2d05262">match_syntax_group_1</a>(<a class="code hl_struct" href="struct_line_iterator.html">LineIterator</a>* it, <span class="keywordtype">long</span> line, <a class="code hl_typedef" href="debug_8h.html#afc3b4552ab1b8deb9d886f2af70a3dd2">debugList</a>* dbg_list);</div>
-<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span> </div>
-<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span><span class="keywordtype">bool</span> <a class="code hl_function" href="syntactical__analysis_8h.html#ae6a335691cd87b3ba20493300d250b0b">match_syntax_group_2</a>(<a class="code hl_struct" href="struct_line_iterator.html">LineIterator</a>* it, <span class="keywordtype">long</span> line, <a class="code hl_typedef" href="debug_8h.html#afc3b4552ab1b8deb9d886f2af70a3dd2">debugList</a>* dbg_list);</div>
-<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span> </div>
-<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span><span class="keywordtype">bool</span> <a class="code hl_function" href="syntactical__analysis_8h.html#a5f99c4d3e555f02fbe4925924058090b">match_syntax_group_3</a>(<a class="code hl_struct" href="struct_line_iterator.html">LineIterator</a>* it, <span class="keywordtype">long</span> line, <a class="code hl_typedef" href="debug_8h.html#afc3b4552ab1b8deb9d886f2af70a3dd2">debugList</a>* dbg_list);</div>
-<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span> </div>
-<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span><span class="keywordtype">bool</span> <a class="code hl_function" href="syntactical__analysis_8h.html#a552075d73f1458ff9facc99ab2bc5702">match_syntax_group_4</a>(<a class="code hl_struct" href="struct_line_iterator.html">LineIterator</a>* it, <span class="keywordtype">long</span> line, <a class="code hl_typedef" href="debug_8h.html#afc3b4552ab1b8deb9d886f2af70a3dd2">debugList</a>* dbg_list);</div>
-<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span> </div>
-<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span><span class="keywordtype">bool</span> <a class="code hl_function" href="syntactical__analysis_8h.html#a942f35e02bcadf7b1fe58d918dc5a531">match_syntax_group_5</a>(<a class="code hl_struct" href="struct_line_iterator.html">LineIterator</a>* it, <span class="keywordtype">long</span> line, <a class="code hl_typedef" href="debug_8h.html#afc3b4552ab1b8deb9d886f2af70a3dd2">debugList</a>* dbg_list);</div>
-<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span> </div>
-<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span><span class="keywordtype">bool</span> <a class="code hl_function" href="syntactical__analysis_8h.html#aeed608a4c974282c8b9764a73c8c8d69">match_syntax_group_6</a>(<a class="code hl_struct" href="struct_line_iterator.html">LineIterator</a>* it, <span class="keywordtype">long</span> line, <a class="code hl_typedef" href="debug_8h.html#afc3b4552ab1b8deb9d886f2af70a3dd2">debugList</a>* dbg_list);</div>
-<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span> </div>
-<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span><span class="keywordtype">bool</span> <a class="code hl_function" href="syntactical__analysis_8h.html#af96503d0f4370ed18672141247730073">match_syntax_group_7</a>(<a class="code hl_struct" href="struct_line_iterator.html">LineIterator</a>* it, <span class="keywordtype">long</span> line, <a class="code hl_typedef" href="debug_8h.html#afc3b4552ab1b8deb9d886f2af70a3dd2">debugList</a>* dbg_list);</div>
-<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span> </div>
-<div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span><span class="keywordtype">bool</span> <a class="code hl_function" href="syntactical__analysis_8h.html#af10b351dc7df0a2b9a1f1a37bd498f68">validate_syntax_string</a>(<a class="code hl_struct" href="struct_line_iterator.html">LineIterator</a>* it, <span class="keywordtype">long</span> line, <a class="code hl_typedef" href="debug_8h.html#afc3b4552ab1b8deb9d886f2af70a3dd2">debugList</a>* dbg_list);</div>
-<div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span> </div>
-<div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span><span class="keywordtype">bool</span> <a class="code hl_function" href="syntactical__analysis_8h.html#ae39eef4bd1f921befdc8fc687ac6925d">validate_syntax_data</a>(<a class="code hl_struct" href="struct_line_iterator.html">LineIterator</a>* it, <span class="keywordtype">long</span> line, <a class="code hl_typedef" href="debug_8h.html#afc3b4552ab1b8deb9d886f2af70a3dd2">debugList</a>* dbg_list);</div>
-<div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span> </div>
-<div class="line"><a id="l00268" name="l00268"></a><span class="lineno">  268</span><span class="keywordtype">bool</span> <a class="code hl_function" href="syntactical__analysis_8h.html#ab79b4aad9db258a105d397a38f3c177f">validate_syntax_extern_and_entry</a>(<a class="code hl_struct" href="struct_line_iterator.html">LineIterator</a>* it, <span class="keywordtype">long</span> line, <a class="code hl_typedef" href="debug_8h.html#afc3b4552ab1b8deb9d886f2af70a3dd2">debugList</a>* dbg_list);</div>
-<div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span> </div>
-<div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span> </div>
-<div class="line"><a id="l00278" name="l00278"></a><span class="lineno">  278</span><span class="keywordtype">bool</span> <a class="code hl_function" href="syntactical__analysis_8h.html#af4efc5b0016633e04baf672fdb9118c9">is_register_name</a>(<a class="code hl_struct" href="struct_line_iterator.html">LineIterator</a>* it);</div>
-<div class="line"><a id="l00279" name="l00279"></a><span class="lineno">  279</span> </div>
-<div class="line"><a id="l00287" name="l00287"></a><span class="lineno">  287</span><span class="keywordtype">bool</span> <a class="code hl_function" href="syntactical__analysis_8h.html#a6e08d23c864040adad1fd85d198143cc">validate_label_ending</a>(<a class="code hl_struct" href="struct_line_iterator.html">LineIterator</a>* it);</div>
-<div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span> </div>
-<div class="line"><a id="l00299" name="l00299"></a><span class="lineno">  299</span><span class="keywordtype">bool</span> <a class="code hl_function" href="syntactical__analysis_8h.html#a1c81b8f22e1b58261c580dc786012ddb">match_operand</a>(<a class="code hl_struct" href="struct_line_iterator.html">LineIterator</a>* it, <span class="keywordtype">long</span> line, <span class="keywordtype">int</span> <a class="code hl_struct" href="structflags.html">flags</a>, <a class="code hl_typedef" href="debug_8h.html#afc3b4552ab1b8deb9d886f2af70a3dd2">debugList</a>* dbg_list);</div>
-<div class="line"><a id="l00300" name="l00300"></a><span class="lineno">  300</span> </div>
-<div class="line"><a id="l00308" name="l00308"></a><span class="lineno">  308</span>SyntaxGroups <a class="code hl_function" href="syntactical__analysis_8h.html#a97d0de41184fb5f42ad42d38dba096c7">get_syntax_group</a>(<span class="keywordtype">char</span>* name);</div>
-<div class="line"><a id="l00309" name="l00309"></a><span class="lineno">  309</span> </div>
-<div class="line"><a id="l00319" name="l00319"></a><span class="lineno">  319</span><span class="keywordtype">bool</span> <a class="code hl_function" href="syntactical__analysis_8h.html#a07296539973fce1b07e9fed70ab86519">match_pamaetrized_label</a>(<a class="code hl_struct" href="struct_line_iterator.html">LineIterator</a>* it, <span class="keywordtype">long</span> line, <a class="code hl_typedef" href="debug_8h.html#afc3b4552ab1b8deb9d886f2af70a3dd2">debugList</a>* dbg_list);</div>
-<div class="line"><a id="l00320" name="l00320"></a><span class="lineno">  320</span> </div>
-<div class="line"><a id="l00328" name="l00328"></a><span class="lineno">  328</span><span class="keywordtype">bool</span> <a class="code hl_function" href="syntactical__analysis_8h.html#a638b5ef066fdf42bc98c180a4d5f55ce">is_register_name_heuristic</a>(<a class="code hl_struct" href="struct_line_iterator.html">LineIterator</a> it);</div>
-<div class="line"><a id="l00329" name="l00329"></a><span class="lineno">  329</span> </div>
-<div class="line"><a id="l00336" name="l00336"></a><span class="lineno">  336</span><span class="keywordtype">bool</span> <a class="code hl_function" href="syntactical__analysis_8h.html#a31555cb9d1250fb7b12ccb741f23764e">is_register_name_whole</a>(<a class="code hl_struct" href="struct_line_iterator.html">LineIterator</a>* it);</div>
-<div class="line"><a id="l00337" name="l00337"></a><span class="lineno">  337</span> </div>
-<div class="line"><a id="l00346" name="l00346"></a><span class="lineno">  346</span><span class="keywordtype">bool</span> <a class="code hl_function" href="syntactical__analysis_8h.html#ae7738981401d4c8c01a35e5b3c19c254">directive_exists</a>(<a class="code hl_struct" href="struct_line_iterator.html">LineIterator</a>* line);</div>
-<div class="line"><a id="l00347" name="l00347"></a><span class="lineno">  347</span><span class="preprocessor">#endif</span></div>
-<div class="ttc" id="adebug_8h_html"><div class="ttname"><a href="debug_8h.html">debug.h</a></div></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &quot;<a class="code" href="first__pass_8h.html">first_pass.h</a>&quot;</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="comment">/*</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="comment">    This enumeration is used to represent each opcode with a specific numeric constant.</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="comment">*/</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="keyword">typedef</span> <span class="keyword">enum</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>{</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>    OP_MOV = 0, OP_CMP, OP_ADD, OP_SUB,</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>    OP_NOT, OP_CLR, OP_LEA, OP_INC,</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>    OP_DEC, OP_JMP, OP_BNE, OP_RED,</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    OP_PRN, OP_JSR, OP_RTS, OP_STOP, OP_UNKNOWN</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>} Opcodes;</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="keyword">typedef</span> <span class="keyword">enum</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>{</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    DOT_DATA_CODE = 1,</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    DOT_STRING_CODE,</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    DOT_ENTRY_CODE,</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    DOT_EXTERN_CODE</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>} ENUM_1;</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> </div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="keyword">typedef</span> <span class="keyword">enum</span></div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>{</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    EMPTY_SENTENCE = 1,</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    COMMENT_SENTENCE,</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    DIRECTIVE_SENTENCE,</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    INSTRUCTION_SENTENCE</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>} ENUM_2;</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span> </div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="keyword">typedef</span> <span class="keyword">enum</span></div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>{</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    OP_TYPE_OPCDE, OP_TYPE_LABEL, OP_TYPE_DATA, OP_TYPE_STRING,</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    OP_TYPE_EXTERN, OP_TYPE_ENTRY, OP_TYPE_UNKNOWN</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>} OperationTypes;</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span> </div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="comment">/* Division of operands to groups with the same syntax. */</span></div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="keyword">typedef</span> <span class="keyword">enum</span></div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>{</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    SG_GROUP_1, SG_GROUP_2, SG_GROUP_3, SG_GROUP_4, SG_GROUP_5,</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    SG_GROUP_6, SG_GROUP_7, SG_GROUP_INVALID</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>} SyntaxGroups;</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span> </div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="preprocessor">#define FLAG_NUMBER      1</span></div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span><span class="preprocessor">#define FLAG_LABEL       2</span></div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span><span class="preprocessor">#define FLAG_REGISTER    4</span></div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span><span class="preprocessor">#define FLAG_PARAM_LABEL 8</span></div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span> </div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>Opcodes <a class="code hl_function" href="syntactical__analysis_8h.html#a30984f09ff89091dd74a21dcae15e4c4">get_opcode</a>(<span class="keywordtype">char</span>* str);</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span> </div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span><a class="code hl_enumeration" href="debug_8h.html#a88edd67ec29d18293fae821840fef3ac">errorCodes</a> <a class="code hl_function" href="syntactical__analysis_8h.html#ab026e29379dc2aca95b5ae14a4045010">check_label_syntax</a>(<span class="keywordtype">char</span>* label);</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span> </div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span><span class="keywordtype">bool</span> <a class="code hl_function" href="syntactical__analysis_8h.html#a855c8939951fd3d960b071b143af6df5">is_valid_label</a>(<span class="keywordtype">char</span>* label);</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span> </div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span><span class="keywordtype">bool</span> <a class="code hl_function" href="syntactical__analysis_8h.html#a19430e4a830b52423fd6c01235dc10af">isLabel</a>(<a class="code hl_struct" href="struct_line_iterator.html">LineIterator</a>* line);</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span> </div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span><span class="keywordtype">bool</span> <a class="code hl_function" href="syntactical__analysis_8h.html#a625e1c4d3afa677d75e4a04f1d6989bd">verify_command_syntax</a>(<a class="code hl_struct" href="struct_line_iterator.html">LineIterator</a>* it, <a class="code hl_struct" href="structdebug_list.html">debugList</a>* dbg_list);</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span> </div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span> </div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span><span class="keywordtype">bool</span> <a class="code hl_function" href="syntactical__analysis_8h.html#a42eff397b553a32135043fe5d99839d7">cmp_register_name</a>(<span class="keywordtype">char</span>* str);</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span> </div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span><span class="keywordtype">bool</span> <a class="code hl_function" href="syntactical__analysis_8h.html#a7223ccb577ce3a94fb768bda5c65203c">is_label_name</a>(<a class="code hl_struct" href="struct_line_iterator.html">LineIterator</a>* it);</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span> </div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span><span class="keywordtype">void</span> <a class="code hl_function" href="syntactical__analysis_8h.html#a6b4c7eb08fbefdb1bad8755c52666824">trim_symbol_name</a>(<span class="keywordtype">char</span>* sym);</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span> </div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span><span class="keywordtype">bool</span> <a class="code hl_function" href="syntactical__analysis_8h.html#a67016b4fe1cda5bfa436414cae4c3561">validate_syntax</a>(<a class="code hl_struct" href="struct_line_iterator.html">LineIterator</a> it, <a class="code hl_enumeration" href="first__pass_8h.html#a851f3b709b20ebd9c41ee7f658292d09">firstPassStates</a> state, <span class="keywordtype">long</span> line, <a class="code hl_struct" href="structdebug_list.html">debugList</a>* dbg_list);</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span> </div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span><span class="keywordtype">bool</span> <a class="code hl_function" href="syntactical__analysis_8h.html#a6393e6140d0121d6d8c81b36cbed42e7">validate_syntax_opcode</a>(<a class="code hl_struct" href="struct_line_iterator.html">LineIterator</a>* it, <span class="keywordtype">long</span> line, <a class="code hl_struct" href="structdebug_list.html">debugList</a>* dbg_list);</div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span> </div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span><span class="keywordtype">bool</span> <a class="code hl_function" href="syntactical__analysis_8h.html#a048ed699cd7cbc580722534d81db9ce1">verify_int</a>(<a class="code hl_struct" href="struct_line_iterator.html">LineIterator</a>* it, <span class="keywordtype">long</span> line, <span class="keywordtype">char</span>* seps, <a class="code hl_struct" href="structdebug_list.html">debugList</a>* dbg_list);</div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span> </div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span><span class="keywordtype">bool</span> <a class="code hl_function" href="syntactical__analysis_8h.html#a2749c50f152de3c380145d95a2d05262">match_syntax_group_1</a>(<a class="code hl_struct" href="struct_line_iterator.html">LineIterator</a>* it, <span class="keywordtype">long</span> line, <a class="code hl_struct" href="structdebug_list.html">debugList</a>* dbg_list);</div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span> </div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span><span class="keywordtype">bool</span> <a class="code hl_function" href="syntactical__analysis_8h.html#ae6a335691cd87b3ba20493300d250b0b">match_syntax_group_2</a>(<a class="code hl_struct" href="struct_line_iterator.html">LineIterator</a>* it, <span class="keywordtype">long</span> line, <a class="code hl_struct" href="structdebug_list.html">debugList</a>* dbg_list);</div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span> </div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span><span class="keywordtype">bool</span> <a class="code hl_function" href="syntactical__analysis_8h.html#a5f99c4d3e555f02fbe4925924058090b">match_syntax_group_3</a>(<a class="code hl_struct" href="struct_line_iterator.html">LineIterator</a>* it, <span class="keywordtype">long</span> line, <a class="code hl_struct" href="structdebug_list.html">debugList</a>* dbg_list);</div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span> </div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span><span class="keywordtype">bool</span> <a class="code hl_function" href="syntactical__analysis_8h.html#a552075d73f1458ff9facc99ab2bc5702">match_syntax_group_4</a>(<a class="code hl_struct" href="struct_line_iterator.html">LineIterator</a>* it, <span class="keywordtype">long</span> line, <a class="code hl_struct" href="structdebug_list.html">debugList</a>* dbg_list);</div>
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span> </div>
+<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span><span class="keywordtype">bool</span> <a class="code hl_function" href="syntactical__analysis_8h.html#a942f35e02bcadf7b1fe58d918dc5a531">match_syntax_group_5</a>(<a class="code hl_struct" href="struct_line_iterator.html">LineIterator</a>* it, <span class="keywordtype">long</span> line, <a class="code hl_struct" href="structdebug_list.html">debugList</a>* dbg_list);</div>
+<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span> </div>
+<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span><span class="keywordtype">bool</span> <a class="code hl_function" href="syntactical__analysis_8h.html#aeed608a4c974282c8b9764a73c8c8d69">match_syntax_group_6</a>(<a class="code hl_struct" href="struct_line_iterator.html">LineIterator</a>* it, <span class="keywordtype">long</span> line, <a class="code hl_struct" href="structdebug_list.html">debugList</a>* dbg_list);</div>
+<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span> </div>
+<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span><span class="keywordtype">bool</span> <a class="code hl_function" href="syntactical__analysis_8h.html#af96503d0f4370ed18672141247730073">match_syntax_group_7</a>(<a class="code hl_struct" href="struct_line_iterator.html">LineIterator</a>* it, <span class="keywordtype">long</span> line, <a class="code hl_struct" href="structdebug_list.html">debugList</a>* dbg_list);</div>
+<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span> </div>
+<div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span><span class="keywordtype">bool</span> <a class="code hl_function" href="syntactical__analysis_8h.html#af10b351dc7df0a2b9a1f1a37bd498f68">validate_syntax_string</a>(<a class="code hl_struct" href="struct_line_iterator.html">LineIterator</a>* it, <span class="keywordtype">long</span> line, <a class="code hl_struct" href="structdebug_list.html">debugList</a>* dbg_list);</div>
+<div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span> </div>
+<div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span><span class="keywordtype">bool</span> <a class="code hl_function" href="syntactical__analysis_8h.html#ae39eef4bd1f921befdc8fc687ac6925d">validate_syntax_data</a>(<a class="code hl_struct" href="struct_line_iterator.html">LineIterator</a>* it, <span class="keywordtype">long</span> line, <a class="code hl_struct" href="structdebug_list.html">debugList</a>* dbg_list);</div>
+<div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span> </div>
+<div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span><span class="keywordtype">bool</span> <a class="code hl_function" href="syntactical__analysis_8h.html#ab79b4aad9db258a105d397a38f3c177f">validate_syntax_extern_and_entry</a>(<a class="code hl_struct" href="struct_line_iterator.html">LineIterator</a>* it, <span class="keywordtype">long</span> line, <a class="code hl_struct" href="structdebug_list.html">debugList</a>* dbg_list);</div>
+<div class="line"><a id="l00266" name="l00266"></a><span class="lineno">  266</span> </div>
+<div class="line"><a id="l00267" name="l00267"></a><span class="lineno">  267</span> </div>
+<div class="line"><a id="l00275" name="l00275"></a><span class="lineno">  275</span><span class="keywordtype">bool</span> <a class="code hl_function" href="syntactical__analysis_8h.html#af4efc5b0016633e04baf672fdb9118c9">is_register_name</a>(<a class="code hl_struct" href="struct_line_iterator.html">LineIterator</a>* it);</div>
+<div class="line"><a id="l00276" name="l00276"></a><span class="lineno">  276</span> </div>
+<div class="line"><a id="l00284" name="l00284"></a><span class="lineno">  284</span><span class="keywordtype">bool</span> <a class="code hl_function" href="syntactical__analysis_8h.html#a6e08d23c864040adad1fd85d198143cc">validate_label_ending</a>(<a class="code hl_struct" href="struct_line_iterator.html">LineIterator</a>* it);</div>
+<div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span> </div>
+<div class="line"><a id="l00296" name="l00296"></a><span class="lineno">  296</span><span class="keywordtype">bool</span> <a class="code hl_function" href="syntactical__analysis_8h.html#a1c81b8f22e1b58261c580dc786012ddb">match_operand</a>(<a class="code hl_struct" href="struct_line_iterator.html">LineIterator</a>* it, <span class="keywordtype">long</span> line, <span class="keywordtype">int</span> <a class="code hl_struct" href="structflags.html">flags</a>, <a class="code hl_struct" href="structdebug_list.html">debugList</a>* dbg_list);</div>
+<div class="line"><a id="l00297" name="l00297"></a><span class="lineno">  297</span> </div>
+<div class="line"><a id="l00305" name="l00305"></a><span class="lineno">  305</span>SyntaxGroups <a class="code hl_function" href="syntactical__analysis_8h.html#a97d0de41184fb5f42ad42d38dba096c7">get_syntax_group</a>(<span class="keywordtype">char</span>* name);</div>
+<div class="line"><a id="l00306" name="l00306"></a><span class="lineno">  306</span> </div>
+<div class="line"><a id="l00316" name="l00316"></a><span class="lineno">  316</span><span class="keywordtype">bool</span> <a class="code hl_function" href="syntactical__analysis_8h.html#a07296539973fce1b07e9fed70ab86519">match_pamaetrized_label</a>(<a class="code hl_struct" href="struct_line_iterator.html">LineIterator</a>* it, <span class="keywordtype">long</span> line, <a class="code hl_struct" href="structdebug_list.html">debugList</a>* dbg_list);</div>
+<div class="line"><a id="l00317" name="l00317"></a><span class="lineno">  317</span> </div>
+<div class="line"><a id="l00325" name="l00325"></a><span class="lineno">  325</span><span class="keywordtype">bool</span> <a class="code hl_function" href="syntactical__analysis_8h.html#a638b5ef066fdf42bc98c180a4d5f55ce">is_register_name_heuristic</a>(<a class="code hl_struct" href="struct_line_iterator.html">LineIterator</a> it);</div>
+<div class="line"><a id="l00326" name="l00326"></a><span class="lineno">  326</span> </div>
+<div class="line"><a id="l00333" name="l00333"></a><span class="lineno">  333</span><span class="keywordtype">bool</span> <a class="code hl_function" href="syntactical__analysis_8h.html#a31555cb9d1250fb7b12ccb741f23764e">is_register_name_whole</a>(<a class="code hl_struct" href="struct_line_iterator.html">LineIterator</a>* it);</div>
+<div class="line"><a id="l00334" name="l00334"></a><span class="lineno">  334</span> </div>
+<div class="line"><a id="l00343" name="l00343"></a><span class="lineno">  343</span><span class="keywordtype">bool</span> <a class="code hl_function" href="syntactical__analysis_8h.html#ae7738981401d4c8c01a35e5b3c19c254">directive_exists</a>(<a class="code hl_struct" href="struct_line_iterator.html">LineIterator</a>* line);</div>
+<div class="line"><a id="l00344" name="l00344"></a><span class="lineno">  344</span><span class="preprocessor">#endif</span></div>
 <div class="ttc" id="adebug_8h_html_a88edd67ec29d18293fae821840fef3ac"><div class="ttname"><a href="debug_8h.html#a88edd67ec29d18293fae821840fef3ac">errorCodes</a></div><div class="ttdeci">errorCodes</div><div class="ttdoc">Error codes used in debug_map_token_to_err()</div><div class="ttdef"><b>Definition:</b> debug.h:14</div></div>
-<div class="ttc" id="adebug_8h_html_afc3b4552ab1b8deb9d886f2af70a3dd2"><div class="ttname"><a href="debug_8h.html#afc3b4552ab1b8deb9d886f2af70a3dd2">debugList</a></div><div class="ttdeci">struct debugList debugList</div><div class="ttdoc">Represents a linked list of debugging information for the assembly code, the full declaration is in t...</div><div class="ttdef"><b>Definition:</b> debug.h:39</div></div>
 <div class="ttc" id="afirst__pass_8h_html"><div class="ttname"><a href="first__pass_8h.html">first_pass.h</a></div></div>
-<div class="ttc" id="afirst__pass_8h_html_a851f3b709b20ebd9c41ee7f658292d09"><div class="ttname"><a href="first__pass_8h.html#a851f3b709b20ebd9c41ee7f658292d09">firstPassStates</a></div><div class="ttdeci">firstPassStates</div><div class="ttdoc">An enum for the different states of the first pass algorithm.</div><div class="ttdef"><b>Definition:</b> first_pass.h:20</div></div>
-<div class="ttc" id="aline__iterator_8h_html"><div class="ttname"><a href="line__iterator_8h.html">line_iterator.h</a></div></div>
+<div class="ttc" id="afirst__pass_8h_html_a851f3b709b20ebd9c41ee7f658292d09"><div class="ttname"><a href="first__pass_8h.html#a851f3b709b20ebd9c41ee7f658292d09">firstPassStates</a></div><div class="ttdeci">firstPassStates</div><div class="ttdoc">An enum for the different states of the first pass algorithm.</div><div class="ttdef"><b>Definition:</b> first_pass.h:19</div></div>
 <div class="ttc" id="astruct_line_iterator_html"><div class="ttname"><a href="struct_line_iterator.html">LineIterator</a></div><div class="ttdoc">This data sturcture is used to make it easier to parse text lines. It's member should not be freed as...</div><div class="ttdef"><b>Definition:</b> line_iterator.h:22</div></div>
+<div class="ttc" id="astructdebug_list_html"><div class="ttname"><a href="structdebug_list.html">debugList</a></div><div class="ttdef"><b>Definition:</b> debug.c:34</div></div>
 <div class="ttc" id="astructflags_html"><div class="ttname"><a href="structflags.html">flags</a></div><div class="ttdef"><b>Definition:</b> second_pass.c:14</div></div>
 <div class="ttc" id="asyntactical__analysis_8h_html_a048ed699cd7cbc580722534d81db9ce1"><div class="ttname"><a href="syntactical__analysis_8h.html#a048ed699cd7cbc580722534d81db9ce1">verify_int</a></div><div class="ttdeci">bool verify_int(LineIterator *it, long line, char *seps, debugList *dbg_list)</div><div class="ttdoc">Verifies that the next character is a valid integer. This is done by examining the characters that be...</div><div class="ttdef"><b>Definition:</b> syntactical_analysis.c:668</div></div>
 <div class="ttc" id="asyntactical__analysis_8h_html_a07296539973fce1b07e9fed70ab86519"><div class="ttname"><a href="syntactical__analysis_8h.html#a07296539973fce1b07e9fed70ab86519">match_pamaetrized_label</a></div><div class="ttdeci">bool match_pamaetrized_label(LineIterator *it, long line, debugList *dbg_list)</div><div class="ttdoc">Matches pamaetrized labels. This is a bit tricky because we don't know the number of arguments to a l...</div><div class="ttdef"><b>Definition:</b> syntactical_analysis.c:532</div></div>
@@ -222,7 +217,6 @@ $(function() {
 <div class="ttc" id="asyntactical__analysis_8h_html_af10b351dc7df0a2b9a1f1a37bd498f68"><div class="ttname"><a href="syntactical__analysis_8h.html#af10b351dc7df0a2b9a1f1a37bd498f68">validate_syntax_string</a></div><div class="ttdeci">bool validate_syntax_string(LineIterator *it, long line, debugList *dbg_list)</div><div class="ttdoc">Validates a syntax string.</div><div class="ttdef"><b>Definition:</b> syntactical_analysis.c:121</div></div>
 <div class="ttc" id="asyntactical__analysis_8h_html_af4efc5b0016633e04baf672fdb9118c9"><div class="ttname"><a href="syntactical__analysis_8h.html#af4efc5b0016633e04baf672fdb9118c9">is_register_name</a></div><div class="ttdeci">bool is_register_name(LineIterator *it)</div><div class="ttdoc">Check if the next character is a register name.</div><div class="ttdef"><b>Definition:</b> syntactical_analysis.c:648</div></div>
 <div class="ttc" id="asyntactical__analysis_8h_html_af96503d0f4370ed18672141247730073"><div class="ttname"><a href="syntactical__analysis_8h.html#af96503d0f4370ed18672141247730073">match_syntax_group_7</a></div><div class="ttdeci">bool match_syntax_group_7(LineIterator *it, long line, debugList *dbg_list)</div><div class="ttdoc">Matches a syntax group 7. In this case we are interested in the name of a register or a label.</div><div class="ttdef"><b>Definition:</b> syntactical_analysis.c:449</div></div>
-<div class="ttc" id="autils_8h_html"><div class="ttname"><a href="utils_8h.html">utils.h</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

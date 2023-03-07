@@ -19,7 +19,7 @@ var searchData=
   ['encodingtypes_16',['EncodingTypes',['../memory_8h.html#a0b9039f87c8a2980c4a6ab14b511760a',1,'memory.h']]],
   ['entry_5fexists_17',['entry_exists',['../second__pass_8h.html#a7f99caea774341d00d92fd11a029ee63',1,'second_pass.c']]],
   ['errorcodes_18',['errorCodes',['../debug_8h.html#a88edd67ec29d18293fae821840fef3ac',1,'debug.h']]],
-  ['errorcontext_19',['errorContext',['../debug_8h.html#a2d74adaccaffe1147d50e614c82fa05f',1,'debug.h']]],
+  ['errorcontext_19',['errorContext',['../structerror_context.html',1,'errorContext'],['../debug_8h.html#a2d74adaccaffe1147d50e614c82fa05f',1,'errorContext():&#160;debug.h']]],
   ['exec_5fimpl_20',['exec_impl',['../driver_8h.html#a34cfcf298ac86bb94cdd2cf28075bd74',1,'driver.c']]],
   ['execute_5fline_21',['execute_line',['../second__pass_8h.html#a36c8038b17843fb6d82d261367f7650b',1,'second_pass.c']]],
   ['expand_5fmacro_5fto_5ffile_22',['expand_macro_to_file',['../pre__assembler_8h.html#aba92169e5bd5232177a7c0a5dfc205bb',1,'pre_assembler.c']]],

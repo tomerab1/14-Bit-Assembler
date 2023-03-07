@@ -1,16 +1,16 @@
 <map id="second_pass.h" name="second_pass.h">
-<area shape="rect" id="node1" title=" " alt="" coords="287,5,398,31"/>
-<area shape="rect" id="node2" href="$syntactical__analysis_8h.html" title=" " alt="" coords="195,152,346,177"/>
-<area shape="rect" id="node3" href="$line__iterator_8h.html" title=" " alt="" coords="265,299,365,324"/>
-<area shape="rect" id="node4" href="$utils_8h.html" title=" " alt="" coords="286,372,343,397"/>
-<area shape="rect" id="node8" href="$constants_8h.html" title=" " alt="" coords="531,445,621,471"/>
-<area shape="rect" id="node10" href="$symbol__table_8h.html" title=" " alt="" coords="130,299,241,324"/>
-<area shape="rect" id="node11" href="$memory_8h.html" title=" " alt="" coords="536,299,616,324"/>
-<area shape="rect" id="node12" href="$debug_8h.html" title=" " alt="" coords="441,299,509,324"/>
-<area shape="rect" id="node14" href="$encoding_8h.html" title=" " alt="" coords="341,79,427,104"/>
-<area shape="rect" id="node9" href="$first__pass_8h.html" title=" " alt="" coords="297,225,386,251"/>
-<area shape="rect" id="node5" title=" " alt="" coords="372,445,433,471"/>
-<area shape="rect" id="node6" title=" " alt="" coords="193,445,257,471"/>
-<area shape="rect" id="node7" title=" " alt="" coords="282,445,347,471"/>
-<area shape="rect" id="node13" title=" " alt="" coords="441,372,509,397"/>
+<area shape="rect" id="node1" title=" " alt="" coords="188,5,299,31"/>
+<area shape="rect" id="node2" href="$encoding_8h.html" title=" " alt="" coords="201,79,286,104"/>
+<area shape="rect" id="node3" href="$syntactical__analysis_8h.html" title=" " alt="" coords="168,152,319,177"/>
+<area shape="rect" id="node4" href="$first__pass_8h.html" title=" " alt="" coords="199,225,288,251"/>
+<area shape="rect" id="node5" href="$symbol__table_8h.html" title=" " alt="" coords="5,299,116,324"/>
+<area shape="rect" id="node11" href="$line__iterator_8h.html" title=" " alt="" coords="140,299,240,324"/>
+<area shape="rect" id="node12" href="$memory_8h.html" title=" " alt="" coords="337,372,417,397"/>
+<area shape="rect" id="node13" href="$debug_8h.html" title=" " alt="" coords="264,299,332,324"/>
+<area shape="rect" id="node6" href="$utils_8h.html" title=" " alt="" coords="161,372,219,397"/>
+<area shape="rect" id="node7" title=" " alt="" coords="246,445,307,471"/>
+<area shape="rect" id="node8" title=" " alt="" coords="67,445,131,471"/>
+<area shape="rect" id="node9" title=" " alt="" coords="156,445,221,471"/>
+<area shape="rect" id="node10" href="$constants_8h.html" title=" " alt="" coords="331,445,422,471"/>
+<area shape="rect" id="node14" title=" " alt="" coords="244,372,312,397"/>
 </map>

@@ -98,15 +98,15 @@ Include dependency graph for debug.h:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="typedef-members" name="typedef-members"></a>
 Typedefs</h2></td></tr>
 <tr class="memitem:a2d74adaccaffe1147d50e614c82fa05f"><td class="memItemLeft" align="right" valign="top"><a id="a2d74adaccaffe1147d50e614c82fa05f" name="a2d74adaccaffe1147d50e614c82fa05f"></a>
-typedef struct <a class="el" href="debug_8h.html#a2d74adaccaffe1147d50e614c82fa05f">errorContext</a>&#160;</td><td class="memItemRight" valign="bottom"><b>errorContext</b></td></tr>
+typedef struct <a class="el" href="structerror_context.html">errorContext</a>&#160;</td><td class="memItemRight" valign="bottom"><b>errorContext</b></td></tr>
 <tr class="memdesc:a2d74adaccaffe1147d50e614c82fa05f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents a context for an error in the assembly code, the full declaration is in the appropriate '.c' file. <br /></td></tr>
 <tr class="separator:a2d74adaccaffe1147d50e614c82fa05f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8169c5c102e61cddcaa3545128d8a61d"><td class="memItemLeft" align="right" valign="top"><a id="a8169c5c102e61cddcaa3545128d8a61d" name="a8169c5c102e61cddcaa3545128d8a61d"></a>
-typedef struct <a class="el" href="debug_8h.html#a8169c5c102e61cddcaa3545128d8a61d">debugNode</a>&#160;</td><td class="memItemRight" valign="bottom"><b>debugNode</b></td></tr>
+typedef struct <a class="el" href="structdebug_node.html">debugNode</a>&#160;</td><td class="memItemRight" valign="bottom"><b>debugNode</b></td></tr>
 <tr class="memdesc:a8169c5c102e61cddcaa3545128d8a61d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents a node in a linked list of debugging information, the full declaration is in the appropriate '.c' file. <br /></td></tr>
 <tr class="separator:a8169c5c102e61cddcaa3545128d8a61d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afc3b4552ab1b8deb9d886f2af70a3dd2"><td class="memItemLeft" align="right" valign="top"><a id="afc3b4552ab1b8deb9d886f2af70a3dd2" name="afc3b4552ab1b8deb9d886f2af70a3dd2"></a>
-typedef struct <a class="el" href="debug_8h.html#afc3b4552ab1b8deb9d886f2af70a3dd2">debugList</a>&#160;</td><td class="memItemRight" valign="bottom"><b>debugList</b></td></tr>
+typedef struct <a class="el" href="structdebug_list.html">debugList</a>&#160;</td><td class="memItemRight" valign="bottom"><b>debugList</b></td></tr>
 <tr class="memdesc:afc3b4552ab1b8deb9d886f2af70a3dd2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents a linked list of debugging information for the assembly code, the full declaration is in the appropriate '.c' file. <br /></td></tr>
 <tr class="separator:afc3b4552ab1b8deb9d886f2af70a3dd2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -161,25 +161,25 @@ Enumerations</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a0f6d6fff6b6702b16bed17185e1ae496"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="debug_8h.html#a0f6d6fff6b6702b16bed17185e1ae496">debug_list_register_node</a> (<a class="el" href="debug_8h.html#afc3b4552ab1b8deb9d886f2af70a3dd2">debugList</a> *list, <a class="el" href="debug_8h.html#a8169c5c102e61cddcaa3545128d8a61d">debugNode</a> *new_node)</td></tr>
+<tr class="memitem:a0f6d6fff6b6702b16bed17185e1ae496"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="debug_8h.html#a0f6d6fff6b6702b16bed17185e1ae496">debug_list_register_node</a> (<a class="el" href="structdebug_list.html">debugList</a> *list, <a class="el" href="structdebug_node.html">debugNode</a> *new_node)</td></tr>
 <tr class="separator:a0f6d6fff6b6702b16bed17185e1ae496"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afcccf5c3264d88f8fb617cd31ff79874"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="debug_8h.html#afcccf5c3264d88f8fb617cd31ff79874">debug_list_is_empty</a> (<a class="el" href="debug_8h.html#afc3b4552ab1b8deb9d886f2af70a3dd2">debugList</a> *list)</td></tr>
+<tr class="memitem:afcccf5c3264d88f8fb617cd31ff79874"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="debug_8h.html#afcccf5c3264d88f8fb617cd31ff79874">debug_list_is_empty</a> (<a class="el" href="structdebug_list.html">debugList</a> *list)</td></tr>
 <tr class="separator:afcccf5c3264d88f8fb617cd31ff79874"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9083c7d418de19fa4a8eda030cfec609"><td class="memItemLeft" align="right" valign="top"><a class="el" href="debug_8h.html#afc3b4552ab1b8deb9d886f2af70a3dd2">debugList</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="debug_8h.html#a9083c7d418de19fa4a8eda030cfec609">debug_list_new_list</a> ()</td></tr>
+<tr class="memitem:a9083c7d418de19fa4a8eda030cfec609"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structdebug_list.html">debugList</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="debug_8h.html#a9083c7d418de19fa4a8eda030cfec609">debug_list_new_list</a> ()</td></tr>
 <tr class="separator:a9083c7d418de19fa4a8eda030cfec609"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae8a834723f2b0da97ec682e732a8c667"><td class="memItemLeft" align="right" valign="top"><a class="el" href="debug_8h.html#a8169c5c102e61cddcaa3545128d8a61d">debugNode</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="debug_8h.html#ae8a834723f2b0da97ec682e732a8c667">debug_list_new_node</a> (char *start, char *err, long line, <a class="el" href="debug_8h.html#a88edd67ec29d18293fae821840fef3ac">errorCodes</a> err_code)</td></tr>
+<tr class="memitem:ae8a834723f2b0da97ec682e732a8c667"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structdebug_node.html">debugNode</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="debug_8h.html#ae8a834723f2b0da97ec682e732a8c667">debug_list_new_node</a> (char *start, char *err, long line, <a class="el" href="debug_8h.html#a88edd67ec29d18293fae821840fef3ac">errorCodes</a> err_code)</td></tr>
 <tr class="separator:ae8a834723f2b0da97ec682e732a8c667"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa9c2f6da6fb0e580a6a822fc4ab93d04"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="debug_8h.html#aa9c2f6da6fb0e580a6a822fc4ab93d04">debug_list_destroy_node</a> (<a class="el" href="debug_8h.html#a8169c5c102e61cddcaa3545128d8a61d">debugNode</a> *node)</td></tr>
+<tr class="memitem:aa9c2f6da6fb0e580a6a822fc4ab93d04"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="debug_8h.html#aa9c2f6da6fb0e580a6a822fc4ab93d04">debug_list_destroy_node</a> (<a class="el" href="structdebug_node.html">debugNode</a> *node)</td></tr>
 <tr class="separator:aa9c2f6da6fb0e580a6a822fc4ab93d04"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab549b9b54d931a5e324856b8a0ec859b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="debug_8h.html#ab549b9b54d931a5e324856b8a0ec859b">debug_list_destroy</a> (<a class="el" href="debug_8h.html#afc3b4552ab1b8deb9d886f2af70a3dd2">debugList</a> **list)</td></tr>
-<tr class="memdesc:ab549b9b54d931a5e324856b8a0ec859b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroys a debugList and all its nodes.  <a href="debug_8h.html#ab549b9b54d931a5e324856b8a0ec859b">More...</a><br /></td></tr>
+<tr class="memitem:ab549b9b54d931a5e324856b8a0ec859b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="debug_8h.html#ab549b9b54d931a5e324856b8a0ec859b">debug_list_destroy</a> (<a class="el" href="structdebug_list.html">debugList</a> **list)</td></tr>
+<tr class="memdesc:ab549b9b54d931a5e324856b8a0ec859b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroys a <a class="el" href="structdebug_list.html">debugList</a> and all its nodes.  <a href="debug_8h.html#ab549b9b54d931a5e324856b8a0ec859b">More...</a><br /></td></tr>
 <tr class="separator:ab549b9b54d931a5e324856b8a0ec859b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aff845343a5b3c908da86478ac7a14343"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="debug_8h.html#aff845343a5b3c908da86478ac7a14343">debug_list_pretty_print</a> (<a class="el" href="debug_8h.html#afc3b4552ab1b8deb9d886f2af70a3dd2">debugList</a> *list)</td></tr>
+<tr class="memitem:aff845343a5b3c908da86478ac7a14343"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="debug_8h.html#aff845343a5b3c908da86478ac7a14343">debug_list_pretty_print</a> (<a class="el" href="structdebug_list.html">debugList</a> *list)</td></tr>
 <tr class="separator:aff845343a5b3c908da86478ac7a14343"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0efb3e81924b5d40b07d927d929fceee"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="debug_8h.html#a0efb3e81924b5d40b07d927d929fceee">debug_map_token_to_err</a> (<a class="el" href="debug_8h.html#a88edd67ec29d18293fae821840fef3ac">errorCodes</a> code)</td></tr>
 <tr class="memdesc:a0efb3e81924b5d40b07d927d929fceee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Map a token code to a human readable error. This is used to display errors in debug output.  <a href="debug_8h.html#a0efb3e81924b5d40b07d927d929fceee">More...</a><br /></td></tr>
 <tr class="separator:a0efb3e81924b5d40b07d927d929fceee"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3a146c90c856701f4e95ec9a6b893469"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="debug_8h.html#a3a146c90c856701f4e95ec9a6b893469">debug_print_error</a> (<a class="el" href="debug_8h.html#a2d74adaccaffe1147d50e614c82fa05f">errorContext</a> *err_ctx, char err_buff[])</td></tr>
+<tr class="memitem:a3a146c90c856701f4e95ec9a6b893469"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="debug_8h.html#a3a146c90c856701f4e95ec9a6b893469">debug_print_error</a> (<a class="el" href="structerror_context.html">errorContext</a> *err_ctx, char err_buff[])</td></tr>
 <tr class="separator:a3a146c90c856701f4e95ec9a6b893469"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
@@ -192,30 +192,21 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname">void debug_list_destroy </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="debug_8h.html#afc3b4552ab1b8deb9d886f2af70a3dd2">debugList</a> **&#160;</td>
+          <td class="paramtype"><a class="el" href="structdebug_list.html">debugList</a> **&#160;</td>
           <td class="paramname"><em>list</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Destroys a debugList and all its nodes. </p>
+<p>Destroys a <a class="el" href="structdebug_list.html">debugList</a> and all its nodes. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">list</td><td>A pointer to the debugList to be destroyed. This function frees the memory allocated for a debugList and all its nodes. It first iterates over the linked list of debugNodes, and for each node, it calls debug_list_destroy_node to free any additional memory that was allocated for it, and then it frees the node itself. After all nodes are freed, it frees the memory allocated for the debugList itself. </td></tr>
+    <tr><td class="paramname">list</td><td>A pointer to the <a class="el" href="structdebug_list.html">debugList</a> to be destroyed. This function frees the memory allocated for a <a class="el" href="structdebug_list.html">debugList</a> and all its nodes. It first iterates over the linked list of debugNodes, and for each node, it calls debug_list_destroy_node to free any additional memory that was allocated for it, and then it frees the node itself. After all nodes are freed, it frees the memory allocated for the <a class="el" href="structdebug_list.html">debugList</a> itself. </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="debug_8h.html#aa9c2f6da6fb0e580a6a822fc4ab93d04">debug_list_destroy_node()</a> </dd></dl>
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="debug_8h_ab549b9b54d931a5e324856b8a0ec859b_icgraph.png" border="0" usemap="#adebug_8h_ab549b9b54d931a5e324856b8a0ec859b_icgraph" alt=""/></div>
-<map name="adebug_8h_ab549b9b54d931a5e324856b8a0ec859b_icgraph" id="adebug_8h_ab549b9b54d931a5e324856b8a0ec859b_icgraph">
-<area shape="rect" title="Destroys a debugList and all its nodes." alt="" coords="117,5,248,31"/>
-<area shape="rect" href="driver_8c.html#af3e60266c17733333c492f296058f896" title="Called when the module is unloaded. Destroys all memory allocated by the module. This is the last fun..." alt="" coords="5,5,69,31"/>
-</map>
-</div>
 
 </div>
 </div>
@@ -228,7 +219,7 @@ Here is the caller graph for this function:</div>
         <tr>
           <td class="memname">void debug_list_destroy_node </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="debug_8h.html#a8169c5c102e61cddcaa3545128d8a61d">debugNode</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="structdebug_node.html">debugNode</a> *&#160;</td>
           <td class="paramname"><em>node</em></td><td>)</td>
           <td></td>
         </tr>
@@ -252,7 +243,7 @@ Here is the caller graph for this function:</div>
         <tr>
           <td class="memname">bool debug_list_is_empty </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="debug_8h.html#afc3b4552ab1b8deb9d886f2af70a3dd2">debugList</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="structdebug_list.html">debugList</a> *&#160;</td>
           <td class="paramname"><em>list</em></td><td>)</td>
           <td></td>
         </tr>
@@ -275,7 +266,7 @@ Here is the caller graph for this function:</div>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="debug_8h.html#afc3b4552ab1b8deb9d886f2af70a3dd2">debugList</a> * debug_list_new_list </td>
+          <td class="memname"><a class="el" href="structdebug_list.html">debugList</a> * debug_list_new_list </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -283,15 +274,6 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 <p >Create a new list. The caller must free the returned list with debug_list_free (). </p><dl class="section return"><dt>Returns</dt><dd>A pointer to the new list. This should be freed by the caller after use of it as a pointer </dd></dl>
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="debug_8h_a9083c7d418de19fa4a8eda030cfec609_icgraph.png" border="0" usemap="#adebug_8h_a9083c7d418de19fa4a8eda030cfec609_icgraph" alt=""/></div>
-<map name="adebug_8h_a9083c7d418de19fa4a8eda030cfec609_icgraph" id="adebug_8h_a9083c7d418de19fa4a8eda030cfec609_icgraph">
-<area shape="rect" title=" " alt="" coords="164,5,299,31"/>
-<area shape="rect" href="driver_8c.html#ae0747e80fcf537740f8c16df476df560" title="Called when the driver is initialized. This is where we initialize the data structures that are used ..." alt="" coords="5,5,116,31"/>
-</map>
-</div>
 
 </div>
 </div>
@@ -302,7 +284,7 @@ Here is the caller graph for this function:</div>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="debug_8h.html#a8169c5c102e61cddcaa3545128d8a61d">debugNode</a> * debug_list_new_node </td>
+          <td class="memname"><a class="el" href="structdebug_node.html">debugNode</a> * debug_list_new_node </td>
           <td>(</td>
           <td class="paramtype">char *&#160;</td>
           <td class="paramname"><em>start</em>, </td>
@@ -332,7 +314,7 @@ Here is the caller graph for this function:</div>
         </tr>
       </table>
 </div><div class="memdoc">
-<p >Create a new node and add it to the list. This is used when we want to build a list of debugNode's that are going to be printed to the console </p><dl class="params"><dt>Parameters</dt><dd>
+<p >Create a new node and add it to the list. This is used when we want to build a list of <a class="el" href="structdebug_node.html">debugNode</a>'s that are going to be printed to the console </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">start</td><td></td></tr>
     <tr><td class="paramname">err</td><td></td></tr>
@@ -342,35 +324,6 @@ Here is the caller graph for this function:</div>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>pointer to the newly created node or NULL if there was insufficient memory to create it ( in which case the caller should free it </dd></dl>
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="debug_8h_ae8a834723f2b0da97ec682e732a8c667_icgraph.png" border="0" usemap="#adebug_8h_ae8a834723f2b0da97ec682e732a8c667_icgraph" alt=""/></div>
-<map name="adebug_8h_ae8a834723f2b0da97ec682e732a8c667_icgraph" id="adebug_8h_ae8a834723f2b0da97ec682e732a8c667_icgraph">
-<area shape="rect" title=" " alt="" coords="224,573,371,599"/>
-<area shape="rect" href="first__pass_8c.html#ae3d15ca0f34657e4715827c439839e1e" title="This function implements the first pass algorithm." alt="" coords="41,5,140,31"/>
-<area shape="rect" href="first__pass_8c.html#a87a70eef7a9fd6d62eb27a5a2127739e" title="This function is used to process .data lines. It also encodes the memory if possible into the memoryB..." alt="" coords="25,55,156,95"/>
-<area shape="rect" href="first__pass_8c.html#ac0da628ba463b754effc2e88e611d4dd" title="This function is used to process lines with label definitions. It also encodes the memory if possible..." alt="" coords="25,119,156,159"/>
-<area shape="rect" href="first__pass_8c.html#aa0a39d1f94314921231c97245e6eb551" title="This function is used to process .entry lines. It also encodes the memory if possible into the memory..." alt="" coords="25,183,156,223"/>
-<area shape="rect" href="first__pass_8c.html#accedad2dc6b0e81f160e2201f4f2b1d3" title="This function is used to process .extern lines. It also encodes the memory if possible into the memor..." alt="" coords="25,247,156,287"/>
-<area shape="rect" href="first__pass_8c.html#a932fa602127543d4c7b4e5f4b64b9138" title="This function is used to process .string lines. It also encodes the memory if possible into the memor..." alt="" coords="25,311,156,351"/>
-<area shape="rect" href="second__pass_8c.html#ab6fec0fc93173020c37fc75727222d6a" title="Check if a label exists in the given line and update debug information accordingly." alt="" coords="32,376,149,401"/>
-<area shape="rect" href="syntactical__analysis_8c.html#a1c81b8f22e1b58261c580dc786012ddb" title="Matches an operand and returns TRUE if it matches. This is a low &#45; level function used by match_opera..." alt="" coords="35,425,146,451"/>
-<area shape="rect" href="syntactical__analysis_8c.html#a07296539973fce1b07e9fed70ab86519" title="Matches pamaetrized labels. This is a bit tricky because we don&#39;t know the number of arguments to a l..." alt="" coords="5,475,176,500"/>
-<area shape="rect" href="syntactical__analysis_8c.html#a2749c50f152de3c380145d95a2d05262" title="Matches a syntax group 1. This is the first part of the syntax group : it must be at the start of a v..." alt="" coords="12,524,169,549"/>
-<area shape="rect" href="syntactical__analysis_8c.html#ae6a335691cd87b3ba20493300d250b0b" title="Matches a syntax group 2. This is the second part of the syntax group matching algorithm." alt="" coords="12,573,169,599"/>
-<area shape="rect" href="syntactical__analysis_8c.html#a5f99c4d3e555f02fbe4925924058090b" title="Matches a syntax group 3. This is the third part of the syntax group matching algorithm." alt="" coords="12,623,169,648"/>
-<area shape="rect" href="syntactical__analysis_8c.html#a552075d73f1458ff9facc99ab2bc5702" title="Matches a syntax group 4. This is used to check if there is a&#39;&#39;followed by an operand." alt="" coords="12,672,169,697"/>
-<area shape="rect" href="syntactical__analysis_8c.html#a942f35e02bcadf7b1fe58d918dc5a531" title="Matches a syntax group 5 starting at the current position. This is used to implement the syntax group..." alt="" coords="12,721,169,747"/>
-<area shape="rect" href="syntactical__analysis_8c.html#aeed608a4c974282c8b9764a73c8c8d69" title="Matches a syntax group 6 starting at the current position. This is used for variable and variable ref..." alt="" coords="12,771,169,796"/>
-<area shape="rect" href="syntactical__analysis_8c.html#af96503d0f4370ed18672141247730073" title="Matches a syntax group 7. In this case we are interested in the name of a register or a label." alt="" coords="12,820,169,845"/>
-<area shape="rect" href="syntactical__analysis_8c.html#ae39eef4bd1f921befdc8fc687ac6925d" title="Validates a syntax data." alt="" coords="19,869,162,895"/>
-<area shape="rect" href="syntactical__analysis_8c.html#ab79b4aad9db258a105d397a38f3c177f" title="Validates the syntax extern and entry. This is used to validate the syntax extern and entry in a macr..." alt="" coords="13,919,168,959"/>
-<area shape="rect" href="syntactical__analysis_8c.html#a6393e6140d0121d6d8c81b36cbed42e7" title="Validate a syntax opcode. This is a helper function for validate_opcode ()." alt="" coords="11,984,171,1009"/>
-<area shape="rect" href="syntactical__analysis_8c.html#af10b351dc7df0a2b9a1f1a37bd498f68" title="Validates a syntax string." alt="" coords="15,1033,166,1059"/>
-<area shape="rect" href="syntactical__analysis_8c.html#a048ed699cd7cbc580722534d81db9ce1" title="Verifies that the next character is a valid integer. This is done by examining the characters that be..." alt="" coords="55,1083,127,1108"/>
-</map>
-</div>
 
 </div>
 </div>
@@ -383,27 +336,18 @@ Here is the caller graph for this function:</div>
         <tr>
           <td class="memname">void debug_list_pretty_print </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="debug_8h.html#afc3b4552ab1b8deb9d886f2af70a3dd2">debugList</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="structdebug_list.html">debugList</a> *&#160;</td>
           <td class="paramname"><em>list</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
-<p >Prints a list of debugNode to stderr. This is useful for debugging the error messages that are sent to the user </p><dl class="params"><dt>Parameters</dt><dd>
+<p >Prints a list of <a class="el" href="structdebug_node.html">debugNode</a> to stderr. This is useful for debugging the error messages that are sent to the user </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">list</td><td></td></tr>
   </table>
   </dd>
 </dl>
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="debug_8h_aff845343a5b3c908da86478ac7a14343_icgraph.png" border="0" usemap="#adebug_8h_aff845343a5b3c908da86478ac7a14343_icgraph" alt=""/></div>
-<map name="adebug_8h_aff845343a5b3c908da86478ac7a14343_icgraph" id="adebug_8h_aff845343a5b3c908da86478ac7a14343_icgraph">
-<area shape="rect" title=" " alt="" coords="135,5,288,31"/>
-<area shape="rect" href="driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="5,5,87,31"/>
-</map>
-</div>
 
 </div>
 </div>
@@ -416,13 +360,13 @@ Here is the caller graph for this function:</div>
         <tr>
           <td class="memname">void debug_list_register_node </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="debug_8h.html#afc3b4552ab1b8deb9d886f2af70a3dd2">debugList</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="structdebug_list.html">debugList</a> *&#160;</td>
           <td class="paramname"><em>list</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="debug_8h.html#a8169c5c102e61cddcaa3545128d8a61d">debugNode</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="structdebug_node.html">debugNode</a> *&#160;</td>
           <td class="paramname"><em>new_node</em>&#160;</td>
         </tr>
         <tr>
@@ -439,35 +383,6 @@ Here is the caller graph for this function:</div>
   </table>
   </dd>
 </dl>
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="debug_8h_a0f6d6fff6b6702b16bed17185e1ae496_icgraph.png" border="0" usemap="#adebug_8h_a0f6d6fff6b6702b16bed17185e1ae496_icgraph" alt=""/></div>
-<map name="adebug_8h_a0f6d6fff6b6702b16bed17185e1ae496_icgraph" id="adebug_8h_a0f6d6fff6b6702b16bed17185e1ae496_icgraph">
-<area shape="rect" title=" " alt="" coords="224,573,391,599"/>
-<area shape="rect" href="first__pass_8c.html#ae3d15ca0f34657e4715827c439839e1e" title="This function implements the first pass algorithm." alt="" coords="41,5,140,31"/>
-<area shape="rect" href="first__pass_8c.html#a87a70eef7a9fd6d62eb27a5a2127739e" title="This function is used to process .data lines. It also encodes the memory if possible into the memoryB..." alt="" coords="25,55,156,95"/>
-<area shape="rect" href="first__pass_8c.html#ac0da628ba463b754effc2e88e611d4dd" title="This function is used to process lines with label definitions. It also encodes the memory if possible..." alt="" coords="25,119,156,159"/>
-<area shape="rect" href="first__pass_8c.html#aa0a39d1f94314921231c97245e6eb551" title="This function is used to process .entry lines. It also encodes the memory if possible into the memory..." alt="" coords="25,183,156,223"/>
-<area shape="rect" href="first__pass_8c.html#accedad2dc6b0e81f160e2201f4f2b1d3" title="This function is used to process .extern lines. It also encodes the memory if possible into the memor..." alt="" coords="25,247,156,287"/>
-<area shape="rect" href="first__pass_8c.html#a932fa602127543d4c7b4e5f4b64b9138" title="This function is used to process .string lines. It also encodes the memory if possible into the memor..." alt="" coords="25,311,156,351"/>
-<area shape="rect" href="second__pass_8c.html#ab6fec0fc93173020c37fc75727222d6a" title="Check if a label exists in the given line and update debug information accordingly." alt="" coords="32,376,149,401"/>
-<area shape="rect" href="syntactical__analysis_8c.html#a1c81b8f22e1b58261c580dc786012ddb" title="Matches an operand and returns TRUE if it matches. This is a low &#45; level function used by match_opera..." alt="" coords="35,425,146,451"/>
-<area shape="rect" href="syntactical__analysis_8c.html#a07296539973fce1b07e9fed70ab86519" title="Matches pamaetrized labels. This is a bit tricky because we don&#39;t know the number of arguments to a l..." alt="" coords="5,475,176,500"/>
-<area shape="rect" href="syntactical__analysis_8c.html#a2749c50f152de3c380145d95a2d05262" title="Matches a syntax group 1. This is the first part of the syntax group : it must be at the start of a v..." alt="" coords="12,524,169,549"/>
-<area shape="rect" href="syntactical__analysis_8c.html#ae6a335691cd87b3ba20493300d250b0b" title="Matches a syntax group 2. This is the second part of the syntax group matching algorithm." alt="" coords="12,573,169,599"/>
-<area shape="rect" href="syntactical__analysis_8c.html#a5f99c4d3e555f02fbe4925924058090b" title="Matches a syntax group 3. This is the third part of the syntax group matching algorithm." alt="" coords="12,623,169,648"/>
-<area shape="rect" href="syntactical__analysis_8c.html#a552075d73f1458ff9facc99ab2bc5702" title="Matches a syntax group 4. This is used to check if there is a&#39;&#39;followed by an operand." alt="" coords="12,672,169,697"/>
-<area shape="rect" href="syntactical__analysis_8c.html#a942f35e02bcadf7b1fe58d918dc5a531" title="Matches a syntax group 5 starting at the current position. This is used to implement the syntax group..." alt="" coords="12,721,169,747"/>
-<area shape="rect" href="syntactical__analysis_8c.html#aeed608a4c974282c8b9764a73c8c8d69" title="Matches a syntax group 6 starting at the current position. This is used for variable and variable ref..." alt="" coords="12,771,169,796"/>
-<area shape="rect" href="syntactical__analysis_8c.html#af96503d0f4370ed18672141247730073" title="Matches a syntax group 7. In this case we are interested in the name of a register or a label." alt="" coords="12,820,169,845"/>
-<area shape="rect" href="syntactical__analysis_8c.html#ae39eef4bd1f921befdc8fc687ac6925d" title="Validates a syntax data." alt="" coords="19,869,162,895"/>
-<area shape="rect" href="syntactical__analysis_8c.html#ab79b4aad9db258a105d397a38f3c177f" title="Validates the syntax extern and entry. This is used to validate the syntax extern and entry in a macr..." alt="" coords="13,919,168,959"/>
-<area shape="rect" href="syntactical__analysis_8c.html#a6393e6140d0121d6d8c81b36cbed42e7" title="Validate a syntax opcode. This is a helper function for validate_opcode ()." alt="" coords="11,984,171,1009"/>
-<area shape="rect" href="syntactical__analysis_8c.html#af10b351dc7df0a2b9a1f1a37bd498f68" title="Validates a syntax string." alt="" coords="15,1033,166,1059"/>
-<area shape="rect" href="syntactical__analysis_8c.html#a048ed699cd7cbc580722534d81db9ce1" title="Verifies that the next character is a valid integer. This is done by examining the characters that be..." alt="" coords="55,1083,127,1108"/>
-</map>
-</div>
 
 </div>
 </div>
@@ -507,7 +422,7 @@ Here is the caller graph for this function:</div>
         <tr>
           <td class="memname">void debug_print_error </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="debug_8h.html#a2d74adaccaffe1147d50e614c82fa05f">errorContext</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="structerror_context.html">errorContext</a> *&#160;</td>
           <td class="paramname"><em>err_ctx</em>, </td>
         </tr>
         <tr>

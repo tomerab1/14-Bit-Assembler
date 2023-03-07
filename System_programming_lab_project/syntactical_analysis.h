@@ -4,10 +4,7 @@
 /** @file
 */
 
-#include "line_iterator.h"
 #include "first_pass.h"
-#include "debug.h"
-#include "utils.h"
 
 /*
 	This enumeration is used to represent each opcode with a specific numeric constant.

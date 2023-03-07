@@ -1,4 +1,0 @@
-<map id="debug_list_destroy" name="debug_list_destroy">
-<area shape="rect" id="node1" title="Destroys a debugList and all its nodes." alt="" coords="117,5,248,31"/>
-<area shape="rect" id="node2" href="$driver_8c.html#af3e60266c17733333c492f296058f896" title="Called when the module is unloaded. Destroys all memory allocated by the module. This is the last fun..." alt="" coords="5,5,69,31"/>
-</map>

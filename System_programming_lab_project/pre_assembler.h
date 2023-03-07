@@ -5,8 +5,6 @@
 */
 
 #include "line_iterator.h"
-#include "constants.h"
-#include "utils.h"
 
 /**
 * @brief Enum for the constans for the different reading states, it only used internally so it'll be declared inside the '.c' file.

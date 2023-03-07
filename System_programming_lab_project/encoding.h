@@ -5,9 +5,6 @@
 */
 
 #include "syntactical_analysis.h"
-#include "line_iterator.h"
-#include "debug.h"
-#include "memory.h"
 
 /**
 * @brief An enum forward declarations of the different variable types.

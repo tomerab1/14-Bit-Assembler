@@ -1,9 +1,12 @@
 <map id="driver" name="driver">
-<area shape="rect" id="node1" title=" " alt="" coords="156,284,208,309"/>
-<area shape="rect" id="node2" href="$struct_symbol_table.html" title=" " alt="" coords="72,196,169,221"/>
+<area shape="rect" id="node1" title=" " alt="" coords="227,284,279,309"/>
+<area shape="rect" id="node2" href="$struct_symbol_table.html" title=" " alt="" coords="75,196,172,221"/>
 <area shape="rect" id="node3" href="$struct_symbol_table_node.html" title=" " alt="" coords="5,93,132,119"/>
 <area shape="rect" id="node4" href="$struct_symbol.html" title=" " alt="" coords="35,5,102,31"/>
-<area shape="rect" id="node5" href="$structmemory_buffer.html" title=" " alt="" coords="201,196,304,221"/>
-<area shape="rect" id="node6" href="$structimage_memory.html" title=" " alt="" coords="210,93,314,119"/>
-<area shape="rect" id="node7" href="$struct_memory_word.html" title=" " alt="" coords="212,5,312,31"/>
+<area shape="rect" id="node5" href="$structdebug_list.html" title=" " alt="" coords="213,196,292,221"/>
+<area shape="rect" id="node6" href="$structdebug_node.html" title=" " alt="" coords="209,93,296,119"/>
+<area shape="rect" id="node7" href="$structerror_context.html" title=" " alt="" coords="206,5,299,31"/>
+<area shape="rect" id="node8" href="$structmemory_buffer.html" title=" " alt="" coords="345,196,448,221"/>
+<area shape="rect" id="node9" href="$structimage_memory.html" title=" " alt="" coords="374,93,478,119"/>
+<area shape="rect" id="node10" href="$struct_memory_word.html" title=" " alt="" coords="376,5,476,31"/>
 </map>

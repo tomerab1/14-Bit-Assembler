@@ -4,14 +4,7 @@
 /** @file
 */
 
-#include "syntactical_analysis.h"
-#include "line_iterator.h"
-#include "symbol_table.h"
 #include "encoding.h"
-#include "memory.h"
-#include "debug.h"
-#include "utils.h"
-#include "constants.h"
 
 typedef struct lines_list_node LinesListNode;
 
