@@ -1,6 +1,3 @@
-/** @file
-*/
-
 #include "driver.h"
 #include "pre_assembler.h"
 #include "memory.h"
@@ -33,16 +30,17 @@ int driver_exec(Driver* driver, int argc, char** argv)
 int exec_impl(Driver* driver, int argc, char** argv)
 {
     int i;
-    char* pre_assembler_path = NULL;
+    char* src_path = NULL, *pre_assembler_path = NULL;
 
     if (argc <= 1) {
-	printf("Usage: ./exe_name <files...>\n");
-	return 1;
+	    printf("Usage: ./exe_name <files...>\n");
+	    return 1;
     }
 
     for (i = 1; i < argc; i++) {
-        start_pre_assembler(argv[i]);
-        pre_assembler_path = get_outfile_name(argv[i], ".am");
+        src_path = get_outfile_name(argv[i], SRC_ASSEMBLER_FILE_EXTENSTION);
+        start_pre_assembler(src_path);
+        pre_assembler_path = get_outfile_name(src_path, PRE_ASSEMBLER_FILE_EXTENSTION);
 
         on_initialization(driver);
 
@@ -59,6 +57,7 @@ int exec_impl(Driver* driver, int argc, char** argv)
 
         on_exit(driver);
         free(pre_assembler_path);
+        free(src_path);
     }
 
     return 0;

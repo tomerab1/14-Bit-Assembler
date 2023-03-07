@@ -165,7 +165,6 @@ bool verify_int(LineIterator* it, long line, char* seps, debugList* dbg_list);
 * @param dbg_list - The debug list to add debug nodes to.
 *
 * @return TRUE if a match was found FALSE otherwise. The match is terminated by a newline
-* @note groups: mov, add,sub
 */
 bool match_syntax_group_1(LineIterator* it, long line, debugList* dbg_list);
 
@@ -343,7 +342,6 @@ bool is_register_name_whole(LineIterator* it);
 This function checks if a directive exists in the given line. The supported directives are ".string",
 ".data", ".extern", and ".entry". It uses the line_iterator_word_includes function to determine if
 the line contains any of these directives.
-@note The line iterator passed to this function must have already been initialized.
 */
 bool directive_exists(LineIterator* line);
 #endif

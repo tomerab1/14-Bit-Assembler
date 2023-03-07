@@ -1,6 +1,3 @@
-/** @file
-*/
-
 #include "debug.h"
 #include <string.h>
 

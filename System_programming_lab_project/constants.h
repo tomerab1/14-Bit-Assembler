@@ -43,13 +43,6 @@
 #define MODE_WRITE_READ "w+"
 #define MODE_APP_READ "a+"
 
-
-#define DOT_COMMAND '.'
-#define DOT_DATA "data"
-#define DOT_STRING "string"
-#define DOT_ENTRY "entry"
-#define DOT_EXTERN "extern"
-
 #define LETTER_A 'A'
 #define LETTER_Z 'Z'
 #define COLON ':'
@@ -67,7 +60,8 @@
 #define OFFSET_LABELS 0x02
 #define BYTE_MASK 0xff
 #define WORD_MASK 0xff00
-#define BITS_3_MASK 0x08
+#define START_OFFSET_SECOND_BYTE 0x08
+
 /**
 * Constans for the different offsets of the memory word fields.
 */
@@ -89,8 +83,12 @@
 #define DOT_ENTRY_STRING ".entry"
 #define ENTRY_STRING "entry"
 #define DOT_DATA_STRING ".data"
-#define DOT_STRING__STRING ".string"
+#define DOT_STRING_STRING ".string"
 
 /*Pre assembler*/
 #define PRE_ASSEMBLER_FILE_EXTENSTION ".am"
+#define SRC_ASSEMBLER_FILE_EXTENSTION ".txt"
+#define EXTERN_ASSEMBLER_FILE_EXTENSTION ".extern"
+#define ENTRY_ASSEMBLER_FILE_EXTENSTION ".entry
+
 #endif

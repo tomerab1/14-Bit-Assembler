@@ -1,6 +1,3 @@
-/** @file
-*/
-
 #include "second_pass.h"
 #include "constants.h"
 
@@ -201,7 +198,7 @@ bool generate_externals_file(SymbolTable* table, char* path) {
 	char placeholder[20] = { 0 }; /* Placeholder string for writing data to the file */
 
 	/* Get the name of the output file */
-	outfileName = get_outfile_name(path, ".external");
+	outfileName = get_outfile_name(path, EXTERN_ASSEMBLER_FILE_EXTENSTION);
 	/* Open the output file for writing */
 	out = open_file(outfileName, MODE_WRITE);
 
@@ -228,7 +225,7 @@ bool generate_entries_file(SymbolTable* table, char* path) {
 	SymbolTableNode* symTableHead = symbol_table_get_head(table);
 	char placeholder[20] = { 0 };
 
-	outfileName = get_outfile_name(path, ".entry");
+	outfileName = get_outfile_name(path, ENTRY_ASSEMBLER_FILE_EXTENSTION);
 	out = open_file(outfileName, MODE_WRITE);
 
 	/* iterate over symbol table and write the entries to file */
@@ -261,11 +258,11 @@ void create_files(memoryBuffer* memory, char* path, programFinalStatus* finalSta
 void extract_directive_type(LineIterator* line, flags* flag) {
     char* command = line_iterator_next_word(line, SPACE_STRING);
 	/* Checks if command is extern */
-    if (strcmp(command, DOT_EXTERN)) {
+    if (strcmp(command, EXTERN_STRING)) {
         extern_exists(flag);
     }
 	/* Checks if command is entry */
-    else if (strcmp(command, DOT_ENTRY)) {
+    else if (strcmp(command, ENTRY_STRING)) {
         extern_exists(flag);
     }
 

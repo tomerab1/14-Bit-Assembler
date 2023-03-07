@@ -1,7 +1,0 @@
-<map id="macro_list_insert_node" name="macro_list_insert_node">
-<area shape="rect" id="node1" title="This function insert a node to the macro list." alt="" coords="663,13,819,38"/>
-<area shape="rect" id="node2" href="$pre__assembler_8c.html#aa3dd08d1da450711d97010d5592530f3" title="This function creates the macro list from a given file." alt="" coords="489,5,615,45"/>
-<area shape="rect" id="node3" href="$pre__assembler_8c.html#abab57bfbc7706d8811056386ff9a4cd6" title="This function starts the pre&#45;assembler phase of expanding the macros." alt="" coords="301,13,441,38"/>
-<area shape="rect" id="node4" href="$driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,13,253,38"/>
-<area shape="rect" id="node5" href="$driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,13,124,38"/>
-</map>

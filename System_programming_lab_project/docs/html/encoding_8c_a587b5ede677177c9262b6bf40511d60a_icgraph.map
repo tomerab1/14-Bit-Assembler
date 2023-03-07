@@ -1,7 +1,0 @@
-<map id="encode_dot_data" name="encode_dot_data">
-<area shape="rect" id="node1" title=" " alt="" coords="627,13,748,38"/>
-<area shape="rect" id="node2" href="$first__pass_8c.html#a87a70eef7a9fd6d62eb27a5a2127739e" title="This function is used to process .data lines. It also encodes the memory if possible into the memoryB..." alt="" coords="448,5,579,45"/>
-<area shape="rect" id="node3" href="$first__pass_8c.html#ae3d15ca0f34657e4715827c439839e1e" title="This function implements the first pass algorithm." alt="" coords="301,13,400,38"/>
-<area shape="rect" id="node4" href="$driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,13,253,38"/>
-<area shape="rect" id="node5" href="$driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,13,124,38"/>
-</map>

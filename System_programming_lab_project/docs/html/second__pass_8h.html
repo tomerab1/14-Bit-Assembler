@@ -125,7 +125,7 @@ typedef struct <a class="el" href="structprogram_final_status.html">programFinal
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:aa33feb8d270721a8f28a90a7833937db"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="second__pass_8h.html#aa33feb8d270721a8f28a90a7833937db">initiate_second_pass</a> (char *path, <a class="el" href="struct_symbol_table.html">SymbolTable</a> *table, <a class="el" href="structmemory_buffer.html">memoryBuffer</a> *memory, <a class="el" href="structdebug_list.html">debugList</a> *dbg_list)</td></tr>
+<tr class="memitem:aa33feb8d270721a8f28a90a7833937db"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="second__pass_8h.html#aa33feb8d270721a8f28a90a7833937db">initiate_second_pass</a> (char *path, <a class="el" href="struct_symbol_table.html">SymbolTable</a> *table, <a class="el" href="structmemory_buffer.html">memoryBuffer</a> *memory, <a class="el" href="debug_8h.html#afc3b4552ab1b8deb9d886f2af70a3dd2">debugList</a> *dbg_list)</td></tr>
 <tr class="memdesc:aa33feb8d270721a8f28a90a7833937db"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initiates the second pass of the assembler. This function is responsible for executing the second pass of the assembly process. It reads each line from the input file, sets a base address for the symbol table, initializes the instruction image counter to 0, and then executes the line by calling <a class="el" href="second__pass_8h.html#a36c8038b17843fb6d82d261367f7650b" title="Executes the line, in case label exists finds if it is valid and then encodes it, otherwise prints er...">execute_line()</a> if it's not a directive or extracts the directive type if it is. Finally, it creates output files for the assembly code.  <a href="second__pass_8h.html#aa33feb8d270721a8f28a90a7833937db">More...</a><br /></td></tr>
 <tr class="separator:aa33feb8d270721a8f28a90a7833937db"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6e1b71ceed1623c7e01e75caf66005db"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="second__pass_8h.html#a6e1b71ceed1623c7e01e75caf66005db">generate_object_file</a> (<a class="el" href="structmemory_buffer.html">memoryBuffer</a> *memory, char *path)</td></tr>
@@ -152,7 +152,7 @@ Functions</h2></td></tr>
 <tr class="memitem:a1507c1f8d81acaede18a7d7107af9876"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="second__pass_8h.html#a1507c1f8d81acaede18a7d7107af9876">extract_directive_type</a> (<a class="el" href="struct_line_iterator.html">LineIterator</a> *line, <a class="el" href="structflags.html">flags</a> *flag)</td></tr>
 <tr class="memdesc:a1507c1f8d81acaede18a7d7107af9876"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extracts the directive type from a given line and sets the appropriate flag.  <a href="second__pass_8h.html#a1507c1f8d81acaede18a7d7107af9876">More...</a><br /></td></tr>
 <tr class="separator:a1507c1f8d81acaede18a7d7107af9876"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a36c8038b17843fb6d82d261367f7650b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="second__pass_8h.html#a36c8038b17843fb6d82d261367f7650b">execute_line</a> (<a class="el" href="struct_line_iterator.html">LineIterator</a> *it, <a class="el" href="struct_symbol_table.html">SymbolTable</a> *table, <a class="el" href="structmemory_buffer.html">memoryBuffer</a> *memory, <a class="el" href="structdebug_list.html">debugList</a> *dbg_list, bool *errorFlag, long line_num)</td></tr>
+<tr class="memitem:a36c8038b17843fb6d82d261367f7650b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="second__pass_8h.html#a36c8038b17843fb6d82d261367f7650b">execute_line</a> (<a class="el" href="struct_line_iterator.html">LineIterator</a> *it, <a class="el" href="struct_symbol_table.html">SymbolTable</a> *table, <a class="el" href="structmemory_buffer.html">memoryBuffer</a> *memory, <a class="el" href="debug_8h.html#afc3b4552ab1b8deb9d886f2af70a3dd2">debugList</a> *dbg_list, bool *errorFlag, long line_num)</td></tr>
 <tr class="memdesc:a36c8038b17843fb6d82d261367f7650b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Executes the line, in case label exists finds if it is valid and then encodes it, otherwise prints error or skips cells.  <a href="second__pass_8h.html#a36c8038b17843fb6d82d261367f7650b">More...</a><br /></td></tr>
 <tr class="separator:a36c8038b17843fb6d82d261367f7650b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5cccc7694391206c3d51d4256ff41272"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="second__pass_8h.html#a5cccc7694391206c3d51d4256ff41272">skip_first_pass_mem</a> (<a class="el" href="structmemory_buffer.html">memoryBuffer</a> *memory, <a class="el" href="struct_line_iterator.html">LineIterator</a> *it)</td></tr>
@@ -161,22 +161,23 @@ Functions</h2></td></tr>
 <tr class="memitem:a091b38cb15eaefb6c5520735f9a4739b"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="second__pass_8h.html#a091b38cb15eaefb6c5520735f9a4739b">find_amount_of_lines_to_skip</a> (<a class="el" href="struct_line_iterator.html">LineIterator</a> *it)</td></tr>
 <tr class="memdesc:a091b38cb15eaefb6c5520735f9a4739b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Counts the amount of lines without any labels, which are needed to be skiped.  <a href="second__pass_8h.html#a091b38cb15eaefb6c5520735f9a4739b">More...</a><br /></td></tr>
 <tr class="separator:a091b38cb15eaefb6c5520735f9a4739b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6b999b1b1244fbcf34f5f866b4aa3153"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="second__pass_8h.html#a6b999b1b1244fbcf34f5f866b4aa3153">is_label_exists_in_line</a> (<a class="el" href="struct_line_iterator.html">LineIterator</a> *line, <a class="el" href="struct_symbol_table.html">SymbolTable</a> *table, <a class="el" href="structdebug_list.html">debugList</a> *dbg_list, bool *flag, long line_num)</td></tr>
+<tr class="memitem:a6b999b1b1244fbcf34f5f866b4aa3153"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="second__pass_8h.html#a6b999b1b1244fbcf34f5f866b4aa3153">is_label_exists_in_line</a> (<a class="el" href="struct_line_iterator.html">LineIterator</a> *line, <a class="el" href="struct_symbol_table.html">SymbolTable</a> *table, <a class="el" href="debug_8h.html#afc3b4552ab1b8deb9d886f2af70a3dd2">debugList</a> *dbg_list, bool *flag, long line_num)</td></tr>
 <tr class="memdesc:a6b999b1b1244fbcf34f5f866b4aa3153"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks whether a label exists in a line and is defined in the symbol table.  <a href="second__pass_8h.html#a6b999b1b1244fbcf34f5f866b4aa3153">More...</a><br /></td></tr>
 <tr class="separator:a6b999b1b1244fbcf34f5f866b4aa3153"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a960769f0586b74efa2d014e201060d3d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="second__pass_8h.html#a960769f0586b74efa2d014e201060d3d">investigate_word</a> (<a class="el" href="struct_line_iterator.html">LineIterator</a> *originalLine, <a class="el" href="struct_line_iterator.html">LineIterator</a> *wordIterator, <a class="el" href="struct_symbol_table.html">SymbolTable</a> *table, <a class="el" href="structdebug_list.html">debugList</a> *dbg_list, bool *flag, long line_num, char *wordToInvestigate, int amoutOfVars)</td></tr>
+<tr class="memitem:a960769f0586b74efa2d014e201060d3d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="second__pass_8h.html#a960769f0586b74efa2d014e201060d3d">investigate_word</a> (<a class="el" href="struct_line_iterator.html">LineIterator</a> *originalLine, <a class="el" href="struct_line_iterator.html">LineIterator</a> *wordIterator, <a class="el" href="struct_symbol_table.html">SymbolTable</a> *table, <a class="el" href="debug_8h.html#afc3b4552ab1b8deb9d886f2af70a3dd2">debugList</a> *dbg_list, bool *flag, long line_num, char *wordToInvestigate, int amoutOfVars)</td></tr>
 <tr class="memdesc:a960769f0586b74efa2d014e201060d3d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if a label exists in the given line and update debug information accordingly.  <a href="second__pass_8h.html#a960769f0586b74efa2d014e201060d3d">More...</a><br /></td></tr>
 <tr class="separator:a960769f0586b74efa2d014e201060d3d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2bb36923cbd54e4938dd7bb42759bea6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="second__pass_8h.html#a2bb36923cbd54e4938dd7bb42759bea6">find_word_start_point</a> (<a class="el" href="struct_line_iterator.html">LineIterator</a> *it, char *word, int amountOfVars)</td></tr>
 <tr class="memdesc:a2bb36923cbd54e4938dd7bb42759bea6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finds the starting point of a given word within a line. This function takes a <a class="el" href="struct_line_iterator.html" title="This data sturcture is used to make it easier to parse text lines. It&#39;s member should not be freed as...">LineIterator</a> object, a string of characters representing the word to search for, and an integer representing the amount of variables in the line. It locates the starting point of the given word within the line, taking into account the amount of variables in the line.  <a href="second__pass_8h.html#a2bb36923cbd54e4938dd7bb42759bea6">More...</a><br /></td></tr>
 <tr class="separator:a2bb36923cbd54e4938dd7bb42759bea6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab6728edfef56c073ce9792b67edd84f7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="second__pass_8h.html#ab6728edfef56c073ce9792b67edd84f7">update_symbol_address</a> (<a class="el" href="struct_line_iterator.html">LineIterator</a> it, <a class="el" href="structmemory_buffer.html">memoryBuffer</a> *memory, <a class="el" href="struct_symbol_table.html">SymbolTable</a> *table)</td></tr>
+<tr class="memdesc:ab6728edfef56c073ce9792b67edd84f7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the addresses of symbols in the given memory buffer and symbol table based on the given assembly line iterator.  <a href="second__pass_8h.html#ab6728edfef56c073ce9792b67edd84f7">More...</a><br /></td></tr>
 <tr class="separator:ab6728edfef56c073ce9792b67edd84f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1d991b81e3a4e0eca4a867bd08cf6ecc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="second__pass_8h.html#a1d991b81e3a4e0eca4a867bd08cf6ecc">update_symbol_offset</a> (char *word, int offset, <a class="el" href="structmemory_buffer.html">memoryBuffer</a> *memory, <a class="el" href="struct_symbol_table.html">SymbolTable</a> *table)</td></tr>
-<tr class="memdesc:a1d991b81e3a4e0eca4a867bd08cf6ecc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the symbol offset in memory.  <a href="second__pass_8h.html#a1d991b81e3a4e0eca4a867bd08cf6ecc">More...</a><br /></td></tr>
+<tr class="memdesc:a1d991b81e3a4e0eca4a867bd08cf6ecc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the symbol offset in memory. This function iterates through all symbols in a symbol table using a linked list traversal macro. For each symbol, if its type is either SYM_DATA or SYM_CODE, the function adds the decimal address base value to its counter field. This is used in assembly programming to set the base address of the program's memory space.  <a href="second__pass_8h.html#a1d991b81e3a4e0eca4a867bd08cf6ecc">More...</a><br /></td></tr>
 <tr class="separator:a1d991b81e3a4e0eca4a867bd08cf6ecc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2765636e71a2da6c192eac0fa06581c1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="second__pass_8h.html#a2765636e71a2da6c192eac0fa06581c1">add_label_base_address</a> (<a class="el" href="struct_symbol_table.html">SymbolTable</a> *table)</td></tr>
-<tr class="memdesc:a2765636e71a2da6c192eac0fa06581c1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds the decimal base address to all data and code symbols in a symbol table.  <a href="second__pass_8h.html#a2765636e71a2da6c192eac0fa06581c1">More...</a><br /></td></tr>
+<tr class="memdesc:a2765636e71a2da6c192eac0fa06581c1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds the decimal base address to all data and code symbols in a symbol table. This function iterates through all symbols in a symbol table using a linked list traversal macro. For each symbol, if its type is either SYM_DATA or SYM_CODE, the function adds the decimal address base value to its counter field. This is used in assembly programming to set the base address of the program's memory space.  <a href="second__pass_8h.html#a2765636e71a2da6c192eac0fa06581c1">More...</a><br /></td></tr>
 <tr class="separator:a2765636e71a2da6c192eac0fa06581c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa80858df65398ada2ee4d26b24aab6dd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="second__pass_8h.html#aa80858df65398ada2ee4d26b24aab6dd">decode_memory</a> (<a class="el" href="struct_translated_machine_data.html">TranslatedMachineData</a> *tmd, <a class="el" href="structimage_memory.html">imageMemory</a> *inst, int *startPos, int endPos)</td></tr>
 <tr class="memdesc:aa80858df65398ada2ee4d26b24aab6dd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Decodes memory so it would be suitable for printing to the object file.  <a href="second__pass_8h.html#aa80858df65398ada2ee4d26b24aab6dd">More...</a><br /></td></tr>
@@ -202,25 +203,13 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Adds the decimal base address to all data and code symbols in a symbol table. </p>
+<p>Adds the decimal base address to all data and code symbols in a symbol table. This function iterates through all symbols in a symbol table using a linked list traversal macro. For each symbol, if its type is either SYM_DATA or SYM_CODE, the function adds the decimal address base value to its counter field. This is used in assembly programming to set the base address of the program's memory space. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">table</td><td>A pointer to the symbol table. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>void This function iterates through all symbols in a symbol table using a linked list traversal macro. For each symbol, if its type is either SYM_DATA or SYM_CODE, the function adds the decimal address base value to its counter field. This is used in assembly programming to set the base address of the program's memory space. </dd></dl>
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="second__pass_8h_a2765636e71a2da6c192eac0fa06581c1_icgraph.png" border="0" usemap="#asecond__pass_8h_a2765636e71a2da6c192eac0fa06581c1_icgraph" alt=""/></div>
-<map name="asecond__pass_8h_a2765636e71a2da6c192eac0fa06581c1_icgraph" id="asecond__pass_8h_a2765636e71a2da6c192eac0fa06581c1_icgraph">
-<area shape="rect" title="Adds the decimal base address to all data and code symbols in a symbol table." alt="" coords="493,5,659,31"/>
-<area shape="rect" href="second__pass_8c.html#aa33feb8d270721a8f28a90a7833937db" title="Initiates the second pass of the assembler. This function is responsible for executing the second pas..." alt="" coords="301,5,445,31"/>
-<area shape="rect" href="driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,5,253,31"/>
-<area shape="rect" href="driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,5,124,31"/>
-</map>
-</div>
 
 </div>
 </div>
@@ -272,17 +261,6 @@ Here is the caller graph for this function:</div>
   </table>
   </dd>
 </dl>
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="second__pass_8h_a20c33f0cb96a55d4b805d746db5cc1cc_icgraph.png" border="0" usemap="#asecond__pass_8h_a20c33f0cb96a55d4b805d746db5cc1cc_icgraph" alt=""/></div>
-<map name="asecond__pass_8h_a20c33f0cb96a55d4b805d746db5cc1cc_icgraph" id="asecond__pass_8h_a20c33f0cb96a55d4b805d746db5cc1cc_icgraph">
-<area shape="rect" title="Creates output files based on the given memory buffer, path, final program status,..." alt="" coords="493,5,581,31"/>
-<area shape="rect" href="second__pass_8c.html#aa33feb8d270721a8f28a90a7833937db" title="Initiates the second pass of the assembler. This function is responsible for executing the second pas..." alt="" coords="301,5,445,31"/>
-<area shape="rect" href="driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,5,253,31"/>
-<area shape="rect" href="driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,5,124,31"/>
-</map>
-</div>
 
 </div>
 </div>
@@ -334,20 +312,6 @@ Here is the caller graph for this function:</div>
   </table>
   </dd>
 </dl>
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="second__pass_8h_aa80858df65398ada2ee4d26b24aab6dd_icgraph.png" border="0" usemap="#asecond__pass_8h_aa80858df65398ada2ee4d26b24aab6dd_icgraph" alt=""/></div>
-<map name="asecond__pass_8h_aa80858df65398ada2ee4d26b24aab6dd_icgraph" id="asecond__pass_8h_aa80858df65398ada2ee4d26b24aab6dd_icgraph">
-<area shape="rect" title="Decodes memory so it would be suitable for printing to the object file." alt="" coords="1041,5,1160,31"/>
-<area shape="rect" href="second__pass_8c.html#ab9d786e13959c66f18750ee6a69eeef3" title="Translates the content of a memory buffer to machine code." alt="" coords="815,5,993,31"/>
-<area shape="rect" href="second__pass_8c.html#a6e1b71ceed1623c7e01e75caf66005db" title="Generates an object file from the data in a memory buffer." alt="" coords="629,5,767,31"/>
-<area shape="rect" href="second__pass_8c.html#a20c33f0cb96a55d4b805d746db5cc1cc" title="Creates output files based on the given memory buffer, path, final program status,..." alt="" coords="493,5,581,31"/>
-<area shape="rect" href="second__pass_8c.html#aa33feb8d270721a8f28a90a7833937db" title="Initiates the second pass of the assembler. This function is responsible for executing the second pas..." alt="" coords="301,5,445,31"/>
-<area shape="rect" href="driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,5,253,31"/>
-<area shape="rect" href="driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,5,124,31"/>
-</map>
-</div>
 
 </div>
 </div>
@@ -404,7 +368,7 @@ Here is the caller graph for this function:</div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="structdebug_list.html">debugList</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="debug_8h.html#afc3b4552ab1b8deb9d886f2af70a3dd2">debugList</a> *&#160;</td>
           <td class="paramname"><em>dbg_list</em>, </td>
         </tr>
         <tr>
@@ -439,17 +403,6 @@ Here is the caller graph for this function:</div>
   </table>
   </dd>
 </dl>
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="second__pass_8h_a36c8038b17843fb6d82d261367f7650b_icgraph.png" border="0" usemap="#asecond__pass_8h_a36c8038b17843fb6d82d261367f7650b_icgraph" alt=""/></div>
-<map name="asecond__pass_8h_a36c8038b17843fb6d82d261367f7650b_icgraph" id="asecond__pass_8h_a36c8038b17843fb6d82d261367f7650b_icgraph">
-<area shape="rect" title="Executes the line, in case label exists finds if it is valid and then encodes it, otherwise prints er..." alt="" coords="493,5,588,31"/>
-<area shape="rect" href="second__pass_8c.html#aa33feb8d270721a8f28a90a7833937db" title="Initiates the second pass of the assembler. This function is responsible for executing the second pas..." alt="" coords="301,5,445,31"/>
-<area shape="rect" href="driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,5,253,31"/>
-<area shape="rect" href="driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,5,124,31"/>
-</map>
-</div>
 
 </div>
 </div>
@@ -476,18 +429,6 @@ Here is the caller graph for this function:</div>
   </table>
   </dd>
 </dl>
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="second__pass_8h_aa431e489ad76934ec4a5a10ba870dd58_icgraph.png" border="0" usemap="#asecond__pass_8h_aa431e489ad76934ec4a5a10ba870dd58_icgraph" alt=""/></div>
-<map name="asecond__pass_8h_aa431e489ad76934ec4a5a10ba870dd58_icgraph" id="asecond__pass_8h_aa431e489ad76934ec4a5a10ba870dd58_icgraph">
-<area shape="rect" title="Sets the dot_extern_exists flag in the given flags struct to TRUE." alt="" coords="689,5,789,31"/>
-<area shape="rect" href="second__pass_8c.html#a1507c1f8d81acaede18a7d7107af9876" title="Extracts the directive type from a given line and sets the appropriate flag." alt="" coords="493,5,641,31"/>
-<area shape="rect" href="second__pass_8c.html#aa33feb8d270721a8f28a90a7833937db" title="Initiates the second pass of the assembler. This function is responsible for executing the second pas..." alt="" coords="301,5,445,31"/>
-<area shape="rect" href="driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,5,253,31"/>
-<area shape="rect" href="driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,5,124,31"/>
-</map>
-</div>
 
 </div>
 </div>
@@ -525,17 +466,6 @@ Here is the caller graph for this function:</div>
   </table>
   </dd>
 </dl>
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="second__pass_8h_a1507c1f8d81acaede18a7d7107af9876_icgraph.png" border="0" usemap="#asecond__pass_8h_a1507c1f8d81acaede18a7d7107af9876_icgraph" alt=""/></div>
-<map name="asecond__pass_8h_a1507c1f8d81acaede18a7d7107af9876_icgraph" id="asecond__pass_8h_a1507c1f8d81acaede18a7d7107af9876_icgraph">
-<area shape="rect" title="Extracts the directive type from a given line and sets the appropriate flag." alt="" coords="493,5,641,31"/>
-<area shape="rect" href="second__pass_8c.html#aa33feb8d270721a8f28a90a7833937db" title="Initiates the second pass of the assembler. This function is responsible for executing the second pas..." alt="" coords="301,5,445,31"/>
-<area shape="rect" href="driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,5,253,31"/>
-<area shape="rect" href="driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,5,124,31"/>
-</map>
-</div>
 
 </div>
 </div>
@@ -563,19 +493,6 @@ Here is the caller graph for this function:</div>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A pointer to the <a class="el" href="struct_var_data.html">VarData</a> struct containing the extracted variables, or NULL if no variables were found. </dd></dl>
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="second__pass_8h_a41e82792e66da5f66e6e378e20a0a7cc_icgraph.png" border="0" usemap="#asecond__pass_8h_a41e82792e66da5f66e6e378e20a0a7cc_icgraph" alt=""/></div>
-<map name="asecond__pass_8h_a41e82792e66da5f66e6e378e20a0a7cc_icgraph" id="asecond__pass_8h_a41e82792e66da5f66e6e378e20a0a7cc_icgraph">
-<area shape="rect" title="Extracts the variables from the current line of assembly code. This function extracts the variables f..." alt="" coords="836,5,955,31"/>
-<area shape="rect" href="second__pass_8c.html#a6b999b1b1244fbcf34f5f866b4aa3153" title="Checks whether a label exists in a line and is defined in the symbol table." alt="" coords="636,5,788,31"/>
-<area shape="rect" href="second__pass_8c.html#a36c8038b17843fb6d82d261367f7650b" title="Executes the line, in case label exists finds if it is valid and then encodes it, otherwise prints er..." alt="" coords="493,5,588,31"/>
-<area shape="rect" href="second__pass_8c.html#aa33feb8d270721a8f28a90a7833937db" title="Initiates the second pass of the assembler. This function is responsible for executing the second pas..." alt="" coords="301,5,445,31"/>
-<area shape="rect" href="driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,5,253,31"/>
-<area shape="rect" href="driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,5,124,31"/>
-</map>
-</div>
 
 </div>
 </div>
@@ -602,19 +519,6 @@ Here is the caller graph for this function:</div>
   </table>
   </dd>
 </dl>
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="second__pass_8h_a091b38cb15eaefb6c5520735f9a4739b_icgraph.png" border="0" usemap="#asecond__pass_8h_a091b38cb15eaefb6c5520735f9a4739b_icgraph" alt=""/></div>
-<map name="asecond__pass_8h_a091b38cb15eaefb6c5520735f9a4739b_icgraph" id="asecond__pass_8h_a091b38cb15eaefb6c5520735f9a4739b_icgraph">
-<area shape="rect" title="Counts the amount of lines without any labels, which are needed to be skiped." alt="" coords="829,5,972,45"/>
-<area shape="rect" href="second__pass_8c.html#a5cccc7694391206c3d51d4256ff41272" title="Counts the amount of lines without any labels, which are needed to be skiped, and updates the origina..." alt="" coords="636,13,781,38"/>
-<area shape="rect" href="second__pass_8c.html#a36c8038b17843fb6d82d261367f7650b" title="Executes the line, in case label exists finds if it is valid and then encodes it, otherwise prints er..." alt="" coords="493,13,588,38"/>
-<area shape="rect" href="second__pass_8c.html#aa33feb8d270721a8f28a90a7833937db" title="Initiates the second pass of the assembler. This function is responsible for executing the second pas..." alt="" coords="301,13,445,38"/>
-<area shape="rect" href="driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,13,253,38"/>
-<area shape="rect" href="driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,13,124,38"/>
-</map>
-</div>
 
 </div>
 </div>
@@ -659,20 +563,6 @@ Here is the caller graph for this function:</div>
   </table>
   </dd>
 </dl>
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="second__pass_8h_a2bb36923cbd54e4938dd7bb42759bea6_icgraph.png" border="0" usemap="#asecond__pass_8h_a2bb36923cbd54e4938dd7bb42759bea6_icgraph" alt=""/></div>
-<map name="asecond__pass_8h_a2bb36923cbd54e4938dd7bb42759bea6_icgraph" id="asecond__pass_8h_a2bb36923cbd54e4938dd7bb42759bea6_icgraph">
-<area shape="rect" title="Finds the starting point of a given word within a line. This function takes a LineIterator object,..." alt="" coords="1001,5,1145,31"/>
-<area shape="rect" href="second__pass_8c.html#ab6fec0fc93173020c37fc75727222d6a" title="Check if a label exists in the given line and update debug information accordingly." alt="" coords="836,5,953,31"/>
-<area shape="rect" href="second__pass_8c.html#a6b999b1b1244fbcf34f5f866b4aa3153" title="Checks whether a label exists in a line and is defined in the symbol table." alt="" coords="636,5,788,31"/>
-<area shape="rect" href="second__pass_8c.html#a36c8038b17843fb6d82d261367f7650b" title="Executes the line, in case label exists finds if it is valid and then encodes it, otherwise prints er..." alt="" coords="493,5,588,31"/>
-<area shape="rect" href="second__pass_8c.html#aa33feb8d270721a8f28a90a7833937db" title="Initiates the second pass of the assembler. This function is responsible for executing the second pas..." alt="" coords="301,5,445,31"/>
-<area shape="rect" href="driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,5,253,31"/>
-<area shape="rect" href="driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,5,124,31"/>
-</map>
-</div>
 
 </div>
 </div>
@@ -711,18 +601,6 @@ Here is the caller graph for this function:</div>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Returns TRUE if the file generation was successful, FALSE otherwise </dd></dl>
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="second__pass_8h_a2bd718eb223c109ac098038bd74150f1_icgraph.png" border="0" usemap="#asecond__pass_8h_a2bd718eb223c109ac098038bd74150f1_icgraph" alt=""/></div>
-<map name="asecond__pass_8h_a2bd718eb223c109ac098038bd74150f1_icgraph" id="asecond__pass_8h_a2bd718eb223c109ac098038bd74150f1_icgraph">
-<area shape="rect" title="Generates an entries file containing the entry symbols and their addresses The function generates an ..." alt="" coords="629,5,771,31"/>
-<area shape="rect" href="second__pass_8c.html#a20c33f0cb96a55d4b805d746db5cc1cc" title="Creates output files based on the given memory buffer, path, final program status,..." alt="" coords="493,5,581,31"/>
-<area shape="rect" href="second__pass_8c.html#aa33feb8d270721a8f28a90a7833937db" title="Initiates the second pass of the assembler. This function is responsible for executing the second pas..." alt="" coords="301,5,445,31"/>
-<area shape="rect" href="driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,5,253,31"/>
-<area shape="rect" href="driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,5,124,31"/>
-</map>
-</div>
 
 </div>
 </div>
@@ -761,18 +639,6 @@ Here is the caller graph for this function:</div>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>TRUE if the file was generated successfully, FALSE otherwise </dd></dl>
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="second__pass_8h_af969b5aef11a97160dd29f2402b35d1e_icgraph.png" border="0" usemap="#asecond__pass_8h_af969b5aef11a97160dd29f2402b35d1e_icgraph" alt=""/></div>
-<map name="asecond__pass_8h_af969b5aef11a97160dd29f2402b35d1e_icgraph" id="asecond__pass_8h_af969b5aef11a97160dd29f2402b35d1e_icgraph">
-<area shape="rect" title="Generates an externals file containing the names and addresses of external symbols." alt="" coords="629,5,784,31"/>
-<area shape="rect" href="second__pass_8c.html#a20c33f0cb96a55d4b805d746db5cc1cc" title="Creates output files based on the given memory buffer, path, final program status,..." alt="" coords="493,5,581,31"/>
-<area shape="rect" href="second__pass_8c.html#aa33feb8d270721a8f28a90a7833937db" title="Initiates the second pass of the assembler. This function is responsible for executing the second pas..." alt="" coords="301,5,445,31"/>
-<area shape="rect" href="driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,5,253,31"/>
-<area shape="rect" href="driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,5,124,31"/>
-</map>
-</div>
 
 </div>
 </div>
@@ -803,28 +669,16 @@ Here is the caller graph for this function:</div>
 </div><div class="memdoc">
 
 <p>Generates an object file from the data in a memory buffer. </p>
-<p >This function takes a <code><a class="el" href="structmemory_buffer.html">memoryBuffer</a></code> structure and a file path, and generates an object file containing the data from the memory buffer. The object file is created using the <code><a class="el" href="second__pass_8h.html#ab9d786e13959c66f18750ee6a69eeef3" title="Translates the content of a memory buffer to machine code.">translate_to_machine_data()</a></code> and <code><a class="el" href="utils_8c.html#a432a9be3e58960e8ea3ce6dcf358e16d" title="Given a path and a postfix this function returns a new name that will be used as the output file name...">get_outfile_name()</a></code> functions, and it is written to the specified path.</p>
+<p >This function takes a <code><a class="el" href="structmemory_buffer.html">memoryBuffer</a></code> structure and a file path, and generates an object file containing the data from the memory buffer. The object file is created using the <code><a class="el" href="second__pass_8h.html#ab9d786e13959c66f18750ee6a69eeef3" title="Translates the content of a memory buffer to machine code.">translate_to_machine_data()</a></code> and <code>get_outfile_name()</code> functions, and it is written to the specified path.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">memory</td><td>The memory buffer to generate the object file from. </td></tr>
     <tr><td class="paramname">path</td><td>The path to the output file. </td></tr>
-    <tr><td class="paramname">err</td><td>A pointer to a <code><a class="el" href="structdebug_list.html">debugList</a></code> structure that will be used to store any errors that occur. </td></tr>
+    <tr><td class="paramname">err</td><td>A pointer to a <code>debugList</code> structure that will be used to store any errors that occur. </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>true if the object file was generated successfully, or false if an error occurred. </dd></dl>
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="second__pass_8h_a6e1b71ceed1623c7e01e75caf66005db_icgraph.png" border="0" usemap="#asecond__pass_8h_a6e1b71ceed1623c7e01e75caf66005db_icgraph" alt=""/></div>
-<map name="asecond__pass_8h_a6e1b71ceed1623c7e01e75caf66005db_icgraph" id="asecond__pass_8h_a6e1b71ceed1623c7e01e75caf66005db_icgraph">
-<area shape="rect" title="Generates an object file from the data in a memory buffer." alt="" coords="629,5,767,31"/>
-<area shape="rect" href="second__pass_8c.html#a20c33f0cb96a55d4b805d746db5cc1cc" title="Creates output files based on the given memory buffer, path, final program status,..." alt="" coords="493,5,581,31"/>
-<area shape="rect" href="second__pass_8c.html#aa33feb8d270721a8f28a90a7833937db" title="Initiates the second pass of the assembler. This function is responsible for executing the second pas..." alt="" coords="301,5,445,31"/>
-<area shape="rect" href="driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,5,253,31"/>
-<area shape="rect" href="driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,5,124,31"/>
-</map>
-</div>
 
 </div>
 </div>
@@ -855,7 +709,7 @@ Here is the caller graph for this function:</div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="structdebug_list.html">debugList</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="debug_8h.html#afc3b4552ab1b8deb9d886f2af70a3dd2">debugList</a> *&#160;</td>
           <td class="paramname"><em>dbg_list</em>&#160;</td>
         </tr>
         <tr>
@@ -877,16 +731,6 @@ Here is the caller graph for this function:</div>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>TRUE if the function executed successfully, FALSE otherwise. </dd></dl>
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="second__pass_8h_aa33feb8d270721a8f28a90a7833937db_icgraph.png" border="0" usemap="#asecond__pass_8h_aa33feb8d270721a8f28a90a7833937db_icgraph" alt=""/></div>
-<map name="asecond__pass_8h_aa33feb8d270721a8f28a90a7833937db_icgraph" id="asecond__pass_8h_aa33feb8d270721a8f28a90a7833937db_icgraph">
-<area shape="rect" title="Initiates the second pass of the assembler. This function is responsible for executing the second pas..." alt="" coords="301,5,445,31"/>
-<area shape="rect" href="driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,5,253,31"/>
-<area shape="rect" href="driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,5,124,31"/>
-</map>
-</div>
 
 </div>
 </div>
@@ -917,7 +761,7 @@ Here is the caller graph for this function:</div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="structdebug_list.html">debugList</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="debug_8h.html#afc3b4552ab1b8deb9d886f2af70a3dd2">debugList</a> *&#160;</td>
           <td class="paramname"><em>dbg_list</em>, </td>
         </tr>
         <tr>
@@ -964,19 +808,6 @@ Here is the caller graph for this function:</div>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A boolean indicating if a label exists in the given line. </dd></dl>
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="second__pass_8h_a960769f0586b74efa2d014e201060d3d_icgraph.png" border="0" usemap="#asecond__pass_8h_a960769f0586b74efa2d014e201060d3d_icgraph" alt=""/></div>
-<map name="asecond__pass_8h_a960769f0586b74efa2d014e201060d3d_icgraph" id="asecond__pass_8h_a960769f0586b74efa2d014e201060d3d_icgraph">
-<area shape="rect" title="Check if a label exists in the given line and update debug information accordingly." alt="" coords="836,5,953,31"/>
-<area shape="rect" href="second__pass_8c.html#a6b999b1b1244fbcf34f5f866b4aa3153" title="Checks whether a label exists in a line and is defined in the symbol table." alt="" coords="636,5,788,31"/>
-<area shape="rect" href="second__pass_8c.html#a36c8038b17843fb6d82d261367f7650b" title="Executes the line, in case label exists finds if it is valid and then encodes it, otherwise prints er..." alt="" coords="493,5,588,31"/>
-<area shape="rect" href="second__pass_8c.html#aa33feb8d270721a8f28a90a7833937db" title="Initiates the second pass of the assembler. This function is responsible for executing the second pas..." alt="" coords="301,5,445,31"/>
-<area shape="rect" href="driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,5,253,31"/>
-<area shape="rect" href="driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,5,124,31"/>
-</map>
-</div>
 
 </div>
 </div>
@@ -1001,7 +832,7 @@ Here is the caller graph for this function:</div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="structdebug_list.html">debugList</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="debug_8h.html#afc3b4552ab1b8deb9d886f2af70a3dd2">debugList</a> *&#160;</td>
           <td class="paramname"><em>dbg_list</em>, </td>
         </tr>
         <tr>
@@ -1029,25 +860,13 @@ Here is the caller graph for this function:</div>
   <table class="params">
     <tr><td class="paramname">line</td><td>Pointer to a <a class="el" href="struct_line_iterator.html" title="This data sturcture is used to make it easier to parse text lines. It&#39;s member should not be freed as...">LineIterator</a> struct containing the line to check. </td></tr>
     <tr><td class="paramname">table</td><td>Pointer to a <a class="el" href="struct_symbol_table.html">SymbolTable</a> struct containing the symbol table. </td></tr>
-    <tr><td class="paramname">dbg_list</td><td>Pointer to a <a class="el" href="structdebug_list.html">debugList</a> struct used for debug prints. </td></tr>
+    <tr><td class="paramname">dbg_list</td><td>Pointer to a debugList struct used for debug prints. </td></tr>
     <tr><td class="paramname">flag</td><td>Pointer to a boolean flag used for error handling. </td></tr>
     <tr><td class="paramname">line_num</td><td>The number of the line being checked. </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if the label exists and is defined in the symbol table, false otherwise. </dd></dl>
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="second__pass_8h_a6b999b1b1244fbcf34f5f866b4aa3153_icgraph.png" border="0" usemap="#asecond__pass_8h_a6b999b1b1244fbcf34f5f866b4aa3153_icgraph" alt=""/></div>
-<map name="asecond__pass_8h_a6b999b1b1244fbcf34f5f866b4aa3153_icgraph" id="asecond__pass_8h_a6b999b1b1244fbcf34f5f866b4aa3153_icgraph">
-<area shape="rect" title="Checks whether a label exists in a line and is defined in the symbol table." alt="" coords="636,5,788,31"/>
-<area shape="rect" href="second__pass_8c.html#a36c8038b17843fb6d82d261367f7650b" title="Executes the line, in case label exists finds if it is valid and then encodes it, otherwise prints er..." alt="" coords="493,5,588,31"/>
-<area shape="rect" href="second__pass_8c.html#aa33feb8d270721a8f28a90a7833937db" title="Initiates the second pass of the assembler. This function is responsible for executing the second pas..." alt="" coords="301,5,445,31"/>
-<area shape="rect" href="driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,5,253,31"/>
-<area shape="rect" href="driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,5,124,31"/>
-</map>
-</div>
 
 </div>
 </div>
@@ -1085,18 +904,6 @@ Here is the caller graph for this function:</div>
   </table>
   </dd>
 </dl>
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="second__pass_8h_a5cccc7694391206c3d51d4256ff41272_icgraph.png" border="0" usemap="#asecond__pass_8h_a5cccc7694391206c3d51d4256ff41272_icgraph" alt=""/></div>
-<map name="asecond__pass_8h_a5cccc7694391206c3d51d4256ff41272_icgraph" id="asecond__pass_8h_a5cccc7694391206c3d51d4256ff41272_icgraph">
-<area shape="rect" title="Counts the amount of lines without any labels, which are needed to be skiped, and updates the origina..." alt="" coords="636,5,781,31"/>
-<area shape="rect" href="second__pass_8c.html#a36c8038b17843fb6d82d261367f7650b" title="Executes the line, in case label exists finds if it is valid and then encodes it, otherwise prints er..." alt="" coords="493,5,588,31"/>
-<area shape="rect" href="second__pass_8c.html#aa33feb8d270721a8f28a90a7833937db" title="Initiates the second pass of the assembler. This function is responsible for executing the second pas..." alt="" coords="301,5,445,31"/>
-<area shape="rect" href="driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,5,253,31"/>
-<area shape="rect" href="driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,5,124,31"/>
-</map>
-</div>
 
 </div>
 </div>
@@ -1124,20 +931,6 @@ Here is the caller graph for this function:</div>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>TranslatedMachineData* A pointer to a translated machine data struct. The struct contains the machine code equivalent of the given memory buffer. Returns NULL if the memory buffer is empty or cannot be translated. </dd></dl>
-<dl class="section note"><dt>Note</dt><dd>The returned memory must be freed by the caller. </dd></dl>
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="second__pass_8h_ab9d786e13959c66f18750ee6a69eeef3_icgraph.png" border="0" usemap="#asecond__pass_8h_ab9d786e13959c66f18750ee6a69eeef3_icgraph" alt=""/></div>
-<map name="asecond__pass_8h_ab9d786e13959c66f18750ee6a69eeef3_icgraph" id="asecond__pass_8h_ab9d786e13959c66f18750ee6a69eeef3_icgraph">
-<area shape="rect" title="Translates the content of a memory buffer to machine code." alt="" coords="815,5,993,31"/>
-<area shape="rect" href="second__pass_8c.html#a6e1b71ceed1623c7e01e75caf66005db" title="Generates an object file from the data in a memory buffer." alt="" coords="629,5,767,31"/>
-<area shape="rect" href="second__pass_8c.html#a20c33f0cb96a55d4b805d746db5cc1cc" title="Creates output files based on the given memory buffer, path, final program status,..." alt="" coords="493,5,581,31"/>
-<area shape="rect" href="second__pass_8c.html#aa33feb8d270721a8f28a90a7833937db" title="Initiates the second pass of the assembler. This function is responsible for executing the second pas..." alt="" coords="301,5,445,31"/>
-<area shape="rect" href="driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,5,253,31"/>
-<area shape="rect" href="driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,5,124,31"/>
-</map>
-</div>
 
 </div>
 </div>
@@ -1172,7 +965,8 @@ Here is the caller graph for this function:</div>
         </tr>
       </table>
 </div><div class="memdoc">
-<p >Updates the addresses of symbols in the given memory buffer and symbol table based on the given assembly line iterator.</p>
+
+<p>Updates the addresses of symbols in the given memory buffer and symbol table based on the given assembly line iterator. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">it</td><td>The assembly line iterator to extract symbols from. </td></tr>
@@ -1181,18 +975,6 @@ Here is the caller graph for this function:</div>
   </table>
   </dd>
 </dl>
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="second__pass_8h_ab6728edfef56c073ce9792b67edd84f7_icgraph.png" border="0" usemap="#asecond__pass_8h_ab6728edfef56c073ce9792b67edd84f7_icgraph" alt=""/></div>
-<map name="asecond__pass_8h_ab6728edfef56c073ce9792b67edd84f7_icgraph" id="asecond__pass_8h_ab6728edfef56c073ce9792b67edd84f7_icgraph">
-<area shape="rect" title=" " alt="" coords="636,5,799,31"/>
-<area shape="rect" href="second__pass_8c.html#a36c8038b17843fb6d82d261367f7650b" title="Executes the line, in case label exists finds if it is valid and then encodes it, otherwise prints er..." alt="" coords="493,5,588,31"/>
-<area shape="rect" href="second__pass_8c.html#aa33feb8d270721a8f28a90a7833937db" title="Initiates the second pass of the assembler. This function is responsible for executing the second pas..." alt="" coords="301,5,445,31"/>
-<area shape="rect" href="driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,5,253,31"/>
-<area shape="rect" href="driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,5,124,31"/>
-</map>
-</div>
 
 </div>
 </div>
@@ -1234,27 +1016,13 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p>Updates the symbol offset in memory. </p>
+<p>Updates the symbol offset in memory. This function iterates through all symbols in a symbol table using a linked list traversal macro. For each symbol, if its type is either SYM_DATA or SYM_CODE, the function adds the decimal address base value to its counter field. This is used in assembly programming to set the base address of the program's memory space. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">table</td><td>A pointer to the symbol table. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>void This function iterates through all symbols in a symbol table using a linked list traversal macro. For each symbol, if its type is either SYM_DATA or SYM_CODE, the function adds the decimal address base value to its counter field. This is used in assembly programming to set the base address of the program's memory space. </dd></dl>
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="second__pass_8h_a1d991b81e3a4e0eca4a867bd08cf6ecc_icgraph.png" border="0" usemap="#asecond__pass_8h_a1d991b81e3a4e0eca4a867bd08cf6ecc_icgraph" alt=""/></div>
-<map name="asecond__pass_8h_a1d991b81e3a4e0eca4a867bd08cf6ecc_icgraph" id="asecond__pass_8h_a1d991b81e3a4e0eca4a867bd08cf6ecc_icgraph">
-<area shape="rect" title="Updates the symbol offset in memory." alt="" coords="847,5,995,31"/>
-<area shape="rect" href="second__pass_8c.html#ab6728edfef56c073ce9792b67edd84f7" title=" " alt="" coords="636,5,799,31"/>
-<area shape="rect" href="second__pass_8c.html#a36c8038b17843fb6d82d261367f7650b" title="Executes the line, in case label exists finds if it is valid and then encodes it, otherwise prints er..." alt="" coords="493,5,588,31"/>
-<area shape="rect" href="second__pass_8c.html#aa33feb8d270721a8f28a90a7833937db" title="Initiates the second pass of the assembler. This function is responsible for executing the second pas..." alt="" coords="301,5,445,31"/>
-<area shape="rect" href="driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,5,253,31"/>
-<area shape="rect" href="driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,5,124,31"/>
-</map>
-</div>
 
 </div>
 </div>

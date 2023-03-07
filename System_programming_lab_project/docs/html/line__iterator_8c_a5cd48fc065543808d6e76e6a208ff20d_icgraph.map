@@ -1,8 +1,0 @@
-<map id="line_iterator_reset" name="line_iterator_reset">
-<area shape="rect" id="node1" title=" " alt="" coords="815,13,940,38"/>
-<area shape="rect" id="node2" href="$encoding_8c.html#ac462ef04efd6a452ec612a07a0e38070" title=" " alt="" coords="636,5,767,45"/>
-<area shape="rect" id="node3" href="$second__pass_8c.html#a36c8038b17843fb6d82d261367f7650b" title="Executes the line, in case label exists finds if it is valid and then encodes it, otherwise prints er..." alt="" coords="493,13,588,38"/>
-<area shape="rect" id="node4" href="$second__pass_8c.html#aa33feb8d270721a8f28a90a7833937db" title="Initiates the second pass of the assembler. This function is responsible for executing the second pas..." alt="" coords="301,13,445,38"/>
-<area shape="rect" id="node5" href="$driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,13,253,38"/>
-<area shape="rect" id="node6" href="$driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,13,124,38"/>
-</map>

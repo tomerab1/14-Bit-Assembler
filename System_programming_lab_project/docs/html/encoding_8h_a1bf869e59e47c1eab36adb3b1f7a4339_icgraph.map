@@ -1,9 +1,0 @@
-<map id="encode_syntax_group_6" name="encode_syntax_group_6">
-<area shape="rect" id="node1" title="Encode a syntax group 6 instruction." alt="" coords="788,45,951,70"/>
-<area shape="rect" id="node2" href="$encoding_8c.html#a5e11ca7717b5440fb6baebdf0da9cfda" title="Encode a single opcode. This is the entry point for the encoding routines." alt="" coords="627,45,740,70"/>
-<area shape="rect" id="node3" href="$first__pass_8c.html#a40eeac60c34220893b004549546acb2d" title="This function is used to process lines with opcodes and no label definitions. It also encodes the mem..." alt="" coords="448,5,579,45"/>
-<area shape="rect" id="node7" href="$first__pass_8c.html#ac0da628ba463b754effc2e88e611d4dd" title="This function is used to process lines with label definitions. It also encodes the memory if possible..." alt="" coords="448,69,579,109"/>
-<area shape="rect" id="node4" href="$first__pass_8c.html#ae3d15ca0f34657e4715827c439839e1e" title="This function implements the first pass algorithm." alt="" coords="301,45,400,70"/>
-<area shape="rect" id="node5" href="$driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,45,253,70"/>
-<area shape="rect" id="node6" href="$driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,45,124,70"/>
-</map>

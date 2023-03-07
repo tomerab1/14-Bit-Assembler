@@ -1,7 +1,0 @@
-<map id="generate_object_file" name="generate_object_file">
-<area shape="rect" id="node1" title="Generates an object file from the data in a memory buffer." alt="" coords="629,5,767,31"/>
-<area shape="rect" id="node2" href="$second__pass_8c.html#a20c33f0cb96a55d4b805d746db5cc1cc" title="Creates output files based on the given memory buffer, path, final program status,..." alt="" coords="493,5,581,31"/>
-<area shape="rect" id="node3" href="$second__pass_8c.html#aa33feb8d270721a8f28a90a7833937db" title="Initiates the second pass of the assembler. This function is responsible for executing the second pas..." alt="" coords="301,5,445,31"/>
-<area shape="rect" id="node4" href="$driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,5,253,31"/>
-<area shape="rect" id="node5" href="$driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,5,124,31"/>
-</map>

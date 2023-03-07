@@ -1,6 +1,3 @@
-/** @file
-*/
-
 #include "syntactical_analysis.h"
 #include "line_iterator.h"
 #include <string.h>
@@ -719,8 +716,8 @@ SyntaxGroups get_syntax_group(char* name)
 }
 
 bool directive_exists(LineIterator* line) {
-    return line_iterator_word_includes(line, ".string") ||
-        line_iterator_word_includes(line, ".data") ||
-        line_iterator_word_includes(line, ".extern") ||
-        line_iterator_word_includes(line, ".entry");
+    return line_iterator_word_includes(line, DOT_STRING_STRING) ||
+           line_iterator_word_includes(line, DOT_DATA_STRING) ||
+           line_iterator_word_includes(line, DOT_EXTERN_STRING) ||
+           line_iterator_word_includes(line, DOT_ENTRY_STRING);
 }

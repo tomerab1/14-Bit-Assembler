@@ -1,4 +1,0 @@
-<map id="skip_label_basic" name="skip_label_basic">
-<area shape="rect" id="node1" title="Skip a basic label. This is used to skip labels that start with a colon or are followed by blanks." alt="" coords="176,13,295,38"/>
-<area shape="rect" id="node2" href="$syntactical__analysis_8c.html#ab26f0bb418b6c3c1d540410e3a74a446" title="Check if instruction at line is a label. This is used to detect if we are going to write an instructi..." alt="" coords="5,5,128,45"/>
-</map>

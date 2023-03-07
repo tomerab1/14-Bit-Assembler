@@ -1,8 +1,0 @@
-<map id="check_symbol_existence" name="check_symbol_existence">
-<area shape="rect" id="node1" title="Check if a symbol with the given name exists in the symbol table and has a specific type." alt="" coords="627,45,796,70"/>
-<area shape="rect" id="node2" href="$first__pass_8c.html#aa0a39d1f94314921231c97245e6eb551" title="This function is used to process .entry lines. It also encodes the memory if possible into the memory..." alt="" coords="448,5,579,45"/>
-<area shape="rect" id="node6" href="$first__pass_8c.html#accedad2dc6b0e81f160e2201f4f2b1d3" title="This function is used to process .extern lines. It also encodes the memory if possible into the memor..." alt="" coords="448,69,579,109"/>
-<area shape="rect" id="node3" href="$first__pass_8c.html#ae3d15ca0f34657e4715827c439839e1e" title="This function implements the first pass algorithm." alt="" coords="301,45,400,70"/>
-<area shape="rect" id="node4" href="$driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,45,253,70"/>
-<area shape="rect" id="node5" href="$driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,45,124,70"/>
-</map>

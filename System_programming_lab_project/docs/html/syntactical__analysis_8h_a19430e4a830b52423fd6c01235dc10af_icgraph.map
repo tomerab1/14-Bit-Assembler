@@ -1,4 +1,0 @@
-<map id="isLabel" name="isLabel">
-<area shape="rect" id="node1" title="Check if the next word is a label. This is used to detect whether or not we are in a label context." alt="" coords="176,13,239,38"/>
-<area shape="rect" id="node2" href="$syntactical__analysis_8c.html#ab26f0bb418b6c3c1d540410e3a74a446" title="Check if instruction at line is a label. This is used to detect if we are going to write an instructi..." alt="" coords="5,5,128,45"/>
-</map>

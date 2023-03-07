@@ -1,5 +1,3 @@
-/** @file
-*/
 #include "encoding.h"
 
 struct VarData
@@ -86,7 +84,7 @@ void encode_integer(imageMemory* img, unsigned int num)
 	set_image_memory(img, num & BYTE_MASK, FLAG_ERA | FLAG_SOURCE | FLAG_DEST | FLAG_OPCODE1);
 
 	/* Copy second 8 bits */
-	set_image_memory(img, (num & WORD_MASK) >> BITS_3_MASK, FLAG_OPCODE2 | FLAG_PARAM1 | FLAG_PARAM2);
+	set_image_memory(img, (num & WORD_MASK) >> START_OFFSET_SECOND_BYTE, FLAG_OPCODE2 | FLAG_PARAM1 | FLAG_PARAM2);
 	img_memory_set_counter(img, img_memory_get_counter(img) + 1);
 }
 
@@ -194,7 +192,7 @@ void encode_source_and_dest(imageMemory* img, char* source, char* dest)
 			case KIND_IMM:
 				num = get_num(operands[i] + 1); /* +1 to ignore the '#' */
 				set_image_memory(img, num << 2, FLAG_DEST | FLAG_SOURCE | FLAG_OPCODE1);
-				set_image_memory(img, num >> BITS_3_MASK, FLAG_PARAM1 | FLAG_PARAM2 | FLAG_OPCODE2);
+				set_image_memory(img, num >> START_OFFSET_SECOND_BYTE, FLAG_PARAM1 | FLAG_PARAM2 | FLAG_OPCODE2);
 				break;
 			case KIND_REG:
 				/* Two different cases for source and dest. */

@@ -1,10 +1,6 @@
-/** @file
-*/
-
 #include "pre_assembler.h"
 #include <string.h>
 #include <ctype.h>
-
 
 struct macro_list_node
 {

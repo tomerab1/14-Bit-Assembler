@@ -1,7 +1,0 @@
-<map id="debug_list_destroy_node" name="debug_list_destroy_node">
-<area shape="rect" id="node1" title=" " alt="" coords="592,5,759,31"/>
-<area shape="rect" id="node2" href="$debug_8c.html#ab549b9b54d931a5e324856b8a0ec859b" title="Destroys a debugList and all its nodes." alt="" coords="413,5,544,31"/>
-<area shape="rect" id="node3" href="$driver_8c.html#af3e60266c17733333c492f296058f896" title="Called when the module is unloaded. Destroys all memory allocated by the module. This is the last fun..." alt="" coords="301,5,365,31"/>
-<area shape="rect" id="node4" href="$driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,5,253,31"/>
-<area shape="rect" id="node5" href="$driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,5,124,31"/>
-</map>

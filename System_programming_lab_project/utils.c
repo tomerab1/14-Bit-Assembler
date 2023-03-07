@@ -1,6 +1,3 @@
-/** @file
-*/
-
 #include "utils.h"
 #include "syntactical_analysis.h"
 #include <string.h>
@@ -9,7 +6,7 @@
 void* xrealloc(void* ptr, size_t alloc_sz)
 {
 	void* mem = realloc(ptr, alloc_sz);
-	if (!mem) 
+	if (!mem)
 		printf("%s\n", "Error: memory allocation failed !");
 	return mem;
 }
@@ -17,7 +14,7 @@ void* xrealloc(void* ptr, size_t alloc_sz)
 void* xcalloc(size_t count, size_t alloc_sz)
 {
 	void* mem = calloc(count, alloc_sz);
-	if (!mem) 
+	if (!mem)
 		printf("%s\n", "Error: memory allocation failed !");
 	return mem;
 }
@@ -25,7 +22,7 @@ void* xcalloc(size_t count, size_t alloc_sz)
 void* xmalloc(size_t alloc_sz)
 {
 	void* mem = malloc(alloc_sz);
-	if (!mem) 
+	if (!mem)
 		printf("%s\n", "Error: memory allocation failed !");
 	return mem;
 }
@@ -34,9 +31,10 @@ char* get_outfile_name(char* path, char* postfix)
 {
 	char* new_name = (char*)xcalloc(strlen(path) + strlen(postfix) + 1, sizeof(char));
 	char* dot_loc = strrchr(path, POSTFIX_DOT_CHAR); /* Assuming path will contain a dot and then a postfix. */
+	size_t cpy_until = (dot_loc) ? (dot_loc - path) : (strlen(path) + strlen(postfix));
 
 	/* Will copy until the dot. */
-	memmove(new_name, path, sizeof(char) * (dot_loc - path));
+	memmove(new_name, path, sizeof(char) * cpy_until);
 	strncat(new_name, postfix, sizeof(char) * strlen(postfix));
 
 	return new_name;
@@ -106,10 +104,4 @@ unsigned int get_num(char* num)
 	int n;
 	(void)sscanf(num, "%d", &n);
 	return n;
-}
-
-
-unsigned int get_2s_complement(int n)
-{
-	return (~n) + 1;
 }

@@ -79,7 +79,6 @@ void debug_list_destroy_node(debugNode* node);
 /**
 * @brief Destroys a debugList and all its nodes.
 * @param list A pointer to the debugList to be destroyed.
-* @note After calling this function, the pointer to the debugList should be set to NULL.
 * This function frees the memory allocated for a debugList and all its nodes.
 * It first iterates over the linked list of debugNodes, and for each node,
 * it calls debug_list_destroy_node to free any additional memory that was allocated for it,

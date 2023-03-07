@@ -23,7 +23,6 @@ typedef struct programFinalStatus programFinalStatus;
 
 
 /**
-
 @brief Initiates the second pass of the assembler.
 This function is responsible for executing the second pass of the assembly process. It reads each line from the input file,
 sets a base address for the symbol table, initializes the instruction image counter to 0, and then executes the line by
@@ -57,7 +56,6 @@ bool generate_object_file(memoryBuffer* memory, char* path);
 @return TranslatedMachineData* A pointer to a translated machine data struct.
 The struct contains the machine code equivalent of the given memory buffer.
 Returns NULL if the memory buffer is empty or cannot be translated.
-@note The returned memory must be freed by the caller.
 */
 TranslatedMachineData* translate_to_machine_data(memoryBuffer* memory);
 
@@ -169,7 +167,7 @@ taking into account the amount of variables in the line.
 void find_word_start_point(LineIterator* it, char* word, int amountOfVars);
 
 /**
- * Updates the addresses of symbols in the given memory buffer and symbol table
+ * @brief Updates the addresses of symbols in the given memory buffer and symbol table
  * based on the given assembly line iterator.
  *
  * @param it The assembly line iterator to extract symbols from.
@@ -179,22 +177,20 @@ void find_word_start_point(LineIterator* it, char* word, int amountOfVars);
 void update_symbol_address(LineIterator it, memoryBuffer* memory, SymbolTable* table);
 
 /**
-@brief Updates the symbol offset in memory
-@param table A pointer to the symbol table.
-@return void
+@brief Updates the symbol offset in memory.
 This function iterates through all symbols in a symbol table using a linked list traversal macro. For each symbol,
 if its type is either SYM_DATA or SYM_CODE, the function adds the decimal address base value to its counter field.
 This is used in assembly programming to set the base address of the program's memory space.
+@param table A pointer to the symbol table.
 */
 void update_symbol_offset(char* word, int offset, memoryBuffer* memory, SymbolTable* table);
 
 /**
 @brief Adds the decimal base address to all data and code symbols in a symbol table.
-@param table A pointer to the symbol table.
-@return void
 This function iterates through all symbols in a symbol table using a linked list traversal macro. For each symbol,
 if its type is either SYM_DATA or SYM_CODE, the function adds the decimal address base value to its counter field.
 This is used in assembly programming to set the base address of the program's memory space.
+@param table A pointer to the symbol table.
 */
 void add_label_base_address(SymbolTable* table);
 

@@ -3,9 +3,6 @@
 #include <string.h>
 #include <ctype.h>
 
-/** @file
-*/
-
 void line_iterator_put_line(LineIterator* it, char* line)
 {
     it->current = it->start = line;

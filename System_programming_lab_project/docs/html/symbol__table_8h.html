@@ -238,19 +238,6 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A boolean value indicating whether a symbol with the given name and type was found in the symbol table or not. This function searches the given symbol table for a symbol with the given name and checks if it has the specified type (either SYM_ENTRY or SYM_EXTERN). If the symbol is found and has the correct type, the function returns TRUE. Otherwise, it returns FALSE. Note that if the symbol is not found in the symbol table, the function will also return FALSE. </dd></dl>
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="symbol__table_8h_aa9e9364ffc547a159df48e179e960d22_icgraph.png" border="0" usemap="#asymbol__table_8h_aa9e9364ffc547a159df48e179e960d22_icgraph" alt=""/></div>
-<map name="asymbol__table_8h_aa9e9364ffc547a159df48e179e960d22_icgraph" id="asymbol__table_8h_aa9e9364ffc547a159df48e179e960d22_icgraph">
-<area shape="rect" title="Check if a symbol with the given name exists in the symbol table and has a specific type." alt="" coords="627,45,796,70"/>
-<area shape="rect" href="first__pass_8c.html#aa0a39d1f94314921231c97245e6eb551" title="This function is used to process .entry lines. It also encodes the memory if possible into the memory..." alt="" coords="448,5,579,45"/>
-<area shape="rect" href="first__pass_8c.html#accedad2dc6b0e81f160e2201f4f2b1d3" title="This function is used to process .extern lines. It also encodes the memory if possible into the memor..." alt="" coords="448,69,579,109"/>
-<area shape="rect" href="first__pass_8c.html#ae3d15ca0f34657e4715827c439839e1e" title="This function implements the first pass algorithm." alt="" coords="301,45,400,70"/>
-<area shape="rect" href="driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,45,253,70"/>
-<area shape="rect" href="driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,45,124,70"/>
-</map>
-</div>
 
 </div>
 </div>
@@ -278,28 +265,6 @@ Here is the caller graph for this function:</div>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The counter of the symbol. </dd></dl>
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="symbol__table_8h_a37a20bf2385e0ac587c17e03fefbd85b_icgraph.png" border="0" usemap="#asymbol__table_8h_a37a20bf2385e0ac587c17e03fefbd85b_icgraph" alt=""/></div>
-<map name="asymbol__table_8h_a37a20bf2385e0ac587c17e03fefbd85b_icgraph" id="asymbol__table_8h_a37a20bf2385e0ac587c17e03fefbd85b_icgraph">
-<area shape="rect" title="Returns the counter of a given symbol." alt="" coords="1120,146,1259,171"/>
-<area shape="rect" href="second__pass_8c.html#a2765636e71a2da6c192eac0fa06581c1" title="Adds the decimal base address to all data and code symbols in a symbol table." alt="" coords="493,70,659,95"/>
-<area shape="rect" href="encoding_8c.html#a6f027af72fd18bdeb31711ada8e669aa" title=" " alt="" coords="942,269,1047,294"/>
-<area shape="rect" href="first__pass_8c.html#aa0a39d1f94314921231c97245e6eb551" title="This function is used to process .entry lines. It also encodes the memory if possible into the memory..." alt="" coords="929,5,1060,45"/>
-<area shape="rect" href="second__pass_8c.html#a2bd718eb223c109ac098038bd74150f1" title="Generates an entries file containing the entry symbols and their addresses The function generates an ..." alt="" coords="924,121,1065,146"/>
-<area shape="rect" href="second__pass_8c.html#af969b5aef11a97160dd29f2402b35d1e" title="Generates an externals file containing the names and addresses of external symbols." alt="" coords="917,170,1072,195"/>
-<area shape="rect" href="second__pass_8c.html#a1d991b81e3a4e0eca4a867bd08cf6ecc" title="Updates the symbol offset in memory." alt="" coords="921,219,1069,245"/>
-<area shape="rect" href="second__pass_8c.html#aa33feb8d270721a8f28a90a7833937db" title="Initiates the second pass of the assembler. This function is responsible for executing the second pas..." alt="" coords="301,95,445,121"/>
-<area shape="rect" href="driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,71,253,97"/>
-<area shape="rect" href="driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,71,124,97"/>
-<area shape="rect" href="encoding_8c.html#ac462ef04efd6a452ec612a07a0e38070" title=" " alt="" coords="723,261,853,301"/>
-<area shape="rect" href="second__pass_8c.html#a36c8038b17843fb6d82d261367f7650b" title="Executes the line, in case label exists finds if it is valid and then encodes it, otherwise prints er..." alt="" coords="529,211,623,237"/>
-<area shape="rect" href="first__pass_8c.html#ae3d15ca0f34657e4715827c439839e1e" title="This function implements the first pass algorithm." alt="" coords="324,31,423,57"/>
-<area shape="rect" href="second__pass_8c.html#a20c33f0cb96a55d4b805d746db5cc1cc" title="Creates output files based on the given memory buffer, path, final program status,..." alt="" coords="744,121,832,146"/>
-<area shape="rect" href="second__pass_8c.html#ab6728edfef56c073ce9792b67edd84f7" title=" " alt="" coords="707,211,869,237"/>
-</map>
-</div>
 
 </div>
 </div>
@@ -327,23 +292,6 @@ Here is the caller graph for this function:</div>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The name of the symbol. </dd></dl>
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="symbol__table_8h_aa399abdbcee97a193a8549b8498f3155_icgraph.png" border="0" usemap="#asymbol__table_8h_aa399abdbcee97a193a8549b8498f3155_icgraph" alt=""/></div>
-<map name="asymbol__table_8h_aa399abdbcee97a193a8549b8498f3155_icgraph" id="asymbol__table_8h_aa399abdbcee97a193a8549b8498f3155_icgraph">
-<area shape="rect" title="Returns the name of a given symbol." alt="" coords="1049,55,1177,80"/>
-<area shape="rect" href="second__pass_8c.html#a2bd718eb223c109ac098038bd74150f1" title="Generates an entries file containing the entry symbols and their addresses The function generates an ..." alt="" coords="853,5,995,31"/>
-<area shape="rect" href="second__pass_8c.html#af969b5aef11a97160dd29f2402b35d1e" title="Generates an externals file containing the names and addresses of external symbols." alt="" coords="847,55,1001,80"/>
-<area shape="rect" href="second__pass_8c.html#a1d991b81e3a4e0eca4a867bd08cf6ecc" title="Updates the symbol offset in memory." alt="" coords="850,104,998,129"/>
-<area shape="rect" href="second__pass_8c.html#a20c33f0cb96a55d4b805d746db5cc1cc" title="Creates output files based on the given memory buffer, path, final program status,..." alt="" coords="673,53,761,79"/>
-<area shape="rect" href="second__pass_8c.html#aa33feb8d270721a8f28a90a7833937db" title="Initiates the second pass of the assembler. This function is responsible for executing the second pas..." alt="" coords="301,79,445,104"/>
-<area shape="rect" href="driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,79,253,104"/>
-<area shape="rect" href="driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,79,124,104"/>
-<area shape="rect" href="second__pass_8c.html#ab6728edfef56c073ce9792b67edd84f7" title=" " alt="" coords="636,104,799,129"/>
-<area shape="rect" href="second__pass_8c.html#a36c8038b17843fb6d82d261367f7650b" title="Executes the line, in case label exists finds if it is valid and then encodes it, otherwise prints er..." alt="" coords="493,104,588,129"/>
-</map>
-</div>
 
 </div>
 </div>
@@ -371,30 +319,6 @@ Here is the caller graph for this function:</div>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The type of the symbol. </dd></dl>
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="symbol__table_8h_a138b11bfe95510adff947a175c253082_icgraph.png" border="0" usemap="#asymbol__table_8h_a138b11bfe95510adff947a175c253082_icgraph" alt=""/></div>
-<map name="asymbol__table_8h_a138b11bfe95510adff947a175c253082_icgraph" id="asymbol__table_8h_a138b11bfe95510adff947a175c253082_icgraph">
-<area shape="rect" title="Returns the type of a given symbol." alt="" coords="1120,223,1241,249"/>
-<area shape="rect" href="second__pass_8c.html#a2765636e71a2da6c192eac0fa06581c1" title="Adds the decimal base address to all data and code symbols in a symbol table." alt="" coords="493,198,659,223"/>
-<area shape="rect" href="encoding_8c.html#a6f027af72fd18bdeb31711ada8e669aa" title=" " alt="" coords="942,397,1047,422"/>
-<area shape="rect" href="first__pass_8c.html#a87a70eef7a9fd6d62eb27a5a2127739e" title="This function is used to process .data lines. It also encodes the memory if possible into the memoryB..." alt="" coords="929,133,1060,173"/>
-<area shape="rect" href="first__pass_8c.html#ac0da628ba463b754effc2e88e611d4dd" title="This function is used to process lines with label definitions. It also encodes the memory if possible..." alt="" coords="929,5,1060,45"/>
-<area shape="rect" href="first__pass_8c.html#aa0a39d1f94314921231c97245e6eb551" title="This function is used to process .entry lines. It also encodes the memory if possible into the memory..." alt="" coords="929,69,1060,109"/>
-<area shape="rect" href="second__pass_8c.html#a2bd718eb223c109ac098038bd74150f1" title="Generates an entries file containing the entry symbols and their addresses The function generates an ..." alt="" coords="924,249,1065,274"/>
-<area shape="rect" href="second__pass_8c.html#af969b5aef11a97160dd29f2402b35d1e" title="Generates an externals file containing the names and addresses of external symbols." alt="" coords="917,298,1072,323"/>
-<area shape="rect" href="second__pass_8c.html#a1d991b81e3a4e0eca4a867bd08cf6ecc" title="Updates the symbol offset in memory." alt="" coords="921,347,1069,373"/>
-<area shape="rect" href="second__pass_8c.html#aa33feb8d270721a8f28a90a7833937db" title="Initiates the second pass of the assembler. This function is responsible for executing the second pas..." alt="" coords="301,223,445,249"/>
-<area shape="rect" href="driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,198,253,223"/>
-<area shape="rect" href="driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,198,124,223"/>
-<area shape="rect" href="encoding_8c.html#ac462ef04efd6a452ec612a07a0e38070" title=" " alt="" coords="723,389,853,429"/>
-<area shape="rect" href="second__pass_8c.html#a36c8038b17843fb6d82d261367f7650b" title="Executes the line, in case label exists finds if it is valid and then encodes it, otherwise prints er..." alt="" coords="529,339,623,365"/>
-<area shape="rect" href="first__pass_8c.html#ae3d15ca0f34657e4715827c439839e1e" title="This function implements the first pass algorithm." alt="" coords="739,109,837,134"/>
-<area shape="rect" href="second__pass_8c.html#a20c33f0cb96a55d4b805d746db5cc1cc" title="Creates output files based on the given memory buffer, path, final program status,..." alt="" coords="744,249,832,274"/>
-<area shape="rect" href="second__pass_8c.html#ab6728edfef56c073ce9792b67edd84f7" title=" " alt="" coords="707,339,869,365"/>
-</map>
-</div>
 
 </div>
 </div>
@@ -422,24 +346,6 @@ Here is the caller graph for this function:</div>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The next node of the given node. </dd></dl>
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="symbol__table_8h_a6e873141116f3277fbe834c21b0e8055_icgraph.png" border="0" usemap="#asymbol__table_8h_a6e873141116f3277fbe834c21b0e8055_icgraph" alt=""/></div>
-<map name="asymbol__table_8h_a6e873141116f3277fbe834c21b0e8055_icgraph" id="asymbol__table_8h_a6e873141116f3277fbe834c21b0e8055_icgraph">
-<area shape="rect" title="Returns the next symbol table node of a given symbol table node." alt="" coords="1120,79,1276,104"/>
-<area shape="rect" href="second__pass_8c.html#a2765636e71a2da6c192eac0fa06581c1" title="Adds the decimal base address to all data and code symbols in a symbol table." alt="" coords="493,5,659,31"/>
-<area shape="rect" href="second__pass_8c.html#a2bd718eb223c109ac098038bd74150f1" title="Generates an entries file containing the entry symbols and their addresses The function generates an ..." alt="" coords="924,53,1065,79"/>
-<area shape="rect" href="second__pass_8c.html#af969b5aef11a97160dd29f2402b35d1e" title="Generates an externals file containing the names and addresses of external symbols." alt="" coords="917,103,1072,128"/>
-<area shape="rect" href="second__pass_8c.html#a1d991b81e3a4e0eca4a867bd08cf6ecc" title="Updates the symbol offset in memory." alt="" coords="921,152,1069,177"/>
-<area shape="rect" href="second__pass_8c.html#aa33feb8d270721a8f28a90a7833937db" title="Initiates the second pass of the assembler. This function is responsible for executing the second pas..." alt="" coords="301,59,445,84"/>
-<area shape="rect" href="driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,59,253,84"/>
-<area shape="rect" href="driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,59,124,84"/>
-<area shape="rect" href="second__pass_8c.html#a20c33f0cb96a55d4b805d746db5cc1cc" title="Creates output files based on the given memory buffer, path, final program status,..." alt="" coords="744,59,832,84"/>
-<area shape="rect" href="second__pass_8c.html#ab6728edfef56c073ce9792b67edd84f7" title=" " alt="" coords="707,145,869,171"/>
-<area shape="rect" href="second__pass_8c.html#a36c8038b17843fb6d82d261367f7650b" title="Executes the line, in case label exists finds if it is valid and then encodes it, otherwise prints er..." alt="" coords="529,121,623,147"/>
-</map>
-</div>
 
 </div>
 </div>
@@ -467,30 +373,6 @@ Here is the caller graph for this function:</div>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The symbol of the node. </dd></dl>
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="symbol__table_8h_a2840400cc50c2f9529dc49c92cf47db9_icgraph.png" border="0" usemap="#asymbol__table_8h_a2840400cc50c2f9529dc49c92cf47db9_icgraph" alt=""/></div>
-<map name="asymbol__table_8h_a2840400cc50c2f9529dc49c92cf47db9_icgraph" id="asymbol__table_8h_a2840400cc50c2f9529dc49c92cf47db9_icgraph">
-<area shape="rect" title="Returns the symbol of a given symbol table node." alt="" coords="1120,223,1276,249"/>
-<area shape="rect" href="second__pass_8c.html#a2765636e71a2da6c192eac0fa06581c1" title="Adds the decimal base address to all data and code symbols in a symbol table." alt="" coords="493,198,659,223"/>
-<area shape="rect" href="encoding_8c.html#a6f027af72fd18bdeb31711ada8e669aa" title=" " alt="" coords="942,397,1047,422"/>
-<area shape="rect" href="first__pass_8c.html#a87a70eef7a9fd6d62eb27a5a2127739e" title="This function is used to process .data lines. It also encodes the memory if possible into the memoryB..." alt="" coords="929,133,1060,173"/>
-<area shape="rect" href="first__pass_8c.html#ac0da628ba463b754effc2e88e611d4dd" title="This function is used to process lines with label definitions. It also encodes the memory if possible..." alt="" coords="929,5,1060,45"/>
-<area shape="rect" href="first__pass_8c.html#aa0a39d1f94314921231c97245e6eb551" title="This function is used to process .entry lines. It also encodes the memory if possible into the memory..." alt="" coords="929,69,1060,109"/>
-<area shape="rect" href="second__pass_8c.html#a2bd718eb223c109ac098038bd74150f1" title="Generates an entries file containing the entry symbols and their addresses The function generates an ..." alt="" coords="924,249,1065,274"/>
-<area shape="rect" href="second__pass_8c.html#af969b5aef11a97160dd29f2402b35d1e" title="Generates an externals file containing the names and addresses of external symbols." alt="" coords="917,298,1072,323"/>
-<area shape="rect" href="second__pass_8c.html#a1d991b81e3a4e0eca4a867bd08cf6ecc" title="Updates the symbol offset in memory." alt="" coords="921,347,1069,373"/>
-<area shape="rect" href="second__pass_8c.html#aa33feb8d270721a8f28a90a7833937db" title="Initiates the second pass of the assembler. This function is responsible for executing the second pas..." alt="" coords="301,223,445,249"/>
-<area shape="rect" href="driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,198,253,223"/>
-<area shape="rect" href="driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,198,124,223"/>
-<area shape="rect" href="encoding_8c.html#ac462ef04efd6a452ec612a07a0e38070" title=" " alt="" coords="723,389,853,429"/>
-<area shape="rect" href="second__pass_8c.html#a36c8038b17843fb6d82d261367f7650b" title="Executes the line, in case label exists finds if it is valid and then encodes it, otherwise prints er..." alt="" coords="529,339,623,365"/>
-<area shape="rect" href="first__pass_8c.html#ae3d15ca0f34657e4715827c439839e1e" title="This function implements the first pass algorithm." alt="" coords="739,109,837,134"/>
-<area shape="rect" href="second__pass_8c.html#a20c33f0cb96a55d4b805d746db5cc1cc" title="Creates output files based on the given memory buffer, path, final program status,..." alt="" coords="744,249,832,274"/>
-<area shape="rect" href="second__pass_8c.html#ab6728edfef56c073ce9792b67edd84f7" title=" " alt="" coords="707,339,869,365"/>
-</map>
-</div>
 
 </div>
 </div>
@@ -528,21 +410,6 @@ Here is the caller graph for this function:</div>
   </table>
   </dd>
 </dl>
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="symbol__table_8h_a65446ec1e574e9239c16bdda937bda48_icgraph.png" border="0" usemap="#asymbol__table_8h_a65446ec1e574e9239c16bdda937bda48_icgraph" alt=""/></div>
-<map name="asymbol__table_8h_a65446ec1e574e9239c16bdda937bda48_icgraph" id="asymbol__table_8h_a65446ec1e574e9239c16bdda937bda48_icgraph">
-<area shape="rect" title="Sets the counter of a given symbol to a new value." alt="" coords="1045,31,1184,56"/>
-<area shape="rect" href="second__pass_8c.html#a2765636e71a2da6c192eac0fa06581c1" title="Adds the decimal base address to all data and code symbols in a symbol table." alt="" coords="636,5,801,31"/>
-<area shape="rect" href="second__pass_8c.html#a1d991b81e3a4e0eca4a867bd08cf6ecc" title="Updates the symbol offset in memory." alt="" coords="849,56,997,81"/>
-<area shape="rect" href="second__pass_8c.html#aa33feb8d270721a8f28a90a7833937db" title="Initiates the second pass of the assembler. This function is responsible for executing the second pas..." alt="" coords="301,31,445,56"/>
-<area shape="rect" href="driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,31,253,56"/>
-<area shape="rect" href="driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,31,124,56"/>
-<area shape="rect" href="second__pass_8c.html#ab6728edfef56c073ce9792b67edd84f7" title=" " alt="" coords="637,56,800,81"/>
-<area shape="rect" href="second__pass_8c.html#a36c8038b17843fb6d82d261367f7650b" title="Executes the line, in case label exists finds if it is valid and then encodes it, otherwise prints er..." alt="" coords="493,56,588,81"/>
-</map>
-</div>
 
 </div>
 </div>
@@ -569,17 +436,6 @@ Here is the caller graph for this function:</div>
   </table>
   </dd>
 </dl>
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="symbol__table_8h_a01109b630db52c46d594ea3062a3b8c8_icgraph.png" border="0" usemap="#asymbol__table_8h_a01109b630db52c46d594ea3062a3b8c8_icgraph" alt=""/></div>
-<map name="asymbol__table_8h_a01109b630db52c46d594ea3062a3b8c8_icgraph" id="asymbol__table_8h_a01109b630db52c46d594ea3062a3b8c8_icgraph">
-<area shape="rect" title="Destroy a symbol table. This frees all memory associated with the symbol table and the table itself." alt="" coords="413,5,563,31"/>
-<area shape="rect" href="driver_8c.html#af3e60266c17733333c492f296058f896" title="Called when the module is unloaded. Destroys all memory allocated by the module. This is the last fun..." alt="" coords="301,5,365,31"/>
-<area shape="rect" href="driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,5,253,31"/>
-<area shape="rect" href="driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,5,124,31"/>
-</map>
-</div>
 
 </div>
 </div>
@@ -634,18 +490,6 @@ Here is the caller graph for this function:</div>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if the table has entry symbols, false otherwise. </dd></dl>
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="symbol__table_8h_ac3bac8997acae526e27a0636744ddcf0_icgraph.png" border="0" usemap="#asymbol__table_8h_ac3bac8997acae526e27a0636744ddcf0_icgraph" alt=""/></div>
-<map name="asymbol__table_8h_ac3bac8997acae526e27a0636744ddcf0_icgraph" id="asymbol__table_8h_ac3bac8997acae526e27a0636744ddcf0_icgraph">
-<area shape="rect" title="Returns whether a given symbol table has entry symbols or not." alt="" coords="629,5,823,31"/>
-<area shape="rect" href="second__pass_8c.html#a20c33f0cb96a55d4b805d746db5cc1cc" title="Creates output files based on the given memory buffer, path, final program status,..." alt="" coords="493,5,581,31"/>
-<area shape="rect" href="second__pass_8c.html#aa33feb8d270721a8f28a90a7833937db" title="Initiates the second pass of the assembler. This function is responsible for executing the second pas..." alt="" coords="301,5,445,31"/>
-<area shape="rect" href="driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,5,253,31"/>
-<area shape="rect" href="driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,5,124,31"/>
-</map>
-</div>
 
 </div>
 </div>
@@ -673,18 +517,6 @@ Here is the caller graph for this function:</div>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if the table has external symbols, false otherwise. </dd></dl>
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="symbol__table_8h_a54fc25f44cb91c477370ab45723384cf_icgraph.png" border="0" usemap="#asymbol__table_8h_a54fc25f44cb91c477370ab45723384cf_icgraph" alt=""/></div>
-<map name="asymbol__table_8h_a54fc25f44cb91c477370ab45723384cf_icgraph" id="asymbol__table_8h_a54fc25f44cb91c477370ab45723384cf_icgraph">
-<area shape="rect" title="Returns whether a given symbol table has external symbols or not." alt="" coords="629,5,836,31"/>
-<area shape="rect" href="second__pass_8c.html#a20c33f0cb96a55d4b805d746db5cc1cc" title="Creates output files based on the given memory buffer, path, final program status,..." alt="" coords="493,5,581,31"/>
-<area shape="rect" href="second__pass_8c.html#aa33feb8d270721a8f28a90a7833937db" title="Initiates the second pass of the assembler. This function is responsible for executing the second pas..." alt="" coords="301,5,445,31"/>
-<area shape="rect" href="driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,5,253,31"/>
-<area shape="rect" href="driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,5,124,31"/>
-</map>
-</div>
 
 </div>
 </div>
@@ -712,24 +544,6 @@ Here is the caller graph for this function:</div>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The head node of the symbol table. </dd></dl>
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="symbol__table_8h_a0523b2417b2ad80df56b3694f8d8cf3a_icgraph.png" border="0" usemap="#asymbol__table_8h_a0523b2417b2ad80df56b3694f8d8cf3a_icgraph" alt=""/></div>
-<map name="asymbol__table_8h_a0523b2417b2ad80df56b3694f8d8cf3a_icgraph" id="asymbol__table_8h_a0523b2417b2ad80df56b3694f8d8cf3a_icgraph">
-<area shape="rect" title="Returns the head symbol table node of a given symbol table." alt="" coords="1120,79,1279,104"/>
-<area shape="rect" href="second__pass_8c.html#a2765636e71a2da6c192eac0fa06581c1" title="Adds the decimal base address to all data and code symbols in a symbol table." alt="" coords="493,5,659,31"/>
-<area shape="rect" href="second__pass_8c.html#a2bd718eb223c109ac098038bd74150f1" title="Generates an entries file containing the entry symbols and their addresses The function generates an ..." alt="" coords="924,53,1065,79"/>
-<area shape="rect" href="second__pass_8c.html#af969b5aef11a97160dd29f2402b35d1e" title="Generates an externals file containing the names and addresses of external symbols." alt="" coords="917,103,1072,128"/>
-<area shape="rect" href="second__pass_8c.html#a1d991b81e3a4e0eca4a867bd08cf6ecc" title="Updates the symbol offset in memory." alt="" coords="921,152,1069,177"/>
-<area shape="rect" href="second__pass_8c.html#aa33feb8d270721a8f28a90a7833937db" title="Initiates the second pass of the assembler. This function is responsible for executing the second pas..." alt="" coords="301,59,445,84"/>
-<area shape="rect" href="driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,59,253,84"/>
-<area shape="rect" href="driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,59,124,84"/>
-<area shape="rect" href="second__pass_8c.html#a20c33f0cb96a55d4b805d746db5cc1cc" title="Creates output files based on the given memory buffer, path, final program status,..." alt="" coords="744,59,832,84"/>
-<area shape="rect" href="second__pass_8c.html#ab6728edfef56c073ce9792b67edd84f7" title=" " alt="" coords="707,145,869,171"/>
-<area shape="rect" href="second__pass_8c.html#a36c8038b17843fb6d82d261367f7650b" title="Executes the line, in case label exists finds if it is valid and then encodes it, otherwise prints er..." alt="" coords="529,121,623,147"/>
-</map>
-</div>
 
 </div>
 </div>
@@ -821,26 +635,6 @@ Here is the caller graph for this function:</div>
   </table>
   </dd>
 </dl>
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="symbol__table_8h_af7ceb2c0ffe3e3ea80e925ba655c3710_icgraph.png" border="0" usemap="#asymbol__table_8h_af7ceb2c0ffe3e3ea80e925ba655c3710_icgraph" alt=""/></div>
-<map name="asymbol__table_8h_af7ceb2c0ffe3e3ea80e925ba655c3710_icgraph" id="asymbol__table_8h_af7ceb2c0ffe3e3ea80e925ba655c3710_icgraph">
-<area shape="rect" title="Insert a symbol into the table. This is used to insert an entry into a symbol table...." alt="" coords="1043,165,1181,205"/>
-<area shape="rect" href="first__pass_8c.html#a87a70eef7a9fd6d62eb27a5a2127739e" title="This function is used to process .data lines. It also encodes the memory if possible into the memoryB..." alt="" coords="855,5,986,45"/>
-<area shape="rect" href="first__pass_8c.html#ac0da628ba463b754effc2e88e611d4dd" title="This function is used to process lines with label definitions. It also encodes the memory if possible..." alt="" coords="855,69,986,109"/>
-<area shape="rect" href="first__pass_8c.html#aa0a39d1f94314921231c97245e6eb551" title="This function is used to process .entry lines. It also encodes the memory if possible into the memory..." alt="" coords="855,133,986,173"/>
-<area shape="rect" href="first__pass_8c.html#accedad2dc6b0e81f160e2201f4f2b1d3" title="This function is used to process .extern lines. It also encodes the memory if possible into the memor..." alt="" coords="855,197,986,237"/>
-<area shape="rect" href="first__pass_8c.html#a932fa602127543d4c7b4e5f4b64b9138" title="This function is used to process .string lines. It also encodes the memory if possible into the memor..." alt="" coords="855,261,986,301"/>
-<area shape="rect" href="second__pass_8c.html#a1d991b81e3a4e0eca4a867bd08cf6ecc" title="Updates the symbol offset in memory." alt="" coords="847,326,995,351"/>
-<area shape="rect" href="first__pass_8c.html#ae3d15ca0f34657e4715827c439839e1e" title="This function implements the first pass algorithm." alt="" coords="668,173,767,198"/>
-<area shape="rect" href="driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,211,253,237"/>
-<area shape="rect" href="driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,211,124,237"/>
-<area shape="rect" href="second__pass_8c.html#ab6728edfef56c073ce9792b67edd84f7" title=" " alt="" coords="636,289,799,314"/>
-<area shape="rect" href="second__pass_8c.html#a36c8038b17843fb6d82d261367f7650b" title="Executes the line, in case label exists finds if it is valid and then encodes it, otherwise prints er..." alt="" coords="493,254,588,279"/>
-<area shape="rect" href="second__pass_8c.html#aa33feb8d270721a8f28a90a7833937db" title="Initiates the second pass of the assembler. This function is responsible for executing the second pas..." alt="" coords="301,237,445,262"/>
-</map>
-</div>
 
 </div>
 </div>
@@ -868,27 +662,6 @@ Here is the caller graph for this function:</div>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>true if the symbol table is empty false otherwise. Note that the caller must have obtained the lock before calling this </dd></dl>
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="symbol__table_8h_a89500f95e0d429616157b09668f1da29_icgraph.png" border="0" usemap="#asymbol__table_8h_a89500f95e0d429616157b09668f1da29_icgraph" alt=""/></div>
-<map name="asymbol__table_8h_a89500f95e0d429616157b09668f1da29_icgraph" id="asymbol__table_8h_a89500f95e0d429616157b09668f1da29_icgraph">
-<area shape="rect" title="Check if a symbol table is empty. This is used to detect circular references in the symbol table." alt="" coords="1229,173,1388,198"/>
-<area shape="rect" href="symbol__table_8c.html#af7ceb2c0ffe3e3ea80e925ba655c3710" title="Insert a symbol into the table. This is used to insert an entry into a symbol table...." alt="" coords="1043,165,1181,205"/>
-<area shape="rect" href="first__pass_8c.html#a87a70eef7a9fd6d62eb27a5a2127739e" title="This function is used to process .data lines. It also encodes the memory if possible into the memoryB..." alt="" coords="855,5,986,45"/>
-<area shape="rect" href="first__pass_8c.html#ac0da628ba463b754effc2e88e611d4dd" title="This function is used to process lines with label definitions. It also encodes the memory if possible..." alt="" coords="855,69,986,109"/>
-<area shape="rect" href="first__pass_8c.html#aa0a39d1f94314921231c97245e6eb551" title="This function is used to process .entry lines. It also encodes the memory if possible into the memory..." alt="" coords="855,133,986,173"/>
-<area shape="rect" href="first__pass_8c.html#accedad2dc6b0e81f160e2201f4f2b1d3" title="This function is used to process .extern lines. It also encodes the memory if possible into the memor..." alt="" coords="855,197,986,237"/>
-<area shape="rect" href="first__pass_8c.html#a932fa602127543d4c7b4e5f4b64b9138" title="This function is used to process .string lines. It also encodes the memory if possible into the memor..." alt="" coords="855,261,986,301"/>
-<area shape="rect" href="second__pass_8c.html#a1d991b81e3a4e0eca4a867bd08cf6ecc" title="Updates the symbol offset in memory." alt="" coords="847,326,995,351"/>
-<area shape="rect" href="first__pass_8c.html#ae3d15ca0f34657e4715827c439839e1e" title="This function implements the first pass algorithm." alt="" coords="668,173,767,198"/>
-<area shape="rect" href="driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,211,253,237"/>
-<area shape="rect" href="driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,211,124,237"/>
-<area shape="rect" href="second__pass_8c.html#ab6728edfef56c073ce9792b67edd84f7" title=" " alt="" coords="636,289,799,314"/>
-<area shape="rect" href="second__pass_8c.html#a36c8038b17843fb6d82d261367f7650b" title="Executes the line, in case label exists finds if it is valid and then encodes it, otherwise prints er..." alt="" coords="493,254,588,279"/>
-<area shape="rect" href="second__pass_8c.html#aa33feb8d270721a8f28a90a7833937db" title="Initiates the second pass of the assembler. This function is responsible for executing the second pas..." alt="" coords="301,237,445,262"/>
-</map>
-</div>
 
 </div>
 </div>
@@ -934,26 +707,6 @@ Here is the caller graph for this function:</div>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>pointer to the new node or NULL if there was an error allocating memory ( in which case a message is printed </dd></dl>
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="symbol__table_8h_a1b234901d5a9c5c2e7e9194faec22915_icgraph.png" border="0" usemap="#asymbol__table_8h_a1b234901d5a9c5c2e7e9194faec22915_icgraph" alt=""/></div>
-<map name="asymbol__table_8h_a1b234901d5a9c5c2e7e9194faec22915_icgraph" id="asymbol__table_8h_a1b234901d5a9c5c2e7e9194faec22915_icgraph">
-<area shape="rect" title="Create a new node in the symbol table. It is assumed that the name is unique and that the symbol tabl..." alt="" coords="1043,173,1207,198"/>
-<area shape="rect" href="first__pass_8c.html#a87a70eef7a9fd6d62eb27a5a2127739e" title="This function is used to process .data lines. It also encodes the memory if possible into the memoryB..." alt="" coords="855,5,986,45"/>
-<area shape="rect" href="first__pass_8c.html#ac0da628ba463b754effc2e88e611d4dd" title="This function is used to process lines with label definitions. It also encodes the memory if possible..." alt="" coords="855,69,986,109"/>
-<area shape="rect" href="first__pass_8c.html#aa0a39d1f94314921231c97245e6eb551" title="This function is used to process .entry lines. It also encodes the memory if possible into the memory..." alt="" coords="855,133,986,173"/>
-<area shape="rect" href="first__pass_8c.html#accedad2dc6b0e81f160e2201f4f2b1d3" title="This function is used to process .extern lines. It also encodes the memory if possible into the memor..." alt="" coords="855,197,986,237"/>
-<area shape="rect" href="first__pass_8c.html#a932fa602127543d4c7b4e5f4b64b9138" title="This function is used to process .string lines. It also encodes the memory if possible into the memor..." alt="" coords="855,261,986,301"/>
-<area shape="rect" href="second__pass_8c.html#a1d991b81e3a4e0eca4a867bd08cf6ecc" title="Updates the symbol offset in memory." alt="" coords="847,326,995,351"/>
-<area shape="rect" href="first__pass_8c.html#ae3d15ca0f34657e4715827c439839e1e" title="This function implements the first pass algorithm." alt="" coords="668,173,767,198"/>
-<area shape="rect" href="driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,211,253,237"/>
-<area shape="rect" href="driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,211,124,237"/>
-<area shape="rect" href="second__pass_8c.html#ab6728edfef56c073ce9792b67edd84f7" title=" " alt="" coords="636,289,799,314"/>
-<area shape="rect" href="second__pass_8c.html#a36c8038b17843fb6d82d261367f7650b" title="Executes the line, in case label exists finds if it is valid and then encodes it, otherwise prints er..." alt="" coords="493,254,588,279"/>
-<area shape="rect" href="second__pass_8c.html#aa33feb8d270721a8f28a90a7833937db" title="Initiates the second pass of the assembler. This function is responsible for executing the second pas..." alt="" coords="301,237,445,262"/>
-</map>
-</div>
 
 </div>
 </div>
@@ -974,17 +727,6 @@ Here is the caller graph for this function:</div>
 
 <p>Create a new symbol table. The table is empty after this function returns. This can be used to create an uninitialized table without allocating it for the first time. </p>
 <dl class="section return"><dt>Returns</dt><dd>A pointer to the newly allocated symbol table. NULL on memory exhaustion or if there is insufficient memory </dd></dl>
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="symbol__table_8h_a53ee66f1de6f20b68a130922a34221d6_icgraph.png" border="0" usemap="#asymbol__table_8h_a53ee66f1de6f20b68a130922a34221d6_icgraph" alt=""/></div>
-<map name="asymbol__table_8h_a53ee66f1de6f20b68a130922a34221d6_icgraph" id="asymbol__table_8h_a53ee66f1de6f20b68a130922a34221d6_icgraph">
-<area shape="rect" title="Create a new symbol table. The table is empty after this function returns. This can be used to create..." alt="" coords="460,5,624,31"/>
-<area shape="rect" href="driver_8c.html#ae0747e80fcf537740f8c16df476df560" title="Called when the driver is initialized. This is where we initialize the data structures that are used ..." alt="" coords="301,5,412,31"/>
-<area shape="rect" href="driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,5,253,31"/>
-<area shape="rect" href="driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,5,124,31"/>
-</map>
-</div>
 
 </div>
 </div>
@@ -1023,26 +765,6 @@ Here is the caller graph for this function:</div>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>pointer to the symbol table node that matches the name or NULL if not found. Note that the caller must free the node </dd></dl>
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="symbol__table_8h_aac7ab4a84f5dd5b8f88a9e5bd2d30b38_icgraph.png" border="0" usemap="#asymbol__table_8h_aac7ab4a84f5dd5b8f88a9e5bd2d30b38_icgraph" alt=""/></div>
-<map name="asymbol__table_8h_aac7ab4a84f5dd5b8f88a9e5bd2d30b38_icgraph" id="asymbol__table_8h_aac7ab4a84f5dd5b8f88a9e5bd2d30b38_icgraph">
-<area shape="rect" title="Search a symbol table. This is used to find a symbol by name. If the symbol is found it is returned o..." alt="" coords="1036,123,1181,163"/>
-<area shape="rect" href="symbol__table_8c.html#aa9e9364ffc547a159df48e179e960d22" title="Check if a symbol with the given name exists in the symbol table and has a specific type." alt="" coords="819,130,988,155"/>
-<area shape="rect" href="first__pass_8c.html#aa0a39d1f94314921231c97245e6eb551" title="This function is used to process .entry lines. It also encodes the memory if possible into the memory..." alt="" coords="640,60,771,100"/>
-<area shape="rect" href="encoding_8c.html#a6f027af72fd18bdeb31711ada8e669aa" title=" " alt="" coords="851,251,956,277"/>
-<area shape="rect" href="first__pass_8c.html#a87a70eef7a9fd6d62eb27a5a2127739e" title="This function is used to process .data lines. It also encodes the memory if possible into the memoryB..." alt="" coords="640,188,771,228"/>
-<area shape="rect" href="first__pass_8c.html#ac0da628ba463b754effc2e88e611d4dd" title="This function is used to process lines with label definitions. It also encodes the memory if possible..." alt="" coords="838,5,969,45"/>
-<area shape="rect" href="first__pass_8c.html#accedad2dc6b0e81f160e2201f4f2b1d3" title="This function is used to process .extern lines. It also encodes the memory if possible into the memor..." alt="" coords="640,124,771,164"/>
-<area shape="rect" href="first__pass_8c.html#ae3d15ca0f34657e4715827c439839e1e" title="This function implements the first pass algorithm." alt="" coords="493,131,592,157"/>
-<area shape="rect" href="driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,185,253,210"/>
-<area shape="rect" href="driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,185,124,210"/>
-<area shape="rect" href="encoding_8c.html#ac462ef04efd6a452ec612a07a0e38070" title=" " alt="" coords="640,252,771,292"/>
-<area shape="rect" href="second__pass_8c.html#a36c8038b17843fb6d82d261367f7650b" title="Executes the line, in case label exists finds if it is valid and then encodes it, otherwise prints er..." alt="" coords="495,249,590,274"/>
-<area shape="rect" href="second__pass_8c.html#aa33feb8d270721a8f28a90a7833937db" title="Initiates the second pass of the assembler. This function is responsible for executing the second pas..." alt="" coords="301,210,445,235"/>
-</map>
-</div>
 
 </div>
 </div>
@@ -1081,24 +803,6 @@ Here is the caller graph for this function:</div>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>TRUE if the symbol is defined in the symbol table FALSE otherwise. Note that the return value is undefined if the symbol is not defined </dd></dl>
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="symbol__table_8h_a481f1684949bafc5d4487a12287a420f_icgraph.png" border="0" usemap="#asymbol__table_8h_a481f1684949bafc5d4487a12287a420f_icgraph" alt=""/></div>
-<map name="asymbol__table_8h_a481f1684949bafc5d4487a12287a420f_icgraph" id="asymbol__table_8h_a481f1684949bafc5d4487a12287a420f_icgraph">
-<area shape="rect" title="Search a symbol table for a symbol with a given name. This is used to determine if a symbol is define..." alt="" coords="1015,101,1160,141"/>
-<area shape="rect" href="first__pass_8c.html#aa0a39d1f94314921231c97245e6eb551" title="This function is used to process .entry lines. It also encodes the memory if possible into the memory..." alt="" coords="836,5,967,45"/>
-<area shape="rect" href="first__pass_8c.html#accedad2dc6b0e81f160e2201f4f2b1d3" title="This function is used to process .extern lines. It also encodes the memory if possible into the memor..." alt="" coords="836,69,967,109"/>
-<area shape="rect" href="first__pass_8c.html#a932fa602127543d4c7b4e5f4b64b9138" title="This function is used to process .string lines. It also encodes the memory if possible into the memor..." alt="" coords="836,133,967,173"/>
-<area shape="rect" href="second__pass_8c.html#ab6fec0fc93173020c37fc75727222d6a" title="Check if a label exists in the given line and update debug information accordingly." alt="" coords="843,198,960,223"/>
-<area shape="rect" href="first__pass_8c.html#ae3d15ca0f34657e4715827c439839e1e" title="This function implements the first pass algorithm." alt="" coords="663,109,761,134"/>
-<area shape="rect" href="driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,151,253,177"/>
-<area shape="rect" href="driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,151,124,177"/>
-<area shape="rect" href="second__pass_8c.html#a6b999b1b1244fbcf34f5f866b4aa3153" title="Checks whether a label exists in a line and is defined in the symbol table." alt="" coords="636,181,788,206"/>
-<area shape="rect" href="second__pass_8c.html#a36c8038b17843fb6d82d261367f7650b" title="Executes the line, in case label exists finds if it is valid and then encodes it, otherwise prints er..." alt="" coords="493,178,588,203"/>
-<area shape="rect" href="second__pass_8c.html#aa33feb8d270721a8f28a90a7833937db" title="Initiates the second pass of the assembler. This function is responsible for executing the second pas..." alt="" coords="301,177,445,202"/>
-</map>
-</div>
 
 </div>
 </div>
@@ -1136,17 +840,6 @@ Here is the caller graph for this function:</div>
   </table>
   </dd>
 </dl>
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="symbol__table_8h_a90d7d34e3a0c0973d99d70819b42730a_icgraph.png" border="0" usemap="#asymbol__table_8h_a90d7d34e3a0c0973d99d70819b42730a_icgraph" alt=""/></div>
-<map name="asymbol__table_8h_a90d7d34e3a0c0973d99d70819b42730a_icgraph" id="asymbol__table_8h_a90d7d34e3a0c0973d99d70819b42730a_icgraph">
-<area shape="rect" title="Sets whether the symbol table is completed (i.e. all symbols are defined)." alt="" coords="448,5,639,31"/>
-<area shape="rect" href="first__pass_8c.html#ae3d15ca0f34657e4715827c439839e1e" title="This function implements the first pass algorithm." alt="" coords="301,5,400,31"/>
-<area shape="rect" href="driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,5,253,31"/>
-<area shape="rect" href="driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,5,124,31"/>
-</map>
-</div>
 
 </div>
 </div>

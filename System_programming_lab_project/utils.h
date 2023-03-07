@@ -101,13 +101,6 @@ FILE* open_file(char* path, char* mode);
 char* get_line(FILE* in);
 
 /**
-* @brief Returns the 2's complement of an integer. This is equivalent to n^2 - 1 but works for integers less than 2^31
-*
-* @param n - the integer to get the 2's complement
-*/
-unsigned int get_2s_complement(int n);
-
-/**
 * @brief Copy a string to a new memory block. The copy is allocated in xcalloc () so you must free it yourself before using it.
 *
 * @param str

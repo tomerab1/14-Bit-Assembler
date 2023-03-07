@@ -1,6 +1,3 @@
-/** @file
-*/
-
 #include "first_pass.h"
 #include "syntactical_analysis.h"
 #include "encoding.h"
@@ -97,7 +94,7 @@ firstPassStates get_symbol_type(LineIterator* it, char* word, errorCodes* outErr
 			return FP_SYM_DATA;
 		}
 		/* Check if .string */
-		if (strcmp(next_word, DOT_STRING__STRING) == 0) {
+		if (strcmp(next_word, DOT_STRING_STRING) == 0) {
 			free(next_word);
 			return FP_SYM_STR;
 		}

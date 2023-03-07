@@ -1,6 +1,3 @@
-/** @file
-*/
-
 #include "symbol_table.h"
 #include <string.h>
 

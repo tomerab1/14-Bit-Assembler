@@ -1,6 +1,0 @@
-<map id="get_symbol_type" name="get_symbol_type">
-<area shape="rect" id="node1" title="This function take in a string, and checks if it&#39;s a symbol, if so it returns it&#39;s type...." alt="" coords="448,5,569,31"/>
-<area shape="rect" id="node2" href="$first__pass_8c.html#ae3d15ca0f34657e4715827c439839e1e" title="This function implements the first pass algorithm." alt="" coords="301,5,400,31"/>
-<area shape="rect" id="node3" href="$driver_8c.html#a34cfcf298ac86bb94cdd2cf28075bd74" title="Executes the assembler. This is the entry point for the execution of the assembly...." alt="" coords="172,5,253,31"/>
-<area shape="rect" id="node4" href="$driver_8c.html#adaca347624dfcda59e729aecdbeb14de" title="Creates a new driver." alt="" coords="5,5,124,31"/>
-</map>
