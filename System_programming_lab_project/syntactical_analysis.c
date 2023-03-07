@@ -10,6 +10,7 @@ errorCodes check_label_syntax(char* label)
 {
     char* colon_loc = strrchr(label, COLON_CHAR);
 
+    /* If there's no colon, it's a syntax error. */
     if (colon_loc == NULL)
         return ERROR_CODE_SYNTAX_ERROR;
 
@@ -17,17 +18,21 @@ errorCodes check_label_syntax(char* label)
     if (*(colon_loc + 1) != '\0')
         return ERROR_CODE_INVALID_LABEL_DEF;
 
+    /* Must start with a letter. */
     if (!isalpha(*label))
         return ERROR_CODE_INVALID_LABEL_DEF;
 
+    /* Cannot have white space before colon. */
     if (isspace(*(colon_loc - 1)))
         return ERROR_CODE_SPACE_BEFORE_COLON;
 
+    /* If the label is a register, there should be only one character before the colon. */
     if ((colon_loc - label) == 2 && *label == REG_BEG_CHAR) {
         if (REG_MIN_NUM <= *(label + 1) && *(label + 1) <= REG_MAX_NUM)
             return ERROR_CODE_RESERVED_KEYWORD_DEF;
     }
 
+    /* Check if all the characters before the colon are valid (letters or digits). */
     while (label < colon_loc) {
         if (!isalpha(*label) && !isdigit(*label))
             return ERROR_CODE_INVALID_CHAR_IN_LABEL;
@@ -151,38 +156,6 @@ bool validate_syntax_string(LineIterator* it, long line, debugList* dbg_list)
     }
 
     return TRUE;
-}
-
-bool directive_exists_basic(LineIterator* line) {
-    while (!line_iterator_is_end(line)) {
-        if (line_iterator_peek(line) == DOT_COMMAND) {
-            return TRUE;
-        }
-        line_iterator_advance(line);
-    }
-    return FALSE;
-    line->current = line->start;
-}
-
-bool find_if_instruction_exists(LineIterator* line) {
-    Opcodes localOpcode = OP_UNKNOWN;
-    if (isLabel(line)) {
-        skip_label_basic(line);
-        get_opcode(line_iterator_next_word(line, SPACE_STRING));
-
-        if (localOpcode != OP_UNKNOWN)
-            return TRUE;
-    }
-    return FALSE;
-}
-
-void skip_label_basic(LineIterator* line) {
-    line->current = line->start;
-    while (!line_iterator_is_end(line) && line_iterator_peek(line) != COLON) {
-        line_iterator_advance(line);
-    }
-    line_iterator_advance(line);
-    line_iterator_consume_blanks(line);
 }
 
 bool validate_syntax_data(LineIterator* it, long line, debugList* dbg_list)
@@ -689,7 +662,7 @@ bool is_register_name_whole(LineIterator* it)
 
     charFlag = line_iterator_peek(it) == 'r';
     line_iterator_advance(it);
-    numFlag = REG_MIN_NUM <= line_iterator_peek(it) && line_iterator_peek(it) <= REG_MAX_NUM;
+    numFlag = REG_MIN_NUM <= line_iterator_peek(it) && line_iterator_peek(it) <= REG_MAX_NUM; /*between 0 to 7*/
 
     return charFlag && numFlag;
 }
