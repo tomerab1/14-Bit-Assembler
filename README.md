@@ -55,6 +55,8 @@ The first word is of the following structure:
 | :--------------------------------: | :--------------------------------: | :--------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------: | :------------------------------------------------------------: | :------------------------------------------------: |
 |              Param 1               |              Param 2               |                                             Opcode                                             |                               Source operand                               |                          Dest operand                          |                       E.R.A                        |
 
+`Thanks for Chat gpt for generating this table`
+
 Encoding of each instruction word is done using the following format:
 
 ```
