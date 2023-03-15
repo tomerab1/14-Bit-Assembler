@@ -148,7 +148,7 @@ char* debug_map_token_to_err(errorCodes code)
 	case ERROR_CODE_INVALID_COMMA_POS: return "Invalid comma position";
 	case ERROR_CODE_INVALID_INT: return "Invalid integer";
 	case ERROR_CODE_SPACE_AFTER_OPERAND: return "Space after operand";
-	case ERROR_CODE_INVALID_OPERAND: return "Invalid operand";
+	case ERROR_CODE_INVALID_OPERAND: return "Invalid or couldn't find operand";
 	case ERROR_CODE_INVALID_WHITE_SPACE: return "Invalid white space";
 	case ERROR_CODE_EXTRA_PAREN: return "Extra parenthesis";
 	case ERROR_CODE_MISSING_OPEN_QUOTES: return "Missing open quotes";
@@ -159,6 +159,7 @@ char* debug_map_token_to_err(errorCodes code)
 	case ERROR_CODE_LABEL_ALREADY_EXISTS_AS_EXTERN: return "Label already defined as extern.";
 	case ERROR_CODE_LABEL_ALREADY_EXISTS_AS_ENTRY: return "Label already defined as entry.";
 	case ERROR_CODE_LABEL_CANNOT_BE_DEFINED_AS_OPCODE_OR_REGISTER: return "Label cannot be defined as Opcode or Register";
+	case ERROR_CODE_LABEL_MISSING_OR_NON_EXISTS_OPCODE: return "OPCODE does not exists or missing";
 	default: return "Unknown error";
 	}
 }

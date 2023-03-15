@@ -122,4 +122,6 @@ bool first_pass_process_sym_ext(LineIterator* it, memoryBuffer* img, SymbolTable
 */
 bool first_pass_process_opcode(LineIterator* it, memoryBuffer* img, SymbolTable* sym_table, debugList* dbg_list, char* name, long line, bool should_encode);
 
+
+void find_uncessery_syms(LineIterator* it, long line, debugList* dbg);
 #endif
