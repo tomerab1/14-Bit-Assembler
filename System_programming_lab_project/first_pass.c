@@ -31,9 +31,9 @@ bool do_first_pass(char* path, memoryBuffer* img, SymbolTable* sym_table, debugL
 		line_iterator_put_line(&it, curr_line);
 		/* Trim white spaces. */
 		line_iterator_consume_blanks(&it);
-
+		find_uncessery_syms(&it, line, dbg_list,&errCode);
 		word = line_iterator_next_word(&it, SPACE_STRING);
-		state = get_symbol_type(&it, word, &errCode);
+		state = get_symbol_type(&it, word, &errCode,dbg_list,line);
 
 		if (state == FP_SYM_IGNORED) {
 			debug_list_register_node(dbg_list, debug_list_new_node(it.start, it.current, line, ERROR_CODE_SYMBOL_IGNORED_WARN));
@@ -59,7 +59,7 @@ bool do_first_pass(char* path, memoryBuffer* img, SymbolTable* sym_table, debugL
 	return should_encode;
 }
 
-firstPassStates get_symbol_type(LineIterator* it, char* word, errorCodes* outErr)
+firstPassStates get_symbol_type(LineIterator* it, char* word, errorCodes* outErr, debugList* dbg, long line)
 {
 	/* An .entry definition. */
 	/* Returns FP_SYM_ENT or FP_SYM_EXT. entry. extern. data or. string.*/
@@ -120,14 +120,14 @@ bool first_pass_process_sym_def(LineIterator* it, memoryBuffer* img, SymbolTable
 	/* Get a handle to the node, if the type is entry/extern then update its counter to the img->instruction_image.counter. */
 	/* If it is not an extern/entry then register an error. */
 	SymbolTableNode* node = symbol_table_search_symbol(sym_table, name);
-
+	char* tempCurrent = NULL;
 
 	/* Register a symbol definition node.*/
 	if (node && (symbol_get_type(symbol_node_get_sym(node)) == SYM_DATA || symbol_get_type(symbol_node_get_sym(node)) == SYM_CODE)) {
 		debug_list_register_node(dbg_list, debug_list_new_node(it->start, it->current, line, ERROR_CODE_SYMBOL_REDEFINITION));
 		return FALSE;
 	}
-
+	
 	symbol_table_insert_symbol(sym_table, symbol_table_new_node(name, SYM_CODE, img_memory_get_counter(memory_buffer_get_inst_img(img))));
 
 	/* Check the syntax, we want a copy of the iterator because if the syntax is correct we will encode the instructions to memory. */
@@ -135,11 +135,12 @@ bool first_pass_process_sym_def(LineIterator* it, memoryBuffer* img, SymbolTable
 	if (!validate_syntax(*it, FP_SYM_DEF, line, dbg_list)) {
 		return FALSE;
 	}
+
 	/* Encode to the image.*/
 	if (should_encode) {
 		encode_opcode(it, img);
 	}
-
+	free(tempCurrent);
 	return TRUE;
 }
 
@@ -289,4 +290,13 @@ bool first_pass_process_sym_ext(LineIterator* it, memoryBuffer* img, SymbolTable
 	}
 
 	return TRUE;
+}
+
+void find_uncessery_syms(LineIterator* it, long line, debugList* dbg)
+{
+	if ((line_iterator_word_includes(it, DOT_EXTERN_STRING) || (line_iterator_word_includes(it, DOT_ENTRY_STRING))) && line_iterator_word_includes(it, COLON_STRING)) {
+		line_iterator_jump_to(it, COLON_CHAR);
+		debug_list_register_node(dbg, debug_list_new_node(it->start, it->current, line, ERROR_CODE_SYMBOL_IGNORED_WARN));
+	}
+	return;
 }
