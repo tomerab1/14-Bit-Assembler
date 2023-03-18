@@ -88,7 +88,7 @@
 /*Pre assembler*/
 #define PRE_ASSEMBLER_FILE_EXTENSTION ".am"
 #define SRC_ASSEMBLER_FILE_EXTENSTION ".txt"
-#define EXTERN_ASSEMBLER_FILE_EXTENSTION ".extern"
+#define EXTERN_ASSEMBLER_FILE_EXTENSTION ".external"
 #define ENTRY_ASSEMBLER_FILE_EXTENSTION ".entry"
 
 #endif
