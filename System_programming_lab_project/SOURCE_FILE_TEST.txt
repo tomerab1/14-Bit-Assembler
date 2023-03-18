@@ -1,43 +1,12 @@
-
-; file ps.as
-;;;;;;;;;;;;;;;;;This is my first prog!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-; Tester
-
-
-; Illegal label(save word)
-     	
-r1:		mov #1, a
-stop: 	
-
-; Illegal adress types for operations
-	
-	mov #1, #8
-	cmp L(#1,#2)
-	not #999
-	lea r1, a
-	lea a, #9
-	jmp #8
-	jsr #9
-	
-;This is legal
-	jmp K1(r1,r3)
-	
-
-; entry and extern errors(amount of labels) and warnings
-
-
-ABD:    .entry LENGTH , 5
- .extern
-ac: 				.extern W , aaff
-5AIN: 	mov r3 ,LENGTH
-; Legal lines
-LOOP: 	jmp L1(#-1,r6)
-	mcr myMacro
-	      sub r1, 		r4
-	      bne L3
-	endmcr
-	myMacro
-L1:	inc K
+.entry LENGTH
+l1: .extern W
+MAIN: mov r3,LENGTH
+LOOP: jmp L1(#-1,r6)
+prn #-5
+bne W(r4,r5)
+sub r1, r4
+bne L3
+L1: inc K
 .entry LOOP
 
 ; Illegal label

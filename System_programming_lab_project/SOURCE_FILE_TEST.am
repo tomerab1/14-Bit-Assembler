@@ -1,20 +1,11 @@
-r1:  mov #1, a
-stop:  
- mov #1, #8
- cmp L(#1,#2)
- not #999
- lea r1, a
- lea a, #9
- jmp #8
- jsr #9
- jmp K1(r1,r3)
-ABD:    .entry LENGTH , 5
- .extern
-ac:     .extern W , aaff
-5AIN:  mov r3 ,LENGTH
-LOOP:  jmp L1(#-1,r6)
-       sub r1,   r4
-       bne L3
+.entry LENGTH
+l1: .extern W
+MAIN: mov r3,LENGTH
+LOOP: jmp L1(#-1,r6)
+prn #-5
+bne W(r4,r5)
+sub r1, r4
+bne L3
 L1: inc K
 .entry LOOP
  bne LOOP(K,W****)

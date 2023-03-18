@@ -94,7 +94,7 @@ The commands allowed in bits 6-9 are:
 A **_directive_** line of the following structure:
 
 1. An **optional** preceding _label_. e.g. `PLACE1: `.
-2. A _directive_: `.data`, `.string`, `.struct`, `.entry` or `.extern`.
+2. A _directive_: `.data`, `.string`, `.entry` or `.extern`.
 3. Operands according to the type of the _directive_.
 
    ### `.data`
@@ -107,11 +107,6 @@ A **_directive_** line of the following structure:
 
    This direcive receives a string as an operand and stores it in the data image. It stores all characters by their order in the string, encoded ny their _ASCII_ values.
    e.g. `STRING1: .string "abcdef"` is a valid directive.
-
-   ### `.struct`
-
-   This directive allocates memory for a _structure_ consists of 2 fields: the first is an integer and the second is a string.
-   e.g. `STRUCT4: .struct 4, "abc"` is a vaild directive.
 
    ### `.entry`
 

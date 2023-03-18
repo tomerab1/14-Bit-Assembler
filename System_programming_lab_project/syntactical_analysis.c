@@ -202,7 +202,7 @@ bool validate_syntax_extern_and_entry(LineIterator* it, long line, debugList* db
 bool validate_syntax_opcode(LineIterator* it, long line, debugList* dbg_list)
 {
     char* word = NULL;
-
+    char* errLocation = it->current;
     while ((word = line_iterator_next_word(it, SPACE_STRING)) != NULL) {
         /* check_for_invalid_comma(word); */
         switch (get_syntax_group(word)) {
@@ -229,13 +229,13 @@ bool validate_syntax_opcode(LineIterator* it, long line, debugList* dbg_list)
             return match_syntax_group_7(it, line, dbg_list);
         case SG_GROUP_INVALID:
             free(word);
-            debug_list_register_node(dbg_list, debug_list_new_node(it->start, it->current, line, ERROR_CODE_SYNTAX_ERROR));
+            debug_list_register_node(dbg_list, debug_list_new_node(it->start, errLocation, line, ERROR_CODE_LABEL_MISSING_OR_NON_EXISTS_OPCODE));
             return FALSE;
         }
         /* Check syntax for .data/.string, otherwise it's an error. */
         free(word);
     }
-
+    free(errLocation);
     return TRUE;
 }
 
