@@ -203,46 +203,34 @@ bool validate_syntax_opcode(LineIterator* it, long line, debugList* dbg_list)
 {
     char* word = NULL;
     char* errLocation = it->current;
-    while ((word = line_iterator_next_word(it, SPACE_STRING)) != NULL) {
-        /* check_for_invalid_comma(word); */
-        switch (get_syntax_group(word)) {
-        case SG_GROUP_1:
-            free(word);
-            return match_syntax_group_1(it, line, dbg_list);
-        case SG_GROUP_2:
-            free(word);
-            return match_syntax_group_2(it, line, dbg_list);
-        case SG_GROUP_3:
-            free(word);
-            return match_syntax_group_3(it, line, dbg_list);
-        case SG_GROUP_4:
-            free(word);
-            return match_syntax_group_4(it, line, dbg_list);
-        case SG_GROUP_5:
-            free(word);
-            return match_syntax_group_5(it, line, dbg_list);
-        case SG_GROUP_6:
-            free(word);
-            return match_syntax_group_6(it, line, dbg_list);
-        case SG_GROUP_7:
-            free(word);
-            return match_syntax_group_7(it, line, dbg_list);
-        case SG_GROUP_INVALID:
+
+    /* typedef for the dispatch table. */
+    typedef bool (*dispatch_table)(LineIterator*, int, debugList*);
+    dispatch_table table[SG_TOTAL] = {
+        match_syntax_group_1_2, match_syntax_group_1_2, match_syntax_group_3, match_syntax_group_4,
+        match_syntax_group_5, match_syntax_group_6, match_syntax_group_7
+    };
+
+    if ((word = line_iterator_next_word(it, SPACE_STRING)) != NULL) {
+        SyntaxGroups sg = get_syntax_group(word);
+        bool ret_val = TRUE;
+
+        if (sg == SG_GROUP_INVALID) {
             free(word);
             debug_list_register_node(dbg_list, debug_list_new_node(it->start, errLocation, line, ERROR_CODE_LABEL_MISSING_OR_NON_EXISTS_OPCODE));
             return FALSE;
         }
-        /* Check syntax for .data/.string, otherwise it's an error. */
+
         free(word);
+        return table[sg](it, line, dbg_list);
     }
+
     free(errLocation);
     return TRUE;
 }
 
-
-bool match_syntax_group_1(LineIterator* it, long line, debugList* dbg_list)
+bool match_operands_for_sg_1_2(LineIterator* it, long line, debugList* dbg_list)
 {
-    /************************* Match operand 1 ****************************/
     line_iterator_consume_blanks(it);
 
     /* Check if immediate number */
@@ -264,82 +252,16 @@ bool match_syntax_group_1(LineIterator* it, long line, debugList* dbg_list)
         debug_list_register_node(dbg_list, debug_list_new_node(it->start, it->current, line, ERROR_CODE_INVALID_OPERAND));
         return FALSE;
     }
-
-    line_iterator_consume_blanks(it);
-
-    /************************* Match operand 2 ****************************/
-
-    /* Check if immediate number */
-    if (line_iterator_peek(it) == HASH_CHAR) {
-        debug_list_register_node(dbg_list, debug_list_new_node(it->start, it->current, line, ERROR_CODE_SYNTAX_ERROR));
-        return FALSE;
-    }
-    /* Check if register */
-    else if (line_iterator_peek(it) == REG_BEG_CHAR) {
-        if (!match_operand(it, line, FLAG_REGISTER, dbg_list))
-            return FALSE;
-    }
-    /* Check if label name */
-    else if (isalpha(line_iterator_peek(it))) {
-        if (!match_operand(it, line, FLAG_LABEL, dbg_list))
-            return FALSE;
-    }
-    else {
-        debug_list_register_node(dbg_list, debug_list_new_node(it->start, it->current, line, ERROR_CODE_INVALID_OPERAND));
-        return FALSE;
-    }
-
-    return TRUE;
 }
 
-bool match_syntax_group_2(LineIterator* it, long line, debugList* dbg_list)
+bool match_syntax_group_1_2(LineIterator* it, long line, debugList* dbg_list)
 {
-    /************************* Match operand 1 ****************************/
-    line_iterator_consume_blanks(it);
+    bool ret_val = TRUE;
 
-    /* Check if immediate number */
-    if (line_iterator_peek(it) == HASH_CHAR) {
-        if (!match_operand(it, line, FLAG_NUMBER, dbg_list))
-            return FALSE;
-    }
-    /* Check if register */
-    else if (line_iterator_peek(it) == REG_BEG_CHAR) {
-        if (!match_operand(it, line, FLAG_REGISTER, dbg_list))
-            return FALSE;
-    }
-    /* Check if label name */
-    else if (isalpha(line_iterator_peek(it))) {
-        if (!match_operand(it, line, FLAG_LABEL, dbg_list))
-            return FALSE;
-    }
-    else {
-        debug_list_register_node(dbg_list, debug_list_new_node(it->start, it->current, line, ERROR_CODE_INVALID_OPERAND));
+    if (!match_operands_for_sg_1_2(it, line, dbg_list))
         return FALSE;
-    }
-
-    line_iterator_consume_blanks(it);
-
-    /************************* Match operand 2 ****************************/
-
-    /* Check if immediate number */
-    if (line_iterator_peek(it) == HASH_CHAR) {
-        if (!match_operand(it, line, FLAG_NUMBER, dbg_list))
-            return FALSE;
-    }
-    /* Check if register */
-    else if (line_iterator_peek(it) == REG_BEG_CHAR) {
-        if (!match_operand(it, line, FLAG_REGISTER, dbg_list))
-            return FALSE;
-    }
-    /* Check if label name */
-    else if (isalpha(line_iterator_peek(it))) {
-        if (!match_operand(it, line, FLAG_LABEL, dbg_list))
-            return FALSE;
-    }
-    else {
-        debug_list_register_node(dbg_list, debug_list_new_node(it->start, it->current, line, ERROR_CODE_INVALID_OPERAND));
+    if (!match_operands_for_sg_1_2(it, line, dbg_list))
         return FALSE;
-    }
 
     return TRUE;
 }
@@ -500,7 +422,7 @@ bool match_operand(LineIterator* it, long line, int flags, debugList* dbg_list)
     case FLAG_NUMBER:
         /* Consume the '#' */
         line_iterator_advance(it);
-        if (!verify_int(it, line, ",", dbg_list)) {
+        if (!verify_int(it, line, ", ", dbg_list)) {
             return FALSE;
         }
         break;

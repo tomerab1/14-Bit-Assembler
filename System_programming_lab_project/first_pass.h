@@ -10,13 +10,10 @@
 #include "debug.h"
 
 
-/* typedef for the dispatch table. */
-typedef bool (*fpass_dispatch_table)(LineIterator* it, memoryBuffer* img, SymbolTable* sym_table, debugList* dbg_list, char* name, long line, bool did_err_occurred);
-
 /**
 * @brief An enum for the different states of the first pass algorithm.
 */
-typedef enum { FP_SYM_DEF, FP_SYM_DATA, FP_SYM_STR, FP_SYM_EXT, FP_SYM_ENT, FP_OPCODE, FP_TOTAL, FP_NONE, FP_SYM_IGNORED } firstPassStates;
+typedef enum { FP_SYM_DEF, FP_SYM_DATA, FP_SYM_STR, FP_SYM_EXT, FP_SYM_ENT, FP_OPCODE, FP_TOTAL, FP_NONE } firstPassStates;
 
 /** 
 * @brief This function implements the first pass algorithm.

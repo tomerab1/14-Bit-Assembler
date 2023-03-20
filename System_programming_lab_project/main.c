@@ -2,15 +2,11 @@
 
 /*
 	TODO:
-	1. Test memory leaks and build on Linux
-	2. Replace final success message with something prettier
-	3. add constants to everythin except for loop vars.
-	4. finish add data abstraction to memory.h
-	5. fix all memory leaks.
-	6. run more tests.
-	7. add more comments.
-	8. free memoryBuffer.
-	9. add utils.h to memory.o
+	1. Add tests.
+	2. Add memory leak logs.
+	3. Complie again to see if there are no new warnings/errors.
+	6. Refactor some of the code and add dispatch tables where possible.
+	7. add the ability to get string like "abc"d".
 */
 
 /**

@@ -42,8 +42,8 @@ typedef enum
 /* Division of operands to groups with the same syntax. */
 typedef enum
 {
-	SG_GROUP_1, SG_GROUP_2, SG_GROUP_3, SG_GROUP_4, SG_GROUP_5,
-	SG_GROUP_6, SG_GROUP_7, SG_GROUP_INVALID
+	SG_GROUP_1 = 0, SG_GROUP_2, SG_GROUP_3, SG_GROUP_4, SG_GROUP_5,
+	SG_GROUP_6, SG_GROUP_7, SG_TOTAL, SG_GROUP_INVALID
 } SyntaxGroups;
 
 #define FLAG_NUMBER      1
@@ -155,7 +155,14 @@ bool validate_syntax_opcode(LineIterator* it, long line, debugList* dbg_list);
 bool verify_int(LineIterator* it, long line, char* seps, debugList* dbg_list);
 
 /**
-* @brief Matches a syntax group 1. This is the first part of the syntax group : it must be at the start of a variable or variable declaration.
+* @brief This function reduce repetative code in the match_syntax_group_1 and match_syntax_group_2 functions.
+* It checks if their operands are valid.
+* @return True if valid, false otherwise.
+*/
+bool match_operands_for_sg_1_2(LineIterator* it, long line, debugList* dbg_list);
+
+/**
+* @brief Matches a syntax group 1 & 2. This is the first part of the syntax group : it must be at the start of a variable or variable declaration.
 *
 * @param it
 * @param line - The current line number being matched. Used for error reporting.
@@ -163,18 +170,7 @@ bool verify_int(LineIterator* it, long line, char* seps, debugList* dbg_list);
 *
 * @return TRUE if a match was found FALSE otherwise. The match is terminated by a newline
 */
-bool match_syntax_group_1(LineIterator* it, long line, debugList* dbg_list);
-
-/**
-* @brief Matches a syntax group 2. This is the second part of the syntax group matching algorithm.
-*
-* @param it
-* @param line - Line number of the source code. This is used for reporting errors.
-* @param dbg_list - Debug list to fill with debug nodes.
-*
-* @return TRUE on success FALSE on failure. If FALSE is returned the iterator is not advanced
-*/
-bool match_syntax_group_2(LineIterator* it, long line, debugList* dbg_list);
+bool match_syntax_group_1_2(LineIterator* it, long line, debugList* dbg_list);
 
 /**
 * @brief Matches a syntax group 3. This is the third part of the syntax group matching algorithm.

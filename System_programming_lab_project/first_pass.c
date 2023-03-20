@@ -11,6 +11,9 @@ bool do_first_pass(char* path, memoryBuffer* img, SymbolTable* sym_table, debugL
 	long line = 1;
 	bool should_encode = TRUE;
 
+	/* typedef for the dispatch table. */
+	typedef bool (*fpass_dispatch_table)(LineIterator* it, memoryBuffer* img, SymbolTable* sym_table, debugList* dbg_list, char* name, long line, bool did_err_occurred);
+
 	fpass_dispatch_table table[FP_TOTAL] = {
 		first_pass_process_sym_def,
 		first_pass_process_sym_data,
@@ -31,16 +34,13 @@ bool do_first_pass(char* path, memoryBuffer* img, SymbolTable* sym_table, debugL
 		line_iterator_put_line(&it, curr_line);
 		/* Trim white spaces. */
 		line_iterator_consume_blanks(&it);
-		find_uncessery_syms(&it, line, dbg_list,&errCode);
+		find_uncessery_syms(&it, line, dbg_list, &errCode);
 		word = line_iterator_next_word(&it, SPACE_STRING);
-		state = get_symbol_type(&it, word, &errCode,dbg_list,line);
+		state = get_symbol_type(&it, word, &errCode, dbg_list, line);
 
-		if (state == FP_SYM_IGNORED) {
-			debug_list_register_node(dbg_list, debug_list_new_node(it.start, it.current, line, ERROR_CODE_SYMBOL_IGNORED_WARN));
-		}
 		/* none of the above, must be an error. */
 		/* if state FP_NONE register the node in the list and register it as a new node. */
-		else if (state == FP_NONE) {
+		if (state == FP_NONE) {
 			debug_list_register_node(dbg_list, debug_list_new_node(it.start, it.current, line, errCode));
 			should_encode = FALSE;
 		}
@@ -97,13 +97,6 @@ firstPassStates get_symbol_type(LineIterator* it, char* word, errorCodes* outErr
 		if (strcmp(next_word, DOT_STRING_STRING) == 0) {
 			free(next_word);
 			return FP_SYM_STR;
-		}
-		/* Ungets the next word from the line iterator. */
-		if (strcmp(next_word, ENTRY_STRING) == 0 || strcmp(next_word, EXTERN_STRING) == 0) {
-			line_iterator_unget_word(it, next_word);
-			line_iterator_unget_word(it, word);
-			free(next_word);
-			return FP_SYM_IGNORED;
 		}
 
 		/* Unget the word, and return FP_SYM_DEF */
@@ -298,5 +291,4 @@ void find_uncessery_syms(LineIterator* it, long line, debugList* dbg)
 		line_iterator_jump_to(it, COLON_CHAR);
 		debug_list_register_node(dbg, debug_list_new_node(it->start, it->current, line, ERROR_CODE_SYMBOL_IGNORED_WARN));
 	}
-	return;
 }

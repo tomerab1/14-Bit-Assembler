@@ -46,6 +46,7 @@
 #define LETTER_A 'A'
 #define LETTER_Z 'Z'
 #define COLON ':'
+#define NEW_LINE_CHAR '\n'
 
 #define OBJECT_PRINT_DOT '.'
 #define OBJECT_PRINT_SLASH '/'

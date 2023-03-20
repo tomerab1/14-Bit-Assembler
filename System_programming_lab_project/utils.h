@@ -125,4 +125,12 @@ bool is_line_only_blanks(char* line);
 */
 unsigned int get_num(char* num);
 
+/*
+* @brief This function check if a file is empty.
+* @param fHandle The file pointer.
+* @return True if empty, false otherwise.
+*/
+
+bool is_file_empty(FILE* fHandle);
+
 #endif

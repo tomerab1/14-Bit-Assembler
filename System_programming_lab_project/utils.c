@@ -43,6 +43,12 @@ char* get_outfile_name(char* path, char* postfix)
 FILE* open_file(char* path, char* mode)
 {
 	FILE* f = fopen(path, mode);
+	
+	if (mode == MODE_READ && is_file_empty(f)) {
+		close(f);
+		printf("Error: This file is empty !\n");
+		exit(EXIT_FAILURE);
+	}
 
 	if (!f) {
 		printf("Error: Could not open %s for %s !\n", path, mode);
@@ -104,4 +110,16 @@ unsigned int get_num(char* num)
 	int n;
 	(void)sscanf(num, "%d", &n);
 	return n;
+}
+
+bool is_file_empty(FILE* fHandle)
+{
+	long bytes;
+
+	fseek(fHandle, 0, SEEK_SET);
+	fseek(fHandle, 0, SEEK_END);
+	bytes = ftell(fHandle);
+	rewind(fHandle);
+
+	return (bytes == 0) ? TRUE : FALSE	;
 }
