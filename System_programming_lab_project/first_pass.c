@@ -34,9 +34,9 @@ bool do_first_pass(char* path, memoryBuffer* img, SymbolTable* sym_table, debugL
 		line_iterator_put_line(&it, curr_line);
 		/* Trim white spaces. */
 		line_iterator_consume_blanks(&it);
-		find_uncessery_syms(&it, line, dbg_list, &errCode);
+		find_uncessery_syms(&it, line, dbg_list);
 		word = line_iterator_next_word(&it, SPACE_STRING);
-		state = get_symbol_type(&it, word, &errCode, dbg_list, line);
+		state = get_symbol_type(&it, word, &errCode);
 
 		/* none of the above, must be an error. */
 		/* if state FP_NONE register the node in the list and register it as a new node. */
@@ -59,7 +59,7 @@ bool do_first_pass(char* path, memoryBuffer* img, SymbolTable* sym_table, debugL
 	return should_encode;
 }
 
-firstPassStates get_symbol_type(LineIterator* it, char* word, errorCodes* outErr, debugList* dbg, long line)
+firstPassStates get_symbol_type(LineIterator* it, char* word, errorCodes* outErr)
 {
 	/* An .entry definition. */
 	/* Returns FP_SYM_ENT or FP_SYM_EXT. entry. extern. data or. string.*/

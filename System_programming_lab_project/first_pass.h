@@ -121,4 +121,5 @@ bool first_pass_process_opcode(LineIterator* it, memoryBuffer* img, SymbolTable*
 
 
 void find_uncessery_syms(LineIterator* it, long line, debugList* dbg);
+
 #endif
