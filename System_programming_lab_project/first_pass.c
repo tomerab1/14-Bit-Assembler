@@ -71,6 +71,12 @@ firstPassStates get_symbol_type(LineIterator* it, char* word, errorCodes* outErr
 	if (strcmp(word, DOT_EXTERN_STRING) == 0) {
 		return FP_SYM_EXT;
 	}
+	if (strcmp(word, DOT_DATA_STRING) == 0) {
+		return FP_SYM_DATA;
+	}
+	if (strcmp(word, DOT_STRING_STRING) == 0) {
+		return FP_SYM_STR;
+	}
 	/* Get the opcode of the word.*/
 	if (get_opcode(word) != OP_UNKNOWN) {
 		/* Unget the opcode. */
@@ -178,7 +184,9 @@ bool first_pass_process_sym_data(LineIterator* it, memoryBuffer* img, SymbolTabl
 
 bool first_pass_process_sym_string(LineIterator* it, memoryBuffer* img, SymbolTable* sym_table, debugList* dbg_list, char* name, long line, bool should_encode)
 {
-	if (symbol_table_search_symbol_bool(sym_table, name)) {
+	SymbolTableNode* node = symbol_table_search_symbol(sym_table, name);
+
+	if (node && node && (symbol_get_type(symbol_node_get_sym(node)) == SYM_DATA || symbol_get_type(symbol_node_get_sym(node)) == SYM_CODE)) {
 		debug_list_register_node(dbg_list, debug_list_new_node(it->start, it->current, line, ERROR_CODE_SYMBOL_REDEFINITION));
 		return FALSE;
 	}

@@ -166,7 +166,8 @@ bool validate_syntax_data(LineIterator* it, long line, debugList* dbg_list)
     while (!line_iterator_is_end(it) && is_valid) {
         line_iterator_consume_blanks(it);
         is_valid = verify_int(it, line, COMMA_STRING, dbg_list);
-        line_iterator_advance(it);
+        /* Will jump to the closest comma and consume it. */
+        line_iterator_jump_to(it, COMMA_CHAR);
     }
 
     if (!is_valid) {
@@ -413,11 +414,6 @@ bool match_operand(LineIterator* it, long line, int flags, debugList* dbg_list)
             debug_list_register_node(dbg_list, debug_list_new_node(it->start, it->current, line, ERROR_CODE_INVALID_NAME));
             return FALSE;
         }
-        if (!validate_label_ending(it)) {
-            debug_list_register_node(dbg_list, debug_list_new_node(it->start, it->current, line, ERROR_CODE_TEXT_AFTER_END));
-            return FALSE;
-        }
-
         break;
     case FLAG_NUMBER:
         /* Consume the '#' */
