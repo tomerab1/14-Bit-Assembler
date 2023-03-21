@@ -206,7 +206,7 @@ bool validate_syntax_opcode(LineIterator* it, long line, debugList* dbg_list)
     char* errLocation = it->current;
 
     /* typedef for the dispatch table. */
-    typedef bool (*dispatch_table)(LineIterator*, int, debugList*);
+    typedef bool (*dispatch_table)(LineIterator* it, long line, debugList* dbg_list);
     dispatch_table table[SG_TOTAL] = {
         match_syntax_group_1_2, match_syntax_group_1_2, match_syntax_group_3, match_syntax_group_4,
         match_syntax_group_5, match_syntax_group_6, match_syntax_group_7
@@ -214,7 +214,6 @@ bool validate_syntax_opcode(LineIterator* it, long line, debugList* dbg_list)
 
     if ((word = line_iterator_next_word(it, SPACE_STRING)) != NULL) {
         SyntaxGroups sg = get_syntax_group(word);
-        bool ret_val = TRUE;
 
         if (sg == SG_GROUP_INVALID) {
             free(word);
@@ -226,7 +225,6 @@ bool validate_syntax_opcode(LineIterator* it, long line, debugList* dbg_list)
         return table[sg](it, line, dbg_list);
     }
 
-    free(errLocation);
     return TRUE;
 }
 
@@ -253,12 +251,12 @@ bool match_operands_for_sg_1_2(LineIterator* it, long line, debugList* dbg_list)
         debug_list_register_node(dbg_list, debug_list_new_node(it->start, it->current, line, ERROR_CODE_INVALID_OPERAND));
         return FALSE;
     }
+
+    return TRUE;
 }
 
 bool match_syntax_group_1_2(LineIterator* it, long line, debugList* dbg_list)
 {
-    bool ret_val = TRUE;
-
     if (!match_operands_for_sg_1_2(it, line, dbg_list))
         return FALSE;
     if (!match_operands_for_sg_1_2(it, line, dbg_list))

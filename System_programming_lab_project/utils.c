@@ -44,8 +44,8 @@ FILE* open_file(char* path, char* mode)
 {
 	FILE* f = fopen(path, mode);
 	
-	if (mode == MODE_READ && is_file_empty(f)) {
-		close(f);
+	if (strcmp(mode, MODE_READ) == 0 && is_file_empty(f)) {
+		fclose(f);
 		printf("Error: This file is empty !\n");
 		exit(EXIT_FAILURE);
 	}
