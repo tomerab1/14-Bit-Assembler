@@ -633,8 +633,6 @@ SyntaxGroups get_syntax_group(char* name)
 }
 
 bool directive_exists(LineIterator* line) {
-    return line_iterator_word_includes(line, DOT_STRING_STRING) ||
-           line_iterator_word_includes(line, DOT_DATA_STRING) ||
-           line_iterator_word_includes(line, DOT_EXTERN_STRING) ||
+    return line_iterator_word_includes(line, DOT_EXTERN_STRING) ||
            line_iterator_word_includes(line, DOT_ENTRY_STRING);
 }

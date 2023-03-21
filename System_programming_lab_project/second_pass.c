@@ -51,6 +51,7 @@ bool initiate_second_pass(char* path, SymbolTable* table, memoryBuffer* memory, 
 		else {
 			extract_directive_type(&curLine, &finalStatus.entryAndExternFlag); /*in case line is a directive*/
 		}
+
 		lineNum++;
 		free(line);
 	}
@@ -65,6 +66,9 @@ bool initiate_second_pass(char* path, SymbolTable* table, memoryBuffer* memory, 
 }
 
 void execute_line(LineIterator* it, SymbolTable* table, memoryBuffer* memory, debugList* dbg_list, bool* errorFlag, long line_num) {
+	if (line_iterator_word_includes(it, DOT_DATA_STRING) || line_iterator_word_includes(it, DOT_STRING_STRING))
+		return;
+
 	/* Increment counter by one, as every command has a preceding word. */
 	img_memory_set_counter(memory_buffer_get_inst_img(memory), img_memory_get_counter(memory_buffer_get_inst_img(memory)) + 1);
 
