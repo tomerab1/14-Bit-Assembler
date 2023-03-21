@@ -215,6 +215,7 @@ bool validate_syntax_opcode(LineIterator* it, long line, debugList* dbg_list)
     if ((word = line_iterator_next_word(it, SPACE_STRING)) != NULL) {
         SyntaxGroups sg = get_syntax_group(word);
 
+        /* Check if the syntax ground is valid, if not register an error, otherwise execute the appropriate handler. */
         if (sg == SG_GROUP_INVALID) {
             free(word);
             debug_list_register_node(dbg_list, debug_list_new_node(it->start, errLocation, line, ERROR_CODE_LABEL_MISSING_OR_NON_EXISTS_OPCODE));

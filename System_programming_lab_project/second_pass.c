@@ -132,11 +132,11 @@ bool generate_object_file(memoryBuffer* memory, char* path)
 	out = open_file(outfileName, MODE_WRITE);
 
 	/* Write the instruction and data image counters to the output file */
-	sprintf(placeholder, "%9d\t%4d\n", img_memory_get_counter(memory_buffer_get_inst_img(memory)) - 1, img_memory_get_counter(memory_buffer_get_data_img(memory)));
+	sprintf(placeholder, "%9d\t%4d\n", img_memory_get_counter(memory_buffer_get_inst_img(memory)), img_memory_get_counter(memory_buffer_get_data_img(memory)));
 	fputs(placeholder, out);
 
 	/* Iterate over the translated memory and write it to the output file */
-	for (i = 0; i < img_memory_get_counter(memory_buffer_get_inst_img(memory)) + img_memory_get_counter(memory_buffer_get_data_img(memory)) - 1; i++) {
+	for (i = 0; i < img_memory_get_counter(memory_buffer_get_inst_img(memory)) + img_memory_get_counter(memory_buffer_get_data_img(memory)); i++) {
 		sprintf(placeholder, "%04d\t%s\n", DECIMAL_ADDRESS_BASE + translatedMemory[i].address, translatedMemory[i].translated);
 		fputs(placeholder, out);
 	}
@@ -158,7 +158,7 @@ TranslatedMachineData* translate_to_machine_data(memoryBuffer* memory)
 	img_memory_get_counter(memory_buffer_get_data_img(memory));
 
 	/* Decode the instruction and data memory buffers and store in the translated memory */
-	decode_memory(translatedMemory, memory_buffer_get_inst_img(memory), &i, img_memory_get_counter(memory_buffer_get_inst_img(memory)));
+	decode_memory(translatedMemory, memory_buffer_get_inst_img(memory), &i, img_memory_get_counter(memory_buffer_get_inst_img(memory)) + 1);
 	decode_memory(translatedMemory, memory_buffer_get_data_img(memory), &i, total);
 
 	return translatedMemory;

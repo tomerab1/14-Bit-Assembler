@@ -186,7 +186,7 @@ bool first_pass_process_sym_string(LineIterator* it, memoryBuffer* img, SymbolTa
 {
 	SymbolTableNode* node = symbol_table_search_symbol(sym_table, name);
 
-	if (node && node && (symbol_get_type(symbol_node_get_sym(node)) == SYM_DATA || symbol_get_type(symbol_node_get_sym(node)) == SYM_CODE)) {
+	if (node && (symbol_get_type(symbol_node_get_sym(node)) == SYM_DATA || symbol_get_type(symbol_node_get_sym(node)) == SYM_CODE)) {
 		debug_list_register_node(dbg_list, debug_list_new_node(it->start, it->current, line, ERROR_CODE_SYMBOL_REDEFINITION));
 		return FALSE;
 	}
