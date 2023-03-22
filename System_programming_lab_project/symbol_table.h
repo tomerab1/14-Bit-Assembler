@@ -8,10 +8,13 @@
 
 typedef enum symbolType { SYM_DATA, SYM_CODE, SYM_ENTRY, SYM_EXTERN } symbolType;
 
+/*@brief This structure represents a symbol in the symbol table. */
 typedef struct Symbol Symbol;
 
+/*@brief This structure represents a symbol node in the symbol table. */
 typedef struct SymbolTableNode SymbolTableNode;
 
+/*@brief This structure represents the symbol table. */
 typedef struct SymbolTable SymbolTable;
 
 /**

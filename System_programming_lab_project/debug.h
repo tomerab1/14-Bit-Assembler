@@ -24,17 +24,17 @@ typedef enum
 } errorCodes;
 
 /**
- * @brief Represents a context for an error in the assembly code, the full declaration is in the appropriate '.c' file.
+ * @brief Represents a context for an error in the assembly code.
  */
 typedef struct errorContext errorContext;
 
 /**
- * @brief Represents a node in a linked list of debugging information, the full declaration is in the appropriate '.c' file.
+ * @brief Represents a node in a linked list of debugging information.
  */
 typedef struct debugNode debugNode;
 
 /**
- * @brief Represents a linked list of debugging information for the assembly code, the full declaration is in the appropriate '.c' file.
+ * @brief Represents a linked list of debugging information for the assembly code.
  */
 typedef struct debugList debugList;
 

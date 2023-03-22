@@ -534,7 +534,18 @@ bool match_pamaetrized_label(LineIterator* it, long line, debugList* dbg_list)
 
 bool is_label_name(LineIterator* it)
 {
+    char* name = NULL;
+
     line_iterator_consume_blanks(it);
+    name = line_iterator_next_word(it, ", ");
+
+    if (is_reserved_word(name)) {
+        free(name);
+        return FALSE;
+    }
+
+    line_iterator_unget_word(it, name);
+    free(name);
 
     if (!isalpha(line_iterator_peek(it))) {
         return FALSE;
@@ -548,6 +559,11 @@ bool is_label_name(LineIterator* it)
     }
 
     return TRUE;
+}
+
+bool is_reserved_word(char* name)
+{
+    return get_syntax_group(name) != SG_GROUP_INVALID || cmp_register_name(name);
 }
 
 

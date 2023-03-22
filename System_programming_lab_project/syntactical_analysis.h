@@ -120,6 +120,14 @@ bool is_label_name(LineIterator* it);
 void trim_symbol_name(char* sym);
 
 /**
+* @brief Checks if name is a reserved keyword.
+*
+* @param name
+* @return True if it is a reserved keyword, false otherwise.
+*/
+bool is_reserved_word(char* name);
+
+/**
 * @brief Validate the syntax at the current position. This is a wrapper around validate_syntax_opcode () validate_syntax_data () and validate_syntax_string () to allow custom code to be added to the debugList
 *
 * @param it - Iterator over the line to be validated
