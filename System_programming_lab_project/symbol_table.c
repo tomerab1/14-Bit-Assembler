@@ -5,7 +5,7 @@ struct Symbol
 {
     char* name;
     int counter;
-    symbolType type;
+    symbolType type; 
 };
 
 struct SymbolTableNode
@@ -16,12 +16,12 @@ struct SymbolTableNode
 
 struct SymbolTable
 {
-    SymbolTableNode* head;
-    SymbolTableNode* tail;
-    int amountOfSymbols;
-    bool hasExternals;
-    bool hasEntries;
-    bool completed;
+    SymbolTableNode* head; /* A pointer to the head node of the linked list*/
+    SymbolTableNode* tail;/* A pointer to the tail node of the linked list.*/
+    int amountOfSymbols; /* The number of symbols stored in the table.*/
+    bool hasExternals;/* A flag indicating whether the table has extern symbols.*/
+    bool hasEntries;/* A flag indicating whether the table has entry symbols.*/
+    bool completed; /* A flag indicating whether the table is complete and can be used for rest of second pass*/
 };
 
 SymbolTable* symbol_table_new_table()

@@ -10,7 +10,8 @@
 * @brief This data sturcture is used to make it easier to parse text lines.
 * It's member should not be freed as they not own the memory only a view of it.
 *
-* The LineIterator data structure is a critical component of our assembler's parsing functionality. It allows us to iterate through each line of the input file and extract the relevant pieces of information necessary for assembling the code.
+* The LineIterator data structure is a critical component of our assembler's parsing functionality.
+* It allows us to iterate through each line of the input file and extract the relevant pieces of information necessary for assembling the code.
 * In order to use LineIterator effectively, we need to be able to pass it by value to different parts of our code.
 * While data hiding techniques such as using an opaque pointer would protect the internal implementation details of LineIterator, it would also make it difficult to pass the struct by value.
 * This is because an opaque pointer requires the user to access its members through accessor functions or by dereferencing the pointer, which can be cumbersome and error-prone.
