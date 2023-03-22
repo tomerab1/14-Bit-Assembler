@@ -107,8 +107,6 @@ void debug_list_pretty_print(debugList* list)
 
 void debug_print_error(errorContext* err_ctx, char err_buff[])
 {
-	ptrdiff_t offset;
-
 	/* Calculate the spacing between the start of the line and the error pos. */
 	sprintf(err_buff, "Line %li:", err_ctx->line_num);
 
