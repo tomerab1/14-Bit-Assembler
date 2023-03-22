@@ -117,6 +117,7 @@ bool validate_syntax(LineIterator it, firstPassStates state, long line, debugLis
     return TRUE;
 }
 
+// .string "abcd""
 
 bool validate_syntax_string(LineIterator* it, long line, debugList* dbg_list)
 {
@@ -134,6 +135,7 @@ bool validate_syntax_string(LineIterator* it, long line, debugList* dbg_list)
     /* Consume quotes*/
     line_iterator_advance(it);
 
+    /* Iterate until closing quote */
     while (!line_iterator_is_end(it) && it->current < closeQuote) {
         line_iterator_advance(it);
     }

@@ -13,17 +13,20 @@ struct VarData
 
 void encode_dot_string(LineIterator* it, memoryBuffer* img)
 {
+	char* closeQuote = strrchr(it->current, QUOTE_CHAR);
+
 	/* Eat all blanks */
 	line_iterator_consume_blanks(it);
 
 	/* Eat quote */
 	line_iterator_advance(it);
 
-	while (line_iterator_peek(it) != QUOTE_CHAR) {
+	while (!line_iterator_is_end(it) && it->current < closeQuote) {
 		set_image_memory(memory_buffer_get_data_img(img), line_iterator_peek(it), FLAG_ERA | FLAG_SOURCE | FLAG_DEST | FLAG_OPCODE1);
 		img_memory_set_counter(memory_buffer_get_data_img(img), img_memory_get_counter(memory_buffer_get_data_img(img)) + 1);
 		line_iterator_advance(it);
 	}
+
 	set_image_memory(memory_buffer_get_data_img(img), BACKSLASH_ZERO, FLAG_ERA | FLAG_SOURCE | FLAG_DEST | FLAG_OPCODE1);
 	img_memory_set_counter(memory_buffer_get_data_img(img), img_memory_get_counter(memory_buffer_get_data_img(img)) + 1);
 }
