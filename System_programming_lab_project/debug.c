@@ -10,7 +10,6 @@ struct errorContext
 {
 	char* start_pos;
 	char* err_pos;
-	ptrdiff_t err_len;
 	long line_num;
 	errorCodes err_code;
 };
@@ -66,7 +65,6 @@ debugNode* debug_list_new_node(char* start, char* err, long line, errorCodes err
 	/* The node does not own the start and err pointers, we should not call 'free' on them ! */
 	new_node->ctx.start_pos = get_copy_string(start);
 	new_node->ctx.err_pos = get_copy_string(err);
-    new_node->ctx.err_len = (err - start);
 	new_node->ctx.line_num = line;
 	new_node->ctx.err_code = err_code;
 	new_node->next = NULL;
@@ -113,7 +111,6 @@ void debug_print_error(errorContext* err_ctx, char err_buff[])
 
 	/* Calculate the spacing between the start of the line and the error pos. */
 	sprintf(err_buff, "Line %li:", err_ctx->line_num);
-	offset = (int) strlen(err_buff) + err_ctx->err_len + 1;
 
 	printf("%s %s\n", err_buff, err_ctx->start_pos);
 	printf("Error: %s\n\n", debug_map_token_to_err(err_ctx->err_code));

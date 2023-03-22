@@ -117,8 +117,6 @@ bool validate_syntax(LineIterator it, firstPassStates state, long line, debugLis
     return TRUE;
 }
 
-// .string "abcd""
-
 bool validate_syntax_string(LineIterator* it, long line, debugList* dbg_list)
 {
     char* closeQuote = strrchr(it->start, QUOTE_CHAR);
