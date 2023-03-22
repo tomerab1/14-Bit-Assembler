@@ -1,4 +1,3 @@
-; made by alex
 		mov 	A, r1
 MAIN: 	mov 	r3 ,LENGTH
 
@@ -17,7 +16,7 @@ LOOP: 	jmp 	L1(#-1,r6)
 K:	bne 	LOOP(r4,r3) 
 	add #-78, r0
 .string   "hello"
-	jmp 	SHALOM(LINE,LOOP)
+	jmp 	BLU(LINE,LOOP)
 		sub 	r1, r4
 		bne 	END
 L1: 	inc K

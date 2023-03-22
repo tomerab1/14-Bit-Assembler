@@ -6,12 +6,19 @@
 
 #include "encoding.h"
 
-typedef struct lines_list_node LinesListNode;
-
+/*
+* @brief A structure which indicates wheter .extern or/and .entry files exists, so corresponding files will be created.
+*/
 typedef struct flags flags;
 
+/**
+@brief A structure representing a translated machine code instruction, which being printed in the end of the prorgam @ object file
+*/
 typedef struct TranslatedMachineData TranslatedMachineData;
 
+/**
+@brief A structure representing the final status of the program, being updated during second pass.
+*/
 typedef struct programFinalStatus programFinalStatus;
 
 

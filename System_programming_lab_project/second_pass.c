@@ -3,13 +3,6 @@
 
 #include <ctype.h>
 
-struct lines_list_node
-{
-	int address;
-	char dataForObject[SINGLE_ORDER_SIZE]; /* 14 bits string strings. */
-};
-
-
 struct flags
 {
 	bool dot_entry_exists;
@@ -23,11 +16,11 @@ struct TranslatedMachineData {
 
 struct programFinalStatus
 {
-	flags entryAndExternFlag;
-	bool createdObject;
-	bool createdExternals;
-	bool createdEntry;
-	bool error_flag;
+	flags entryAndExternFlag; /*The flags related to the entryand extern directives.*/
+		bool createdObject; /* A flag indicating whether an object file was created. */
+		bool createdExternals; /* A flag indicating whether an externals file was created. */
+		bool createdEntry; /* A flag indicating whether an entry file was created. */
+		bool error_flag; /* A flag indicating whether an error occurred during assembly. */
 };
 
 bool initiate_second_pass(char* path, SymbolTable* table, memoryBuffer* memory, debugList* dbg_list)
@@ -327,7 +320,7 @@ bool is_label_exists_in_line(LineIterator* line, SymbolTable* table, debugList* 
 
 		line_iterator_put_line(&itLeftVar, varData_get_leftVar(variablesData));
 		line_iterator_put_line(&itRightVar, varData_get_rightVar(variablesData));
-		ret_val = investigate_word(line, &itLeftVar, table, dbg_list, flag, line_num, varData_get_leftVar(variablesData), 2) ||
+		ret_val = investigate_word(line, &itLeftVar, table, dbg_list, flag, line_num, varData_get_leftVar(variablesData), 2) &&
 				  investigate_word(line, &itRightVar, table, dbg_list, flag, line_num, varData_get_rightVar(variablesData), 2);
 		break;
 
@@ -336,8 +329,8 @@ bool is_label_exists_in_line(LineIterator* line, SymbolTable* table, debugList* 
 		line_iterator_put_line(&itRightVar, varData_get_rightVar(variablesData));
 		line_iterator_put_line(&itLabel, varData_get_label(variablesData));
 
-		ret_val = investigate_word(line, &itLeftVar, table, dbg_list, flag, line_num, varData_get_leftVar(variablesData), 3) ||
-				  investigate_word(line, &itRightVar, table, dbg_list, flag, line_num, varData_get_rightVar(variablesData), 3) ||
+		ret_val = investigate_word(line, &itLeftVar, table, dbg_list, flag, line_num, varData_get_leftVar(variablesData), 3) &&
+				  investigate_word(line, &itRightVar, table, dbg_list, flag, line_num, varData_get_rightVar(variablesData), 3) &&
 				  investigate_word(line, &itLabel, table, dbg_list, flag, line_num, varData_get_label(variablesData), 3);
 		break;
 	}

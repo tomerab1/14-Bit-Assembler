@@ -119,7 +119,12 @@ bool first_pass_process_sym_ext(LineIterator* it, memoryBuffer* img, SymbolTable
 */
 bool first_pass_process_opcode(LineIterator* it, memoryBuffer* img, SymbolTable* sym_table, debugList* dbg_list, char* name, long line, bool should_encode);
 
-
+/**
+@brief Finds unnecessary symbols in a line of code that contains an extern or entry directive and a colon.
+@param it A pointer to the LineIterator object used to iterate over the line.
+@param line The number of the line being checked.
+@param dbg A pointer to the debugList object used to store debug information.
+*/
 void find_uncessery_syms(LineIterator* it, long line, debugList* dbg);
 
 #endif

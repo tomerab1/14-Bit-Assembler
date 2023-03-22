@@ -120,10 +120,12 @@ bool validate_syntax(LineIterator it, firstPassStates state, long line, debugLis
 
 bool validate_syntax_string(LineIterator* it, long line, debugList* dbg_list)
 {
+    char* closeQuote = strrchr(it->start, QUOTE_CHAR);
+
     /* Consume all preceding blanks */
     line_iterator_consume_blanks(it);
 
-    /* Next char of a valid string must be '\"' */
+    /* Next char of a valid string must be '"' */
     if (line_iterator_peek(it) != QUOTE_CHAR) {
         debug_list_register_node(dbg_list, debug_list_new_node(it->start, it->current, line, ERROR_CODE_MISSING_OPEN_QUOTES));
         return FALSE;
@@ -132,8 +134,9 @@ bool validate_syntax_string(LineIterator* it, long line, debugList* dbg_list)
     /* Consume quotes*/
     line_iterator_advance(it);
 
-    while (!line_iterator_is_end(it) && line_iterator_peek(it) != QUOTE_CHAR)
+    while (!line_iterator_is_end(it) && it->current < closeQuote) {
         line_iterator_advance(it);
+    }
 
     /* Check closing quotes */
     if (line_iterator_peek(it) != QUOTE_CHAR) {
