@@ -9,7 +9,6 @@ struct driver {
     SymbolTable* sym_table;
     debugList* dbg_list;
     memoryBuffer* mem_buffer;
-    int (*exec)(Driver* self, int argc, char** argv);
 };
 
 #define FIRST_PASS_FAILED 1
@@ -18,13 +17,12 @@ struct driver {
 Driver* driver_new_driver()
 {
     Driver* driver = (Driver*)xmalloc(sizeof(Driver));
-    driver->exec = exec_impl;
     return driver;
 }
 
 int driver_exec(Driver* driver, int argc, char** argv)
 {
-    return driver->exec(driver, argc, argv);
+    return exec_impl(driver, argc, argv);
 }
 
 int exec_impl(Driver* driver, int argc, char** argv)

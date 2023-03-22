@@ -6,22 +6,15 @@
 
 #include "utils.h"
 
-
 typedef enum symbolType { SYM_DATA, SYM_CODE, SYM_ENTRY, SYM_EXTERN } symbolType;
 
-/**
-@brief A structure representing a symbol in the symbol table.
-*/
+/*@brief This structure represents a symbol in the symbol table. */
 typedef struct Symbol Symbol;
 
-/**
-@brief A node in a linked list representing a symbol table.
-*/
+/*@brief This structure represents a symbol node in the symbol table. */
 typedef struct SymbolTableNode SymbolTableNode;
 
-/*
-@brief A structure representing a symbol table.
-*/
+/*@brief This structure represents the symbol table. */
 typedef struct SymbolTable SymbolTable;
 
 /**

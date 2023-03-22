@@ -59,8 +59,9 @@ bool initiate_second_pass(char* path, SymbolTable* table, memoryBuffer* memory, 
 }
 
 void execute_line(LineIterator* it, SymbolTable* table, memoryBuffer* memory, debugList* dbg_list, bool* errorFlag, long line_num) {
-	if (line_iterator_word_includes(it, DOT_DATA_STRING) || line_iterator_word_includes(it, DOT_STRING_STRING))
+	if (line_iterator_word_includes(it, DOT_DATA_STRING) || line_iterator_word_includes(it, DOT_STRING_STRING)) {
 		return;
+	}
 
 	/* Increment counter by one, as every command has a preceding word. */
 	img_memory_set_counter(memory_buffer_get_inst_img(memory), img_memory_get_counter(memory_buffer_get_inst_img(memory)) + 1);
@@ -244,9 +245,11 @@ void create_files(memoryBuffer* memory, char* path, programFinalStatus* finalSta
 {
 	/*Generate object file and update finalStatus accordingly*/
 	finalStatus->createdObject = generate_object_file(memory, path);
+
 	/*If the symbol table has externals, generate external file and update finalStatus accordingly*/
 	if (symbol_table_get_hasExternals(table))
 		finalStatus->createdExternals = generate_externals_file(table, path);
+
 	/*If the symbol table has entries, generate entry file and update finalStatus accordingly*/
 	if (symbol_table_get_hasEntries(table))
 		finalStatus->createdEntry = generate_entries_file(table, path);
@@ -362,7 +365,7 @@ bool investigate_word(LineIterator* originalLine, LineIterator* wordIterator, Sy
 }
 
 void find_word_start_point(LineIterator* it, char* word, int amountOfVars) {
-	it->current = it->start;
+	line_iterator_reset(it);
 	line_iterator_jump_to(it, COLON_CHAR);
 	line_iterator_consume_blanks(it);
 	line_iterator_jump_to(it, SPACE_CHAR);

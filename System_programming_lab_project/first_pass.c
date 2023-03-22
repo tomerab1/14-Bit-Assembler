@@ -167,7 +167,9 @@ bool first_pass_process_sym_data(LineIterator* it, memoryBuffer* img, SymbolTabl
 		return FALSE;
 	}
 
-	symbol_table_insert_symbol(sym_table, symbol_table_new_node(name, SYM_DATA, img_memory_get_counter(memory_buffer_get_inst_img(img)) + img_memory_get_counter(memory_buffer_get_data_img(img))));
+	if (strcmp(name, DOT_DATA_STRING) != 0) {
+		symbol_table_insert_symbol(sym_table, symbol_table_new_node(name, SYM_DATA, img_memory_get_counter(memory_buffer_get_inst_img(img)) + img_memory_get_counter(memory_buffer_get_data_img(img))));
+	}
 
 	/* Check the syntax, we want a copy of the iterator because if the syntax is correct we will encode the instructions to memory. */
 	if (!validate_syntax(*it, FP_SYM_DATA, line, dbg_list)) {
@@ -191,7 +193,9 @@ bool first_pass_process_sym_string(LineIterator* it, memoryBuffer* img, SymbolTa
 		return FALSE;
 	}
 
-	symbol_table_insert_symbol(sym_table, symbol_table_new_node(name, SYM_DATA, img_memory_get_counter(memory_buffer_get_inst_img(img)) + img_memory_get_counter(memory_buffer_get_data_img(img))));
+	if (strcmp(name, DOT_STRING_STRING) != 0) {
+		symbol_table_insert_symbol(sym_table, symbol_table_new_node(name, SYM_DATA, img_memory_get_counter(memory_buffer_get_inst_img(img)) + img_memory_get_counter(memory_buffer_get_data_img(img))));
+	}
 
 	/* Check the syntax, we want a copy of the iterator because if the syntax is correct we will encode the instructions to memory. */
 	if (!validate_syntax(*it, FP_SYM_STR, line, dbg_list)) {

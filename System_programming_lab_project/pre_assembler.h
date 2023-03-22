@@ -12,12 +12,12 @@
 typedef enum { READ_UNKNOWN, READ_COMMENT, READ_START_MACRO, READ_END_MACRO } ReadState;
 
 /**
-* @brief A forward declaration of the macro list node which hold the content of each macro, will be declared in the '.c' file.
+* @brief A forward declaration of the macro list node which hold the content of each macro.
 */
 typedef struct macro_list_node MacroListNode;
 
 /**
-* @brief A forward declaration of the macro list node which stores all the macros in the file, will be declared in the '.c' file.
+* @brief A forward declaration of the macro list node which stores all the macros in the file.
 */
 typedef struct macro_list MacroList;
 
