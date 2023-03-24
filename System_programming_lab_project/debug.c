@@ -1,19 +1,6 @@
 #include "debug.h"
 #include <string.h>
 
-/**
- *The `errorContext` struct contains information about the position of an error in the
- * assembly code, including the start position, the position of the error, the length of
- * the error, the line number, and an error code indicating the type of error.
-*/
-struct errorContext
-{
-	char* start_pos;
-	char* err_pos;
-	long line_num;
-	errorCodes err_code;
-};
-
 void print_error(char* start_pos, long line_num, errorCodes err_code)
 {
 	char err_buff[DEBUG_LINE_MAX_LENGTH] = { 0 };
