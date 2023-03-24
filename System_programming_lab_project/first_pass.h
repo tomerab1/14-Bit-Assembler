@@ -23,7 +23,7 @@ typedef enum { FP_SYM_DEF, FP_SYM_DATA, FP_SYM_STR, FP_SYM_EXT, FP_SYM_ENT, FP_O
 * @param dbg_list - A pointer to the debug list, used to register errors.
 * @return - TRUE if no errors occurred, FALSE otherwise.
 */
-bool do_first_pass(char* path, memoryBuffer* img, SymbolTable* sym_table, debugList* dbg_list);
+bool do_first_pass(char* path, memoryBuffer* img, SymbolTable* sym_table);
 
 /** 
  * @brief This function take in a string, and checks if it's a symbol, if so it returns it's type.
@@ -47,7 +47,7 @@ firstPassStates get_symbol_type(LineIterator* it, char* word, errorCodes* outErr
 * param should_encode - If there is an error we can skip the encoding phase.
 * @return True if there are no errors, false otherwise.
 */
-bool first_pass_process_sym_def(LineIterator* it, memoryBuffer* img, SymbolTable* sym_table, debugList* dbg_list, char* name, long line, bool should_encode);
+bool first_pass_process_sym_def(LineIterator* it, memoryBuffer* img, SymbolTable* sym_table, char* name, long line, bool should_encode);
 
 /**
 * @brief This function is used to process .entry lines.
@@ -61,7 +61,7 @@ bool first_pass_process_sym_def(LineIterator* it, memoryBuffer* img, SymbolTable
 * param should_encode - If there is an error we can skip the encoding phase.
 * @return True if there are no errors, false otherwise.
 */
-bool first_pass_process_sym_ent(LineIterator* it, memoryBuffer* img, SymbolTable* sym_table, debugList* dbg_list, char* name, long line, bool should_encode);
+bool first_pass_process_sym_ent(LineIterator* it, memoryBuffer* img, SymbolTable* sym_table, char* name, long line, bool should_encode);
 
 /**
 * @brief This function is used to process .string lines.
@@ -75,7 +75,7 @@ bool first_pass_process_sym_ent(LineIterator* it, memoryBuffer* img, SymbolTable
 * param should_encode - If there is an error we can skip the encoding phase.
 * @return True if there are no errors, false otherwise.
 */
-bool first_pass_process_sym_string(LineIterator* it, memoryBuffer* img, SymbolTable* sym_table, debugList* dbg_list, char* name, long line, bool should_encode);
+bool first_pass_process_sym_string(LineIterator* it, memoryBuffer* img, SymbolTable* sym_table, char* name, long line, bool should_encode);
 
 /**
 * @brief This function is used to process .data lines.
@@ -89,7 +89,7 @@ bool first_pass_process_sym_string(LineIterator* it, memoryBuffer* img, SymbolTa
 * param should_encode - If there is an error we can skip the encoding phase.
 * @return True if there are no errors, false otherwise.
 */
-bool first_pass_process_sym_data(LineIterator* it, memoryBuffer* img, SymbolTable* sym_table, debugList* dbg_list, char* name, long line, bool should_encode);
+bool first_pass_process_sym_data(LineIterator* it, memoryBuffer* img, SymbolTable* sym_table, char* name, long line, bool should_encode);
 
 /**
 * @brief This function is used to process .extern lines.
@@ -103,7 +103,7 @@ bool first_pass_process_sym_data(LineIterator* it, memoryBuffer* img, SymbolTabl
 * param should_encode - If there is an error we can skip the encoding phase.
 * @return True if there are no errors, false otherwise.
 */
-bool first_pass_process_sym_ext(LineIterator* it, memoryBuffer* img, SymbolTable* sym_table, debugList* dbg_list, char* name, long line, bool should_encode);
+bool first_pass_process_sym_ext(LineIterator* it, memoryBuffer* img, SymbolTable* sym_table, char* name, long line, bool should_encode);
 
 /**
 * @brief This function is used to process lines with opcodes and no label definitions.
@@ -117,7 +117,7 @@ bool first_pass_process_sym_ext(LineIterator* it, memoryBuffer* img, SymbolTable
 * param should_encode - If there is an error we can skip the encoding phase.
 * @return True if there are no errors, false otherwise.
 */
-bool first_pass_process_opcode(LineIterator* it, memoryBuffer* img, SymbolTable* sym_table, debugList* dbg_list, char* name, long line, bool should_encode);
+bool first_pass_process_opcode(LineIterator* it, memoryBuffer* img, SymbolTable* sym_table, char* name, long line, bool should_encode);
 
 /**
 @brief Finds unnecessary symbols in a line of code that contains an extern or entry directive and a colon.
@@ -125,6 +125,6 @@ bool first_pass_process_opcode(LineIterator* it, memoryBuffer* img, SymbolTable*
 @param line The number of the line being checked.
 @param dbg A pointer to the debugList object used to store debug information.
 */
-void find_uncessery_syms(LineIterator* it, long line, debugList* dbg);
+void find_uncessery_syms(LineIterator* it, long line);
 
 #endif

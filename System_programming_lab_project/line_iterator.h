@@ -19,7 +19,7 @@
 * For these reasons, we decided that the benefits of being able to pass LineIterator by value outweighed the benefits of data hiding in this particular case.
 * In conclusion, we believe that our decision not to use data hiding techniques for LineIterator was the most appropriate choice for our assembler's functionality and maintainability.
 */
-typedef struct LineIterator
+typedef struct
 {
     char* start; /* Pointer to the start of the line. */
     char* current; /* Pointer to the current position in the line. */

@@ -48,7 +48,7 @@ void encode_dot_data(LineIterator* it, memoryBuffer* img);
 * @param symTable
 * @param dbg_list Debug list to add debug info
 */
-void encode_label_start_process(LineIterator* it, memoryBuffer* img, SymbolTable* symTable, debugList* dbg_list);
+void encode_label_start_process(LineIterator* it, memoryBuffer* img, SymbolTable* symTable);
 
 /**
 * Encode labels in an assembler image. This is a helper function.

@@ -91,7 +91,7 @@ bool isLabel(LineIterator* line);
 *
 * @return TRUE if the syntax is correct FALSE otherwise. In this case the parser should be instructed to abort
 */
-bool verify_command_syntax(LineIterator* it, debugList* dbg_list);
+bool verify_command_syntax(LineIterator* it);
 
 
 /**
@@ -137,7 +137,7 @@ bool is_reserved_word(char* name);
 *
 * @return TRUE if the syntax is valid FALSE if it is
 */
-bool validate_syntax(LineIterator it, firstPassStates state, long line, debugList* dbg_list);
+bool validate_syntax(LineIterator it, firstPassStates state, long line);
 
 /**
 * @brief Validate a syntax opcode. This is a helper function for validate_opcode ().
@@ -148,7 +148,7 @@ bool validate_syntax(LineIterator it, firstPassStates state, long line, debugLis
 *
 * @return true if the opcode is valid false otherwise. Note that it is up to the caller to free it
 */
-bool validate_syntax_opcode(LineIterator* it, long line, debugList* dbg_list);
+bool validate_syntax_opcode(LineIterator* it, long line);
 
 /**
 * @brief Verifies that the next character is a valid integer. This is done by examining the characters that begin with a digit followed by a comma or a comma and verifying that it is a valid integer.
@@ -160,14 +160,14 @@ bool validate_syntax_opcode(LineIterator* it, long line, debugList* dbg_list);
 *
 * @return TRUE if the integer is valid FALSE otherwise. On failure the iterator is left pointing at the character that failed
 */
-bool verify_int(LineIterator* it, long line, char* seps, debugList* dbg_list);
+bool verify_int(LineIterator* it, long line, char* seps);
 
 /**
 * @brief This function reduce repetative code in the match_syntax_group_1 and match_syntax_group_2 functions.
 * It checks if their operands are valid.
 * @return True if valid, false otherwise.
 */
-bool match_operands_for_sg_1_2(LineIterator* it, long line, debugList* dbg_list);
+bool match_operands_for_sg_1_2(LineIterator* it, long line);
 
 /**
 * @brief Matches a syntax group 1 & 2. This is the first part of the syntax group : it must be at the start of a variable or variable declaration.
@@ -178,7 +178,7 @@ bool match_operands_for_sg_1_2(LineIterator* it, long line, debugList* dbg_list)
 *
 * @return TRUE if a match was found FALSE otherwise. The match is terminated by a newline
 */
-bool match_syntax_group_1_2(LineIterator* it, long line, debugList* dbg_list);
+bool match_syntax_group_1_2(LineIterator* it, long line);
 
 /**
 * @brief Matches a syntax group 3. This is the third part of the syntax group matching algorithm.
@@ -189,7 +189,7 @@ bool match_syntax_group_1_2(LineIterator* it, long line, debugList* dbg_list);
 *
 * @return TRUE if a match was found FALSE otherwise. When false the iterator is left pointing at the character immediately following the end of the syntax group
 */
-bool match_syntax_group_3(LineIterator* it, long line, debugList* dbg_list);
+bool match_syntax_group_3(LineIterator* it, long line);
 
 /**
 * @brief Matches a syntax group 4. This is used to check if there is a'%'followed by an operand.
@@ -200,7 +200,7 @@ bool match_syntax_group_3(LineIterator* it, long line, debugList* dbg_list);
 *
 * @return TRUE if a match was found FALSE otherwise. If FALSE is returned the iterator is not advanced
 */
-bool match_syntax_group_4(LineIterator* it, long line, debugList* dbg_list);
+bool match_syntax_group_4(LineIterator* it, long line);
 
 /**
 * @brief Matches a syntax group 5 starting at the current position. This is used to implement the syntax group 5 ( and below ) as well as the syntax group 5 ( and below ).
@@ -211,7 +211,7 @@ bool match_syntax_group_4(LineIterator* it, long line, debugList* dbg_list);
 *
 * @return TRUE if a match was found FALSE if not ( or an error occurred
 */
-bool match_syntax_group_5(LineIterator* it, long line, debugList* dbg_list);
+bool match_syntax_group_5(LineIterator* it, long line);
 
 /**
 * @brief Matches a syntax group 6 starting at the current position. This is used for variable and variable references.
@@ -222,7 +222,7 @@ bool match_syntax_group_5(LineIterator* it, long line, debugList* dbg_list);
 *
 * @return TRUE if a match was found FALSE otherwise ( an error has been reported
 */
-bool match_syntax_group_6(LineIterator* it, long line, debugList* dbg_list);
+bool match_syntax_group_6(LineIterator* it, long line);
 
 /**
 * @brief Matches a syntax group 7. In this case we are interested in the name of a register or a label.
@@ -233,7 +233,7 @@ bool match_syntax_group_6(LineIterator* it, long line, debugList* dbg_list);
 *
 * @return TRUE if a match was found FALSE otherwise. This function is called by match_syntax_group ()
 */
-bool match_syntax_group_7(LineIterator* it, long line, debugList* dbg_list);
+bool match_syntax_group_7(LineIterator* it, long line);
 
 /**
 * @brief Validates a syntax string.
@@ -244,7 +244,7 @@ bool match_syntax_group_7(LineIterator* it, long line, debugList* dbg_list);
 *
 * @return TRUE if the string is valid FALSE if it is isn't
 */
-bool validate_syntax_string(LineIterator* it, long line, debugList* dbg_list);
+bool validate_syntax_string(LineIterator* it, long line);
 
 /**
 * @brief Validates a syntax data. 
@@ -255,7 +255,7 @@ bool validate_syntax_string(LineIterator* it, long line, debugList* dbg_list);
 *
 * @return TRUE if the data is valid FALSE if it isn't
 */
-bool validate_syntax_data(LineIterator* it, long line, debugList* dbg_list);
+bool validate_syntax_data(LineIterator* it, long line);
 
 /**
 * @brief Validates the syntax extern and entry. This is used to validate the syntax extern and entry in a macro expansion.
@@ -266,7 +266,7 @@ bool validate_syntax_data(LineIterator* it, long line, debugList* dbg_list);
 *
 * @return TRUE if there is at least one error FALSE if isn't
 */
-bool validate_syntax_extern_and_entry(LineIterator* it, long line, debugList* dbg_list);
+bool validate_syntax_extern_and_entry(LineIterator* it, long line);
 
 
 /**
@@ -297,7 +297,7 @@ bool validate_label_ending(LineIterator* it);
 *
 * @return TRUE if the operand matches FALSE otherwise. On failure the iterator is left pointing at the end of the operand
 */
-bool match_operand(LineIterator* it, long line, int flags, debugList* dbg_list);
+bool match_operand(LineIterator* it, long line, int flags);
 
 /**
 * @brief Get the syntax group of a name. This is used to distinguish groups of syntaxes that are different from each other.
@@ -317,7 +317,7 @@ SyntaxGroups get_syntax_group(char* name);
 *
 * @return TRUE if it succeeds FALSE otherwise. Note that it does not check for syntax errors
 */
-bool match_pamaetrized_label(LineIterator* it, long line, debugList* dbg_list);
+bool match_pamaetrized_label(LineIterator* it, long line);
 
 /**
 * @brief Check if we are looking for a heuristics to be used in register names.

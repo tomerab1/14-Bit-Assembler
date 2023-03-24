@@ -48,7 +48,7 @@ void encode_dot_data(LineIterator* it, memoryBuffer* img)
 	}
 }
 
-void encode_label_start_process(LineIterator* it, memoryBuffer* img, SymbolTable* symTable, debugList* dbg_list) {
+void encode_label_start_process(LineIterator* it, memoryBuffer* img, SymbolTable* symTable) {
 	VarData* variables = NULL;
 	char* opcode = NULL;
 	SyntaxGroups synGroup;

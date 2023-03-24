@@ -126,7 +126,7 @@ void line_iterator_replace(LineIterator* it, char* seps, char newSep)
     while (!line_iterator_is_end(it)) {
         for (i = 0; seps[i]; i++) {
             if (line_iterator_peek(it) == seps[i]) {
-                *it->current = newSep;
+                *(it->current) = newSep;
             }
         }
         line_iterator_advance(it);

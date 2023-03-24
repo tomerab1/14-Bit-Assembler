@@ -34,7 +34,7 @@ for the assembly code.
 @param dbg_list A pointer to the debug list.
 @return TRUE if the function executed successfully, FALSE otherwise.
 */
-bool initiate_second_pass(char* path, SymbolTable* table, memoryBuffer* memory, debugList* dbg_list);
+bool initiate_second_pass(char* path, SymbolTable* table, memoryBuffer* memory);
 
 /**
  * @brief Generates an object file from the data in a memory buffer.
@@ -115,7 +115,7 @@ void extract_directive_type(LineIterator* line, flags* flag);
 @param errorFlag turns true in case when error found, so files won't be created
 @param line_num used to indicates the line where error has been occured
 */
-void execute_line(LineIterator* it, SymbolTable* table, memoryBuffer* memory, debugList* dbg_list, bool* errorFlag, long line_num);
+void execute_line(LineIterator* it, SymbolTable* table, memoryBuffer* memory, bool* errorFlag, long line_num);
 
 /**
 @brief Counts the amount of lines without any labels, which are needed to be skiped, and updates the original memory
@@ -139,7 +139,7 @@ int find_amount_of_lines_to_skip(LineIterator* it);
 @param line_num The number of the line being checked.
 @return True if the label exists and is defined in the symbol table, false otherwise.
 */
-bool is_label_exists_in_line(LineIterator* line, SymbolTable* table, debugList* dbg_list, bool* flag, long line_num);
+bool is_label_exists_in_line(LineIterator* line, SymbolTable* table, bool* flag, long line_num);
 
 /**
 
@@ -151,7 +151,7 @@ bool is_label_exists_in_line(LineIterator* line, SymbolTable* table, debugList* 
 @param line_num The current line number.
 @return A boolean indicating if a label exists in the given line.
 */
-bool investigate_word(LineIterator* originalLine, LineIterator* wordIterator, SymbolTable* table, debugList* dbg_list, bool* flag, long line_num, char* wordToInvestigate, int amoutOfVars);
+bool investigate_word(LineIterator* originalLine, LineIterator* wordIterator, SymbolTable* table, bool* flag, long line_num, char* wordToInvestigate, int amoutOfVars);
 
 /**
 

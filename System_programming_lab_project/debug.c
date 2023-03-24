@@ -14,109 +14,19 @@ struct errorContext
 	errorCodes err_code;
 };
 
-/**
- * The `debugNode` struct contains an `errorContext` struct representing debugging
- * information for the assembly code, as well as a pointer to the next node in the linked
- * list.
- */
-struct debugNode
-{
-	errorContext ctx;
-	struct debugNode* next;
-};
-
-/**
- * The `debugList` struct contains pointers to the head and tail nodes of a linked list of
- * `debugNode` structs, which contain debugging information for the assembly code.
-*/
-struct debugList
-{
-	debugNode* head;
-	debugNode* tail;
-};
-
-void debug_list_register_node(debugList* list, debugNode* new_node)
-{
-	if (debug_list_is_empty(list)) {
-		list->head = list->tail = new_node;
-	}
-	else {
-		list->tail->next = new_node;
-		list->tail = list->tail->next;
-	}
-}
-
-bool debug_list_is_empty(debugList* list)
-{
-	return !list->head && !list->tail;
-}
-
-debugList* debug_list_new_list()
-{
-	debugList* new_list = (debugList*)xmalloc(sizeof(debugList));
-	new_list->head = new_list->tail = NULL;
-	return new_list;
-}
-
-debugNode* debug_list_new_node(char* start, char* err, long line, errorCodes err_code)
-{
-	debugNode* new_node = (debugNode*)xmalloc(sizeof(debugNode));
-
-	/* The node does not own the start and err pointers, we should not call 'free' on them ! */
-	new_node->ctx.start_pos = get_copy_string(start);
-	new_node->ctx.err_pos = get_copy_string(err);
-	new_node->ctx.line_num = line;
-	new_node->ctx.err_code = err_code;
-	new_node->next = NULL;
-
-	return new_node;
-}
-
-void debug_list_destroy_node(debugNode* node)
-{
-	free(node->ctx.start_pos);
-	free(node->ctx.err_pos);
-}
-
-void debug_list_destroy(debugList** list)
-{
-	debugNode* head = (*list)->head, *next;
-
-	while(head) {
-		next = head->next;
-		debug_list_destroy_node(head);
-		free(head);
-		head = next;
-	}
-
-	free(*list);
-}
-
-void debug_list_pretty_print(debugList* list)
+void print_error(char* start_pos, long line_num, errorCodes err_code)
 {
 	char err_buff[DEBUG_LINE_MAX_LENGTH] = { 0 };
-
-	LIST_FOR_EACH(debugNode, list->head, head) {
-		switch (head->ctx.err_code) {
-		default:
-			debug_print_error(&head->ctx, err_buff);
-			break;
-		}
-	}
-}
-
-void debug_print_error(errorContext* err_ctx, char err_buff[])
-{
 	ptrdiff_t offset;
 
 	/* Calculate the spacing between the start of the line and the error pos. */
-	sprintf(err_buff, "Line %li:", err_ctx->line_num);
+	sprintf(err_buff, "Line %li:", line_num);
 
-	printf("%s %s\n", err_buff, err_ctx->start_pos);
-	printf("Error: %s\n\n", debug_map_token_to_err(err_ctx->err_code));
+	printf("%s %s\n", err_buff, start_pos);
+	printf("Error: %s\n\n", map_token_to_err(err_code));
 }
 
-char* debug_map_token_to_err(errorCodes code)
+char* map_token_to_err(errorCodes code)
 {
 	switch (code) {
 	case ERROR_CODE_OK: return "No errors";

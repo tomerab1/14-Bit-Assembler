@@ -51,7 +51,7 @@ bool isLabel(LineIterator* line) {
     return is_valid_label(line_iterator_next_word(line, SPACE_STRING));
 }
 
-bool verify_command_syntax(LineIterator* it, debugList* dbg_list)
+bool verify_command_syntax(LineIterator* it)
 {
     return FALSE;
 }
@@ -102,22 +102,22 @@ Opcodes get_opcode(char* str)
 }
 
 
-bool validate_syntax(LineIterator it, firstPassStates state, long line, debugList* dbg_list)
+bool validate_syntax(LineIterator it, firstPassStates state, long line)
 {
     switch (state) {
     case FP_SYM_DEF:
-    case FP_OPCODE: return validate_syntax_opcode(&it, line, dbg_list);
-    case FP_SYM_DATA: return validate_syntax_data(&it, line, dbg_list);
-    case FP_SYM_STR: return validate_syntax_string(&it, line, dbg_list);
+    case FP_OPCODE: return validate_syntax_opcode(&it, line);
+    case FP_SYM_DATA: return validate_syntax_data(&it, line);
+    case FP_SYM_STR: return validate_syntax_string(&it, line);
     case FP_SYM_ENT:
-    case FP_SYM_EXT: return validate_syntax_extern_and_entry(&it, line, dbg_list);
+    case FP_SYM_EXT: return validate_syntax_extern_and_entry(&it, line);
     default: break;
     }
 
     return TRUE;
 }
 
-bool validate_syntax_string(LineIterator* it, long line, debugList* dbg_list)
+bool validate_syntax_string(LineIterator* it, long line)
 {
     char* closeQuote = strrchr(it->start, QUOTE_CHAR);
 
@@ -126,7 +126,7 @@ bool validate_syntax_string(LineIterator* it, long line, debugList* dbg_list)
 
     /* Next char of a valid string must be '"' */
     if (line_iterator_peek(it) != QUOTE_CHAR) {
-        debug_list_register_node(dbg_list, debug_list_new_node(it->start, it->current, line, ERROR_CODE_MISSING_OPEN_QUOTES));
+        print_error(it->start, line, ERROR_CODE_MISSING_OPEN_QUOTES);
         return FALSE;
     }
 
@@ -140,7 +140,7 @@ bool validate_syntax_string(LineIterator* it, long line, debugList* dbg_list)
 
     /* Check closing quotes */
     if (line_iterator_peek(it) != QUOTE_CHAR) {
-        debug_list_register_node(dbg_list, debug_list_new_node(it->start, it->current, line, ERROR_CODE_MISSING_CLOSE_QUOTES));
+        print_error(it->start, line, ERROR_CODE_MISSING_CLOSE_QUOTES);
         return FALSE;
     }
 
@@ -151,14 +151,14 @@ bool validate_syntax_string(LineIterator* it, long line, debugList* dbg_list)
     line_iterator_consume_blanks(it);
 
     if (!line_iterator_is_end(it)) {
-        debug_list_register_node(dbg_list, debug_list_new_node(it->start, it->current, line, ERROR_CODE_TEXT_AFTER_END));
+        print_error(it->start, line, ERROR_CODE_TEXT_AFTER_END);
         return FALSE;
     }
 
     return TRUE;
 }
 
-bool validate_syntax_data(LineIterator* it, long line, debugList* dbg_list)
+bool validate_syntax_data(LineIterator* it, long line)
 {
     bool is_valid = TRUE;
 
@@ -168,7 +168,7 @@ bool validate_syntax_data(LineIterator* it, long line, debugList* dbg_list)
     /* Routine to check digit list */
     while (!line_iterator_is_end(it) && is_valid) {
         line_iterator_consume_blanks(it);
-        is_valid = verify_int(it, line, COMMA_STRING, dbg_list);
+        is_valid = verify_int(it, line, COMMA_STRING);
         /* Will jump to the closest comma and consume it. */
         line_iterator_jump_to(it, COMMA_CHAR);
     }
@@ -184,32 +184,32 @@ bool validate_syntax_data(LineIterator* it, long line, debugList* dbg_list)
 
     /* Check last char.*/
     if (!isdigit(line_iterator_peek(it))) {
-        debug_list_register_node(dbg_list, debug_list_new_node(it->start, it->current, line, ERROR_CODE_TEXT_AFTER_END));
+        print_error(it->start, line, ERROR_CODE_TEXT_AFTER_END);
         return FALSE;
     }
 
     return TRUE;
 }
 
-bool validate_syntax_extern_and_entry(LineIterator* it, long line, debugList* dbg_list)
+bool validate_syntax_extern_and_entry(LineIterator* it, long line)
 {
     line_iterator_consume_blanks(it);
 
     if (!line_iterator_is_end(it)) {
-        debug_list_register_node(dbg_list, debug_list_new_node(it->start, it->current, line, ERROR_CODE_TEXT_AFTER_END));
+        print_error(it->start, it->current, line, ERROR_CODE_TEXT_AFTER_END);
         return FALSE;
     }
 
     return TRUE;
 }
 
-bool validate_syntax_opcode(LineIterator* it, long line, debugList* dbg_list)
+bool validate_syntax_opcode(LineIterator* it, long line)
 {
     char* word = NULL;
     char* errLocation = it->current;
 
     /* typedef for the dispatch table. */
-    typedef bool (*dispatch_table)(LineIterator* it, long line, debugList* dbg_list);
+    typedef bool (*dispatch_table)(LineIterator* it, long line);
     dispatch_table table[SG_TOTAL] = {
         match_syntax_group_1_2, match_syntax_group_1_2, match_syntax_group_3, match_syntax_group_4,
         match_syntax_group_5, match_syntax_group_6, match_syntax_group_7
@@ -221,84 +221,84 @@ bool validate_syntax_opcode(LineIterator* it, long line, debugList* dbg_list)
         /* Check if the syntax ground is valid, if not register an error, otherwise execute the appropriate handler. */
         if (sg == SG_GROUP_INVALID) {
             free(word);
-            debug_list_register_node(dbg_list, debug_list_new_node(it->start, errLocation, line, ERROR_CODE_LABEL_MISSING_OR_NON_EXISTS_OPCODE));
+            print_error(it->start, errLocation, line, ERROR_CODE_LABEL_MISSING_OR_NON_EXISTS_OPCODE);
             return FALSE;
         }
 
         free(word);
-        return table[sg](it, line, dbg_list);
+        return table[sg](it, line);
     }
 
     return TRUE;
 }
 
-bool match_operands_for_sg_1_2(LineIterator* it, long line, debugList* dbg_list)
+bool match_operands_for_sg_1_2(LineIterator* it, long line)
 {
     line_iterator_consume_blanks(it);
 
     /* Check if immediate number */
     if (line_iterator_peek(it) == HASH_CHAR) {
-        if (!match_operand(it, line, FLAG_NUMBER, dbg_list))
+        if (!match_operand(it, line, FLAG_NUMBER))
             return FALSE;
     }
     /* Check if register */
     else if (line_iterator_peek(it) == REG_BEG_CHAR) {
-        if (!match_operand(it, line, FLAG_REGISTER, dbg_list))
+        if (!match_operand(it, line, FLAG_REGISTER))
             return FALSE;
     }
     /* Check if label name */
     else if (isalpha(line_iterator_peek(it))) {
-        if (!match_operand(it, line, FLAG_LABEL, dbg_list))
+        if (!match_operand(it, line, FLAG_LABEL))
             return FALSE;
     }
     else {
-        debug_list_register_node(dbg_list, debug_list_new_node(it->start, it->current, line, ERROR_CODE_INVALID_OPERAND));
+        print_error(it->start, line, ERROR_CODE_INVALID_OPERAND);
         return FALSE;
     }
 
     return TRUE;
 }
 
-bool match_syntax_group_1_2(LineIterator* it, long line, debugList* dbg_list)
+bool match_syntax_group_1_2(LineIterator* it, long line)
 {
-    if (!match_operands_for_sg_1_2(it, line, dbg_list))
+    if (!match_operands_for_sg_1_2(it, line))
         return FALSE;
-    if (!match_operands_for_sg_1_2(it, line, dbg_list))
+    if (!match_operands_for_sg_1_2(it, line))
         return FALSE;
 
     return TRUE;
 }
 
-bool match_syntax_group_3(LineIterator* it, long line, debugList* dbg_list)
+bool match_syntax_group_3(LineIterator* it, long line)
 {
     line_iterator_consume_blanks(it);
 
     /* Check if register */
     if (line_iterator_peek(it) == REG_BEG_CHAR) {
-        if (!match_operand(it, line, FLAG_REGISTER, dbg_list))
+        if (!match_operand(it, line, FLAG_REGISTER))
             return FALSE;
     }
     /* Check if label name */
     else if (isalpha(line_iterator_peek(it))) {
-        if (!match_operand(it, line, FLAG_LABEL, dbg_list))
+        if (!match_operand(it, line, FLAG_LABEL))
             return FALSE;
     }
     else {
-        debug_list_register_node(dbg_list, debug_list_new_node(it->start, it->current, line, ERROR_CODE_INVALID_OPERAND));
+        print_error(it->start, line, ERROR_CODE_INVALID_OPERAND);
         return FALSE;
     }
 
     return TRUE;
 }
 
-bool match_syntax_group_4(LineIterator* it, long line, debugList* dbg_list)
+bool match_syntax_group_4(LineIterator* it, long line)
 {
     /* Check that they dont get any operand. */
     char* op = line_iterator_next_word(it, SPACE_STRING);
 
     if (op != NULL) {
         free(op);
-        debug_list_register_node(dbg_list, debug_list_new_node(it->start, it->current, line, ERROR_CODE_INVALID_OPERAND));
+        print_error(it->start, line, ERROR_CODE_INVALID_OPERAND);
         return FALSE;
     }
 
@@ -306,7 +306,7 @@ bool match_syntax_group_4(LineIterator* it, long line, debugList* dbg_list)
     return TRUE;
 }
 
-bool match_syntax_group_5(LineIterator* it, long line, debugList* dbg_list)
+bool match_syntax_group_5(LineIterator* it, long line)
 {
     char* open_paren_loc = strchr(it->current, OPEN_PAREN_CHAR);
 
@@ -314,75 +314,75 @@ bool match_syntax_group_5(LineIterator* it, long line, debugList* dbg_list)
 
     /* Check if label name */
     if (!open_paren_loc && isalpha(line_iterator_peek(it))) {
-        if (!match_operand(it, line, FLAG_LABEL, dbg_list))
+        if (!match_operand(it, line, FLAG_LABEL))
             return FALSE;
     }
     else if (open_paren_loc) {
         if (line_iterator_peek(it) == REG_BEG_CHAR) {
             if (is_register_name(it)) {
-                debug_list_register_node(dbg_list, debug_list_new_node(it->start, it->current, line, ERROR_CODE_RESERVED_KEYWORD_DEF));
+                print_error(it->start, line, ERROR_CODE_RESERVED_KEYWORD_DEF);
                 return FALSE;
             }
             line_iterator_backwards(it);
         }
         if (!is_label_name(it)) {
-            debug_list_register_node(dbg_list, debug_list_new_node(it->start, it->current, line, ERROR_CODE_INVALID_LABEL_DEF));
+            print_error(it->start, it->current, line, ERROR_CODE_INVALID_LABEL_DEF);
             return FALSE;
         }
 
         line_iterator_jump_to(it, '(');
 
-        if (!match_operand(it, line, FLAG_PARAM_LABEL, dbg_list)) {
+        if (!match_operand(it, line, FLAG_PARAM_LABEL)) {
             return FALSE;
         }
     }
     else {
-        debug_list_register_node(dbg_list, debug_list_new_node(it->start, it->current, line, ERROR_CODE_INVALID_OPERAND));
+        print_error(it->start, line, ERROR_CODE_INVALID_OPERAND);
         return FALSE;
     }
 
     return TRUE;
 }
 
-bool match_syntax_group_6(LineIterator* it, long line, debugList* dbg_list)
+bool match_syntax_group_6(LineIterator* it, long line)
 {
     line_iterator_consume_blanks(it);
 
     /* Check if immediate number */
     if (line_iterator_peek(it) == HASH_CHAR) {
-        if (!match_operand(it, line, FLAG_NUMBER, dbg_list))
+        if (!match_operand(it, line, FLAG_NUMBER))
             return FALSE;
     }
     /* Check if register */
     else if (line_iterator_peek(it) == REG_BEG_CHAR) {
-        if (!match_operand(it, line, FLAG_REGISTER, dbg_list))
+        if (!match_operand(it, line, FLAG_REGISTER))
             return FALSE;
     }
     /* Check if label name */
     else if (isalpha(line_iterator_peek(it))) {
-        if (!match_operand(it, line, FLAG_LABEL, dbg_list))
+        if (!match_operand(it, line, FLAG_LABEL))
             return FALSE;
     }
     else {
-        debug_list_register_node(dbg_list, debug_list_new_node(it->start, it->current, line, ERROR_CODE_INVALID_OPERAND));
+        print_error(it->start, it->current, line, ERROR_CODE_INVALID_OPERAND);
         return FALSE;
     }
 
     return TRUE;
 }
 
-bool match_syntax_group_7(LineIterator* it, long line, debugList* dbg_list)
+bool match_syntax_group_7(LineIterator* it, long line)
 {
     line_iterator_consume_blanks(it);
 
     /************************* Match operand 1 ****************************/
 
     if (isalpha(line_iterator_peek(it))) {
-        if (!match_operand(it, line, FLAG_LABEL, dbg_list))
+        if (!match_operand(it, line, FLAG_LABEL))
             return FALSE;
     }
     else {
-        debug_list_register_node(dbg_list, debug_list_new_node(it->start, it->current, line, ERROR_CODE_INVALID_OPERAND));
+        print_error(it->start, line, ERROR_CODE_INVALID_OPERAND);
         return FALSE;
     }
 
@@ -392,42 +392,42 @@ bool match_syntax_group_7(LineIterator* it, long line, debugList* dbg_list)
 
     /* Check if register */
     if (line_iterator_peek(it) == REG_BEG_CHAR) {
-        if (!match_operand(it, line, FLAG_REGISTER, dbg_list))
+        if (!match_operand(it, line, FLAG_REGISTER))
             return FALSE;
     }
     /* Check if label name */
     else if (isalpha(line_iterator_peek(it))) {
-        if (!match_operand(it, line, FLAG_LABEL, dbg_list))
+        if (!match_operand(it, line, FLAG_LABEL))
             return FALSE;
     }
     else {
-        debug_list_register_node(dbg_list, debug_list_new_node(it->start, it->current, line, ERROR_CODE_INVALID_OPERAND));
+        print_error(it->start, it->current, line, ERROR_CODE_INVALID_OPERAND);
         return FALSE;
     }
 
     return TRUE;
 }
 
-bool match_operand(LineIterator* it, long line, int flags, debugList* dbg_list)
+bool match_operand(LineIterator* it, long line, int flags)
 {
     switch (flags) {
     case FLAG_LABEL:
         if (!is_label_name(it)) {
-            debug_list_register_node(dbg_list, debug_list_new_node(it->start, it->current, line, ERROR_CODE_INVALID_NAME));
+            print_error(it->start, it->current, line, ERROR_CODE_INVALID_NAME);
             return FALSE;
         }
         break;
     case FLAG_NUMBER:
         /* Consume the '#' */
         line_iterator_advance(it);
-        if (!verify_int(it, line, ", ", dbg_list)) {
+        if (!verify_int(it, line, ", ")) {
             return FALSE;
         }
         break;
     case FLAG_REGISTER:
         if (is_register_name_heuristic(*it)) {
             if (!is_register_name(it)) {
-                debug_list_register_node(dbg_list, debug_list_new_node(it->start, it->current, line, ERROR_CODE_INVALID_NAME));
+                print_error(it->start, line, ERROR_CODE_INVALID_NAME);
                 return FALSE;
             }
             /* Consume the number. */
@@ -435,7 +435,7 @@ bool match_operand(LineIterator* it, long line, int flags, debugList* dbg_list)
         }
         break;
     case FLAG_PARAM_LABEL:
-        if (!match_pamaetrized_label(it, line, dbg_list)) {
+        if (!match_pamaetrized_label(it, line)) {
             return FALSE;
         }
         break;
@@ -449,14 +449,14 @@ bool match_operand(LineIterator* it, long line, int flags, debugList* dbg_list)
     return TRUE;
 }
 
-bool match_pamaetrized_label(LineIterator* it, long line, debugList* dbg_list)
+bool match_pamaetrized_label(LineIterator* it, long line)
 {
     int comma_counter = 0, close_paren_counter = 0, args_count = 0;
 
     while (!line_iterator_is_end(it) && line_iterator_peek(it) != CLOSE_PAREN_CHAR) {
         if (line_iterator_peek(it) == HASH_CHAR) {
             line_iterator_advance(it);
-            if (!verify_int(it, line, ",)", dbg_list)) {
+            if (!verify_int(it, line, ",)")) {
                 return FALSE;
             }
             args_count++;
@@ -483,30 +483,30 @@ bool match_pamaetrized_label(LineIterator* it, long line, debugList* dbg_list)
         }
         else {
             if (line_iterator_peek(it) == COMMA_CHAR && comma_counter > 1) {
-                debug_list_register_node(dbg_list, debug_list_new_node(it->start, it->current, line, ERROR_CODE_EXTRA_COMMA));
+                print_error(it->start, it->current, line, ERROR_CODE_EXTRA_COMMA);
                 return FALSE;
             }
             else if (!isalpha(line_iterator_peek(it))) {
-                debug_list_register_node(dbg_list, debug_list_new_node(it->start, it->current, line, ERROR_CODE_INVALID_OPERAND));
+                print_error(it->start, it->current, line, ERROR_CODE_INVALID_OPERAND);
                 return FALSE;
             }
             else if (isspace(line_iterator_peek(it))) {
-                debug_list_register_node(dbg_list, debug_list_new_node(it->start, it->current, line, ERROR_CODE_INVALID_WHITE_SPACE));
+                print_error(it->start, it->current, line, ERROR_CODE_INVALID_WHITE_SPACE);
                 return FALSE;
             }
             else if (line_iterator_peek(it) == COMMA_CHAR) {
-                debug_list_register_node(dbg_list, debug_list_new_node(it->start, it->current, line, ERROR_CODE_EXTRA_COMMA));
+                print_error(it->start, it->current, line, ERROR_CODE_EXTRA_COMMA);
                 return FALSE;
             }
             else if (line_iterator_peek(it) == CLOSE_PAREN_CHAR || line_iterator_peek(it) == OPEN_PAREN_CHAR) {
-                debug_list_register_node(dbg_list, debug_list_new_node(it->start, it->current, line, ERROR_CODE_EXTRA_PAREN));
+                print_error(it->start, it->current, line, ERROR_CODE_EXTRA_PAREN);
                 return FALSE;
             }
         }
     }
 
     if (args_count != 2) {
-        debug_list_register_node(dbg_list, debug_list_new_node(it->start, it->current, line, ERROR_CODE_MISSING_OPERAND));
+        print_error(it->start, it->current, line, ERROR_CODE_MISSING_OPERAND);
         return FALSE;
     }
 
@@ -515,7 +515,7 @@ bool match_pamaetrized_label(LineIterator* it, long line, debugList* dbg_list)
             close_paren_counter++;
         }
         if (!line_iterator_match_any(it, " )")) {
-            debug_list_register_node(dbg_list, debug_list_new_node(it->start, it->current, line, ERROR_CODE_TEXT_AFTER_END));
+            print_error(it->start, it->current, line, ERROR_CODE_TEXT_AFTER_END);
             return FALSE;
         }
 
@@ -523,7 +523,7 @@ bool match_pamaetrized_label(LineIterator* it, long line, debugList* dbg_list)
     }
 
     if (close_paren_counter > 1) {
-        debug_list_register_node(dbg_list, debug_list_new_node(it->start, it->current, line, ERROR_CODE_EXTRA_PAREN));
+        print_error(it->start, it->current, line, ERROR_CODE_EXTRA_PAREN);
         return FALSE;
     }
 
@@ -601,23 +601,23 @@ bool is_register_name_whole(LineIterator* it)
 }
 
 
-bool verify_int(LineIterator* it, long line, char* seps, debugList* dbg_list)
+bool verify_int(LineIterator* it, long line, char* seps)
 {
     if (line_iterator_peek(it) == NEG_SIGN_CHAR || line_iterator_peek(it) == POS_SIGN_CHAR) {
         line_iterator_advance(it);
     }
     else if (line_iterator_peek(it) == COMMA_CHAR) {
-        debug_list_register_node(dbg_list, debug_list_new_node(it->start, it->current, line, ERROR_CODE_EXTRA_COMMA));
+        print_error(it->start, it->current, line, ERROR_CODE_EXTRA_COMMA);
         return FALSE;
     }
     else if (!isdigit(line_iterator_peek(it))) {
-        debug_list_register_node(dbg_list, debug_list_new_node(it->start, it->current, line, ERROR_CODE_INVALID_INT));
+        print_error(it->start, it->current, line, ERROR_CODE_INVALID_INT);
         return FALSE;
     }
 
     while (!line_iterator_is_end(it) && !line_iterator_match_any(it, seps)) {
         if (!isdigit(line_iterator_peek(it))) {
-            debug_list_register_node(dbg_list, debug_list_new_node(it->start, it->current, line, ERROR_CODE_INVALID_INT));
+            print_error(it->start, it->current, line, ERROR_CODE_INVALID_INT);
             return FALSE;
         }
         line_iterator_advance(it);

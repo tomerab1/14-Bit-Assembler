@@ -29,77 +29,11 @@ typedef enum
 typedef struct errorContext errorContext;
 
 /**
- * @brief Represents a node in a linked list of debugging information.
- */
-typedef struct debugNode debugNode;
-
-/**
- * @brief Represents a linked list of debugging information for the assembly code.
- */
-typedef struct debugList debugList;
-
-/**
-* Registers a node at the end of the list.
-* This is useful for adding nodes to the list in a way that is consistent with the order of the nodes in the list.
-* @param list - The list.
-* @param new_node - New error node.
-*/
-void debug_list_register_node(debugList* list, debugNode* new_node);
-
-/**
-* Returns true if the list is empty. This is the case if the head and tail are empty.
-* @param list
-* @return true if the list is empty false otherwise. 
-*/
-bool debug_list_is_empty(debugList* list);
-
-/**
-* Create a new list. The caller must free the returned list with debug_list_free ().
-* @return A pointer to the new list. This should be freed by the caller after use of it as a pointer
-*/
-debugList* debug_list_new_list();
-
-/**
-* Create a new node and add it to the list. This is used when we want to build a list of debugNode's that are going to be printed to the console
-* @param start
-* @param err
-* @param line - line number where the error occurred ( for debugging purposes )
-* @param err_code - error code associated with the error ( for debugging purposes )
-*
-* @return pointer to the newly created node or NULL if there was insufficient memory to create it ( in which case the caller should free it
-*/
-debugNode* debug_list_new_node(char* start, char* err, long line, errorCodes err_code);
-
-/**
-* Destroys a node and frees all memory. This is useful for freeing an allocated node after it has been deallocated.
-* @param node
-*/
-void debug_list_destroy_node(debugNode* node);
-
-/**
-* @brief Destroys a debugList and all its nodes.
-* @param list A pointer to the debugList to be destroyed.
-* This function frees the memory allocated for a debugList and all its nodes.
-* It first iterates over the linked list of debugNodes, and for each node,
-* it calls debug_list_destroy_node to free any additional memory that was allocated for it,
-* and then it frees the node itself.
-* After all nodes are freed, it frees the memory allocated for the debugList itself.
-@see debug_list_destroy_node()
-*/
-void debug_list_destroy(debugList** list);
-
-/**
-* Prints a list of debugNode to stderr. This is useful for debugging the error messages that are sent to the user
-* @param list
-*/
-void debug_list_pretty_print(debugList* list);
-
-/**
 * @brief Map a token code to a human readable error. This is used to display errors in debug output
 * @param code the token code to map
 * @return pointer to the error string or NULL if none could be
 */
-char* debug_map_token_to_err(errorCodes code);
+char* map_token_to_err(errorCodes code);
 
 /**
 * Prints an error to stderr. This is used for debugging and should not be called externally. The err_ctx and err_buff are passed by reference so it can be manipulated by the caller.
@@ -107,6 +41,6 @@ char* debug_map_token_to_err(errorCodes code);
 * @param err_ctx
 * @param err_buff
 */
-void debug_print_error(errorContext* err_ctx, char err_buff[]);
+void print_error(errorContext* err_ctx);
 
 #endif

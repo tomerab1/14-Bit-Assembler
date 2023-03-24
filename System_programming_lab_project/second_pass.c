@@ -23,7 +23,7 @@ struct programFinalStatus
 		bool error_flag; /* A flag indicating whether an error occurred during assembly. */
 };
 
-bool initiate_second_pass(char* path, SymbolTable* table, memoryBuffer* memory, debugList* dbg_list)
+bool initiate_second_pass(char* path, SymbolTable* table, memoryBuffer* memory)
 {
 	FILE* in = open_file(path, MODE_READ);
 	programFinalStatus finalStatus = { 0 }; /*state manager*/
@@ -39,7 +39,7 @@ bool initiate_second_pass(char* path, SymbolTable* table, memoryBuffer* memory, 
 		line_iterator_jump_to(&curLine, COLON_CHAR); /*skips label*/
 
 		if (!directive_exists(&curLine)) { /*checks if any kind of instruction exists (.something)*/
-			execute_line(&curLine, table, memory, dbg_list, &finalStatus.error_flag, lineNum); /*exeutes line by verification -> enocding/error throw*/
+			execute_line(&curLine, table, memory, &finalStatus.error_flag, lineNum); /*exeutes line by verification -> enocding/error throw*/
 		}
 		else {
 			extract_directive_type(&curLine, &finalStatus.entryAndExternFlag); /*in case line is a directive*/
@@ -58,7 +58,7 @@ bool initiate_second_pass(char* path, SymbolTable* table, memoryBuffer* memory, 
 	return TRUE;
 }
 
-void execute_line(LineIterator* it, SymbolTable* table, memoryBuffer* memory, debugList* dbg_list, bool* errorFlag, long line_num) {
+void execute_line(LineIterator* it, SymbolTable* table, memoryBuffer* memory, bool* errorFlag, long line_num) {
 	if (line_iterator_word_includes(it, DOT_DATA_STRING) || line_iterator_word_includes(it, DOT_STRING_STRING)) {
 		return;
 	}
@@ -66,9 +66,9 @@ void execute_line(LineIterator* it, SymbolTable* table, memoryBuffer* memory, de
 	/* Increment counter by one, as every command has a preceding word. */
 	img_memory_set_counter(memory_buffer_get_inst_img(memory), img_memory_get_counter(memory_buffer_get_inst_img(memory)) + 1);
 
-	if (is_label_exists_in_line(it, table, dbg_list, errorFlag, line_num)) { /*checks if label exists and valid*/
+	if (is_label_exists_in_line(it, table, errorFlag, line_num)) { /*checks if label exists and valid*/
 		update_symbol_address(*it, memory, table); /*updates the address of the symbol*/
-		encode_label_start_process(it, memory, table, dbg_list); /*encodes the mem cell according to the label*/
+		encode_label_start_process(it, memory, table); /*encodes the mem cell according to the label*/
 	}
 	else {
 		skip_first_pass_mem(memory, it); /*if no label exists, skip calculated amount of cells*/
@@ -88,8 +88,8 @@ int find_amount_of_lines_to_skip(LineIterator* it) {
 
 	strcpy(tempLine, it->start);
 	line_iterator_put_line(&tempIt, tempLine);
-	line_iterator_jump_to(&tempIt, COLON_CHAR);
 	line_iterator_replace(&tempIt, "(), ", SPACE_CHAR);
+	line_iterator_jump_to(&tempIt, COLON_CHAR);
 
 	op = line_iterator_next_word(&tempIt, SPACE_STRING);
 	operand1 = line_iterator_next_word(&tempIt, SPACE_STRING);
@@ -294,7 +294,7 @@ VarData* extract_variables(LineIterator* it) {
 	return variables;
 }
 
-bool is_label_exists_in_line(LineIterator* line, SymbolTable* table, debugList* dbg_list, bool* flag, long line_num) {
+bool is_label_exists_in_line(LineIterator* line, SymbolTable* table, bool* flag, long line_num) {
 	VarData* variablesData = NULL;
 	bool ret_val = TRUE;
 	LineIterator itLeftVar, itRightVar, itLabel;
@@ -311,20 +311,21 @@ bool is_label_exists_in_line(LineIterator* line, SymbolTable* table, debugList* 
 	case 1: /*group 3 and 6, left var*/
 		if (varData_get_leftVar(variablesData) != NULL) {
 			line_iterator_put_line(&itLeftVar, varData_get_leftVar(variablesData));
-			ret_val = investigate_word(line, &itLeftVar, table, dbg_list, flag, line_num, varData_get_leftVar(variablesData), 1);
+			ret_val = investigate_word(line, &itLeftVar, table, flag, line_num, varData_get_leftVar(variablesData), 1);
 		}
 		else {
 			line_iterator_put_line(&itLabel, varData_get_label(variablesData));
-			ret_val = investigate_word(line, &itLabel, table, dbg_list, flag, line_num, varData_get_label(variablesData), 1);
+			ret_val = investigate_word(line, &itLabel, table, flag, line_num, varData_get_label(variablesData), 1);
 		}
 		break;
 
+	/* We use a bitwise OR operator because logical OR will not propogate to the next check if one of the results is true. */
 	case 2: /*groups 1,2,7, left var and right var*/
 
 		line_iterator_put_line(&itLeftVar, varData_get_leftVar(variablesData));
 		line_iterator_put_line(&itRightVar, varData_get_rightVar(variablesData));
-		ret_val = investigate_word(line, &itLeftVar, table, dbg_list, flag, line_num, varData_get_leftVar(variablesData), 2) &&
-				  investigate_word(line, &itRightVar, table, dbg_list, flag, line_num, varData_get_rightVar(variablesData), 2);
+		ret_val = investigate_word(line, &itLeftVar, table, flag, line_num, varData_get_leftVar(variablesData), 2) |
+				  investigate_word(line, &itRightVar, table, flag, line_num, varData_get_rightVar(variablesData), 2);
 		break;
 
 	case 3: /*groups 5, labe, left var and right var*/
@@ -332,9 +333,9 @@ bool is_label_exists_in_line(LineIterator* line, SymbolTable* table, debugList* 
 		line_iterator_put_line(&itRightVar, varData_get_rightVar(variablesData));
 		line_iterator_put_line(&itLabel, varData_get_label(variablesData));
 
-		ret_val = investigate_word(line, &itLeftVar, table, dbg_list, flag, line_num, varData_get_leftVar(variablesData), 3) &&
-				  investigate_word(line, &itRightVar, table, dbg_list, flag, line_num, varData_get_rightVar(variablesData), 3) &&
-				  investigate_word(line, &itLabel, table, dbg_list, flag, line_num, varData_get_label(variablesData), 3);
+		ret_val = investigate_word(line, &itLeftVar, table, flag, line_num, varData_get_leftVar(variablesData), 3) |
+				  investigate_word(line, &itRightVar, table, flag, line_num, varData_get_rightVar(variablesData), 3) |
+				  investigate_word(line, &itLabel, table, flag, line_num, varData_get_label(variablesData), 3);
 		break;
 	}
 
@@ -343,7 +344,7 @@ bool is_label_exists_in_line(LineIterator* line, SymbolTable* table, debugList* 
 	return ret_val;
 }
 
-bool investigate_word(LineIterator* originalLine, LineIterator* wordIterator, SymbolTable* table, debugList* dbg_list, bool* flag, long line_num, char* wordToInvestigate, int amountOfVars) {
+bool investigate_word(LineIterator* originalLine, LineIterator* wordIterator, SymbolTable* table, bool* flag, long line_num, char* wordToInvestigate, int amountOfVars) {
 	if (is_register_name_whole(wordIterator)) /*If the word is a register name, return FALSE*/
 		return FALSE;
 
@@ -357,7 +358,7 @@ bool investigate_word(LineIterator* originalLine, LineIterator* wordIterator, Sy
 		}
 		else { /*If the word doesn't exist in the symbol table*/
 			find_word_start_point(originalLine, wordToInvestigate, amountOfVars);
-			debug_list_register_node(dbg_list, debug_list_new_node(originalLine->start, originalLine->current, line_num, ERROR_CODE_LABEL_DOES_NOT_EXISTS));
+			print_error(originalLine->start, line_num, ERROR_CODE_LABEL_DOES_NOT_EXISTS);
 			(*flag) = TRUE; /*sets errors flag to true*/
 			return FALSE;
 		}

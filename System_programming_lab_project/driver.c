@@ -7,7 +7,6 @@
 
 struct driver {
     SymbolTable* sym_table;
-    debugList* dbg_list;
     memoryBuffer* mem_buffer;
 };
 
@@ -43,15 +42,9 @@ int exec_impl(Driver* driver, int argc, char** argv)
         on_initialization(driver);
 
         /* If first pass failed returns false, otherwise returns true, goes as same for second pass */
-        if (!do_first_pass(pre_assembler_path, driver->mem_buffer, driver->sym_table, driver->dbg_list)) 
-            debug_list_pretty_print(driver->dbg_list); /*First pass errors Errors */
-        else
-            if (!initiate_second_pass(pre_assembler_path, driver->sym_table, driver->mem_buffer, driver->dbg_list))
-                debug_list_pretty_print(driver->dbg_list); /*Second pass Errors */
-            else
+        if (do_first_pass(pre_assembler_path, driver->mem_buffer, driver->sym_table))
+            if (initiate_second_pass(pre_assembler_path, driver->sym_table, driver->mem_buffer))
                 printf("\n~~~\nProcess completed successfully\n~~~\n");
-
-            
 
         on_exit(driver);
         free(pre_assembler_path);
@@ -63,14 +56,12 @@ int exec_impl(Driver* driver, int argc, char** argv)
 
 void on_initialization(Driver* driver)
 {
-    driver->dbg_list = debug_list_new_list();
     driver->sym_table = symbol_table_new_table();
     driver->mem_buffer = memory_buffer_get_new();
 }
 
 void on_exit(Driver* driver)
 {
-    debug_list_destroy(&driver->dbg_list);
     symbol_table_destroy(&driver->sym_table);
     memory_buffer_destroy(&driver->mem_buffer);
 }
